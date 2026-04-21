@@ -1,0 +1,12 @@
+```
+{
+  "goal": "research_internship",
+  "research_domains": ["Game Theory", "Mechanism Design"],
+  "countries": ["Punjab, India"],
+  "target_institutions": null,
+  "timeline": null,
+  "user_name": null,
+  "email_tone": null,
+  "extra_notes": null
+}
+```

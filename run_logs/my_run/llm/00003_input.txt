@@ -1,0 +1,17 @@
+
+The user was asked: "📅 What is your target timeline? (e.g. Summer 2025, Fall 2025, immediately)"
+The user replied: ""
+The slot being filled is: "timeline"
+
+Based on the reply, extract the value for this slot.
+Return ONLY a JSON with key "timeline" and the extracted value.
+
+Rules:
+- For list fields (research_domains, countries, target_institutions): return a JSON array of strings.
+- For scalar fields (timeline, user_name, email_tone): return a string.
+- Clean up any obvious typos in domain names.
+- If the user said "any" for countries, return ["Worldwide"].
+- IMPORTANT FOR COUNTRIES: If the user provides a specific state, city, or region (e.g., "Punjab, India" or "Boston, USA"), PRESERVE the exact string they typed. Do NOT strip out the region to just the country.
+- Normalize isolated acronyms (e.g. "US" → "USA", "UK" → "United Kingdom"), but preserve full location contexts.
+
+Return ONLY JSON.

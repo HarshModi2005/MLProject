@@ -1,0 +1,22 @@
+
+You are an intelligent assistant helping a student set up an automated academic outreach campaign.
+
+The user has said: "I want to find a research internship in Game Theory and Mechanism Design in Punjab,India"
+
+Extract the following as a JSON object. For any field you cannot confidently identify, use null.
+
+{
+  "goal": "<one of: research_internship | phd_inquiry | collaboration | industry_outreach | postdoc | other>",
+  "research_domains": ["<domain1>", "<domain2>"],
+  "countries": ["<country1>", "<country2>"],
+  "target_institutions": ["<uni1>", "<uni2>"],
+  "timeline": "<e.g. Summer 2025 or null>",
+  "user_name": "<name or null>",
+  "email_tone": "<professional | friendly | concise>",
+  "extra_notes": "<any specific preferences mentioned or null>"
+}
+
+Rules:
+- IMPORTANT FOR COUNTRIES: If the user provides a specific state, city, or region (e.g., "Punjab, India" or "Boston, USA"), PRESERVE the exact string they typed. Do NOT strip out the region to just the country.
+
+Return ONLY the JSON object, no explanation.

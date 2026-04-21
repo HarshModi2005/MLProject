@@ -1,0 +1,9 @@
+Database initialized (rigorous session).
+
+✓ Database initialized.
+
+═══ Step 1/5: Intent Clarification ═══
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 Research Outreach Agent                                                                                           │
+│ I'll help you set up a personalized academic outreach campaign.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

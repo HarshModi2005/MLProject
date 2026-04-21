@@ -1,0 +1,596 @@
+/Users/harsh/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[36m╭──────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m🤖 Welcome to the Autonomous Research Outreach Agent[0m             [36m│[0m
+[36m│[0m Let's find the perfect professors and draft personalized emails. [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────╯[0m
+[2m✓ Database initialized.[0m
+[2mDatabase initialized.[0m
+
+
+[1;36m═══ Step [0m[1;36m1[0m[1;36m/[0m[1;36m5[0m[1;36m: Intent Clarification ═══[0m
+[36m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m🤖 Research Outreach Agent[0m                                                   [36m│[0m
+[36m│[0m [2mI'll help you set up a personalized academic outreach campaign.[0m              [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mWhat do you want to do?[0m: I want a research internship in Game Theory in Punjab, India
+
+[2mAnalyzing your request[0m[2;33m...[0m
+
+[2mI need a few more details. [0m[1;2m([0m[1;2;36m3[0m[2m questions remaining[0m[1;2m)[0m
+
+[1;32m►[0m 📅 What is your target timeline? [1m([0me.g. Summer [1;36m2025[0m, Fall [1;36m2025[0m, immediately[1m)[0m
+: Summer 2026
+
+[1;32m►[0m 👤 What is your full name? [1m([0mfor personalizing the emails[1m)[0m
+: Harsh Modi
+
+[1;32m►[0m 📄 Please briefly describe your background: your degree, year, key skills, and
+notable projects or publications. [1m([0mOr type [32m'cv'[0m to provide a CV file path[1m)[0m
+: '/Users/harsh/Desktop/ML/MLProjectAutonomousAgent/HarshModi.pdf'
+[2m📄 Parsing CV: [0m[2;35m/Users/harsh/Desktop/ML/MLProjectAutonomousAgent/[0m[2;95mHarshModi.pdf[0m
+[32m✓ CV parsed successfully.[0m
+
+[2mGenerating confirmation summary[0m[2;33m...[0m
+
+[34m╭─[0m[34m─────────────────────────────[0m[34m [0m[1;34m📋 Confirmation[0m[34m [0m[34m──────────────────────────────[0m[34m─╮[0m
+[34m│[0m To confirm, here's a summary of your structured outreach plan:               [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m * Your goal is to secure a research internship, specifically in the domain   [34m│[0m
+[34m│[0m of Game Theory.                                                              [34m│[0m
+[34m│[0m * You're interested in opportunities located in Punjab, India.               [34m│[0m
+[34m│[0m * Your background is in Computer Science and Engineering, with a strong      [34m│[0m
+[34m│[0m foundation in AI, NLP, and formal verification, and you're currently a       [34m│[0m
+[34m│[0m student at the Indian Institute of Technology, Ropar.                        [34m│[0m
+[34m│[0m * You have a strong portfolio of projects, including stock price prediction, [34m│[0m
+[34m│[0m formal verification systems, and blockchain integration plugins.             [34m│[0m
+[34m│[0m * Your research interests include AI, NLP, formal verification, time series  [34m│[0m
+[34m│[0m prediction, and blockchain.                                                  [34m│[0m
+[34m│[0m * You're looking to apply for internships during Summer 2026.                [34m│[0m
+[34m│[0m * You'd like to send 10 outreach emails per week, with a follow-up email     [34m│[0m
+[34m│[0m after 7 days if you don't receive a response.                                [34m│[0m
+[34m│[0m * You prefer a professional tone for your emails.                            [34m│[0m
+[34m│[0m * Your CV is available at the specified path and highlights your             [34m│[0m
+[34m│[0m achievements, skills, and experience.                                        [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Does this look correct? (yes to confirm / no to make changes)                [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+[1;33mYour answer[0m: yes
+[1;32m✓ Intent confirmed! Moving to planning[0m[1;32m...[0m
+
+
+[1;36m═══ Step [0m[1;36m2[0m[1;36m/[0m[1;36m5[0m[1;36m: Execution Planning ═══[0m
+
+[2m🧠 Generating execution plan[0m[2;33m...[0m
+
+
+[36m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m📊 Generated Execution Plan[0m                                                  [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+[3m                               🔍 Search Strategy                               [0m
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mField           [0m[1;35m [0m┃[1;35m [0m[1;35mValue                                                    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│[1m [0m[1mKeywords        [0m[1m [0m│ Game Theory, AI, NLP, Formal Verification, Time Series    │
+│[1m                  [0m│ Prediction, Blockchain, Machine Learning, Conversational  │
+│[1m                  [0m│ AI, Stock Price Prediction                                │
+│[1m [0m[1mCountries       [0m[1m [0m│ Punjab, India                                             │
+│[1m [0m[1mTop-K Professors[0m[1m [0m│ 2                                                         │
+└──────────────────┴───────────────────────────────────────────────────────────┘
+[3m         📧 Email Strategy          [0m
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃[1;34m [0m[1;34mField            [0m[1;34m [0m┃[1;34m [0m[1;34mValue       [0m[1;34m [0m┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│[1m [0m[1mPersonalization  [0m[1m [0m│ high         │
+│[1m [0m[1mTone             [0m[1m [0m│ professional │
+│[1m [0m[1mWord Count Target[0m[1m [0m│ 220          │
+│[1m [0m[1mRef. Publications[0m[1m [0m│ ✓            │
+│[1m [0m[1mAttach CV        [0m[1m [0m│ ✓            │
+└───────────────────┴──────────────┘
+[3m    📅 Sending Schedule     [0m
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃[1;32m [0m[1;32mField          [0m[1;32m [0m┃[1;32m [0m[1;32mValue [0m[1;32m [0m┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│[1m [0m[1mEmails/Week    [0m[1m [0m│ 10     │
+│[1m [0m[1mFollow-up After[0m[1m [0m│ 7 days │
+│[1m [0m[1mMax Follow-ups [0m[1m [0m│ 2      │
+└─────────────────┴────────┘
+
+[2mGetting plain-language explanation[0m[2;33m...[0m
+[2m╭─[0m[2m────────────────────────────[0m[2m [0m[1;2m💡 What this means[0m[2m [0m[2m────────────────────────────[0m[2m─╮[0m
+[2m│[0m Here's a simple explanation of the outreach execution plan:                  [2m│[0m
+[2m│[0m                                                                              [2m│[0m
+[2m│[0m * **Search approach**: The plan will search for professors using keywords    [2m│[0m
+[2m│[0m like Game Theory, AI, and Machine Learning, and filter results to only       [2m│[0m
+[2m│[0m include professors from Punjab, India.                                       [2m│[0m
+[2m│[0m * **Professor selection**: Professors will be selected based on criteria     [2m│[0m
+[2m│[0m such as:                                                                     [2m│[0m
+[2m│[0m   * Recent publications                                                      [2m│[0m
+[2m│[0m   * Active lab membership                                                    [2m│[0m
+[2m│[0m   * Relevance to the search keywords (with a minimum score of 0.4)           [2m│[0m
+[2m│[0m   * Availability of an email address                                         [2m│[0m
+[2m│[0m * **Email strategy**: Emails will be:                                        [2m│[0m
+[2m│[0m   * Highly personalized                                                      [2m│[0m
+[2m│[0m   * Written in a professional tone                                           [2m│[0m
+[2m│[0m   * Around 220 words long                                                    [2m│[0m
+[2m│[0m   * Include a CV attachment and reference to relevant publications           [2m│[0m
+[2m│[0m   * Sent to a maximum of 2 professors at a time, with follow-ups scheduled 7 [2m│[0m
+[2m│[0m days apart.                                                                  [2m│[0m
+[2m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mApprove this plan? [0m[1;33m([0m[1;33myes [0m[1;33m/[0m[1;33m no + describe change[0m[1;33m)[0m
+: yes
+[1;32m✓ Plan approved! Starting crawl[0m[1;32m...[0m
+
+
+[1;36m═══ Step [0m[1;36m3[0m[1;36m/[0m[1;36m5[0m[1;36m: Crawling for Professors ═══[0m
+[36m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m🕷 Web Crawling Mode[0m                                                          [36m│[0m
+[36m│[0m [2mSearching for professors matching your criteria...[0m                           [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1mStep [0m[1;36m1[0m[1m/[0m[1;36m3[0m[1m:[0m Running web searches[33m...[0m
+  [2mDetermining top institutions in Punjab, India[0m[2;33m...[0m
+  [2mFound regional institutions: IIT Ropar, Thapar University, PEC Chandigarh, NIT[0m
+[2mJalandhar, GNDU Amritsar[0m
+
+[1;36m🔍 Running [0m[1;36m38[0m[1;36m search queries[0m[1;36m...[0m
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in Game Theory faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor Thapar University research[0m
+  [1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor GNDU Amritsar research[0m
+  [1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m9[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in AI faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m10[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m11[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor Thapar University research[0m
+  [1;2m([0m[1;2;36m12[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m13[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m14[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor GNDU Amritsar research[0m
+  [1;2m([0m[1;2;36m15[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m16[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in NLP faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m17[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m18[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor Thapar University research[0m
+  [1;2m([0m[1;2;36m19[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m20[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m21[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor GNDU Amritsar research[0m
+  [1;2m([0m[1;2;36m22[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m23[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in Formal Verification faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m24[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m25[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor Thapar University research[0m
+  [1;2m([0m[1;2;36m26[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m27[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m28[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor GNDU Amritsar research[0m
+  [1;2m([0m[1;2;36m29[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m30[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in Time Series Prediction faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m31[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m32[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor Thapar University research[0m
+  [1;2m([0m[1;2;36m33[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m34[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m35[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor GNDU Amritsar research[0m
+  [1;2m([0m[1;2;36m36[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory research group lab Punjab, India PhD students[0m
+  [1;2m([0m[1;2;36m37[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI research group lab Punjab, India PhD students[0m
+  [1;2m([0m[1;2;36m38[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP research group lab Punjab, India PhD students[0m
+  [32m✓ Found [0m[1;32m311[0m[32m unique candidate URLs[0m
+  [32m✓[0m [1;36m50[0m faculty URLs identified for scraping
+
+[1mStep [0m[1;36m2[0m[1m/[0m[1;36m3[0m[1m:[0m Querying Semantic Scholar[33m...[0m
+
+[1;36m🎓 Searching Semantic Scholar[0m[1;36m...[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Game Theory[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: AI[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: NLP[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Formal Verification[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Time Series Prediction[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Blockchain[0m
+[31mSemantic Scholar search error: [0m[1;31m429[0m[31m Client Error:  for url: [0m
+[4;31mhttps://api.semanticscholar.org/graph/v1/author/search?[0m[4;31mquery[0m[4;31m=[0m[4;31mBlockchain[0m[4;31m&[0m[4;31mlimit[0m[4;31m=[0m[4;31m15[0m
+[4;31m&[0m[4;31mfields[0m[4;31m=[0m[4;31mname[0m[4;31m%2Caffiliations%2CpaperCount%2CcitationCount%2ChIndex%2Cpapers.title[0m
+[4;31m%2Cpapers.year%2Cpapers.venue[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Machine Learning[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Conversational AI[0m
+  [32m✓ Found [0m[1;32m48[0m[32m unique authors[0m
+  [2mSnowball Expansion: Fetching active co-authors[0m[2;33m...[0m
+  [32m✓ Snowball expansion discovered [0m[1;32m2[0m[32m relevant co-authors[0m
+
+[1mStep [0m[1;36m3[0m[1m/[0m[1;36m3[0m[1m:[0m Scraping [1;36m50[0m pages[33m...[0m
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://cup.edu.in/summer_res_internship...[0m
+    → Summer/Research Internship | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.isb.edu/faculty-and-research/faculty-directory/abhinav-upp...[0m
+    → abhinav uppal | abhinav_uppal@isb.edu
+  [1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.punjabiuniversity.ac.in/Departments/Profiles/18/Profile_P1...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://dtu.ac.in/modules/faculty_profile_new/faculty_index.php?[0m[4;94muname[0m[4;94m=...[0m
+  [31mFetch error [0m[1;31m([0m[4;31mhttps://dtu.ac.in/modules/faculty_profile_new/faculty_index....[0m[4;31m)[0m[4;31m:[0m
+[1;31mHTTPSConnectionPool[0m[1;31m([0m[31mhost[0m[31m=[0m[31m'dtu.ac.in'[0m[31m, [0m[31mport[0m[31m=[0m[1;31m443[0m[1;31m)[0m[31m: Max retries exceeded with url: [0m
+[31m/modules/faculty_profile_new/[0m[31mfaculty_index.php[0m[31m?[0m[31muname[0m[31m=[0m[31mjamkhongam[0m[31m [0m[1;31m([0m[31mCaused by [0m
+[1;31mConnectTimeoutError[0m[1;31m([0m[1;31m<[0m[1;31murllib3.connection.HTTPSConnection[0m[31m object at [0m[1;31m0x115f803a0[0m[1;31m>[0m[31m, [0m
+[31m'Connection to dtu.ac.in timed out. [0m[31m([0m[31mconnect [0m[31mtimeout[0m[31m=[0m[31m15[0m[31m)[0m[31m'[0m[1;31m)[0m[1;31m)[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://punjabiuniversity.ac.in/Departments/Profiles/78/Profile_P78X4C...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://iiitvadodara.ac.in/faculty/ag001.php...[0m
+    → IIIT | antriksh_goswami@iiitvadodara.ac.in
+  [1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2893[0m[4;94m...[0m
+    → Dr. Arvind Kumar Gupta | akgupta@iitrpr.ac.in
+  [1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://punjabiuniversity.ac.in/pages/Department.aspx?[0m[4;94mdsenc[0m[4;94m=[0m[4;94m54[0m[4;94m...[0m
+    → Punjabi University, Patiala | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m9[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitj.ac.in/People/Profile/ccf498a7-2d28-4410-a814-aecff198...[0m
+    → S Srivatsa Srinivas | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m10[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2848[0m[4;94m...[0m
+    → Dr. Arti Pandey | arti@iitrpr.ac.in
+  [1;2m([0m[1;2;36m11[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mswapnil[0m[4;94m.dhamal...[0m
+    → Research Highlights | swapnil.dhamal@iitrpr.ac.in
+  [1;2m([0m[1;2;36m12[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m773[0m[4;94m...[0m
+    → Ph.D. | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m13[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://iitrpr.irins.org/faculty/index/Department+of+Computer+Science+...[0m
+    → IIT Ropar | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m14[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://cse.iitrpr.ac.in/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m83[0m[4;94m...[0m
+    → Research Areas | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m15[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/AK/PEOPLE.html...[0m
+    → People | poonamr@iitrpr.ac.in
+  [1;2m([0m[1;2;36m16[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://scholar.google.com/citations?[0m[4;94muser[0m[4;94m=[0m[4;94m067LPdgAAAAJ[0m[4;94m&[0m[4;94mhl[0m[4;94m=[0m[4;94men[0m[4;94m...[0m
+  [2mSkipping direct scrape of Google Scholar [0m[1;2m([0m[2mavoids [0m[1;2;36m403[0m[2m, no emails anyway[0m[1;2m)[0m[2m.[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m17[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mshwetajain[0m[4;94m%40i...[0m
+    → Research Highlights | shwetajain@iitrpr.ac.in
+  [1;2m([0m[1;2;36m18[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttp://www.cs.iit.edu/~kapoor/...[0m
+    → Sanjiv Kapoor | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m19[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTIxNA[0m[4;94m==...[0m
+    → [1m([0mname not found[1m)[0m | sanjay.sharma@thapar.edu
+  [1;2m([0m[1;2;36m20[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://tslas.thapar.edu/facultymaster/97...[0m
+    → AMIT PRAKASH JHA | amit.prakash@thapar.edu
+  [1;2m([0m[1;2;36m21[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://som.thapar.edu/facultydetails/[0m[4;94mMTQ1NA[0m[4;94m==...[0m
+    → School of Mathematics | tina.verma1@thapar.edu
+  [1;2m([0m[1;2;36m22[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTU3Nw[0m[4;94m==...[0m
+    → [1m([0mname not found[1m)[0m | debayani.ghosh@thapar.edu
+  [1;2m([0m[1;2;36m23[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://som.thapar.edu/facultydetails/NjM2...[0m
+    → School of Mathematics | amitkumar@thapar.edu
+  [1;2m([0m[1;2;36m24[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://pec.ac.in/sites/default/files/pdf/Merged-IDP-2016.pdf...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m25[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://pec.ac.in/mathematics/faculty...[0m
+    → Faculty | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m26[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://curin.chitkara.edu.in/profile/dr-bhisham-sharma/...[0m
+    → BHISHAM SHARMAAssociate Professor | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m27[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://pec.ac.in/mathematics/faculty/ankit-kumar...[0m
+    → Ankit Kumar | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m28[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iimamritsar.ac.in/faculty-and-research/faculty-user-profil...[0m
+    → Faculty Directory | pavneets@iimamritsar.ac.in
+  [1;2m([0m[1;2;36m29[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://ptu.ac.in/wp-content/uploads/2024/05/updated-list-of-Ph.D.-awa...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m30[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://pec.ac.in/sites/default/files/2025-11/mechanical-engineering-s...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m31[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://pec.ac.in/sites/default/files/2024-11/Mathematics_computing_sy...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m32[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://nitj.irins.org/faculty/index/Department+of+Mathematics...[0m
+    → NIT Jalandhar | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m33[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://nitj.ac.in/research/research_publications.html...[0m
+    → Research Publications | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m34[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.nitj.ac.in/nitj_files/links/CCSP_Brochure_ECE_Tentative_7_...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m35[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://rndshowcase.iiit.ac.in/tto2022/main1.php?[0m[4;94mcentername[0m[4;94m=[0m[4;94mMachine[0m[4;94m%20...[0m
+    → Research | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m36[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?[0m[4;94mmid[0m[4;94m=[0m[4;94m354456[0m[4;94m...[0m
+    → GURU NANAK DEV UNIVERSITY | mlsingh.ece@gndu.ac.in
+  [1;2m([0m[1;2;36m37[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://digital.gndu.ac.in/pdf/resume/2015101199.pdf...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m38[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?[0m[4;94mmid[0m[4;94m=[0m[4;94m354456[0m[4;94m...[0m
+    → GURU NANAK DEV UNIVERSITY | aman.phy@gndu.ac.in
+  [1;2m([0m[1;2;36m39[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitj.ac.in/school-of-artificial-intelligence-data-science/...[0m
+    → Internship Programs | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m40[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://konnifel.com/professor/public_internship/a1kzL013K3BLNnI2LytqV...[0m
+    → AI Research Assistantship | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m41[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.daiict.ac.in/summer-research-internship-dau...[0m
+    → logo | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m42[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mArnksh[0m[4;94m%40iitrp...[0m
+    → Research Highlights | Arnksh@iitrpr.ac.in
+  [1;2m([0m[1;2;36m43[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mmayuresh[0m[4;94m%40iit...[0m
+    → Research Highlights | mayuresh@iitrpr.ac.in
+  [1;2m([0m[1;2;36m44[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://pec.ac.in/faculty/cse...[0m
+    → Faculty | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m45[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mawaneesh[0m[4;94m%40iit...[0m
+    → Research Highlights | awaneesh@iitrpr.ac.in
+  [1;2m([0m[1;2;36m46[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?[0m[4;94mmid[0m[4;94m=[0m[4;94m354456[0m[4;94m...[0m
+    → GURU NANAK DEV UNIVERSITY | kuldeep.ece@gndu.ac.in
+  [1;2m([0m[1;2;36m47[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://punjabiuniversity.ac.in/Departments/Profiles/18/Profile_P18X8A...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m48[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mashwani[0m[4;94m.sharma...[0m
+    → Research Highlights | ashwani.sharma@iitrpr.ac.in
+  [1;2m([0m[1;2;36m49[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mreddy[0m[4;94m%40iitrpr...[0m
+    → Research Highlights | reddy@iitrpr.ac.in
+  [1;2m([0m[1;2;36m50[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mpuneet[0m[4;94m.kumar%4...[0m
+    → Research Highlights | puneet.kumar@iitrpr.ac.in
+
+[1;36m🧠 Extracting professor profiles[0m[1;36m...[0m
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://cup.edu.in/summer_res_internship...[0m
+    [32m✓[0m Summer/Research Internship | Central University of Punjab
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.isb.edu/faculty-and-research/faculty-directory/a...[0m
+    [32m✓[0m Abhinav Uppal | Indian School of Business
+  [1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.punjabiuniversity.ac.in/Departments/Profiles/18/...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://dtu.ac.in/modules/faculty_profile_new/faculty_index....[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://punjabiuniversity.ac.in/Departments/Profiles/78/Prof...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://iiitvadodara.ac.in/faculty/ag001.php...[0m
+    [32m✓[0m Antriksh Goswami | Indian Institute of Information Technology Vadodara
+  [1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2893[0m[4;94m...[0m
+    [32m✓[0m Arvind Kumar Gupta | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://punjabiuniversity.ac.in/pages/Department.aspx?[0m[4;94mdsenc[0m[4;94m=...[0m
+    [32m✓[0m Punjabi University, Patiala | Punjabi University
+  [1;2m([0m[1;2;36m9[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitj.ac.in/People/Profile/ccf498a7-2d28-4410-a81...[0m
+    [32m✓[0m S Srivatsa Srinivas | Indian Institute of Technology Jodhpur
+  [1;2m([0m[1;2;36m10[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2848[0m[4;94m...[0m
+    [32m✓[0m Dr. Arti Pandey | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m11[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mswap[0m[4;94m...[0m
+    [32m✓[0m Swapnil Vilas Dhamal | IIT Ropar
+  [1;2m([0m[1;2;36m12[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m773[0m[4;94m...[0m
+    [32m✓[0m Ph.D. | IIT Ropar
+  [1;2m([0m[1;2;36m13[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://iitrpr.irins.org/faculty/index/Department+of+Compute...[0m
+    [32m✓[0m Nitin Auluck | IIT Ropar
+  [1;2m([0m[1;2;36m14[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://cse.iitrpr.ac.in/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m83[0m[4;94m...[0m
+    [32m✓[0m Research Areas | IIT Ropar
+  [1;2m([0m[1;2;36m15[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/AK/PEOPLE.html...[0m
+    [32m✓[0m Arvind Kumar Gupta | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m16[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://scholar.google.com/citations?[0m[4;94muser[0m[4;94m=[0m[4;94m067LPdgAAAAJ[0m[4;94m&[0m[4;94mhl[0m[4;94m=[0m[4;94men[0m[4;94m...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m17[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mshwe[0m[4;94m...[0m
+    [32m✓[0m Shweta Jain | IIT Ropar
+  [1;2m([0m[1;2;36m18[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttp://www.cs.iit.edu/~kapoor/...[0m
+    [32m✓[0m Sanjiv Kapoor | Illinois Institute of Technology
+  [1;2m([0m[1;2;36m19[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTIxNA[0m[4;94m==...[0m
+    [32m✓[0m Sanjay Sharma | Thapar Institute of Engineering and Technology
+  [1;2m([0m[1;2;36m20[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://tslas.thapar.edu/facultymaster/97...[0m
+    [32m✓[0m Amit Prakash Jha | Thapar Institute of Engineering and Technology
+  [1;2m([0m[1;2;36m21[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://som.thapar.edu/facultydetails/[0m[4;94mMTQ1NA[0m[4;94m==...[0m
+    [32m✓[0m School of Mathematics | THAPAR
+  [1;2m([0m[1;2;36m22[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTU3Nw[0m[4;94m==...[0m
+    [32m✓[0m Debayani Ghosh | Thapar Institute of Engineering and Technology
+  [1;2m([0m[1;2;36m23[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://som.thapar.edu/facultydetails/NjM2...[0m
+    [32m✓[0m Amit Kumar | Thapar Institute of Engineering and Technology
+  [1;2m([0m[1;2;36m24[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://pec.ac.in/sites/default/files/pdf/Merged-IDP-2016.pd...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m25[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://pec.ac.in/mathematics/faculty...[0m
+    [32m✓[0m Ankit Kumar | Punjab Engineering College [1m([0mDeemed to be University[1m)[0m, 
+Chandigarh
+  [1;2m([0m[1;2;36m26[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://curin.chitkara.edu.in/profile/dr-bhisham-sharma/...[0m
+    [32m✓[0m Bhisham Sharma | Chitkara University
+  [1;2m([0m[1;2;36m27[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://pec.ac.in/mathematics/faculty/ankit-kumar...[0m
+    [32m✓[0m Ankit Kumar | Punjab Engineering College, [1m([0mDeemed to be University[1m)[0m, 
+Chandigarh
+  [1;2m([0m[1;2;36m28[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iimamritsar.ac.in/faculty-and-research/faculty-u...[0m
+    [32m✓[0m Pavneet Singh | IIM Amritsar
+  [1;2m([0m[1;2;36m29[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://ptu.ac.in/wp-content/uploads/2024/05/updated-list-of...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m30[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://pec.ac.in/sites/default/files/2025-11/mechanical-eng...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m31[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://pec.ac.in/sites/default/files/2024-11/Mathematics_co...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m32[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://nitj.irins.org/faculty/index/Department+of+Mathemati...[0m
+    [32m✓[0m Dr Jaspal Aujla | NIT Jalandhar
+  [1;2m([0m[1;2;36m33[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://nitj.ac.in/research/research_publications.html...[0m
+    [32m✓[0m Research Publications | AC
+  [1;2m([0m[1;2;36m34[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.nitj.ac.in/nitj_files/links/CCSP_Brochure_ECE_Te...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m35[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://rndshowcase.iiit.ac.in/tto2022/main1.php?[0m[4;94mcentername[0m[4;94m=...[0m
+    [32m✓[0m Research | IIIT
+  [1;2m([0m[1;2;36m36[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...[0m
+    [32m✓[0m Dr. Maninder Lal Singh | Guru Nanak Dev University
+  [1;2m([0m[1;2;36m37[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/pdf/resume/2015101199.pdf...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m38[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...[0m
+    [32m✓[0m Dr. Aman Mahajan | Guru Nanak Dev University
+  [1;2m([0m[1;2;36m39[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitj.ac.in/school-of-artificial-intelligence-dat...[0m
+    [32m✓[0m Internship Programs | IIT Jodhpur
+  [1;2m([0m[1;2;36m40[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://konnifel.com/professor/public_internship/a1kzL013K3B...[0m
+    [32m✓[0m AI Research Assistantship | Central University of Punjab, Bathinda
+  [1;2m([0m[1;2;36m41[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.daiict.ac.in/summer-research-internship-dau...[0m
+    [32m✓[0m Abhishek Jindal | Dhirubhai Ambani Institute of Information and 
+Communication Technology
+  [1;2m([0m[1;2;36m42[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mArnk[0m[4;94m...[0m
+    [32m✓[0m Arun Kumar Sharma | IIT Ropar
+  [1;2m([0m[1;2;36m43[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mmayu[0m[4;94m...[0m
+    [32m✓[0m Dr. M. S. Pardeshi | IIT Ropar
+  [1;2m([0m[1;2;36m44[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://pec.ac.in/faculty/cse...[0m
+    [32m✓[0m Akashdeep Kaur | Punjab Engineering College [1m([0mDeemed to be University[1m)[0m, 
+Chandigarh
+  [1;2m([0m[1;2;36m45[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mawan[0m[4;94m...[0m
+    [32m✓[0m Awaneesh Kumar Yadav | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m46[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...[0m
+    [32m✓[0m Dr. Kuldeep Singh | Guru Nanak Dev University
+  [1;2m([0m[1;2;36m47[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://punjabiuniversity.ac.in/Departments/Profiles/18/Prof...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m48[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mashw[0m[4;94m...[0m
+    [32m✓[0m Ashwani Sharma | IIT Ropar
+  [1;2m([0m[1;2;36m49[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mredd[0m[4;94m...[0m
+    [32m✓[0m C.C. Reddy | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m50[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mpune[0m[4;94m...[0m
+    [32m✓[0m Puneet Kumar | Indian Institute of Technology [1m([0mIIT[1m)[0m Ropar
+
+  Processing [1;36m50[0m Semantic Scholar authors[33m...[0m
+
+[1;32m✓ Extracted [0m[1;32m75[0m[1;32m unique professor profiles[0m [1m([0m[1;36m14[0m duplicates removed[1m)[0m
+
+  [2mEmail filter: kept [0m[1;2;36m25[0m[2m/[0m[1;2;36m75[0m[2m professors with known emails[0m
+
+[1;32m✓ Crawl complete. [0m[1;32m25[0m[1;32m professor profiles ready for scoring.[0m
+
+[1;36m═══ Step [0m[1;36m4[0m[1;36m/[0m[1;36m5[0m[1;36m: Scoring & Shortlisting [0m[1;36m([0m[1;36m25[0m[1;36m candidates[0m[1;36m)[0m[1;36m ═══[0m
+  [2mGeographic filter: dropped [0m[1;2;36m3[0m[2m professors not in Punjab, India[0m
+
+[1;36m📊 Scoring [0m[1;36m22[0m[1;36m professors[0m[1;36m...[0m
+[32m✓ Scoring complete.[0m
+[3m                        🏆 Top 2 Shortlisted Professors                         [0m
+┏━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃[1;35m [0m[1;35m#  [0m[1;35m [0m┃[1;35m [0m[1;35mName      [0m[1;35m [0m┃[1;35m [0m[1;35mInstituti…[0m[1;35m [0m┃[1;35m [0m[1;35mDomains   [0m[1;35m [0m┃[1;35m [0m[1;35mScore[0m[1;35m [0m┃[1;35m [0m[1;35mEmail     [0m[1;35m [0m┃[1;35m [0m[1;35mAccepting?[0m[1;35m [0m┃
+┡━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│[2m [0m[2m1  [0m[2m [0m│[1m [0m[1mShweta    [0m[1m [0m│ IIT Ropar  │ Game       │[1;32m [0m[1;32m0.490[0m[1;32m [0m│[2m [0m[2mshwetajai…[0m[2m [0m│[2m [0m[2m?         [0m[2m [0m│
+│[2m     [0m│[1m [0m[1mJain      [0m[1m [0m│            │ Theory,    │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m            [0m│            │ Machine    │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m            [0m│            │ Learning,  │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m            [0m│            │ Rein       │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m [0m[2m2  [0m[2m [0m│[1m [0m[1mAwaneesh  [0m[1m [0m│ Indian     │ Applied    │[1;32m [0m[1;32m0.488[0m[1;32m [0m│[2m [0m[2mawaneesh@…[0m[2m [0m│[2m [0m[2m?         [0m[2m [0m│
+│[2m     [0m│[1m [0m[1mKumar     [0m[1m [0m│ Institute  │ Cryptogra… │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m [0m[1mYadav     [0m[1m [0m│ of Techn   │ Post       │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m            [0m│            │ Quantum    │[1;32m       [0m│[2m            [0m│[2m            [0m│
+└─────┴────────────┴────────────┴────────────┴───────┴────────────┴────────────┘
+[32m✓ [0m[1;32m2[0m[32m professors shortlisted.[0m
+
+[1;36m═══ Step [0m[1;36m5[0m[1;36m/[0m[1;36m5[0m[1;36m: Generating & Reviewing Emails ═══[0m
+
+[1;36m✉ Generating [0m[1;36m2[0m[1;36m personalized emails[0m[1;36m...[0m
+
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m2[0m[1;2m)[0m [1mShweta Jain[0m — IIT Ropar
+  [33m⚠ Email QC failed for Shweta Jain; retrying once[0m[33m...[0m
+  [33m⚠ Expanding short email for Shweta Jain[0m[33m...[0m
+  [32m✓[0m Subject: [3mResearch Internship Inquiry — Shweta Jain[0m
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m2[0m[1;2m)[0m [1mAwaneesh Kumar Yadav[0m — Indian Institute of Technology Ropar
+  [33m⚠ Email QC failed for Awaneesh Kumar Yadav; retrying once[0m[33m...[0m
+  [33m⚠ Expanding short email for Awaneesh Kumar Yadav[0m[33m...[0m
+  [32m✓[0m Subject: [3mResearch Internship Inquiry — Awaneesh Kumar Yadav[0m
+
+[1;32m✓ Generated [0m[1;32m2[0m[1;32m draft emails.[0m
+
+[1m─── Email [0m[1;36m1[0m[1m/[0m[1;36m2[0m[1m ───[0m
+[34m╭─[0m[34m──────────────────[0m[34m [0m[1;34mDraft Email → Shweta Jain[0m[34m | [0m[2;34mIIT Ropar[0m[34m [0m[34m───────────────────[0m[34m─╮[0m
+[34m│[0m [1mTo:[0m shwetajain@iitrpr.ac.in                                                  [34m│[0m
+[34m│[0m [1mSubject:[0m Research Internship Inquiry — Shweta Jain                           [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m Dear Professor Jain,                                                         [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I am excited to apply for a summer research internship under your guidance   [34m│[0m
+[34m│[0m at IIT Ropar, where I can leverage my strong foundation in AI, NLP, and      [34m│[0m
+[34m│[0m formal verification to explore real-world problems. Your work on Exploring   [34m│[0m
+[34m│[0m and Mitigating Gender Bias in Book Recommender Systems and EQBAL-RS:         [34m│[0m
+[34m│[0m Mitigating popularity bias in recommender systems resonates with my research [34m│[0m
+[34m│[0m interests in Game Theory. I am impressed by your research on Efficient       [34m│[0m
+[34m│[0m Algorithms For Fair Clustering with a new fairness notion, which aligns with [34m│[0m
+[34m│[0m my skills and interests.                                                     [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m In my previous projects, I developed AI-powered formal verification systems  [34m│[0m
+[34m│[0m and built conversational AI agents with advanced reasoning capabilities. I   [34m│[0m
+[34m│[0m am confident that my skills will enable me to contribute to your research    [34m│[0m
+[34m│[0m group. I am particularly drawn to your work because it addresses critical    [34m│[0m
+[34m│[0m issues in recommender systems, and I believe my strong academic background   [34m│[0m
+[34m│[0m and research experience make me a strong fit for your team. I look forward   [34m│[0m
+[34m│[0m to discussing my application and how I can contribute to your research       [34m│[0m
+[34m│[0m endeavors, specifically focusing on mitigating biases in recommender         [34m│[0m
+[34m│[0m systems.                                                                     [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Sincerely,                                                                   [34m│[0m
+[34m│[0m Harsh Modi                                                                   [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m [2;3mNote:  (Critiqued & Revised by LLM Reviewer)[0m                                 [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mAction[0m [1;35m[approve/skip/quit][0m [1;36m(approve)[0m: approve
+[32m✓ Draft saved to database.[0m
+
+[1m─── Email [0m[1;36m2[0m[1m/[0m[1;36m2[0m[1m ───[0m
+[34m╭─[0m[34m [0m[1;34mDraft Email → Awaneesh Kumar Yadav[0m[34m | [0m[2;34mIndian Institute of Technology Ropar[0m[34m [0m[34m─[0m[34m─╮[0m
+[34m│[0m [1mTo:[0m awaneesh@iitrpr.ac.in                                                    [34m│[0m
+[34m│[0m [1mSubject:[0m Research Internship Inquiry — Awaneesh Kumar Yadav                  [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m Dear Professor Yadav,                                                        [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I am Harsh Modi, a Bachelor of Technology student in Computer Science and    [34m│[0m
+[34m│[0m Engineering at the Indian Institute of Technology, Ropar, with a strong      [34m│[0m
+[34m│[0m foundation in AI, NLP, and formal verification. Your work in Applied         [34m│[0m
+[34m│[0m Cryptography, Post Quantum Security, and AI security for 5G/6G has been a    [34m│[0m
+[34m│[0m significant influence on my research interests. I am particularly drawn to   [34m│[0m
+[34m│[0m the applications of Game Theory in these fields, as evident in your          [34m│[0m
+[34m│[0m publications on Post Quantum Cryptography and Quantum Key Distribution.      [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m With experience in developing AI-powered formal verification systems and     [34m│[0m
+[34m│[0m building conversational AI agents, I am confident that my skills align with  [34m│[0m
+[34m│[0m your research group's focus. I am excited about the opportunity to           [34m│[0m
+[34m│[0m contribute to and learn from your projects, specifically those related to    [34m│[0m
+[34m│[0m 5G/6G Security and Post Quantum Security. I believe that an internship under [34m│[0m
+[34m│[0m your guidance would be invaluable in exploring these areas further.          [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I would appreciate the chance to discuss my application and how I can        [34m│[0m
+[34m│[0m contribute to your research group. I look forward to the opportunity to work [34m│[0m
+[34m│[0m with you and explore the applications of Game Theory in Post Quantum         [34m│[0m
+[34m│[0m Security.                                                                    [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Sincerely,                                                                   [34m│[0m
+[34m│[0m Harsh Modi                                                                   [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m [2;3mNote:  (Critiqued & Revised by LLM Reviewer)[0m                                 [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mAction[0m [1;35m[approve/skip/quit][0m [1;36m(approve)[0m: approve
+[32m✓ Draft saved to database.[0m
+
+[1;32m✓ Review complete![0m [1;36m2[0m approved, [1;36m0[0m skipped.
+
+[2mTip: Run [0m[1;2mpython3 main.py review[0m[2m to launch the UI and send approved emails.[0m
+
+[1;32m✓ Agent workflow completed.[0m

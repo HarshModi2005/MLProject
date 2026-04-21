@@ -1,0 +1,596 @@
+/Users/harsh/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+╭──────────────────────────────────────────────────────────────────╮
+│ 🤖 Welcome to the Autonomous Research Outreach Agent             │
+│ Let's find the perfect professors and draft personalized emails. │
+╰──────────────────────────────────────────────────────────────────╯
+✓ Database initialized.
+Database initialized.
+
+
+═══ Step 1/5: Intent Clarification ═══
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 Research Outreach Agent                                                   │
+│ I'll help you set up a personalized academic outreach campaign.              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+What do you want to do?: I want a research internship in Game Theory in Punjab, India
+
+Analyzing your request...
+
+I need a few more details. (3 questions remaining)
+
+► 📅 What is your target timeline? (e.g. Summer 2025, Fall 2025, immediately)
+: Summer 2026
+
+► 👤 What is your full name? (for personalizing the emails)
+: Harsh Modi
+
+► 📄 Please briefly describe your background: your degree, year, key skills, and
+notable projects or publications. (Or type 'cv' to provide a CV file path)
+: '/Users/harsh/Desktop/ML/MLProjectAutonomousAgent/HarshModi.pdf'
+📄 Parsing CV: /Users/harsh/Desktop/ML/MLProjectAutonomousAgent/HarshModi.pdf
+✓ CV parsed successfully.
+
+Generating confirmation summary...
+
+╭────────────────────────────── 📋 Confirmation ───────────────────────────────╮
+│ To confirm, here's a summary of your structured outreach plan:               │
+│                                                                              │
+│ * Your goal is to secure a research internship, specifically in the domain   │
+│ of Game Theory.                                                              │
+│ * You're interested in opportunities located in Punjab, India.               │
+│ * Your background is in Computer Science and Engineering, with a strong      │
+│ foundation in AI, NLP, and formal verification, and you're currently a       │
+│ student at the Indian Institute of Technology, Ropar.                        │
+│ * You have a strong portfolio of projects, including stock price prediction, │
+│ formal verification systems, and blockchain integration plugins.             │
+│ * Your research interests include AI, NLP, formal verification, time series  │
+│ prediction, and blockchain.                                                  │
+│ * You're looking to apply for internships during Summer 2026.                │
+│ * You'd like to send 10 outreach emails per week, with a follow-up email     │
+│ after 7 days if you don't receive a response.                                │
+│ * You prefer a professional tone for your emails.                            │
+│ * Your CV is available at the specified path and highlights your             │
+│ achievements, skills, and experience.                                        │
+│                                                                              │
+│ Does this look correct? (yes to confirm / no to make changes)                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Your answer: yes
+✓ Intent confirmed! Moving to planning...
+
+
+═══ Step 2/5: Execution Planning ═══
+
+🧠 Generating execution plan...
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 📊 Generated Execution Plan                                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+                               🔍 Search Strategy                               
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Field            ┃ Value                                                     ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Keywords         │ Game Theory, AI, NLP, Formal Verification, Time Series    │
+│                  │ Prediction, Blockchain, Machine Learning, Conversational  │
+│                  │ AI, Stock Price Prediction                                │
+│ Countries        │ Punjab, India                                             │
+│ Top-K Professors │ 2                                                         │
+└──────────────────┴───────────────────────────────────────────────────────────┘
+         📧 Email Strategy          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Field             ┃ Value        ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ Personalization   │ high         │
+│ Tone              │ professional │
+│ Word Count Target │ 220          │
+│ Ref. Publications │ ✓            │
+│ Attach CV         │ ✓            │
+└───────────────────┴──────────────┘
+    📅 Sending Schedule     
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Field           ┃ Value  ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ Emails/Week     │ 10     │
+│ Follow-up After │ 7 days │
+│ Max Follow-ups  │ 2      │
+└─────────────────┴────────┘
+
+Getting plain-language explanation...
+╭───────────────────────────── 💡 What this means ─────────────────────────────╮
+│ Here's a simple explanation of the outreach execution plan:                  │
+│                                                                              │
+│ * **Search approach**: The plan will search for professors using keywords    │
+│ like Game Theory, AI, and Machine Learning, and filter results to only       │
+│ include professors from Punjab, India.                                       │
+│ * **Professor selection**: Professors will be selected based on criteria     │
+│ such as:                                                                     │
+│   * Recent publications                                                      │
+│   * Active lab membership                                                    │
+│   * Relevance to the search keywords (with a minimum score of 0.4)           │
+│   * Availability of an email address                                         │
+│ * **Email strategy**: Emails will be:                                        │
+│   * Highly personalized                                                      │
+│   * Written in a professional tone                                           │
+│   * Around 220 words long                                                    │
+│   * Include a CV attachment and reference to relevant publications           │
+│   * Sent to a maximum of 2 professors at a time, with follow-ups scheduled 7 │
+│ days apart.                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Approve this plan? (yes / no + describe change)
+: yes
+✓ Plan approved! Starting crawl...
+
+
+═══ Step 3/5: Crawling for Professors ═══
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🕷 Web Crawling Mode                                                          │
+│ Searching for professors matching your criteria...                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Step 1/3: Running web searches...
+  Determining top institutions in Punjab, India...
+  Found regional institutions: IIT Ropar, Thapar University, PEC Chandigarh, NIT
+Jalandhar, GNDU Amritsar
+
+🔍 Running 38 search queries...
+  (1/38) Game Theory professor Punjab, India research internship
+  (2/38) site:.ac.in Game Theory faculty professor Punjab, India
+  (3/38) Game Theory professor IIT Ropar research
+  (4/38) Game Theory professor Thapar University research
+  (5/38) Game Theory professor PEC Chandigarh research
+  (6/38) Game Theory professor NIT Jalandhar research
+  (7/38) Game Theory professor GNDU Amritsar research
+  (8/38) AI professor Punjab, India research internship
+  (9/38) site:.ac.in AI faculty professor Punjab, India
+  (10/38) AI professor IIT Ropar research
+  (11/38) AI professor Thapar University research
+  (12/38) AI professor PEC Chandigarh research
+  (13/38) AI professor NIT Jalandhar research
+  (14/38) AI professor GNDU Amritsar research
+  (15/38) NLP professor Punjab, India research internship
+  (16/38) site:.ac.in NLP faculty professor Punjab, India
+  (17/38) NLP professor IIT Ropar research
+  (18/38) NLP professor Thapar University research
+  (19/38) NLP professor PEC Chandigarh research
+  (20/38) NLP professor NIT Jalandhar research
+  (21/38) NLP professor GNDU Amritsar research
+  (22/38) Formal Verification professor Punjab, India research internship
+  (23/38) site:.ac.in Formal Verification faculty professor Punjab, India
+  (24/38) Formal Verification professor IIT Ropar research
+  (25/38) Formal Verification professor Thapar University research
+  (26/38) Formal Verification professor PEC Chandigarh research
+  (27/38) Formal Verification professor NIT Jalandhar research
+  (28/38) Formal Verification professor GNDU Amritsar research
+  (29/38) Time Series Prediction professor Punjab, India research internship
+  (30/38) site:.ac.in Time Series Prediction faculty professor Punjab, India
+  (31/38) Time Series Prediction professor IIT Ropar research
+  (32/38) Time Series Prediction professor Thapar University research
+  (33/38) Time Series Prediction professor PEC Chandigarh research
+  (34/38) Time Series Prediction professor NIT Jalandhar research
+  (35/38) Time Series Prediction professor GNDU Amritsar research
+  (36/38) Game Theory research group lab Punjab, India PhD students
+  (37/38) AI research group lab Punjab, India PhD students
+  (38/38) NLP research group lab Punjab, India PhD students
+  ✓ Found 311 unique candidate URLs
+  ✓ 50 faculty URLs identified for scraping
+
+Step 2/3: Querying Semantic Scholar...
+
+🎓 Searching Semantic Scholar...
+  Keyword (1/8): Game Theory
+  Keyword (2/8): AI
+  Keyword (3/8): NLP
+  Keyword (4/8): Formal Verification
+  Keyword (5/8): Time Series Prediction
+  Keyword (6/8): Blockchain
+Semantic Scholar search error: 429 Client Error:  for url: 
+https://api.semanticscholar.org/graph/v1/author/search?query=Blockchain&limit=15
+&fields=name%2Caffiliations%2CpaperCount%2CcitationCount%2ChIndex%2Cpapers.title
+%2Cpapers.year%2Cpapers.venue
+  Keyword (7/8): Machine Learning
+  Keyword (8/8): Conversational AI
+  ✓ Found 48 unique authors
+  Snowball Expansion: Fetching active co-authors...
+  ✓ Snowball expansion discovered 2 relevant co-authors
+
+Step 3/3: Scraping 50 pages...
+  (1/50) Scraping: https://cup.edu.in/summer_res_internship...
+    → Summer/Research Internship | (no email)
+  (2/50) Scraping: 
+https://www.isb.edu/faculty-and-research/faculty-directory/abhinav-upp...
+    → abhinav uppal | abhinav_uppal@isb.edu
+  (3/50) Scraping: 
+https://www.punjabiuniversity.ac.in/Departments/Profiles/18/Profile_P1...
+    → (name not found) | (no email)
+  (4/50) Scraping: 
+https://dtu.ac.in/modules/faculty_profile_new/faculty_index.php?uname=...
+  Fetch error (https://dtu.ac.in/modules/faculty_profile_new/faculty_index....):
+HTTPSConnectionPool(host='dtu.ac.in', port=443): Max retries exceeded with url: 
+/modules/faculty_profile_new/faculty_index.php?uname=jamkhongam (Caused by 
+ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x115f803a0>, 
+'Connection to dtu.ac.in timed out. (connect timeout=15)'))
+    → (name not found) | (no email)
+  (5/50) Scraping: 
+https://punjabiuniversity.ac.in/Departments/Profiles/78/Profile_P78X4C...
+    → (name not found) | (no email)
+  (6/50) Scraping: https://iiitvadodara.ac.in/faculty/ag001.php...
+    → IIIT | antriksh_goswami@iiitvadodara.ac.in
+  (7/50) Scraping: https://www.iitrpr.ac.in/maths/?p=2893...
+    → Dr. Arvind Kumar Gupta | akgupta@iitrpr.ac.in
+  (8/50) Scraping: 
+https://punjabiuniversity.ac.in/pages/Department.aspx?dsenc=54...
+    → Punjabi University, Patiala | (no email)
+  (9/50) Scraping: 
+https://www.iitj.ac.in/People/Profile/ccf498a7-2d28-4410-a814-aecff198...
+    → S Srivatsa Srinivas | (no email)
+  (10/50) Scraping: https://www.iitrpr.ac.in/maths/?p=2848...
+    → Dr. Arti Pandey | arti@iitrpr.ac.in
+  (11/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=swapnil.dhamal...
+    → Research Highlights | swapnil.dhamal@iitrpr.ac.in
+  (12/50) Scraping: https://www.iitrpr.ac.in/maths/?page_id=773...
+    → Ph.D. | (no email)
+  (13/50) Scraping: 
+https://iitrpr.irins.org/faculty/index/Department+of+Computer+Science+...
+    → IIT Ropar | (no email)
+  (14/50) Scraping: https://cse.iitrpr.ac.in/?page_id=83...
+    → Research Areas | (no email)
+  (15/50) Scraping: https://www.iitrpr.ac.in/AK/PEOPLE.html...
+    → People | poonamr@iitrpr.ac.in
+  (16/50) Scraping: 
+https://scholar.google.com/citations?user=067LPdgAAAAJ&hl=en...
+  Skipping direct scrape of Google Scholar (avoids 403, no emails anyway).
+    → (name not found) | (no email)
+  (17/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=shwetajain%40i...
+    → Research Highlights | shwetajain@iitrpr.ac.in
+  (18/50) Scraping: http://www.cs.iit.edu/~kapoor/...
+    → Sanjiv Kapoor | (no email)
+  (19/50) Scraping: https://eced.thapar.edu/facultydetails/MTIxNA==...
+    → (name not found) | sanjay.sharma@thapar.edu
+  (20/50) Scraping: https://tslas.thapar.edu/facultymaster/97...
+    → AMIT PRAKASH JHA | amit.prakash@thapar.edu
+  (21/50) Scraping: https://som.thapar.edu/facultydetails/MTQ1NA==...
+    → School of Mathematics | tina.verma1@thapar.edu
+  (22/50) Scraping: https://eced.thapar.edu/facultydetails/MTU3Nw==...
+    → (name not found) | debayani.ghosh@thapar.edu
+  (23/50) Scraping: https://som.thapar.edu/facultydetails/NjM2...
+    → School of Mathematics | amitkumar@thapar.edu
+  (24/50) Scraping: 
+https://pec.ac.in/sites/default/files/pdf/Merged-IDP-2016.pdf...
+    → (name not found) | (no email)
+  (25/50) Scraping: https://pec.ac.in/mathematics/faculty...
+    → Faculty | (no email)
+  (26/50) Scraping: https://curin.chitkara.edu.in/profile/dr-bhisham-sharma/...
+    → BHISHAM SHARMAAssociate Professor | (no email)
+  (27/50) Scraping: https://pec.ac.in/mathematics/faculty/ankit-kumar...
+    → Ankit Kumar | (no email)
+  (28/50) Scraping: 
+https://www.iimamritsar.ac.in/faculty-and-research/faculty-user-profil...
+    → Faculty Directory | pavneets@iimamritsar.ac.in
+  (29/50) Scraping: 
+https://ptu.ac.in/wp-content/uploads/2024/05/updated-list-of-Ph.D.-awa...
+    → (name not found) | (no email)
+  (30/50) Scraping: 
+https://pec.ac.in/sites/default/files/2025-11/mechanical-engineering-s...
+    → (name not found) | (no email)
+  (31/50) Scraping: 
+https://pec.ac.in/sites/default/files/2024-11/Mathematics_computing_sy...
+    → (name not found) | (no email)
+  (32/50) Scraping: 
+https://nitj.irins.org/faculty/index/Department+of+Mathematics...
+    → NIT Jalandhar | (no email)
+  (33/50) Scraping: https://nitj.ac.in/research/research_publications.html...
+    → Research Publications | (no email)
+  (34/50) Scraping: 
+https://www.nitj.ac.in/nitj_files/links/CCSP_Brochure_ECE_Tentative_7_...
+    → (name not found) | (no email)
+  (35/50) Scraping: 
+https://rndshowcase.iiit.ac.in/tto2022/main1.php?centername=Machine%20...
+    → Research | (no email)
+  (36/50) Scraping: 
+https://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?mid=354456...
+    → GURU NANAK DEV UNIVERSITY | mlsingh.ece@gndu.ac.in
+  (37/50) Scraping: https://digital.gndu.ac.in/pdf/resume/2015101199.pdf...
+    → (name not found) | (no email)
+  (38/50) Scraping: 
+https://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?mid=354456...
+    → GURU NANAK DEV UNIVERSITY | aman.phy@gndu.ac.in
+  (39/50) Scraping: 
+https://www.iitj.ac.in/school-of-artificial-intelligence-data-science/...
+    → Internship Programs | (no email)
+  (40/50) Scraping: 
+https://konnifel.com/professor/public_internship/a1kzL013K3BLNnI2LytqV...
+    → AI Research Assistantship | (no email)
+  (41/50) Scraping: https://www.daiict.ac.in/summer-research-internship-dau...
+    → logo | (no email)
+  (42/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=Arnksh%40iitrp...
+    → Research Highlights | Arnksh@iitrpr.ac.in
+  (43/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=mayuresh%40iit...
+    → Research Highlights | mayuresh@iitrpr.ac.in
+  (44/50) Scraping: https://pec.ac.in/faculty/cse...
+    → Faculty | (no email)
+  (45/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=awaneesh%40iit...
+    → Research Highlights | awaneesh@iitrpr.ac.in
+  (46/50) Scraping: 
+https://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?mid=354456...
+    → GURU NANAK DEV UNIVERSITY | kuldeep.ece@gndu.ac.in
+  (47/50) Scraping: 
+https://punjabiuniversity.ac.in/Departments/Profiles/18/Profile_P18X8A...
+    → (name not found) | (no email)
+  (48/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=ashwani.sharma...
+    → Research Highlights | ashwani.sharma@iitrpr.ac.in
+  (49/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=reddy%40iitrpr...
+    → Research Highlights | reddy@iitrpr.ac.in
+  (50/50) Scraping: 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=puneet.kumar%4...
+    → Research Highlights | puneet.kumar@iitrpr.ac.in
+
+🧠 Extracting professor profiles...
+  (1/50) Extracting from https://cup.edu.in/summer_res_internship...
+    ✓ Summer/Research Internship | Central University of Punjab
+  (2/50) Extracting from 
+https://www.isb.edu/faculty-and-research/faculty-directory/a...
+    ✓ Abhinav Uppal | Indian School of Business
+  (3/50) Extracting from 
+https://www.punjabiuniversity.ac.in/Departments/Profiles/18/...
+    ✗ Skipped (no name found)
+  (4/50) Extracting from 
+https://dtu.ac.in/modules/faculty_profile_new/faculty_index....
+    ✗ Skipped (no name found)
+  (5/50) Extracting from 
+https://punjabiuniversity.ac.in/Departments/Profiles/78/Prof...
+    ✗ Skipped (no name found)
+  (6/50) Extracting from https://iiitvadodara.ac.in/faculty/ag001.php...
+    ✓ Antriksh Goswami | Indian Institute of Information Technology Vadodara
+  (7/50) Extracting from https://www.iitrpr.ac.in/maths/?p=2893...
+    ✓ Arvind Kumar Gupta | Indian Institute of Technology Ropar
+  (8/50) Extracting from 
+https://punjabiuniversity.ac.in/pages/Department.aspx?dsenc=...
+    ✓ Punjabi University, Patiala | Punjabi University
+  (9/50) Extracting from 
+https://www.iitj.ac.in/People/Profile/ccf498a7-2d28-4410-a81...
+    ✓ S Srivatsa Srinivas | Indian Institute of Technology Jodhpur
+  (10/50) Extracting from https://www.iitrpr.ac.in/maths/?p=2848...
+    ✓ Dr. Arti Pandey | Indian Institute of Technology Ropar
+  (11/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=swap...
+    ✓ Swapnil Vilas Dhamal | IIT Ropar
+  (12/50) Extracting from https://www.iitrpr.ac.in/maths/?page_id=773...
+    ✓ Ph.D. | IIT Ropar
+  (13/50) Extracting from 
+https://iitrpr.irins.org/faculty/index/Department+of+Compute...
+    ✓ Nitin Auluck | IIT Ropar
+  (14/50) Extracting from https://cse.iitrpr.ac.in/?page_id=83...
+    ✓ Research Areas | IIT Ropar
+  (15/50) Extracting from https://www.iitrpr.ac.in/AK/PEOPLE.html...
+    ✓ Arvind Kumar Gupta | Indian Institute of Technology Ropar
+  (16/50) Extracting from 
+https://scholar.google.com/citations?user=067LPdgAAAAJ&hl=en...
+    ✗ Skipped (no name found)
+  (17/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=shwe...
+    ✓ Shweta Jain | IIT Ropar
+  (18/50) Extracting from http://www.cs.iit.edu/~kapoor/...
+    ✓ Sanjiv Kapoor | Illinois Institute of Technology
+  (19/50) Extracting from https://eced.thapar.edu/facultydetails/MTIxNA==...
+    ✓ Sanjay Sharma | Thapar Institute of Engineering and Technology
+  (20/50) Extracting from https://tslas.thapar.edu/facultymaster/97...
+    ✓ Amit Prakash Jha | Thapar Institute of Engineering and Technology
+  (21/50) Extracting from https://som.thapar.edu/facultydetails/MTQ1NA==...
+    ✓ School of Mathematics | THAPAR
+  (22/50) Extracting from https://eced.thapar.edu/facultydetails/MTU3Nw==...
+    ✓ Debayani Ghosh | Thapar Institute of Engineering and Technology
+  (23/50) Extracting from https://som.thapar.edu/facultydetails/NjM2...
+    ✓ Amit Kumar | Thapar Institute of Engineering and Technology
+  (24/50) Extracting from 
+https://pec.ac.in/sites/default/files/pdf/Merged-IDP-2016.pd...
+    ✗ Skipped (no name found)
+  (25/50) Extracting from https://pec.ac.in/mathematics/faculty...
+    ✓ Ankit Kumar | Punjab Engineering College (Deemed to be University), 
+Chandigarh
+  (26/50) Extracting from 
+https://curin.chitkara.edu.in/profile/dr-bhisham-sharma/...
+    ✓ Bhisham Sharma | Chitkara University
+  (27/50) Extracting from https://pec.ac.in/mathematics/faculty/ankit-kumar...
+    ✓ Ankit Kumar | Punjab Engineering College, (Deemed to be University), 
+Chandigarh
+  (28/50) Extracting from 
+https://www.iimamritsar.ac.in/faculty-and-research/faculty-u...
+    ✓ Pavneet Singh | IIM Amritsar
+  (29/50) Extracting from 
+https://ptu.ac.in/wp-content/uploads/2024/05/updated-list-of...
+    ✗ Skipped (no name found)
+  (30/50) Extracting from 
+https://pec.ac.in/sites/default/files/2025-11/mechanical-eng...
+    ✗ Skipped (no name found)
+  (31/50) Extracting from 
+https://pec.ac.in/sites/default/files/2024-11/Mathematics_co...
+    ✗ Skipped (no name found)
+  (32/50) Extracting from 
+https://nitj.irins.org/faculty/index/Department+of+Mathemati...
+    ✓ Dr Jaspal Aujla | NIT Jalandhar
+  (33/50) Extracting from 
+https://nitj.ac.in/research/research_publications.html...
+    ✓ Research Publications | AC
+  (34/50) Extracting from 
+https://www.nitj.ac.in/nitj_files/links/CCSP_Brochure_ECE_Te...
+    ✗ Skipped (no name found)
+  (35/50) Extracting from 
+https://rndshowcase.iiit.ac.in/tto2022/main1.php?centername=...
+    ✓ Research | IIIT
+  (36/50) Extracting from 
+https://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...
+    ✓ Dr. Maninder Lal Singh | Guru Nanak Dev University
+  (37/50) Extracting from 
+https://digital.gndu.ac.in/pdf/resume/2015101199.pdf...
+    ✗ Skipped (no name found)
+  (38/50) Extracting from 
+https://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...
+    ✓ Dr. Aman Mahajan | Guru Nanak Dev University
+  (39/50) Extracting from 
+https://www.iitj.ac.in/school-of-artificial-intelligence-dat...
+    ✓ Internship Programs | IIT Jodhpur
+  (40/50) Extracting from 
+https://konnifel.com/professor/public_internship/a1kzL013K3B...
+    ✓ AI Research Assistantship | Central University of Punjab, Bathinda
+  (41/50) Extracting from 
+https://www.daiict.ac.in/summer-research-internship-dau...
+    ✓ Abhishek Jindal | Dhirubhai Ambani Institute of Information and 
+Communication Technology
+  (42/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=Arnk...
+    ✓ Arun Kumar Sharma | IIT Ropar
+  (43/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=mayu...
+    ✓ Dr. M. S. Pardeshi | IIT Ropar
+  (44/50) Extracting from https://pec.ac.in/faculty/cse...
+    ✓ Akashdeep Kaur | Punjab Engineering College (Deemed to be University), 
+Chandigarh
+  (45/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=awan...
+    ✓ Awaneesh Kumar Yadav | Indian Institute of Technology Ropar
+  (46/50) Extracting from 
+https://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...
+    ✓ Dr. Kuldeep Singh | Guru Nanak Dev University
+  (47/50) Extracting from 
+https://punjabiuniversity.ac.in/Departments/Profiles/18/Prof...
+    ✗ Skipped (no name found)
+  (48/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=ashw...
+    ✓ Ashwani Sharma | IIT Ropar
+  (49/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=redd...
+    ✓ C.C. Reddy | Indian Institute of Technology Ropar
+  (50/50) Extracting from 
+https://www.iitrpr.ac.in/saide/profile.faculty.php?mail=pune...
+    ✓ Puneet Kumar | Indian Institute of Technology (IIT) Ropar
+
+  Processing 50 Semantic Scholar authors...
+
+✓ Extracted 75 unique professor profiles (14 duplicates removed)
+
+  Email filter: kept 25/75 professors with known emails
+
+✓ Crawl complete. 25 professor profiles ready for scoring.
+
+═══ Step 4/5: Scoring & Shortlisting (25 candidates) ═══
+  Geographic filter: dropped 3 professors not in Punjab, India
+
+📊 Scoring 22 professors...
+✓ Scoring complete.
+                        🏆 Top 2 Shortlisted Professors                         
+┏━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ #   ┃ Name       ┃ Instituti… ┃ Domains    ┃ Score ┃ Email      ┃ Accepting? ┃
+┡━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ 1   │ Shweta     │ IIT Ropar  │ Game       │ 0.490 │ shwetajai… │ ?          │
+│     │ Jain       │            │ Theory,    │       │            │            │
+│     │            │            │ Machine    │       │            │            │
+│     │            │            │ Learning,  │       │            │            │
+│     │            │            │ Rein       │       │            │            │
+│ 2   │ Awaneesh   │ Indian     │ Applied    │ 0.488 │ awaneesh@… │ ?          │
+│     │ Kumar      │ Institute  │ Cryptogra… │       │            │            │
+│     │ Yadav      │ of Techn   │ Post       │       │            │            │
+│     │            │            │ Quantum    │       │            │            │
+└─────┴────────────┴────────────┴────────────┴───────┴────────────┴────────────┘
+✓ 2 professors shortlisted.
+
+═══ Step 5/5: Generating & Reviewing Emails ═══
+
+✉ Generating 2 personalized emails...
+
+  (1/2) Shweta Jain — IIT Ropar
+  ⚠ Email QC failed for Shweta Jain; retrying once...
+  ⚠ Expanding short email for Shweta Jain...
+  ✓ Subject: Research Internship Inquiry — Shweta Jain
+  (2/2) Awaneesh Kumar Yadav — Indian Institute of Technology Ropar
+  ⚠ Email QC failed for Awaneesh Kumar Yadav; retrying once...
+  ⚠ Expanding short email for Awaneesh Kumar Yadav...
+  ✓ Subject: Research Internship Inquiry — Awaneesh Kumar Yadav
+
+✓ Generated 2 draft emails.
+
+─── Email 1/2 ───
+╭─────────────────── Draft Email → Shweta Jain | IIT Ropar ────────────────────╮
+│ To: shwetajain@iitrpr.ac.in                                                  │
+│ Subject: Research Internship Inquiry — Shweta Jain                           │
+│ ─────────────────────────────────────                                        │
+│ Dear Professor Jain,                                                         │
+│                                                                              │
+│ I am excited to apply for a summer research internship under your guidance   │
+│ at IIT Ropar, where I can leverage my strong foundation in AI, NLP, and      │
+│ formal verification to explore real-world problems. Your work on Exploring   │
+│ and Mitigating Gender Bias in Book Recommender Systems and EQBAL-RS:         │
+│ Mitigating popularity bias in recommender systems resonates with my research │
+│ interests in Game Theory. I am impressed by your research on Efficient       │
+│ Algorithms For Fair Clustering with a new fairness notion, which aligns with │
+│ my skills and interests.                                                     │
+│                                                                              │
+│ In my previous projects, I developed AI-powered formal verification systems  │
+│ and built conversational AI agents with advanced reasoning capabilities. I   │
+│ am confident that my skills will enable me to contribute to your research    │
+│ group. I am particularly drawn to your work because it addresses critical    │
+│ issues in recommender systems, and I believe my strong academic background   │
+│ and research experience make me a strong fit for your team. I look forward   │
+│ to discussing my application and how I can contribute to your research       │
+│ endeavors, specifically focusing on mitigating biases in recommender         │
+│ systems.                                                                     │
+│                                                                              │
+│ Sincerely,                                                                   │
+│ Harsh Modi                                                                   │
+│ ─────────────────────────────────────                                        │
+│ Note:  (Critiqued & Revised by LLM Reviewer)                                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Action [approve/skip/quit] (approve): approve
+✓ Draft saved to database.
+
+─── Email 2/2 ───
+╭─ Draft Email → Awaneesh Kumar Yadav | Indian Institute of Technology Ropar ──╮
+│ To: awaneesh@iitrpr.ac.in                                                    │
+│ Subject: Research Internship Inquiry — Awaneesh Kumar Yadav                  │
+│ ─────────────────────────────────────                                        │
+│ Dear Professor Yadav,                                                        │
+│                                                                              │
+│ I am Harsh Modi, a Bachelor of Technology student in Computer Science and    │
+│ Engineering at the Indian Institute of Technology, Ropar, with a strong      │
+│ foundation in AI, NLP, and formal verification. Your work in Applied         │
+│ Cryptography, Post Quantum Security, and AI security for 5G/6G has been a    │
+│ significant influence on my research interests. I am particularly drawn to   │
+│ the applications of Game Theory in these fields, as evident in your          │
+│ publications on Post Quantum Cryptography and Quantum Key Distribution.      │
+│                                                                              │
+│ With experience in developing AI-powered formal verification systems and     │
+│ building conversational AI agents, I am confident that my skills align with  │
+│ your research group's focus. I am excited about the opportunity to           │
+│ contribute to and learn from your projects, specifically those related to    │
+│ 5G/6G Security and Post Quantum Security. I believe that an internship under │
+│ your guidance would be invaluable in exploring these areas further.          │
+│                                                                              │
+│ I would appreciate the chance to discuss my application and how I can        │
+│ contribute to your research group. I look forward to the opportunity to work │
+│ with you and explore the applications of Game Theory in Post Quantum         │
+│ Security.                                                                    │
+│                                                                              │
+│ Sincerely,                                                                   │
+│ Harsh Modi                                                                   │
+│ ─────────────────────────────────────                                        │
+│ Note:  (Critiqued & Revised by LLM Reviewer)                                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Action [approve/skip/quit] (approve): approve
+✓ Draft saved to database.
+
+✓ Review complete! 2 approved, 0 skipped.
+
+Tip: Run python3 main.py review to launch the UI and send approved emails.
+
+✓ Agent workflow completed.

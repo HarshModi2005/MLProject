@@ -1,0 +1,13 @@
+.env
+.env.*
+*.pem
+*.key
+*credentials*.json
+client_secret_*.json
+token.json
+session_state.json
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/

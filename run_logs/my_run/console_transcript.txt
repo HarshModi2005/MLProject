@@ -1,0 +1,21 @@
+Database initialized (rigorous session).
+
+✓ Database initialized.
+
+═══ Step 1/5: Intent Clarification ═══
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 Research Outreach Agent                                                                                           │
+│ I'll help you set up a personalized academic outreach campaign.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Analyzing your request...
+
+I need a few more details. (3 questions remaining)
+
+► 📅 What is your target timeline? (e.g. Summer 2025, Fall 2025, immediately)
+
+► 📅 What is your target timeline? (e.g. Summer 2025, Fall 2025, immediately)
+
+► 📅 What is your target timeline? (e.g. Summer 2025, Fall 2025, immediately)
+
+► 📅 What is your target timeline? (e.g. Summer 2025, Fall 2025, immediately)

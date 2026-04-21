@@ -1,0 +1,228 @@
+
+═══ Step 1/5: Intent Clarification ═══
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 Research Outreach Agent                                                   │
+│ I'll help you set up a personalized academic outreach campaign.              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Analyzing your request...
+
+I need a few more details. (1 question remaining)
+
+► 📄 Please briefly describe your background: your degree, year, key skills, and
+notable projects or publications. (Or type 'cv' to provide a CV file path)
+
+Generating confirmation summary...
+
+╭────────────────────────────── 📋 Confirmation ───────────────────────────────╮
+│ To confirm, here's a summary of your structured outreach plan:               │
+│                                                                              │
+│ * Your goal is to secure a research internship, specifically focusing on     │
+│ machine learning and natural language processing.                            │
+│ * You are targeting institutions in the United States for this opportunity.  │
+│ * Your timeline for the internship is Summer 2026.                           │
+│ * You have a strong background in AI and data analysis, with expertise in    │
+│ machine learning and NLP, and you're looking to apply these skills in a      │
+│ research setting.                                                            │
+│ * Your key highlights for the research internship include machine learning   │
+│ expertise, NLP knowledge, AI applications, data analysis, model development, │
+│ language models, and deep learning.                                          │
+│ * You have experience with Python and PyTorch, and you've completed a        │
+│ project on fine-tuning transformers for text classification.                 │
+│ * You're looking for a research lab alignment that matches your interests    │
+│ and skills.                                                                  │
+│ * Your preferred email tone for outreach is professional.                    │
+│ * You plan to send out 10 outreach emails per week, with a follow-up email   │
+│ after 7 days if you don't receive a response.                                │
+│ * You've provided some additional notes about your experience and interests, │
+│ but you haven't uploaded your CV or provided detailed information about your │
+│ academic background or achievements.                                         │
+│                                                                              │
+│ Does this look correct? (yes to confirm / no to make changes)                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+✓ Intent confirmed! Moving to planning...
+
+
+═══ Step 2/5: Execution Planning ═══
+
+🧠 Generating execution plan...
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 📊 Generated Execution Plan                                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+                               🔍 Search Strategy                               
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Field            ┃ Value                                                     ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Keywords         │ machine learning, natural language processing, AI         │
+│                  │ applications, data analysis, model development, language  │
+│                  │ models, deep learning, NLP, ML                            │
+│ Countries        │ United States                                             │
+│ Top-K Professors │ 2                                                         │
+└──────────────────┴───────────────────────────────────────────────────────────┘
+         📧 Email Strategy          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Field             ┃ Value        ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ Personalization   │ high         │
+│ Tone              │ professional │
+│ Word Count Target │ 220          │
+│ Ref. Publications │ ✓            │
+│ Attach CV         │ ✓            │
+└───────────────────┴──────────────┘
+    📅 Sending Schedule     
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Field           ┃ Value  ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ Emails/Week     │ 10     │
+│ Follow-up After │ 7 days │
+│ Max Follow-ups  │ 2      │
+└─────────────────┴────────┘
+
+Getting plain-language explanation...
+╭───────────────────────────── 💡 What this means ─────────────────────────────╮
+│ Here's a simple and friendly explanation of the outreach execution plan:     │
+│                                                                              │
+│ * **Search approach**: We'll look for professors in the United States who    │
+│ have published research on topics like machine learning, natural language    │
+│ processing, and AI applications.                                             │
+│ * **Professor selection**: We'll choose professors who:                      │
+│         + Have published recently                                            │
+│         + Have an active lab                                                 │
+│         + Have a relevance score of at least 0.4                             │
+│         + Have a publicly available email address                            │
+│ * **Email strategy**: We'll send personalized, professional emails with:     │
+│         + A reference to their publications                                  │
+│         + A tone that's professional and friendly                            │
+│         + A word count of around 220 words                                   │
+│         + An attachment of our CV                                            │
+│ We'll send 10 emails per week, with follow-ups every 7 days, up to 2 times.  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Approve this plan? (yes / no + describe change)
+✓ Plan approved! Starting crawl...
+
+
+═══ Step 3/5: Crawling for Professors ═══
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🕷 Web Crawling Mode                                                          │
+│ Searching for professors matching your criteria...                           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Step 1/3: Running web searches...
+  Determining top institutions in United States...
+  Found regional institutions: Stanford, Caltech, Harvard, UC Berkeley
+
+🔍 Running 28 search queries...
+  (1/10) machine learning professor United States research internship...
+  (2/10) machine learning professor Stanford research...
+  (3/10) machine learning professor Caltech research...
+  (4/10) machine learning professor Harvard research...
+  (5/10) machine learning professor UC Berkeley research...
+  (6/10) natural language processing professor United States research 
+internship...
+  (7/10) natural language processing professor Stanford research...
+  (8/10) natural language processing professor Caltech research...
+  (9/10) natural language processing professor Harvard research...
+  (10/10) natural language processing professor UC Berkeley research...
+  ✓ Found 20 unique candidate URLs
+  ✓ 5 faculty URLs identified for scraping
+
+Step 2/3: Querying Semantic Scholar...
+
+🎓 Searching Semantic Scholar...
+  Keyword: machine learning
+  Keyword: natural language processing
+  ✓ Found 3 unique authors
+
+Step 3/3: Scraping 5 pages...
+  (1/5) Scraping: http://mlclass.stanford.edu/...
+    → Machine Learning | (no email)
+  (2/5) Scraping: https://cs.stanford.edu/people/jure/...
+    → What's new | (no email)
+  (3/5) Scraping: 
+https://www.cms.caltech.edu/research/artificial-intelligence-and-machi...
+    → Artificial Intelligence and Machine Learning | (no email)
+  (4/5) Scraping: https://home.work.caltech.edu/index.html...
+    → Yaser S. Abu | (no email)
+  (5/5) Scraping: https://www.harvard.edu/ai/ai-at-harvard-faculty/...
+    → Faculty | (no email)
+
+🧠 Extracting professor profiles...
+  (1/5) Extracting from http://mlclass.stanford.edu/...
+    ✓ Andrew Ng | Stanford University
+  (2/5) Extracting from https://cs.stanford.edu/people/jure/...
+    ✓ Jure Leskovec | Stanford University
+  (3/5) Extracting from 
+https://www.cms.caltech.edu/research/artificial-intelligence...
+    ✓ Anima Anandkumar | Caltech
+  (4/5) Extracting from https://home.work.caltech.edu/index.html...
+    ✓ Yaser S. Abu-Mostafa | California Institute of Technology
+  (5/5) Extracting from https://www.harvard.edu/ai/ai-at-harvard-faculty/...
+    ✓ Faculty | Harvard University
+
+  Processing 3 Semantic Scholar authors...
+
+✓ Extracted 8 unique professor profiles (0 duplicates removed)
+
+✓ Crawl complete. 8 professor profiles ready for scoring.
+
+═══ Step 4/5: Scoring & Shortlisting (8 candidates) ═══
+
+📊 Scoring 8 professors...
+✓ Scoring complete.
+                        🏆 Top 1 Shortlisted Professors                         
+┏━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ #   ┃ Name        ┃ Institution ┃ Domains      ┃ Score ┃ Email  ┃ Accepting? ┃
+┡━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ 1   │ Jure        │ Stanford    │ applied      │ 0.435 │ (none) │ ✓          │
+│     │ Leskovec    │ University  │ machine      │       │        │            │
+│     │             │             │ learning,    │       │        │            │
+│     │             │             │ relationa    │       │        │            │
+└─────┴─────────────┴─────────────┴──────────────┴───────┴────────┴────────────┘
+✓ 1 professors shortlisted.
+
+═══ Step 5/5: Generating & Reviewing Emails ═══
+
+✉ Generating 1 personalized emails...
+
+  (1/1) Jure Leskovec — Stanford University
+  ⚠ Email QC failed for Jure Leskovec; retrying once...
+  ⚠ Expanding short email for Jure Leskovec...
+  ✓ Subject: Research Internship Inquiry — Jure Leskovec
+
+✓ Generated 1 draft emails.
+
+─── Email 1/1 ───
+╭───────────── Draft Email → Jure Leskovec | Stanford University ──────────────╮
+│ To: professor-email-not-on-page@example.invalid                              │
+│ Subject: Research Internship Inquiry — Jure Leskovec                         │
+│ ─────────────────────────────────────                                        │
+│ Dear Professor Leskovec,                                                     │
+│                                                                              │
+│ I am excited to express my interest in a summer research internship at       │
+│ Stanford University, working under your guidance on projects like PyG 2.0    │
+│ and the Stanford Graph Learning Workshop 2024. With a strong foundation in   │
+│ machine learning and natural language processing, I am drawn to your work    │
+│ and believe my research targets align with your expertise. I am eager to     │
+│ explore the applications of PyTorch Frame in machine learning and NLP, and I │
+│ am confident that my background in AI and data analysis would be a good fit  │
+│ for your research group.                                                     │
+│                                                                              │
+│ I am impressed by your contributions to the field, particularly in model     │
+│ development and language models. I have a solid understanding of deep        │
+│ learning and its applications, which I believe would enable me to make       │
+│ valuable contributions to your research group. I am excited about the        │
+│ prospect of working on projects that involve machine learning expertise and  │
+│ NLP knowledge, and I am confident that this experience would enhance my      │
+│ research skills and knowledge.                                               │
+│                                                                              │
+│ I would appreciate the opportunity to discuss my application and how I can   │
+│ contribute to your research group during the Summer 2026 internship, and I   │
+│ look forward to the chance to work with you.                                 │
+│ ─────────────────────────────────────                                        │
+│ Note:  (Critiqued & Revised by LLM Reviewer)                                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+✓ Review complete! 0 approved, 1 skipped.

@@ -1,0 +1,979 @@
+/Users/harsh/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[36m╭──────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m🤖 Welcome to the Autonomous Research Outreach Agent[0m             [36m│[0m
+[36m│[0m Let's find the perfect professors and draft personalized emails. [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────╯[0m
+[2m✓ Database initialized.[0m
+[2mDatabase initialized.[0m
+
+
+[1;36m═══ Step [0m[1;36m1[0m[1;36m/[0m[1;36m5[0m[1;36m: Intent Clarification ═══[0m
+[36m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m🤖 Research Outreach Agent[0m                                                   [36m│[0m
+[36m│[0m [2mI'll help you set up a personalized academic outreach campaign.[0m              [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mWhat do you want to do?[0m: I want to find a research internship in Game Theory in Punjab, India
+
+[2mAnalyzing your request[0m[2;33m...[0m
+
+[2mI need a few more details. [0m[1;2m([0m[1;2;36m3[0m[2m questions remaining[0m[1;2m)[0m
+
+[1;32m►[0m 📅 What is your target timeline? [1m([0me.g. Summer [1;36m2025[0m, Fall [1;36m2025[0m, immediately[1m)[0m
+: Summer 2026
+
+[1;32m►[0m 👤 What is your full name? [1m([0mfor personalizing the emails[1m)[0m
+: Harsh Modu
+
+[1;32m►[0m 📄 Please briefly describe your background: your degree, year, key skills, and
+notable projects or publications. [1m([0mOr type [32m'cv'[0m to provide a CV file path[1m)[0m
+: '/Users/harsh/Desktop/ML/MLProjectAutonomousAgent/HarshModi.pdf'
+[2m📄 Parsing CV: [0m[2;35m/Users/harsh/Desktop/ML/MLProjectAutonomousAgent/[0m[2;95mHarshModi.pdf[0m
+[32m✓ CV parsed successfully.[0m
+
+[2mGenerating confirmation summary[0m[2;33m...[0m
+
+[34m╭─[0m[34m─────────────────────────────[0m[34m [0m[1;34m📋 Confirmation[0m[34m [0m[34m──────────────────────────────[0m[34m─╮[0m
+[34m│[0m To confirm, here's a summary of your structured outreach plan:               [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m * Your goal is to secure a research internship, specifically in the domain   [34m│[0m
+[34m│[0m of Game Theory.                                                              [34m│[0m
+[34m│[0m * You're interested in opportunities located in Punjab, India.               [34m│[0m
+[34m│[0m * Your background is in Computer Science and Engineering, with a strong      [34m│[0m
+[34m│[0m foundation in AI, NLP, and formal verification, and you're currently a       [34m│[0m
+[34m│[0m student at the Indian Institute of Technology, Ropar.                        [34m│[0m
+[34m│[0m * Your research interests include machine learning, time series prediction,  [34m│[0m
+[34m│[0m and formal verification, and you have experience with projects such as stock [34m│[0m
+[34m│[0m price prediction, formal verification systems, and conversational AI agents. [34m│[0m
+[34m│[0m * You've developed skills in programming languages like TypeScript, Python,  [34m│[0m
+[34m│[0m and React, as well as experience with blockchain, LSTM, and Transformers.    [34m│[0m
+[34m│[0m * You're looking to apply for research internships during Summer 2026, with  [34m│[0m
+[34m│[0m a professional email tone and a plan to follow up with contacts after 7      [34m│[0m
+[34m│[0m days.                                                                        [34m│[0m
+[34m│[0m * You aim to reach out to 10 potential institutions or contacts per week.    [34m│[0m
+[34m│[0m * Your CV is available and highlights your academic achievements, research   [34m│[0m
+[34m│[0m experience, and skills.                                                      [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Does this look correct? (yes to confirm / no to make changes)                [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+[1;33mYour answer[0m: yes
+[1;32m✓ Intent confirmed! Moving to planning[0m[1;32m...[0m
+
+
+[1;36m═══ Step [0m[1;36m2[0m[1;36m/[0m[1;36m5[0m[1;36m: Execution Planning ═══[0m
+
+[2m🧠 Generating execution plan[0m[2;33m...[0m
+
+
+[36m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m📊 Generated Execution Plan[0m                                                  [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+[3m                               🔍 Search Strategy                               [0m
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mField           [0m[1;35m [0m┃[1;35m [0m[1;35mValue                                                    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│[1m [0m[1mKeywords        [0m[1m [0m│ Game Theory, AI, NLP, Formal Verification, Time Series    │
+│[1m                  [0m│ Prediction, Machine Learning, LSTM, Transformers,         │
+│[1m                  [0m│ Blockchain, DeFi                                          │
+│[1m [0m[1mCountries       [0m[1m [0m│ Punjab, India                                             │
+│[1m [0m[1mTop-K Professors[0m[1m [0m│ 2                                                         │
+└──────────────────┴───────────────────────────────────────────────────────────┘
+[3m         📧 Email Strategy          [0m
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃[1;34m [0m[1;34mField            [0m[1;34m [0m┃[1;34m [0m[1;34mValue       [0m[1;34m [0m┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│[1m [0m[1mPersonalization  [0m[1m [0m│ high         │
+│[1m [0m[1mTone             [0m[1m [0m│ professional │
+│[1m [0m[1mWord Count Target[0m[1m [0m│ 220          │
+│[1m [0m[1mRef. Publications[0m[1m [0m│ ✓            │
+│[1m [0m[1mAttach CV        [0m[1m [0m│ ✓            │
+└───────────────────┴──────────────┘
+[3m    📅 Sending Schedule     [0m
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃[1;32m [0m[1;32mField          [0m[1;32m [0m┃[1;32m [0m[1;32mValue [0m[1;32m [0m┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│[1m [0m[1mEmails/Week    [0m[1m [0m│ 10     │
+│[1m [0m[1mFollow-up After[0m[1m [0m│ 7 days │
+│[1m [0m[1mMax Follow-ups [0m[1m [0m│ 2      │
+└─────────────────┴────────┘
+
+[2mGetting plain-language explanation[0m[2;33m...[0m
+[2m╭─[0m[2m────────────────────────────[0m[2m [0m[1;2m💡 What this means[0m[2m [0m[2m────────────────────────────[0m[2m─╮[0m
+[2m│[0m Here's a simple and friendly explanation of the outreach execution plan:     [2m│[0m
+[2m│[0m                                                                              [2m│[0m
+[2m│[0m * **Search approach**: We'll look for professors in Punjab, India who have   [2m│[0m
+[2m│[0m expertise in areas like Game Theory, AI, and Blockchain.                     [2m│[0m
+[2m│[0m * **Professor selection**: We'll choose professors who:                      [2m│[0m
+[2m│[0m   + Have published recently                                                  [2m│[0m
+[2m│[0m   + Are currently active in their field                                      [2m│[0m
+[2m│[0m   + Have a strong relevance score (at least 0.4)                             [2m│[0m
+[2m│[0m   + Have a publicly available email address                                  [2m│[0m
+[2m│[0m * **Email strategy**: We'll send personalized, professional emails (around   [2m│[0m
+[2m│[0m 220 words) that:                                                             [2m│[0m
+[2m│[0m   + Reference the professor's publications                                   [2m│[0m
+[2m│[0m   + Include a CV attachment                                                  [2m│[0m
+[2m│[0m   + Are sent at a rate of 10 emails per week, with follow-ups every 7 days   [2m│[0m
+[2m│[0m (up to 2 follow-ups)                                                         [2m│[0m
+[2m│[0m   We'll focus on reaching out to the top 2 professors who match our          [2m│[0m
+[2m│[0m criteria.                                                                    [2m│[0m
+[2m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mApprove this plan? [0m[1;33m([0m[1;33myes [0m[1;33m/[0m[1;33m no + describe change[0m[1;33m)[0m
+: yes
+[1;32m✓ Plan approved! Starting crawl[0m[1;32m...[0m
+
+
+[1;36m═══ Step [0m[1;36m3[0m[1;36m/[0m[1;36m5[0m[1;36m: Crawling for Professors ═══[0m
+[36m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[36m│[0m [1;36m🕷 Web Crawling Mode[0m                                                          [36m│[0m
+[36m│[0m [2mSearching for professors matching your criteria...[0m                           [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1mStep [0m[1;36m1[0m[1m/[0m[1;36m3[0m[1m:[0m Running web searches[33m...[0m
+  [2mDetermining top institutions in Punjab, India[0m[2;33m...[0m
+  [2mFound regional institutions: IIT Ropar, Thapar University, PEC Chandigarh, NIT[0m
+[2mJalandhar, GNDU[0m
+
+[1;36m🔍 Running [0m[1;36m38[0m[1;36m search queries[0m[1;36m...[0m
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in Game Theory faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor Thapar University research[0m
+  [1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory professor GNDU research[0m
+  [1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m9[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in AI faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m10[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m11[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor Thapar University research[0m
+  [1;2m([0m[1;2;36m12[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m13[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m14[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI professor GNDU research[0m
+  [1;2m([0m[1;2;36m15[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m16[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in NLP faculty professor Punjab, India[0m
+[33m⚠ Serper API key not set. Skipping Serper search.[0m
+  [1;2m([0m[1;2;36m17[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m18[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor Thapar University research[0m
+  [1;2m([0m[1;2;36m19[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m20[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m21[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP professor GNDU research[0m
+  [1;2m([0m[1;2;36m22[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m23[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in Formal Verification faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m24[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m25[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor Thapar University research[0m
+  [1;2m([0m[1;2;36m26[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m27[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m28[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Formal Verification professor GNDU research[0m
+  [1;2m([0m[1;2;36m29[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor Punjab, India research internship[0m
+  [1;2m([0m[1;2;36m30[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m site:.ac.in Time Series Prediction faculty professor Punjab, India[0m
+  [1;2m([0m[1;2;36m31[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor IIT Ropar research[0m
+  [1;2m([0m[1;2;36m32[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor Thapar University research[0m
+  [1;2m([0m[1;2;36m33[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor PEC Chandigarh research[0m
+  [1;2m([0m[1;2;36m34[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor NIT Jalandhar research[0m
+  [1;2m([0m[1;2;36m35[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Time Series Prediction professor GNDU research[0m
+  [1;2m([0m[1;2;36m36[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m Game Theory research group lab Punjab, India PhD students[0m
+  [1;2m([0m[1;2;36m37[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m AI research group lab Punjab, India PhD students[0m
+  [1;2m([0m[1;2;36m38[0m[2m/[0m[1;2;36m38[0m[1;2m)[0m[2m NLP research group lab Punjab, India PhD students[0m
+  [32m✓ Found [0m[1;32m306[0m[32m unique candidate URLs[0m
+  [32m✓[0m [1;36m50[0m faculty URLs identified for scraping
+
+[1mStep [0m[1;36m2[0m[1m/[0m[1;36m3[0m[1m:[0m Querying Semantic Scholar[33m...[0m
+
+[1;36m🎓 Searching Semantic Scholar[0m[1;36m...[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Game Theory[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: AI[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: NLP[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Formal Verification[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Time Series Prediction[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Machine Learning[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: LSTM[0m
+  [2mKeyword [0m[1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m8[0m[1;2m)[0m[2m: Transformers[0m
+  [32m✓ Found [0m[1;32m76[0m[32m unique authors[0m
+  [2mSnowball Expansion: Fetching active co-authors[0m[2;33m...[0m
+  [32m✓ Snowball expansion discovered [0m[1;32m2[0m[32m relevant co-authors[0m
+
+[1mStep [0m[1;36m3[0m[1m/[0m[1;36m3[0m[1m:[0m Scraping [1;36m50[0m pages[33m...[0m
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://cup.edu.in/summer_res_internship...[0m
+    → Summer/Research Internship | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.isb.edu/faculty-and-research/faculty-directory/abhinav-upp...[0m
+    → abhinav uppal | abhinav_uppal@isb.edu
+  [1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.daiict.ac.in/summer-research-internship-dau...[0m
+    → logo | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitj.ac.in/People/Profile/ccf498a7-2d28-4410-a814-aecff198...[0m
+    → S Srivatsa Srinivas | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://iiitvadodara.ac.in/faculty/ag001.php...[0m
+    → IIIT | antriksh_goswami@iiitvadodara.ac.in
+  [1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2893[0m[4;94m...[0m
+    → Dr. Arvind Kumar Gupta | akgupta@iitrpr.ac.in
+  [1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://punjabiuniversity.ac.in/pages/Department.aspx?[0m[4;94mdsenc[0m[4;94m=[0m[4;94m54[0m[4;94m...[0m
+    → Punjabi University, Patiala | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2848[0m[4;94m...[0m
+    → Dr. Arti Pandey | arti@iitrpr.ac.in
+  [1;2m([0m[1;2;36m9[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mswapnil[0m[4;94m.dhamal...[0m
+    → Research Highlights | swapnil.dhamal@iitrpr.ac.in
+  [1;2m([0m[1;2;36m10[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m773[0m[4;94m...[0m
+    → Ph.D. | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m11[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m11609[0m[4;94m...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m12[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mshwetajain[0m[4;94m%40i...[0m
+    → Research Highlights | shwetajain@iitrpr.ac.in
+  [1;2m([0m[1;2;36m13[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://dtu.ac.in/modules/faculty_profile_new/faculty_index.php?[0m[4;94muname[0m[4;94m=...[0m
+  [31mFetch error [0m[1;31m([0m[4;31mhttps://dtu.ac.in/modules/faculty_profile_new/faculty_index....[0m[4;31m)[0m[4;31m:[0m
+[1;31mHTTPSConnectionPool[0m[1;31m([0m[31mhost[0m[31m=[0m[31m'dtu.ac.in'[0m[31m, [0m[31mport[0m[31m=[0m[1;31m443[0m[1;31m)[0m[31m: Max retries exceeded with url: [0m
+[31m/modules/faculty_profile_new/[0m[31mfaculty_index.php[0m[31m?[0m[31muname[0m[31m=[0m[31mjamkhongam[0m[31m [0m[1;31m([0m[31mCaused by [0m
+[1;31mConnectTimeoutError[0m[1;31m([0m[1;31m<[0m[1;31murllib3.connection.HTTPSConnection[0m[31m object at [0m[1;31m0x117bfd040[0m[1;31m>[0m[31m, [0m
+[31m'Connection to dtu.ac.in timed out. [0m[31m([0m[31mconnect [0m[31mtimeout[0m[31m=[0m[31m15[0m[31m)[0m[31m'[0m[1;31m)[0m[1;31m)[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m14[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://iitrpr.irins.org/faculty/index/Department+of+Computer+Science+...[0m
+    → IIT Ropar | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m15[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://cse.iitrpr.ac.in/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m83[0m[4;94m...[0m
+    → Research Areas | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m16[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://www.iitrpr.ac.in/AK/PEOPLE.html...[0m
+    → People | poonamr@iitrpr.ac.in
+  [1;2m([0m[1;2;36m17[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://scholar.google.com/citations?[0m[4;94muser[0m[4;94m=[0m[4;94m067LPdgAAAAJ[0m[4;94m&[0m[4;94mhl[0m[4;94m=[0m[4;94men[0m[4;94m...[0m
+  [2mSkipping direct scrape of Google Scholar [0m[1;2m([0m[2mavoids [0m[1;2;36m403[0m[2m, no emails anyway[0m[1;2m)[0m[2m.[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m18[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttp://www.cs.iit.edu/~kapoor/...[0m
+    → Sanjiv Kapoor | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m19[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTIxNA[0m[4;94m==...[0m
+    → [1m([0mname not found[1m)[0m | sanjay.sharma@thapar.edu
+  [1;2m([0m[1;2;36m20[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://tslas.thapar.edu/facultymaster/97...[0m
+    → AMIT PRAKASH JHA | amit.prakash@thapar.edu
+  [1;2m([0m[1;2;36m21[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://som.thapar.edu/facultydetails/[0m[4;94mMTQ1NA[0m[4;94m==...[0m
+    → School of Mathematics | tina.verma1@thapar.edu
+  [1;2m([0m[1;2;36m22[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTU3Nw[0m[4;94m==...[0m
+    → [1m([0mname not found[1m)[0m | debayani.ghosh@thapar.edu
+  [1;2m([0m[1;2;36m23[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://som.thapar.edu/facultydetails/NjM2...[0m
+    → School of Mathematics | amitkumar@thapar.edu
+  [1;2m([0m[1;2;36m24[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://pec.ac.in/mathematics/faculty...[0m
+    → Faculty | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m25[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://curin.chitkara.edu.in/profile/dr-bhisham-sharma/...[0m
+    → BHISHAM SHARMAAssociate Professor | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m26[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://pec.ac.in/mathematics/faculty/ankit-kumar...[0m
+    → Ankit Kumar | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m27[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://pec.ac.in/sites/default/files/pdf/Merged-IDP-2016.pdf...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m28[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iimamritsar.ac.in/faculty-and-research/faculty-user-profil...[0m
+    → Faculty Directory | pavneets@iimamritsar.ac.in
+  [1;2m([0m[1;2;36m29[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://ptu.ac.in/wp-content/uploads/2024/05/updated-list-of-Ph.D.-awa...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m30[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://pec.ac.in/sites/default/files/2025-11/mechanical-engineering-s...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m31[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://pec.ac.in/sites/default/files/2024-11/Mathematics_computing_sy...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m32[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.nitj.ac.in/nitj_files/links/CCSP_Brochure_ECE_Tentative_7_...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m33[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://nitj.ac.in/research/research_publications.html...[0m
+    → Research Publications | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m34[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://rndshowcase.iiit.ac.in/tto2022/main1.php?[0m[4;94mcentername[0m[4;94m=[0m[4;94mMachine[0m[4;94m%20...[0m
+    → Research | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m35[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?[0m[4;94mmid[0m[4;94m=[0m[4;94m354456[0m[4;94m...[0m
+    → GURU NANAK DEV UNIVERSITY | amit.cse@gndu.ac.in
+  [1;2m([0m[1;2;36m36[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?[0m[4;94mmid[0m[4;94m=[0m[4;94m354456[0m[4;94m...[0m
+    → GURU NANAK DEV UNIVERSITY | harkiran.csda@gndu.ac.in
+  [1;2m([0m[1;2;36m37[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://digital.gndu.ac.in/pdf/resume/2015101199.pdf...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m38[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://researchjournals.gndu.ac.in/Psychology/pdf/CurrentIssue.pdf...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m39[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.uaa.alaska.edu/academics/college-of-engineering/department...[0m
+    → University of Alaska Anchorage | udutta2@alaska.edu
+  [1;2m([0m[1;2;36m40[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/ConferencesSeminarAttendedByFaculty.aspx...[0m
+    → GURU NANAK DEV UNIVERSITY | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m41[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://konnifel.com/professor/public_internship/a1kzL013K3BLNnI2LytqV...[0m
+    → AI Research Assistantship | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m42[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitj.ac.in/school-of-artificial-intelligence-data-science/...[0m
+    → Internship Programs | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m43[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://plaksha.edu.in/ms/artificial-intelligence/faculty...[0m
+    → Faculty | deepan.muthirayan@plaksha.edu.in
+  [1;2m([0m[1;2;36m44[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: [4;94mhttps://pec.ac.in/faculty/cse...[0m
+    → Faculty | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m45[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mawaneesh[0m[4;94m%40iit...[0m
+    → Research Highlights | awaneesh@iitrpr.ac.in
+  [1;2m([0m[1;2;36m46[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?[0m[4;94mmid[0m[4;94m=[0m[4;94m354456[0m[4;94m...[0m
+    → GURU NANAK DEV UNIVERSITY | kuldeep.ece@gndu.ac.in
+  [1;2m([0m[1;2;36m47[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://punjabiuniversity.ac.in/Departments/Profiles/18/Profile_P18X8A...[0m
+    → [1m([0mname not found[1m)[0m | [1m([0mno email[1m)[0m
+  [1;2m([0m[1;2;36m48[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mashwani[0m[4;94m.sharma...[0m
+    → Research Highlights | ashwani.sharma@iitrpr.ac.in
+  [1;2m([0m[1;2;36m49[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mreddy[0m[4;94m%40iitrpr...[0m
+    → Research Highlights | reddy@iitrpr.ac.in
+  [1;2m([0m[1;2;36m50[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Scraping: 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mpuneet[0m[4;94m.kumar%4...[0m
+    → Research Highlights | puneet.kumar@iitrpr.ac.in
+
+[1;36m🧠 Extracting professor profiles[0m[1;36m...[0m
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://cup.edu.in/summer_res_internship...[0m
+    [32m✓[0m Summer/Research Internship | Central University of Punjab
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.isb.edu/faculty-and-research/faculty-directory/a...[0m
+    [32m✓[0m Abhinav Uppal | Indian School of Business
+  [1;2m([0m[1;2;36m3[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.daiict.ac.in/summer-research-internship-dau...[0m
+    [32m✓[0m Abhishek Jindal | Dhirubhai Ambani Institute of Information and 
+Communication Technology
+  [1;2m([0m[1;2;36m4[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitj.ac.in/People/Profile/ccf498a7-2d28-4410-a81...[0m
+    [32m✓[0m S Srivatsa Srinivas | Indian Institute of Technology Jodhpur
+  [1;2m([0m[1;2;36m5[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://iiitvadodara.ac.in/faculty/ag001.php...[0m
+    [32m✓[0m Antriksh Goswami | Indian Institute of Information Technology Vadodara
+  [1;2m([0m[1;2;36m6[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2893[0m[4;94m...[0m
+    [32m✓[0m Arvind Kumar Gupta | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m7[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://punjabiuniversity.ac.in/pages/Department.aspx?[0m[4;94mdsenc[0m[4;94m=...[0m
+    [32m✓[0m Punjabi University, Patiala | Punjabi University
+  [1;2m([0m[1;2;36m8[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mp[0m[4;94m=[0m[4;94m2848[0m[4;94m...[0m
+    [32m✓[0m Dr. Arti Pandey | Indian Institute of Technology Ropar
+  [1;2m([0m[1;2;36m9[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mswap[0m[4;94m...[0m
+    [32m✓[0m Dr. Swapnil Vilas Dhamal | IIT Ropar
+  [1;2m([0m[1;2;36m10[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m773[0m[4;94m...[0m
+    [32m✓[0m Ph.D. | IIT Ropar
+  [1;2m([0m[1;2;36m11[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/maths/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m11609[0m[4;94m...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m12[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mshwe[0m[4;94m...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1501. Please try again in 19m28.992s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research Highlights | AC
+  [1;2m([0m[1;2;36m13[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://dtu.ac.in/modules/faculty_profile_new/faculty_index....[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m14[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://iitrpr.irins.org/faculty/index/Department+of+Compute...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1128. Please try again in 14m6.72s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m IIT Ropar | IRINS
+  [1;2m([0m[1;2;36m15[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://cse.iitrpr.ac.in/?[0m[4;94mpage_id[0m[4;94m=[0m[4;94m83[0m[4;94m...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1116. Please try again in 13m56.352s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research Areas | AC
+  [1;2m([0m[1;2;36m16[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://www.iitrpr.ac.in/AK/PEOPLE.html...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1351. Please try again in 17m19.392s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m People | AC
+  [1;2m([0m[1;2;36m17[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://scholar.google.com/citations?[0m[4;94muser[0m[4;94m=[0m[4;94m067LPdgAAAAJ[0m[4;94m&[0m[4;94mhl[0m[4;94m=[0m[4;94men[0m[4;94m...[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m18[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttp://www.cs.iit.edu/~kapoor/...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1485. Please try again in 19m15.168s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Sanjiv Kapoor | IIT
+  [1;2m([0m[1;2;36m19[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTIxNA[0m[4;94m==...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1386. Please try again in 17m49.632s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m20[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://tslas.thapar.edu/facultymaster/97...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1082. Please try again in 13m26.976s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m AMIT PRAKASH JHA | THAPAR
+  [1;2m([0m[1;2;36m21[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://som.thapar.edu/facultydetails/[0m[4;94mMTQ1NA[0m[4;94m==...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1428. Please try again in 18m25.92s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m School of Mathematics | THAPAR
+  [1;2m([0m[1;2;36m22[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://eced.thapar.edu/facultydetails/[0m[4;94mMTU3Nw[0m[4;94m==...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1174. Please try again in 14m46.464s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m23[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://som.thapar.edu/facultydetails/NjM2...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1301. Please try again in 16m36.192s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m School of Mathematics | THAPAR
+  [1;2m([0m[1;2;36m24[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://pec.ac.in/mathematics/faculty...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 823. Please try again in 9m43.2s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Faculty | AC
+  [1;2m([0m[1;2;36m25[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://curin.chitkara.edu.in/profile/dr-bhisham-sharma/...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1303. Please try again in 16m37.92s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m BHISHAM SHARMAAssociate Professor | EDU
+  [1;2m([0m[1;2;36m26[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://pec.ac.in/mathematics/faculty/ankit-kumar...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1133. Please try again in 14m11.04s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Ankit Kumar | AC
+  [1;2m([0m[1;2;36m27[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://pec.ac.in/sites/default/files/pdf/Merged-IDP-2016.pd...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 3048. Please try again in 41m45.6s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m28[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iimamritsar.ac.in/faculty-and-research/faculty-u...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 1284. Please try again in 16m21.504s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Faculty Directory | AC
+  [1;2m([0m[1;2;36m29[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://ptu.ac.in/wp-content/uploads/2024/05/updated-list-of...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 3158. Please try again in 43m20.64s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m30[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://pec.ac.in/sites/default/files/2025-11/mechanical-eng...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 2910. Please try again in 39m46.368s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m31[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://pec.ac.in/sites/default/files/2024-11/Mathematics_co...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99852, Requested 3203. Please try again in 43m59.52s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m32[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.nitj.ac.in/nitj_files/links/CCSP_Brochure_ECE_Te...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 3031. Please try again in 41m30.048s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m33[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://nitj.ac.in/research/research_publications.html...[0m
+    [32m✓[0m Research Publications | AC
+  [1;2m([0m[1;2;36m34[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://rndshowcase.iiit.ac.in/tto2022/main1.php?[0m[4;94mcentername[0m[4;94m=...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 712. Please try again in [0m
+[31m8m6.431999999s. Need more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research | AC
+  [1;2m([0m[1;2;36m35[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1308. Please try again in 16m41.376s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m GURU NANAK DEV UNIVERSITY | AC
+  [1;2m([0m[1;2;36m36[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1227. Please try again in 15m31.392s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m GURU NANAK DEV UNIVERSITY | AC
+  [1;2m([0m[1;2;36m37[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/pdf/resume/2015101199.pdf...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 3072. Please try again in [0m
+[31m42m5.471999999s. Need more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m38[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://researchjournals.gndu.ac.in/Psychology/pdf/CurrentIs...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 3037. Please try again in 41m35.232s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m39[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.uaa.alaska.edu/academics/college-of-engineering/...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1204. Please try again in 15m11.52s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m University of Alaska Anchorage | ALASKA
+  [1;2m([0m[1;2;36m40[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/ConferencesSeminarAttendedByFacul...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1286. Please try again in [0m
+[31m16m22.367999999s. Need more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m GURU NANAK DEV UNIVERSITY | AC
+  [1;2m([0m[1;2;36m41[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://konnifel.com/professor/public_internship/a1kzL013K3B...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 991. Please try again in 12m7.488s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m AI Research Assistantship | KONNIFEL
+  [1;2m([0m[1;2;36m42[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitj.ac.in/school-of-artificial-intelligence-dat...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1034. Please try again in 12m44.64s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Internship Programs | AC
+  [1;2m([0m[1;2;36m43[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://plaksha.edu.in/ms/artificial-intelligence/faculty...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1090. Please try again in 13m33.024s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Faculty | EDU
+  [1;2m([0m[1;2;36m44[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from [4;94mhttps://pec.ac.in/faculty/cse...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1314. Please try again in 16m46.56s. [0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Faculty | AC
+  [1;2m([0m[1;2;36m45[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mawan[0m[4;94m...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1275. Please try again in [0m
+[31m16m12.863999999s. Need more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research Highlights | AC
+  [1;2m([0m[1;2;36m46[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://digital.gndu.ac.in/Final_View_Faculty_Proforma.aspx?...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1225. Please try again in 15m29.664s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m GURU NANAK DEV UNIVERSITY | AC
+  [1;2m([0m[1;2;36m47[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://punjabiuniversity.ac.in/Departments/Profiles/18/Prof...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 3061. Please try again in 41m55.968s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [33m✗ Skipped [0m[1;33m([0m[33mno name found[0m[1;33m)[0m
+  [1;2m([0m[1;2;36m48[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mashw[0m[4;94m...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1365. Please try again in 17m30.624s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research Highlights | AC
+  [1;2m([0m[1;2;36m49[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mredd[0m[4;94m...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99851, Requested 1350. Please try again in 17m17.664s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research Highlights | AC
+  [1;2m([0m[1;2;36m50[0m[2m/[0m[1;2;36m50[0m[1;2m)[0m Extracting from 
+[4;94mhttps://www.iitrpr.ac.in/saide/profile.faculty.php?[0m[4;94mmail[0m[4;94m=[0m[4;94mpune[0m[4;94m...[0m
+  [31mLLM extraction error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit [0m
+[31mreached for model `llama-3.3-70b-versatile` in organization [0m
+[31m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99850, Requested 1141. Please try again in 14m16.224s.[0m
+[31mNeed more tokens? Upgrade to Dev Tier today at [0m
+[31mhttps://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m
+[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+    [32m✓[0m Research Highlights | AC
+
+  Processing [1;36m78[0m Semantic Scholar authors[33m...[0m
+
+[1;32m✓ Extracted [0m[1;32m90[0m[1;32m unique professor profiles[0m [1m([0m[1;36m25[0m duplicates removed[1m)[0m
+
+  [2mEmail filter: kept [0m[1;2;36m14[0m[2m/[0m[1;2;36m90[0m[2m professors with known emails[0m
+
+[1;32m✓ Crawl complete. [0m[1;32m14[0m[1;32m professor profiles ready for scoring.[0m
+
+[1;36m═══ Step [0m[1;36m4[0m[1;36m/[0m[1;36m5[0m[1;36m: Scoring & Shortlisting [0m[1;36m([0m[1;36m14[0m[1;36m candidates[0m[1;36m)[0m[1;36m ═══[0m
+  [2mGeographic filter: dropped [0m[1;2;36m1[0m[2m professors not in Punjab, India[0m
+
+[1;36m📊 Scoring [0m[1;36m13[0m[1;36m professors[0m[1;36m...[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 699. Please try again in 7m54.336s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 630. Please try again in 6m54.72s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 744. Please try again in 8m33.216s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 636. Please try again in 6m59.904s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 710. Please try again in 8m3.84s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 757. Please try again in 8m44.448s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 551. Please try again in 5m46.464s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99850, Requested 543. Please try again in 5m39.552s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99849, Requested 657. Please try again in 7m17.184s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99849, Requested 675. Please try again in 7m32.736s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99849, Requested 640. Please try again in 7m2.496s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99849, Requested 647. Please try again in 7m8.544s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+  [33m⚠ LLM Scorer error: Error code: [0m[1;33m429[0m[33m - [0m[1;33m{[0m[33m'error'[0m[33m: [0m[1;33m{[0m[33m'message'[0m[33m: [0m[33m'Rate limit [0m
+[33mreached for model `llama-3.3-70b-versatile` in organization [0m
+[33m`org_01hwxdqwjyendt4tvxh263n2fy` service tier `on_demand` on tokens per day [0m
+[33m([0m[33mTPD[0m[33m)[0m[33m: Limit 100000, Used 99849, Requested 627. Please try again in 6m51.264s. [0m
+[33mNeed more tokens? Upgrade to Dev Tier today at [0m
+[33mhttps://console.groq.com/settings/billing'[0m[33m, [0m[33m'type'[0m[33m: [0m[33m'tokens'[0m[33m, [0m[33m'code'[0m[33m: [0m
+[33m'rate_limit_exceeded'[0m[1;33m}[0m[1;33m}[0m[33m. Using neutral score.[0m
+[32m✓ Scoring complete.[0m
+[3m                        🏆 Top 2 Shortlisted Professors                         [0m
+┏━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃[1;35m [0m[1;35m#  [0m[1;35m [0m┃[1;35m [0m[1;35mName      [0m[1;35m [0m┃[1;35m [0m[1;35mInstituti…[0m[1;35m [0m┃[1;35m [0m[1;35mDomains   [0m[1;35m [0m┃[1;35m [0m[1;35mScore[0m[1;35m [0m┃[1;35m [0m[1;35mEmail     [0m[1;35m [0m┃[1;35m [0m[1;35mAccepting?[0m[1;35m [0m┃
+┡━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│[2m [0m[2m1  [0m[2m [0m│[1m [0m[1mDr.       [0m[1m [0m│ IIT Ropar  │ Game       │[1;32m [0m[1;32m0.487[0m[1;32m [0m│[2m [0m[2mswapnil.d…[0m[2m [0m│[2m [0m[2m?         [0m[2m [0m│
+│[2m     [0m│[1m [0m[1mSwapnil   [0m[1m [0m│            │ Theory,    │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m [0m[1mVilas     [0m[1m [0m│            │ Social     │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m [0m[1mDhamal    [0m[1m [0m│            │ Network,   │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m            [0m│            │ Transp     │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m [0m[2m2  [0m[2m [0m│[1m [0m[1mAbhinav   [0m[1m [0m│ Indian     │ microecon… │[1;32m [0m[1;32m0.474[0m[1;32m [0m│[2m [0m[2mabhinav_u…[0m[2m [0m│[2m [0m[2m?         [0m[2m [0m│
+│[2m     [0m│[1m [0m[1mUppal     [0m[1m [0m│ School of  │ theory,    │[1;32m       [0m│[2m            [0m│[2m            [0m│
+│[2m     [0m│[1m            [0m│ Business   │ game-theo… │[1;32m       [0m│[2m            [0m│[2m            [0m│
+└─────┴────────────┴────────────┴────────────┴───────┴────────────┴────────────┘
+[32m✓ [0m[1;32m2[0m[32m professors shortlisted.[0m
+
+[1;36m═══ Step [0m[1;36m5[0m[1;36m/[0m[1;36m5[0m[1;36m: Generating & Reviewing Emails ═══[0m
+
+[1;36m✉ Generating [0m[1;36m2[0m[1;36m personalized emails[0m[1;36m...[0m
+
+  [1;2m([0m[1;2;36m1[0m[2m/[0m[1;2;36m2[0m[1;2m)[0m [1mDr. Swapnil Vilas Dhamal[0m — IIT Ropar
+[31mLLM Error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit reached for model[0m
+[31m`llama-3.3-70b-versatile` in organization `org_01hwxdqwjyendt4tvxh263n2fy` [0m
+[31mservice tier `on_demand` on tokens per day [0m[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99849, [0m
+[31mRequested 1199. Please try again in 15m5.472s. Need more tokens? Upgrade to Dev [0m
+[31mTier today at https://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m
+[31m'code'[0m[31m: [0m[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+  [33m⚠ Email QC failed for Dr. Swapnil Vilas Dhamal; retrying once[0m[33m...[0m
+[31mLLM Error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit reached for model[0m
+[31m`llama-3.3-70b-versatile` in organization `org_01hwxdqwjyendt4tvxh263n2fy` [0m
+[31mservice tier `on_demand` on tokens per day [0m[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99849, [0m
+[31mRequested 1281. Please try again in 16m16.319999999s. Need more tokens? Upgrade [0m
+[31mto Dev Tier today at https://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m
+[31m'tokens'[0m[31m, [0m[31m'code'[0m[31m: [0m[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+  [33m⚠ Expanding short email for Dr. Swapnil Vilas Dhamal[0m[33m...[0m
+[31mLLM Error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit reached for model[0m
+[31m`llama-3.3-70b-versatile` in organization `org_01hwxdqwjyendt4tvxh263n2fy` [0m
+[31mservice tier `on_demand` on tokens per day [0m[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99849, [0m
+[31mRequested 585. Please try again in 6m14.976s. Need more tokens? Upgrade to Dev [0m
+[31mTier today at https://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m
+[31m'code'[0m[31m: [0m[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+  [33m⚠ Using template fallback for Dr. Swapnil Vilas Dhamal.[0m
+  [32m✓[0m Subject: [3mResearch Internship Inquiry — Dr. Swapnil Vilas Dhamal[0m
+  [1;2m([0m[1;2;36m2[0m[2m/[0m[1;2;36m2[0m[1;2m)[0m [1mAbhinav Uppal[0m — Indian School of Business
+[31mLLM Error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit reached for model[0m
+[31m`llama-3.3-70b-versatile` in organization `org_01hwxdqwjyendt4tvxh263n2fy` [0m
+[31mservice tier `on_demand` on tokens per day [0m[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99849, [0m
+[31mRequested 1192. Please try again in 14m59.424s. Need more tokens? Upgrade to Dev[0m
+[31mTier today at https://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m
+[31m'code'[0m[31m: [0m[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+  [33m⚠ Email QC failed for Abhinav Uppal; retrying once[0m[33m...[0m
+[31mLLM Error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit reached for model[0m
+[31m`llama-3.3-70b-versatile` in organization `org_01hwxdqwjyendt4tvxh263n2fy` [0m
+[31mservice tier `on_demand` on tokens per day [0m[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99849, [0m
+[31mRequested 1274. Please try again in 16m10.272s. Need more tokens? Upgrade to Dev[0m
+[31mTier today at https://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m
+[31m'code'[0m[31m: [0m[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+  [33m⚠ Expanding short email for Abhinav Uppal[0m[33m...[0m
+[31mLLM Error: Error code: [0m[1;31m429[0m[31m - [0m[1;31m{[0m[31m'error'[0m[31m: [0m[1;31m{[0m[31m'message'[0m[31m: [0m[31m'Rate limit reached for model[0m
+[31m`llama-3.3-70b-versatile` in organization `org_01hwxdqwjyendt4tvxh263n2fy` [0m
+[31mservice tier `on_demand` on tokens per day [0m[31m([0m[31mTPD[0m[31m)[0m[31m: Limit 100000, Used 99848, [0m
+[31mRequested 667. Please try again in 7m24.96s. Need more tokens? Upgrade to Dev [0m
+[31mTier today at https://console.groq.com/settings/billing'[0m[31m, [0m[31m'type'[0m[31m: [0m[31m'tokens'[0m[31m, [0m
+[31m'code'[0m[31m: [0m[31m'rate_limit_exceeded'[0m[1;31m}[0m[1;31m}[0m
+  [33m⚠ Using template fallback for Abhinav Uppal.[0m
+  [32m✓[0m Subject: [3mResearch Internship Inquiry — Abhinav Uppal[0m
+
+[1;32m✓ Generated [0m[1;32m2[0m[1;32m draft emails.[0m
+
+[1m─── Email [0m[1;36m1[0m[1m/[0m[1;36m2[0m[1m ───[0m
+[34m╭─[0m[34m────────────[0m[34m [0m[1;34mDraft Email → Dr. Swapnil Vilas Dhamal[0m[34m | [0m[2;34mIIT Ropar[0m[34m [0m[34m────────────[0m[34m─╮[0m
+[34m│[0m [1mTo:[0m swapnil.dhamal@iitrpr.ac.in                                              [34m│[0m
+[34m│[0m [1mSubject:[0m Research Internship Inquiry — Dr. Swapnil Vilas Dhamal              [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m Dear Professor Dhamal,                                                       [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I am Harsh Modu, a Bachelor of Technology in Computer Science and            [34m│[0m
+[34m│[0m Engineering student at Indian Institute Of Technology, Ropar (CGPA 8.13/10   [34m│[0m
+[34m│[0m (till 4th sem)). I am writing to ask whether you might consider hosting a    [34m│[0m
+[34m│[0m research internship at IIT Ropar during Summer 2026. I have followed your    [34m│[0m
+[34m│[0m group's research and would be grateful for the chance to work in an          [34m│[0m
+[34m│[0m environment that pushes the state of the art in your area.                   [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I recently read your work, including "A game theoretic framework for         [34m│[0m
+[34m│[0m distributed computing with dynamic set of agents", and found the problems    [34m│[0m
+[34m│[0m you address closely aligned with topics I have been studying. I also looked  [34m│[0m
+[34m│[0m at "Simultaneously Achieving Group Exposure Fairness and Within-Group        [34m│[0m
+[34m│[0m Meritocracy in Stochastic Bandits" as further context on your group's        [34m│[0m
+[34m│[0m direction.                                                                   [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Developed AI-powered formal verification system using SPIN and CIL. I        [34m│[0m
+[34m│[0m believe the skills I have been developing could be relevant to projects in   [34m│[0m
+[34m│[0m Game Theory, Social Network, Transportation Planning, and I would welcome    [34m│[0m
+[34m│[0m the chance to learn from your group's approach.                              [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m If you have openings for interns in that timeframe, I would appreciate       [34m│[0m
+[34m│[0m guidance on next steps. If your group is not recruiting then, I would still  [34m│[0m
+[34m│[0m be grateful for any suggestion of a colleague whose work might be a better   [34m│[0m
+[34m│[0m match.                                                                       [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Thank you for considering my inquiry.                                        [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Best regards,                                                                [34m│[0m
+[34m│[0m Harsh Modu                                                                   [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m [2;3mNote: [0m                                                                       [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mAction[0m [1;35m[approve/skip/quit][0m [1;36m(approve)[0m: approve
+[32m✓ Draft saved to database.[0m
+
+[1m─── Email [0m[1;36m2[0m[1m/[0m[1;36m2[0m[1m ───[0m
+[34m╭─[0m[34m─────────[0m[34m [0m[1;34mDraft Email → Abhinav Uppal[0m[34m | [0m[2;34mIndian School of Business[0m[34m [0m[34m──────────[0m[34m─╮[0m
+[34m│[0m [1mTo:[0m abhinav_uppal@isb.edu                                                    [34m│[0m
+[34m│[0m [1mSubject:[0m Research Internship Inquiry — Abhinav Uppal                         [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m Dear Professor Uppal,                                                        [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I am Harsh Modu, a Bachelor of Technology in Computer Science and            [34m│[0m
+[34m│[0m Engineering student at Indian Institute Of Technology, Ropar (CGPA 8.13/10   [34m│[0m
+[34m│[0m (till 4th sem)). I am writing to ask whether you might consider hosting a    [34m│[0m
+[34m│[0m research internship at Indian School of Business during Summer 2026. I have  [34m│[0m
+[34m│[0m followed your group's research and would be grateful for the chance to work  [34m│[0m
+[34m│[0m in an environment that pushes the state of the art in your area.             [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m I recently read your work, including "Multi-Homing Alliances and Price       [34m│[0m
+[34m│[0m Competition", and found the problems you address closely aligned with topics [34m│[0m
+[34m│[0m I have been studying. I also looked at "Bricks Processing Returns for        [34m│[0m
+[34m│[0m Clicks: Can Foes Become Friends?" as further context on your group's         [34m│[0m
+[34m│[0m direction.                                                                   [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Developed AI-powered formal verification system using SPIN and CIL. I        [34m│[0m
+[34m│[0m believe the skills I have been developing could be relevant to projects in   [34m│[0m
+[34m│[0m microeconomic theory, game-theory, retailing, and I would welcome the chance [34m│[0m
+[34m│[0m to learn from your group's approach.                                         [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m If you have openings for interns in that timeframe, I would appreciate       [34m│[0m
+[34m│[0m guidance on next steps. If your group is not recruiting then, I would still  [34m│[0m
+[34m│[0m be grateful for any suggestion of a colleague whose work might be a better   [34m│[0m
+[34m│[0m match.                                                                       [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Thank you for considering my inquiry.                                        [34m│[0m
+[34m│[0m                                                                              [34m│[0m
+[34m│[0m Best regards,                                                                [34m│[0m
+[34m│[0m Harsh Modu                                                                   [34m│[0m
+[34m│[0m [2m─────────────────────────────────────[0m                                        [34m│[0m
+[34m│[0m [2;3mNote: [0m                                                                       [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;33mAction[0m [1;35m[approve/skip/quit][0m [1;36m(approve)[0m: approve
+[32m✓ Draft saved to database.[0m
+
+[1;32m✓ Review complete![0m [1;36m2[0m approved, [1;36m0[0m skipped.
+
+[2mTip: Run [0m[1;2mpython3 main.py review[0m[2m to launch the UI and send approved emails.[0m
+
+[1;32m✓ Agent workflow completed.[0m

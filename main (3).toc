@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Introduction and objectives}{2}{section.1}%
+\contentsline {section}{\numberline {2}High-level architecture}{2}{section.2}%
+\contentsline {section}{\numberline {3}Central state and data models}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}User intent (\texttt {UserIntent})}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Execution plan (\texttt {ExecutionPlan})}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Professor and email artifacts}{4}{subsection.3.3}%
+\contentsline {section}{\numberline {4}End-to-end workflow (14 steps)}{4}{section.4}%
+\contentsline {section}{\numberline {5}Control flow and routing logic}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}LangGraph conditional edges}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Supervised CLI loop (\texttt {run\_supervised\_loop})}{7}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Key design decisions}{7}{section.6}%
+\contentsline {section}{\numberline {7}Documented live run (exact session log)}{7}{section.7}%
+\contentsline {paragraph}{Identifiers in the log.}{8}{section*.2}%
+\contentsline {subsection}{\numberline {7.1}Session provenance}{8}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Exact console transcript}{8}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Limitations and operational notes}{18}{section.8}%
+\contentsline {section}{\numberline {9}Conclusion}{18}{section.9}%

@@ -1,0 +1,26 @@
+# Template for --batch-file (one non-comment line per Prompt.ask, in strict call order).
+# Easiest workflow: run once with interactive rigorous_session.py, then either:
+#   - copy "reply" values from user_interactions.jsonl in order into this file, or
+#   - use:  python3 tools/rigorous_session.py --replay-from path/to/user_interactions.jsonl
+#
+# Typical fresh-session order (your run may differ if the model fills fewer slots):
+# 1) What do you want to do?  (long goal text)
+# 2+) Empty-string prompts: slot answers (domains, countries, timeline, name, profile) — only if still missing
+# N) Your answer — intent confirmation (yes / no / ...)
+# N+1) Approve plan? — first Prompt.ask("") is often "yes"
+# ... possibly more "" if plan refinement loops
+# Last) Action — approve | skip | quit (per email; repeat for each draft)
+
+# --- Replace everything below with your real answers (full text, no truncation) ---
+
+I am looking for a Summer 2026 research internship in machine learning and NLP, targeting the United States. My name is Alex Rivera. I am an MS student with PyTorch experience and a course project on fine-tuning transformers.
+
+machine learning, natural language processing
+United States
+Summer 2026
+Alex Rivera
+MS Computer Science; Python, PyTorch; NLP coursework; transformer fine-tuning project for text classification.
+
+yes
+yes
+skip
