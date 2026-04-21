@@ -355,12 +355,53 @@ def planning_node(state: AgentState) -> AgentState:
     intent = UserIntent.model_validate(state["intent"])
     agent = PlanningAgent()
 
+    messages = state.get("messages", [])
+    human_input = state.get("human_input", "").strip().lower()
+
+    if state.get("plan"):
+        plan = ExecutionPlan.model_validate(state["plan"])
+        
+        # Check human input for confirmation
+        if human_input in ("yes", "y", "approve", "ok", "looks good") or human_input.startswith("yes"):
+            plan.confirmed = True
+            messages.append({"role": "user", "content": human_input})
+            messages.append({
+                "role": "assistant",
+                "content": "Plan approved! Starting crawl...",
+            })
+            return {
+                **state,
+                "plan": plan.model_dump(),
+                "messages": messages,
+                "mode": "crawling",
+            }
+        elif human_input:
+            # User wants to refine it
+            messages.append({"role": "user", "content": human_input})
+            change = human_input
+            if change.startswith("no"):
+                change = change[2:].strip() or "Please modify the plan."
+            plan = agent.refine_plan(plan, change)
+            explanation = agent._call_llm(
+                PLAN_EXPLANATION_PROMPT.format(plan_json=plan.model_dump_json(indent=2))
+            )
+            messages.append({
+                "role": "assistant",
+                "content": f"Here is your refined execution plan:\n\n{explanation}\n\nType 'yes' to confirm.",
+            })
+            return {
+                **state,
+                "plan": plan.model_dump(),
+                "messages": messages,
+                "mode": "planning",
+            }
+            
+    # Generate new plan if none exists
     plan = agent.generate_plan(intent)
     explanation = agent._call_llm(
         PLAN_EXPLANATION_PROMPT.format(plan_json=plan.model_dump_json(indent=2))
     )
 
-    messages = state.get("messages", [])
     messages.append({
         "role": "assistant",
         "content": f"Here is your execution plan:\n\n{explanation}\n\nType 'yes' to confirm.",
@@ -370,5 +411,5 @@ def planning_node(state: AgentState) -> AgentState:
         **state,
         "plan": plan.model_dump(),
         "messages": messages,
-        "mode": "crawling",
+        "mode": "planning",
     }

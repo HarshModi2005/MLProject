@@ -490,23 +490,37 @@ def intent_node(state: AgentState) -> AgentState:
         messages.append({"role": "user", "content": human_input})
         messages.append({"role": "assistant", "content": next_question})
     else:
-        # Subsequent turns: fill slots from reply
-        # Identify which slot we just asked
+        # Subsequent turns: process user reply
         last_msg = messages[-1]["content"] if messages else ""
-        slot = _identify_slot_from_question(last_msg)
-        if slot:
-            agent.fill_slot_from_reply(slot, last_msg, human_input)
+        
+        # Check if the last msg was the confirmation prompt
+        if "Does this look correct?" in last_msg:
+            ans = human_input.strip().lower()
+            if ans in ("yes", "y", "confirm", "correct") or ans.startswith("yes"):
+                agent.intent.confirmed = True
+            elif ans in ("no", "n", "change", "edit"):
+                pass # The next turn should ask what they want to change
+            else:
+                agent._handle_change_request(human_input)
+        else:
+            # Identify which slot we just asked
+            slot = _identify_slot_from_question(last_msg)
+            if slot:
+                agent.fill_slot_from_reply(slot, last_msg, human_input)
 
         messages.append({"role": "user", "content": human_input})
 
-        missing = agent.intent.missing_required_slots()
-        if missing:
-            next_question = SLOT_QUESTIONS.get(missing[0], f"Please provide: {missing[0]}")
-            messages.append({"role": "assistant", "content": next_question})
+        if agent.intent.confirmed:
+            messages.append({"role": "assistant", "content": "Intent confirmed. Proceeding to planning..."})
         else:
-            # All slots filled — generate confirmation
-            summary = agent.generate_confirmation_summary()
-            messages.append({"role": "assistant", "content": summary})
+            missing = agent.intent.missing_required_slots()
+            if missing:
+                next_question = SLOT_QUESTIONS.get(missing[0], f"Please provide: {missing[0]}")
+                messages.append({"role": "assistant", "content": next_question})
+            else:
+                # All slots filled — generate confirmation
+                summary = agent.generate_confirmation_summary()
+                messages.append({"role": "assistant", "content": summary})
 
     return {
         **state,

@@ -88,108 +88,150 @@ def start(
 
 def _run_supervised_pipeline(session_id: str, state: dict):
     """
-    Runs the full supervised pipeline sequentially:
-    IntentAgent → PlanningAgent → CrawlerAgent → Scorer → EmailAgent → Review
-    Each step runs its CLI, then passes its result to the next step.
+    Runs the full supervised pipeline using LangGraph orchestration.
     """
-    # ── Step 1: Collect Intent ────────────────────────────────────────────────
-    console.print("\n[bold cyan]═══ Step 1/5: Intent Clarification ═══[/bold cyan]")
-    from agents.intent_agent import IntentAgent
-    intent_agent = IntentAgent()
+    from orchestrator.graph import build_graph
+    from orchestrator.state import AgentState, AgentMode, UserIntent, ExecutionPlan
     
+    app = build_graph()
+    config_dict = {"configurable": {"thread_id": session_id}}
+    
+    state_to_use = {
+        "messages": [],
+        "mode": AgentMode.CLARIFICATION.value,
+        "session_id": session_id
+    }
     if state and state.get("intent"):
-        intent_agent.intent = UserIntent.model_validate(state["intent"])
-        console.print("[green]Restored previous intent.[/green]")
-        intent = intent_agent.intent
-    else:
-        intent = intent_agent.run_cli()
-        save_state(intent=intent)
-
-    # ── Step 2: Generate Plan ─────────────────────────────────────────────────
-    console.print("\n[bold cyan]═══ Step 2/5: Execution Planning ═══[/bold cyan]")
-    from agents.planning_agent import PlanningAgent
-    planning_agent = PlanningAgent()
-    
+        state_to_use["intent"] = state["intent"]
     if state and state.get("plan"):
-        plan = ExecutionPlan.model_validate(state["plan"])
-        console.print("[green]Restored previous execution plan.[/green]")
-    else:
-        plan = planning_agent.run_cli(intent)
-        save_state(plan=plan)
+        state_to_use["plan"] = state["plan"]
 
-    # Persist for review UI (CV attachment, plan flags)
-    upsert_session_state(session_id, intent, plan)
+    console.print("\n[bold cyan]═══ Starting Autonomous Agent (LangGraph) ═══[/bold cyan]")
+    
+    if not state.get("intent"):
+        from rich.prompt import Prompt
+        initial_input = Prompt.ask("\n[bold yellow]What do you want to do?[/bold yellow]")
+        state_to_use["human_input"] = initial_input
+    
+    while True:
+        try:
+            events = app.stream(state_to_use, config=config_dict)
+            for event in events:
+                node_name = list(event.keys())[0]
+                node_state = event[node_name]
+                
+                if node_name == "intent" and not node_state.get("intent", {}).get("confirmed"):
+                    messages = node_state.get("messages", [])
+                    if messages:
+                         last_msg = messages[-1]["content"]
+                         console.print(f"\n[cyan]Agent:[/cyan] {last_msg}")
+                    
+                    user_input = input("\n> ")
+                    if user_input.lower() in ["quit", "exit"]:
+                        sys.exit(0)
+                        
+                    state_to_use = {"human_input": user_input}
+                    break 
+                
+                elif node_name == "intent" and node_state.get("intent", {}).get("confirmed"):
+                    intent_obj = UserIntent.model_validate(node_state["intent"])
+                    save_state(intent=intent_obj)
+                    state_to_use = None
 
-    # ── Step 3: Crawl for Professors ──────────────────────────────────────────
-    console.print("\n[bold cyan]═══ Step 3/5: Crawling for Professors ═══[/bold cyan]")
-    from agents.crawler_agent import CrawlerAgent
-    crawler = CrawlerAgent()
-    professors = crawler.run(plan)
+                elif node_name == "planning" and not node_state.get("plan", {}).get("confirmed"):
+                    messages = node_state.get("messages", [])
+                    if messages:
+                         last_msg = messages[-1]["content"]
+                         console.print(f"\n[cyan]Agent:[/cyan] {last_msg}")
+                    
+                    user_input = input("\n[bold]Approve plan? (yes/no/modify):[/bold] ")
+                    if user_input.lower() in ["quit", "exit"]:
+                        sys.exit(0)
+                        
+                    state_to_use = {"human_input": user_input}
+                    break
+                    
+                elif node_name == "planning" and node_state.get("plan", {}).get("confirmed"):
+                     intent_obj = UserIntent.model_validate(node_state["intent"])
+                     plan_obj = ExecutionPlan.model_validate(node_state["plan"])
+                     save_state(intent=intent_obj, plan=plan_obj)
+                     upsert_session_state(session_id, intent_obj, plan_obj)
+                     state_to_use = None
 
-    if not professors:
-        console.print("[yellow]⚠ No professors found. Try broadening your search terms.[/yellow]")
-        return
+                elif node_name == "crawling":
+                     state_to_use = None
+                    
+                elif node_name == "scoring":
+                     shortlisted = node_state.get("shortlisted", [])
+                     if shortlisted:
+                         console.print(f"\n[bold cyan]═══ Step 4/5: Scoring & Shortlisting ({len(node_state.get('professors', []))} candidates) ═══[/bold cyan]")
+                         console.print(f"[green]✓ {len(shortlisted)} professors shortlisted.[/green]")
+                     state_to_use = None
 
-    # ── Step 4: Score & Shortlist ─────────────────────────────────────────────
-    console.print(f"\n[bold cyan]═══ Step 4/5: Scoring & Shortlisting ({len(professors)} candidates) ═══[/bold cyan]")
-    from core.relevance_scorer import RelevanceScorer
-    scorer = RelevanceScorer()
-    shortlisted = scorer.shortlist(professors, intent, plan)
-
-    if not shortlisted:
-        console.print("[yellow]⚠ No professors met the relevance threshold.[/yellow]")
-        return
-
-    console.print(f"[green]✓ {len(shortlisted)} professors shortlisted.[/green]")
-
-    # ── Step 5: Generate & Review Emails ─────────────────────────────────────
-    console.print(f"\n[bold cyan]═══ Step 5/5: Generating & Reviewing Emails ═══[/bold cyan]")
-    from agents.email_agent import EmailAgent
-    from rich.prompt import Prompt
-    from db import database as db
-
-    email_agent = EmailAgent()
-    drafts = email_agent.generate_batch(shortlisted, intent, plan)
-
-    approved_count = 0
-    skipped_count = 0
-
-    for i, (draft, prof) in enumerate(zip(drafts, shortlisted), 1):
-        console.print(f"\n[bold]─── Email {i}/{len(drafts)} ───[/bold]")
-        email_agent.display_email(draft, prof)
-
-        if not draft.recipient_email:
-            console.print("[yellow]⚠ No email address found for this professor. Skipping.[/yellow]")
-            skipped_count += 1
-            continue
-
-        while True:
-            action = Prompt.ask(
-                "\n[bold yellow]Action[/bold yellow]",
-                choices=["approve", "skip", "quit"],
-                default="approve"
-            )
-            if action == "approve":
-                db.save_draft_email(draft, session_id)
-                console.print("[green]✓ Draft saved to database.[/green]")
-                approved_count += 1
+                elif node_name == "email_draft":
+                    console.print(f"\n[bold cyan]═══ Step 5/5: Generating & Reviewing Emails ═══[/bold cyan]")
+                    drafts_data = node_state.get("draft_emails", [])
+                    shortlisted_data = node_state.get("shortlisted", [])
+                    
+                    from orchestrator.state import DraftEmail, ProfessorProfile
+                    from agents.email_agent import EmailAgent
+                    from rich.prompt import Prompt
+                    from db import database as db
+                
+                    email_agent = EmailAgent()
+                    drafts = [DraftEmail.model_validate(d) for d in drafts_data]
+                    shortlisted = [ProfessorProfile.model_validate(p) for p in shortlisted_data]
+                
+                    approved_count = 0
+                    skipped_count = 0
+                
+                    for i, (draft, prof) in enumerate(zip(drafts, shortlisted), 1):
+                        console.print(f"\n[bold]─── Email {i}/{len(drafts)} ───[/bold]")
+                        email_agent.display_email(draft, prof)
+                
+                        if not draft.recipient_email:
+                            console.print("[yellow]⚠ No email address found for this professor. Skipping.[/yellow]")
+                            skipped_count += 1
+                            continue
+                
+                        while True:
+                            action = Prompt.ask(
+                                "\n[bold yellow]Action[/bold yellow]",
+                                choices=["approve", "skip", "quit"],
+                                default="approve"
+                            )
+                            if action == "approve":
+                                db.save_draft_email(draft, session_id)
+                                console.print("[green]✓ Draft saved to database.[/green]")
+                                approved_count += 1
+                                break
+                            elif action == "skip":
+                                skipped_count += 1
+                                break
+                            elif action == "quit":
+                                console.print("[yellow]Exiting review early.[/yellow]")
+                                return
+                
+                    console.print(
+                        f"\n[bold green]✓ Review complete![/bold green] "
+                        f"{approved_count} approved, {skipped_count} skipped."
+                    )
+                    if approved_count > 0:
+                        console.print(
+                            "\n[dim]Tip: Run [bold]python3 main.py review[/bold] to launch the UI "
+                            "and send approved emails.[/dim]"
+                        )
+                    
+                    state_to_use = None
+                    
+                else:
+                    state_to_use = None
+                    
+            else:
                 break
-            elif action == "skip":
-                skipped_count += 1
-                break
-            elif action == "quit":
-                console.print("[yellow]Exiting review early.[/yellow]")
-                return
-
-    console.print(
-        f"\n[bold green]✓ Review complete![/bold green] "
-        f"{approved_count} approved, {skipped_count} skipped."
-    )
-    if approved_count > 0:
-        console.print(
-            "\n[dim]Tip: Run [bold]python3 main.py review[/bold] to launch the UI "
-            "and send approved emails.[/dim]"
-        )
+        except Exception as e:
+            console.print(f"[red]Workflow Error: {e}[/red]")
+            break
 
 
 @app.command()
