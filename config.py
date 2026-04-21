@@ -63,6 +63,22 @@ SEMANTIC_SCHOLAR_SLEEP_SEC: float = float(os.getenv("SEMANTIC_SCHOLAR_SLEEP_SEC"
 # ── Prompts directory ─────────────────────────────────────────────────────────
 PROMPTS_DIR: Path = BASE_DIR / "prompts"
 
+# ── Observability (JSONL run logs) ────────────────────────────────────────────
+RUN_LOG_DIR: Path = Path(os.getenv("RUN_LOG_DIR", str(BASE_DIR / "run_logs")))
+ENABLE_STRUCTURED_LOGS: bool = os.getenv("ENABLE_STRUCTURED_LOGS", "true").lower() in (
+    "1",
+    "true",
+    "yes",
+)
+
+# Email enrichment / variants (defaults keep prior single-draft behavior)
+ENABLE_EMAIL_DISCOVERY_METADATA: bool = os.getenv(
+    "ENABLE_EMAIL_DISCOVERY_METADATA", "true"
+).lower() in ("1", "true", "yes")
+DEFAULT_GENERATE_EMAIL_VARIANTS: bool = os.getenv(
+    "DEFAULT_GENERATE_EMAIL_VARIANTS", "false"
+).lower() in ("1", "true", "yes")
+
 
 def validate_config() -> list[str]:
     """

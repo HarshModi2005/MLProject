@@ -65,6 +65,8 @@ def scripted_prompt_ask(*args, **kwargs):
     if "your answer" in plain:
         _PromptState.seen_confirm_your_answer = True
         return "yes"
+    if "variant" in plain and kwargs.get("choices"):
+        return "a"
     if "action" in plain and kwargs.get("choices"):
         return "skip"
 
@@ -129,7 +131,11 @@ def main() -> int:
 
     from agents.planning_agent import PlanningAgent
     from agents.email_agent import EmailAgent
-    from core.relevance_scorer import RelevanceScorer
+    from core.relevance_scorer import (
+        RelevanceScorer,
+        ShortlistDiagnostics,
+        ShortlistResult,
+    )
 
     real_plan_cli = PlanningAgent.run_cli
 
@@ -146,7 +152,18 @@ def main() -> int:
             k = top_k or plan.top_k_professors
             shortlisted = filtered[:k]
             self._display_shortlist(shortlisted)
-            return shortlisted
+            diag = ShortlistDiagnostics(
+                n_candidates_in=len(professors),
+                n_after_geo_filter=len(professors),
+                min_relevance_threshold=min_score,
+                top_k_cap=k,
+                max_score=ranked[0].relevance_score if ranked else 0.0,
+                n_above_threshold=len(filtered),
+                top_preview=[
+                    (p.name, p.institution or "", p.relevance_score) for p in ranked[:5]
+                ],
+            )
+            return ShortlistResult(shortlisted=shortlisted, diagnostics=diag)
 
         return _wrapped
 

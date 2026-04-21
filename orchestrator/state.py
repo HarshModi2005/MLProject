@@ -60,6 +60,22 @@ class Publication(BaseModel):
     abstract_snippet: Optional[str] = None
 
 
+class PublicationMatch(BaseModel):
+    title: str
+    reason: str
+
+
+class RelevanceBreakdown(BaseModel):
+    keyword_overlap: float = 0.0
+    embedding_sim: float = 0.0
+    recency: float = 0.0
+    geographic: float = 0.0
+    accepting_students: float = 0.0
+    weights_used: dict[str, float] = Field(default_factory=dict)
+    matched_terms: list[str] = Field(default_factory=list)
+    publication_matches: list[PublicationMatch] = Field(default_factory=list)
+
+
 class ProfessorProfile(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid4()))
     name: str
@@ -74,10 +90,21 @@ class ProfessorProfile(BaseModel):
     bio_snippet: Optional[str] = None
     raw_page_text: Optional[str] = None
     relevance_score: float = 0.0
+    relevance_breakdown: Optional[RelevanceBreakdown] = None
+    identity_key: Optional[str] = None
+    orcid: Optional[str] = None
+    email_source: Optional[str] = None
+    email_confidence: Optional[float] = None
     crawled_at: datetime = Field(default_factory=datetime.utcnow)
 
     class Config:
         json_encoders = {datetime: lambda v: v.isoformat()}
+
+
+class DraftVariant(BaseModel):
+    label: str = "A"
+    subject: str = ""
+    body: str = ""
 
 
 class DraftEmail(BaseModel):
@@ -93,6 +120,18 @@ class DraftEmail(BaseModel):
     sent_at: Optional[datetime] = None
     reply_received_at: Optional[datetime] = None
     follow_up_count: int = 0
+    variants: list[DraftVariant] = Field(default_factory=list)
+    selected_variant_index: int = 0
+
+    def apply_selected_variant(self) -> "DraftEmail":
+        """Copy subject/body from the chosen variant (no-op if variants empty)."""
+        if not self.variants:
+            return self
+        i = max(0, min(self.selected_variant_index, len(self.variants) - 1))
+        v = self.variants[i]
+        return self.model_copy(
+            update={"subject": v.subject, "body": v.body, "selected_variant_index": i}
+        )
 
     class Config:
         json_encoders = {datetime: lambda v: v.isoformat()}
@@ -174,6 +213,7 @@ class EmailStrategy(BaseModel):
     tone: str = "professional"
     word_count_target: int = 220
     include_cv_attachment: bool = True
+    generate_variants: bool = False
 
 
 class SendingSchedule(BaseModel):

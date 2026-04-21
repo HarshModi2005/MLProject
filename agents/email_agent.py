@@ -14,20 +14,23 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from typing import Optional
 
 from rich.console import Console
 from rich.panel import Panel
 
 import config
+from core.observability import log_llm_call
 from core.student_context import build_email_internship_context, highlights_for_intent
 from orchestrator.state import (
-    ProfessorProfile,
-    DraftEmail,
-    UserIntent,
-    ExecutionPlan,
-    EmailStatus,
     AgentState,
+    DraftEmail,
+    DraftVariant,
+    EmailStatus,
+    ExecutionPlan,
+    ProfessorProfile,
+    UserIntent,
 )
 
 console = Console()
@@ -202,6 +205,40 @@ Return ONLY JSON:
 }}
 """
 
+VARIANT_B_EMAIL_PROMPT = """
+You are an expert writer of **research internship** emails. Produce a **concise** alternative to the same outreach.
+
+PROFESSOR DETAILS:
+- Full name (context only): {prof_name}
+- Institution: {institution}
+- Department: {department}
+- Research topics (sanitized): {research_areas}
+- Recent Publications: {publications}
+- Lab/Profile Page: {lab_url}
+
+LINE 1 of "body" (copy EXACTLY — then blank line before paragraph 2):
+{salutation}
+
+STUDENT CONTEXT (facts only):
+{student_context}
+
+Sign-off name: {user_name}
+OUTREACH GOAL: {goal}
+TONE: concise and direct (no fluff)
+
+LENGTH (strict):
+- Total body: **{min_words}–{max_words} words** (shorter than the primary draft).
+
+STRUCTURE: same as primary (intro, their work with one publication reference, your fit, ask).
+
+Return ONLY JSON:
+{{
+  "subject": "<distinct angle; still specific; under 58 chars>",
+  "body": "<plain text; line1 = salutation>",
+  "personalization_notes": "<one line>"
+}}
+"""
+
 CRITIQUE_PROMPT = """
 You are editing a research internship email for Professor {prof_name}.
 
@@ -283,10 +320,20 @@ class EmailAgent:
     def __init__(self):
         self.llm = config.get_groq_llm()
 
-    def _call_llm(self, prompt: str) -> str:
+    def _call_llm(self, prompt: str, *, label: str = "email") -> str:
         try:
+            t0 = time.perf_counter()
             response = self.llm.invoke(prompt)
-            return response.content.strip()
+            dt = time.perf_counter() - t0
+            text = (response.content or "").strip()
+            log_llm_call(
+                label=label,
+                prompt_chars=len(prompt),
+                response_chars=len(text),
+                latency_sec=dt,
+                model=config.GROQ_MODEL,
+            )
+            return text
         except Exception as e:
             console.print(f"[red]LLM Error: {e}[/red]")
             return ""
@@ -333,7 +380,7 @@ class EmailAgent:
             student_snippet=student_snippet,
             body=body,
         )
-        expanded = self._call_llm(prompt)
+        expanded = self._call_llm(prompt, label="email_expand_length")
         return _force_opening_salutation((expanded or "").strip(), salutation)
 
     # ── Email Generation ──────────────────────────────────────────────────────
@@ -390,7 +437,7 @@ class EmailAgent:
         def _qc_fail(b: str) -> bool:
             return not b or _email_body_failed_qc(b, professor.name, min_words=min_w)
 
-        raw = self._call_llm(prompt)
+        raw = self._call_llm(prompt, label="email_generate_primary")
         data = self._parse_json(raw)
 
         subject = data.get("subject", f"Research Internship Inquiry — {professor.name}")
@@ -400,7 +447,7 @@ class EmailAgent:
         if _qc_fail(body):
             if body:
                 console.print(f"  [yellow]⚠ Email QC failed for {professor.name}; retrying once...[/yellow]")
-            raw = self._call_llm(prompt)
+            raw = self._call_llm(prompt, label="email_generate_retry")
             data = self._parse_json(raw)
             body = _force_opening_salutation((data.get("body") or "").strip(), salutation)
             if data.get("subject"):
@@ -431,7 +478,7 @@ class EmailAgent:
                 min_words=min_w,
                 max_words=max_w,
             )
-            revised_body = self._call_llm(c_prompt)
+            revised_body = self._call_llm(c_prompt, label="email_critique")
             revised_body = _force_opening_salutation(
                 (revised_body or "").strip(), salutation
             )
@@ -446,6 +493,39 @@ class EmailAgent:
             elif revised_body and _qc_fail(revised_body):
                 notes += " (Critique skipped — would break quality)"
 
+        variants: list[DraftVariant] = []
+        want_variants = (
+            plan.email_strategy.generate_variants or config.DEFAULT_GENERATE_EMAIL_VARIANTS
+        )
+        if want_variants:
+            t_lo = max(90, min_w - 40)
+            t_hi = max(130, min_w)
+            b_prompt = VARIANT_B_EMAIL_PROMPT.format(
+                prof_name=professor.name,
+                institution=professor.institution,
+                department=professor.department or "Computer Science",
+                research_areas=research_areas_str,
+                publications=pubs_text,
+                lab_url=professor.lab_url or professor.profile_url or "N/A",
+                salutation=salutation,
+                student_context=build_email_internship_context(intent),
+                user_name=intent.user_name or "Student",
+                goal=f"{intent.goal.value.replace('_', ' ').title()} — {intent.timeline or 'flexible timeline'}",
+                min_words=t_lo,
+                max_words=t_hi,
+            )
+            braw = self._call_llm(b_prompt, label="email_variant_concise")
+            bdata = self._parse_json(braw)
+            b_sub = bdata.get("subject") or f"Internship inquiry — {professor.name}"
+            b_body = _force_opening_salutation((bdata.get("body") or "").strip(), salutation)
+            if not b_body or _email_body_failed_qc(b_body, professor.name, min_words=t_lo):
+                b_body = body
+                b_sub = subject
+            variants = [
+                DraftVariant(label="A", subject=subject, body=body),
+                DraftVariant(label="B", subject=b_sub, body=b_body),
+            ]
+
         return DraftEmail(
             professor_id=professor.id,
             recipient_name=professor.name,
@@ -454,6 +534,8 @@ class EmailAgent:
             body=body,
             personalization_notes=notes,
             status=EmailStatus.DRAFT,
+            variants=variants,
+            selected_variant_index=0,
         )
 
     def _fallback_email(
@@ -585,7 +667,7 @@ class EmailAgent:
             goal=intent.goal.value.replace("_", " "),
             days=days_elapsed,
         )
-        raw = self._call_llm(prompt)
+        raw = self._call_llm(prompt, label="email_followup")
         data = self._parse_json(raw)
 
         return DraftEmail(

@@ -319,7 +319,8 @@ def run_pipeline_with_state_dumps(
         f"\n[bold cyan]═══ Step 4/5: Scoring & Shortlisting ({len(professors)} candidates) ═══[/bold cyan]"
     )
     scorer = RelevanceScorer()
-    shortlisted = scorer.shortlist(professors, intent, plan)
+    shortlist_result = scorer.shortlist(professors, intent, plan)
+    shortlisted = shortlist_result.shortlisted
     _dump(
         "04_shortlisted.json",
         [p.model_dump(mode="json") for p in shortlisted],

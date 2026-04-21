@@ -53,7 +53,7 @@ def re_crawl_job(
     scorer = RelevanceScorer()
 
     profiles = crawler.run(plan)
-    shortlisted = scorer.shortlist(profiles, intent, plan)
+    shortlisted = scorer.shortlist(profiles, intent, plan).shortlisted
 
     # Filter out already-contacted professors
     new_professors = [

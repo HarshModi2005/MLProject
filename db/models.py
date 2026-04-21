@@ -5,6 +5,7 @@ SQLAlchemy ORM models for all persistent entities:
   - Professor: crawled and scored professor profiles
   - Email: draft and sent email tracking
   - Session: user session + intent + plan state
+  - SessionRevision: append-only audit trail for resume / multi-machine sync
 """
 
 from __future__ import annotations
@@ -48,6 +49,11 @@ class Professor(Base):
     relevance_score = Column(Float, default=0.0)
     crawled_at = Column(DateTime, default=datetime.utcnow)
     session_id = Column(String(36), ForeignKey("sessions.id"), nullable=True)
+    relevance_breakdown_json = Column(Text, nullable=True)
+    identity_key = Column(String(120), nullable=True, index=True)
+    orcid = Column(String(40), nullable=True)
+    email_source = Column(String(80), nullable=True)
+    email_confidence = Column(Float, nullable=True)
 
     # Relationships
     emails = relationship("Email", back_populates="professor")
@@ -74,6 +80,7 @@ class Email(Base):
     reply_received_at = Column(DateTime, nullable=True)
     follow_up_count = Column(Integer, default=0)
     session_id = Column(String(36), ForeignKey("sessions.id"), nullable=True)
+    variants_json = Column(Text, nullable=True)
 
     # Relationships
     professor = relationship("Professor", back_populates="emails")
@@ -87,8 +94,7 @@ class Session(Base):
     Stores a complete user session:
       - Serialized UserIntent (JSON)
       - Serialized ExecutionPlan (JSON)
-      - Current pipeline mode
-    Allows resuming a session after restart.
+      - Current pipeline mode / step for reliable resume
     """
 
     __tablename__ = "sessions"
@@ -100,6 +106,25 @@ class Session(Base):
     user_name = Column(String(200), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    pipeline_step = Column(String(40), default="intent")
+    state_version = Column(Integer, default=1)
+
+    revisions = relationship("SessionRevision", back_populates="session")
 
     def __repr__(self) -> str:
-        return f"<Session id={self.id[:8]} mode={self.mode}>"
+        return f"<Session id={self.id[:8]} mode={self.mode} step={self.pipeline_step}>"
+
+
+class SessionRevision(Base):
+    """Append-only history of session checkpoints (intent/plan/crawl/score/email)."""
+
+    __tablename__ = "session_revisions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    session_id = Column(String(36), ForeignKey("sessions.id"), nullable=False, index=True)
+    version = Column(Integer, nullable=False)
+    step = Column(String(40), nullable=False)
+    payload_json = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    session = relationship("Session", back_populates="revisions")
