@@ -99,6 +99,12 @@ class Settings:
     explore_rounds: int = field(default_factory=lambda: _int("BRAIN_EXPLORE_ROUNDS", 3))
     backfill: bool = field(default_factory=lambda: os.getenv("BRAIN_BACKFILL", "1") not in ("0", "false", "no"))
     use_memory: bool = field(default_factory=lambda: os.getenv("BRAIN_MEMORY", "1") not in ("0", "false", "no"))
+    # Precision layer (brain/discovery/precision): org-type gate, pre-judge before enrichment, learned fit model.
+    org_type_gate: bool = field(default_factory=lambda: os.getenv("BRAIN_ORG_TYPE_GATE", "1") not in ("0", "false", "no"))
+    prejudge: bool = field(default_factory=lambda: os.getenv("BRAIN_PREJUDGE", "1") not in ("0", "false", "no"))
+    prejudge_limit: int = field(default_factory=lambda: _int("BRAIN_PREJUDGE_LIMIT", 0))  # 0 = max(30, 8 x target)
+    prejudge_min: float = field(default_factory=lambda: _float("BRAIN_PREJUDGE_MIN", 0.3))
+    learned_fit: bool = field(default_factory=lambda: os.getenv("BRAIN_LEARNED_FIT", "1") not in ("0", "false", "no"))
 
     # Replay (benchmarks): "" = live; "replay" = network answers only from the cache (misses are skipped, never
     # fetched), LLM calls still allowed; "strict" = LLM calls also only from the cache.

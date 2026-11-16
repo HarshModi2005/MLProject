@@ -36,7 +36,10 @@ from typing import Any, Callable, Dict, List, Optional
 
 from brain.cache import Cache
 from brain.context import CampaignContext
+from brain.discovery.precision.orgtype import gate as org_type_gate
+from brain.discovery.precision.prejudge import prejudge, reorder as reorder_screened
 from brain.explore import explore
+from brain.fit import profile_for
 from brain.orgs import OrgEnricher
 from brain.searchplan import SearchPlanner, search_budget
 from brain.draft import draft_email, verify_and_fix
@@ -153,6 +156,12 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         misses = getattr(deps.search, "replay_misses", 0) + getattr(deps.fetcher, "replay_misses", 0)
         if misses:
             funnel["cost"]["replay_misses"] = misses
+        if funnel.get("source_funnel") and not funnel.get("source_stats_recorded") and status not in ("running", "empty"):
+            try:  # which sources paid off: the next campaign of this playbook starts from it (precision/priors.py)
+                store.record_source_stats(pack.name, funnel["source_funnel"], funnel.get("ledger") or {})
+                funnel["source_stats_recorded"] = True
+            except Exception as e:
+                log.warning("could not record source stats: %s", e)
         if ctx.query_log and not funnel.get("query_stats_recorded") and status != "running":
             try:
                 store.record_query_stats(pack.name, spec, ctx.query_log)
@@ -179,7 +188,19 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 orgs, spec, limit=min(80, max(15, spec.target_count * st.light_read_factor)))
             funnel["light_read"] = funnel.get("light_read", 0) + n
             ranked = prescore(ranked, spec, pack, backend=st.embeddings)
-        funnel["qualified"] = funnel.get("qualified", 0) + len(kept)
+        if st.org_type_gate:  # demote kinds of organisation the campaign does not target; drop directories
+            ranked, typed = org_type_gate(ranked, spec, pack)
+            for k, v in typed.items():
+                funnel.setdefault("org_types", {})[k] = funnel.get("org_types", {}).get(k, 0) + v
+            dropped["directory"] = dropped.get("directory", 0) + typed.get("dropped_directory", 0)
+            ranked = prescore(ranked, spec, pack, backend=st.embeddings)
+        if st.prejudge and deps.llm.available:  # cheap screen of the top before any enrichment spend
+            limit = st.prejudge_limit or max(30, spec.target_count * 8)
+            head = [c for c in ranked if not (c.kind == "org" and not c.org_domain and not c.emails)][:limit]
+            prejudge(head, spec, deps.llm, prof=profile_for(spec, pack), min_score=st.prejudge_min,
+                     stats=funnel.setdefault("prejudge", {}), ctx=ctx)
+            ranked = reorder_screened(ranked)
+        funnel["qualified"] = funnel.get("qualified", 0) + len(ranked)
         merged = dict(funnel.get("dropped") or {})
         for k, v in dropped.items():
             merged[k] = merged.get(k, 0) + v
@@ -215,7 +236,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         inbox_share = sum(1 for c in out if c.best_email and c.best_email.method == "inbox")
         if out and inbox_share > len(out) / 2:
             ctx.note("most organisations publish only a shared inbox, so many emails go to the team rather than a person")
-        out = prescore(out, spec, pack, backend=st.embeddings)  # pages may have added context
+        out = reorder_screened(prescore(out, spec, pack, backend=st.embeddings))  # pages may have added context
         funnel["enrichment"] = enrich_stats
         return out
 
@@ -254,7 +275,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             by_source.update({k: v for k, v in ex.by_source.items() if k != "your_lists"})
             for name, stats in ex.tool_stats.items():
                 funnel[f"tool_{name}"] = stats
-            funnel["explore"] = {"rounds": ex.rounds, "qualified": ex.qualified,
+            funnel["explore"] = {"rounds": ex.rounds, "qualified": ex.qualified, "fit": ex.fit,
                                  "tools": {k: dict(v) for k, v in ctx.tool_stats.items()}}
             funnel["ledger"] = ex.ledger
             result.warnings += ex.warnings
@@ -300,6 +321,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         # Prefer candidates that can be read and reached: an organisation without a website is a last resort.
         unreadable = lambda c: c.kind == "org" and not c.org_domain and not c.emails  # noqa: E731
         order = [c for c in ranked if not unreadable(c)] + [c for c in ranked if unreadable(c)]
+        order = [c for c in order if "prejudge_reject" not in c.flags]  # screened out: not worth the lookups
         targets = diversify(order, n_enrich, max_per_org=st.max_per_org * 4)
         # Remember who was tried BEFORE enriching: enrichment can drop a candidate or turn an organisation into
         # the person found inside it (a new id), and neither may be enriched twice.
@@ -317,7 +339,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             progress(f"enrich: only {sum(has_usable_email(c, st.min_email_confidence) for c in targets)} reachable; "
                      f"trying the next {len(batch)}…")
             done |= {c.id for c in batch} | {c.org_domain for c in batch if c.org_domain}
-            targets = prescore(resolve(targets + enrich_stage(batch, ranked)), spec, pack, backend=st.embeddings)
+            targets = reorder_screened(prescore(resolve(targets + enrich_stage(batch, ranked)), spec, pack,
+                                                backend=st.embeddings))
             waves += 1
         funnel["enrich_waves"] = waves
         funnel["enriched"] = len(targets)
@@ -364,6 +387,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 c.score = c.prescore
                 c.flags.append("unjudged")
             scored = to_judge
+        if st.learned_fit:
+            funnel["fit_model"] = learn_fit(spec, pack, store, ranked + targets + scored)
         scored.sort(key=lambda c: c.score or 0, reverse=True)
         seen_addr: set = set()
         unique = []
@@ -406,6 +431,30 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     if failed:
         result.warnings.append(f"{failed} drafts could not be generated (LLM error or budget); re-run to retry them.")
     return finish("done")
+
+
+def learn_fit(spec: CampaignSpec, pack, store: Store, contacts: List[Contact]) -> Dict[str, Any]:
+    """Store this campaign's (pre-)judge verdicts as training examples and refit the playbook's fit model
+    (brain/discovery/precision/fitmodel.py). Learning is a bonus: it never fails a campaign."""
+    from brain.discovery.precision.fitmodel import examples_from, train
+
+    try:
+        best: Dict[str, Contact] = {}
+        for c in contacts:  # the same candidate can appear as several objects; keep the judged one
+            cur = best.get(c.id)
+            if cur is None or (cur.score is None and c.score is not None):
+                best[c.id] = c
+        rows = examples_from(list(best.values()), profile_for(spec, pack))
+        store.record_fit_examples(pack.name, spec.id, rows)
+        model = train(store.fit_examples(pack.name))
+        if model is None:
+            return {"examples_added": len(rows), "model": None}
+        store.save_fit_model(pack.name, model)
+        return {"examples_added": len(rows), "model": {k: model[k] for k in ("n", "positives", "threshold",
+                                                                              "train_precision", "train_recall")}}
+    except Exception as e:
+        log.warning("could not update the fit model: %s", e)
+        return {"error": str(e)}
 
 
 def backfill(spec: CampaignSpec, pack, ctx: CampaignContext, deps: Deps, planner: SearchPlanner,

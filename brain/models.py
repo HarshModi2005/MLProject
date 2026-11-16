@@ -136,6 +136,8 @@ class Contact(BaseModel):
 
     # filled by ranking
     prescore: float = 0.0
+    prejudge: Optional[float] = None  # cheap LLM screen before enrichment (brain/discovery/precision/prejudge.py)
+    prejudge_reason: Optional[str] = None
     score: Optional[float] = None
     reasons: List[str] = Field(default_factory=list)
     hook: Optional[str] = None

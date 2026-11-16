@@ -270,3 +270,60 @@ def compare(new: Dict[str, Any], old: Dict[str, Any]) -> List[Dict[str, Any]]:
                 row[k] = (b, a)
         out.append(row)
     return out
+
+
+def screen_check(run_label: str, only: Optional[List[str]] = None, progress=print) -> Dict[str, Any]:
+    """Shadow-evaluate the pre-judge against the judge on the SAME candidates: those a bench run judged (its
+    enrich checkpoint). The judge's calls replay from the scenario's LLM cache, so only the pre-judge costs
+    anything (~1 fast call per scenario). Reports how many judge-good candidates the screen would have rejected
+    (must stay ~0) and how many judge-bad ones it catches. Free of replay artifacts, unlike an end-to-end replay."""
+    import sqlite3
+
+    from brain.cache import Cache
+    from brain.context import CampaignContext
+    from brain.discovery.precision.prejudge import prejudge
+    from brain.enrich import has_usable_email
+    from brain.fit import profile_for
+    from brain.judge import judge
+    from brain.llm import LLM
+    from brain.models import Contact
+    from brain.playbooks import get_playbook
+    from brain.settings import Settings
+
+    st = Settings()
+    totals = {"good": 0, "good_rejected": 0, "mid": 0, "mid_rejected": 0, "bad": 0, "bad_rejected": 0}
+    rows: List[Dict[str, Any]] = []
+    for sc in load_scenarios(only):
+        db = RESULT_DIR / f"run_{run_label}" / f"{sc['name']}.db"
+        if not db.exists():
+            continue
+        con = sqlite3.connect(str(db))
+        stages = {s: json.loads(d) for s, d in con.execute("select stage, payload_json from brain_stages")}
+        con.close()
+        if "enrich" not in stages:
+            continue
+        spec = spec_from_scenario(sc)
+        pb = get_playbook(spec.pack)
+        llm = LLM(st, Cache(str(CACHE_DIR / f"{sc['name']}.sqlite"), ignore_ttl=True))
+        ctx = CampaignContext(understanding=spec.objective, target_brief=spec.persona.description)
+        for f in sc.get("facts", []):
+            ctx.add_fact(f, "scenario")
+        targets = [Contact(**c) for c in stages["enrich"]["contacts"]]
+        judged = [c for c in targets if has_usable_email(c, st.min_email_confidence)][: spec.target_count * 2]
+        judge(judged, spec, llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pb)
+        screened = [c.model_copy(deep=True) for c in judged]
+        for c in screened:
+            c.prejudge, c.prejudge_reason = None, None
+            c.flags = [f for f in c.flags if f != "prejudge_reject"]
+        prejudge(screened, spec, llm, prof=profile_for(spec, pb), min_score=st.prejudge_min)
+        for c, p in zip(judged, screened):
+            if c.score is None:
+                continue
+            band = "good" if c.score >= GOOD else "bad" if c.score < 0.5 else "mid"
+            rejected = "prejudge_reject" in p.flags
+            totals[band] += 1
+            totals[band + "_rejected"] += int(rejected)
+            rows.append({"scenario": sc["name"], "name": c.name, "judge": c.score, "band": band,
+                         "prejudge": p.prejudge, "rejected": rejected, "why": p.prejudge_reason})
+        progress(f"[screen] {sc['name']}: {sum(1 for r in rows if r['scenario'] == sc['name'])} candidates checked")
+    return {"totals": totals, "rows": rows}

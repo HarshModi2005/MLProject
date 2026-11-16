@@ -315,6 +315,28 @@ def bench(
         console.print(d)
 
 
+@app.command("bench-screen")
+def bench_screen(
+    run: str = typer.Option(..., help="A bench run label whose candidates were judged (evals/results/run_<label>)."),
+    only: Optional[List[str]] = typer.Option(None, help="Scenario name. Repeatable."),
+):
+    """Check the pre-judge against the judge on the same candidates (judge replays from cache; ~1 cheap call each)."""
+    from brain.bench import screen_check
+
+    out = screen_check(run, list(only) if only else None, progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+    t = Table(title="Pre-judge vs judge (same candidates)")
+    for col in ("Scenario", "Candidate", "judge", "pre-judge", "verdict", "why"):
+        t.add_column(col)
+    for r in out["rows"]:
+        bad = r["rejected"] and r["band"] == "good"
+        t.add_row(r["scenario"], r["name"][:30], f"{r['judge']:.2f} {r['band']}", str(r["prejudge"]),
+                  ("[red]REJECTED[/red]" if bad else "rejected" if r["rejected"] else "kept"), (r["why"] or "")[:60])
+    console.print(t)
+    tot = out["totals"]
+    console.print(f"good rejected: {tot['good_rejected']}/{tot['good']}  ·  mid rejected: {tot['mid_rejected']}/{tot['mid']}"
+                  f"  ·  bad caught: {tot['bad_rejected']}/{tot['bad']}")
+
+
 @app.command("bench-labels")
 def bench_labels(
     run: str = typer.Option(..., help="A bench run label (evals/results/run_<label>)."),

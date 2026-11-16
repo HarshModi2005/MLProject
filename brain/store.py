@@ -102,6 +102,42 @@ class QueryStatRow(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
+class FitExampleRow(Base):
+    """A candidate the (pre-)judge or a human scored: training data for the learned fit model."""
+    __tablename__ = "brain_fit_examples"
+    campaign_id = Column(String(64), primary_key=True)
+    contact_id = Column(String(64), primary_key=True)
+    playbook = Column(String(64), index=True)
+    name = Column(String(300))
+    features_json = Column(Text)
+    judge_score = Column(Float, nullable=True)
+    prejudge = Column(Float, nullable=True)
+    label = Column(String(16), nullable=True)  # good | bad, from a human
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class FitModelRow(Base):
+    __tablename__ = "brain_fit_models"
+    playbook = Column(String(64), primary_key=True)
+    model_json = Column(Text)
+    n = Column(Integer, default=0)
+    trained_at = Column(DateTime, default=datetime.utcnow)
+
+
+class SourceStatRow(Base):
+    """What a source produced across finished campaigns of a playbook (see brain/discovery/precision/priors.py)."""
+    __tablename__ = "brain_source_stats"
+    playbook = Column(String(64), primary_key=True)
+    source = Column(String(64), primary_key=True)
+    campaigns = Column(Integer, default=0)
+    unique = Column(Float, default=0)
+    reachable = Column(Float, default=0)
+    passed = Column(Float, default=0)
+    shortlisted = Column(Float, default=0)
+    search_calls = Column(Float, default=0)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 def query_template(query: str, topics: List[str], places: List[str]) -> Optional[str]:
     """'edtech sponsors Bangalore' -> '{topic} sponsors {place}'. None if the query has no topic in it."""
     out, has_topic = query, False
@@ -246,6 +282,80 @@ class Store:
             rows = s.query(QueryStatRow).filter(QueryStatRow.playbook == playbook, QueryStatRow.good > 0).all()
         rows.sort(key=lambda r: (r.good / max(1, r.runs), r.good), reverse=True)
         return [r.template for r in rows[:limit]]
+
+    # ── learned fit model ────────────────────────────────────────────────────
+    def record_fit_examples(self, playbook: str, campaign_id: str, rows: List[Dict[str, Any]]) -> int:
+        """Upsert training rows ({contact_id, name, features, judge_score, prejudge}); human labels are kept."""
+        with self._Session.begin() as s:
+            for r in rows:
+                row = s.get(FitExampleRow, (campaign_id, r["contact_id"])) or FitExampleRow(
+                    campaign_id=campaign_id, contact_id=r["contact_id"])
+                row.playbook, row.name = playbook, (r.get("name") or "")[:300]
+                row.features_json = json.dumps(r["features"])
+                if r.get("judge_score") is not None:
+                    row.judge_score = r["judge_score"]
+                if r.get("prejudge") is not None:
+                    row.prejudge = r["prejudge"]
+                s.merge(row)
+        return len(rows)
+
+    def label_fit_examples(self, playbook: str, good: List[str], bad: List[str]) -> int:
+        """Attach human labels (names or contact ids) to stored examples of a playbook."""
+        from brain.textutil import name_tokens
+
+        def key(v: str) -> str:
+            return " ".join(name_tokens(v))
+
+        g, b = {key(x) for x in good}, {key(x) for x in bad}
+        n = 0
+        with self._Session.begin() as s:
+            for row in s.query(FitExampleRow).filter(FitExampleRow.playbook == playbook):
+                k = key(row.name or "")
+                label = "good" if (k in g or row.contact_id in good) else "bad" if (k in b or row.contact_id in bad) else None
+                if label and row.label != label:
+                    row.label = label
+                    n += 1
+        return n
+
+    def fit_examples(self, playbook: str) -> List[Dict[str, Any]]:
+        with self._Session() as s:
+            rows = s.query(FitExampleRow).filter(FitExampleRow.playbook == playbook).all()
+        return [{"contact_id": r.contact_id, "name": r.name, "features": json.loads(r.features_json or "{}"),
+                 "judge_score": r.judge_score, "prejudge": r.prejudge, "label": r.label} for r in rows]
+
+    def save_fit_model(self, playbook: str, model: Dict[str, Any]) -> None:
+        with self._Session.begin() as s:
+            s.merge(FitModelRow(playbook=playbook, model_json=json.dumps(model), n=int(model.get("n", 0)),
+                                trained_at=datetime.utcnow()))
+
+    def load_fit_model(self, playbook: str) -> Optional[Dict[str, Any]]:
+        with self._Session() as s:
+            row = s.get(FitModelRow, playbook)
+        return json.loads(row.model_json) if row and row.model_json else None
+
+    # ── source priors ────────────────────────────────────────────────────────
+    def record_source_stats(self, playbook: str, source_funnel: Dict[str, Dict[str, int]],
+                            ledger: Dict[str, Dict[str, float]]) -> int:
+        sources = set(ledger) | {k for st in source_funnel.values() for k in st}
+        with self._Session.begin() as s:
+            for src in sources:
+                row = s.get(SourceStatRow, (playbook, src)) or SourceStatRow(
+                    playbook=playbook, source=src, campaigns=0, unique=0, reachable=0, passed=0, shortlisted=0,
+                    search_calls=0)
+                row.campaigns = (row.campaigns or 0) + 1
+                for attr, stage in (("unique", "unique"), ("reachable", "reachable"), ("passed", "passed_judge"),
+                                    ("shortlisted", "shortlisted")):
+                    setattr(row, attr, (getattr(row, attr) or 0) + (source_funnel.get(stage) or {}).get(src, 0))
+                row.search_calls = (row.search_calls or 0) + float((ledger.get(src) or {}).get("search_calls", 0))
+                s.merge(row)
+        return len(sources)
+
+    def source_priors(self, playbook: str) -> Dict[str, Dict[str, float]]:
+        with self._Session() as s:
+            rows = s.query(SourceStatRow).filter(SourceStatRow.playbook == playbook).all()
+        return {r.source: {"campaigns": r.campaigns or 0, "unique": r.unique or 0, "reachable": r.reachable or 0,
+                           "passed": r.passed or 0, "shortlisted": r.shortlisted or 0,
+                           "search_calls": r.search_calls or 0} for r in rows}
 
     def labels_from_review(self, campaign_id: str) -> Dict[str, List[str]]:
         """Human decisions as evaluation labels: approved/sent/replied are good, rejected is bad."""

@@ -96,7 +96,14 @@ def merge_into(a: Contact, b: Contact) -> Contact:
     for k, v in b.signals.items():
         a.signals[k] = max(a.signals.get(k, 0.0), v)
     a.sources = list(dict.fromkeys(a.sources + b.sources))
+    # The pre-judge screen: keep the best one; the merged record is rejected only if that screen rejected it.
+    best = a
+    if b.prejudge is not None and (a.prejudge is None or b.prejudge > a.prejudge):
+        a.prejudge, a.prejudge_reason, best = b.prejudge, b.prejudge_reason, b
+    best_rejected = "prejudge_reject" in best.flags
     a.flags = list(dict.fromkeys(a.flags + b.flags))
+    if a.prejudge is not None and not best_rejected:
+        a.flags = [f for f in a.flags if f != "prejudge_reject"]
     return a
 
 

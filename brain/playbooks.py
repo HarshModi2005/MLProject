@@ -57,6 +57,9 @@ class Playbook:
     word_target: int = 150
     upload_prompts: List[str] = field(default_factory=list)  # older lists worth asking the user for
     questions: List[str] = field(default_factory=list)  # worth asking when the prompt does not say
+    # Kinds of organisation that are proper targets besides companies (see brain/discovery/precision/orgtype.py):
+    # academic, media, publisher, government, nonprofit. Others are demoted before enrichment.
+    allowed_org_classes: List[str] = field(default_factory=list)
     # What makes a prospect good, beyond matching the topics (a topic criterion is always added).
     # Each item: {"name", "signal", "weight", "terms", "description", "must"} — see models.FitCriterion.
     criteria: List[dict] = field(default_factory=list)
@@ -75,7 +78,7 @@ _UPLOAD_COMMON = ["a do-not-contact list or people you have already emailed (so 
 
 _BUILTIN: List[Playbook] = [
     Playbook(
-        name="academic", title="Researchers and faculty",
+        name="academic", allowed_org_classes=["academic"], title="Researchers and faculty",
         description="Professors, researchers or labs found through their publications: research internships, "
                     "PhD/postdoc inquiries, academic collaboration.",
         target_kind="person", sources=["openalex", "coauthors", "web"],
@@ -197,7 +200,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["bot", "organization account"]
     ),
     Playbook(
-        name="pr_media", title="Journalists and media",
+        name="pr_media", allowed_org_classes=["media"], title="Journalists and media",
         description="Journalists, editors, newsletter writers or podcasters, to pitch a story or get coverage.",
         target_kind="person", sources=["news", "podcasts"], accept_inboxes=True,
         preferred_inboxes=["news", "editor", "editorial", "tips", "press", "newsdesk", "story"],
@@ -230,7 +233,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["directory", "listing site"]
     ),
     Playbook(
-        name="creators", title="Creators, influencers and podcasts",
+        name="creators", allowed_org_classes=["media"], title="Creators, influencers and podcasts",
         description="YouTubers, Instagram creators, newsletter writers or podcast hosts for collaborations, "
                     "guest appearances or promotions.",
         target_kind="person", sources=["podcasts", "web", "orgs"], accept_inboxes=True,
@@ -248,7 +251,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["talent agency", "mcn"]
     ),
     Playbook(
-        name="speakers", title="Speakers, judges and mentors",
+        name="speakers", allowed_org_classes=["academic", "media"], title="Speakers, judges and mentors",
         description="Experts to invite as speakers, judges, panelists, guests or mentors for an event or program.",
         target_kind="person", sources=["events", "web", "openalex"], accept_inboxes=False,
         default_roles=["Founder", "Director", "Head", "Professor", "Lead", "Principal"],
@@ -290,7 +293,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["marketplace", "directory", "trading platform"]
     ),
     Playbook(
-        name="grants", title="Grants and CSR funding",
+        name="grants", allowed_org_classes=["nonprofit", "government"], title="Grants and CSR funding",
         description="Foundations, CSR arms of companies or grant programmes to fund an NGO, research or social project.",
         sources=["orgs", "lookalike"], default_roles=["Program Officer", "CSR Head", "Program Director", "Trustee",
                                                        "Head of Sustainability", "Grants Manager"],

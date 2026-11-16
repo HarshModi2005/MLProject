@@ -23,6 +23,8 @@ from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from brain.discovery.ledger import Ledger
+from brain.discovery.precision.fitmodel import FitModel
+from brain.discovery.precision.priors import order_seed_tools, pseudo
 from brain.fit import anti_pattern_hits, profile_for, promising, quick_fit
 from brain.models import CampaignSpec, Contact, ProspectProfile
 from brain.playbooks import Playbook
@@ -41,6 +43,7 @@ class ExploreResult:
     qualified: int = 0
     warnings: List[str] = field(default_factory=list)
     ledger: Dict[str, Dict[str, float]] = field(default_factory=dict)  # per source: spend and yield
+    fit: str = "rule"  # what decided "qualified": the hand-written rule or a learned model
 
 
 def choose_tools(spec: CampaignSpec, pb: Playbook, prof: ProspectProfile, *, has_seeds: bool,
@@ -66,9 +69,12 @@ def _merge_stats(into: Dict[str, Any], new: Dict[str, Any]) -> None:
             into[k] = v
 
 
-def _ucb(st: Dict[str, float], total_runs: int) -> float:
-    runs = max(1.0, st.get("runs", 0))
-    mean = st.get("qualified", 0) / (st.get("cost", 0) + 1.0)
+def _ucb(st: Dict[str, float], total_runs: int, prior: Optional[Dict[str, float]] = None) -> float:
+    """Upper confidence bound on qualified finds per search call; `prior` adds earlier campaigns as
+    pseudo-observations (brain/discovery/precision/priors.py)."""
+    prior = prior or {}
+    runs = max(1.0, st.get("runs", 0) + prior.get("runs", 0))
+    mean = (st.get("qualified", 0) + prior.get("qualified", 0)) / (st.get("cost", 0) + prior.get("cost", 0) + 1.0)
     return mean + math.sqrt(2 * math.log(max(2, total_runs)) / runs) * 0.5
 
 
@@ -98,10 +104,22 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
     def pool() -> List[Contact]:
         return resolve([c.model_copy(deep=True) for c in raw])
 
+    st = deps.settings
+    remember = getattr(st, "use_memory", True) and hasattr(deps.store, "load_fit_model")
+    model = None
+    if remember and getattr(st, "learned_fit", True):
+        data = deps.store.load_fit_model(pb.name)
+        model = FitModel(data) if data else None  # learned from earlier judge verdicts (precision/fitmodel.py)
+    priors = deps.store.source_priors(pb.name) if remember and hasattr(deps.store, "source_priors") else {}
+    res.fit = "learned" if model else "rule"
+
     def qualified(cs: List[Contact]) -> List[Contact]:
         out = []
         for c in cs:
-            ok = promising(c, prof) if c.kind == "org" and "light_read" not in c.flags else quick_fit(c, prof) >= 0.25
+            if model is not None:
+                ok = not anti_pattern_hits(prof, c) and model.qualified(c, prof)
+            else:
+                ok = promising(c, prof) if c.kind == "org" and "light_read" not in c.flags else quick_fit(c, prof) >= 0.25
             if ok:
                 out.append(c)
         return out
@@ -158,14 +176,14 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
 
     # ── round 0: seed ────────────────────────────────────────────────────────
     if winners is None:
-        paid = [t for t in seed_tools if TOOLS[t].needs_search]
+        paid = order_seed_tools([t for t in seed_tools if TOOLS[t].needs_search], priors)
         shares = {t: (2 if i == 0 else 1) for i, t in enumerate(paid)}
         total_share = sum(shares.values()) or 1
         # Hold back a third of the budget for the adaptive rounds when there is something to adapt to.
         seed_budget = budget if rounds <= 1 else int(budget * 0.67)
         # Free tools always run (and first): they cost nothing and often carry what paid tools lack (e.g. podcast
         # feeds publish an email; bylines do not). Paid tools stop once enough qualified prospects exist.
-        ordered = [t for t in seed_tools if not TOOLS[t].needs_search] + [t for t in seed_tools if TOOLS[t].needs_search]
+        ordered = [t for t in seed_tools if not TOOLS[t].needs_search] + paid
         for name in ordered:
             if TOOLS[name].needs_search and len(qualified(pool())) >= need:
                 break
@@ -194,7 +212,7 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
         live = [t for t in seed_tools if TOOLS[t].needs_search and t not in retired]
         if live and left() > 1:
             total_runs = int(sum(ctx.tool_stats.get(t, {}).get("runs", 0) for t in live)) or 1
-            best = max(live, key=lambda t: _ucb(ctx.tool_stats.get(t, {}), total_runs))
+            best = max(live, key=lambda t: _ucb(ctx.tool_stats.get(t, {}), total_runs, pseudo(priors.get(t, {}))))
             rounds_left = max(1, rounds - r)
             run_tool(best, max(3, left() // rounds_left), [])
             ran.append(best)

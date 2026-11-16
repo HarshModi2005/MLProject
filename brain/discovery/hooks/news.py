@@ -2,17 +2,31 @@
 
 from __future__ import annotations
 
+import re
 from typing import Dict, List, Optional
 
 from brain.models import Contact, Evidence
 from brain.textutil import country_from_domain, registrable_domain, squash
 
 
+# Bylines that name an organisation, a desk or a product rather than a person ("Sarvam AI", "ET Bureau").
+_NOT_A_PERSON = re.compile(r"\b(ai|labs?|team|desk|bureau|news|staff|media|network|times|express|online|digital|"
+                           r"correspondent|editorial|agency|agencies|reporter|tech|pvt|ltd|inc|llc|foundation|group)\b", re.I)
+
+
+def is_byline_person(name: str, outlet: str = "") -> bool:
+    low = name.strip().lower()
+    if not low or (outlet and (low == outlet.strip().lower() or low in outlet.strip().lower())):
+        return False
+    return not _NOT_A_PERSON.search(name)
+
+
 def extract(spec, run, hit: Dict, page) -> List[Dict]:
     from brain.tools import authors_from_article
 
     return [{"name": name, "author_url": author_url, "page_url": page.url, "article": hit}
-            for name, author_url in authors_from_article(page.html, page.url)]
+            for name, author_url in authors_from_article(page.html, page.url)
+            if is_byline_person(name, hit.get("source") or "")]
 
 
 def to_contact(spec, record, run) -> Optional[Contact]:

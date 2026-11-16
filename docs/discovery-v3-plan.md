@@ -3,7 +3,7 @@
 **Goal:** discovery that can reach any public source relevant to any outreach use case, without losing
 precision or blowing the budget, built so that adding a source or a use case is configuration, not surgery.
 
-Status: Phases 0 and 1 implemented (2026-11-16) · Branch base: `discovery-v2` · Owner: discovery module (`brain/`)
+Status: Phases 0–1 implemented and committed (c046ace); Phase 2 built (2026-11-17) · Branch base: `discovery-v2` · Owner: discovery module (`brain/`)
 
 ### Progress
 
@@ -11,6 +11,7 @@ Status: Phases 0 and 1 implemented (2026-11-16) · Branch base: `discovery-v2` �
 |---|---|---|
 | 0 Measurement | done, except the labels themselves | per-source funnel (`source_funnel`, `ledger` in every bench row and table), backfill counted in `unique_people`, label sheets (`brain bench-labels --run <label>` → `evals/labels/<scenario>.json`, read by `brain bench`), 4 new scenarios (`grants_csr_india`, `speakers_ai_summit`, `b2b_app_devs`, `distributors_solar`; not yet run live). **Human labels still to fill in.** |
 | 1 Source framework | done | `brain/discovery/` with all five generic adapters plus `python`; `podcasts` (json_api → rss) and `news` (search + hooks) are generic manifests; `jobs` is a manifest using the `python` adapter (its three ATS APIs move to generic manifests in Phase 3). Router replaces `choose_tools`. Replay parity: discover and rank stages identical on all 6 scenarios. |
+| 2 Precision layer | built; end-to-end effect not yet measured live | `precision/orgtype.py` (org-type classes + gate, `Playbook.allowed_org_classes`), `precision/prejudge.py` (one batched fast call on the top ~40 before enrichment; rejected candidates are never enriched), `precision/fitmodel.py` (examples stored after every judge, logistic model per playbook once ≥50 examples, used by the explorer's "qualified"), `precision/priors.py` (per-source history orders paid seed sources and feeds the bandit), byline filter for organisation names. **Screen check** (`brain bench-screen --run p2_before`, same candidates as the judge): 0/19 judge-good and 0/8 middling rejected, 9/19 judge-bad caught. End-to-end replay fell 19 → 13 good@K, but replay misses tripled (new candidates were never recorded), so only a live run can measure the end-to-end effect. |
 | Fix found on the way | done | Decision-maker searches raced between threads (same code gave 8, 9 or 10 decision-makers across replays). They now run in rank order after the parallel site reads: deterministic, and the best-ranked organisations get the capped searches. |
 
 Baselines: `evals/results/pre_v3_replay.json` (before), `evals/results/v3_replay_a.json` (after Phases 0–1), both
