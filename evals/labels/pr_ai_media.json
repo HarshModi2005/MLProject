@@ -1,0 +1,544 @@
+{
+  "scenario": "pr_ai_media",
+  "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). good = you would really email them for this scenario's ask.",
+  "good": [],
+  "bad": [],
+  "candidates": [
+    {
+      "label": "",
+      "name": "Supriya Roy",
+      "kind": "person",
+      "org": "The Times of India",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Sarvam AI updates model to boost Indian language OCR accuracy",
+        "Supriya Roy is a business news journalist at The Times of India. She covers startups, venture capital and the intersection of technology, policy and society, with a focus on India’s new economy and it"
+      ],
+      "url": "https://timesofindia.indiatimes.com/toireporter/author-supriya-roy-479259429.cms",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Charlotte Lang",
+      "kind": "person",
+      "org": "Computer Weekly",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "India AI Impact Summit: Open source gains ground, but sovereignty tensions persist"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Ridhika Basnet",
+      "kind": "person",
+      "org": "Analytics India Magazine",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Chariot Launches Speech Recognition Model for 10 Indian Languages",
+        "Ridhika is a journalist covering the real-world impact of artificial intelligence at the intersection of tech, policy, and society. Ridhika Basnet is a Journalist at AIM."
+      ],
+      "url": "https://analyticsindiamag.com/author/ridhika-basnet",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Sarvam AI",
+      "kind": "person",
+      "org": "Sarvam AI",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Introducing Saaras V4 speech recognition",
+        "Open-sourcing Sarvam 30B & 105B models",
+        ") and Axonwise Private Limited, doing business as ‘Sarvam AI’, a company incorporated under the laws of India and having its registered office in Bengaluru, Karnataka, India ("
+      ],
+      "url": "https://www.sarvam.ai/contact-us",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Kileuna Haralu",
+      "kind": "person",
+      "org": "Analytics India Magazine",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Gnani AI Launches Prisma v3.0 Speech Recognition Model for 10 Languages",
+        "Kileuna is a journalist covering the real-world impact of artificial intelligence at the intersection of tech, policy, and society. Kileuna Haralu is a Contributor at AIM."
+      ],
+      "url": "https://analyticsindiamag.com/author/kileuna-haralu",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "S Ronendra Singh",
+      "kind": "person",
+      "org": "BusinessLine",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "India Charts Independent AI Path, Backs Open-Source Models Amid US Restrictions"
+      ],
+      "url": "https://www.thehindubusinessline.com/profile/author/s-ronendra-singh-10989/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Siddharth Jindal",
+      "kind": "person",
+      "org": "Analytics India Magazine",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "AMD AI DevDay India Brings Developers Closer to the Open-Source AI Stack",
+        "Siddharth is a media graduate who loves to explore tech through journalism and putting forward ideas worth pondering about in the era of artificial intelligence. Siddharth Jindal is a Tech Journalist "
+      ],
+      "url": "https://analyticsindiamag.com/author/siddharth-jindal",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Aditya Sudhindranath",
+      "kind": "person",
+      "org": "Fortune India",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Voice AI: India’s next digital leap must include every Indian’s language"
+      ],
+      "url": "https://www.fortuneindia.com/author/aditya-sudhindranath",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "ChatGPT: News on Open AI, MidJourney, NVIDIA, Anthropic, Open Source LLMs, Machine Learning",
+      "kind": "org",
+      "org": "ChatGPT: News on Open AI, MidJourney, NVIDIA, Anthropic, Open Source LLMs, Machine Learning",
+      "email": "guests@podcaststudio.com",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast ChatGPT: News on Open AI, MidJourney, NVIDIA, Anthropic, Open Source LLMs, Machine Learning: <p>ChatGPT: News on Open AI, MidJourney, NVIDIA, Anthropic, Open Source LLMs, Machine Lea",
+        "Episode: Anthropic Launches Claude Fable 5.2 and Mythos 5.2",
+        "Episode: OpenAI Launches ChatGPT Wallet and More AI News"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/chatgpt-news-on-open-ai-midjourney-nvidia-anthropic/id1722120770?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Anvita Manne",
+      "kind": "person",
+      "org": "Frontiers",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Automatic speech recognition for Telugu: a comparative analysis of Wav2Vec 2.0 model variants and hyperparameter tuning"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Nikhita James",
+      "kind": "person",
+      "org": "Frontiers",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Automatic speech recognition for Telugu: a comparative analysis of Wav2Vec 2.0 model variants and hyperparameter tuning"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Ishaan Jain",
+      "kind": "person",
+      "org": "Frontiers",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Automatic speech recognition for Telugu: a comparative analysis of Wav2Vec 2.0 model variants and hyperparameter tuning"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Jagmeet Singh",
+      "kind": "person",
+      "org": "TechCrunch",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Indian chip startup Bharat Semi lands $24M seed round as it eyes global AI sensor market",
+        "Jagmeet covers startups, tech policy-related updates, and all other major tech-centric developments from India for TechCrunch. He previously worked as a principal correspondent at NDTV."
+      ],
+      "url": "https://techcrunch.com/author/jagmeet-singh/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Padmini Dhruvaraj",
+      "kind": "person",
+      "org": "The New Indian Express",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "India’s AI race moves from chatbots to voice agents"
+      ],
+      "url": "https://www.newindianexpress.com/author/padmini-dhruvaraj",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Ashutosh Kumar Thakur",
+      "kind": "person",
+      "org": "Down To Earth",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "‘Give each major Indian written language the chance to shine as a way of expressing new ideas, especially in science and tech’",
+        "‘Give each major Indian written language the chance to shine as a way of expressing new ideas, especially in science and tech’"
+      ],
+      "url": "https://www.downtoearth.org.in/author/ashutosh-kumar-thakur",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Mohit Pandey",
+      "kind": "person",
+      "org": "Analytics India Magazine",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "After ₹190 Cr Reliance Exit, Vivekanand Pani Targets India’s AI Language Data Problem",
+        "Mohit writes about AI in simple, explainable, and often funny words. He's especially passionate about chatting with those building AI for Bharat, with the occasional detour into AGI."
+      ],
+      "url": "https://analyticsindiamag.com/author/mohit-pandey",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Open Source AI",
+      "kind": "person",
+      "org": "Open Source AI",
+      "email": "mothersalmon22+11@gmail.com",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast Open Source AI: <p>Open Source AI keeps you up to date on everything happening in artificial intelligence. We break down the top AI news, the latest tools and research, and the trend",
+        "Episode: Anthropic Launches Claude Fable 5.2 and Mythos 5.2",
+        "Episode: OpenAI Launches ChatGPT Wallet and More AI News"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/open-source-ai/id1725552807?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Kumar Gandharv",
+      "kind": "person",
+      "org": "CRN Asia",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Anthropic names Vartika Bansal as head of startup partnerships in India"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "BFSI Network",
+      "kind": "person",
+      "org": "Elets BFSI",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "AI, Healthcare and B2B Fintech Seen as Top India Startup Bets"
+      ],
+      "url": "https://bfsi.eletsonline.com/author/bfsinetwork/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Sajid Raza",
+      "kind": "person",
+      "org": "Education Times",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "At 23, these Indian-origin Gen Z founders are worth Rs 40,000 crore each: How their AI startup Mercor became a $20 billion company"
+      ],
+      "url": "https://www.educationtimes.com/toireporter/author-sajid-raza-479281210.cms",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Gargi S.",
+      "kind": "person",
+      "org": "Inc42",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Jensen Huang’s Exit: How Deep Does NVIDIA’s AI Ecosystem Run In India?"
+      ],
+      "url": "https://inc42.com/author/gargi-sarkar/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Debarghya S.",
+      "kind": "person",
+      "org": "Inc42",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Jensen Huang’s Exit: How Deep Does NVIDIA’s AI Ecosystem Run In India?"
+      ],
+      "url": "https://inc42.com/author/debarghya-sil/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Saritha Rai",
+      "kind": "person",
+      "org": "Bloomberg",
+      "email": "srai33@bloomberg.net",
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Former Investment Banker Debuts Low-Cost Video AI for India",
+        "Dreame’s Huo is working on artificial intelligence algorithms and humanoid machines to handle cleaning, washing and other chores."
+      ],
+      "url": "https://www.bloomberg.com/authors/ASxkTfI9dW8/saritha-rai",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Shraddha Goled",
+      "kind": "person",
+      "org": "Inc42",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "Jensen Huang’s Exit: How Deep Does NVIDIA’s AI Ecosystem Run In India?",
+        "D2C founders scaling from ₹1 Cr to ₹10 Cr. Learn from India's top 1% D2C founders and experts through 40+ expert-led sessions, 1:1 mentorship and a personalised growth strategy. It closes with an in-p"
+      ],
+      "url": "https://inc42.com/author/shraddha-goled/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "The Speech Recognition Podcast",
+      "kind": "org",
+      "org": "The Speech Recognition Podcast",
+      "email": "janneke@learnspeechrecognition.com",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast The Speech Recognition Podcast: <p>The Speech Recognition Podcast broadly discusses dictation and voice commands on PC, Mac and iPad/iPhone. Microphones will also be a common topic, ",
+        "Episode: The Christmas episode",
+        "Episode: Simple Custom Voice Commands in Dragon"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/the-speech-recognition-podcast/id1612265199?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Daybreak",
+      "kind": "org",
+      "org": "Daybreak",
+      "email": "podcasts@the-ken.com",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast Daybreak: Business news is complex and overwhelming. It doesn’t have to be. Every day of the week, from Monday to Friday, Daybreak tells one business story that’s significant, simple",
+        "Episode: Why global betting giants are paying Indian data scouts to see games before bettors",
+        "Episode: Engineering profits are slipping and L&T Tech is going all in on AI"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/daybreak/id1658118308?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Jay Ganglani",
+      "kind": "person",
+      "org": "Fortune",
+      "email": null,
+      "sources": [
+        "news"
+      ],
+      "title": "Journalist",
+      "evidence": [
+        "India’s film industry hopes a $420 million mythological epic can be a global hit",
+        "Prime Infra’s CEO says the Paris 1.5-degree goal is ‘feasible’ for Southeast Asia—if governments are willing to pay for it"
+      ],
+      "url": "https://fortune.com/author/jay-ganglani/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Sumit Nandi",
+      "kind": "person",
+      "org": "Let's Talk - Freelancing, AI and Translation, Umax Language Founder Sherya • Episode -1",
+      "email": "contact.cphint@gmail.com",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast Let's Talk - Freelancing, AI and Translation, Umax Language Founder Sherya • Episode -1: <p><span style=\"color: rgb(19, 19, 19); background-color: rgba(0, 0, 0, 0.05);\">Welcome to th",
+        "Episode: Bengali Music Industry, AI, and Radio | Let's Talk Ep -5 | Crescendo Studio| RJ Labanya",
+        "Episode: Episode 4 - Exposing Indian Education System, Private Tuition & Education System with Robin Dey"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/lets-talk-freelancing-ai-and-translation-umax/id1821814079?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Two by Two",
+      "kind": "org",
+      "org": "Two by Two",
+      "email": "twobytwo@the-ken.com",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast Two by Two: The Two by Two podcast is a premium business podcast from The Ken that investigates, discusses and breaks down the most important business stories around you. Hosted from",
+        "Episode: Connecting 110 Dots (Season Finale)",
+        "Episode: The hyperindependent Bangalorean walks into a hospital rave"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/two-by-two/id1757938645?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Bloomberg Daybreak: Asia Edition",
+      "kind": "org",
+      "org": "Bloomberg Daybreak: Asia Edition",
+      "email": "podcasts1@bloomberg.net",
+      "sources": [
+        "podcasts"
+      ],
+      "title": "Podcast host",
+      "evidence": [
+        "Hosts the podcast Bloomberg Daybreak: Asia Edition: <p>Listen for business and finance news centered in the Asia-Pacific region. <br><br>Host Doug Krizner brings you insight and analysis on the day's ",
+        "Episode: FT: Huang Discusses Nvidia Return, President Trump's Asia Trip",
+        "Episode: Daybreak Weekend: Nvidia Earnings, UK Labour Market, APEC Summit"
+      ],
+      "url": "https://podcasts.apple.com/in/podcast/bloomberg-daybreak-asia-edition/id1663863437?uo=4",
+      "judge_score": null,
+      "judge_reason": null
+    }
+  ]
+}

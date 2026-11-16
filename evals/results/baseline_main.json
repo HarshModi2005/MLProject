@@ -1,0 +1,367 @@
+{
+  "label": "baseline_main",
+  "rows": [
+    {
+      "name": "academic_gnn",
+      "playbook": "academic",
+      "target": 5,
+      "unique": 363,
+      "qualified": 255,
+      "reachable": 17,
+      "passed_judge": 7,
+      "shortlisted": 5,
+      "good@K": 5,
+      "precision@K": 1.0,
+      "mean_score": 0.827,
+      "distinct_orgs": 5,
+      "proof_rate": 0.0,
+      "search_calls": 8,
+      "llm_paid_calls": 4,
+      "llm_usd": 0.0035,
+      "pages_fetched": 28,
+      "seconds": 82.0,
+      "usd_per_good": 0.0023,
+      "shortlist": [
+        {
+          "name": "Swagatam Das",
+          "org": "Indian Statistical Institute",
+          "email": "swagatam.das@isical.ac.in",
+          "score": 0.859,
+          "reasons": [
+            "Professor working on graph neural networks"
+          ]
+        },
+        {
+          "name": "Garima Chanana",
+          "org": "Vivekananda Institute of Professional Studies",
+          "email": "garimachanana1@gmail.com",
+          "score": 0.8553,
+          "reasons": [
+            "Research on molecular property prediction using GNNs"
+          ]
+        },
+        {
+          "name": "Bhaskarjyoti Das",
+          "org": "PES University",
+          "email": "bhaskarjyoti01@gmail.com",
+          "score": 0.828,
+          "reasons": [
+            "Research on graph neural networks"
+          ]
+        },
+        {
+          "name": "Partha Basuchowdhuri",
+          "org": "Indian Association for the Cultivation of Science",
+          "email": "partha.basuchowdhuri@iacs.res.in",
+          "score": 0.8046,
+          "reasons": [
+            "Associate Professor working on GNNs"
+          ]
+        },
+        {
+          "name": "Vinti Agarwal",
+          "org": "Birla Institute of Technology and Science, Pilani",
+          "email": "vinti.agarwal@pilani.bits-pilani.ac.in",
+          "score": 0.7875,
+          "reasons": [
+            "Works on graph representation learning"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "b2b_dental_bangalore",
+      "playbook": "b2b_sales",
+      "target": 6,
+      "unique": 78,
+      "qualified": 78,
+      "reachable": 3,
+      "passed_judge": 3,
+      "shortlisted": 3,
+      "good@K": 3,
+      "precision@K": 0.5,
+      "mean_score": 0.756,
+      "distinct_orgs": 3,
+      "proof_rate": 0.0,
+      "search_calls": 14,
+      "llm_paid_calls": 5,
+      "llm_usd": 0.0028,
+      "pages_fetched": 9,
+      "seconds": 62.2,
+      "usd_per_good": 0.0056,
+      "shortlist": [
+        {
+          "name": "Reginoldsdental",
+          "org": "Reginoldsdental",
+          "email": "regiarthur@hotmail.com",
+          "score": 0.7789,
+          "reasons": [
+            "Multispeciality dental clinic in Bangalore"
+          ]
+        },
+        {
+          "name": "Excel Dental Care | Jayanagar, Bengaluru",
+          "org": "Excel Dental Care | Jayanagar, Bengaluru",
+          "email": "1exceldentalcare@gmail.com",
+          "score": 0.7667,
+          "reasons": [
+            "Dental clinic in Bangalore"
+          ]
+        },
+        {
+          "name": "House of Dentistry",
+          "org": "House of Dentistry",
+          "email": "info@houseofdentistry.in",
+          "score": 0.7239,
+          "reasons": [
+            "Dental clinic in Bangalore"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "investors_edtech",
+      "playbook": "fundraising",
+      "target": 5,
+      "unique": 37,
+      "qualified": 34,
+      "reachable": 5,
+      "passed_judge": 3,
+      "shortlisted": 3,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.657,
+      "distinct_orgs": 3,
+      "proof_rate": 0.0,
+      "search_calls": 20,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0022,
+      "pages_fetched": 13,
+      "seconds": 37.3,
+      "usd_per_good": 0.0222,
+      "shortlist": [
+        {
+          "name": "Terex Ventures",
+          "org": "Terex Ventures",
+          "email": "info@terexventures.com",
+          "score": 0.7583,
+          "reasons": [
+            "Works with high-growth businesses including edtech"
+          ]
+        },
+        {
+          "name": "Omkar Sudhir Patil",
+          "org": "Omkar Patil Research",
+          "email": "omkarpatil64328@gmail.com",
+          "score": 0.652,
+          "reasons": [
+            "Listed as investor in India with edtech market"
+          ]
+        },
+        {
+          "name": "CA Parveen Sharma",
+          "org": "CA Parveen Sharma",
+          "email": "contact@caparveensharma.com",
+          "score": 0.5599,
+          "reasons": [
+            "Listed as investor in India with edtech market"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5,
+      "unique": 30,
+      "qualified": 30,
+      "reachable": 6,
+      "passed_judge": 4,
+      "shortlisted": 4,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.66,
+      "distinct_orgs": 4,
+      "proof_rate": 0.0,
+      "search_calls": 13,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0017,
+      "pages_fetched": 63,
+      "seconds": 114.3,
+      "usd_per_good": 0.0147,
+      "shortlist": [
+        {
+          "name": "Simplismart",
+          "org": "Simplismart",
+          "email": "contact@simplismart.ai",
+          "score": 0.7717,
+          "reasons": [
+            "Company fine-tunes and deploys LLMs"
+          ]
+        },
+        {
+          "name": "Iisc",
+          "org": "Iisc",
+          "email": "venky@iisc.ac.in",
+          "score": 0.6887,
+          "reasons": [
+            "Involved in computer vision projects using deep learning"
+          ]
+        },
+        {
+          "name": "Augury",
+          "org": "Augury",
+          "email": "info@augury.com",
+          "score": 0.6269,
+          "reasons": [
+            "Focus on AI for manufacturing predictive maintenance"
+          ]
+        },
+        {
+          "name": "Valiance Solutions",
+          "org": "Valiance Solutions",
+          "email": "info@valiancesolutions.com",
+          "score": 0.5515,
+          "reasons": [
+            "Company works on AI, machine learning, and analytics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5,
+      "unique": 31,
+      "qualified": 31,
+      "reachable": 0,
+      "passed_judge": 0,
+      "shortlisted": 5,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 5,
+      "proof_rate": 0.0,
+      "search_calls": 8,
+      "llm_paid_calls": 1,
+      "llm_usd": 0.0001,
+      "pages_fetched": 42,
+      "seconds": 85.4,
+      "usd_per_good": null,
+      "shortlist": [
+        {
+          "name": "Charlotte Lang",
+          "org": "Computer Weekly",
+          "email": null,
+          "score": null,
+          "reasons": []
+        },
+        {
+          "name": "S Ronendra Singh",
+          "org": "BusinessLine",
+          "email": null,
+          "score": null,
+          "reasons": []
+        },
+        {
+          "name": "Supriya Roy",
+          "org": "The Times of India",
+          "email": null,
+          "score": null,
+          "reasons": []
+        },
+        {
+          "name": "Ridhika Basnet",
+          "org": "Analytics India Magazine",
+          "email": null,
+          "score": null,
+          "reasons": []
+        },
+        {
+          "name": "Sarvam AI",
+          "org": "Sarvam AI",
+          "email": null,
+          "score": null,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6,
+      "unique": 50,
+      "qualified": 50,
+      "reachable": 9,
+      "passed_judge": 8,
+      "shortlisted": 6,
+      "good@K": 3,
+      "precision@K": 0.5,
+      "mean_score": 0.693,
+      "distinct_orgs": 6,
+      "proof_rate": 0.0,
+      "search_calls": 13,
+      "llm_paid_calls": 5,
+      "llm_usd": 0.0034,
+      "pages_fetched": 76,
+      "seconds": 56.8,
+      "usd_per_good": 0.0055,
+      "shortlist": [
+        {
+          "name": "JetBrains",
+          "org": "JetBrains",
+          "email": "marketing@jetbrains.com",
+          "score": 0.7892,
+          "reasons": [
+            "Creates intelligent development tools and IDEs"
+          ]
+        },
+        {
+          "name": "Codingninjas",
+          "org": "Codingninjas",
+          "email": "contact@codingninjas.com",
+          "score": 0.7252,
+          "reasons": [
+            "Edtech company with structured upskilling courses"
+          ]
+        },
+        {
+          "name": "Masai School",
+          "org": "Masai School",
+          "email": "ihubiitr.programs@masaischool.com",
+          "score": 0.723,
+          "reasons": [
+            "Offers job-ready AI, data science, and tech programs"
+          ]
+        },
+        {
+          "name": "Sai Kiran",
+          "org": "Codegnan",
+          "email": "saikiran@codegnan.com",
+          "score": 0.6817,
+          "reasons": [
+            "Offers finishing schools for students starting tech careers"
+          ]
+        },
+        {
+          "name": "Facets.cloud",
+          "org": "Facets.cloud",
+          "email": "info@facets.cloud",
+          "score": 0.6339,
+          "reasons": [
+            "Transforms DevOps and cloud delivery for tech companies"
+          ]
+        },
+        {
+          "name": "CtrlB",
+          "org": "CtrlB",
+          "email": "hello@ctrlb.ai",
+          "score": 0.6072,
+          "reasons": [
+            "Provides developer tools for logs and metrics"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -20,13 +20,14 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
 from brain import uploads as up
 from brain.context import CampaignContext
 from brain.llm import LLM
-from brain.models import CampaignSpec, Contact, SenderProfile, TargetPersona
+from brain.models import CampaignSpec, Contact, FitCriterion, ProspectProfile, SenderProfile, TargetPersona
 from brain.playbooks import PLAYBOOKS, catalog_text, get_playbook
 from brain.searchplan import search_budget
 from brain.spec import new_campaign_id, sender_from_text
@@ -51,6 +52,11 @@ _SCHEMA = """{
  "target_count": <number of recipients the user wants, or null>,
  "search_queries": ["<6-10 web queries that surface the targets' own websites or curated lists of such targets; never site:linkedin.com>"],
  "lookalike_queries": ["<only if EXAMPLES are given: 2-5 queries to find organisations similar to them>"],
+ "criteria": [{"name": "<2-4 things that make a target GOOD beyond the topic, as checkable facts, e.g. 'has sponsored college tech fests', 'hiring backend engineers', 'invests at pre-seed'>",
+   "signal": "past_sponsorship|hiring|portfolio_fit|recent_coverage|publications|audience|spoke_before|local_business|funding_focus|open_source|topic",
+   "weight": <1-3>, "required": <true only if the user said it is a must>}],
+ "anti_patterns": ["<kinds of organisation/person that look relevant but are poor targets, e.g. 'event agency', 'job board'>"],
+ "event_queries": ["<only when targets are sponsors or speakers: 2-4 queries for SIMILAR PAST EVENTS' sponsor/speaker pages>"],
  "preferred_inboxes": ["<if targets are organisations: shared inbox names that suit this ask, best first>"],
  "sender_facts": ["<facts about the sender or the offer that the USER stated (numbers, achievements, what is offered), one per item, in their words>"],
  "assumptions": ["<everything you inferred that the user did NOT say: the audience, location, roles, counts...>"],
@@ -149,7 +155,7 @@ def _user_block(prompt: str, sender: SenderProfile, extra: str = "") -> str:
 
 def understand(prompt: str, sender: SenderProfile, llm: LLM) -> Dict[str, Any]:
     data = llm.json(system=UNDERSTAND_SYSTEM.replace("{catalog}", catalog_text()), user=_user_block(prompt, sender),
-                    purpose="intake", tier="strong", max_tokens=1800)
+                    purpose="intake", tier="strong", max_tokens=2200)
     return data if isinstance(data, dict) else {}
 
 
@@ -165,7 +171,7 @@ def refine(data: Dict[str, Any], prompt: str, sender: SenderProfile, llm: LLM, *
     if seeds:
         extra += "\nEXAMPLES THE USER CONSIDERS GOOD TARGETS (write lookalike_queries for them):\n" + ", ".join(seeds[:15]) + "\n"
     out = llm.json(system=REFINE_SYSTEM.replace("{catalog}", catalog_text()), user=_user_block(prompt, sender, extra),
-                   purpose="intake_refine", tier="strong", max_tokens=1800)
+                   purpose="intake_refine", tier="strong", max_tokens=2200)
     return out if isinstance(out, dict) and out.get("objective") else data
 
 
@@ -209,6 +215,8 @@ def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, targ
         count = 25
     kind = data.get("target_kind") if data.get("target_kind") in ("person", "org") else pb.target_kind
     return CampaignSpec(
+        profile=_profile(data, persona, pb),
+        event_queries=[str(q) for q in data.get("event_queries") or []][:4],
         id=campaign_id, pack=pb.name, target_kind=kind,
         objective=squash(str(data.get("objective") or ""), 300), ask=squash(str(data.get("ask") or ""), 300),
         persona=TargetPersona(description=squash(str(persona.get("description") or ""), 300),
@@ -227,6 +235,33 @@ def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, targ
     )
 
 
+_SIGNALS = {"past_sponsorship", "hiring", "portfolio_fit", "recent_coverage", "publications", "audience", "spoke_before",
+            "local_business", "funding_focus", "open_source", "topic"}
+_STOP = {"the", "and", "for", "with", "that", "has", "have", "are", "who", "their", "they", "from", "into", "this",
+         "been", "at", "in", "of", "to", "a", "an", "is", "or", "on", "by"}
+
+
+def _profile(data: Dict[str, Any], persona: Dict[str, Any], pb) -> ProspectProfile:
+    """The prospect profile from the intake answer. Criterion terms are the criterion's own content words, so the
+    cheap scorer can check them against evidence; the playbook's defaults are merged in later (brain/fit.py)."""
+    crits = []
+    for c in data.get("criteria") or []:
+        if not isinstance(c, dict) or not str(c.get("name") or "").strip():
+            continue
+        name = squash(str(c["name"]), 120)
+        sig = str(c.get("signal") or "topic")
+        try:
+            weight = max(0.5, min(3.0, float(c.get("weight") or 1)))
+        except (TypeError, ValueError):
+            weight = 1.0
+        terms = [w for w in re.findall(r"[a-z][a-z0-9+-]{2,}", name.lower()) if w not in _STOP][:6]
+        crits.append(FitCriterion(name=name, signal=sig if sig in _SIGNALS else "topic", weight=weight, terms=terms,
+                                  must=bool(c.get("required"))))
+    return ProspectProfile(criteria=crits[:4],
+                           anti_patterns=[squash(str(a), 60).lower() for a in data.get("anti_patterns") or []][:6],
+                           decision_roles=[str(r) for r in persona.get("roles") or []][:8] or list(pb.default_roles[:8]))
+
+
 def card(spec: CampaignSpec, ctx: CampaignContext, max_searches: int) -> str:
     pb = get_playbook(spec.pack)
     where = ", ".join(spec.regions + spec.countries) or "anywhere"
@@ -243,6 +278,12 @@ def card(spec: CampaignSpec, ctx: CampaignContext, max_searches: int) -> str:
     ]
     if spec.timeline:
         lines.append(f"  [bold]When:[/bold] {spec.timeline}")
+    from brain.fit import describe, profile_for
+
+    prof_lines = describe(profile_for(spec, pb))
+    if prof_lines:
+        lines.append("  [bold]A good target (each candidate is checked against this):[/bold]")
+        lines += [f"    • {l}" for l in prof_lines[:8]]
     if spec.exclude_organizations or ctx.exclude_domains or ctx.exclude_emails or ctx.exclude_names:
         n = len(spec.exclude_organizations) + len(ctx.exclude_domains) + len(ctx.exclude_emails) + len(ctx.exclude_names)
         lines.append(f"  [bold]Never contact:[/bold] {n} entries from your instructions and lists")
@@ -256,7 +297,10 @@ def card(spec: CampaignSpec, ctx: CampaignContext, max_searches: int) -> str:
     if ctx.assumptions:
         lines.append("  [bold yellow]Assumptions — correct any that are wrong:[/bold yellow]")
         lines += [f"    • {a}" for a in ctx.assumptions[:8]]
-    tools = ", ".join(pb.sources)
+    from brain.explore import choose_tools
+
+    seed, expand = choose_tools(spec, pb, profile_for(spec, pb), has_seeds=bool(ctx.seed_names))
+    tools = ", ".join(seed + [f"{t} (from the best finds)" for t in expand])
     lines.append(f"\n  [dim]Plan: discover with {tools}; at most {max_searches} web searches; you review every draft.[/dim]")
     return "\n".join(lines)
 

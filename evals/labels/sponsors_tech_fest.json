@@ -1,0 +1,546 @@
+{
+  "scenario": "sponsors_tech_fest",
+  "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). good = you would really email them for this scenario's ask.",
+  "good": [],
+  "bad": [],
+  "candidates": [
+    {
+      "label": "",
+      "name": "OpenBuild",
+      "kind": "org",
+      "org": "OpenBuild",
+      "email": "build@openbuild.xyz",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "OpenBuild is dedicated to providing developers with high-quality, systematic content and activities, bridging the gap between Web2 and Web3. Our goal is to assist developers in transitioning to decent",
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://openbuild.xyz/",
+      "judge_score": 0.7936,
+      "judge_reason": "Dedicated to developers bridging Web2 and Web3"
+    },
+    {
+      "label": "",
+      "name": "Testkube",
+      "kind": "org",
+      "org": "Testkube",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Testkube is the testing platform that orchestrates any automated test, works with any CI/CD tool, and runs inside your own cloud-native infrastructure.",
+        "Sponsor or partner of Sponsors – DeveloperWeek"
+      ],
+      "url": "https://testkube.io/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "HackerRank",
+      "kind": "org",
+      "org": "HackerRank",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "HackerRank is the market-leading coding test and interview solution for hiring developers. Start hiring at the pace of innovation!",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://hackerrank.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "The GitHub Blog",
+      "kind": "org",
+      "org": "The GitHub Blog",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Updates, ideas, and inspiration from GitHub to help developers build and design software.",
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://github.blog/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Make A Difference",
+      "kind": "org",
+      "org": "Make A Difference",
+      "email": "mannat@makeadiff.in",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "MAKE A DIFFERENCE IS AN AWARD-WINNING NON-PROFIT SCALING A REVOLUTIONARY VOLUNTEER-LED MENTORING PROGRAM ACROSS INDIA",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://makeadiff.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Mastra",
+      "kind": "org",
+      "org": "Mastra",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Ship AI agents that reason, remember, and act in TypeScript. Mastra provides memory, tools, MCP, and observability to go from prototype to production.",
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://mastra.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "CodeChef",
+      "kind": "org",
+      "org": "CodeChef",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Learn coding with our free and beginner friendly courses on Python, Java, C, C++, Data structures, Algorithms, SQL. Solve our collection of 1000s of problems to practice coding.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://codechef.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "HackerEarth",
+      "kind": "org",
+      "org": "HackerEarth",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Evaluate humans and AI. Assess real-world skills, run AI interviews, engage 10M+ developers, and benchmark AI models, with built-in proctoring.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://hackerearth.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "IELTS One Skill Retake",
+      "kind": "person",
+      "org": "IDP IELTS India",
+      "email": "ielts.india@idp.com",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "IELTS is the world's leading English-language test for work, study and migration. Learn about IELTS, find prep materials and get your results in one place.",
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://ielts.idp.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Search Internships, Jobs, & Courses",
+      "kind": "org",
+      "org": "Search Internships, Jobs, & Courses",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Internshala is India’s No. 1 career platform, offering 120K+ paid internships, jobs, and online courses. Post a job and hire candidates faster - trusted by 400K+ companies.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://internshala.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "IBM",
+      "kind": "org",
+      "org": "IBM",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "For more than a century, IBM has been a global technology innovator, leading advances in AI, automation and hybrid cloud solutions that help businesses grow.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://ibm.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Eigen Cloud",
+      "kind": "org",
+      "org": "Eigen Cloud",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://docs.eigencloud.xyz/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "My Site 6",
+      "kind": "org",
+      "org": "My Site 6",
+      "email": "starlabsurat@gmail.com",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "We build suborbital launch platforms for microgravity, supersonic, and hypersonic research and testing.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://starlabsurat.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "CONFlux App",
+      "kind": "org",
+      "org": "CONFlux App",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Download CONFlux for iOS and Android - The ultimate mobile app for conference organizers and attendees. Streamline your event experience today!",
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://conflux.events/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "KnowAFest",
+      "kind": "org",
+      "org": "KnowAFest",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Discover college festivals, hackathons, workshops and conferences across India with KnowAFest.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://knowafest.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "FACT CHECK",
+      "kind": "person",
+      "org": "Indiatodaygroup",
+      "email": "factcheck@intoday.com",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "INDIA TODAY GROUP: India Today, Business Today, Aaj Tak, Care Today, Mail Today, Cosmopolitan, Reader's Digest, India Today Conclave",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://indiatodaygroup.com/contact.php",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Savithri Parekh",
+      "kind": "person",
+      "org": "Reliance Industries Limited",
+      "email": "savithri.parekh@ril.com",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Reliance Industries Limited is a Fortune 500 company and the largest private sector corporation in India. Our activities span hydrocarbon exploration and production, petroleum refining and marketing, ",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://ril.com/investors/shareholders-information/investor-contacts",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Service Support",
+      "kind": "person",
+      "org": "Zebronics",
+      "email": "agra.service@zebcare.in",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Zebronics is an Indian Brand helping you in discovering best Soundbars, Home Theaters, Wireless Party Bluetooth Speakers, Headphones, LED Projectors, Gaming & PC Peripherals, Power Banks, LED TV, CCTV",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "http://support.zebronics.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "MetaMask",
+      "kind": "org",
+      "org": "MetaMask",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Buy, sell, swap, earn, and spend BTC, ETH, SOL and more — all in one self-custody crypto wallet. Total control over your assets, trusted by millions of users.",
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": "https://metamask.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "HackersVilla",
+      "kind": "org",
+      "org": "HackersVilla",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "HackersVilla is a leading cybersecurity training platform where we provide Live Trainings in mini batches. Our trainings are led by Industry Experts and provides actual value as we focus on practical ",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://hackersvilla.xyz/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "GrabOn",
+      "kind": "org",
+      "org": "GrabOn",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Find Latest Coupons & Offers For Online Shopping Sites in India. GrabOn Will Ensure You Get The Right Coupon Codes, Promo Codes & Deals For 2026 | SAVE ON EVERYTHING",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://grabon.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "T.I.M.E.",
+      "kind": "org",
+      "org": "T.I.M.E.",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Join T.I.M.E. for classroom and online coaching in CAT, Bank, GATE, GMAT, GRE, SSC, CLAT, IPM, BBA, JEE. AIMCAT mocks, study material and centres across India.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://time4education.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Partner Spotlight",
+      "kind": "person",
+      "org": "Databricks",
+      "email": "partners@databricks.com",
+      "sources": [
+        "events"
+      ],
+      "title": "Partner",
+      "evidence": [
+        "Databricks offers a unified platform for data, analytics and AI. Build better AI with a data-centric approach. Simplify ETL, data warehousing, governance and AI on the Data + AI Platform.",
+        "Sponsor or partner of Sponsors – DeveloperWeek",
+        "From strategic collaborations to co-developed data solutions, these partners are producing real business outcomes with Databricks"
+      ],
+      "url": "https://databricks.com/partners/partner-spotlight",
+      "judge_score": 0.6544,
+      "judge_reason": "Offers data, analytics and AI platform relevant to developers"
+    },
+    {
+      "label": "",
+      "name": "Crusoe",
+      "kind": "org",
+      "org": "Crusoe",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Crusoe provides next-gen AI infrastructure and cloud compute using an energy-first approach. Deploy AI workloads at scale with reliable performance and 24/7 support.",
+        "Sponsor or partner of Sponsors – DeveloperWeek"
+      ],
+      "url": "https://crusoe.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "humans-of-college",
+      "kind": "org",
+      "org": "humans-of-college",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://humansofcollege.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Jamboree Education",
+      "kind": "org",
+      "org": "Jamboree Education",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Jamboree is India's premier institute for GMAT, GRE, SAT, TOEFL and IELTS exam preparation. Expert faculty, personalized coaching, and comprehensive study material. Join us today.",
+        "Sponsor or partner of Sponsors | Aaruush '26 (an event in the target area)"
+      ],
+      "url": "https://jamboreeindia.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Lightsage",
+      "kind": "org",
+      "org": "Lightsage",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Lightsage is the Agent-Led Growth Platform for software companies. Win discovery, recommendations, and adoption across AI agents.",
+        "Sponsor or partner of Sponsors – DeveloperWeek"
+      ],
+      "url": "https://lightsage.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Red Hat",
+      "kind": "org",
+      "org": "Red Hat",
+      "email": "apac@redhat.com",
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Red Hat is the world’s leading provider of enterprise open source solutions, including high-performing Linux, cloud, container, and Kubernetes technologies.",
+        "Sponsor or partner of Sponsors – DeveloperWeek"
+      ],
+      "url": "https://redhat.com/",
+      "judge_score": 0.7116,
+      "judge_reason": "Works on cloud and developer tools"
+    },
+    {
+      "label": "",
+      "name": "The Tata group. Leadership with Trust.",
+      "kind": "org",
+      "org": "The Tata group. Leadership with Trust.",
+      "email": "info@tata.com",
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "The official website for the Tata group, India's only value-based corporation. A visionary, a pioneer, a leader, since 1868",
+        "To this end, we have backed and promoted events in India and abroad that focus on sports, arts and culture. ... Since 2014, TCS has been the title sponsor of what ..."
+      ],
+      "url": "https://www.tata.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Duality",
+      "kind": "org",
+      "org": "Duality",
+      "email": null,
+      "sources": [
+        "events"
+      ],
+      "title": null,
+      "evidence": [
+        "Sponsor or partner of OSEN | Hackathon Support & Student Tech Events in India (an event in the target area)"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    }
+  ]
+}

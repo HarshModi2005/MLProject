@@ -1,0 +1,115 @@
+{
+  "label": "v2_sponsors_probe",
+  "replay": "",
+  "rows": [
+    {
+      "unique": 31,
+      "qualified": 37,
+      "reachable": 7,
+      "passed_judge": 5,
+      "shortlisted": 5,
+      "good@K": 5,
+      "precision@K": 0.833,
+      "mean_score": 0.777,
+      "distinct_orgs": 5,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.2,
+      "search_calls": 26,
+      "llm_paid_calls": 4,
+      "llm_usd": 0.003,
+      "pages_fetched": 130,
+      "seconds": 91.5,
+      "usd_per_good": 0.0058,
+      "llm_by_purpose": {
+        "judge": 2,
+        "triage": 1,
+        "extract_orgs": 1
+      },
+      "by_source": {
+        "events": 31
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "Testkube",
+          "org": "Testkube",
+          "email": "careers@testkube.io",
+          "score": 0.8084,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Works on developer tools and cloud-native infrastructure"
+          ]
+        },
+        {
+          "name": "Partner Spotlight",
+          "org": "Databricks",
+          "email": "partners@databricks.com",
+          "score": 0.795,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Offers data, analytics, AI platform relevant to developers"
+          ]
+        },
+        {
+          "name": "OpenBuild",
+          "org": "OpenBuild",
+          "email": "build@openbuild.xyz",
+          "score": 0.7888,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Focuses on developer content bridging Web2 and Web3"
+          ]
+        },
+        {
+          "name": "Red Hat",
+          "org": "Red Hat",
+          "email": "info-latam@redhat.com",
+          "score": 0.7858,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Provides cloud, container, Kubernetes technologies"
+          ]
+        },
+        {
+          "name": "Storyblok",
+          "org": "Storyblok",
+          "email": "marketing@storyblok.com",
+          "score": 0.7058,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Provides content management system for developers and marketers"
+          ]
+        }
+      ],
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6
+    }
+  ],
+  "summary": {
+    "scenarios": 1,
+    "failed": 0,
+    "good@K": 5,
+    "precision@K": 0.833,
+    "mean_score": 0.777,
+    "distinct_orgs": 5,
+    "proof_rate": 1.0,
+    "reachable": 7,
+    "search_calls": 26,
+    "llm_paid_calls": 4,
+    "llm_usd": 0.003,
+    "seconds": 91.5,
+    "usd_per_good": 0.0058
+  }
+}

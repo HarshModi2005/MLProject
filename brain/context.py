@@ -27,6 +27,7 @@ class QueryLog(BaseModel):
     kind: str = "search"  # search | places | news
     hits: int = 0
     new: int = 0  # new candidates this query added
+    good: int = -1  # how many of those were qualified (fit the prospect profile); -1 = not measured
 
 
 class CampaignContext(BaseModel):
@@ -42,6 +43,9 @@ class CampaignContext(BaseModel):
     style_examples: List[str] = Field(default_factory=list)  # past emails the user liked
     uploads: List[Dict[str, str]] = Field(default_factory=list)  # {"file", "role", "summary"}
     query_log: List[QueryLog] = Field(default_factory=list)
+    # Per discovery tool: {"runs", "cost", "found", "qualified"} — what the adaptive loop allocates budget by.
+    tool_stats: Dict[str, Dict[str, float]] = Field(default_factory=dict)
+    rejected_reasons: List[str] = Field(default_factory=list)  # why the judge turned candidates down (feedback)
     notes: List[str] = Field(default_factory=list)  # things learned during the run
 
     # ── building ─────────────────────────────────────────────────────────────
@@ -74,8 +78,15 @@ class CampaignContext(BaseModel):
             if d and d not in self.seed_domains:
                 self.seed_domains.append(d)
 
-    def log_query(self, query: str, kind: str, hits: int, new: int) -> None:
-        self.query_log.append(QueryLog(query=query, kind=kind, hits=hits, new=new))
+    def log_query(self, query: str, kind: str, hits: int, new: int, good: int = -1) -> None:
+        self.query_log.append(QueryLog(query=query, kind=kind, hits=hits, new=new, good=good))
+
+    def log_tool(self, name: str, cost: float, found: int, qualified: int) -> None:
+        st = self.tool_stats.setdefault(name, {"runs": 0, "cost": 0.0, "found": 0, "qualified": 0})
+        st["runs"] += 1
+        st["cost"] += cost
+        st["found"] += found
+        st["qualified"] += qualified
 
     def note(self, text: str) -> None:
         if text not in self.notes:
@@ -93,7 +104,11 @@ class CampaignContext(BaseModel):
         return None
 
     def productive_queries(self, min_new: int = 2) -> List[QueryLog]:
-        return sorted((q for q in self.query_log if q.new >= min_new), key=lambda q: q.new, reverse=True)
+        """Queries worth building on. Where quality was measured, qualified finds count, not volume."""
+        def yield_of(q: QueryLog) -> int:
+            return q.good if q.good >= 0 else q.new
+
+        return sorted((q for q in self.query_log if yield_of(q) >= min_new), key=yield_of, reverse=True)
 
     def tried(self, query: str) -> bool:
         norm = _norm_query(query)

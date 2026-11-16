@@ -1,0 +1,19 @@
+{
+  "name": "grants_csr_india",
+  "playbook": "grants",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "CSR funding for a coding programme for girls in rural Maharashtra",
+    "ask": "Would your CSR programme consider funding a 12-month coding course for 300 girls in rural Maharashtra?",
+    "persona": {"description": "CSR heads and foundations of companies that fund education and digital skills in India", "roles": ["CSR Head", "Program Officer", "Foundation Director"], "org_types": ["corporate foundation", "CSR team", "philanthropy"]},
+    "topics": ["girls education", "digital literacy", "coding education"],
+    "expanded_terms": ["STEM for girls", "skill development CSR"],
+    "locations": ["Maharashtra, India"],
+    "preferred_inboxes": ["csr", "foundation", "grants", "partnerships"]
+  },
+  "sender": {"name": "Test NGO Lead", "headline": "Founder of a rural education NGO",
+             "summary": "Runs after-school coding clubs in 14 villages near Nashik; 600 students trained since 2022.",
+             "highlights": ["600 students trained since 2022", "12G and 80G registered NGO"]},
+  "facts": ["Coding clubs in 14 villages near Nashik", "600 students trained since 2022"]
+}

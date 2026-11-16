@@ -1,0 +1,215 @@
+{
+  "label": "pre_v3_replay",
+  "replay": "strict",
+  "rows": [
+    {
+      "unique": 298,
+      "qualified": 240,
+      "reachable": 14,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 1.2,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "openalex": 300
+      },
+      "replay_misses": 38,
+      "warnings": [
+        "10 candidates could not be judged and were left out.",
+        "2 candidates could not be judged and were left out."
+      ],
+      "shortlist": [],
+      "name": "academic_gnn",
+      "playbook": "academic",
+      "target": 5
+    },
+    {
+      "unique": 38,
+      "qualified": 41,
+      "reachable": 5,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 3.5,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "places": 28,
+        "orgs": 12
+      },
+      "replay_misses": 27,
+      "warnings": [
+        "5 candidates could not be judged and were left out."
+      ],
+      "shortlist": [],
+      "name": "b2b_dental_bangalore",
+      "playbook": "b2b_sales",
+      "target": 6
+    },
+    {
+      "unique": 22,
+      "qualified": 17,
+      "reachable": 3,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 3.8,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "portfolio": 14,
+        "orgs": 11,
+        "lookalike": 0
+      },
+      "replay_misses": 40,
+      "warnings": [
+        "3 candidates could not be judged and were left out."
+      ],
+      "shortlist": [],
+      "name": "investors_edtech",
+      "playbook": "fundraising",
+      "target": 5
+    },
+    {
+      "unique": 38,
+      "qualified": 38,
+      "reachable": 4,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 7.4,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "orgs": 18,
+        "jobs": 20
+      },
+      "replay_misses": 29,
+      "warnings": [
+        "4 candidates could not be judged and were left out."
+      ],
+      "shortlist": [],
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5
+    },
+    {
+      "unique": 50,
+      "qualified": 50,
+      "reachable": 27,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 9.3,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "podcasts": 26,
+        "news": 24
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "10 candidates could not be judged and were left out."
+      ],
+      "shortlist": [],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    },
+    {
+      "unique": 103,
+      "qualified": 107,
+      "reachable": 12,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 7.5,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "events": 61,
+        "orgs": 42
+      },
+      "replay_misses": 21,
+      "warnings": [
+        "12 candidates could not be judged and were left out.",
+        "1 candidates could not be judged and were left out."
+      ],
+      "shortlist": [],
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6
+    }
+  ],
+  "summary": {
+    "scenarios": 6,
+    "failed": 0,
+    "good@K": 0,
+    "precision@K": 0.0,
+    "mean_score": 0.0,
+    "distinct_orgs": 0,
+    "proof_rate": 0.0,
+    "reachable": 65,
+    "search_calls": 0,
+    "llm_paid_calls": 0,
+    "llm_usd": 0.0,
+    "seconds": 32.7,
+    "usd_per_good": null
+  }
+}

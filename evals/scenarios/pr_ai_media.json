@@ -1,0 +1,18 @@
+{
+  "name": "pr_ai_media",
+  "playbook": "pr_media",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Coverage for the launch of an open-source Indian-language speech model",
+    "ask": "Would you like early access and an interview for a story on the launch?",
+    "persona": {"description": "Tech journalists and podcast hosts covering AI in India", "roles": ["Journalist", "Reporter", "Editor", "Host"]},
+    "topics": ["Indian language AI", "speech recognition"],
+    "expanded_terms": ["open source AI India", "AI startups India"],
+    "locations": ["India"],
+    "preferred_inboxes": ["tips", "news", "editor"]
+  },
+  "sender": {"name": "Test Founder", "headline": "Founder of a speech AI startup",
+             "summary": "Releasing an open-source speech recognition model for 11 Indian languages."},
+  "facts": ["Open-source speech model covering 11 Indian languages", "Launching next month"]
+}

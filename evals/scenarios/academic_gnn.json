@@ -1,0 +1,19 @@
+{
+  "name": "academic_gnn",
+  "playbook": "academic",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "person",
+    "objective": "A summer research internship working on graph neural networks",
+    "ask": "A 2-month summer research internship in your group",
+    "persona": {"description": "Faculty in India who lead groups working on graph neural networks", "roles": ["professor", "assistant professor", "associate professor"]},
+    "topics": ["graph neural networks", "graph representation learning"],
+    "expanded_terms": ["message passing neural networks", "molecular property prediction"],
+    "locations": ["India"],
+    "search_queries": ["graph neural networks faculty India", "graph representation learning professor IIT"]
+  },
+  "sender": {"name": "Test Student", "headline": "Third-year CS undergraduate",
+             "summary": "Built a GNN-based molecule property predictor reaching 0.91 ROC-AUC on Tox21.",
+             "highlights": ["Project: GNN molecule property predictor (PyTorch Geometric), 0.91 ROC-AUC on Tox21"]},
+  "facts": ["Built a GNN-based molecule property predictor reaching 0.91 ROC-AUC on Tox21"]
+}

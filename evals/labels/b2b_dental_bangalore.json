@@ -1,0 +1,490 @@
+{
+  "scenario": "b2b_dental_bangalore",
+  "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). good = you would really email them for this scenario's ask.",
+  "good": [],
+  "bad": [],
+  "candidates": [
+    {
+      "label": "",
+      "name": "Little Pearls Dental Care",
+      "kind": "org",
+      "org": "Little Pearls Dental Care",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Experienced Pediatric Dentists & Orthodontists. Discover compassionate pediatric dentistry and orthodontic care at Little Pearls Dental Clinic in Bangalore.",
+        "Dental clinic, rated 4.9 (1500 reviews)"
+      ],
+      "url": "http://littlepearlsdentalcare.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Excel Dental Care | Jayanagar, Bengaluru",
+      "kind": "org",
+      "org": "Excel Dental Care | Jayanagar, Bengaluru",
+      "email": "1exceldentalcare@gmail.com",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Your Ultimate Smile Destiny . Our team - Chief Orthodontist, Cosmetic Dental Surgeon, Specialist Consultant Dentists and Dental Auxiliaries.",
+        "Orthodontist, rated 4.9 (707 reviews)"
+      ],
+      "url": "https://www.exceldentalcare.in/",
+      "judge_score": 0.8255,
+      "judge_reason": "Dental clinic in Bangalore with specialist dentists"
+    },
+    {
+      "label": "",
+      "name": "Dental Clinic Indiranagar, Bangalore",
+      "kind": "org",
+      "org": "Dental Clinic Indiranagar, Bangalore",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "The best dentist in Whitefield & Indiranagar at Dentalign, your premier dental clinic in Bangalore. Experience top-notch care and advanced treatments today!",
+        "Orthodontist, rated 4.8 (864 reviews)"
+      ],
+      "url": "http://www.dentalign.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dezy (Dental made easy)",
+      "kind": "org",
+      "org": "Dezy (Dental made easy)",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Dezy Dental Care offers expert dental treatments by trusted dentists. From aligners to implants, get advanced care, clear pricing & free consultations.",
+        "Dental clinic, rated 4.8 (2600 reviews)"
+      ],
+      "url": "https://www.dezy.com/clinics/bangalore/best-dental-clinic-bangalore-hsr-layout-sector-1?city=bangalore",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Amaya Dental Clinic",
+      "kind": "org",
+      "org": "Amaya Dental Clinic",
+      "email": "amayadental.ind@gmail.com",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Amaya Dental Clinic is the Best Dental Clinic in Bangalore, offering advanced dental care, painless treatments, and experienced dentists.",
+        "Dental clinic, rated 5.0 (278 reviews)"
+      ],
+      "url": "https://www.amayadental.in/",
+      "judge_score": 0.8256,
+      "judge_reason": "Best dental clinic in Bangalore with experienced dentists"
+    },
+    {
+      "label": "",
+      "name": "Teeth Care Centre Dental Hospital",
+      "kind": "org",
+      "org": "Teeth Care Centre Dental Hospital",
+      "email": "info@teethcarecentre.com",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Teeth Care Centre® | high-end dentistry for 'The Elites' | TCC is Awards Winner ISO 9001:2015 Certified Dental Hospital in Ahmedabad. Best Dentist India.",
+        "Dental clinic, rated 5.0 (6500 reviews)"
+      ],
+      "url": "https://www.teethcarecentre.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Invisalignbracesindia",
+      "kind": "org",
+      "org": "Invisalignbracesindia",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "In LV Dental Square, we have brought together a team of highly qualified dental specialities to bring the best dental treatments available in Dentistry to the customers reaching our clinic.",
+        "Orthodontist, rated 5.0 (100 reviews)"
+      ],
+      "url": "https://www.invisalignbracesindia.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Bangalore Orthodontic & Invisalign Provider",
+      "kind": "org",
+      "org": "Bangalore Orthodontic & Invisalign Provider",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Get a confident smile with Invisalign braces in Whitefield. Consult the best orthodontist in Bangalore for advanced teeth alignment solutions. Book your appointment today!",
+        "Orthodontist, rated 4.8 (109 reviews)"
+      ],
+      "url": "https://bangaloreorthodonticbraces.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Braceportdentistry",
+      "kind": "org",
+      "org": "Braceportdentistry",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Discover top-quality dental care at our Dental Clinic in HSR Layout, Bangalore. we provide expert services to help you achieve a healthy and beautiful smile. Visit us for personalized dental solutions",
+        "Orthodontist, rated 5.0 (158 reviews)"
+      ],
+      "url": "https://braceportdentistry.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dentaldiagnosticcentre",
+      "kind": "org",
+      "org": "Dentaldiagnosticcentre",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "5-Star Rated Dental Clinic | Free Parking Coupons Available at front desk | New COVID-19 protocols followed",
+        "Orthodontist, rated 4.9 (554 reviews)"
+      ],
+      "url": "http://www.dentaldiagnosticcentre.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dentistree Bangalore",
+      "kind": "person",
+      "org": "Dentistree Advanced Dental & Implant Center",
+      "email": "dentistree.bangalore@gmail.com",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Looking for the best dental clinic in Bangalore? Visit Dentistree Bangalore for painless treatments, implants, and expert smile design. Schedule now!",
+        "Dental clinic, rated 4.9 (573 reviews)",
+        "At Dentistree, we bring together specialist dentists in Bangalore dedicated to improving your dental health, enhancing your smile design, and providing world-class care for every patient."
+      ],
+      "url": "https://dentistreebangalore.com/?utm_source=gmb",
+      "judge_score": 0.7777,
+      "judge_reason": "Dental clinic in Bangalore with specialist dentists"
+    },
+    {
+      "label": "",
+      "name": "Geetha Dental Clinic",
+      "kind": "org",
+      "org": "Geetha Dental Clinic",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Geetha Dental Clinic in Basavanagudi, Bangalore offers aligners, braces, orthodontic care, dental implants, root canal treatment, cosmetic dentistry, and complete dental care.",
+        "Dental clinic, rated 5.0 (2100 reviews)"
+      ],
+      "url": "https://geethadentalclinic.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dental Solutions Clinic",
+      "kind": "org",
+      "org": "Dental Solutions Clinic",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Top-rated Dental Clinic in Indiranagar, Bangalore with 25+ years of experience. Trusted by thousands for dental implants, cosmetic & laser dentistry and advanced dental care. Book Now.",
+        "Dental clinic, rated 4.8 (1800 reviews)"
+      ],
+      "url": "https://www.dentalsolutionsclinic.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Apollo Dental",
+      "kind": "org",
+      "org": "Apollo Dental",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Apollo Dental is the leading dental clinic / hospital in India for Implants, Braces, Bridges, Laser RCT, Cosmetic Dentistry & Dental Surgeries.",
+        "Dental clinic, rated 4.9 (455 reviews)"
+      ],
+      "url": "https://apollodental.in/bengaluru/our-clinics",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dentistbangalore",
+      "kind": "org",
+      "org": "Dentistbangalore",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Infinit Dental Solutions in Jayanagar, Bangalore offers dental implants,root canal,smile makeover,Invisalign & cosmetic dentistry.Book your consultation today.",
+        "Dental clinic, rated 4.9 (317 reviews)"
+      ],
+      "url": "https://dentistbangalore.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Chisel Dental Clinic",
+      "kind": "org",
+      "org": "Chisel Dental Clinic",
+      "email": "chiseldentalclinics@gmail.com",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Dental Clinic in koramangala Bangalore provides good services advanced level treatment with best prices. Chisel Dental specialize in Smile Design & Makeovers.",
+        "Dental clinic, rated 4.7 (3200 reviews)"
+      ],
+      "url": "https://www.chiseldental.co.in/",
+      "judge_score": 0.7519,
+      "judge_reason": "Dental clinic in Koramangala Bangalore"
+    },
+    {
+      "label": "",
+      "name": "Drxpro",
+      "kind": "org",
+      "org": "Drxpro",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Karthikeyan V is a leading Implantologist in Bengaluru, providing expert care for patients in Yelahanka New Town. Specializing in Diagnosis and treatment, Information and advice, Health and nutrition ",
+        "Dental clinic, rated 4.6 (1100 reviews)"
+      ],
+      "url": "https://drkarthikeyan.drxpro.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "House of Dentistry",
+      "kind": "org",
+      "org": "House of Dentistry",
+      "email": "info@houseofdentistry.in",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Discover the Best Dental Clinic near Sadashiva Nagar and Malleshwaram at House of Dentistry. Offering comprehensive dental care, from smile makeovers to advanced treatments, ensuring pain-free, qualit",
+        "Dental clinic, rated 5.0 (485 reviews)"
+      ],
+      "url": "http://www.houseofdentistry.in/",
+      "judge_score": 0.7536,
+      "judge_reason": "Dental clinic near Sadashiva Nagar and Malleshwaram Bangalore"
+    },
+    {
+      "label": "",
+      "name": "Narayanadental",
+      "kind": "org",
+      "org": "Narayanadental",
+      "email": "care@narayanadental.com",
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Specialist dental clinic serving Indiranagar, KR Puram & Jayanagar with advanced dentistry, gentle care & modern treatment options.",
+        "Dental clinic, rated 4.9 (263 reviews)"
+      ],
+      "url": "https://www.narayanadental.com/",
+      "judge_score": 0.7461,
+      "judge_reason": "Specialist dental clinic serving Bangalore areas"
+    },
+    {
+      "label": "",
+      "name": "Smilekraft Dental Clinic",
+      "kind": "org",
+      "org": "Smilekraft Dental Clinic",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Get treated for end to end cosmetic dental and oral health problems at Smilekraft Dental Clinic Koramangala so you can resolve your issues quickly.",
+        "Dental clinic, rated 4.9 (822 reviews)"
+      ],
+      "url": "https://smilekraftdc.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dent Ally",
+      "kind": "org",
+      "org": "Dent Ally",
+      "email": null,
+      "sources": [
+        "places"
+      ],
+      "title": null,
+      "evidence": [
+        "Visit Dent Ally, an award-winning multi-speciality dental clinic in Delhi offering dental implants, smile makeovers, Invisalign, RCT and advanced digital care.",
+        "Dental clinic, rated 4.8 (474 reviews)"
+      ],
+      "url": "https://dentally.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Reginoldsdental",
+      "kind": "org",
+      "org": "Reginoldsdental",
+      "email": "regiarthur@hotmail.com",
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Reginolds Dental Clinic is the best multispeciality dental clinic located at KHB Colony, Koramangala 5th Block, Bangalore (Bengaluru), Karnataka , 560095",
+        "Reginolds Dental Clinic is the best multispeciality dental clinic located at KHB Colony, Koramangala 5th Block, Bangalore (Bengaluru), Karnataka , 560095."
+      ],
+      "url": "https://www.reginoldsdental.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dental Sanctuary",
+      "kind": "org",
+      "org": "Dental Sanctuary",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Dental Sanctuary is a multi-speciality dental clinic in Indiranagar, Bangalore, located on 80 Feet Road, HAL 3rd Stage. We provide preventive, restorative, ..."
+      ],
+      "url": "https://www.dentalsanctuary.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Skydentalclinics",
+      "kind": "org",
+      "org": "Skydentalclinics",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "With a strong presence across Bengaluru, our clinics are strategically located in Koramangala, RR Nagar, Kothnur and Sahakara Nagar, making quality dental care ..."
+      ],
+      "url": "https://skydentalclinics.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dental Clinic in Indiranagar, Bangalore",
+      "kind": "org",
+      "org": "Dental Clinic in Indiranagar, Bangalore",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Dental Clinic in Indiranagar, Bangalore. Expert care for check-ups, cleanings, implants … 8th Main Road, HAL 2nd Stage, +91-6366040123. Mon to Sat 10:00AM to 8 ..."
+      ],
+      "url": "https://rootsandgrinsdental.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Dr C Jagadeesh's Dental Clinic",
+      "kind": "org",
+      "org": "Dr C Jagadeesh's Dental Clinic",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "in Indiranagar, Bangalore offers advanced, precise and gentle dental care. Visit us Monday to Saturday, 9 AM to 6 PM, or call us at +91-8197093444."
+      ],
+      "url": "https://www.drcjagadeesh.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Theexcellencedental",
+      "kind": "org",
+      "org": "Theexcellencedental",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Five dental specialties, one address in Indiranagar ・ implants, periodontics, +91 96860 39281 100 Feet Road, Indiranagar, Bangalore ・ all on 100 Feet Road, ..."
+      ],
+      "url": "https://theexcellencedental.com/",
+      "judge_score": null,
+      "judge_reason": null
+    }
+  ]
+}

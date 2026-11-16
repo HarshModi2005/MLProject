@@ -1,0 +1,18 @@
+{
+  "name": "distributors_solar",
+  "playbook": "partnerships",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Distributors for a residential solar inverter in Gujarat",
+    "ask": "Would you consider distributing our residential solar inverters in your region?",
+    "persona": {"description": "Solar equipment distributors, dealers and EPC companies in Gujarat", "roles": ["Owner", "Director", "Business Development", "Purchase Head"], "org_types": ["solar distributor", "solar dealer", "EPC company"]},
+    "topics": ["solar inverter distributor", "rooftop solar dealer", "solar EPC"],
+    "expanded_terms": ["solar panels dealer", "renewable energy distributor"],
+    "locations": ["Gujarat, India"],
+    "preferred_inboxes": ["sales", "info", "business", "purchase"]
+  },
+  "sender": {"name": "Test Manager", "headline": "Channel sales manager at a solar inverter maker",
+             "summary": "Manufacturer of 3-10 kW residential hybrid inverters, BIS certified, 5-year warranty."},
+  "facts": ["3-10 kW hybrid inverters", "BIS certified", "5-year warranty"]
+}

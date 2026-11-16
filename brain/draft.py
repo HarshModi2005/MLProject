@@ -51,6 +51,10 @@ Return JSON: {"subject": "<under 9 words, specific, no clickbait>", "body": "<pa
 
 def salutation(contact: Contact, pack: Pack) -> str:
     if contact.kind == "org":
+        dm = contact.decision_maker or {}
+        first = clean_name(dm.get("name") or "").split()
+        if first:  # found the right person but only the shared inbox: address them through it
+            return f"Hi {first[0]},"
         return f"Hello {contact.name} team,"
     tokens = clean_name(contact.name).split()
     if not tokens:

@@ -14,3 +14,7 @@ __pycache__/
 
 # Brain cache (fetched pages, API and LLM responses)
 .brain_cache.sqlite*
+
+# Benchmark recordings and per-run databases (results JSON is kept)
+evals/cache/
+evals/results/run_*/

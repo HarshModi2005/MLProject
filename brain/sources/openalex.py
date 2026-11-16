@@ -53,6 +53,8 @@ class OpenAlexSource:
         hit = self.cache.get("openalex", key)
         if hit is not None:
             return hit
+        if self.settings.replay:
+            raise RuntimeError(f"replay: OpenAlex {path} not recorded")
         query = dict(params)
         if self.settings.openalex_api_key:
             query["api_key"] = self.settings.openalex_api_key
@@ -124,6 +126,43 @@ class OpenAlexSource:
         institutions = self._institutions(list({p["inst_id"] for p in ranked if p["inst_id"]}))
         return [self._to_contact(p, details.get(p["id"], {}), institutions.get(p["inst_id"] or "", {}))
                 for p in ranked]
+
+    def coauthors(self, seeds: List[tuple], spec: CampaignSpec, years_back: int = 4,
+                  max_authors: int = 80) -> List[Contact]:
+        """Graph expansion: people who recently published WITH known-good researchers (seeds: [(openalex_id, name)]),
+        restricted to the campaign's institutions/countries. Collaborators of a good fit are often good fits too."""
+        filters = [f"from_publication_date:{date.today().year - years_back}-01-01"]
+        inst_ids = self.target_institutions(spec)
+        inst_set = set(inst_ids)
+        seed_ids = {sid for sid, _ in seeds}
+        people: Dict[str, Dict[str, Any]] = {}
+        via: Dict[str, str] = {}
+        for sid, sname in seeds:
+            try:
+                data = self._get("/works", {
+                    "filter": ",".join(filters + [f"author.id:{sid}"]), "per-page": 50,
+                    "select": "id,title,publication_year,primary_location,authorships,abstract_inverted_index"})
+            except Exception as e:
+                log.warning("OpenAlex co-author lookup failed for %s: %s", sid, e)
+                continue
+            before = set(people)
+            for work in data.get("results", []):
+                self._collect(work, f"co-author of {sname}", spec, people, inst_set)
+            for aid in set(people) - before:
+                via[aid] = sname
+        for sid in seed_ids:
+            people.pop(sid, None)
+        ranked = sorted(people.values(), key=lambda p: (p["senior_positions"], len(p["works"])), reverse=True)[:max_authors]
+        details = self._author_details([p["id"] for p in ranked])
+        institutions = self._institutions(list({p["inst_id"] for p in ranked if p["inst_id"]}))
+        out = []
+        for p in ranked:
+            c = self._to_contact(p, details.get(p["id"], {}), institutions.get(p["inst_id"] or "", {}))
+            c.sources = ["coauthors"]
+            c.evidence.append(Evidence(kind="profile", text=f"Publishes with {via.get(p['id'], 'a strong match')}"))
+            c.signals["publications"] = 1.0
+            out.append(c)
+        return out
 
     def target_institutions(self, spec: CampaignSpec) -> List[str]:
         """Institution ids for the regions and organisations named in the spec (empty = no narrowing)."""
@@ -249,6 +288,7 @@ class OpenAlexSource:
             "h_index": float(stats.get("h_index") or 0),
             "latest_year": float(max([w.get("year") or 0 for w in works] or [0])),
         }
+        c.signals["publications"] = min(1.0, len(works) / 3)
         # Students co-author the same papers; a publication track record separates them from group leads.
         c.signals["seniority"] = round(min(1.0, math.log1p(c.signals["h_index"]) / math.log(30)), 3)
         return c

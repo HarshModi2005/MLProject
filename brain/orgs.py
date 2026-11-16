@@ -17,21 +17,23 @@ from __future__ import annotations
 
 import logging
 import re
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlsplit
 
 from brain.discover import rank_hits
-from brain.emailfinder import extract_emails, is_role_address, name_match
+from brain.emailfinder import _patterns, extract_emails, infer_domain_patterns, is_role_address, name_match
 from brain.fetch import Fetcher
 from brain.llm import LLM, LLMError
 from brain.models import CampaignSpec, Contact, EmailCandidate, Evidence
 from brain.packs import Pack
-from brain.pages import classify, directory_contacts, parse, profile_contact
+from brain.pages import ParsedPage, classify, directory_contacts, parse, profile_contact
 from brain.settings import Settings
 from brain.sources.websearch import Hit, WebSearch
 from brain.textutil import (
-    FREE_MAIL, country_from_domain, host_of, region_terms, registrable_domain, squash, to_country_code,
+    FREE_MAIL, clean_name, country_from_domain, host_of, looks_like_person_name, region_terms, registrable_domain,
+    squash, to_country_code,
 )
 
 log = logging.getLogger("brain.orgs")
@@ -151,45 +153,84 @@ def _orgs_from_list_page(html: str, url: str, spec: CampaignSpec, llm: LLM) -> L
 
 def discover_orgs(spec: CampaignSpec, pack: Pack, search: WebSearch, fetcher: Fetcher, llm: Optional[LLM],
                   settings: Settings, planner: Optional["SearchPlanner"] = None,
-                  max_list_pages: int = 8) -> Tuple[List[Contact], Dict[str, int]]:
-    """Organisations from web search. Each query's results are processed at once (own sites kept, list pages
-    read) so the planner knows what every query yielded and can stop as soon as there are enough."""
+                  max_list_pages: int = 8, queries: Optional[List[str]] = None,
+                  budget: Optional[int] = None) -> Tuple[List[Contact], Dict[str, int]]:
+    """Organisations from web search. Each query's results are triaged (own site / list / event / article),
+    processed at once (own sites kept, list and event pages read for names) and scored against the prospect
+    profile, so the planner knows how many QUALIFIED organisations every query yielded and stops as soon as
+    there are enough. `queries` runs exactly those (lookalike / feedback rounds); `budget` caps search calls."""
+    from brain.channels import _place_terms, orgs_from_event_page
     from brain.context import CampaignContext
+    from brain.fit import profile_for, promising
     from brain.searchplan import SearchPlanner
+    from brain.triage import triage
 
-    stats = {"queries": 0, "hits": 0, "org_sites": 0, "list_pages": 0, "orgs_from_lists": 0}
+    stats = {"queries": 0, "hits": 0, "org_sites": 0, "list_pages": 0, "orgs_from_lists": 0, "event_pages": 0,
+             "orgs_from_events": 0, "articles_skipped": 0, "irrelevant_skipped": 0, "qualified": 0}
     if not search.available:
         return [], stats
     planner = planner or SearchPlanner(spec, pack, CampaignContext(), llm)
+    prof = profile_for(spec, pack)
     orgs: Dict[str, Contact] = {}
+    good: set = set()
     seen_urls: set = set()
+    start_calls = search.calls
+    triage_llm = llm if getattr(settings, "triage_llm", True) else None
 
-    def add(c: Contact) -> bool:
+    def add(c: Contact) -> Tuple[bool, bool]:
         key = c.org_domain or c.name.lower()
         if key in orgs:
             orgs[key].evidence += [e for e in c.evidence if e.text not in {x.text for x in orgs[key].evidence}]
-            return False
+            for k, v in c.signals.items():
+                orgs[key].signals[k] = max(orgs[key].signals.get(k, 0.0), v)
+            if key not in good and promising(orgs[key], prof):
+                good.add(key)
+            return False, False
         orgs[key] = c
-        return True
+        ok = promising(c, prof)
+        if ok:
+            good.add(key)
+        return True, ok
 
-    def execute(query: str) -> Tuple[int, int]:
+    def execute(query: str) -> Tuple[int, int, int]:
         stats["queries"] += 1
         hits = [h for h in search.search(query, n=10) if h.url not in seen_urls]
         seen_urls.update(h.url for h in hits)
         stats["hits"] += len(hits)
-        new = 0
+        new = qualified = 0
         lists: List[Hit] = []
-        for _, h in rank_hits(hits, spec, pack):
-            dom = registrable_domain(h.url)
-            if is_aggregator(dom) or _LIST_TITLE.search(h.title or ""):
+        events: List[Hit] = []
+        ranked = [h for _, h in rank_hits(hits, spec, pack)]
+        for h, kind in triage(ranked, spec, is_aggregator, triage_llm, stats):
+            if kind == "list":
                 lists.append(h)
+                continue
+            if kind == "event":
+                events.append(h)
+                continue
+            if kind in ("article", "irrelevant"):
+                stats[f"{kind}s_skipped" if kind == "article" else "irrelevant_skipped"] += 1
+                continue
+            dom = registrable_domain(h.url)
+            if is_aggregator(dom):
                 continue
             home = f"{urlsplit(h.url).scheme or 'https'}://{host_of(h.url)}/"
             c = _org_contact(_org_name_from_title(h.title, dom), dom, home, h.snippet)
             c.add_url(h.url)
-            if add(c):
-                new += 1
-                stats["org_sites"] += 1
+            is_new, ok = add(c)
+            new += is_new
+            qualified += is_new and ok
+            stats["org_sites"] += is_new
+        for h in events[:2]:  # sponsors / partners of a similar event: proof of past sponsorship, no LLM
+            page = fetcher.get(h.url)
+            if not page.ok:
+                continue
+            stats["event_pages"] += 1
+            for c in orgs_from_event_page(page.html, page.url, h.title, place_terms=_place_terms(spec)):
+                is_new, ok = add(c)
+                new += is_new
+                qualified += is_new and ok
+                stats["orgs_from_events"] += is_new
         if llm is not None and llm.available:
             for h in lists[:2]:  # the two most relevant list pages per query
                 if stats["list_pages"] >= max_list_pages:
@@ -204,17 +245,25 @@ def discover_orgs(spec: CampaignSpec, pack: Pack, search: WebSearch, fetcher: Fe
                     break
                 stats["list_pages"] += 1
                 for c in found:
-                    if add(c):
-                        new += 1
-                        stats["orgs_from_lists"] += 1
-        return len(hits), new
+                    is_new, ok = add(c)
+                    new += is_new
+                    qualified += is_new and ok
+                    stats["orgs_from_lists"] += is_new
+        return len(hits), new, qualified
 
-    planner.run(execute, have=lambda: len(orgs), budget_left=lambda: search.remaining - 2, kind="search")
+    def budget_left() -> int:
+        left = search.remaining - 2
+        if budget is not None:
+            left = min(left, budget - (search.calls - start_calls))
+        return left
+
+    planner.run(execute, have=lambda: len(good), budget_left=budget_left, kind="search", queries=queries)
+    stats["qualified"] = len(good)
     return list(orgs.values()), stats
 
 
 def discover_places(spec: CampaignSpec, pack: Pack, search: WebSearch, planner: "SearchPlanner",
-                    gl: str = "") -> Tuple[List[Contact], Dict[str, int]]:
+                    gl: str = "", budget: Optional[int] = None) -> Tuple[List[Contact], Dict[str, int]]:
     """Local businesses from Google Maps: one call returns ~20 businesses with website and address."""
     stats = {"queries": 0, "places": 0, "with_website": 0}
     orgs: Dict[str, Contact] = {}
@@ -234,22 +283,52 @@ def discover_places(spec: CampaignSpec, pack: Pack, search: WebSearch, planner: 
             c = _org_contact(p.name, dom, p.website, about or p.name, location=p.address, source="places")
             if p.reviews:
                 c.signals["reviews"] = float(p.reviews)
+            c.signals["local_business"] = 1.0  # a Maps listing in the right category is direct proof
             orgs[dom] = c
             new += 1
         stats["with_website"] = len(orgs)
         return len(found), new
 
-    planner.run(execute, have=lambda: len(orgs), budget_left=lambda: search.remaining - 2, kind="places",
-                first_round_max=6)
+    start = search.calls
+
+    def budget_left() -> int:
+        left = search.remaining - 2
+        return min(left, budget - (search.calls - start)) if budget is not None else left
+
+    planner.run(execute, have=lambda: len(orgs), budget_left=budget_left, kind="places", first_round_max=6)
     return list(orgs.values()), stats
 
 
 # ── enrichment ───────────────────────────────────────────────────────────────
 
-def _inbox_rank(address: str, preferred: List[str]) -> Optional[int]:
-    """Lower is better; None means this address must not be used."""
+# Role words hiding inside one-token local parts ("mediarelations@", "factcheck@", "pr@"): never an owner's address.
+_FUNCTION_IN_LOCAL = re.compile(r"^(pr|ir|cs)$|media|relation|press|news|fact|check|support|sales|career|recruit|"
+                                r"admin|office|contact|enquir|inquir|market|partner|invest|legal|help|service|feedback|"
+                                r"desk|editor|webmaster|booking|order|account|billing|info", re.I)
+
+GENERIC_INBOXES = {"hello", "hi", "contact", "contactus", "info", "enquiry", "enquiries", "inquiry", "team", "mail",
+                   "office", "admin", "business", "biz"}
+# Regional inboxes ("info-latam@") reach the wrong team unless the campaign targets that region.
+_REGION_TOKENS = {
+    "latam": {"BR", "MX", "AR", "CL", "CO", "PE"}, "emea": {"GB", "DE", "FR", "NL", "AE", "ZA", "ES", "IT", "SE", "IE"},
+    "apac": {"IN", "SG", "AU", "JP", "ID", "MY", "PH", "VN", "TH", "KR", "NZ", "HK"}, "americas": {"US", "CA", "BR", "MX"},
+    "mena": {"AE", "SA", "EG", "QA"}, "anz": {"AU", "NZ"}, "eu": {"DE", "FR", "NL", "ES", "IT", "IE", "SE"},
+    "europe": {"DE", "FR", "NL", "ES", "IT", "IE", "SE", "GB"}, "us": {"US"}, "usa": {"US"}, "uk": {"GB"},
+    "india": {"IN"}, "sg": {"SG"}, "de": {"DE"}, "fr": {"FR"}, "br": {"BR"}, "mx": {"MX"}, "jp": {"JP"}, "au": {"AU"},
+    "ca": {"CA"},
+}
+
+
+def _inbox_rank(address: str, preferred: List[str], countries: List[str] = ()) -> Optional[int]:
+    """Lower is better; None means this address must not be used. With `preferred` set, a shared inbox for another
+    function (careers@ for a sponsorship ask) is refused; generic ones (hello@, info@) stay acceptable."""
     tokens = [t for t in re.split(r"[._\-+]", address.split("@")[0].lower()) if t]
     if not tokens or any(t in NEVER_INBOXES for t in tokens) and not any(t in preferred for t in tokens):
+        return None
+    if preferred and not any(t in preferred or t in GENERIC_INBOXES for t in tokens) and \
+            any(t in DEFAULT_INBOXES for t in tokens):
+        return None
+    if countries and any(t in _REGION_TOKENS and not (_REGION_TOKENS[t] & set(countries)) for t in tokens):
         return None
     order = [p.lower() for p in preferred] + [d for d in DEFAULT_INBOXES if d not in preferred]
     ranks = [order.index(t) for t in tokens if t in order]
@@ -264,13 +343,61 @@ def _role_fits(title: Optional[str], roles: List[str]) -> bool:
 
 
 class OrgEnricher:
-    def __init__(self, fetcher: Fetcher, search: WebSearch, settings: Settings):
+    def __init__(self, fetcher: Fetcher, search: WebSearch, settings: Settings, find_people: bool = False,
+                 max_people_searches: int = 6):
         self.fetcher, self.search, self.settings = fetcher, search, settings
+        self.find_people = find_people
+        self.max_people_searches = max_people_searches
+        self._people_searches = 0
+        self._resolves = 0
+        self.max_resolves = 8
+        self._lock = threading.Lock()
+        self._pending: Dict[int, tuple] = {}  # organisations waiting for a decision-maker search (enrich_all)
         self.stats = {"orgs_read": 0, "sites_resolved": 0, "person_contacts": 0, "inbox_contacts": 0,
-                      "site_contacts": 0, "no_contact": 0}
+                      "site_contacts": 0, "no_contact": 0, "decision_maker_searches": 0, "decision_makers_found": 0,
+                      "decision_makers_emailed": 0}
+
+    def _find_decision_maker(self, org: Contact, roles: List[str], site_people: List[Contact]) -> Optional[Contact]:
+        """Search for the person in the right role at this organisation. Their name and title are recorded on the
+        organisation (so the email can address them) even when only the shared inbox is known; a personal
+        contact is returned only when the address follows a convention confirmed on the organisation's site."""
+        with self._lock:
+            if self._people_searches >= self.max_people_searches or self.search.remaining <= 4:
+                return None
+            self._people_searches += 1
+            self.stats["decision_maker_searches"] += 1
+        top = [r for r in roles[:3] if r]
+        query = f'"{org.name}" ' + " OR ".join(f'"{r}"' for r in top)
+        hits = self.search.search(query, n=8, raw=True)
+        person = people_from_serp(hits, org.name, top)
+        if not person:
+            return None
+        name, title, url = person
+        self.stats["decision_makers_found"] += 1
+        org.decision_maker = {"name": name, "title": title, "source": url}
+        patterns = infer_domain_patterns(site_people, min_support=2)
+        hit = next(((d, pn) for d, pn in patterns.items() if registrable_domain(d) == org.org_domain), None)
+        if not hit:
+            return None
+        domain, (pname, support) = hit
+        local = _patterns(name).get(pname)
+        if not local:
+            return None
+        c = Contact(kind="person", name=name, title=title, org=org.name, org_domain=org.org_domain,
+                    country=org.country, location_text=org.location_text, urls=[url] + org.urls,
+                    evidence=list(org.evidence), bio=org.bio, sources=org.sources + ["decision_maker"],
+                    flags=org.flags + ["email_from_pattern"], signals=dict(org.signals))
+        c.add_email(EmailCandidate(address=f"{local}@{domain}", confidence=0.7 if support >= 3 else 0.62,
+                                   method="pattern_confirmed", source_url=url))
+        self.stats["decision_makers_emailed"] += 1
+        return c
 
     def _resolve_site(self, org: Contact, spec: CampaignSpec) -> None:
-        """Find the official website of an organisation known only by name (one search)."""
+        """Find the official website of an organisation known only by name (one search, capped per campaign)."""
+        with self._lock:
+            if self._resolves >= self.max_resolves or not _plausible_org_name(org.name):
+                return
+            self._resolves += 1
         place = (spec.regions or [""])[0]
         hits = self.search.search(f'"{org.name}" {place} official website', n=5)
         tokens = [t for t in re.findall(r"[a-z0-9]+", org.name.lower()) if len(t) > 2]
@@ -286,23 +413,17 @@ class OrgEnricher:
                 self.stats["sites_resolved"] += 1
                 return
 
-    def enrich(self, org: Contact, spec: CampaignSpec, roles: List[str]) -> Contact:
-        if not org.org_domain:
-            self._resolve_site(org, spec)
-        if not org.org_domain:
-            org.flags.append("no_website")
-            return org
+    def read_home(self, org: Contact) -> Optional[Tuple["ParsedPage", str]]:
+        """Fetch and read an organisation's homepage: real name, description, hiring signal. Cached, so the
+        light read before ranking and the full enrichment after it pay for the page once."""
         home = next((u for u in org.urls if registrable_domain(u) == org.org_domain and urlsplit(u).path in ("", "/")),
                     f"https://{org.org_domain}/")
         page = self.fetcher.get(home)
         if not page.ok and "//www." not in home:
             page = self.fetcher.get(home.replace("://", "://www.", 1))
         if not page.ok:
-            org.flags.append("site_unreachable")
-            return org
-        self.stats["orgs_read"] += 1
+            return None
         parsed = parse(page.html, page.url)
-        pages = [parsed]
         soup = parsed.soup
         meta = None
         if soup is not None:
@@ -319,14 +440,58 @@ class OrgEnricher:
                     meta = squash(tag["content"], 300)
                     break
         description = meta or next((squash(p) for p in parsed.text.split("\n") if len(p.strip()) > 80), "")
-        if description:
+        if description and description[:300] not in {e.text for e in org.evidence}:
             org.bio = description[:400]
             org.evidence.insert(0, Evidence(kind="profile", text=description[:300], url=page.url))
+        hiring = hiring_signal(parsed)
+        if hiring:
+            org.signals["hiring"] = max(org.signals.get("hiring", 0.0), hiring)
+        return parsed, page.url
 
+    def light_read(self, orgs: List[Contact], spec: CampaignSpec, limit: int) -> int:
+        """Homepage-only read of the first `limit` organisations, before pre-ranking, so ranking sees what the
+        organisation says about itself instead of a search snippet. Returns how many were read."""
+        todo = [o for o in orgs if o.kind == "org" and o.org_domain and "light_read" not in o.flags][:limit]
+
+        def one(o: Contact) -> bool:
+            try:
+                got = self.read_home(o)
+            except Exception as e:
+                log.warning("light read failed for %s: %s", o.org_domain, e)
+                return False
+            o.flags.append("light_read")
+            if got:
+                low = got[0].text.lower()
+                places = [r for r in spec.regions if any(t in low for t in region_terms(r))]
+                if places and not o.location_text:
+                    o.location_text = ", ".join(places)
+            return bool(got)
+
+        with ThreadPoolExecutor(max_workers=max(1, self.settings.fetch_workers)) as ex:
+            return sum(ex.map(one, todo))
+
+    def enrich(self, org: Contact, spec: CampaignSpec, roles: List[str], defer_dm: bool = False) -> Contact:
+        """Read the organisation's site and choose who to write to. With `defer_dm`, an organisation that needs a
+        decision-maker search is parked (see enrich_all) instead of searching right away, so the capped searches
+        go to the best-ranked organisations in order rather than to whichever thread gets there first."""
+        if "channel_verified" in org.flags and org.emails:
+            return org  # the channel already gave a published address (e.g. a podcast feed): nothing to look up
+        if not org.org_domain:
+            self._resolve_site(org, spec)
+        if not org.org_domain:
+            org.flags.append("no_website")
+            return org
+        got = self.read_home(org)
+        if not got:
+            org.flags.append("site_unreachable")
+            return org
+        self.stats["orgs_read"] += 1
+        parsed, page_url = got
+        pages = [parsed]
         # Follow the few internal pages most likely to name people or give contact details.
         scored: Dict[str, int] = {}
         for href, text in parsed.nav_links:
-            if registrable_domain(href) != org.org_domain or _AVOID.search(href) or href.rstrip("/") == page.url.rstrip("/"):
+            if registrable_domain(href) != org.org_domain or _AVOID.search(href) or href.rstrip("/") == page_url.rstrip("/"):
                 continue
             score = max((w for w, rx in _PAGE_HINTS if rx.search(href) or rx.search(text)), default=0)
             if score:
@@ -376,24 +541,47 @@ class OrgEnricher:
                 best_person = (person, good)
                 if _role_fits(person.title, roles):
                     break
-        if best_person:
-            person, good = best_person
-            c = Contact(kind="person", name=person.name, title=person.title, org=org.name, org_domain=org.org_domain,
-                        country=org.country, location_text=org.location_text, urls=person.urls + org.urls,
-                        evidence=org.evidence + person.evidence, bio=org.bio, sources=org.sources, flags=org.flags)
-            for e in good:
-                c.add_email(e)
-            self.stats["person_contacts"] += 1
-            return c
+        if best_person and (_role_fits(best_person[0].title, roles) or not self.find_people):
+            return self._person_contact(org, best_person)
 
-        # 2. The organisation's shared inbox, chosen to suit the ask (partnerships@ for sponsorship, ...).
+        # 2. Nobody in the right role on the site: look for the decision-maker by role (one search). A personal
+        #    address is used only when the organisation's own convention is confirmed by people on its site.
+        if self.find_people and roles:
+            if defer_dm:
+                with self._lock:
+                    self._pending[id(org)] = (people, emails, best_person)
+                return org
+            dm = self._find_decision_maker(org, roles, people)
+            if dm is not None:
+                return dm
+        return self._fallback(org, spec, emails, best_person)
+
+    def _person_contact(self, org: Contact, best_person) -> Contact:
+        person, good = best_person
+        c = Contact(kind="person", name=person.name, title=person.title, org=org.name, org_domain=org.org_domain,
+                    country=org.country, location_text=org.location_text, urls=person.urls + org.urls,
+                    evidence=org.evidence + person.evidence, bio=org.bio, sources=org.sources, flags=org.flags,
+                    signals=dict(org.signals))
+        for e in good:
+            c.add_email(e)
+        self.stats["person_contacts"] += 1
+        return c
+
+    def _fallback(self, org: Contact, spec: CampaignSpec, emails: Dict[str, str], best_person) -> Contact:
+        """No decision-maker with an address: someone reachable, else the right shared inbox, else the owner's."""
+        # Someone reachable at the organisation, even if not in the ideal role — only when the address is clearly
+        # theirs (a page title such as "Partner Spotlight" can look like a name and half-match partners@).
+        if best_person and any(name_match(best_person[0].name, e.address) == 1.0 for e in best_person[1]):
+            return self._person_contact(org, best_person)
+
+        # 3. The organisation's shared inbox, chosen to suit the ask (partnerships@ for sponsorship, ...).
         preferred = [p.lower() for p in spec.preferred_inboxes]
         candidates = []
         for addr, src in emails.items():
             dom = registrable_domain(addr.split("@")[1])
             if dom != org.org_domain:
                 continue
-            rank = _inbox_rank(addr, preferred)
+            rank = _inbox_rank(addr, preferred, spec.countries)
             if rank is not None and is_role_address(addr) or rank is not None and rank < len(preferred):
                 candidates.append((rank, addr, src))
         if candidates:
@@ -402,8 +590,9 @@ class OrgEnricher:
             self.stats["inbox_contacts"] += 1
             return org
 
-        # 3. Small organisations often publish one personal-looking address (the owner's): use it if it is the only one.
-        personal = [a for a in emails if not is_role_address(a) and _inbox_rank(a, preferred) is None
+        # 4. Small organisations often publish one personal-looking address (the owner's): use it if it is the only one.
+        personal = [a for a in emails if not is_role_address(a) and not _FUNCTION_IN_LOCAL.search(a.split("@")[0])
+                    and _inbox_rank(a, preferred, spec.countries) is None
                     and registrable_domain(a.split("@")[1]) in (org.org_domain, *FREE_MAIL)]
         if len(personal) == 1:
             org.add_email(EmailCandidate(address=personal[0], confidence=0.65, method="site", source_url=emails[personal[0]]))
@@ -413,21 +602,75 @@ class OrgEnricher:
         return org
 
     def enrich_all(self, orgs: List[Contact], spec: CampaignSpec, pack: Pack) -> List[Contact]:
-        roles = spec.persona.roles or pack.default_roles
+        roles = spec.profile.decision_roles or spec.persona.roles or pack.default_roles
 
         def one(o: Contact) -> Contact:
             try:
-                return self.enrich(o, spec, roles)
+                return self.enrich(o, spec, roles, defer_dm=True)
             except Exception as e:  # one broken site must not abort the batch
                 log.warning("org enrichment failed for %s: %s", o.name, e)
                 o.flags.append("enrich_error")
                 return o
 
+        # Sites are read in parallel; the capped decision-maker searches then run in rank order (deterministic).
         with ThreadPoolExecutor(max_workers=max(1, self.settings.fetch_workers)) as ex:
-            return list(ex.map(one, orgs))
+            out = list(ex.map(one, orgs))
+        for i, o in enumerate(out):
+            parked = self._pending.pop(id(o), None)
+            if parked is None:
+                continue
+            people, emails, best_person = parked
+            try:
+                dm = self._find_decision_maker(o, roles, people)
+                out[i] = dm if dm is not None else self._fallback(o, spec, emails, best_person)
+            except Exception as e:
+                log.warning("decision-maker step failed for %s: %s", o.name, e)
+                o.flags.append("enrich_error")
+        return out
 
 
 def _country_names() -> Dict[str, str]:
     from brain.textutil import COUNTRY_CODES
 
     return {k: v for k, v in COUNTRY_CODES.items() if len(k) > 3}
+
+
+_ATS = ("greenhouse.io", "lever.co", "ashbyhq.com", "workable.com", "smartrecruiters.com", "keka.com", "darwinbox",
+        "zohorecruit", "freshteam.com", "recruitee.com", "breezy.hr", "wellfound.com/company")
+_CAREERS = re.compile(r"\b(careers?|jobs|we'?re hiring|join (us|our team)|open (roles|positions))\b", re.I)
+
+
+def hiring_signal(page: ParsedPage) -> float:
+    """1.0 if the site links to a job board (open roles exist), 0.5 if it has a careers page, else 0."""
+    links = page.nav_links + page.links
+    if any(any(a in href.lower() for a in _ATS) for href, _ in links):
+        return 1.0
+    if any(_CAREERS.search(text or "") or re.search(r"/(careers?|jobs)(/|$)", href.lower()) for href, text in links):
+        return 0.5
+    return 0.0
+
+
+_SERP_SPLIT = re.compile(r"\s+[-–—|·]\s+|\s+at\s+|,\s+")
+
+
+def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str]]:
+    """A (name, title, url) from search-result titles like "Priya Nair - Head of Partnerships - DevToolCo".
+    Only result titles/snippets are read (no profile pages are fetched), and the organisation must be named."""
+    org_tokens = [t for t in re.findall(r"[a-z0-9]+", org_name.lower()) if len(t) > 2]
+    for h in hits:
+        title = (h.title or "").replace("| LinkedIn", "").replace("LinkedIn", "")
+        blob = (title + " " + (h.snippet or "")).lower()
+        if org_tokens and not any(t in blob for t in org_tokens):
+            continue
+        parts = [p.strip() for p in _SERP_SPLIT.split(title) if p.strip()]
+        if len(parts) < 2:
+            continue
+        name = clean_name(parts[0])
+        if not looks_like_person_name(name) or any(t in name.lower() for t in org_tokens):
+            continue
+        role = next((p for p in parts[1:] if _role_fits(p, roles)), None)
+        if role is None:
+            role = next((r for r in roles if r.lower() in blob), None)
+        if role:
+            return name, squash(role, 80), h.url
+    return None

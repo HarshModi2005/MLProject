@@ -81,7 +81,7 @@ class Settings:
     user_agent: str = field(default_factory=lambda: os.getenv("BRAIN_USER_AGENT", "OutreachResearchBot/0.1"))
     per_host_delay: float = field(default_factory=lambda: _float("BRAIN_PER_HOST_DELAY", 1.0))
     fetch_workers: int = field(default_factory=lambda: _int("BRAIN_FETCH_WORKERS", 8))
-    max_page_fetches: int = field(default_factory=lambda: _int("BRAIN_MAX_PAGE_FETCHES", 250))
+    max_page_fetches: int = field(default_factory=lambda: _int("BRAIN_MAX_PAGE_FETCHES", 400))
 
     # Ranking
     embeddings: str = field(default_factory=lambda: os.getenv("BRAIN_EMBEDDINGS", "lexical"))  # lexical | sentence-transformers
@@ -89,3 +89,17 @@ class Settings:
     max_per_org: int = field(default_factory=lambda: _int("BRAIN_MAX_PER_ORG", 3))
     judge_batch_size: int = field(default_factory=lambda: _int("BRAIN_JUDGE_BATCH", 8))
     max_extract_calls: int = field(default_factory=lambda: _int("BRAIN_MAX_EXTRACT_CALLS", 15))
+
+    # Discovery v2
+    # One batched fast LLM call per query settles search hits the heuristics cannot place (own site / list /
+    # article). Set to 0 to use heuristics only.
+    triage_llm: bool = field(default_factory=lambda: os.getenv("BRAIN_TRIAGE_LLM", "1") not in ("0", "false", "no"))
+    light_read_factor: int = field(default_factory=lambda: _int("BRAIN_LIGHT_READ_FACTOR", 3))  # homepages read per target
+    max_people_searches: int = field(default_factory=lambda: _int("BRAIN_MAX_PEOPLE_SEARCHES", 6))
+    explore_rounds: int = field(default_factory=lambda: _int("BRAIN_EXPLORE_ROUNDS", 3))
+    backfill: bool = field(default_factory=lambda: os.getenv("BRAIN_BACKFILL", "1") not in ("0", "false", "no"))
+    use_memory: bool = field(default_factory=lambda: os.getenv("BRAIN_MEMORY", "1") not in ("0", "false", "no"))
+
+    # Replay (benchmarks): "" = live; "replay" = network answers only from the cache (misses are skipped, never
+    # fetched), LLM calls still allowed; "strict" = LLM calls also only from the cache.
+    replay: str = field(default_factory=lambda: os.getenv("BRAIN_REPLAY", "").lower())

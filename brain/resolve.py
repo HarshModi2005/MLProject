@@ -62,6 +62,8 @@ def strong_keys(c: Contact) -> List[str]:
     person's name or came from a source that ties it to them (ORCID, the user's own list); otherwise one
     mis-attributed address would chain unrelated people into a single record."""
     keys = list(c.keys)
+    if c.kind == "org" and c.org_domain:
+        keys.append(f"domain:{registrable_domain(c.org_domain)}")  # one website, one organisation
     for e in c.emails:
         if e.method == "pattern" or e.confidence < 0.8:
             continue
@@ -131,7 +133,7 @@ def resolve(contacts: Iterable[Contact]) -> List[Contact]:
             j = by_key.get(k)
             if j is None:
                 by_key[k] = i
-            elif k.startswith(("orcid:", "openalex:")) or names_compatible(contacts[j].name, c.name):
+            elif k.startswith(("orcid:", "openalex:", "domain:")) or names_compatible(contacts[j].name, c.name):
                 union(i, j)  # a shared email alone never merges two different names
 
     # Fuzzy pass, blocked by surname so it stays near-linear.

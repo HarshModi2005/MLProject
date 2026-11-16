@@ -55,6 +55,7 @@ class Fetcher:
         self._host_last: Dict[str, float] = {}
         self._lock = threading.Lock()
         self.fetched = 0  # network fetches this run (cache hits excluded)
+        self.replay_misses = 0
 
     def _host_lock(self, host: str) -> threading.Lock:
         with self._lock:
@@ -85,6 +86,9 @@ class Fetcher:
         cached = self.cache.get("page", url)
         if cached is not None:
             return Page(url, cached["status"], cached.get("html", ""), cached.get("error", ""))
+        if self.settings.replay:
+            self.replay_misses += 1
+            return Page(url, 0, error="replay: not recorded")
         if self.fetched >= self.settings.max_page_fetches:
             return Page(url, 0, error="page fetch budget exhausted")
 
@@ -121,11 +125,34 @@ class Fetcher:
             ctype = r.headers.get("content-type", "")
             if r.status_code != 200:
                 return Page(url, r.status_code, error=f"HTTP {r.status_code}")
-            if "html" not in ctype and "text" not in ctype:
+            if "html" not in ctype and "text" not in ctype and "xml" not in ctype:  # xml: RSS feeds
                 return Page(url, r.status_code, error=f"not html ({ctype})")
             return Page(url, 200, r.text[:MAX_BYTES])
         log.debug("fetch failed %s: %s", url, err)
         return Page(url, 0, error=err or "fetch failed")
+
+    def get_json(self, url: str, params: Optional[Dict] = None, ttl: float = 3 * 86400,
+                 headers: Optional[Dict[str, str]] = None) -> Optional[object]:
+        """A public JSON API (job boards, iTunes directory). Cached; None on any failure. Not robots-gated:
+        these are documented APIs meant for programmatic use, not pages. `headers` (e.g. an API key) are
+        sent but are not part of the cache key."""
+        key = Cache.key(url, params or {})
+        cached = self.cache.get("api", key)
+        if cached is not None:
+            return cached.get("data")
+        if self.settings.replay:
+            self.replay_misses += 1
+            return None
+        if self.fetched >= self.settings.max_page_fetches:
+            return None
+        self.fetched += 1
+        try:
+            r = self.client.get(url, params=params, headers={"Accept": "application/json", **(headers or {})})
+            data = r.json() if r.status_code == 200 else None
+        except (httpx.HTTPError, ValueError):
+            data = None
+        self.cache.set("api", key, {"data": data}, ttl=ttl if data is not None else 3600)
+        return data
 
     def get_many(self, urls: Iterable[str]) -> List[Page]:
         urls = list(dict.fromkeys(urls))

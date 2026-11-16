@@ -4,15 +4,24 @@ Persistence for the brain (SQLAlchemy; SQLite locally, Postgres in production vi
 Holds what must outlive a run: campaigns and their stage checkpoints (so a crashed run resumes
 instead of paying again), every contact with a stable id, per-campaign results and drafts, and
 the do-not-contact list that is enforced across all campaigns.
+
+It is also the brain's long-term memory:
+  * prospects verified in earlier campaigns (with evidence and a timestamp) are offered to later
+    campaigns before any search is paid for (`known_prospects`, the `memory` discovery tool);
+  * which query templates found qualified prospects, per playbook (`learned_templates`);
+  * human review decisions become evaluation labels (`labels_from_review`).
+NOTE: memory is shared across all campaigns in this database. In a multi-user deployment, scope it
+per account before enabling BRAIN_MEMORY.
 """
 
 from __future__ import annotations
 
 import json
-from datetime import datetime
+import re
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
-from sqlalchemy import Column, DateTime, Float, String, Text, create_engine, inspect, text
+from sqlalchemy import Column, DateTime, Float, Integer, String, Text, create_engine, inspect, text
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from brain.models import CampaignSpec, Contact, Draft
@@ -81,6 +90,30 @@ class SuppressionRow(Base):
     value = Column(String(250), primary_key=True)  # an email address or a domain
     reason = Column(String(200))
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class QueryStatRow(Base):
+    __tablename__ = "brain_query_stats"
+    playbook = Column(String(64), primary_key=True)
+    template = Column(String(300), primary_key=True)  # query with {topic} / {place} placeholders
+    runs = Column(Integer, default=0)
+    hits = Column(Integer, default=0)
+    good = Column(Integer, default=0)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+def query_template(query: str, topics: List[str], places: List[str]) -> Optional[str]:
+    """'edtech sponsors Bangalore' -> '{topic} sponsors {place}'. None if the query has no topic in it."""
+    out, has_topic = query, False
+    for t in sorted([t for t in topics if t], key=len, reverse=True):
+        new = re.sub(re.escape(t), "{topic}", out, flags=re.I)
+        has_topic |= new != out
+        out = new
+    for pl in sorted([p for p in places if p], key=len, reverse=True):
+        out = re.sub(re.escape(pl), "{place}", out, flags=re.I)
+    if not has_topic or out.count("{topic}") > 1 or "site:" in out:
+        return None
+    return out[:300]
 
 
 class Store:
@@ -155,6 +188,74 @@ class Store:
                                    email_confidence=best.confidence if best else 0.0, data_json=c.model_dump_json()))
                 for k in keys:
                     s.merge(ContactKeyRow(key=k[:250], contact_id=c.id))
+
+    # ── memory ───────────────────────────────────────────────────────────────
+    def known_prospects(self, spec: CampaignSpec, prof, limit: int = 30, max_age_days: int = 180,
+                        scan: int = 3000) -> List[Contact]:
+        """Prospects verified (reachable) in earlier campaigns that fit this one. Free: no search, no LLM."""
+        from brain.fit import quick_fit
+
+        kind = spec.target_kind or None
+        cutoff = datetime.utcnow() - timedelta(days=max_age_days)
+        out: List[tuple] = []
+        with self._Session() as s:
+            rows = (s.query(ContactRow).filter(ContactRow.updated_at >= cutoff, ContactRow.email.isnot(None))
+                    .order_by(ContactRow.updated_at.desc()).limit(scan).all())
+        for r in rows:
+            try:
+                c = Contact.model_validate_json(r.data_json)
+            except ValueError:
+                continue
+            if kind and c.kind != kind:
+                continue
+            if spec.countries and c.country and c.country not in spec.countries:
+                continue
+            fit = quick_fit(c, prof)
+            if fit < 0.3:
+                continue
+            c.score, c.reasons, c.hook, c.prescore, c.criteria = None, [], None, 0.0, {}
+            c.flags = [f for f in c.flags if f not in ("unjudged",)] + ["from_memory"]
+            c.sources = list(dict.fromkeys(c.sources + ["memory"]))
+            out.append((fit, c))
+        out.sort(key=lambda x: x[0], reverse=True)
+        return [c for _, c in out[:limit]]
+
+    def record_query_stats(self, playbook: str, spec: CampaignSpec, query_log) -> int:
+        """Fold this campaign's query yields into per-playbook template statistics."""
+        places = spec.regions + list(spec.countries)
+        from brain.searchplan import _country_name
+
+        places += [_country_name(c) for c in spec.countries]
+        n = 0
+        with self._Session.begin() as s:
+            for q in query_log:
+                tpl = query_template(q.query, spec.topics + spec.expanded_terms, places)
+                if not tpl:
+                    continue
+                row = s.get(QueryStatRow, (playbook, tpl)) or QueryStatRow(playbook=playbook, template=tpl, runs=0,
+                                                                          hits=0, good=0)
+                row.runs = (row.runs or 0) + 1
+                row.hits = (row.hits or 0) + int(q.new)
+                row.good = (row.good or 0) + int(q.good if q.good >= 0 else q.new)
+                s.merge(row)
+                n += 1
+        return n
+
+    def learned_templates(self, playbook: str, limit: int = 5) -> List[str]:
+        with self._Session() as s:
+            rows = s.query(QueryStatRow).filter(QueryStatRow.playbook == playbook, QueryStatRow.good > 0).all()
+        rows.sort(key=lambda r: (r.good / max(1, r.runs), r.good), reverse=True)
+        return [r.template for r in rows[:limit]]
+
+    def labels_from_review(self, campaign_id: str) -> Dict[str, List[str]]:
+        """Human decisions as evaluation labels: approved/sent/replied are good, rejected is bad."""
+        good, bad = [], []
+        for r in self.results(campaign_id):
+            if r["status"] in ("approved", "sent", "replied", "followed_up"):
+                good.append(r["email"] or r["name"])
+            elif r["status"] == "rejected":
+                bad.append(r["email"] or r["name"])
+        return {"good": good, "bad": bad}
 
     # ── do-not-contact ───────────────────────────────────────────────────────
     def suppress(self, value: str, reason: str = "manual") -> None:

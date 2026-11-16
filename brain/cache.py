@@ -12,7 +12,8 @@ from typing import Any, Optional
 
 
 class Cache:
-    def __init__(self, path: str = ":memory:"):
+    def __init__(self, path: str = ":memory:", ignore_ttl: bool = False):
+        self.ignore_ttl = ignore_ttl  # replay mode: a recorded answer never expires
         self._lock = threading.Lock()
         self._db = sqlite3.connect(path, check_same_thread=False)
         self._db.execute(
@@ -31,7 +32,7 @@ class Cache:
         if not row:
             return None
         value, expires = row
-        if expires and expires < time.time():
+        if expires and expires < time.time() and not self.ignore_ttl:
             return None
         return json.loads(value)
 

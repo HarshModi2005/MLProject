@@ -1,0 +1,16 @@
+{
+  "name": "news",
+  "title": "Journalists via recent articles on the topic (Serper news), read from article bylines.",
+  "adapter": "search",
+  "tier": 2,
+  "cost": "search",
+  "kinds": ["person"],
+  "stage": "seed",
+  "order": 50,
+  "proves": ["recent_coverage"],
+  "yields_email": false,
+  "search": {"vertical": "news", "kind": "news", "first_round_max": 5, "reserve": 4, "gl": "single_country"},
+  "follow": {"max": 10},
+  "hooks": "brain.discovery.hooks.news",
+  "policy": {"robots": "respect", "terms": "Article pages are read for bylines only."}
+}

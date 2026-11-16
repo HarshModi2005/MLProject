@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from typing import Dict, List
 
 from brain.llm import LLM, LLMError
@@ -31,14 +32,18 @@ Candidates with "kind": "org" are organisations reached through a shared inbox: 
 ask. Candidates with "kind": "person" must be real individuals: if one is actually a page title, department, event or
 product, score 0. Also score 0 for publishers, directories and media sites that merely write about the topic.
 
+If CRITERIA are listed, also rate each criterion 0-100 for each candidate, strictly from the evidence (0 when the
+evidence says nothing about it), and let the overall score reflect them.
+
 Return JSON: {"results": [{"id": "<id>", "score": <int>, "reasons": ["<short reason>", "<short reason>"],
+"criteria": {"<criterion name>": <int>, ...},
 "hook": "<the single most relevant fact from this person's evidence, quoted or closely paraphrased, or null>",
 "hook_ref": <index of the evidence item the hook comes from, or null>}]}
 Include every candidate id exactly once. Keep each reason under 20 words."""
 
 
-def _card(c: Contact, max_evidence: int = 4) -> Dict:
-    return {
+def _card(c: Contact, max_evidence: int = 5) -> Dict:
+    card = {
         "id": c.id,
         "kind": c.kind,
         "name": c.name,
@@ -49,9 +54,36 @@ def _card(c: Contact, max_evidence: int = 4) -> Dict:
         "contact_via": (c.best_email.address if c.best_email else None),
         "evidence": [
             {"i": i, "what": squash(ev.text, 180), "year": ev.year, "detail": squash(ev.detail or "", 200) or None}
-            for i, ev in enumerate(c.evidence[:max_evidence])
+            for i, ev in _best_evidence(c, max_evidence)
         ],
     }
+    if c.decision_maker:
+        card["decision_maker"] = f"{c.decision_maker.get('name')} ({c.decision_maker.get('title')})"
+    proofs = {k: v for k, v in c.signals.items() if k in _PROOF_KEYS and v > 0}
+    if proofs:
+        card["verified_signals"] = proofs  # set by discovery channels from direct evidence (e.g. listed as a sponsor)
+    return card
+
+
+_PROOF_KEYS = ("past_sponsorship", "hiring", "portfolio_fit", "recent_coverage", "spoke_before", "open_roles",
+               "events_count", "local_business")
+
+
+def _best_evidence(c: Contact, k: int):
+    """The judge sees at most k items: keep the channel proofs (sponsor of X, hiring, portfolio) next to the
+    first descriptive items instead of whatever happened to be scraped first. Order is preserved so hook_ref
+    indices still point into c.evidence."""
+    if len(c.evidence) <= k:
+        return list(enumerate(c.evidence))
+    proof = [i for i, e in enumerate(c.evidence) if re.match(r"(Sponsor|Hiring|Portfolio|Speaker|Publishes with|Episode)", e.text)]
+    keep = sorted(set(list(range(k))[: max(1, k - len(proof[:2]))] + proof[:2]))[:k]
+    return [(i, c.evidence[i]) for i in keep]
+
+
+def _country(code: str) -> str:
+    from brain.searchplan import _country_name
+
+    return _country_name(code)
 
 
 def sender_brief(spec: CampaignSpec) -> str:
@@ -64,6 +96,8 @@ def sender_brief(spec: CampaignSpec) -> str:
         f"Ask: {spec.ask}" if spec.ask else "",
         f"Looking for: {spec.persona.description}" if spec.persona.description else "",
         "Topics of interest: " + ", ".join(spec.topics),
+        ("Target geography: " + ", ".join(spec.regions + [_country(c) for c in spec.countries])
+         + " — organisations or people clearly based or active elsewhere are a poor fit") if spec.regions or spec.countries else "",
     ]
     return "\n".join(l for l in lines if l)
 
@@ -74,9 +108,17 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
     Contacts the model could not score keep score=None and are flagged, never silently defaulted."""
     from brain.draft import with_context
 
+    from brain.fit import profile_for, reach_factor
+
     brief = sender_brief(with_context(spec, ctx))
     if playbook is not None and playbook.judge_rubric:
         brief += f"\nWhat makes a good target here: {playbook.judge_rubric}"
+    prof = profile_for(spec, playbook) if playbook is not None else spec.profile
+    if prof is not None and prof.criteria:
+        brief += "\nCRITERIA (confirmed by the user): " + "; ".join(
+            f"{c.name}{' [required]' if c.must else ''}" for c in prof.criteria)
+        if prof.anti_patterns:
+            brief += "\nPoor targets look like: " + ", ".join(prof.anti_patterns[:8])
     if ctx is not None and ctx.brief():
         brief += "\n" + ctx.brief()
     judged = 0
@@ -102,7 +144,26 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
             except (TypeError, ValueError):
                 c.flags.append("unjudged")
                 continue
-            c.score = round(0.8 * score + 0.2 * c.prescore, 4)
+            crit = item.get("criteria") if isinstance(item.get("criteria"), dict) else {}
+            if prof is not None and prof.criteria and crit:
+                per = {}
+                for cr in prof.criteria:
+                    v = next((val for k, val in crit.items() if str(k).strip().lower() == cr.name.lower()), None)
+                    try:
+                        per[cr.name] = max(0.0, min(100.0, float(v))) / 100.0 if v is not None else None
+                    except (TypeError, ValueError):
+                        per[cr.name] = None
+                rated = [(cr, per[cr.name]) for cr in prof.criteria if per.get(cr.name) is not None]
+                if rated:
+                    crit_score = sum(cr.weight * v for cr, v in rated) / (sum(cr.weight for cr, _ in rated) or 1.0)
+                    score = 0.5 * score + 0.5 * crit_score
+                    c.criteria = {cr.name: round(v, 2) for cr, v in rated}
+                    missing = [cr.name for cr, v in rated if cr.must and v < 0.3]
+                    if missing:
+                        score *= 0.5
+                        c.flags.append("missing_required:" + ", ".join(missing))
+            reach = reach_factor(c) if c.emails else 1.0
+            c.score = round((0.8 * score + 0.2 * c.prescore) * (0.85 + 0.15 * reach), 4)
             c.reasons = [squash(str(r), 160) for r in (item.get("reasons") or [])[:3]]
             hook = item.get("hook")
             ref = item.get("hook_ref")

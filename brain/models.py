@@ -31,6 +31,38 @@ class TargetPersona(BaseModel):
     min_seniority: str = "any"  # any | established
 
 
+class FitCriterion(BaseModel):
+    """One thing that makes a prospect good, and what would prove it.
+
+    `signal` ties the criterion to the discovery channels that can produce that proof
+    (see brain/tools.py `proves`): topic, past_sponsorship, hiring, portfolio_fit, recent_coverage,
+    publications, audience, spoke_before, location, local_business, funding_focus, open_source.
+    """
+
+    name: str
+    description: str = ""
+    weight: float = 1.0
+    signal: str = "topic"
+    terms: List[str] = Field(default_factory=list)  # words whose presence in the evidence supports it
+    must: bool = False  # a hard requirement: candidates with no support are dropped after judging
+
+
+class ProspectProfile(BaseModel):
+    """What a good prospect looks like for this campaign, confirmed by the user at intake."""
+
+    criteria: List[FitCriterion] = Field(default_factory=list)
+    timing_signals: List[FitCriterion] = Field(default_factory=list)  # reasons why *now* is a good moment
+    anti_patterns: List[str] = Field(default_factory=list)  # phrases that mark a poor target
+    decision_roles: List[str] = Field(default_factory=list)  # who to address inside an organisation, best first
+
+    @property
+    def empty(self) -> bool:
+        return not self.criteria
+
+    def signals(self) -> List[str]:
+        return list(dict.fromkeys(c.signal for c in self.criteria + self.timing_signals if c.signal))
+
+
 class CampaignSpec(BaseModel):
     id: str
     pack: str = "academic"  # see brain/packs.py
@@ -47,7 +79,9 @@ class CampaignSpec(BaseModel):
     search_queries: List[str] = Field(default_factory=list)
     preferred_inboxes: List[str] = Field(default_factory=list)  # e.g. partnerships, marketing (org campaigns)
     lookalike_queries: List[str] = Field(default_factory=list)  # searches for organisations like the user's examples
+    event_queries: List[str] = Field(default_factory=list)  # searches for similar past events (sponsors / speakers)
     target_kind: str = ""  # person | org; empty = the playbook's default
+    profile: ProspectProfile = Field(default_factory=ProspectProfile)
     confirmed: bool = False  # the user saw and approved this spec
     timeline: Optional[str] = None
     tone: str = "professional"
@@ -95,6 +129,10 @@ class Contact(BaseModel):
     evidence: List[Evidence] = Field(default_factory=list)
     signals: Dict[str, float] = Field(default_factory=dict)
     sources: List[str] = Field(default_factory=list)
+    # For an organisation reached through its shared inbox: the person in the right role, if one was found
+    # ({"name", "title", "source"}), so the email can be addressed to them.
+    decision_maker: Optional[Dict[str, str]] = None
+    criteria: Dict[str, float] = Field(default_factory=dict)  # support per fit criterion (cheap, then judged)
 
     # filled by ranking
     prescore: float = 0.0

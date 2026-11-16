@@ -258,3 +258,84 @@ def evaluate_cmd(campaign_id: str, labels: str):
     from brain.evalkit import evaluate
 
     console.print_json(json.dumps(evaluate(_deps().store.results(campaign_id), labels)))
+
+
+@app.command()
+def bench(
+    only: Optional[List[str]] = typer.Option(None, help="Scenario name (file stem in evals/scenarios). Repeatable."),
+    replay: bool = typer.Option(False, help="Answer every search/fetch from the recorded cache only (free)."),
+    strict: bool = typer.Option(False, help="With --replay: LLM calls must also come from the cache."),
+    draft: bool = typer.Option(False, help="Also draft emails (costs one LLM call per email)."),
+    label: str = typer.Option("", help="Name for this run; results go to evals/results/<label>.json."),
+    compare_to: Optional[str] = typer.Option(None, "--compare", help="A previous results JSON to diff against."),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+):
+    """Benchmark discovery on the scenarios in evals/scenarios (stops after judging unless --draft)."""
+    from brain.bench import compare, run_bench
+
+    logging.basicConfig(level=logging.INFO if verbose else logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    report = run_bench(list(only) if only else None, replay=("strict" if strict else "replay") if replay else "",
+                       draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+    t = Table(title=f"Benchmark {report['label']}")
+    for col in ("Scenario", "label prec", "good@K", "prec@K", "mean", "orgs", "proof", "reach", "search", "LLM", "$", "s"):
+        t.add_column(col)
+    for r in report["rows"]:
+        if "error" in r:
+            t.add_row(r["name"], f"[red]{r['error'][:60]}[/red]", *[""] * 10)
+            continue
+        lp = r.get("label_precision@K")
+        t.add_row(r["name"], "-" if lp is None else f"{lp} ({r.get('labeled', 0)} lab.)", f"{r['good@K']}/{r['target']}",
+                  str(r["precision@K"]), str(r["mean_score"]), str(r["distinct_orgs"]), str(r["proof_rate"]),
+                  str(r["reachable"]), str(r["search_calls"]), str(r["llm_paid_calls"]), str(r["llm_usd"]), str(r["seconds"]))
+    console.print(t)
+    stages = ("unique", "qualified", "reachable", "passed_judge", "shortlisted")
+    srcs = Table(title="Per source: unique → qualified → reachable → passed judge → shortlisted  (search calls)")
+    for col in ("Scenario", "Source", *stages, "searches"):
+        srcs.add_column(col)
+    for r in report["rows"]:
+        sf, led = r.get("source_funnel") or {}, r.get("ledger") or {}
+        for src in sorted({k for st in stages for k in (sf.get(st) or {})}):
+            srcs.add_row(r["name"], src, *[str((sf.get(st) or {}).get(src, 0)) for st in stages],
+                         str(int((led.get(src) or {}).get("search_calls", 0))))
+    if srcs.row_count:
+        console.print(srcs)
+    console.print_json(json.dumps(report["summary"]))
+    console.print(f"[dim]Saved {report['path']}[/dim]")
+    if compare_to:
+        with open(compare_to, encoding="utf-8") as fh:
+            old = json.load(fh)
+        d = Table(title=f"Δ vs {old.get('label')}  (old → new)")
+        keys = ["good@K", "precision@K", "proof_rate", "search_calls", "llm_usd", "usd_per_good"]
+        d.add_column("Scenario")
+        for k in keys:
+            d.add_column(k)
+        for row in compare(report, old):
+            d.add_row(row["name"], *[f"{row[k][0]} → {row[k][1]}" if k in row else row.get("note", "") for k in keys])
+        console.print(d)
+
+
+@app.command("bench-labels")
+def bench_labels(
+    run: str = typer.Option(..., help="A bench run label (evals/results/run_<label>)."),
+    only: Optional[List[str]] = typer.Option(None, help="Scenario name. Repeatable. Default: every scenario."),
+    limit: int = typer.Option(40, help="Candidates per scenario."),
+):
+    """Write label sheets (evals/labels/<scenario>.json) from a bench run, for a human to mark good / bad."""
+    from brain.bench import export_label_sheet, load_scenarios
+
+    for sc in load_scenarios(list(only) if only else None):
+        try:
+            path = export_label_sheet(run, sc["name"], limit=limit)
+            console.print(f"Wrote {path}")
+        except FileNotFoundError as e:
+            console.print(f"[yellow]{e}[/yellow]")
+
+
+@app.command()
+def labels(campaign_id: str, out: str = typer.Option(..., help="Write the labels JSON here.")):
+    """Turn your review decisions (approved / sent / replied vs rejected) into an evaluation labels file."""
+    data = _deps().store.labels_from_review(campaign_id)
+    with open(out, "w", encoding="utf-8") as fh:
+        json.dump(data, fh, indent=2)
+    console.print(f"Wrote {len(data['good'])} good and {len(data['bad'])} bad labels to {out}")

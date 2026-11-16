@@ -1,7 +1,16 @@
 """
 The campaign pipeline.
 
-    discover -> rank -> enrich -> judge -> draft
+    discover -> rank -> enrich -> judge [-> backfill] -> draft
+
+discover  adaptive exploration (brain/explore.py): the playbook's tools plus any tool the fit criteria
+          need, budget moved to whatever finds qualified prospects, expansion from the best finds
+rank      hard filters, a homepage-only "light read" of the top organisations, then pre-ranking on topic
+          similarity + evidence-based fit to the prospect profile (brain/fit.py)
+enrich    contact details; inside organisations, the decision-maker by role
+judge     batched LLM check of the confirmed criteria; if too few pass, ONE backfill round searches
+          again, seeded with the winners and the judge's rejection reasons
+draft     the writing, then a batched fact-check
 
 Each stage is checkpointed, so a crashed or interrupted run resumes from the last finished stage
 without repeating network or LLM spend. Every stage reports into a funnel, which is how
@@ -11,6 +20,8 @@ Where the LLM is used, and why it cannot be avoided there:
     campaign spec   1 call   understanding a free-text request
     sender profile  1 call   curating a CV (cached by content, so once per CV)
     extraction      0-15     only for promising pages the heuristics could not read
+    triage          0-1/query  search hits the heuristics cannot classify (cheap model, batched)
+    replan          0-2      new queries from the query log (+ winners and rejections in the backfill)
     judge           ~K/8     nuanced fit between this sender and this person (batched)
     draft           1 each   the writing itself (plus at most one retry on a failed check)
 Everything else — discovery, page reading, email finding, dedupe, filtering, pre-ranking — is free.
@@ -25,9 +36,9 @@ from typing import Any, Callable, Dict, List, Optional
 
 from brain.cache import Cache
 from brain.context import CampaignContext
+from brain.explore import explore
 from brain.orgs import OrgEnricher
 from brain.searchplan import SearchPlanner, search_budget
-from brain.tools import TOOLS, ToolRun
 from brain.draft import draft_email, verify_and_fix
 from brain.enrich import Enricher, has_usable_email
 from brain.fetch import Fetcher
@@ -47,6 +58,26 @@ from brain.store import Store
 log = logging.getLogger("brain.pipeline")
 
 STAGES = ["discover", "rank", "enrich", "judge", "draft"]
+
+
+def count_sources(contacts: List[Contact]) -> Dict[str, int]:
+    """How many of these candidates each source contributed (a candidate found by two sources counts for both)."""
+    out: Dict[str, int] = {}
+    for c in contacts:
+        for s in dict.fromkeys(c.sources or ["unknown"]):
+            out[s] = out.get(s, 0) + 1
+    return out
+
+
+def note_sources(funnel: Dict[str, Any], stage: str, contacts: List[Contact], add: bool = False) -> None:
+    """funnel["source_funnel"][stage][source] = candidates at that stage; shows which sources survive to the end."""
+    sf = funnel.setdefault("source_funnel", {})
+    counts = count_sources(contacts)
+    if add and stage in sf:
+        for k, v in counts.items():
+            sf[stage][k] = sf[stage].get(k, 0) + v
+    else:
+        sf[stage] = counts
 MIN_JUDGED_SCORE = 0.5  # below this the judge considers the fit loose at best
 
 
@@ -99,6 +130,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     total_budget = search_budget(spec.target_count, st.max_search_calls)
     budget_start = deps.search.calls
     deps.search.budget = budget_start + total_budget
+    discovery_budget = int(total_budget * 0.55)  # the rest: contact details (~30%) and the backfill (~15%)
+    enrich_ceiling = budget_start + int(total_budget * 0.85)
 
     def blocked(c: Contact) -> Optional[str]:
         return ctx.is_excluded(c.name, [e.address for e in c.emails], c.org_domain or "") or store.blocked_reason(c)
@@ -117,12 +150,88 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             "seconds": round(time.time() - started, 1),
         }
         funnel["cost"]["search_by_kind"] = dict(deps.search.by_kind)
+        misses = getattr(deps.search, "replay_misses", 0) + getattr(deps.fetcher, "replay_misses", 0)
+        if misses:
+            funnel["cost"]["replay_misses"] = misses
+        if ctx.query_log and not funnel.get("query_stats_recorded") and status != "running":
+            try:
+                store.record_query_stats(pack.name, spec, ctx.query_log)
+                funnel["query_stats_recorded"] = True
+            except Exception as e:  # learning is a bonus; never fail a campaign over it
+                log.warning("could not record query stats: %s", e)
         result.funnel = funnel
         store.save_campaign(spec, status, funnel)
         store.save_context(spec.id, ctx)
         return result
 
-    # ── 1. discover: the playbook's tools, plus the user's own lists ──────────
+    planner = SearchPlanner(spec, pack, ctx, deps.llm,
+                            learned_templates=store.learned_templates(pack.name) if st.use_memory else None)
+
+    # ── stage helpers (shared by the main pass and the backfill) ─────────────
+    def rank_stage(contacts: List[Contact]) -> List[Contact]:
+        kept, dropped = filter_contacts(contacts, spec, pack, is_blocked=blocked,
+                                        defer_region=any(c.kind == "org" for c in contacts))
+        ranked = prescore(kept, spec, pack, backend=st.embeddings)
+        orgs = [c for c in ranked if c.kind == "org"]
+        if orgs and st.light_read_factor > 0:
+            # Read the top organisations' homepages before ranking them for real: a snippet is not enough.
+            n = OrgEnricher(deps.fetcher, deps.search, st).light_read(
+                orgs, spec, limit=min(80, max(15, spec.target_count * st.light_read_factor)))
+            funnel["light_read"] = funnel.get("light_read", 0) + n
+            ranked = prescore(ranked, spec, pack, backend=st.embeddings)
+        funnel["qualified"] = funnel.get("qualified", 0) + len(kept)
+        merged = dict(funnel.get("dropped") or {})
+        for k, v in dropped.items():
+            merged[k] = merged.get(k, 0) + v
+        funnel["dropped"] = merged
+        return ranked
+
+    def enrich_stage(targets: List[Contact], pool: List[Contact]) -> List[Contact]:
+        deps.search.budget = enrich_ceiling
+        orgs_t = [c for c in targets if c.kind == "org"]
+        people_t = [c for c in targets if c.kind != "org"]
+        enrich_stats: Dict[str, Any] = dict(funnel.get("enrichment") or {})
+        if orgs_t:
+            org_enricher = OrgEnricher(deps.fetcher, deps.search, st, find_people=True,
+                                       max_people_searches=st.max_people_searches)
+            orgs_t = org_enricher.enrich_all(orgs_t, spec, pack)
+            enrich_stats["organisations"] = org_enricher.stats
+        if people_t:
+            enricher = Enricher(deps.fetcher, deps.search, deps.orcid, st)
+            hints = [w for t in spec.topics for w in t.lower().split() if len(w) > 4] + \
+                    (["computer", "comput", "cse", "informatics"] if spec.pack == "academic" else [])
+            enricher.enrich(people_t, pool=pool, hint_terms=hints)
+            enrich_stats["people"] = enricher.stats
+        out = orgs_t + people_t
+        if orgs_t:  # locations are known now that the sites have been read: apply the region rule strictly
+            out, late_drop = filter_contacts(out, spec, pack)
+            merged = dict(funnel.get("dropped_after_reading_sites") or {})
+            for k, v in late_drop.items():
+                merged[k] = merged.get(k, 0) + v
+            funnel["dropped_after_reading_sites"] = merged
+        out = resolve(out)  # a newly found email can reveal two records are one person
+        # Addresses are known now, so the do-not-contact check can be exact.
+        out = [c for c in out if not blocked(c)]
+        inbox_share = sum(1 for c in out if c.best_email and c.best_email.method == "inbox")
+        if out and inbox_share > len(out) / 2:
+            ctx.note("most organisations publish only a shared inbox, so many emails go to the team rather than a person")
+        out = prescore(out, spec, pack, backend=st.embeddings)  # pages may have added context
+        funnel["enrichment"] = enrich_stats
+        return out
+
+    def judge_stage(to_judge: List[Contact]) -> List[Contact]:
+        n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack)
+        funnel["judged"] = funnel.get("judged", 0) + n
+        passed = [c for c in to_judge if c.score is not None and c.score >= MIN_JUDGED_SCORE]
+        for c in to_judge:  # negative feedback for any later search
+            if c.score is not None and c.score < MIN_JUDGED_SCORE and c.reasons and len(ctx.rejected_reasons) < 20:
+                ctx.rejected_reasons.append(f"{c.name}: {c.reasons[0]}")
+        unjudged = [c for c in to_judge if c.score is None]
+        if unjudged:
+            result.warnings.append(f"{len(unjudged)} candidates could not be judged and were left out.")
+        return passed
+
+    # ── 1. discover ──────────────────────────────────────────────────────────
     cp = saved("discover")
     if cp:
         contacts = cp["contacts"]
@@ -134,41 +243,28 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             found = load_csv(csv_path)
             by_source["csv"] = len(found)
             raw += found
-        elif not only_seeds:
-            planner = SearchPlanner(spec, pack, ctx, deps.llm)
-            # Discovery may spend 60% of the searches; the rest is kept for finding contact details.
-            deps.search.budget = budget_start + int(total_budget * 0.6)
-            for name in pack.sources:
-                tool = TOOLS.get(name)
-                if tool is None:
-                    result.warnings.append(f"Unknown tool '{name}' in playbook {pack.name}; skipped.")
-                    continue
-                if tool.needs_search and not deps.search.available:
-                    result.warnings.append(f"Tool '{name}' needs SERPER_API_KEY (or TAVILY_API_KEY); skipped.")
-                    continue
-                if tool.needs_search and deps.search.remaining <= 2:
-                    result.warnings.append(f"Search budget used up before tool '{name}'.")
-                    continue
-                progress(f"discover: {tool.description}")
-                try:
-                    found, stats = tool.fn(ToolRun(spec, pack, ctx, deps, planner))
-                except Exception as e:  # one failing tool must not sink the campaign
-                    log.warning("tool %s failed: %s", name, e)
-                    result.warnings.append(f"Tool '{name}' failed: {e}")
-                    continue
-                by_source[name] = len(found)
+            contacts = resolve(raw)
+        elif only_seeds:
+            contacts = resolve(raw)
+        else:
+            deps.search.budget = budget_start + discovery_budget
+            ex = explore(spec, pack, ctx, deps, planner, seeds=raw, budget=discovery_budget,
+                         rounds=st.explore_rounds, progress=progress)
+            contacts = ex.contacts
+            by_source.update({k: v for k, v in ex.by_source.items() if k != "your_lists"})
+            for name, stats in ex.tool_stats.items():
                 funnel[f"tool_{name}"] = stats
-                if stats.get("failed_terms"):
-                    result.warnings.append("Publication search failed for: " + ", ".join(stats["failed_terms"])
-                                           + " (re-run to retry).")
-                raw += found
+            funnel["explore"] = {"rounds": ex.rounds, "qualified": ex.qualified,
+                                 "tools": {k: dict(v) for k, v in ctx.tool_stats.items()}}
+            funnel["ledger"] = ex.ledger
+            result.warnings += ex.warnings
         deps.search.budget = budget_start + total_budget
-        contacts = resolve(raw)
-        funnel.update({"found_raw": len(raw), "by_source": by_source, "unique_people": len(contacts),
-                       "search_calls_discovery": deps.search.calls})
+        funnel.update({"found_raw": sum(by_source.values()), "by_source": by_source, "unique_people": len(contacts),
+                       "search_calls_discovery": deps.search.calls - budget_start})
+        note_sources(funnel, "unique", contacts)
         store.checkpoint(spec.id, "discover", contacts)
         store.save_context(spec.id, ctx)
-        progress(f"discover: {len(raw)} records → {len(contacts)} unique candidates")
+        progress(f"discover: {funnel['found_raw']} records → {len(contacts)} unique candidates")
     if not contacts:
         result.warnings.append("Discovery found nobody. Broaden the topics or locations.")
         return finish("empty")
@@ -180,14 +276,14 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     if cp:
         ranked = cp["contacts"]
     else:
-        kept, dropped = filter_contacts(contacts, spec, pack, is_blocked=blocked,
-                                        defer_region=bool(pack.sources_set & {"orgs", "places"}))
-        ranked = prescore(kept, spec, pack, backend=st.embeddings)
-        funnel.update({"qualified": len(kept), "dropped": dict(dropped)})
+        funnel.pop("qualified", None)
+        funnel.pop("dropped", None)
+        ranked = rank_stage(contacts)
         # Keep a wider pool than we enrich: it is what email-pattern learning draws on.
+        note_sources(funnel, "qualified", ranked)
         ranked = ranked[: max(spec.target_count * 12, 150)]
         store.checkpoint(spec.id, "rank", ranked)
-        progress(f"rank: {len(kept)} qualify ({sum(dropped.values())} filtered out)")
+        progress(f"rank: {funnel['qualified']} qualify ({sum(funnel['dropped'].values())} filtered out)")
     if not ranked:
         result.warnings.append(f"Every candidate was filtered out: {funnel.get('dropped')}")
         return finish("empty")
@@ -201,39 +297,42 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         targets = cp["contacts"]
     else:
         n_enrich = min(len(ranked), max(spec.target_count * 4, 30))
-        targets = diversify(ranked, n_enrich, max_per_org=st.max_per_org * 4)
+        # Prefer candidates that can be read and reached: an organisation without a website is a last resort.
+        unreadable = lambda c: c.kind == "org" and not c.org_domain and not c.emails  # noqa: E731
+        order = [c for c in ranked if not unreadable(c)] + [c for c in ranked if unreadable(c)]
+        targets = diversify(order, n_enrich, max_per_org=st.max_per_org * 4)
+        # Remember who was tried BEFORE enriching: enrichment can drop a candidate or turn an organisation into
+        # the person found inside it (a new id), and neither may be enriched twice.
+        done = {c.id for c in targets} | {c.org_domain for c in targets if c.org_domain}
         progress(f"enrich: looking up contact details for the top {len(targets)}…")
-        # Organisations and people are enriched differently; a campaign can contain both (e.g. a user's list).
-        orgs_t = [c for c in targets if c.kind == "org"]
-        people_t = [c for c in targets if c.kind != "org"]
-        enrich_stats: Dict[str, Any] = {}
-        if orgs_t:
-            org_enricher = OrgEnricher(deps.fetcher, deps.search, st)
-            orgs_t = org_enricher.enrich_all(orgs_t, spec, pack)
-            enrich_stats["organisations"] = org_enricher.stats
-        if people_t:
-            enricher = Enricher(deps.fetcher, deps.search, deps.orcid, st)
-            hints = [w for t in spec.topics for w in t.lower().split() if len(w) > 4] + \
-                    (["computer", "comput", "cse", "informatics"] if spec.pack == "academic" else [])
-            enricher.enrich(people_t, pool=ranked, hint_terms=hints)
-            enrich_stats["people"] = enricher.stats
-        targets = orgs_t + people_t
-        if orgs_t:  # locations are known now that the sites have been read: apply the region rule strictly
-            targets, late_drop = filter_contacts(targets, spec, pack)
-            funnel["dropped_after_reading_sites"] = dict(late_drop)
-        targets = resolve(targets)  # a newly found email can reveal two records are one person
-        # Addresses are known now, so the do-not-contact check can be exact.
-        targets = [c for c in targets if not blocked(c)]
-        inbox_share = sum(1 for c in targets if c.best_email and c.best_email.method == "inbox")
-        if targets and inbox_share > len(targets) / 2:
-            ctx.note("most organisations publish only a shared inbox, so many emails go to the team rather than a person")
-        targets = prescore(targets, spec, pack, backend=st.embeddings)  # pages may have added context
-        funnel.update({"enriched": len(targets), "enrichment": enrich_stats})
+        targets = enrich_stage(targets, ranked)
+        # Many organisations publish no address. While too few are reachable, enrich the next candidates too
+        # (page fetches, plus decision-maker searches only while budget remains).
+        waves = 1
+        while waves < 3 and sum(has_usable_email(c, st.min_email_confidence) for c in targets) < spec.target_count * 2:
+            rest = [c for c in order if c.id not in done and not (c.org_domain and c.org_domain in done)]
+            if not rest:
+                break
+            batch = diversify(rest, min(len(rest), max(spec.target_count * 3, 20)), max_per_org=st.max_per_org * 4)
+            progress(f"enrich: only {sum(has_usable_email(c, st.min_email_confidence) for c in targets)} reachable; "
+                     f"trying the next {len(batch)}…")
+            done |= {c.id for c in batch} | {c.org_domain for c in batch if c.org_domain}
+            targets = prescore(resolve(targets + enrich_stage(batch, ranked)), spec, pack, backend=st.embeddings)
+            waves += 1
+        funnel["enrich_waves"] = waves
+        funnel["enriched"] = len(targets)
         store.checkpoint(spec.id, "enrich", targets)
     reachable = [c for c in targets if has_usable_email(c, st.min_email_confidence)]
     funnel["reachable"] = len(reachable)
+    note_sources(funnel, "enriched", targets)
+    note_sources(funnel, "reachable", reachable)
     funnel["guessed_email_only"] = sum(1 for c in targets if c.emails and c not in reachable)
     progress(f"enrich: {len(reachable)} of {len(targets)} have a confident email")
+    if reachable:
+        try:  # verified, reachable prospects become memory for later campaigns
+            store.upsert_contacts(reachable)
+        except Exception as e:
+            log.warning("could not save prospects to memory: %s", e)
     if not reachable:
         result.warnings.append("No confident email found for any top candidate.")
         result.shortlist = targets[: spec.target_count]
@@ -242,7 +341,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         result.shortlist = reachable[: spec.target_count]
         return finish("partial")
 
-    # ── 4. judge (batched LLM) ───────────────────────────────────────────────
+    # ── 4. judge (batched LLM), then at most one backfill round ──────────────
     cp = saved("judge")
     if cp and (cp["extra"].get("unjudged") or not cp["contacts"]):
         cp = None  # judging failed last time (e.g. rate limit): redo it rather than resume an empty result
@@ -252,13 +351,13 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         to_judge = reachable[: spec.target_count * 2]
         if deps.llm.available:
             progress(f"judge: assessing fit for {len(to_judge)} people…")
-            n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack)
-            funnel["judged"] = n
-            scored = [c for c in to_judge if c.score is not None and c.score >= MIN_JUDGED_SCORE]
+            scored = judge_stage(to_judge)
             funnel["passed_judge"] = len(scored)
-            unjudged = [c for c in to_judge if c.score is None]
-            if unjudged:
-                result.warnings.append(f"{len(unjudged)} candidates could not be judged and were left out.")
+            if st.backfill and len(scored) < spec.target_count and not only_seeds and not csv_path:
+                scored += backfill(spec, pack, ctx, deps, planner, scored, known=ranked + targets,
+                                   rank_stage=rank_stage, enrich_stage=enrich_stage, judge_stage=judge_stage,
+                                   funnel=funnel, progress=progress, ceiling=budget_start + total_budget)
+                funnel["passed_judge"] = len(scored)
         else:
             result.warnings.append("No LLM key: ranking used the lexical pre-score only and no emails were drafted.")
             for c in to_judge:
@@ -266,8 +365,18 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 c.flags.append("unjudged")
             scored = to_judge
         scored.sort(key=lambda c: c.score or 0, reverse=True)
-        shortlist = diversify(scored, spec.target_count, st.max_per_org)
+        seen_addr: set = set()
+        unique = []
+        for c in scored:  # two branches sharing one inbox are one recipient
+            addr = c.best_email.address if c.best_email else None
+            if addr and addr in seen_addr:
+                continue
+            seen_addr.add(addr)
+            unique.append(c)
+        shortlist = diversify(unique, spec.target_count, st.max_per_org)
         funnel["shortlisted"] = len(shortlist)
+        note_sources(funnel, "passed_judge", [c for c in scored if c.score is not None and c.score >= MIN_JUDGED_SCORE])
+        note_sources(funnel, "shortlisted", shortlist)
         store.upsert_contacts(shortlist)
         store.checkpoint(spec.id, "judge", shortlist,
                          extra={"unjudged": sum(1 for c in to_judge if "unjudged" in c.flags and deps.llm.available)})
@@ -297,3 +406,45 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     if failed:
         result.warnings.append(f"{failed} drafts could not be generated (LLM error or budget); re-run to retry them.")
     return finish("done")
+
+
+def backfill(spec: CampaignSpec, pack, ctx: CampaignContext, deps: Deps, planner: SearchPlanner,
+             winners: List[Contact], *, known: List[Contact], rank_stage, enrich_stage, judge_stage,
+             funnel: Dict[str, Any], progress: Callable[[str], None], ceiling: int) -> List[Contact]:
+    """Too few candidates passed the judge: search once more, seeded with the ones that did (lookalikes,
+    co-authors, the best-performing tool) and steered away from why the others failed. Only NEW candidates
+    are ranked, enriched and judged, so nothing is paid for twice."""
+    deps.search.budget = ceiling
+    left = deps.search.remaining
+    if left <= 2 or not deps.search.available and not any(t in pack.sources for t in ("openalex", "github", "podcasts")):
+        return []
+    missing = spec.target_count - len(winners)
+    progress(f"backfill: only {len(winners)} passed; searching once more for ~{missing} more, seeded with the best…")
+    planner.winners = [w.org or w.name for w in winners[:8]]
+    planner.need = max(10, missing * 4)
+    planner.replanned = False  # one more replan, now with winners and rejection reasons
+    ex = explore(spec, pack, ctx, deps, planner, budget=max(0, left - 1), rounds=2, need=planner.need,
+                 winners=winners[:5], progress=progress)
+    seen = {c.id for c in known} | {c.org_domain for c in known if c.kind == "org" and c.org_domain}
+    fresh = [c for c in ex.contacts if c.id not in seen and not (c.kind == "org" and c.org_domain in seen)]
+    stats: Dict[str, Any] = {"found": len(fresh), "spent": ex.rounds[-1]["spent"] if ex.rounds else 0}
+    funnel["backfill"] = stats
+    # The funnel's totals include what the backfill found, so `qualified` can never exceed `unique_people`.
+    funnel["unique_people"] = funnel.get("unique_people", 0) + len(fresh)
+    note_sources(funnel, "unique", fresh, add=True)
+    for k, v in ex.by_source.items():
+        funnel.setdefault("by_source", {})[k] = funnel.get("by_source", {}).get(k, 0) + v
+    if not fresh:
+        return []
+    ranked = rank_stage(fresh)[: max(missing * 6, 20)]
+    note_sources(funnel, "qualified", ranked, add=True)
+    targets = enrich_stage(diversify(ranked, min(len(ranked), max(missing * 3, 10)), deps.settings.max_per_org * 4),
+                           ranked)
+    reachable = [c for c in targets if has_usable_email(c, deps.settings.min_email_confidence)]
+    stats["reachable"] = len(reachable)
+    note_sources(funnel, "reachable", reachable, add=True)
+    if not reachable or not deps.llm.available:
+        return []
+    passed = judge_stage(reachable[: missing * 2])
+    stats["passed_judge"] = len(passed)
+    return passed

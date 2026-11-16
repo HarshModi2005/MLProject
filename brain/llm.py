@@ -174,6 +174,8 @@ class LLM:
                 self.cached_hits += 1
                 return hit
 
+        if self.settings.replay == "strict":
+            raise LLMError(f"replay(strict): no recorded answer for '{purpose}'")
         system_full = system + "\nRespond with a single valid JSON object and nothing else."
         last_err = ""
         for attempt in range(6):  # room for model fallbacks plus one repair attempt

@@ -1,0 +1,710 @@
+{
+  "scenario": "investors_edtech",
+  "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). good = you would really email them for this scenario's ask.",
+  "good": [],
+  "bad": [],
+  "candidates": [
+    {
+      "label": "",
+      "name": "GSV Ventures",
+      "kind": "org",
+      "org": "GSV Ventures",
+      "email": null,
+      "sources": [
+        "web",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "PORTFOLIO OUR TEAM CONTACT ASU+GSV SUMMIT We’re Leveling Up Our new website is launching soon. Stay Connected Copyright 2026, GSV Ventures, all rights reserved",
+        "GSV Ventures is a female-led, multi-stage venture capital firm investing in the $7+ trillion education technology sector across \"Pre-K to Gray.”",
+        "Female-led, edtech-specialist VC with Pre-K-to-Gray learning thesis and AI-first requirement, offering summit-driven access to 15,000+ leaders, 500+ edtech CEOs, EdTech 150/200 visibility, and founder"
+      ],
+      "url": "https://gsv.ventures/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Emerge",
+      "kind": "org",
+      "org": "Emerge",
+      "email": null,
+      "sources": [
+        "list",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "Emerge is a $75M pre-seed fund for human capital development: consumer learning, careers and AI diffusion at work. First cheques of $500k to $2.5M, UK and Europe.",
+        "Early-stage, pre-product focus on AI-first learning and work tools; unusually large first checks ($500k–$2.5M), 100+ Venture Partners who've founded Udemy, Coursera, Kahoot, mission-driven to democrat",
+        "Listed on Edtech funds — Curated VC Funds"
+      ],
+      "url": "https://emerge.education/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Reach Capital",
+      "kind": "org",
+      "org": "Reach Capital",
+      "email": null,
+      "sources": [
+        "web",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "Reach Capital is the leading early-stage investor in learning, health, and work, backing founders who elevate human potential and ignite purpose.",
+        "Reach Capital is an early-stage venture capital firm investing in education technology companies serving people at every stage of their lives.",
+        "Supports entrepreneurs developing technology solutions for education challenges spanning early childhood through the future of work."
+      ],
+      "url": "https://www.reachcapital.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Robb Doub",
+      "kind": "person",
+      "org": "New Markets Venture Partners",
+      "email": "rdoub@newmarketsvp.com",
+      "sources": [
+        "web",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "New Markets Venture Partners is a leading edtech venture capital firm investing in innovative education and workforce technology startups. As a top VC firm in edtech, we provide funding and strategic ",
+        "New Markets Venture Partners is a leading edtech venture capital firm investing in innovative education and workforce technology startups. As a top VC firm ...",
+        "Portfolio page lists ~1 companies; mentions education technology"
+      ],
+      "url": "https://www.newmarketsvp.com/team",
+      "judge_score": 0.6932,
+      "judge_reason": "Leading edtech venture capital firm"
+    },
+    {
+      "label": "",
+      "name": "Christopher Nyren",
+      "kind": "person",
+      "org": "Educated Ventures",
+      "email": "cnyren@educatedventures.com",
+      "sources": [
+        "list",
+        "portfolio"
+      ],
+      "title": "Founder",
+      "evidence": [
+        "Advisory and investment in the education industry",
+        "Education businesses seeking sector-specific capital or transaction support.",
+        "Listed on 53 EdTech Investors and Funding Resources (2026) | Finta"
+      ],
+      "url": "https://www.educatedventures.com/",
+      "judge_score": 0.7617,
+      "judge_reason": "Advisory and investment in education industry"
+    },
+    {
+      "label": "",
+      "name": "LEAD School",
+      "kind": "org",
+      "org": "LEAD School",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Discover LEAD's learning system, a Digital Learning Solution for Schools, designed to transform education with integrated curriculum, teacher training, and advanced technology. Enhance learning outcom",
+        "GSV Ventures backs innovative entrepreneurs across the “Pre-K to Grey” Arc of Learning. It manages over $400 million in global Ed-tech investments through GSV ..."
+      ],
+      "url": "https://leadschool.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Copper Wire Ventures",
+      "kind": "org",
+      "org": "Copper Wire Ventures",
+      "email": null,
+      "sources": [
+        "list",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "Copper Wire Ventures is a venture microfund. We focus on helping women entrepreneurs find early-stage capital and strategic advice for their companies and technology-driven products or services.",
+        "Microfund making $100K–$500K first checks into women-led tech companies focused on lifelong learning (early childhood to adult career), offering 25+ years edtech experience and access to educators, bu",
+        "Listed on Edtech funds — Curated VC Funds"
+      ],
+      "url": "https://copperwire.ventures/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Owlvc",
+      "kind": "org",
+      "org": "Owlvc",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "With $2.2B+ in committed capital across seven funds, Owl Ventures is the defining global investor in EdTech, backing companies at every stage that are transforming the future of education and work. A ",
+        "With $2.2B+ in committed capital across seven funds, Owl Ventures is the defining global investor in EdTech, backing companies at every stage. Indian students ..."
+      ],
+      "url": "https://www.owlvc.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Forum Ventures",
+      "kind": "org",
+      "org": "Forum Ventures",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Forum Ventures is a founder-first AI venture studio, accelerator, and pre-seed fund for B2B startups. Founded 2014. 600+ portfolio companies. $1B+ in follow-on funding raised.",
+        "Forum Ventures provides pre-seed funding for B2B AI startups. Get the capital and support to scale your business."
+      ],
+      "url": "https://www.forumvc.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Juvovc",
+      "kind": "org",
+      "org": "Juvovc",
+      "email": null,
+      "sources": [
+        "list",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "Juvo Ventures is an early-stage venture fund in Salt Lake City investing in the future of learning and work.",
+        "Subsidiary fund sponsored by Western Governors University, run by WGU's President and CFO, giving companies direct access to one of the world's largest online universities and CRA-aligned connections.",
+        "Listed on Edtech funds — Curated VC Funds"
+      ],
+      "url": "https://juvovc.org/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Beta Boom",
+      "kind": "org",
+      "org": "Beta Boom",
+      "email": "hello@betaboom.com",
+      "sources": [
+        "web",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "Beta Boom is a pre-seed and seed VC fund backing founders outside Silicon Valley who solve complex enterprise problems, from healthcare to cybersecurity.",
+        "Up to $500K Pre-Seed or Seed Investment Daily Operational and Strategic Support from Beta Boom's Growth Team Access to Our Investor Network for Series Funding.",
+        "Portfolio page lists ~0 companies; mentions edtech"
+      ],
+      "url": "https://www.betaboom.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Owlvc",
+      "kind": "org",
+      "org": "Owlvc",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "With $2.2B+ in committed capital across seven funds, Owl Ventures is the defining global investor in EdTech, backing companies at every stage that are transforming the future of education and work. A ",
+        "With $2.2B+ in committed capital across seven funds, Owl Ventures is the defining global investor in EdTech, backing companies at every stage"
+      ],
+      "url": "https://www.owlvc.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Lightrock",
+      "kind": "org",
+      "org": "Lightrock",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "A global investment platform advising $5.8bn+ in assets across private and public markets. Funds span Europe, North America, Latin America, Asia, and Africa.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.lightrock.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Lightrock",
+      "kind": "org",
+      "org": "Lightrock",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "A global investment platform advising $5.8bn+ in assets across private and public markets. Funds span Europe, North America, Latin America, Asia, and Africa.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.lightrock.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Rema Subramanian",
+      "kind": "person",
+      "org": "Ankur Capital",
+      "email": "rema@ankurcapital.com",
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Ankur Capital is a top venture capital firm in India. Three funds, twelve years, 40+ companies - backing scientists and engineers from pre-seed to Series A.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.ankurcapital.com/team",
+      "judge_score": 0.7176,
+      "judge_reason": "Top VC firm in India"
+    },
+    {
+      "label": "",
+      "name": "Elev8 Venture Partners",
+      "kind": "org",
+      "org": "Elev8 Venture Partners",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Elev8 Venture Partners is India's leading growth-stage venture capital firm, backing technology companies at the precise moment between proven traction and",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://elev8vp.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "GHV Accelerator",
+      "kind": "org",
+      "org": "GHV Accelerator",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "GHV Accelerator, the pioneer of the Indo-Japanese Innovation Ecosystem, with a two-fold vision: increasing the fundability quotient of Indian startups and giving international institutions access to t",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.ghvaccelerator.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Cropin",
+      "kind": "org",
+      "org": "Cropin",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Cropin combines field data, satellite imagery and AI to help food and agriculture teams forecast crop supply, monitor farms and manage climate risk.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.cropin.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Cropin",
+      "kind": "org",
+      "org": "Cropin",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Cropin combines field data, satellite imagery and AI to help food and agriculture teams forecast crop supply, monitor farms and manage climate risk.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.cropin.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "FundTQ",
+      "kind": "org",
+      "org": "FundTQ",
+      "email": "deals@fundtq.com",
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "India's top investment banking firm for startups. Advised Unilever Ventures, Emami, DSG Consumer deals. Fundraising, M&A, and advisory for founders. Talk to us.",
+        "EdTech startup funding in India is the process of raising capital from angel investors, venture capital firms, and private equity to scale ..."
+      ],
+      "url": "https://fundtq.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Eight Roads",
+      "kind": "org",
+      "org": "Eight Roads",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Eight Roads has a 50+ year history of investing and partners with game-changing technology and healthcare companies, supporting them as they scale to become global leaders.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://eightroads.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Emerson Collective",
+      "kind": "org",
+      "org": "Emerson Collective",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Emerson Collective is a company that invests in entrepreneurs and innovators driven by purpose and possibility, working to create a world of abundance for future generations.",
+        "Low-visibility hybrid LLC combining venture, philanthropy, advocacy, art and media ownership, offering founders grants, political advocacy, media influence and policy expertise, notably in frontier AI",
+        "Listed on Edtech funds — Curated VC Funds"
+      ],
+      "url": "https://www.emersoncollective.com/work/venture-capital/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Kalaari Capital",
+      "kind": "org",
+      "org": "Kalaari Capital",
+      "email": "info@kalaari.com",
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Empowering exceptional entrepreneurs with capital and long-term commitment. Discover our high-conviction investment approach for tech startups.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://kalaari.com/",
+      "judge_score": 0.6432,
+      "judge_reason": "Listed on EdTech Investors in India"
+    },
+    {
+      "label": "",
+      "name": "Terex Ventures",
+      "kind": "org",
+      "org": "Terex Ventures",
+      "email": "info@terexventures.com",
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Terex Ventures provides capital raising, transaction due diligence, financial modelling, M&A, UAE expansion and IPO readiness advisory across India, UAE and international markets.",
+        "As Vice President at Terex Ventures, Abhijay Jain works closely with high-growth businesses across multiple sectors, including education technology.",
+        "Listed on Top 20 Education Startup Investors in India 2026"
+      ],
+      "url": "https://terexventures.com/",
+      "judge_score": 0.6062,
+      "judge_reason": "Provides capital raising and advisory"
+    },
+    {
+      "label": "",
+      "name": "Sequoia Capital",
+      "kind": "org",
+      "org": "Sequoia Capital",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "We help the daring build legendary companies from idea to IPO and beyond.",
+        "Sequoia's AI portfolio spans from the earliest bets on Nvidia to current positions in OpenAI and Harvey.",
+        "Listed on The Top 10 VC Firms Investing in AI (2026)"
+      ],
+      "url": "https://sequoiacap.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Chiratae Ventures",
+      "kind": "org",
+      "org": "Chiratae Ventures",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://chiratae.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Educapitalvc",
+      "kind": "org",
+      "org": "Educapitalvc",
+      "email": null,
+      "sources": [
+        "web",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "We invest in Entrepreneurs shaping the future of education & future of work.",
+        "We invest in Entrepreneurs shaping the future of education & future of work · The largest European Edtech & Future of Work VC · We invest in innovative solutions",
+        "Portfolio page lists ~46 companies; mentions edtech"
+      ],
+      "url": "https://www.educapitalvc.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Welcome to EPIC World",
+      "kind": "org",
+      "org": "Welcome to EPIC World",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Building 50+ blue chip companies to accelerate the economic momentum of Entrepreneurial Households. Discover our purpose, platform and perspectives.",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.epicworld.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Ascent Capital",
+      "kind": "org",
+      "org": "Ascent Capital",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Seattle's Trusted Private Lender for Builders and Real Estate Investors About Ascent Capital Ascent Capital is a private lender based in the Pacific No ...",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://www.ascent-cap.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Elevar Equity",
+      "kind": "org",
+      "org": "Elevar Equity",
+      "email": "info@elevarequity.com",
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Elevar Equity fuels the economic resilience and vibrancy of underserved customers and low income communities by investing early growth capital in entrepreneurs building at the intersection of inclusiv",
+        "Listed on EdTech Investors in India (150+) | AngelBacked"
+      ],
+      "url": "https://elevarequity.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "AngelBacked",
+      "kind": "org",
+      "org": "AngelBacked",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Search 58,000+ angel investors and VCs with verified emails. Filter by stage, check size, industry, and location. The investor database built for startup founders raising capital.",
+        "Find 150+ EdTech angel investors and VCs in India. Browse verified contacts, investment thesis, and portfolio companies."
+      ],
+      "url": "https://www.angelbacked.co/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "IndiaBizForSale",
+      "kind": "org",
+      "org": "IndiaBizForSale",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Premium Platform to buy, sell, fund and grow businesses in India. Find businesses for sale in India. Buy a Business or find Investment opportunities in India",
+        "Search and connect directly with strategic Education and EdTech investors, HNIs, NRIs, private individual investors, and startup investors from 1,300+ locations ..."
+      ],
+      "url": "https://www.indiabizforsale.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Learntube",
+      "kind": "org",
+      "org": "Learntube",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Learn Venture capital Online: Free Course with AI Tutor & Certificate. You'll learn to evaluate startup investments, negotiate terms and manage portfolios ..."
+      ],
+      "url": "https://learntube.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Rethink Capital Partners",
+      "kind": "org",
+      "org": "Rethink Capital Partners",
+      "email": null,
+      "sources": [
+        "web",
+        "portfolio"
+      ],
+      "title": null,
+      "evidence": [
+        "Connecting capital to impact. Rethink Capital Partners is a purpose-driven investment manager. We specialize in real estate and venture capital with impact at the core of all we do. We believe that by",
+        "We are a venture capital firm investing in companies that expand human potential and economic mobility at scale.",
+        "Portfolio page lists ~2 companies; mentions education technology"
+      ],
+      "url": "https://rethink-capital.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "51D",
+      "kind": "org",
+      "org": "51D",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Fifty One Degrees builds production AI for venture capital and private equity firms, from deal sourcing and diligence to portfolio monitoring and value creation ..."
+      ],
+      "url": "https://www.51d.co/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Carta",
+      "kind": "org",
+      "org": "Carta",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Pre-seed funding is the earliest investment a startup receives. It's. Pre-seed funding is any funding that comes before the seed round."
+      ],
+      "url": "https://carta.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Goldilocks AI",
+      "kind": "org",
+      "org": "Goldilocks AI",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "The AI search engine for finding and understanding leads and talents. Search and know any professional on earth.",
+        "Learn Capital is a venture capital firm founded in 2009 as the first VC firm dedicated to education and human capital development."
+      ],
+      "url": "https://goldi.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Investors Backing Pre-Seed Startups",
+      "kind": "org",
+      "org": "Investors Backing Pre-Seed Startups",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "75 investors on our list back Pre-Seed startups, 15% of the 494 we list. Pre-seed is the first outside money, usually raised on a prototype, a first few users ..."
+      ],
+      "url": "https://www.startupgrantsindia.com/",
+      "judge_score": null,
+      "judge_reason": null
+    }
+  ]
+}

@@ -1,0 +1,587 @@
+{
+  "scenario": "academic_gnn",
+  "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). good = you would really email them for this scenario's ask.",
+  "good": [],
+  "bad": [],
+  "candidates": [
+    {
+      "label": "",
+      "name": "Swagatam Das",
+      "kind": "person",
+      "org": "Indian Statistical Institute",
+      "email": "swagatam.das@isical.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": "Professor",
+      "evidence": [
+        "Asynchronous Message Passing for Addressing Oversquashing in Graph Neural Networks",
+        "Can Graph Neural Networks Tackle Heterophily? Yes, With a Label-Guided Graph Rewiring Approach!",
+        "earned his B.E. in Electronics and Telecommunications Engineering, M.E. with a specialization in Control Engineering, and Ph.D.(Engineering) degrees from Jadavpur University, India, in the years 2003,"
+      ],
+      "url": "https://openalex.org/A5000078546",
+      "judge_score": 0.7818,
+      "judge_reason": "Recent publications on graph neural networks in 2025"
+    },
+    {
+      "label": "",
+      "name": "Sanjay Kumar Singh",
+      "kind": "person",
+      "org": "Indian Institute of Technology BHU",
+      "email": "sks.cse@iitbhu.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Mitigating Catastrophic Forgetting in Molecular Property Prediction via Refresh Learning and Pareto Optimization",
+        "Overcoming catastrophic forgetting in molecular property prediction using continual learning of sequential episodes",
+        "Combating Over-Smoothing in Graph Models with Half- Hop for Molecular Property Prediction"
+      ],
+      "url": "https://openalex.org/A5100696254",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Garima Chanana",
+      "kind": "person",
+      "org": "Vivekananda Institute of Professional Studies",
+      "email": "garimachanana1@gmail.com",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Performance analysis of activation functions in molecular property prediction using Message Passing Graph Neural Networks",
+        "Molecular Property Prediction Toward Materials Science Applications Using Quantum-Inspired Graph Neural Networks"
+      ],
+      "url": "https://openalex.org/A5115728439",
+      "judge_score": 0.7313,
+      "judge_reason": "Recent publications on molecular property prediction using GNNs in 2025 and 2026"
+    },
+    {
+      "label": "",
+      "name": "Bhaskarjyoti Das",
+      "kind": "person",
+      "org": "PES University",
+      "email": "bhaskarjyoti01@gmail.com",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Transforming Molecular Insights: Enhancement of Property Prediction Using Graphormers",
+        "Meta-learning Assisted Graph Representation Learning for Downstream Learning Tasks"
+      ],
+      "url": "https://openalex.org/A5011212001",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Partha Basuchowdhuri",
+      "kind": "person",
+      "org": "Indian Association for the Cultivation of Science",
+      "email": "partha.basuchowdhuri@iacs.res.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": "Associate Professor",
+      "evidence": [
+        "MoLE-GNN: Parameter-Efficient Fine-Tuning of Graph Neural Networks with Mixture-of-Experts",
+        "CrysAtom: Distributed Representation of Atoms for Crystal Property Prediction",
+        "IACS0043 Name: Partha Basuchowdhuri | Dept: School of Mathematical & Computational Sciences | Designation: School+Chair+%26+Associate+Professor | Contact: 91 33 2473 4971 (Ext: 2372 )"
+      ],
+      "url": "https://openalex.org/A5060417636",
+      "judge_score": 0.7684,
+      "judge_reason": "Recent publications on graph neural networks in 2026 and 2024"
+    },
+    {
+      "label": "",
+      "name": "Anirban Dasgupta",
+      "kind": "person",
+      "org": "Indian Institute of Technology Gandhinagar",
+      "email": "anirbandg@iitgn.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "SiST-GNN: Simultaneous Spatial-Temporal Message Passing for Dynamic Graph Representation Learning"
+      ],
+      "url": "https://openalex.org/A5061449196",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Anuraj Mohan",
+      "kind": "person",
+      "org": "NSS College of Engineering Palakkad",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Enhancing molecular property prediction by fusing graph and sequence encoder representations",
+        "Leveraging Deep Learning and Molecular Representation for Drug Discovery"
+      ],
+      "url": "https://openalex.org/A5087924425",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Vinti Agarwal",
+      "kind": "person",
+      "org": "Birla Institute of Technology and Science, Pilani",
+      "email": "vinti.agarwal@pilani.bits-pilani.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Repurposing Unified Topological Signatures for Graph Representation Learning"
+      ],
+      "url": "https://openalex.org/A5068576926",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Satadeep Bhattacharjee",
+      "kind": "person",
+      "org": "Indo Korea Science and Technology",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "SR-CGCNN: Shared recurrent convolution in crystal graph neural networks for materials property prediction",
+        "A Magnetism-Aware Crystal Graph Neural Network with Explicit Magnetic-Sublattice and Exchange-Geometry Representations"
+      ],
+      "url": "https://openalex.org/A5007163300",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Debashis De",
+      "kind": "person",
+      "org": "Maulana Abul Kalam Azad University of Technology, West Bengal",
+      "email": "debashis.de@makautwb.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": "Professor",
+      "evidence": [
+        "GraphXAI: a survey of graph neural networks (GNNs) for explainable AI (XAI)",
+        "First principle and deep learning based switching property prediction of optical bio-molecular switch",
+        "Debashis De, PhD, is a Professor in the Department of Computer Science and Engineering at Maulana Abul Kalam Azad University of Technology, West Bengal, India. He earned his M.Tech from the University"
+      ],
+      "url": "https://openalex.org/A5013897423",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Debasis Samanta",
+      "kind": "person",
+      "org": "Indian Institute of Technology Kharagpur",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": "Professor",
+      "evidence": [
+        "Enhancing Graph-Based Representation Learning with Adversarial Policy Gradient: A Hyperparameter Analysis",
+        "Graph signal processing and graph learning approaches to Schizophrenia pattern identification in brain Electroencephalogram",
+        "A Novel Graph Representation Learning Approach for Visual Modeling Using Neural Combinatorial Optimization"
+      ],
+      "url": "https://openalex.org/A5019043360",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Sandeep Kumar",
+      "kind": "person",
+      "org": "Indian Institute of Technology Delhi",
+      "email": "ksandeep@ee.iitd.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Multi-Component Coarsened Graph Learning for Scaling Graph Machine Learning",
+        "GOTHAM: Graph Class Incremental Learning Framework under Weak Supervision",
+        "No Prejudice! Fair Federated Graph Neural Networks for Personalized Recommendation"
+      ],
+      "url": "https://openalex.org/A5101667410",
+      "judge_score": 0.7596,
+      "judge_reason": "Multiple recent publications on advanced graph neural networks in 2024 and 2025"
+    },
+    {
+      "label": "",
+      "name": "Subhankar Mishra",
+      "kind": "person",
+      "org": "National Institute of Science Education and Research",
+      "email": "smishra@niser.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Inherently Interpretable Graph Neural Networks via B-cos Alignment",
+        "Graph Neural Networks at a Fraction",
+        "Locally and Structurally Private Graph Neural Networks"
+      ],
+      "url": "https://openalex.org/A5030378871",
+      "judge_score": 0.8318,
+      "judge_reason": "Recent publications on graph neural networks"
+    },
+    {
+      "label": "",
+      "name": "Sarat Kumar Patra",
+      "kind": "person",
+      "org": "National Institute of Technology Rourkela",
+      "email": "skpatra@nitrkl.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Deep Learning Based Enhanced Approximate Message Passing for mmWave Massive MIMO Channel Estimation"
+      ],
+      "url": "https://openalex.org/A5075822182",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "S. Sachin Kumar",
+      "kind": "person",
+      "org": "Amrita Vishwa Vidyapeetham",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Topological Indices Based Vector Representation of Graphs",
+        "DeBERTaSSL: Enhancing Molecular Property Prediction with Self-Supervised Learning"
+      ],
+      "url": "https://openalex.org/A5002233877",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Indu Purushothaman",
+      "kind": "person",
+      "org": "Meenakshi Academy of Higher Education and Research",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Entanglement-Based Contrastive Learning Algorithms for Molecular Property Prediction"
+      ],
+      "url": "https://openalex.org/A5112613200",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Shailendra Sanjay Suryawanshi",
+      "kind": "person",
+      "org": "KLE Academy of Higher Education and Research",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "In Silico Drug-Likeness Assessment of Phytochemicals from Alpinia zerumbet Using Molecular Property Prediction",
+        "Computer-Aided Drug-Likeness Assessment and Lipinski's Rule of Five Evaluation of Twenty Medicinal Plant Alkaloids Using the MolSoft Molecular Property Prediction Server: A Comparative Computational S"
+      ],
+      "url": "https://openalex.org/A5018174711",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Adil Mudasir Malla",
+      "kind": "person",
+      "org": "Islamic University of Science and Technology",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Bridging Molecular Features and Solubility: A Machine Learning Approach for Prediction",
+        "Comprehensive Review of Graph Neural Networks: Challenges, Classification, Architectures, Applications, and Potential Utility in Bioinformatics"
+      ],
+      "url": "https://openalex.org/A5073501828",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Deepak Mishra",
+      "kind": "person",
+      "org": "Indian Institute of Space Science and Technology",
+      "email": "deepak.mishra@iist.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": "Scientist",
+      "evidence": [
+        "Symmetry group equivariant convolutions for representation learning: a survey",
+        "Neural Pooling for Graph Neural Networks",
+        "Computer vision, Image processing, Deep/Machine learning, Signal processing, Information Security and Biometrics, Mathematical Modeling (related to Computational Neuroscience)."
+      ],
+      "url": "https://openalex.org/A5086817031",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Harish G. Ramaswamy",
+      "kind": "person",
+      "org": "Indian Institute of Technology Madras",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Graph Representation of CTA Images for Spatially Aware Classification",
+        "Graph Classification with GNNs: Optimisation, Representation & Inductive Bias"
+      ],
+      "url": "https://openalex.org/A5086266146",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Shrimon Mukherjee",
+      "kind": "person",
+      "org": "Indian Association for the Cultivation of Science",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "MoLE-GNN: Parameter-Efficient Fine-Tuning of Graph Neural Networks with Mixture-of-Experts",
+        "CrysAtom: Distributed Representation of Atoms for Crystal Property Prediction"
+      ],
+      "url": "https://openalex.org/A5040759397",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Saptarshi Bej",
+      "kind": "person",
+      "org": "Indian Institute of Science Education and Research Thiruvananthapuram",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": "Director",
+      "evidence": [
+        "Fast and featureless node representation learning with partial pairwise supervision",
+        "Bitter peptide prediction using graph neural networks",
+        "My academic background during my master’s degree at IISER-Kolkata was in Mathematics, with a specialization in graph theory. I joined Systems-Biology and Bioinformatics group at the University of Rost"
+      ],
+      "url": "https://openalex.org/A5046944026",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Alankar Alankar",
+      "kind": "person",
+      "org": "Indian Institute of Technology Bombay",
+      "email": "alankar.alankar@iitb.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": "Professor",
+      "evidence": [
+        "Graph residual based method for molecular property prediction",
+        "for simulating and understanding material behaviour and their failure when exposed to various mechanical, chemical and other environment e.g. radiation."
+      ],
+      "url": "https://openalex.org/A5085892657",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Raghavan B. Sunoj",
+      "kind": "person",
+      "org": "Indian Institute of Technology Bombay",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Advances in machine learning with chemical language models in molecular property and reaction outcome predictions",
+        "Recent Applications of Machine Learning in Molecular Property and Chemical Reaction Outcome Predictions"
+      ],
+      "url": "https://openalex.org/A5018528585",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Debaditya Barman",
+      "kind": "person",
+      "org": "Visva-Bharati University",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Unveiling atom–bond relationships: Graph neural networks for molecular property prediction"
+      ],
+      "url": "https://openalex.org/A5002635411",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Roshan R. Kotkondawar",
+      "kind": "person",
+      "org": "Dr. Babasaheb Ambedkar Technological University",
+      "email": "rkotkondawar@stvincentngp.edu.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": "Director",
+      "evidence": [
+        "Transformer Generative AI Model for Enhanced Molecular Property Prediction",
+        "Drug Target Interaction Prediction Using Optimized Interactive Neural Network"
+      ],
+      "url": "https://openalex.org/A5087546865",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Arvind W. Kiwelekar",
+      "kind": "person",
+      "org": "Dr. Babasaheb Ambedkar Technological University",
+      "email": "awkiwelekar@dbatu.ac.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Transformer Generative AI Model for Enhanced Molecular Property Prediction",
+        "Drug Target Interaction Prediction Using Optimized Interactive Neural Network"
+      ],
+      "url": "https://openalex.org/A5042287742",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "P. Nehru",
+      "kind": "person",
+      "org": "B.S. Abdur Rahman Crescent Institute of Science & Technology",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Graph Convolutional Networks with Attention Mechanisms for Enhanced Molecular Property Prediction"
+      ],
+      "url": "https://openalex.org/A5116016784",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Nishant Kumar",
+      "kind": "person",
+      "org": "Christ University",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Uncertainty-Aware Molecular Property Prediction Using Heterogeneous Molecular Graph Neural Networks"
+      ],
+      "url": "https://openalex.org/A5070957075",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Pratik K. Agrawal",
+      "kind": "person",
+      "org": "Symbiosis International University",
+      "email": "pratik.agrawal@sitnagpur.siu.edu.in",
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Advancing molecular property prediction for environmental fate using graph neural networks: A comparative analysis",
+        "SIT Nagpur B.Tech. First Year Admission via JEE (Main) and any State Government Engineering Entrance Examination (ASGEEE 2027)"
+      ],
+      "url": "https://openalex.org/A5103201905",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Sanjay Kumar Singh",
+      "kind": "person",
+      "org": "Indian Institute of Technology BHU",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Mitigating Catastrophic Forgetting in Molecular Property Prediction via Refresh Learning and Pareto Optimization",
+        "Overcoming catastrophic forgetting in molecular property prediction using continual learning of sequential episodes",
+        "Combating Over-Smoothing in Graph Models with Half- Hop for Molecular Property Prediction"
+      ],
+      "url": "https://openalex.org/A5100696254",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Arvind W. Kiwelekar",
+      "kind": "person",
+      "org": "Dr. Babasaheb Ambedkar Technological University",
+      "email": null,
+      "sources": [
+        "openalex"
+      ],
+      "title": null,
+      "evidence": [
+        "Transformer Generative AI Model for Enhanced Molecular Property Prediction",
+        "Drug Target Interaction Prediction Using Optimized Interactive Neural Network"
+      ],
+      "url": "https://openalex.org/A5042287742",
+      "judge_score": null,
+      "judge_reason": null
+    }
+  ]
+}
