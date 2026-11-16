@@ -11,3 +11,6 @@ session_state.json
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Brain cache (fetched pages, API and LLM responses)
+.brain_cache.sqlite*
