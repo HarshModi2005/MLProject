@@ -53,6 +53,12 @@ aiohttp>=3.9.0
 tenacity>=8.2.0
 python-slugify>=8.0.0
 
+# --- Brain (discovery / ranking engine) ---
+groq>=0.11.0
+langchain-groq>=0.2.0
+rapidfuzz>=3.0.0        # fuzzy name / organisation matching
+dnspython>=2.4.0        # MX checks on discovered email domains (optional; skipped if missing)
+
 # --- Testing ---
 pytest>=8.0.0
 pytest-asyncio>=0.23.0

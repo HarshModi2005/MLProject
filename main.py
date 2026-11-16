@@ -251,5 +251,11 @@ def review():
         console.print("Review UI stopped.")
 
 
+# The new discovery / ranking / drafting engine:  python main.py brain --help
+from brain.cli import app as brain_app  # noqa: E402
+
+app.add_typer(brain_app, name="brain")
+
+
 if __name__ == "__main__":
     app()
