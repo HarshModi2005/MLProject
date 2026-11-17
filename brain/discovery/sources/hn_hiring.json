@@ -1,0 +1,4 @@
+{"name": "hn_hiring", "title": "Companies posting in Hacker News 'Who is hiring?' this month and last, often with a founder's email.",
+ "adapter": "python", "entry": "brain.discovery.hooks.hn:discover", "tier": 1, "cost": "free",
+ "kinds": ["org"], "stage": "seed", "order": 72, "proves": ["hiring"], "yields_email": true,
+ "policy": {"robots": "api", "rate_per_min": 60, "terms": "Public HN Algolia API."}}

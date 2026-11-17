@@ -31,7 +31,19 @@ def get_json(spec: SourceSpec, run, url: str, params: Optional[Dict[str, Any]] =
     cached = getattr(run.deps, "cache", None) is not None and \
         run.deps.cache.get("api", Cache.key(url, all_params or {})) is not None
     throttle(spec, cached=cached or bool(getattr(run.deps.settings, "replay", "")), owner=run.deps.fetcher)
+    if spec.cost == "paid" and not cached and hasattr(fetcher, "paid_calls"):
+        fetcher.paid_calls[spec.name] = fetcher.paid_calls.get(spec.name, 0) + 1
     return fetcher.get_json(url, params=all_params, headers=headers or None)
+
+
+def post_json(spec: SourceSpec, run, url: str, body: Dict[str, Any]) -> Any:
+    fetcher = run.deps.fetcher
+    headers, _ = auth_parts(spec)
+    cached = getattr(run.deps, "cache", None) is not None and run.deps.cache.get("api_post", Cache.key(url, body)) is not None
+    throttle(spec, cached=cached or bool(getattr(run.deps.settings, "replay", "")), owner=fetcher)
+    if spec.cost == "paid" and not cached and hasattr(fetcher, "paid_calls"):
+        fetcher.paid_calls[spec.name] = fetcher.paid_calls.get(spec.name, 0) + 1
+    return fetcher.post_json(url, body, headers=headers or None)
 
 
 def get_text(spec: SourceSpec, run, url: str, params: Optional[Dict[str, Any]] = None) -> Optional[str]:

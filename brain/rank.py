@@ -195,6 +195,8 @@ def prescore(contacts: List[Contact], spec: CampaignSpec, pack: Pack, backend: s
                            + w["quality"] * quality, 4)
         if c.kind == "org" and not c.org_domain and not c.emails:
             c.prescore = round(c.prescore * 0.7, 4)  # no website: nothing to read, usually nobody to write to
+        if s.get("warm_path"):  # the user knows them, or someone there: the best reply odds there are
+            c.prescore = round(min(1.0, c.prescore + 0.15 * s["warm_path"]), 4)
         if any(f.startswith("off_type:") for f in c.flags):
             c.prescore = round(c.prescore * 0.3, 4)  # a kind of organisation the campaign does not target
     return sorted(contacts, key=lambda c: c.prescore, reverse=True)

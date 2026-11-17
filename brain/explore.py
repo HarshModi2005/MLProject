@@ -22,6 +22,7 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
+from brain.discovery.graph import record as graph_record
 from brain.discovery.ledger import Ledger
 from brain.discovery.precision.fitmodel import FitModel
 from brain.discovery.precision.priors import order_seed_tools, pseudo
@@ -167,6 +168,8 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
 
     seed_tools, expand_tools = choose_tools(spec, pb, prof, has_seeds=bool(ctx.seed_names),
                                             use_memory=getattr(deps.settings, "use_memory", True))
+    seed_tools = [t for t in seed_tools if t in TOOLS]  # a playbook may name a source that is not installed
+    expand_tools = [t for t in expand_tools if t in TOOLS]
     from brain.discovery.router import skipped
 
     for why in skipped(spec, pb):
@@ -190,6 +193,7 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
             allowance = max(3, int(seed_budget * shares[name] / total_share)) if name in shares else None
             run_tool(name, allowance, [])
         current = pool()
+        graph_record(deps.store, current)  # so the graph walk can expand from this round's finds
         res.rounds.append({"round": 0, "tools": seed_tools, "spent": spent(), "qualified": len(qualified(current))})
     else:
         current = pool()
@@ -224,6 +228,7 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
             break
 
     res.contacts = current
+    graph_record(deps.store, current)
     res.qualified = len(qualified(current))
     res.ledger = ledger.report()
     return res

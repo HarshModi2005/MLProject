@@ -1,0 +1,4 @@
+{"name": "beat_walk", "title": "Other journalists covering the topic for the winners' outlets.",
+ "adapter": "python", "entry": "brain.discovery.walkers:beat_walk", "tier": 2, "cost": "search",
+ "kinds": ["person"], "stage": "expand", "order": 106, "proves": ["recent_coverage"], "yields_email": false,
+ "policy": {"robots": "respect", "terms": "Article pages read for bylines only."}}

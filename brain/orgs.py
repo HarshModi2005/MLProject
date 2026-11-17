@@ -344,7 +344,8 @@ def _role_fits(title: Optional[str], roles: List[str]) -> bool:
 
 class OrgEnricher:
     def __init__(self, fetcher: Fetcher, search: WebSearch, settings: Settings, find_people: bool = False,
-                 max_people_searches: int = 6):
+                 max_people_searches: int = 6, store=None, accept_prior: bool = False):
+        self.store, self.accept_prior = store, accept_prior  # cross-campaign email conventions (reach/patterns.py)
         self.fetcher, self.search, self.settings = fetcher, search, settings
         self.find_people = find_people
         self.max_people_searches = max_people_searches
@@ -377,18 +378,28 @@ class OrgEnricher:
         org.decision_maker = {"name": name, "title": title, "source": url}
         patterns = infer_domain_patterns(site_people, min_support=2)
         hit = next(((d, pn) for d, pn in patterns.items() if registrable_domain(d) == org.org_domain), None)
-        if not hit:
-            return None
-        domain, (pname, support) = hit
-        local = _patterns(name).get(pname)
-        if not local:
-            return None
         c = Contact(kind="person", name=name, title=title, org=org.name, org_domain=org.org_domain,
                     country=org.country, location_text=org.location_text, urls=[url] + org.urls,
                     evidence=list(org.evidence), bio=org.bio, sources=org.sources + ["decision_maker"],
                     flags=org.flags + ["email_from_pattern"], signals=dict(org.signals))
-        c.add_email(EmailCandidate(address=f"{local}@{domain}", confidence=0.7 if support >= 3 else 0.62,
-                                   method="pattern_confirmed", source_url=url))
+        if hit:
+            domain, (pname, support) = hit
+            local = _patterns(name).get(pname)
+            if not local:
+                return None
+            c.add_email(EmailCandidate(address=f"{local}@{domain}", confidence=0.7 if support >= 3 else 0.62,
+                                       method="pattern_confirmed", source_url=url))
+        else:
+            # No convention on the site: the one confirmed in earlier campaigns, or (if the playbook accepts
+            # flagged guesses) the usual one for this kind of organisation.
+            from brain.discovery.reach.patterns import guess
+
+            g = guess(c, self.store, self.accept_prior, domain=org.org_domain)
+            if g is None:
+                return None
+            g.source_url = url
+            c.add_email(g)
+            c.flags.append("email_guessed")
         self.stats["decision_makers_emailed"] += 1
         return c
 
@@ -554,7 +565,7 @@ class OrgEnricher:
             dm = self._find_decision_maker(org, roles, people)
             if dm is not None:
                 return dm
-        return self._fallback(org, spec, emails, best_person)
+        return self._fallback(org, spec, emails, best_person, roles)
 
     def _person_contact(self, org: Contact, best_person) -> Contact:
         person, good = best_person
@@ -567,12 +578,21 @@ class OrgEnricher:
         self.stats["person_contacts"] += 1
         return c
 
-    def _fallback(self, org: Contact, spec: CampaignSpec, emails: Dict[str, str], best_person) -> Contact:
-        """No decision-maker with an address: someone reachable, else the right shared inbox, else the owner's."""
+    def _fallback(self, org: Contact, spec: CampaignSpec, emails: Dict[str, str], best_person,
+                  roles: Optional[List[str]] = None) -> Contact:
+        """No decision-maker with an address: someone reachable, else a paid provider's personal address (only with
+        its key), else the right shared inbox, else the owner's."""
         # Someone reachable at the organisation, even if not in the ideal role — only when the address is clearly
         # theirs (a page title such as "Partner Spotlight" can look like a name and half-match partners@).
         if best_person and any(name_match(best_person[0].name, e.address) == 1.0 for e in best_person[1]):
             return self._person_contact(org, best_person)
+        if self.find_people:
+            from brain.discovery.reach.providers import hunter_person
+
+            paid = hunter_person(self.fetcher, org, roles or [])
+            if paid is not None:
+                self.stats["hunter_contacts"] = self.stats.get("hunter_contacts", 0) + 1
+                return paid
 
         # 3. The organisation's shared inbox, chosen to suit the ask (partnerships@ for sponsorship, ...).
         preferred = [p.lower() for p in spec.preferred_inboxes]
@@ -622,7 +642,7 @@ class OrgEnricher:
             people, emails, best_person = parked
             try:
                 dm = self._find_decision_maker(o, roles, people)
-                out[i] = dm if dm is not None else self._fallback(o, spec, emails, best_person)
+                out[i] = dm if dm is not None else self._fallback(o, spec, emails, best_person, roles)
             except Exception as e:
                 log.warning("decision-maker step failed for %s: %s", o.name, e)
                 o.flags.append("enrich_error")

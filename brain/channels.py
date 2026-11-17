@@ -163,8 +163,9 @@ def event_queries(spec: CampaignSpec) -> List[str]:
     return list(dict.fromkeys(q for q in out if q))
 
 
-def discover_events(run) -> Tuple[List[Contact], Dict]:
-    """Find similar past events and read who sponsored them (org campaigns) or spoke at them (person campaigns)."""
+def discover_events(run, queries: Optional[List[str]] = None, source: str = "events") -> Tuple[List[Contact], Dict]:
+    """Find similar past events and read who sponsored them (org campaigns) or spoke at them (person campaigns).
+    `queries` replaces the planned event searches (the sponsor walk passes searches built from known sponsors)."""
     from brain.discover import llm_extract
     from brain.orgs import is_aggregator
     from brain.triage import heuristic_kind
@@ -214,9 +215,14 @@ def discover_events(run) -> Tuple[List[Contact], Dict]:
         lim = search.remaining - 2
         return min(lim, run.budget - (search.calls - start)) if run.budget is not None else lim
 
+    planned = queries if queries is not None else event_queries(spec)
     planner.run(execute, have=lambda: len(found), budget_left=left, kind="events", first_round_max=5,
-                queries=[q for q in event_queries(spec) if not run.ctx.tried(q)][:6])
-    return list(found.values()), stats
+                queries=[q for q in planned if not run.ctx.tried(q)][:6])
+    out = list(found.values())
+    if source != "events":
+        for c in out:
+            c.sources = list(dict.fromkeys(c.sources + [source]))
+    return out, stats
 
 
 # ── jobs: public applicant-tracking boards ───────────────────────────────────

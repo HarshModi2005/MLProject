@@ -69,6 +69,7 @@ class Fetcher:
         self._host_last: Dict[str, float] = {}
         self._lock = threading.Lock()
         self.fetched = 0  # network fetches this run (cache hits excluded)
+        self.paid_calls: Dict[str, int] = {}  # calls to paid APIs this run, per provider (cache hits excluded)
         self.replay_misses = 0
 
     def _host_lock(self, host: str) -> threading.Lock:
@@ -181,6 +182,26 @@ class Fetcher:
         except (httpx.HTTPError, ValueError):
             data = None
         self.cache.set("api", key, {"data": data}, ttl=ttl if data is not None else 3600)
+        return data
+
+    def post_json(self, url: str, body: Dict, headers: Optional[Dict[str, str]] = None,
+                  ttl: float = 3 * 86400) -> Optional[object]:
+        """A JSON API that takes a POST body (e.g. Exa search). Cached by url + body; headers (API keys) are not part
+        of the key. Counts as a paid call when the caller says so (see paid_calls)."""
+        key = Cache.key(url, body)
+        cached = self.cache.get("api_post", key)
+        if cached is not None:
+            return cached.get("data")
+        if self.settings.replay:
+            self.replay_misses += 1
+            return None
+        self.fetched += 1
+        try:
+            r = self.client.post(url, json=body, headers={"Accept": "application/json", **(headers or {})})
+            data = r.json() if r.status_code == 200 else None
+        except (httpx.HTTPError, ValueError):
+            data = None
+        self.cache.set("api_post", key, {"data": data}, ttl=ttl if data is not None else 3600)
         return data
 
     def get_api_text(self, url: str, params: Optional[Dict] = None, ttl: float = 3 * 86400) -> Optional[str]:

@@ -7,6 +7,7 @@ json_api: a JSON API queried once per campaign term.
     "dedupe":  "id",                 # item path that identifies an item across terms
     "follow":  {"field": "feedUrl", "parse": "rss", "as": "feed", "max": 30}   # optional
 
+"request": {"method": "POST", "body": {...templates...}} posts a JSON body (paid search APIs such as Exa).
 "request": {"format": "text", ...} reads an API that answers in XML/text; the source's hook
 `parse(spec, text) -> [items]` turns it into items.
 Without "follow", each item is a record. With it, a record is {"item": <item>, "<as>": <what the URL held>}.
@@ -17,9 +18,17 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from brain.discovery.adapters.common import finish, follow_items, get_json, get_text
+from brain.discovery.adapters.common import finish, follow_items, get_json, get_text, post_json
 from brain.discovery.contracts import Record, SourceSpec
 from brain.discovery.normalize import campaign_terms, campaign_vars, get_path, hook, render
+
+
+def _render_deep(obj: Any, v: Dict[str, Any]) -> Any:
+    if isinstance(obj, dict):
+        return {k: _render_deep(x, v) for k, x in obj.items()}
+    if isinstance(obj, list):
+        return [_render_deep(x, v) for x in obj]
+    return " ".join(render(obj, v).split()) if isinstance(obj, str) else obj
 
 
 def query_items(spec: SourceSpec, run, stats: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -33,7 +42,10 @@ def query_items(spec: SourceSpec, run, stats: Dict[str, Any]) -> List[Dict[str, 
         v = dict(base, term=term)
         url = render(req["url"], v)
         params = {k: render(val, v) for k, val in (req.get("params") or {}).items()}
-        if req.get("format") == "text":  # an API answering in XML/text: the source's hook `parse` reads it
+        if req.get("method", "GET").upper() == "POST":  # a JSON body rendered from the campaign (e.g. Exa)
+            body = _render_deep(req.get("body") or {}, v)
+            data = post_json(spec, run, url, body)
+        elif req.get("format") == "text":  # an API answering in XML/text: the source's hook `parse` reads it
             text = get_text(spec, run, url, params or None)
             parse = hook(spec, "parse")
             data = parse(spec, text or "") if parse and text else []

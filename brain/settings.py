@@ -104,6 +104,7 @@ class Settings:
     prejudge: bool = field(default_factory=lambda: os.getenv("BRAIN_PREJUDGE", "1") not in ("0", "false", "no"))
     prejudge_limit: int = field(default_factory=lambda: _int("BRAIN_PREJUDGE_LIMIT", 0))  # 0 = max(30, 8 x target)
     prejudge_min: float = field(default_factory=lambda: _float("BRAIN_PREJUDGE_MIN", 0.3))
+    warm: bool = field(default_factory=lambda: os.getenv("BRAIN_WARM", "1") not in ("0", "false", "no"))  # imported network
     learned_fit: bool = field(default_factory=lambda: os.getenv("BRAIN_LEARNED_FIT", "1") not in ("0", "false", "no"))
 
     # Replay (benchmarks): "" = live; "replay" = network answers only from the cache (misses are skipped, never

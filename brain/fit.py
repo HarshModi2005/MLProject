@@ -25,8 +25,13 @@ from brain.textutil import strip_accents
 QUALIFIED_THRESHOLD = 0.25  # quick fit at or above this counts as a qualified find during discovery
 
 # Evidence a channel attaches is tagged in Contact.signals with these keys (value in [0, 1]).
-SIGNAL_KEYS = ("past_sponsorship", "hiring", "portfolio_fit", "recent_coverage", "publications", "audience",
-               "spoke_before", "local_business", "funding_focus", "open_source")
+def _signal_keys():
+    from brain.discovery.signals import proof_signals
+
+    return proof_signals()
+
+
+SIGNAL_KEYS = _signal_keys()  # every registered kind of proof (brain/discovery/signals.py)
 
 
 def _crit(d: dict) -> FitCriterion:
@@ -139,7 +144,9 @@ def reach_factor(contact: Contact) -> float:
         return 0.9
     if best.method in ("site",):
         return 0.85
-    if best.method == "pattern":
+    if best.method == "pattern_prior":
+        return 0.5
+    if best.method.startswith("pattern"):
         return 0.6
     return 1.0
 

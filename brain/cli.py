@@ -315,6 +315,39 @@ def bench(
         console.print(d)
 
 
+@app.command("network-import")
+def network_import(path: str):
+    """Import YOUR OWN contacts (LinkedIn Connections.csv, Google Contacts CSV, .vcf, or CSV name,email,company) so
+    campaigns can find people you know or can be introduced to. Stored locally only."""
+    from brain.discovery.warm.importers import read_file
+
+    people = read_file(path)
+    n = _deps().store.network_add(people)
+    kinds = sorted({p["source"] for p in people})
+    console.print(f"Imported {n} contacts ({', '.join(kinds) or 'none'}). Remove them any time with `brain network-clear`.")
+
+
+@app.command("network-stats")
+def network_stats():
+    """How many of your own contacts are imported."""
+    console.print(f"{_deps().store.network_size()} contacts in your network")
+
+
+@app.command("network-clear")
+def network_clear():
+    """Delete every imported contact of yours."""
+    console.print(f"Deleted {_deps().store.network_clear()} contacts")
+
+
+@app.command()
+def refresh(limit: int = typer.Option(500, help="How many remembered prospects to re-check.")):
+    """Re-check remembered prospects against free sources (job boards, podcast feeds); run on a schedule."""
+    from brain.discovery.index import refresh as do_refresh
+
+    deps = _deps()
+    console.print_json(json.dumps(do_refresh(deps.store, deps.fetcher, limit=limit)))
+
+
 @app.command("bench-screen")
 def bench_screen(
     run: str = typer.Option(..., help="A bench run label whose candidates were judged (evals/results/run_<label>)."),

@@ -1,0 +1,15 @@
+{
+  "name": "exa",
+  "title": "Organisations found by Exa's semantic search (paid; needs EXA_API_KEY).",
+  "adapter": "json_api",
+  "tier": 2, "cost": "paid", "kinds": ["org"], "stage": "seed", "order": 15,
+  "proves": ["topic"], "yields_email": false,
+  "auth": {"env": "EXA_API_KEY", "header": "x-api-key"},
+  "request": {"url": "https://api.exa.ai/search", "method": "POST",
+              "body": {"query": "{term} companies {place}", "numResults": 15, "type": "auto", "category": "company"}},
+  "query": {"terms": ["topics"], "max": 2},
+  "items": "results", "dedupe": "url",
+  "map": {"name": "title", "website": "url", "bio": "text"},
+  "evidence": "Exa: {title}",
+  "policy": {"robots": "api", "rate_per_min": 30, "terms": "Exa search API, billed per request by Exa."}
+}

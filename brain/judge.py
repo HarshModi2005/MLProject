@@ -65,8 +65,13 @@ def _card(c: Contact, max_evidence: int = 5) -> Dict:
     return card
 
 
-_PROOF_KEYS = ("past_sponsorship", "hiring", "portfolio_fit", "recent_coverage", "spoke_before", "open_roles",
-               "events_count", "local_business")
+def _judge_keys():
+    from brain.discovery.signals import judge_signals
+
+    return judge_signals()
+
+
+_PROOF_KEYS = _judge_keys()  # signals the judge sees as verified (brain/discovery/signals.py)
 
 
 def _best_evidence(c: Contact, k: int):

@@ -36,6 +36,10 @@ from typing import Any, Callable, Dict, List, Optional
 
 from brain.cache import Cache
 from brain.context import CampaignContext
+from brain.discovery.graph import record as graph_record
+from brain.discovery.reach.patterns import learn as learn_patterns, threshold as reach_threshold
+from brain.discovery.reach.providers import tag_tech
+from brain.discovery.reach.verify import verify_guesses
 from brain.discovery.precision.orgtype import gate as org_type_gate
 from brain.discovery.precision.prejudge import prejudge, reorder as reorder_screened
 from brain.explore import explore
@@ -131,6 +135,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     store.save_context(spec.id, ctx)
     # A per-campaign Serper budget sized to the target, never above the configured ceiling.
     total_budget = search_budget(spec.target_count, st.max_search_calls)
+    reach_min = reach_threshold(st, pack)  # lower when the playbook accepts flagged guesses
     budget_start = deps.search.calls
     deps.search.budget = budget_start + total_budget
     discovery_budget = int(total_budget * 0.55)  # the rest: contact details (~30%) and the backfill (~15%)
@@ -153,6 +158,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             "seconds": round(time.time() - started, 1),
         }
         funnel["cost"]["search_by_kind"] = dict(deps.search.by_kind)
+        if getattr(deps.fetcher, "paid_calls", None):
+            funnel["cost"]["paid_calls"] = dict(deps.fetcher.paid_calls)  # paid data providers (exa, hunter, builtwith)
         misses = getattr(deps.search, "replay_misses", 0) + getattr(deps.fetcher, "replay_misses", 0)
         if misses:
             funnel["cost"]["replay_misses"] = misses
@@ -180,6 +187,12 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     def rank_stage(contacts: List[Contact]) -> List[Contact]:
         kept, dropped = filter_contacts(contacts, spec, pack, is_blocked=blocked,
                                         defer_region=any(c.kind == "org" for c in contacts))
+        if st.warm and hasattr(store, "network_size") and store.network_size():
+            from brain.discovery.warm.paths import Network, annotate
+
+            w = annotate(kept, Network(store.network()))  # people the user knows, or can be introduced to
+            for k, v in w.items():
+                funnel.setdefault("warm_paths", {})[k] = funnel.get("warm_paths", {}).get(k, 0) + v
         ranked = prescore(kept, spec, pack, backend=st.embeddings)
         orgs = [c for c in ranked if c.kind == "org"]
         if orgs and st.light_read_factor > 0:
@@ -187,6 +200,10 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             n = OrgEnricher(deps.fetcher, deps.search, st).light_read(
                 orgs, spec, limit=min(80, max(15, spec.target_count * st.light_read_factor)))
             funnel["light_read"] = funnel.get("light_read", 0) + n
+            ranked = prescore(ranked, spec, pack, backend=st.embeddings)
+        tagged = tag_tech([c for c in ranked if c.kind == "org"], profile_for(spec, pack), deps.fetcher)
+        if tagged:  # paid (BUILTWITH_API_KEY), only when a criterion needs proof of a technology
+            funnel["uses_tech_tagged"] = funnel.get("uses_tech_tagged", 0) + tagged
             ranked = prescore(ranked, spec, pack, backend=st.embeddings)
         if st.org_type_gate:  # demote kinds of organisation the campaign does not target; drop directories
             ranked, typed = org_type_gate(ranked, spec, pack)
@@ -214,11 +231,12 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         enrich_stats: Dict[str, Any] = dict(funnel.get("enrichment") or {})
         if orgs_t:
             org_enricher = OrgEnricher(deps.fetcher, deps.search, st, find_people=True,
-                                       max_people_searches=st.max_people_searches)
+                                       max_people_searches=st.max_people_searches, store=store,
+                                       accept_prior=pack.accept_guessed)
             orgs_t = org_enricher.enrich_all(orgs_t, spec, pack)
             enrich_stats["organisations"] = org_enricher.stats
         if people_t:
-            enricher = Enricher(deps.fetcher, deps.search, deps.orcid, st)
+            enricher = Enricher(deps.fetcher, deps.search, deps.orcid, st, store=store, accept_prior=pack.accept_guessed)
             hints = [w for t in spec.topics for w in t.lower().split() if len(w) > 4] + \
                     (["computer", "comput", "cse", "informatics"] if spec.pack == "academic" else [])
             enricher.enrich(people_t, pool=pool, hint_terms=hints)
@@ -331,12 +349,12 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         # Many organisations publish no address. While too few are reachable, enrich the next candidates too
         # (page fetches, plus decision-maker searches only while budget remains).
         waves = 1
-        while waves < 3 and sum(has_usable_email(c, st.min_email_confidence) for c in targets) < spec.target_count * 2:
+        while waves < 3 and sum(has_usable_email(c, reach_min) for c in targets) < spec.target_count * 2:
             rest = [c for c in order if c.id not in done and not (c.org_domain and c.org_domain in done)]
             if not rest:
                 break
             batch = diversify(rest, min(len(rest), max(spec.target_count * 3, 20)), max_per_org=st.max_per_org * 4)
-            progress(f"enrich: only {sum(has_usable_email(c, st.min_email_confidence) for c in targets)} reachable; "
+            progress(f"enrich: only {sum(has_usable_email(c, reach_min) for c in targets)} reachable; "
                      f"trying the next {len(batch)}…")
             done |= {c.id for c in batch} | {c.org_domain for c in batch if c.org_domain}
             targets = reorder_screened(prescore(resolve(targets + enrich_stage(batch, ranked)), spec, pack,
@@ -345,8 +363,10 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         funnel["enrich_waves"] = waves
         funnel["enriched"] = len(targets)
         store.checkpoint(spec.id, "enrich", targets)
-    reachable = [c for c in targets if has_usable_email(c, st.min_email_confidence)]
+    reachable = [c for c in targets if has_usable_email(c, reach_min)]
     funnel["reachable"] = len(reachable)
+    funnel["graph_edges"] = graph_record(store, targets)  # decision-makers and sites read add edges
+    funnel["email_conventions_learned"] = learn_patterns(store, targets)
     note_sources(funnel, "enriched", targets)
     note_sources(funnel, "reachable", reachable)
     funnel["guessed_email_only"] = sum(1 for c in targets if c.emails and c not in reachable)
@@ -372,6 +392,10 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         shortlist = cp["contacts"]
     else:
         to_judge = reachable[: spec.target_count * 2]
+        checked = verify_guesses(to_judge, deps.fetcher)  # a guessed address must at least be deliverable
+        if checked["checked"]:
+            funnel["guess_verification"] = checked
+            to_judge = [c for c in to_judge if has_usable_email(c, reach_min)]
         if deps.llm.available:
             progress(f"judge: assessing fit for {len(to_judge)} people…")
             scored = judge_stage(to_judge)
@@ -489,7 +513,7 @@ def backfill(spec: CampaignSpec, pack, ctx: CampaignContext, deps: Deps, planner
     note_sources(funnel, "qualified", ranked, add=True)
     targets = enrich_stage(diversify(ranked, min(len(ranked), max(missing * 3, 10)), deps.settings.max_per_org * 4),
                            ranked)
-    reachable = [c for c in targets if has_usable_email(c, deps.settings.min_email_confidence)]
+    reachable = [c for c in targets if has_usable_email(c, reach_threshold(deps.settings, pack))]
     stats["reachable"] = len(reachable)
     note_sources(funnel, "reachable", reachable, add=True)
     if not reachable or not deps.llm.available:

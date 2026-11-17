@@ -172,7 +172,7 @@ def add_published_email(c: Contact, raw: str, confidence: float, source_url: Opt
     """An address a source publishes for this candidate. Shared inboxes are fine for organisations (as an inbox,
     like the ones read off their own sites); addresses nobody reads (noreply@, support@ ...) are skipped."""
     from brain.emailfinder import EMAIL_RE, is_role_address
-    from brain.orgs import NEVER_INBOXES
+    from brain.orgs import DEFAULT_INBOXES, NEVER_INBOXES
 
     m = EMAIL_RE.search(raw.replace("mailto:", "").split("?")[0].strip().lower()) if raw else None
     if not m:
@@ -181,7 +181,7 @@ def add_published_email(c: Contact, raw: str, confidence: float, source_url: Opt
     local = addr.split("@")[0].split("+")[0]  # support+android@ is still support@
     if local in NEVER_INBOXES or "noreply" in local or "no-reply" in local or addr.endswith("@github.com"):
         return False
-    if is_role_address(addr):
+    if is_role_address(addr) or local in DEFAULT_INBOXES:  # hiring@, partnerships@ ... are team inboxes
         if c.kind != "org":
             return False
         c.add_email(EmailCandidate(address=addr, confidence=0.7, method="inbox", source_url=source_url))
