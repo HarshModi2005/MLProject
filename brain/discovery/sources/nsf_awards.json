@@ -1,0 +1,14 @@
+{
+  "name": "nsf_awards",
+  "title": "US researchers funded by NSF to work on the topic, with the investigator's listed address.",
+  "adapter": "json_api",
+  "tier": 1, "cost": "free", "kinds": ["person"], "stage": "seed", "order": 6, "regions": ["US"],
+  "proves": ["grant_awarded"], "yields_email": true,
+  "request": {"url": "https://api.nsf.gov/services/v1/awards.json",
+              "params": {"keyword": "{term}", "dateStart": "{since_us}", "rpp": 25,
+                         "printFields": "id,title,piFirstName,piLastName,piEmail,awardeeName,awardeeCity,awardeeStateCode,startDate,estimatedTotalAmt,abstractText"}},
+  "query": {"terms": ["topics"], "max": 3},
+  "items": "response.award", "dedupe": "id",
+  "hooks": "brain.discovery.hooks.nsf",
+  "policy": {"robots": "api", "rate_per_min": 30, "terms": "Public NSF Award Search API."}
+}

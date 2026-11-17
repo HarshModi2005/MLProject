@@ -109,8 +109,10 @@ def _manifest(**kw):
 def test_builtin_manifests_load_and_keep_the_historical_tool_order():
     assert not [e for e in registry.errors() if "discovery/sources" in e[0]]
     names = list(TOOLS)
-    assert names[:13] == ["openalex", "orgs", "places", "web", "github", "news", "events", "jobs", "portfolio",
-                          "podcasts", "lookalike", "coauthors", "memory"]
+    legacy = ["openalex", "orgs", "places", "web", "github", "news", "events", "jobs", "portfolio", "podcasts",
+              "lookalike", "coauthors", "memory"]
+    assert [n for n in names if n in legacy] == legacy  # new sources slot in without reordering the old ones
+    assert {"arxiv", "nsf_awards", "npm", "huggingface", "gdelt", "google_play"} <= set(names)
     assert TOOLS["podcasts"].spec is not None and not TOOLS["podcasts"].needs_search
     assert TOOLS["news"].needs_search and TOOLS["jobs"].needs_search and TOOLS["jobs"].kinds == ("org",)
 
@@ -267,7 +269,7 @@ def test_router_skips_sources_without_keys_or_outside_their_region(monkeypatch):
     monkeypatch.setenv("NO_SUCH_KEY_V3", "x")
     assert usable(keyed, spec, pb)[0]
     seed, expand = choose(spec, pb, profile_for(spec, pb), has_seeds=False)
-    assert seed == ["memory", "news", "podcasts"] and skipped(spec, pb) == []
+    assert seed == ["memory", "news", "gdelt", "podcasts"] and skipped(spec, pb) == []
 
 
 # ── ledger ───────────────────────────────────────────────────────────────────

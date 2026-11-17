@@ -2,7 +2,10 @@
 Records -> Contacts, plus the small template language manifests use.
 
 Templates: "{path}" reads a dotted path from the record (or the campaign variables when querying);
-"{path|lower}", "{path|upper}", "{path|quote}" apply a filter. A missing path renders as "".
+"{path|lower}", "{path|upper}", "{path|quote}" apply a filter; "{path|prefix=TEXT}" prepends TEXT only when
+the value is non-empty; "{path|default=TEXT}" fills an empty value. A missing path renders as "".
+Campaign variables: term, country, place, role, objective, since_iso / since_us (three years ago),
+recent_iso (90 days ago).
 
 Generic field map (manifest "map"), each value a record path or "=literal":
     name, kind, title, org, website, email, url, bio, location, country, topics, key
@@ -21,7 +24,7 @@ from brain.discovery.policy import allowed_field
 from brain.models import CampaignSpec, Contact, EmailCandidate, Evidence
 from brain.textutil import looks_like_person_name, registrable_domain, squash
 
-_TPL = re.compile(r"\{([^{}|]+)(?:\|(\w+))?\}")
+_TPL = re.compile(r"\{([^{}|]+)(?:\|(\w+)(?:=([^{}]*))?)?\}")
 
 
 def get_path(data: Any, path: str) -> Any:
@@ -47,13 +50,17 @@ def render(template: Any, values: Dict[str, Any]) -> Any:
     def sub(m: "re.Match[str]") -> str:
         v = get_path(values, m.group(1).strip())
         s = "" if v is None else str(v)
-        f = m.group(2)
+        f, arg = m.group(2), m.group(3)
         if f == "lower":
             return s.lower()
         if f == "upper":
             return s.upper()
         if f == "quote":
             return quote(s)
+        if f == "prefix":  # "{country|prefix= sourcecountry:}" -> " sourcecountry:IN", or "" when empty
+            return (arg or "") + s if s else ""
+        if f == "default":
+            return s or (arg or "")
         return s
 
     return _TPL.sub(sub, template)
@@ -78,7 +85,14 @@ def campaign_vars(spec: CampaignSpec, q: Dict[str, Any], playbook=None) -> Dict[
     country = spec.countries[0] if len(spec.countries) == 1 else str(q.get("default_country") or "")
     place = (spec.regions or [_country_name(c) for c in spec.countries] or [""])[0]
     roles = spec.persona.roles or (list(getattr(playbook, "default_roles", []) or []))
-    return {"country": country, "place": place, "role": (roles or [""])[0], "objective": spec.objective}
+    from datetime import date, timedelta
+
+    today = date.today()
+    since = today.replace(year=today.year - 3)
+    return {"country": country, "place": place, "role": (roles or [""])[0], "objective": spec.objective,
+            "country_name": _country_name(country).lower().replace(" ", "") if country else "",
+            "since_iso": since.isoformat(), "since_us": since.strftime("%m/%d/%Y"),
+            "recent_iso": (today - timedelta(days=90)).isoformat()}
 
 
 # ── hooks ────────────────────────────────────────────────────────────────────
@@ -127,10 +141,8 @@ def generic_contact(spec: SourceSpec, record: Record) -> Optional[Contact]:
     url = _field(spec, data, "url")
     if url and str(url).startswith("http"):
         c.add_url(str(url))
-    email = str(_field(spec, data, "email") or "").replace("mailto:", "").split("?")[0].strip().lower()
-    if "@" in email:
-        c.add_email(EmailCandidate(address=email, confidence=spec.email_confidence, method="published",
-                                   source_url=record.url or (str(url) if url else None)))
+    email = str(_field(spec, data, "email") or "")
+    add_published_email(c, email, spec.email_confidence, record.url or (str(url) if url else None))
     bio = _field(spec, data, "bio")
     if bio:
         c.bio = squash(str(bio), 600)
@@ -154,6 +166,28 @@ def generic_contact(spec: SourceSpec, record: Record) -> Optional[Contact]:
     for sig, v in spec.signals.items():
         c.signals[sig] = float(v)
     return c
+
+
+def add_published_email(c: Contact, raw: str, confidence: float, source_url: Optional[str]) -> bool:
+    """An address a source publishes for this candidate. Shared inboxes are fine for organisations (as an inbox,
+    like the ones read off their own sites); addresses nobody reads (noreply@, support@ ...) are skipped."""
+    from brain.emailfinder import EMAIL_RE, is_role_address
+    from brain.orgs import NEVER_INBOXES
+
+    m = EMAIL_RE.search(raw.replace("mailto:", "").split("?")[0].strip().lower()) if raw else None
+    if not m:
+        return False
+    addr = m.group(0).lower().strip(".")
+    local = addr.split("@")[0].split("+")[0]  # support+android@ is still support@
+    if local in NEVER_INBOXES or "noreply" in local or "no-reply" in local or addr.endswith("@github.com"):
+        return False
+    if is_role_address(addr):
+        if c.kind != "org":
+            return False
+        c.add_email(EmailCandidate(address=addr, confidence=0.7, method="inbox", source_url=source_url))
+        return True
+    c.add_email(EmailCandidate(address=addr, confidence=confidence, method="published", source_url=source_url))
+    return True
 
 
 def to_contact(spec: SourceSpec, record: Record, run=None) -> Optional[Contact]:

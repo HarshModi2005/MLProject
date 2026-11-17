@@ -30,8 +30,17 @@ def get_json(spec: SourceSpec, run, url: str, params: Optional[Dict[str, Any]] =
     all_params = {**(params or {}), **auth_params} or None
     cached = getattr(run.deps, "cache", None) is not None and \
         run.deps.cache.get("api", Cache.key(url, all_params or {})) is not None
-    throttle(spec, cached=cached or bool(getattr(run.deps.settings, "replay", "")))
+    throttle(spec, cached=cached or bool(getattr(run.deps.settings, "replay", "")), owner=run.deps.fetcher)
     return fetcher.get_json(url, params=all_params, headers=headers or None)
+
+
+def get_text(spec: SourceSpec, run, url: str, params: Optional[Dict[str, Any]] = None) -> Optional[str]:
+    _, auth_params = auth_parts(spec)
+    all_params = {**(params or {}), **auth_params} or None
+    cached = getattr(run.deps, "cache", None) is not None and \
+        run.deps.cache.get("api_text", Cache.key(url, all_params or {})) is not None
+    throttle(spec, cached=cached or bool(getattr(run.deps.settings, "replay", "")), owner=run.deps.fetcher)
+    return run.deps.fetcher.get_api_text(url, params=all_params)
 
 
 def select_one(node, selector: str, base_url: str) -> Optional[str]:
@@ -114,10 +123,16 @@ def text_matches(pattern: Optional[str], *texts: str) -> bool:
     return not pattern or bool(re.search(pattern, " ".join(t or "" for t in texts), re.I))
 
 
+def post_process(spec: SourceSpec, run, contacts: List, stats: Dict[str, Any]) -> List:
+    """A source's hook `post(spec, run, contacts, stats) -> contacts` (e.g. reading PDFs for author emails)."""
+    fn = hook(spec, "post")
+    return list(fn(spec, run, contacts, stats)) if fn else contacts
+
+
 def finish(spec: SourceSpec, run, records: List[Record], stats: Dict[str, Any]):
     col = Collector(spec, run)
     for r in records:
         col.add(r)
     stats["records"] = stats.get("records", 0) + len(records)
     stats["found"] = len(col)
-    return col.contacts(), stats
+    return post_process(spec, run, col.contacts(), stats), stats

@@ -9,7 +9,7 @@ Router: which sources a campaign uses.
        prospects); the user's examples put lookalike first; memory (free) always leads.
 
 A source is usable when its API key is present (manifest "auth"), it serves the campaign's countries
-(manifest "regions"), and it is enabled by default or the playbook names it.
+(manifest "regions"), and it is enabled by default, the playbook names it, or a criterion needs its proof.
 """
 
 from __future__ import annotations
@@ -20,7 +20,9 @@ from brain.models import CampaignSpec, ProspectProfile
 from brain.playbooks import Playbook
 
 
-def usable(tool, spec: CampaignSpec, pb: Playbook) -> Tuple[bool, str]:
+def usable(tool, spec: CampaignSpec, pb: Playbook, asked: bool = False) -> Tuple[bool, str]:
+    """`asked`: a criterion of this campaign needs the proof this source gives, which enables an off-by-default
+    source (e.g. google_play for a campaign that targets app makers)."""
     src = getattr(tool, "spec", None)
     if src is None:
         return True, ""
@@ -28,7 +30,7 @@ def usable(tool, spec: CampaignSpec, pb: Playbook) -> Tuple[bool, str]:
         return False, f"needs {src.auth.env}"
     if src.regions and "*" not in src.regions and spec.countries and not set(src.regions) & set(spec.countries):
         return False, "does not serve the campaign's countries"
-    if not src.enabled_by_default and tool.name not in pb.sources:
+    if not src.enabled_by_default and not asked and tool.name not in pb.sources:
         return False, "off by default"
     return True, ""
 
@@ -44,7 +46,7 @@ def choose(spec: CampaignSpec, pb: Playbook, prof: ProspectProfile, *, has_seeds
         if sig in covered or sig in ("topic", "location"):
             continue
         extra = next((t.name for t in TOOLS.values() if sig in t.proves and kind in t.kinds and t.name not in names
-                      and t.name not in ("memory",) and usable(t, spec, pb)[0]), None)
+                      and t.name not in ("memory",) and usable(t, spec, pb, asked=True)[0]), None)
         if extra:
             names.append(extra)
             covered |= set(TOOLS[extra].proves)

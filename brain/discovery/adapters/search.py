@@ -84,4 +84,6 @@ def collect(spec: SourceSpec, run):
     run.planner.run(execute, have=lambda: len(col), budget_left=left, kind=cfg.get("kind") or spec.name,
                     first_round_max=int(cfg.get("first_round_max") or 8), queries=queries)
     stats["found"] = len(col)
-    return col.contacts(), stats
+    from brain.discovery.adapters.common import post_process
+
+    return post_process(spec, run, col.contacts(), stats), stats

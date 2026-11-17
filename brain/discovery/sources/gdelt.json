@@ -1,0 +1,16 @@
+{
+  "name": "gdelt",
+  "title": "Journalists from recent articles on the topic worldwide (GDELT, free), read from bylines.",
+  "adapter": "json_api",
+  "tier": 1, "cost": "free", "kinds": ["person"], "stage": "seed", "order": 52,
+  "proves": ["recent_coverage"], "yields_email": false,
+  "request": {"url": "https://api.gdeltproject.org/api/v2/doc/doc",
+              "params": {"query": "\"{term}\" sourcelang:english{country_name|prefix= sourcecountry:}", "mode": "artlist",
+                         "format": "json", "maxrecords": 25, "timespan": "3months", "sort": "DateDesc"}},
+  "query": {"terms": ["topics"], "max": 2},
+  "items": "articles", "dedupe": "url",
+  "follow": {"field": "url", "parse": "html", "max": 12},
+  "hooks": "brain.discovery.hooks.gdelt",
+  "policy": {"robots": "respect", "rate_per_min": 12,
+             "terms": "GDELT DOC API asks for at most one request every 5 s; article pages read for bylines only."}
+}

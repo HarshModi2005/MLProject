@@ -1,0 +1,14 @@
+{
+  "name": "arxiv",
+  "title": "Researchers with recent arXiv papers on the topic, with the address their paper prints.",
+  "adapter": "json_api",
+  "tier": 1, "cost": "free", "kinds": ["person"], "stage": "seed", "order": 5,
+  "proves": ["publications"], "yields_email": true,
+  "request": {"url": "https://export.arxiv.org/api/query", "format": "text", "max_pdfs": 4,
+              "params": {"search_query": "all:\"{term}\"", "start": 0, "max_results": 10,
+                         "sortBy": "submittedDate", "sortOrder": "descending"}},
+  "query": {"terms": ["topics"], "max": 2},
+  "hooks": "brain.discovery.hooks.arxiv",
+  "policy": {"robots": "api", "rate_per_min": 20,
+             "terms": "arXiv API (one request per 3 s). PDFs from arxiv.org/pdf are read through the robots-aware fetcher (Crawl-delay honoured)."}
+}

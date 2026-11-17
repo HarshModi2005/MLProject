@@ -225,7 +225,13 @@ _ATS_PATTERNS = [
     ("greenhouse", re.compile(r"(?:boards|job-boards)\.greenhouse\.io/(?:embed/job_board\?for=)?([A-Za-z0-9_-]+)")),
     ("lever", re.compile(r"jobs\.lever\.co/([A-Za-z0-9_.-]+)")),
     ("ashby", re.compile(r"jobs\.ashbyhq\.com/([A-Za-z0-9_.%-]+)")),
+    ("workable", re.compile(r"apply\.workable\.com/(?!j/|api/)([A-Za-z0-9_-]+)")),
+    ("recruitee", re.compile(r"//(?!www\.|jobs\.)([A-Za-z0-9-]+)\.recruitee\.com")),
+    ("smartrecruiters", re.compile(r"(?:jobs|careers)\.smartrecruiters\.com/([A-Za-z0-9_-]+)")),
 ]
+# Two grouped searches per topic cover all six boards (verified: Google honours OR between site: filters).
+_ATS_SITE_GROUPS = [("boards.greenhouse.io", "jobs.lever.co", "jobs.ashbyhq.com"),
+                    ("apply.workable.com", "recruitee.com", "jobs.smartrecruiters.com")]
 
 
 def ats_token(url: str) -> Optional[Tuple[str, str]]:
@@ -261,6 +267,29 @@ def fetch_board(fetcher, ats: str, token: str) -> Tuple[str, List[Dict[str, str]
         for j in (data or {}).get("jobs", []) if isinstance(data, dict) else []:
             jobs.append({"title": str(j.get("title") or ""), "location": str(j.get("location") or ""),
                          "url": str(j.get("jobUrl") or ""), "date": str(j.get("publishedAt") or "")[:10]})
+    elif ats == "workable":
+        data = fetcher.get_json(f"https://apply.workable.com/api/v1/widget/accounts/{token}")
+        if isinstance(data, dict):
+            name = str(data.get("name") or name)
+            for j in data.get("jobs") or []:
+                where = ", ".join(x for x in (j.get("city"), j.get("country")) if x) + (" (remote)" if j.get("telecommuting") else "")
+                jobs.append({"title": str(j.get("title") or ""), "location": where, "url": str(j.get("url") or ""),
+                             "date": str(j.get("published_on") or "")[:10]})
+    elif ats == "recruitee":
+        data = fetcher.get_json(f"https://{token}.recruitee.com/api/offers/")
+        for j in (data or {}).get("offers", []) if isinstance(data, dict) else []:
+            name = str(j.get("company_name") or name)
+            jobs.append({"title": str(j.get("title") or ""), "location": str(j.get("location") or ""),
+                         "url": str(j.get("careers_url") or ""), "date": str(j.get("published_at") or "")[:10]})
+    elif ats == "smartrecruiters":
+        data = fetcher.get_json(f"https://api.smartrecruiters.com/v1/companies/{token}/postings", params={"limit": 100})
+        for j in (data or {}).get("content", []) if isinstance(data, dict) else []:
+            name = str((j.get("company") or {}).get("name") or name)
+            loc = j.get("location") or {}
+            where = str(loc.get("fullLocation") or loc.get("city") or "") + (" (remote)" if loc.get("remote") else "")
+            jobs.append({"title": str(j.get("name") or ""), "location": where,
+                         "url": f"https://jobs.smartrecruiters.com/{token}/{j.get('id')}" if j.get("id") else "",
+                         "date": str(j.get("releasedDate") or "")[:10]})
     return name, [j for j in jobs if j["title"]]
 
 
@@ -289,7 +318,8 @@ def _guess_site(fetcher, name: str, token: str) -> Optional[str]:
 
 
 def discover_jobs(run) -> Tuple[List[Contact], Dict]:
-    """Companies hiring now, from public Greenhouse / Lever / Ashby boards found by search."""
+    """Companies hiring now, from public job boards found by search: Greenhouse, Lever, Ashby, Workable,
+    Recruitee and SmartRecruiters (each has a public JSON API for a company's open roles)."""
     from brain.orgs import _org_contact
 
     spec, search, fetcher, planner = run.spec, run.deps.search, run.deps.fetcher, run.planner
@@ -297,8 +327,8 @@ def discover_jobs(run) -> Tuple[List[Contact], Dict]:
     role_words = [r for r in (spec.persona.roles or [])][:2]
     queries = []
     for t in spec.topics[:3]:
-        for site in ("boards.greenhouse.io", "jobs.lever.co", "jobs.ashbyhq.com"):
-            queries.append(squash(f"site:{site} {t} {place}"))
+        for group in _ATS_SITE_GROUPS:
+            queries.append(squash("(" + " OR ".join(f"site:{g}" for g in group) + f") {t} {place}"))
     found: Dict[str, Contact] = {}
     stats = {"queries": 0, "boards": 0, "companies": 0, "in_region": 0}
     start = search.calls

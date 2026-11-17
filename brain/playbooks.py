@@ -81,7 +81,7 @@ _BUILTIN: List[Playbook] = [
         name="academic", allowed_org_classes=["academic"], title="Researchers and faculty",
         description="Professors, researchers or labs found through their publications: research internships, "
                     "PhD/postdoc inquiries, academic collaboration.",
-        target_kind="person", sources=["openalex", "coauthors", "web"],
+        target_kind="person", sources=["openalex", "arxiv", "nsf_awards", "coauthors", "web"],
         default_roles=["professor", "assistant professor", "associate professor", "principal investigator",
                        "research scientist", "lecturer", "reader"],
         reject_roles=["phd student", "student", "research scholar", "intern"], min_seniority=0.45,
@@ -188,7 +188,7 @@ _BUILTIN: List[Playbook] = [
     Playbook(
         name="recruiting", title="Recruiting candidates",
         description="Finding people to hire or invite: developers, designers, researchers, open-source contributors.",
-        target_kind="person", sources=["github"], accept_inboxes=False,
+        target_kind="person", sources=["github", "npm", "huggingface"], accept_inboxes=False,
         default_roles=["Engineer", "Developer", "Designer", "Researcher"],
         query_templates=["{topic} developer {place}", "{topic} engineer portfolio {place}"],
         judge_rubric="Their public work shows the required skills at the required level.",
@@ -202,7 +202,7 @@ _BUILTIN: List[Playbook] = [
     Playbook(
         name="pr_media", allowed_org_classes=["media"], title="Journalists and media",
         description="Journalists, editors, newsletter writers or podcasters, to pitch a story or get coverage.",
-        target_kind="person", sources=["news", "podcasts"], accept_inboxes=True,
+        target_kind="person", sources=["news", "gdelt", "podcasts"], accept_inboxes=True,
         preferred_inboxes=["news", "editor", "editorial", "tips", "press", "newsdesk", "story"],
         default_roles=["Journalist", "Reporter", "Editor", "Correspondent", "Writer", "Host"],
         query_templates=["{topic} {place}", "{topic} startup news {place}"],
@@ -253,7 +253,7 @@ _BUILTIN: List[Playbook] = [
     Playbook(
         name="speakers", allowed_org_classes=["academic", "media"], title="Speakers, judges and mentors",
         description="Experts to invite as speakers, judges, panelists, guests or mentors for an event or program.",
-        target_kind="person", sources=["events", "web", "openalex"], accept_inboxes=False,
+        target_kind="person", sources=["events", "web", "openalex", "arxiv"], accept_inboxes=False,
         default_roles=["Founder", "Director", "Head", "Professor", "Lead", "Principal"],
         query_templates=["{topic} speaker {place}", "{topic} expert {place}"],
         judge_rubric="Recognised expertise in the topic and plausible availability for this kind of invitation.",

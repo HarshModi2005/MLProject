@@ -7,6 +7,8 @@ json_api: a JSON API queried once per campaign term.
     "dedupe":  "id",                 # item path that identifies an item across terms
     "follow":  {"field": "feedUrl", "parse": "rss", "as": "feed", "max": 30}   # optional
 
+"request": {"format": "text", ...} reads an API that answers in XML/text; the source's hook
+`parse(spec, text) -> [items]` turns it into items.
 Without "follow", each item is a record. With it, a record is {"item": <item>, "<as>": <what the URL held>}.
 Template variables: term, country, place, role, objective.
 """
@@ -15,9 +17,9 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from brain.discovery.adapters.common import finish, follow_items, get_json
+from brain.discovery.adapters.common import finish, follow_items, get_json, get_text
 from brain.discovery.contracts import Record, SourceSpec
-from brain.discovery.normalize import campaign_terms, campaign_vars, get_path, render
+from brain.discovery.normalize import campaign_terms, campaign_vars, get_path, hook, render
 
 
 def query_items(spec: SourceSpec, run, stats: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -31,7 +33,12 @@ def query_items(spec: SourceSpec, run, stats: Dict[str, Any]) -> List[Dict[str, 
         v = dict(base, term=term)
         url = render(req["url"], v)
         params = {k: render(val, v) for k, val in (req.get("params") or {}).items()}
-        data = get_json(spec, run, url, params or None)
+        if req.get("format") == "text":  # an API answering in XML/text: the source's hook `parse` reads it
+            text = get_text(spec, run, url, params or None)
+            parse = hook(spec, "parse")
+            data = parse(spec, text or "") if parse and text else []
+        else:
+            data = get_json(spec, run, url, params or None)
         stats["requests"] = stats.get("requests", 0) + 1
         found = get_path(data, spec.items) if spec.items else data
         for it in found if isinstance(found, list) else []:

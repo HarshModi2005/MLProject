@@ -1,6 +1,6 @@
 {
   "name": "jobs",
-  "title": "Companies hiring now, from public Greenhouse / Lever / Ashby job boards.",
+  "title": "Companies hiring now, from public job boards (Greenhouse, Lever, Ashby, Workable, Recruitee, SmartRecruiters).",
   "adapter": "python",
   "entry": "brain.channels:discover_jobs",
   "tier": 2,
@@ -10,5 +10,5 @@
   "order": 70,
   "proves": ["hiring"],
   "yields_email": false,
-  "policy": {"robots": "api", "terms": "Public job-board APIs (boards-api.greenhouse.io, api.lever.co, api.ashbyhq.com)."}
+  "policy": {"robots": "api", "terms": "Public job-board APIs (Greenhouse, Lever, Ashby, Workable widget, Recruitee offers, SmartRecruiters postings)."}
 }

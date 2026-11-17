@@ -413,6 +413,7 @@ def test_free_tools_run_even_when_paid_tools_already_found_enough(monkeypatch):
     fake = {"news": Tool("news", "n", "search", tool("news", 30, True), True, ("recent_coverage",), ("person",)),
             "podcasts": Tool("podcasts", "p", "free", tool("podcasts", 3, False), False, ("audience",))}
     monkeypatch.setattr(ex, "TOOLS", fake)
+    monkeypatch.setattr("brain.tools.TOOLS", fake)  # the router reads the registry too
     st = Settings()
     st.serper_api_key, st.use_memory = "x", False
 
