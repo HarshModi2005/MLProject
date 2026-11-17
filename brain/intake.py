@@ -94,7 +94,9 @@ Rules:
   Do not ask about things already stated. Give every question a sensible default.
 - Topics describe the TARGETS (e.g. "dental clinics", "edtech startups"), not the sender's product.
 - offer, constraints, ask_detail.link/availability/deadline and language: only what the user stated; otherwise leave
-  them empty (never guess a price, a link or a size)."""
+  them empty (never guess a price, a link or a size).
+- criteria are qualities of a GOOD target beyond the topic, each with the SIGNAL that would prove it. Never make a
+  criterion of a location (that is "locations") or a job title / role (that is "persona.roles")."""
 
 REFINE_SYSTEM = f"""You update a cold-outreach campaign configuration with new information from the user (answers,
 corrections, uploaded lists). Apply corrections exactly; when the user answers a question, remove the corresponding
@@ -292,6 +294,8 @@ def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, targ
     except (TypeError, ValueError):
         count = 25
     kind = data.get("target_kind") if data.get("target_kind") in ("person", "org") else pb.target_kind
+    if kind == "person" and _org_only(pb):
+        kind = "org"  # this playbook's sources find organisations; the right person is reached through them
     return CampaignSpec(
         profile=_profile(data, persona, pb),
         event_queries=[str(q) for q in data.get("event_queries") or []][:4],
@@ -315,6 +319,18 @@ def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, targ
         playbook_alternatives=[a["name"] for a in data.get("playbook_alternatives") or []
                                if isinstance(a, dict) and a.get("name") in PLAYBOOKS and a["name"] != pb.name][:2],
     )
+
+
+def _org_only(pb) -> bool:
+    from brain.tools import TOOLS
+
+    kinds = [TOOLS[n].kinds for n in pb.sources if n in TOOLS and TOOLS[n].stage != "expand"]
+    return bool(kinds) and all(k == ("org",) for k in kinds)
+
+
+# Criteria that only restate a place or a role: those have their own fields (locations, persona.roles).
+_NOT_A_CRITERION = re.compile(r"\b(based|located|headquartered|operating) in\b|^in [A-Z]|\brole\b|\bjob title\b|"
+                              r"\bposition (is|of)\b|^(is|be) an? (journalist|principal|founder|professor|ceo|cto)\b", re.I)
 
 
 def _float(v) -> Optional[float]:
@@ -398,6 +414,8 @@ def _profile(data: Dict[str, Any], persona: Dict[str, Any], pb) -> ProspectProfi
             continue
         name = squash(str(c["name"]), 120)
         sig = str(c.get("signal") or "topic")
+        if sig == "location" or _NOT_A_CRITERION.search(name):
+            continue  # a place or a role, already captured as locations / persona.roles
         try:
             weight = max(0.5, min(3.0, float(c.get("weight") or 1)))
         except (TypeError, ValueError):

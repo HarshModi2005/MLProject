@@ -33,7 +33,11 @@ def score_case(case: Dict[str, Any], spec, data: Dict[str, Any], questions: List
         topics = " ".join(low(spec.topics + spec.expanded_terms))
         checks["topics"] = any(t in topics for t in e["topic_any"])
     if "criteria_signal_any" in e:
-        checks["criteria"] = any(c.signal in e["criteria_signal_any"] for c in spec.profile.criteria)
+        from brain.fit import profile_for
+        from brain.playbooks import get_playbook
+
+        prof = profile_for(spec, get_playbook(spec.pack))  # what discovery uses: intake criteria + playbook defaults
+        checks["criteria"] = any(c.signal in e["criteria_signal_any"] for c in prof.criteria)
     if "ask_type" in e:
         checks["ask_type"] = spec.ask_detail.type in e["ask_type"]
     if "exclude_any" in e:
@@ -57,9 +61,24 @@ def score_case(case: Dict[str, Any], spec, data: Dict[str, Any], questions: List
     # Invented sender facts: numbers in the facts that the request did not contain.
     import re
 
-    nums = set(re.findall(r"\d[\d,.]*k?", facts.lower())) - set(re.findall(r"\d[\d,.]*k?", case["prompt"].lower()))
+    nums = _numbers(facts) - _numbers(case["prompt"])
     checks["no_invented_numbers"] = not nums
     return checks
+
+
+def _numbers(text: str) -> set:
+    """Numbers as values: '80k' == '80,000' == '80000'; trailing punctuation ignored."""
+    import re
+
+    out = set()
+    for raw in re.findall(r"\d[\d,]*(?:\.\d+)?\s?[kKmM]?", text or ""):
+        t = raw.replace(",", "").replace(" ", "").lower()
+        mult = 1000 if t.endswith("k") else 1_000_000 if t.endswith("m") else 1
+        try:
+            out.add(round(float(t.rstrip("km")) * mult, 2))
+        except ValueError:
+            continue
+    return out
 
 
 def run(llm, only: Optional[List[str]] = None, progress=print) -> Dict[str, Any]:
