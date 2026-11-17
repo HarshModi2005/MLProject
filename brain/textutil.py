@@ -14,6 +14,13 @@ HONORIFICS = {
 
 # Words that appear in navigation, headings and organisation names but never in a person's name.
 NOT_NAME_WORDS = {
+    # page sections and company words that make page titles look like names ("Partner Spotlight")
+    "partner", "partners", "partnership", "spotlight", "customer", "customers", "stories", "story", "sponsor",
+    "sponsors", "member", "members", "community", "featured", "insights", "resources", "webinar", "webinars",
+    "testimonials", "clients", "client", "portfolio", "investors", "mission", "vision", "values", "impact",
+    "report", "updates", "newsroom", "gallery", "ecosystem", "support", "pricing", "features", "platform",
+    "developers", "enterprise", "startups", "ventures", "capital", "holdings", "technologies", "studio",
+    "solutions", "official", "limited", "pvt", "ltd", "inc", "llc",
     "department", "university", "institute", "college", "school", "faculty", "research", "home",
     "contact", "about", "people", "staff", "team", "news", "events", "publications", "projects",
     "teaching", "students", "alumni", "group", "lab", "laboratory", "centre", "center", "office",

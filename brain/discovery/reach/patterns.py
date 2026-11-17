@@ -8,7 +8,8 @@ convention (brain_domain_patterns), so the second campaign that meets an outlet 
 
     pattern_global  the domain's convention confirmed by earlier addresses     confidence 0.55-0.62
     pattern_prior   a common convention, for playbooks that accept guesses     confidence 0.50
-                    (Playbook.accept_guessed): first@ for companies, first.last@ for media
+                    (Playbook.accept_guessed): first@ at companies only — never at news outlets,
+                    universities, government or directories
 Both require the domain to accept mail (MX), and both are marked so drafts and reviewers know.
 """
 
@@ -57,9 +58,11 @@ def _prior(domain: str, c: Contact) -> Optional[str]:
     from brain.discovery.precision.orgtype import classify
 
     cls, _ = classify(Contact(kind="org", name=c.org or domain, org=c.org, org_domain=domain))
-    if cls in ("academic", "government", "publisher", "directory"):
-        return None  # large institutions: conventions vary too much to guess
-    return "first.last" if cls == "media" or "journalist" in (c.title or "").lower() else "first"
+    if cls in ("academic", "government", "publisher", "directory", "media") or "journalist" in (c.title or "").lower():
+        # Large institutions vary too much, and outlets often mail from another domain than their website
+        # (indiatimes.com vs timesgroup.com): only a convention confirmed by real addresses is used there.
+        return None
+    return "first"
 
 
 def guess(c: Contact, store=None, accept_prior: bool = False, domain: Optional[str] = None) -> Optional[EmailCandidate]:

@@ -41,6 +41,9 @@ _MEDIA_NAME = re.compile(r"\b(news|times|magazine|herald|tribune|gazette|chronic
                          r"today|weekly|media|broadcast(ing)?|tv|radio)\b", re.I)
 _MEDIA_TEXT = re.compile(r"\b(news (website|portal|outlet|organi[sz]ation)|newspaper|news ?room|digital media (company|"
                          r"platform)|media (house|company|outlet)|magazine)\b", re.I)
+# Job boards and startup lists named for what they list (topstartups.io, aijobs.net, startupslist.in ...).
+_LISTING_DOMAIN = re.compile(r"(^|[-_])?(jobs?|careers|hiring|directory|listings?|topstartups|startupslist|"
+                             r"startups-?list|companylist|toplist)([-_]|$)|^(top|best|list)[a-z]*(startups|companies|jobs)", re.I)
 _NONPROFIT = re.compile(r"\b(non-?profit|ngo|not-for-profit|charitable (trust|society)|charity|foundation)\b", re.I)
 
 # Words in the persona that ask for a type.
@@ -66,6 +69,8 @@ def classify(c: Contact, aggregator=None) -> Tuple[str, str]:
     text = " ".join([c.bio or ""] + [e.text for e in c.evidence[:2]])[:1500]
     if domain and aggregator(domain):
         return "directory", f"{domain} is a listing site"
+    if domain and _LISTING_DOMAIN.search(domain.split(".")[0]):
+        return "directory", f"{domain} looks like a job board or listing"
     if domain and any(domain.endswith(p) for p in _PUBLISHERS):
         return "publisher", f"{domain} is a publisher"
     if domain and _GOV_DOMAIN.search(domain):

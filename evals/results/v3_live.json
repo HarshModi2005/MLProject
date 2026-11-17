@@ -1,0 +1,1470 @@
+{
+  "label": "v3_live",
+  "replay": "",
+  "rows": [
+    {
+      "unique": 309,
+      "qualified": 195,
+      "reachable": 14,
+      "passed_judge": 10,
+      "shortlisted": 5,
+      "good@K": 5,
+      "precision@K": 1.0,
+      "mean_score": 0.799,
+      "distinct_orgs": 5,
+      "proof_rate": 0.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 2,
+      "llm_paid_calls": 4,
+      "llm_usd": 0.0048,
+      "pages_fetched": 33,
+      "seconds": 231.7,
+      "usd_per_good": 0.0014,
+      "llm_by_purpose": {
+        "prejudge": 2,
+        "judge": 2
+      },
+      "by_source": {
+        "openalex": 300,
+        "arxiv": 11
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Source nsf_awards: does not serve the campaign's countries; skipped."
+      ],
+      "source_funnel": {
+        "unique": {
+          "openalex": 298,
+          "arxiv": 11
+        },
+        "qualified": {
+          "openalex": 190,
+          "arxiv": 5
+        },
+        "enriched": {
+          "openalex": 30
+        },
+        "reachable": {
+          "openalex": 14
+        },
+        "passed_judge": {
+          "openalex": 10
+        },
+        "shortlisted": {
+          "openalex": 5
+        }
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 5.96,
+          "found": 300,
+          "new": 300,
+          "qualified": 250
+        },
+        "arxiv": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 6,
+          "llm_calls": 0,
+          "seconds": 69.19,
+          "found": 11,
+          "new": 11,
+          "qualified": 11
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Swagatam Das",
+          "org": "Indian Statistical Institute",
+          "email": "swagatam.das@isical.ac.in",
+          "score": 0.8634,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent papers on graph neural networks"
+          ]
+        },
+        {
+          "name": "Partha Basuchowdhuri",
+          "org": "Indian Association for the Cultivation of Science",
+          "email": "partha.basuchowdhuri@iacs.res.in",
+          "score": 0.8073,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks"
+          ]
+        },
+        {
+          "name": "Subhankar Mishra",
+          "org": "National Institute of Science Education and Research",
+          "email": "smishra@niser.ac.in",
+          "score": 0.7987,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Multiple recent publications on graph neural networks"
+          ]
+        },
+        {
+          "name": "Bhaskarjyoti Das",
+          "org": "PES University",
+          "email": "bhaskarjyoti01@gmail.com",
+          "score": 0.7675,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks"
+          ]
+        },
+        {
+          "name": "Sandeep Kumar",
+          "org": "Indian Institute of Technology Delhi",
+          "email": "ksandeep@ee.iitd.ac.in",
+          "score": 0.7588,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks"
+          ]
+        }
+      ],
+      "name": "academic_gnn",
+      "playbook": "academic",
+      "target": 5
+    },
+    {
+      "unique": 66,
+      "qualified": 66,
+      "reachable": 12,
+      "passed_judge": 4,
+      "shortlisted": 4,
+      "good@K": 4,
+      "precision@K": 0.8,
+      "mean_score": 0.806,
+      "distinct_orgs": 4,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 22,
+      "llm_paid_calls": 19,
+      "llm_usd": 0.0068,
+      "pages_fetched": 202,
+      "seconds": 327.6,
+      "usd_per_good": 0.0072,
+      "llm_by_purpose": {
+        "triage": 6,
+        "extract_orgs": 7,
+        "prejudge": 3,
+        "judge": 3
+      },
+      "by_source": {
+        "places": 16,
+        "orgs": 54
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "10 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 16,
+          "web": 19,
+          "orgs": 50,
+          "list": 31
+        },
+        "qualified": {
+          "places": 16,
+          "list": 31,
+          "orgs": 50,
+          "web": 19
+        },
+        "enriched": {
+          "list": 9,
+          "orgs": 14,
+          "places": 16,
+          "web": 5
+        },
+        "reachable": {
+          "list": 5,
+          "orgs": 11,
+          "places": 5,
+          "web": 6
+        },
+        "passed_judge": {
+          "list": 2,
+          "orgs": 4,
+          "web": 2
+        },
+        "shortlisted": {
+          "list": 2,
+          "orgs": 4,
+          "web": 2
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 6.52,
+          "found": 16,
+          "new": 16,
+          "qualified": 16
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 3,
+          "fetches": 5,
+          "llm_calls": 4,
+          "seconds": 30.73,
+          "found": 26,
+          "new": 26,
+          "qualified": 24
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Unico Connect",
+          "org": "Unico Connect",
+          "email": "sales@unicoconnect.com",
+          "score": 0.8632,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Specializes in mobile app development including Android, Flutter, React Native"
+          ]
+        },
+        {
+          "name": "OpenXcell",
+          "org": "OpenXcell",
+          "email": "sales@openxcell.com",
+          "score": 0.8392,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading mobile app development company in India"
+          ]
+        },
+        {
+          "name": "Krishangtechnolab",
+          "org": "Krishangtechnolab",
+          "email": "info@krishangtechnolab.com",
+          "score": 0.7818,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Specializes in mobile apps and React Native development"
+          ]
+        },
+        {
+          "name": "Binstellar",
+          "org": "Binstellar",
+          "email": "hello@binstellar.com",
+          "score": 0.7394,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Builds customized React Native applications"
+          ]
+        }
+      ],
+      "name": "b2b_app_devs",
+      "playbook": "b2b_sales",
+      "target": 5
+    },
+    {
+      "unique": 47,
+      "qualified": 47,
+      "reachable": 5,
+      "passed_judge": 7,
+      "shortlisted": 6,
+      "good@K": 5,
+      "precision@K": 0.833,
+      "mean_score": 0.733,
+      "distinct_orgs": 6,
+      "proof_rate": 0.667,
+      "personal_email_rate": 0.167,
+      "search_calls": 12,
+      "llm_paid_calls": 5,
+      "llm_usd": 0.0037,
+      "pages_fetched": 28,
+      "seconds": 68.2,
+      "usd_per_good": 0.0031,
+      "llm_by_purpose": {
+        "prejudge": 2,
+        "judge": 2,
+        "extract_orgs": 1
+      },
+      "by_source": {
+        "places": 42,
+        "lookalike": 18
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "places": 35,
+          "list": 10,
+          "lookalike": 12,
+          "web": 2
+        },
+        "qualified": {
+          "places": 35,
+          "web": 2,
+          "lookalike": 12,
+          "list": 10
+        },
+        "enriched": {
+          "places": 16
+        },
+        "reachable": {
+          "places": 5,
+          "list": 2,
+          "lookalike": 2
+        },
+        "passed_judge": {
+          "list": 2,
+          "lookalike": 2,
+          "places": 5
+        },
+        "shortlisted": {
+          "list": 2,
+          "lookalike": 2,
+          "places": 4
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.0,
+          "found": 32,
+          "new": 32,
+          "qualified": 32
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Excel Dental Care | Jayanagar, Bengaluru",
+          "org": "Excel Dental Care | Jayanagar, Bengaluru",
+          "email": "1exceldentalcare@gmail.com",
+          "score": 0.7892,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Dental clinic in Bangalore with orthodontist and dental surgeons"
+          ]
+        },
+        {
+          "name": "Dr Braces",
+          "org": "Dr Braces",
+          "email": "drbracesandfaces@gmail.com",
+          "score": 0.7657,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Largest Invisalign centre in Bangalore"
+          ]
+        },
+        {
+          "name": "Dentistree Bangalore",
+          "org": "Dentistree Advanced Dental & Implant Center",
+          "email": "dentistree.bangalore@gmail.com",
+          "score": 0.7339,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Bangalore with specialist dentists"
+          ]
+        },
+        {
+          "name": "House of Dentistry",
+          "org": "House of Dentistry",
+          "email": "info@houseofdentistry.in",
+          "score": 0.7099,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic near Sadashiva Nagar and Malleshwaram"
+          ]
+        },
+        {
+          "name": "Chisel Dental Clinic",
+          "org": "Chisel Dental Clinic",
+          "email": "chiseldentalclinics@gmail.com",
+          "score": 0.7088,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Koramangala Bangalore"
+          ]
+        },
+        {
+          "name": "Dental Conceptz",
+          "org": "Dental Conceptz",
+          "email": "dentalconceptz@gmail.com",
+          "score": 0.6882,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Dental clinic in Bangalore offering expert dental care"
+          ]
+        }
+      ],
+      "name": "b2b_dental_bangalore",
+      "playbook": "b2b_sales",
+      "target": 6
+    },
+    {
+      "unique": 29,
+      "qualified": 29,
+      "reachable": 14,
+      "passed_judge": 10,
+      "shortlisted": 5,
+      "good@K": 5,
+      "precision@K": 1.0,
+      "mean_score": 0.791,
+      "distinct_orgs": 5,
+      "proof_rate": 0.4,
+      "personal_email_rate": 0.0,
+      "search_calls": 15,
+      "llm_paid_calls": 13,
+      "llm_usd": 0.0068,
+      "pages_fetched": 88,
+      "seconds": 177.7,
+      "usd_per_good": 0.0044,
+      "llm_by_purpose": {
+        "triage": 3,
+        "extract_orgs": 6,
+        "prejudge": 2,
+        "judge": 2
+      },
+      "by_source": {
+        "orgs": 29
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "web": 15,
+          "orgs": 29,
+          "list": 14
+        },
+        "qualified": {
+          "web": 15,
+          "orgs": 29,
+          "list": 14
+        },
+        "enriched": {
+          "web": 12,
+          "orgs": 22,
+          "list": 10
+        },
+        "reachable": {
+          "web": 8,
+          "orgs": 14,
+          "list": 6
+        },
+        "passed_judge": {
+          "web": 7,
+          "orgs": 10,
+          "list": 3
+        },
+        "shortlisted": {
+          "web": 4,
+          "orgs": 5,
+          "list": 1
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 8,
+          "llm_calls": 9,
+          "seconds": 42.62,
+          "found": 29,
+          "new": 29,
+          "qualified": 26
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Photovoltaic Solar",
+          "org": "Photovoltaic Solar",
+          "email": "info@photovoltaicsolar.in",
+          "score": 0.833,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "EPC & solar distribution company in Gujarat"
+          ]
+        },
+        {
+          "name": "Gracerenew",
+          "org": "Gracerenew",
+          "email": "info@gracerenew.com",
+          "score": 0.8068,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Solar EPC provider in Ahmedabad, Gujarat"
+          ]
+        },
+        {
+          "name": "Voltah",
+          "org": "Voltah",
+          "email": "info@thevoltah.com",
+          "score": 0.7871,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Manufacturer of solar inverters and panels in Gujarat"
+          ]
+        },
+        {
+          "name": "Kashyap Infraprojects",
+          "org": "Kashyap Infraprojects",
+          "email": "info@kashyap.in",
+          "score": 0.7761,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Award-winning Solar EPC company in Gujarat"
+          ]
+        },
+        {
+          "name": "Greenrevolutionpowerpark",
+          "org": "Greenrevolutionpowerpark",
+          "email": "info@greenrevolutionpowerpark.com",
+          "score": 0.75,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Top Solar EPC company based in Gujarat"
+          ]
+        }
+      ],
+      "name": "distributors_solar",
+      "playbook": "partnerships",
+      "target": 5
+    },
+    {
+      "unique": 47,
+      "qualified": 47,
+      "reachable": 5,
+      "passed_judge": 5,
+      "shortlisted": 5,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.671,
+      "distinct_orgs": 5,
+      "proof_rate": 0.6,
+      "personal_email_rate": 0.2,
+      "search_calls": 23,
+      "llm_paid_calls": 19,
+      "llm_usd": 0.0064,
+      "pages_fetched": 146,
+      "seconds": 204.5,
+      "usd_per_good": 0.0294,
+      "llm_by_purpose": {
+        "triage": 9,
+        "extract_orgs": 5,
+        "prejudge": 3,
+        "judge": 2
+      },
+      "by_source": {
+        "orgs": 45,
+        "lookalike": 9
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "web": 42,
+          "orgs": 40,
+          "list": 5,
+          "lookalike": 7
+        },
+        "qualified": {
+          "web": 42,
+          "orgs": 40,
+          "list": 5,
+          "lookalike": 7
+        },
+        "enriched": {
+          "web": 12,
+          "orgs": 13,
+          "list": 1
+        },
+        "reachable": {
+          "web": 8,
+          "orgs": 8
+        },
+        "passed_judge": {
+          "web": 5,
+          "orgs": 5
+        },
+        "shortlisted": {
+          "web": 5,
+          "orgs": 5
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 2,
+          "llm_calls": 6,
+          "seconds": 26.64,
+          "found": 28,
+          "new": 28,
+          "qualified": 26
+        }
+      },
+      "shortlist": [
+        {
+          "name": "E-Class",
+          "org": "E-Class",
+          "email": "info@e-class.in",
+          "score": 0.7539,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Trusted CSR partner for digital education in Maharashtra"
+          ]
+        },
+        {
+          "name": "Anylan Foundation",
+          "org": "Anylan Foundation",
+          "email": "connect@anylanfoundation.org",
+          "score": 0.6986,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Active in Maharashtra with CSR-funded STEM labs"
+          ]
+        },
+        {
+          "name": "NavDrishti Digital Trust",
+          "org": "NavDrishti Digital Trust",
+          "email": "info@navdrishtidigital.com",
+          "score": 0.6886,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Supports education and digital literacy in Maharashtra"
+          ]
+        },
+        {
+          "name": "Corporate Governance",
+          "org": "Bharat Forge Pune, India",
+          "email": "corporate.communication@bharatforge.com",
+          "score": 0.6729,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Supports education of girls through CSR initiative"
+          ]
+        },
+        {
+          "name": "Metro Brands Ltd",
+          "org": "Metro Brands Ltd",
+          "email": "info@metrobrands.com",
+          "score": 0.5433,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Has supported education for girls in Maharashtra"
+          ]
+        }
+      ],
+      "name": "grants_csr_india",
+      "playbook": "grants",
+      "target": 5
+    },
+    {
+      "unique": 57,
+      "qualified": 47,
+      "reachable": 6,
+      "passed_judge": 6,
+      "shortlisted": 5,
+      "good@K": 4,
+      "precision@K": 0.8,
+      "mean_score": 0.717,
+      "distinct_orgs": 5,
+      "proof_rate": 0.8,
+      "personal_email_rate": 0.4,
+      "search_calls": 17,
+      "llm_paid_calls": 10,
+      "llm_usd": 0.004,
+      "pages_fetched": 52,
+      "seconds": 73.8,
+      "usd_per_good": 0.0053,
+      "llm_by_purpose": {
+        "judge": 2,
+        "extract_orgs": 4,
+        "triage": 3,
+        "prejudge": 1
+      },
+      "by_source": {
+        "portfolio": 21,
+        "orgs": 37,
+        "lookalike": 12
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "web": 22,
+          "portfolio": 21,
+          "orgs": 29,
+          "list": 35,
+          "lookalike": 10
+        },
+        "qualified": {
+          "web": 15,
+          "portfolio": 17,
+          "orgs": 23,
+          "list": 32,
+          "lookalike": 10
+        },
+        "enriched": {
+          "web": 9,
+          "portfolio": 15,
+          "orgs": 22,
+          "list": 25,
+          "decision_maker": 1
+        },
+        "reachable": {
+          "web": 2,
+          "portfolio": 3,
+          "decision_maker": 1,
+          "list": 8,
+          "orgs": 3,
+          "lookalike": 4
+        },
+        "passed_judge": {
+          "list": 5,
+          "lookalike": 2,
+          "web": 1,
+          "portfolio": 2,
+          "decision_maker": 1,
+          "orgs": 2
+        },
+        "shortlisted": {
+          "list": 4,
+          "lookalike": 2,
+          "web": 1,
+          "portfolio": 2,
+          "decision_maker": 1,
+          "orgs": 1
+        }
+      },
+      "ledger": {
+        "portfolio": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 1,
+          "llm_calls": 0,
+          "seconds": 2.17,
+          "found": 21,
+          "new": 21,
+          "qualified": 20
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.21,
+          "found": 26,
+          "new": 23,
+          "qualified": 23
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Ajuniorvc",
+          "org": "Ajuniorvc",
+          "email": "team@ajuniorvc.com",
+          "score": 0.7528,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Focuses on pre-seed and seed investments"
+          ]
+        },
+        {
+          "name": "Mark Grovic",
+          "org": "New Markets Venture Partners",
+          "email": "mgrovic@newmarketsvp.com",
+          "score": 0.7367,
+          "sources": [
+            "web",
+            "portfolio",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Leading edtech venture capital firm"
+          ]
+        },
+        {
+          "name": "Christopher Nyren",
+          "org": "Educated Ventures",
+          "email": "cnyren@educatedventures.com",
+          "score": 0.7342,
+          "sources": [
+            "list",
+            "portfolio"
+          ],
+          "reasons": [
+            "Advisory and investment in education industry"
+          ]
+        },
+        {
+          "name": "3One4Capital",
+          "org": "3One4Capital",
+          "email": "hello@3one4capital.com",
+          "score": 0.7163,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Invests in early-stage companies in India"
+          ]
+        },
+        {
+          "name": "Terex Ventures",
+          "org": "Terex Ventures",
+          "email": "info@terexventures.com",
+          "score": 0.6461,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Works with education technology sector"
+          ]
+        }
+      ],
+      "name": "investors_edtech",
+      "playbook": "fundraising",
+      "target": 5
+    },
+    {
+      "unique": 38,
+      "qualified": 38,
+      "reachable": 11,
+      "passed_judge": 8,
+      "shortlisted": 5,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.666,
+      "distinct_orgs": 4,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.8,
+      "search_calls": 4,
+      "llm_paid_calls": 3,
+      "llm_usd": 0.0044,
+      "pages_fetched": 20,
+      "seconds": 47.8,
+      "usd_per_good": 0.0084,
+      "llm_by_purpose": {
+        "prejudge": 1,
+        "judge": 2
+      },
+      "by_source": {
+        "hn_hiring": 13,
+        "orgs": 25
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "hn_hiring": 13,
+          "list": 19,
+          "orgs": 25,
+          "web": 6
+        },
+        "qualified": {
+          "web": 6,
+          "orgs": 25,
+          "list": 19,
+          "hn_hiring": 13
+        },
+        "enriched": {
+          "web": 4,
+          "orgs": 27,
+          "list": 23,
+          "decision_maker": 9
+        },
+        "reachable": {
+          "web": 4,
+          "orgs": 11,
+          "list": 7,
+          "decision_maker": 9
+        },
+        "passed_judge": {
+          "web": 3,
+          "orgs": 8,
+          "decision_maker": 6,
+          "list": 5
+        },
+        "shortlisted": {
+          "web": 2,
+          "orgs": 5,
+          "decision_maker": 4,
+          "list": 3
+        }
+      },
+      "ledger": {
+        "hn_hiring": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 7,
+          "llm_calls": 0,
+          "seconds": 4.08,
+          "found": 13,
+          "new": 13,
+          "qualified": 13
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 3,
+          "llm_calls": 0,
+          "seconds": 3.21,
+          "found": 25,
+          "new": 25,
+          "qualified": 25
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Arif Masum Mallick",
+          "org": "Techasoft",
+          "email": "arif@techasoft.com",
+          "score": 0.707,
+          "sources": [
+            "web",
+            "orgs",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Founder of AI startup specializing in generative AI and machine learning"
+          ]
+        },
+        {
+          "name": "Shiva Kumar M",
+          "org": "Advance Sensing",
+          "email": "shiva@advancesensing.com",
+          "score": 0.6924,
+          "sources": [
+            "web",
+            "orgs",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Company works on machine vision and AI inspection in Bengaluru"
+          ]
+        },
+        {
+          "name": "Kai Brandt",
+          "org": "Topstartups",
+          "email": "kai@topstartups.io",
+          "score": 0.6851,
+          "sources": [
+            "list",
+            "orgs",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Founder of a startup listing platform"
+          ]
+        },
+        {
+          "name": "Valiance Solutions",
+          "org": "Valiance Solutions",
+          "email": "info@valiancesolutions.com",
+          "score": 0.6424,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Company works on AI, machine learning, analytics"
+          ]
+        },
+        {
+          "name": "Vikas Kamra",
+          "org": "Valiance Solutions",
+          "email": "vikas@valiancesolutions.com",
+          "score": 0.6027,
+          "sources": [
+            "list",
+            "orgs",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Founder & CEO of AI/ML company in Bangalore"
+          ]
+        }
+      ],
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5
+    },
+    {
+      "unique": 54,
+      "qualified": 49,
+      "reachable": 23,
+      "passed_judge": 10,
+      "shortlisted": 5,
+      "good@K": 4,
+      "precision@K": 0.8,
+      "mean_score": 0.744,
+      "distinct_orgs": 4,
+      "proof_rate": 1.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 0,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0031,
+      "pages_fetched": 38,
+      "seconds": 96.4,
+      "usd_per_good": 0.0008,
+      "llm_by_purpose": {
+        "judge": 2
+      },
+      "by_source": {
+        "gdelt": 0,
+        "podcasts": 26,
+        "news": 28
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "podcasts": 26,
+          "news": 28
+        },
+        "qualified": {
+          "news": 24,
+          "podcasts": 25
+        },
+        "enriched": {
+          "news": 21,
+          "podcasts": 9
+        },
+        "reachable": {
+          "news": 14,
+          "podcasts": 9
+        },
+        "passed_judge": {
+          "news": 9,
+          "podcasts": 1
+        },
+        "shortlisted": {
+          "news": 5
+        }
+      },
+      "ledger": {
+        "gdelt": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 2,
+          "llm_calls": 0,
+          "seconds": 12.96,
+          "found": 0,
+          "new": 0,
+          "qualified": 0
+        },
+        "podcasts": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 3.27,
+          "found": 26,
+          "new": 26,
+          "qualified": 19
+        },
+        "news": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 13,
+          "llm_calls": 0,
+          "seconds": 38.65,
+          "found": 28,
+          "new": 28,
+          "qualified": 28
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Ridhika Basnet",
+          "org": "Analytics India Magazine",
+          "email": "ridhika.basnet@analyticsindiamag.com",
+          "score": 0.804,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Covers AI impact at intersection of tech, policy, society"
+          ]
+        },
+        {
+          "name": "Kileuna Haralu",
+          "org": "Analytics India Magazine",
+          "email": "kileuna.haralu@analyticsindiamag.com",
+          "score": 0.7987,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Covers AI impact at intersection of tech, policy, society"
+          ]
+        },
+        {
+          "name": "Charlotte Lang",
+          "org": "Computer Weekly",
+          "email": "charlotte.lang@computerweekly.com",
+          "score": 0.7137,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Recent coverage on open source AI relevant to Indian AI context"
+          ]
+        },
+        {
+          "name": "Aditya Sudhindranath",
+          "org": "Fortune India",
+          "email": "aditya.sudhindranath@fortuneindia.com",
+          "score": 0.7071,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Recently wrote about Voice AI for Indian languages"
+          ]
+        },
+        {
+          "name": "Supriya Roy",
+          "org": "The Times of India",
+          "email": "supriya.roy@indiatimes.com",
+          "score": 0.6955,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Covers Indian startups and technology with a focus on India\u2019s new economy"
+          ]
+        }
+      ],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    },
+    {
+      "unique": 350,
+      "qualified": 15,
+      "reachable": 2,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 16,
+      "llm_paid_calls": 4,
+      "llm_usd": 0.0025,
+      "pages_fetched": 87,
+      "seconds": 225.9,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "prejudge": 1,
+        "judge": 1,
+        "extract": 2
+      },
+      "by_source": {
+        "openalex": 300,
+        "arxiv": 15,
+        "events": 37
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "openalex": 298,
+          "arxiv": 15,
+          "events": 37
+        },
+        "qualified": {
+          "openalex": 15
+        },
+        "enriched": {
+          "openalex": 15
+        },
+        "reachable": {
+          "openalex": 2
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 33.63,
+          "found": 300,
+          "new": 300,
+          "qualified": 291
+        },
+        "arxiv": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 6,
+          "llm_calls": 0,
+          "seconds": 76.91,
+          "found": 15,
+          "new": 15,
+          "qualified": 10
+        }
+      },
+      "shortlist": [],
+      "name": "speakers_ai_summit",
+      "playbook": "speakers",
+      "target": 5
+    },
+    {
+      "unique": 103,
+      "qualified": 102,
+      "reachable": 11,
+      "passed_judge": 8,
+      "shortlisted": 6,
+      "good@K": 2,
+      "precision@K": 0.333,
+      "mean_score": 0.692,
+      "distinct_orgs": 6,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.5,
+      "search_calls": 15,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0039,
+      "pages_fetched": 51,
+      "seconds": 55.2,
+      "usd_per_good": 0.0095,
+      "llm_by_purpose": {
+        "judge": 2
+      },
+      "by_source": {
+        "events": 61,
+        "orgs": 42
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "events": 101,
+          "web": 2,
+          "orgs": 42
+        },
+        "qualified": {
+          "events": 100,
+          "orgs": 42,
+          "web": 2
+        },
+        "enriched": {
+          "events": 58,
+          "orgs": 15,
+          "web": 1
+        },
+        "reachable": {
+          "events": 10,
+          "web": 1,
+          "orgs": 3
+        },
+        "passed_judge": {
+          "events": 7,
+          "orgs": 2,
+          "web": 1
+        },
+        "shortlisted": {
+          "events": 6,
+          "orgs": 1
+        }
+      },
+      "ledger": {
+        "events": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.35,
+          "found": 61,
+          "new": 61,
+          "qualified": 12
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.04,
+          "found": 42,
+          "new": 42,
+          "qualified": 42
+        }
+      },
+      "shortlist": [
+        {
+          "name": "OpenBuild",
+          "org": "OpenBuild",
+          "email": "build@openbuild.xyz",
+          "score": 0.8393,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Focus on developer content bridging Web2 and Web3"
+          ]
+        },
+        {
+          "name": "Savithri Parekh",
+          "org": "Reliance Industries Limited",
+          "email": "savithri.parekh@ril.com",
+          "score": 0.7331,
+          "sources": [
+            "events",
+            "orgs"
+          ],
+          "reasons": [
+            "Large Indian company with past sponsorship of tech events"
+          ]
+        },
+        {
+          "name": "Red Hat",
+          "org": "Red Hat",
+          "email": "apac@redhat.com",
+          "score": 0.6618,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Works on cloud and developer tools"
+          ]
+        },
+        {
+          "name": "Partner Spotlight",
+          "org": "Databricks",
+          "email": "partners@databricks.com",
+          "score": 0.6481,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Works on data, analytics and AI platforms"
+          ]
+        },
+        {
+          "name": "Frontline Workplace",
+          "org": "TeamViewer",
+          "email": "frontline-service@teamviewer.com",
+          "score": 0.6426,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Past sponsorship of AI hackathon shows event sponsorship experience"
+          ]
+        },
+        {
+          "name": "Storyblok",
+          "org": "Storyblok",
+          "email": "marketing@storyblok.com",
+          "score": 0.6256,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Content management system for developers and marketers"
+          ]
+        }
+      ],
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6
+    }
+  ],
+  "summary": {
+    "scenarios": 10,
+    "failed": 0,
+    "good@K": 31,
+    "precision@K": 0.597,
+    "mean_score": 0.662,
+    "distinct_orgs": 44,
+    "proof_rate": 0.647,
+    "reachable": 103,
+    "search_calls": 126,
+    "llm_paid_calls": 81,
+    "llm_usd": 0.0464,
+    "seconds": 1508.8,
+    "usd_per_good": 0.0056
+  }
+}

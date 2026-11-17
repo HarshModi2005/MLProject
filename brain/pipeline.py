@@ -67,6 +67,19 @@ log = logging.getLogger("brain.pipeline")
 STAGES = ["discover", "rank", "enrich", "judge", "draft"]
 
 
+HANDLE_SOURCES = ("npm", "huggingface", "github")  # people known by a username, not a full name
+
+
+def plausible_person(c: Contact) -> bool:
+    """A 'person' must have a person's name (page titles such as "Partner Spotlight" do not), unless the source
+    identifies people by handle."""
+    if c.kind == "org" or any(s in HANDLE_SOURCES for s in c.sources):
+        return True
+    from brain.textutil import looks_like_person_name
+
+    return looks_like_person_name(c.name)
+
+
 def count_sources(contacts: List[Contact]) -> Dict[str, int]:
     """How many of these candidates each source contributed (a candidate found by two sources counts for both)."""
     out: Dict[str, int] = {}
@@ -242,7 +255,9 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             enricher.enrich(people_t, pool=pool, hint_terms=hints)
             enrich_stats["people"] = enricher.stats
         out = orgs_t + people_t
-        if orgs_t:  # locations are known now that the sites have been read: apply the region rule strictly
+        if orgs_t or any("region_unknown" in c.flags for c in out):
+            # Locations may be known now (sites read, profile pages fetched): apply the region rule again. Orgs are
+            # judged strictly; people whose city is still not stated stay (flagged), people now known elsewhere go.
             out, late_drop = filter_contacts(out, spec, pack)
             merged = dict(funnel.get("dropped_after_reading_sites") or {})
             for k, v in late_drop.items():
@@ -251,6 +266,18 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         out = resolve(out)  # a newly found email can reveal two records are one person
         # Addresses are known now, so the do-not-contact check can be exact.
         out = [c for c in out if not blocked(c)]
+        # Enrichment creates new candidates (decision-makers, people listed on sites): they must look like real people
+        # and pass the same cheap screen as everyone else before they can reach the judge.
+        implausible = [c for c in out if not plausible_person(c)]
+        if implausible:
+            funnel["dropped_not_a_person"] = funnel.get("dropped_not_a_person", 0) + len(implausible)
+            out = [c for c in out if plausible_person(c)]
+        if st.prejudge and deps.llm.available:
+            fresh = [c for c in out if c.prejudge is None][:60]
+            if fresh:
+                prejudge(fresh, spec, deps.llm, prof=profile_for(spec, pack), min_score=st.prejudge_min,
+                         stats=funnel.setdefault("prejudge_after_enrich", {}), ctx=ctx)
+                out = [c for c in out if "prejudge_reject" not in c.flags]
         inbox_share = sum(1 for c in out if c.best_email and c.best_email.method == "inbox")
         if out and inbox_share > len(out) / 2:
             ctx.note("most organisations publish only a shared inbox, so many emails go to the team rather than a person")
@@ -391,7 +418,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     if cp:
         shortlist = cp["contacts"]
     else:
-        to_judge = reachable[: spec.target_count * 2]
+        to_judge = reachable[: spec.target_count * 3]  # a wider pool for the judge: it, not the pre-score, decides
         checked = verify_guesses(to_judge, deps.fetcher)  # a guessed address must at least be deliverable
         if checked["checked"]:
             funnel["guess_verification"] = checked
@@ -447,6 +474,11 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             drafts[c.id] = d
     progress("draft: fact-checking drafts…")
     funnel["fact_check"] = verify_and_fix(shortlist, drafts, spec, pack, deps.llm, ctx=ctx)
+    for c in shortlist:  # a guessed address is never sent without a human looking at it
+        best = c.best_email
+        if c.id in drafts and best and best.method in ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior"):
+            drafts[c.id].issues.append(f"recipient address {best.address} is a guess from the organisation's usual "
+                                       f"email format ({best.method}); verify it before sending")
     store.save_results(spec.id, shortlist, drafts)
     result.drafts = drafts
     funnel.update({"drafted_ok": sum(1 for d in drafts.values() if d.ok),

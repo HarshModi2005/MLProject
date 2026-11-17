@@ -3,7 +3,8 @@ Router: which sources a campaign uses.
 
     1. the playbook's own list;
     2. plus, for each criterion whose proof no listed source gives, the first usable source that proves it
-       (in registry order) and produces the campaign's kind of target;
+       (in registry order) and produces the campaign's kind of target — these run first, since the user's
+       confirmed criteria asked for exactly that proof;
     3. person campaigns drop org-only sources the playbook did not ask for;
     4. split into seed sources (run from the campaign description) and expansion sources (need known-good
        prospects); the user's examples put lookalike first; memory (free) always leads.
@@ -42,14 +43,18 @@ def choose(spec: CampaignSpec, pb: Playbook, prof: ProspectProfile, *, has_seeds
     kind = spec.target_kind or pb.target_kind
     names = [n for n in pb.sources if n in TOOLS and usable(TOOLS[n], spec, pb)[0]]
     covered = {s for n in names for s in TOOLS[n].proves}
+    extras: List[str] = []
     for sig in dict.fromkeys(c.signal for c in prof.criteria):  # timing signals never add a tool
         if sig in covered or sig in ("topic", "location"):
             continue
         extra = next((t.name for t in TOOLS.values() if sig in t.proves and kind in t.kinds and t.name not in names
-                      and t.name not in ("memory",) and usable(t, spec, pb, asked=True)[0]), None)
+                      and t.name not in extras and t.name not in ("memory",) and usable(t, spec, pb, asked=True)[0]), None)
         if extra:
-            names.append(extra)
+            extras.append(extra)
             covered |= set(TOOLS[extra].proves)
+    # A source added because a confirmed criterion needs its proof runs FIRST (it leads the paid seed tools and gets
+    # the larger budget share): generic search must not use up the budget before the specific source runs.
+    names = extras + names
     if kind == "person":
         names = [n for n in names if "person" in TOOLS[n].kinds or n in pb.sources]
     seed = [n for n in names if TOOLS[n].stage in ("seed", "both")]

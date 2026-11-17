@@ -67,9 +67,16 @@ def filter_contacts(
             if not (named or in_region(c) or vouched):
                 if defer_region and c.kind == "org" and "enriched" not in c.flags:
                     c.flags.append("region_pending")  # its website has not been read yet
+                elif c.kind != "org" and not c.location_text:
+                    # A person whose city nobody states (most researchers, speakers, authors) is not "elsewhere":
+                    # keep them, ranked a little lower, for the pre-judge and the judge to weigh.
+                    if "region_unknown" not in c.flags:
+                        c.flags.append("region_unknown")
                 else:
                     dropped["region"] += 1
                     continue
+            else:
+                c.flags = [f for f in c.flags if f != "region_unknown"]
         if c.org and any(o in c.org.lower() for o in ex_orgs):
             dropped["excluded_org"] += 1
             continue
@@ -195,6 +202,8 @@ def prescore(contacts: List[Contact], spec: CampaignSpec, pack: Pack, backend: s
                            + w["quality"] * quality, 4)
         if c.kind == "org" and not c.org_domain and not c.emails:
             c.prescore = round(c.prescore * 0.7, 4)  # no website: nothing to read, usually nobody to write to
+        if "region_unknown" in c.flags:
+            c.prescore = round(c.prescore * 0.85, 4)  # location not stated: below people known to be local
         if s.get("warm_path"):  # the user knows them, or someone there: the best reply odds there are
             c.prescore = round(min(1.0, c.prescore + 0.15 * s["warm_path"]), 4)
         if any(f.startswith("off_type:") for f in c.flags):
