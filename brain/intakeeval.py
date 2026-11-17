@@ -32,6 +32,9 @@ def score_case(case: Dict[str, Any], spec, data: Dict[str, Any], questions: List
     if "topic_any" in e:
         topics = " ".join(low(spec.topics + spec.expanded_terms))
         checks["topics"] = any(t in topics for t in e["topic_any"])
+    if "topic_none" in e:
+        topics = " ".join(low(spec.topics))
+        checks["topics_describe_targets"] = not any(t in topics for t in e["topic_none"])
     if "criteria_signal_any" in e:
         from brain.fit import profile_for
         from brain.playbooks import get_playbook

@@ -18,6 +18,7 @@ from typing import List, Optional
 from brain.llm import LLM, LLMError
 from brain.models import CampaignSpec, Contact, Draft
 from brain.packs import Pack
+from brain.emailfinder import is_role_address
 from brain.textutil import clean_name, squash, strip_accents
 
 log = logging.getLogger("brain.draft")
@@ -54,19 +55,38 @@ Return JSON: {"subjects": ["<3 different subject lines, each under 9 words, spec
 "body": "<paragraphs separated by blank lines>"}"""
 
 
+def _greet_name(tokens: List[str]) -> str:
+    """'C Jagadeesh' -> 'C Jagadeesh' (an initial is not a first name); 'Priya Nair' -> 'Priya'."""
+    if len(tokens) > 1 and len(tokens[0].strip(".")) <= 1:
+        return " ".join(tokens)
+    return tokens[0]
+
+
+def team_name(name: str) -> str:
+    """'The TWIML AI Podcast (formerly This Week in ...)' -> 'TWIML AI Podcast'."""
+    n = re.sub(r"\s*[\(\[].*?[\)\]]", "", name or "")
+    n = re.split(r"\s+[|–—-]\s+|:\s", n)[0]
+    n = re.sub(r"^the\s+", "", n.strip(), flags=re.I)
+    return n.strip() or name
+
+
 def salutation(contact: Contact, pack: Pack) -> str:
+    from brain.textutil import looks_like_person_name
+
     if contact.kind == "org":
         dm = contact.decision_maker or {}
         first = clean_name(dm.get("name") or "").split()
         if first:  # found the right person but only the shared inbox: address them through it
-            return f"Hi {first[0]},"
-        return f"Hello {contact.name} team,"
+            return f"Hi {_greet_name(first)},"
+        if looks_like_person_name(contact.name):  # a one-person business listed under its owner's name
+            return f"Hi {_greet_name(clean_name(contact.name).split())},"
+        return f"Hello {team_name(contact.name)} team,"
     tokens = clean_name(contact.name).split()
     if not tokens:
         return "Hello,"
     if pack.salutation == "professor":
         return f"Dear Professor {tokens[-1]},"
-    return f"Hi {tokens[0]},"
+    return f"Hi {_greet_name(tokens)},"
 
 
 def _norm(text: str) -> str:
@@ -198,6 +218,10 @@ def check(body: str, subject: str, contact: Contact, spec: CampaignSpec) -> List
     return issues
 
 
+# A second request tacked on after the ask ("Also, if you could connect me with ...").
+_SECOND_ASK = re.compile(r"(^|[.?!]\s+)(also|alternatively|additionally|separately|in addition),?\s+"
+                         r"(if you could|could you|would you|can you|please|i would (also )?(appreciate|love)|i'?d (also )?(appreciate|love))",
+                         re.I)
 _SHORTENERS = ("bit.ly", "tinyurl", "t.co/", "goo.gl", "ow.ly", "rb.gy", "cutt.ly", "is.gd")
 _WARM_OVERCLAIM = re.compile(r"\b(introduced me|suggested (that )?I (reach|contact|write)|referred me|recommended (that )?I|"
                              r"asked me to (reach|contact|write)|told me to (reach|contact))", re.I)
@@ -220,8 +244,8 @@ def quality_problems(body: str, contact: Contact, spec: CampaignSpec) -> List[st
     terms = _recipient_terms(contact)
     if terms and english and not ({t for t in _TERM.findall(body.lower())} & terms):
         out.append("not personalised: mentions nothing specific from the recipient's evidence")
-    if body.count("?") > 2:
-        out.append("more than one ask (too many questions)")
+    if body.count("?") > 2 or _SECOND_ASK.search(body):
+        out.append("more than one ask")
     links = re.findall(r"https?://\S+|www\.\S+", body)
     if len(links) > 1:
         out.append(f"{len(links)} links (at most one)")
@@ -291,11 +315,12 @@ SITUATION_RULES = {
     "person_own_address": "Writing to the person's own address: be direct and personal.",
     "person_guessed_address": ("The address follows the organisation's usual format and may not reach them: do not imply "
                                "you know them; if it is not their area, ask them to point you to the right person."),
-    "decision_maker_via_inbox": ("The email goes to the organisation's shared inbox but is addressed to the named person: "
-                                 "say in one short line that you are writing to the team address hoping it reaches them, "
-                                 "and end with the SHARED-INBOX ASK as a fallback."),
-    "org_inbox": ("The email goes to a shared team inbox: write to the team, make it easy to forward, and use the "
-                  "SHARED-INBOX ASK (ask to be pointed to the right person) if one is given."),
+    "decision_maker_via_inbox": ("The email goes to the organisation's shared team inbox but is addressed to the named "
+                                 "person: do not comment on the address. Keep ONE ask; you may end it with a short clause "
+                                 "such as 'or point me to whoever handles this' — never a second request."),
+    "org_inbox": ("The email goes to a shared team inbox: write to the team and make it easy to forward. The ONE ask is "
+                  "the SHARED-INBOX ASK if one is given (to be pointed to the right person), otherwise the main ask — "
+                  "never both."),
     "warm_direct": "The sender is already connected to this person (see evidence): mention it once, plainly, first.",
     "warm_intro": ("The sender knows someone at this organisation (see evidence): you may mention that connection once, "
                    "plainly; do not claim they referred or introduced the sender."),
@@ -310,6 +335,9 @@ def situation(contact: Contact) -> str:
         return "warm_intro"
     best = contact.best_email
     if contact.kind == "org":
+        shared = bool(best) and (best.method == "inbox" or is_role_address(best.address))
+        if not shared:
+            return "person_own_address"  # e.g. a small clinic's own Gmail: write as to its owner
         return "decision_maker_via_inbox" if (contact.decision_maker or {}).get("name") else "org_inbox"
     if best and best.method in GUESSED_METHODS:
         return "person_guessed_address"
@@ -345,7 +373,7 @@ GOAL
 Objective: {spec.objective}
 Ask: {spec.ask or spec.objective}{(' [' + a.type + ']') if (a := spec.ask_detail).type != 'other' else ''}
 {('Link to include: ' + a.link) if a.link else ''}{(chr(10) + 'Sender availability: ' + a.availability) if a.availability else ''}{(chr(10) + 'Deadline: ' + a.deadline) if a.deadline else ''}
-SHARED-INBOX ASK: {a.inbox_text or 'n/a'}
+SHARED-INBOX ASK: {(a.inbox_text or 'n/a') if situation(contact) in ('org_inbox', 'decision_maker_via_inbox') else 'n/a (not writing to a team inbox)'}
 Timing: {spec.timeline or 'not specified'}
 Tone: {spec.tone}
 LANGUAGE: {spec.language or 'English'}

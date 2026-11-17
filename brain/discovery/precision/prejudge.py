@@ -28,7 +28,9 @@ Score 0-100:
  40-69   plausible but unclear from the evidence
  0-39    wrong kind of target: unrelated field, wrong type of organisation, clearly elsewhere, or not a real
          person/organisation at all (a page title, product, event, directory or article)
-Thin evidence alone is not a reason for a low score: judge what the evidence shows.
+Thin evidence alone is not a reason for a low score: judge what the evidence shows. If a quality the campaign wants
+cannot be confirmed or ruled out from the evidence ("not clearly independent", "unclear focus"), score 40-60 — below
+40 only when the evidence shows the candidate is the wrong kind of target.
 Return JSON: {"results": [{"id": "<id>", "score": <int>, "why": "<at most 12 words>"}]}. Include every id once."""
 
 PROOF = ("past_sponsorship", "hiring", "portfolio_fit", "recent_coverage", "spoke_before", "local_business",

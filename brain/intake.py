@@ -96,7 +96,12 @@ Rules:
 - offer, constraints, ask_detail.link/availability/deadline and language: only what the user stated; otherwise leave
   them empty (never guess a price, a link or a size).
 - criteria are qualities of a GOOD target beyond the topic, each with the SIGNAL that would prove it. Never make a
-  criterion of a location (that is "locations") or a job title / role (that is "persona.roles")."""
+  criterion of a location (that is "locations") or a job title / role (that is "persona.roles"). Never use warm_path
+  (it comes only from the user's imported contacts) and use uses_tech only when the user named a technology.
+- Topics are WHAT THE TARGET ORGANISATIONS OR PEOPLE ARE OR DO — never the sender's event, product or the role sought.
+  Sponsors of a tech fest: the industries that sponsor such events ("developer tools", "edtech", "cloud platforms"),
+  not "tech fests" or "hackathon sponsorship". A job search at AI startups: "AI startups", "machine learning
+  companies", not "software engineering leadership"."""
 
 REFINE_SYSTEM = f"""You update a cold-outreach campaign configuration with new information from the user (answers,
 corrections, uploaded lists). Apply corrections exactly; when the user answers a question, remove the corresponding
@@ -329,7 +334,7 @@ def _org_only(pb) -> bool:
 
 
 # Criteria that only restate a place or a role: those have their own fields (locations, persona.roles).
-_NOT_A_CRITERION = re.compile(r"\b(based|located|headquartered|operating) in\b|^in [A-Z]|\brole\b|\bjob title\b|"
+_NOT_A_CRITERION = re.compile(r"\b(based|located|headquartered|operating|operates|present|active) in\b|^in [A-Z]|\brole\b|\bjob title\b|"
                               r"\bposition (is|of)\b|^(is|be) an? (journalist|principal|founder|professor|ceo|cto)\b", re.I)
 
 
@@ -416,6 +421,8 @@ def _profile(data: Dict[str, Any], persona: Dict[str, Any], pb) -> ProspectProfi
         sig = str(c.get("signal") or "topic")
         if sig == "location" or _NOT_A_CRITERION.search(name):
             continue  # a place or a role, already captured as locations / persona.roles
+        if sig == "warm_path" or (sig == "uses_tech" and not re.search(r"\b(uses?|built (on|with)|runs? on|stack)\b", name, re.I)):
+            sig = "topic"  # warm paths come from the user's contacts only; uses_tech needs a named technology
         try:
             weight = max(0.5, min(3.0, float(c.get("weight") or 1)))
         except (TypeError, ValueError):

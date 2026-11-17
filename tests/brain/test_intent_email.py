@@ -143,9 +143,12 @@ def test_situations_are_computed_in_code():
     assert dr.situation(_contact()) == "person_own_address"
     assert dr.situation(_contact(emails=[EmailCandidate(address="asha@byte.in", confidence=0.5, method="pattern_prior")])) \
         == "person_guessed_address"
-    assert dr.situation(Contact(kind="org", name="ByteStudio", decision_maker={"name": "Asha Rao", "title": "CTO"})) \
-        == "decision_maker_via_inbox"
-    assert dr.situation(Contact(kind="org", name="ByteStudio")) == "org_inbox"
+    inbox = [EmailCandidate(address="hello@byte.in", confidence=0.7, method="inbox")]
+    assert dr.situation(Contact(kind="org", name="ByteStudio", emails=inbox,
+                                decision_maker={"name": "Asha Rao", "title": "CTO"})) == "decision_maker_via_inbox"
+    assert dr.situation(Contact(kind="org", name="ByteStudio", emails=inbox)) == "org_inbox"
+    own = [EmailCandidate(address="dentiszone@gmail.com", confidence=0.65, method="site")]
+    assert dr.situation(Contact(kind="org", name="Dentis Zone", emails=own)) == "person_own_address"  # the clinic's own Gmail
     assert dr.situation(_contact(signals={"warm_path": 0.6})) == "warm_intro"
 
 
@@ -236,3 +239,20 @@ def test_draft_grades_and_summary():
     g = grade([(c, d)], _spec(), llm)
     s = summarise({"c": d}, g)
     assert s["pass_rate"] == 0.0 and s["avg_relevance"] == 5 and s["would_send_rate"] == 1.0 and s["top_issues"][0][0] == "too short"
+
+
+def test_salutations_handle_initials_owner_named_businesses_and_long_names():
+    pb = get_playbook("b2b_sales")
+    assert dr.salutation(_contact(name="C Jagadeesh"), pb) == "Hi C Jagadeesh,"
+    assert dr.salutation(Contact(kind="org", name="Gaurav Singh"), pb) == "Hi Gaurav,"
+    assert dr.salutation(Contact(kind="org", name="The TWIML AI Podcast (formerly This Week in Machine Learning)"), pb) \
+        == "Hello TWIML AI Podcast team,"
+    assert dr.salutation(Contact(kind="org", name="Voxa", decision_maker={"name": "S. Rao"}), pb) == "Hi S. Rao,"
+
+
+def test_a_second_ask_is_caught():
+    c = _contact()
+    two = "QuickClinic looks great. Could we schedule a call? Alternatively, if you could connect me with your CTO, that would help."
+    assert any("more than one ask" in p for p in dr.quality_problems(two, c, _spec()))
+    one = "QuickClinic looks great. Could we schedule a call, or point me to whoever handles this?"
+    assert not any("more than one ask" in p for p in dr.quality_problems(one, c, _spec()))
