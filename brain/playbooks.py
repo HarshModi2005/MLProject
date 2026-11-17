@@ -67,6 +67,9 @@ class Playbook:
     family: str = "other"
     # Commercial outreach (selling, partnerships for revenue): emails get an opt-out line (draft.py).
     commercial: bool = False
+    # Words that describe the SENDER's side (their event, the role they seek), not what targets are: topics made of
+    # them are moved out of the search topics (brain/intake.py), since discovery searches for what targets ARE.
+    topic_stoplist: List[str] = field(default_factory=list)
     # What makes a prospect good, beyond matching the topics (a topic criterion is always added).
     # Each item: {"name", "signal", "weight", "terms", "description", "must"} — see models.FitCriterion.
     criteria: List[dict] = field(default_factory=list)
@@ -108,7 +111,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["phd student", "retired", "emeritus"]
     ),
     Playbook(
-        name="sponsorship", family="funding", title="Event sponsors",
+        name="sponsorship", topic_stoplist=["fest", "festival", "hackathon", "event", "sponsor", "conference", "summit", "college", "student", "corporate"], family="funding", title="Event sponsors",
         description="Companies or brands to sponsor an event, fest, hackathon, conference, club or team.",
         sources=["events", "orgs", "lookalike", "sponsor_walk", "graph_walk"], default_roles=["Brand Manager", "Marketing Manager", "Partnerships", "Head of Marketing",
                                           "Community", "Developer Relations", "Campus"],
@@ -153,7 +156,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["directory", "marketplace", "franchise opportunity"]
     ),
     Playbook(
-        name="job_search", family="jobs", accept_guessed=True, title="Job and internship search",
+        name="job_search", topic_stoplist=["internship", "intern", "job", "role", "leadership", "career", "hiring", "position"], family="jobs", accept_guessed=True, title="Job and internship search",
         description="Hiring managers, founders, CTOs or recruiters at companies, to ask for a job, internship or referral.",
         sources=["orgs", "jobs", "hn_hiring", "lookalike"], default_roles=["Founder", "Co-founder", "CTO", "Engineering Manager", "Head of Engineering",
                                           "Recruiter", "Talent", "Hiring Manager"],
@@ -258,7 +261,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["talent agency", "mcn"]
     ),
     Playbook(
-        name="speakers", family="people", allowed_org_classes=["academic", "media"], title="Speakers, judges and mentors",
+        name="speakers", topic_stoplist=["summit", "conference", "event", "speaker", "talk"], family="people", allowed_org_classes=["academic", "media"], title="Speakers, judges and mentors",
         description="Experts to invite as speakers, judges, panelists, guests or mentors for an event or program.",
         target_kind="person", sources=["events", "web", "openalex", "arxiv"], accept_inboxes=False,
         default_roles=["Founder", "Director", "Head", "Professor", "Lead", "Principal"],
@@ -425,7 +428,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["influencer agency", "affiliate network", "marketplace"],
     ),
     Playbook(
-        name="campus_recruiting", family="jobs", title="Campus recruiting and student communities",
+        name="campus_recruiting", topic_stoplist=["hiring", "fresher", "recruitment drive"], family="jobs", title="Campus recruiting and student communities",
         description="Placement cells, career offices and student clubs at colleges, to recruit or run programmes with students.",
         sources=["orgs", "places", "events"], allowed_org_classes=["academic"],
         default_roles=["Training and Placement Officer", "Placement Officer", "Career Services", "Club Lead", "Dean"],

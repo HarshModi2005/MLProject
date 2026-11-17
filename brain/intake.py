@@ -309,7 +309,7 @@ def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, targ
         persona=TargetPersona(description=squash(str(persona.get("description") or ""), 300),
                               roles=[str(r) for r in persona.get("roles") or []][:8] or pb.default_roles[:8],
                               org_types=[str(r) for r in persona.get("org_types") or []][:5]),
-        topics=[str(t) for t in data.get("topics") or []][:6],
+        topics=_target_topics(data, pb)[:6],
         expanded_terms=[str(t) for t in data.get("expanded_terms") or []][:8],
         countries=countries, regions=regions,
         organizations=[str(o) for o in data.get("organizations") or []][:15],
@@ -324,6 +324,24 @@ def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, targ
         playbook_alternatives=[a["name"] for a in data.get("playbook_alternatives") or []
                                if isinstance(a, dict) and a.get("name") in PLAYBOOKS and a["name"] != pb.name][:2],
     )
+
+
+def _target_topics(data: Dict[str, Any], pb) -> List[str]:
+    """Topics are what the targets ARE. A topic built from the playbook's sender-side words ("tech fest sponsors",
+    "startup leadership") is dropped; if none remain, related terms that pass are used; never empty."""
+    topics = [str(t) for t in data.get("topics") or [] if str(t).strip()]
+    stop = [w.lower() for w in getattr(pb, "topic_stoplist", []) or []]
+    if not stop:
+        return topics
+
+    def ok(t: str) -> bool:
+        low = t.lower()
+        return not any(re.search(rf"\b{re.escape(w)}", low) for w in stop)
+
+    kept = [t for t in topics if ok(t)]
+    if not kept:
+        kept = [str(t) for t in data.get("expanded_terms") or [] if ok(str(t))][:4]
+    return kept or topics
 
 
 def _org_only(pb) -> bool:
