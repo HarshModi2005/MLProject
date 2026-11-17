@@ -463,6 +463,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         return finish("partial" if shortlist else "empty")
 
     # ── 5. draft ─────────────────────────────────────────────────────────────
+    if hasattr(store, "style_examples"):  # the user's own edited emails teach the writer their style
+        ctx.style_examples = list(dict.fromkeys(store.style_examples() + list(ctx.style_examples)))[:3]
     progress(f"draft: writing {len(shortlist)} emails…")
     drafts: Dict[str, Draft] = {}
     failed = 0

@@ -59,7 +59,7 @@ def sender_from_text(text: str, llm: LLM, attachment_path: Optional[str] = None)
     profile = SenderProfile(
         name=str(data.get("name") or ""), headline=str(data.get("headline") or ""),
         summary=str(data.get("summary") or ""),
-        highlights=[str(h) for h in (data.get("highlights") or [])][:7],
+        highlights=[str(h) for h in (data.get("highlights") or [])][:10],
         skills=[str(s) for s in (data.get("skills") or [])][:12],
         links=[str(l) for l in (data.get("links") or [])][:5],
         attachment_path=attachment_path,

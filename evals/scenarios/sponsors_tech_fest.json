@@ -6,15 +6,56 @@
     "target_kind": "org",
     "objective": "Find sponsors for a college technical fest with 5000 student attendees",
     "ask": "Sponsor our technical fest (title, gold or workshop partner)",
-    "persona": {"description": "Tech companies that market to students and developers in India", "roles": ["Head of Marketing", "Developer Relations", "Partnerships", "Brand Manager"], "org_types": ["developer tools company", "edtech company"]},
-    "topics": ["developer tools", "edtech", "cloud platform"],
-    "expanded_terms": ["coding platform", "student developer program"],
-    "locations": ["India"],
-    "search_queries": ["companies that sponsor college tech fests India", "developer tools companies India student programs", "edtech companies sponsoring hackathons India"],
-    "event_queries": ["college tech fest sponsors India 2025", "student hackathon sponsors India"],
-    "preferred_inboxes": ["partnerships", "sponsorship", "marketing", "events", "hello"]
+    "persona": {
+      "description": "Tech companies that market to students and developers in India",
+      "roles": [
+        "Head of Marketing",
+        "Developer Relations",
+        "Partnerships",
+        "Brand Manager"
+      ],
+      "org_types": [
+        "developer tools company",
+        "edtech company"
+      ]
+    },
+    "topics": [
+      "developer tools",
+      "edtech",
+      "cloud platform"
+    ],
+    "expanded_terms": [
+      "coding platform",
+      "student developer program"
+    ],
+    "locations": [
+      "India"
+    ],
+    "search_queries": [
+      "companies that sponsor college tech fests India",
+      "developer tools companies India student programs",
+      "edtech companies sponsoring hackathons India"
+    ],
+    "event_queries": [
+      "college tech fest sponsors India 2025",
+      "student hackathon sponsors India"
+    ],
+    "preferred_inboxes": [
+      "partnerships",
+      "sponsorship",
+      "marketing",
+      "events",
+      "hello"
+    ]
   },
-  "sender": {"name": "Test Organiser", "headline": "Sponsorship lead, college technical fest",
-             "summary": "Our annual technical fest draws 5000+ students from 120 colleges."},
-  "facts": ["The fest draws 5000+ students from 120 colleges", "Last year's edition had 40 workshops and a 36-hour hackathon"]
+  "sender": {
+    "name": "Test Organiser",
+    "headline": "Sponsorship lead, college technical fest",
+    "summary": "Our annual technical fest draws 5000+ students from 120 colleges."
+  },
+  "facts": [
+    "The fest draws 5000+ students from 120 colleges",
+    "Last year's edition had 40 workshops and a 36-hour hackathon"
+  ],
+  "prompt": "find sponsors for our college tech fest in India \u2014 companies that sponsored student tech fests or hackathons before"
 }

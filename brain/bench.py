@@ -172,7 +172,8 @@ def metrics(result, spec: CampaignSpec, labels: Optional[Dict[str, List[str]]] =
     return m
 
 
-def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, out_dir: Path) -> Dict[str, Any]:
+def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, out_dir: Path,
+                 from_prompt: bool = True) -> Dict[str, Any]:
     from brain.cache import Cache
     from brain.context import CampaignContext
     from brain.fetch import Fetcher
@@ -194,8 +195,28 @@ def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, o
     cache = Cache(str(CACHE_DIR / f"{sc['name']}.sqlite"), ignore_ttl=bool(replay))
     deps = Deps(settings=st, cache=cache, llm=LLM(st, cache), fetcher=Fetcher(st, cache), search=WebSearch(st, cache),
                 orcid=Orcid(st, cache), openalex=OpenAlexSource(st, cache), store=Store(st.database_url))
-    spec = spec_from_scenario(sc)
-    ctx = CampaignContext(understanding=spec.objective, target_brief=spec.persona.description)
+    intake: Dict[str, Any] = {}
+    if from_prompt and sc.get("prompt") and deps.llm.available:
+        # End to end: the request as a user writes it goes through the intake, as in a real campaign.
+        from brain.intake import ScriptedUI, run_intake
+
+        sender = SenderProfile(**sc.get("sender", {}))
+        res = run_intake(sc["prompt"], deps.llm, ScriptedUI([]), sender, interactive=False,
+                         max_searches_ceiling=st.max_search_calls, target_count=int(sc.get("target_count", 8)))
+        spec, ctx = res.spec, res.ctx
+        spec.id = f"bench_{sc['name']}"[:32]
+        ok = [sc.get("playbook")] + list(sc.get("playbook_ok") or [])
+        want = spec_from_scenario(sc)
+        intake = {"intake_playbook": spec.pack, "intake_playbook_ok": spec.pack in ok,
+                  "intake_kind_ok": spec.target_kind == (want.target_kind or spec.target_kind),
+                  "intake_where": spec.regions + spec.countries,
+                  "intake_where_ok": set(want.countries) <= set(spec.countries)
+                  and all(any(r.lower() in x.lower() or x.lower() in r.lower() for x in spec.regions) for r in want.regions),
+                  "intake_topics": spec.topics[:5], "intake_ask_type": spec.ask_detail.type,
+                  "intake_confidence": spec.playbook_confidence, "intake_llm_calls": res.llm_calls}
+    else:
+        spec = spec_from_scenario(sc)
+        ctx = CampaignContext(understanding=spec.objective, target_brief=spec.persona.description)
     for f in sc.get("facts", []):
         ctx.add_fact(f, "scenario")
     for name in sc.get("seeds", []):
@@ -207,6 +228,17 @@ def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, o
         log.exception("scenario %s failed", sc["name"])
         return {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - started, 1)}
     m = metrics(result, spec, sc.get("labels"))
+    m.update(intake)
+    if draft and result.drafts:
+        from brain.drafteval import grade, summarise
+
+        by_id = {c.id: c for c in result.shortlist}
+        grades = grade([(by_id[cid], d) for cid, d in result.drafts.items() if cid in by_id], spec, deps.llm)
+        m["drafts"] = summarise(result.drafts, grades)
+        m["emails"] = [{"to": d.to, "subject": d.subject, "body": d.body, "issues": d.issues, "grade": grades.get(cid)}
+                       for cid, d in result.drafts.items()]
+        m["llm_usd"] = deps.llm.report().get("est_cost_usd", m.get("llm_usd"))
+        m["llm_paid_calls"] = deps.llm.report().get("paid_calls", m.get("llm_paid_calls"))
     m["name"] = sc["name"]
     m["playbook"] = spec.pack
     m["target"] = spec.target_count
@@ -225,6 +257,18 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
         if not vals:
             continue
         out[k] = round(sum(vals) / len(vals), 3) if k in ("precision@K", "mean_score", "proof_rate") else round(sum(vals), 4)
+    with_intake = [r for r in ok if "intake_playbook_ok" in r]
+    if with_intake:
+        out["intake_playbook_ok"] = f"{sum(r['intake_playbook_ok'] for r in with_intake)}/{len(with_intake)}"
+        out["intake_where_ok"] = f"{sum(bool(r.get('intake_where_ok')) for r in with_intake)}/{len(with_intake)}"
+    drafted = [r["drafts"] for r in ok if r.get("drafts", {}).get("drafts")]
+    if drafted:
+        n = sum(d["drafts"] for d in drafted)
+        out["drafts"] = n
+        out["draft_pass_rate"] = round(sum(d["pass_rate"] * d["drafts"] for d in drafted) / n, 3)
+        ws = [(d["would_send_rate"], d["drafts"]) for d in drafted if d.get("would_send_rate") is not None]
+        if ws:
+            out["would_send_rate"] = round(sum(a * b for a, b in ws) / sum(b for _, b in ws), 3)
     goods = out.get("good@K") or 0
     spend = (out.get("llm_usd") or 0) + SERPER_USD * (out.get("search_calls") or 0)
     out["usd_per_good"] = round(spend / goods, 4) if goods else None
@@ -232,7 +276,7 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool = False, label: str = "",
-              progress=print) -> Dict[str, Any]:
+              progress=print, from_prompt: bool = True) -> Dict[str, Any]:
     scenarios = load_scenarios(only)
     if not scenarios:
         raise ValueError(f"No scenarios found in {SCENARIO_DIR} (filter: {only})")
@@ -242,7 +286,7 @@ def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool
     rows = []
     for sc in scenarios:
         progress(f"[bench] {sc['name']} ({sc.get('playbook')}) …")
-        row = run_scenario(sc, replay=replay, draft=draft, out_dir=out_dir)
+        row = run_scenario(sc, replay=replay, draft=draft, out_dir=out_dir, from_prompt=from_prompt)
         rows.append(row)
         progress(f"[bench] {sc['name']}: " + (row.get("error") or
                  f"good@K {row['good@K']}/{row['target']}, reachable {row['reachable']}, "

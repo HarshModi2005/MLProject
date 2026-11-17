@@ -63,6 +63,10 @@ class Playbook:
     # Accept clearly-flagged guessed addresses (an organisation's usual convention) as reachable
     # (brain/discovery/reach/patterns.py). Sensible where people expect cold mail at work addresses.
     accept_guessed: bool = False
+    # Catalog grouping, so near-neighbours are compared side by side when a playbook is chosen.
+    family: str = "other"
+    # Commercial outreach (selling, partnerships for revenue): emails get an opt-out line (draft.py).
+    commercial: bool = False
     # What makes a prospect good, beyond matching the topics (a topic criterion is always added).
     # Each item: {"name", "signal", "weight", "terms", "description", "must"} — see models.FitCriterion.
     criteria: List[dict] = field(default_factory=list)
@@ -81,7 +85,7 @@ _UPLOAD_COMMON = ["a do-not-contact list or people you have already emailed (so 
 
 _BUILTIN: List[Playbook] = [
     Playbook(
-        name="academic", allowed_org_classes=["academic"], title="Researchers and faculty",
+        name="academic", family="research", allowed_org_classes=["academic"], title="Researchers and faculty",
         description="Professors, researchers or labs found through their publications: research internships, "
                     "PhD/postdoc inquiries, academic collaboration.",
         target_kind="person", sources=["openalex", "arxiv", "nsf_awards", "coauthors", "web"],
@@ -104,7 +108,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["phd student", "retired", "emeritus"]
     ),
     Playbook(
-        name="sponsorship", title="Event sponsors",
+        name="sponsorship", family="funding", title="Event sponsors",
         description="Companies or brands to sponsor an event, fest, hackathon, conference, club or team.",
         sources=["events", "orgs", "lookalike", "sponsor_walk", "graph_walk"], default_roles=["Brand Manager", "Marketing Manager", "Partnerships", "Head of Marketing",
                                           "Community", "Developer Relations", "Campus"],
@@ -128,7 +132,7 @@ _BUILTIN: List[Playbook] = [
         rank_weights={"fit": 0.45, "sim": 0.35}
     ),
     Playbook(
-        name="b2b_sales", title="B2B sales leads",
+        name="b2b_sales", family="selling", commercial=True, title="B2B sales leads",
         description="Businesses that could buy a product or service: SaaS, agencies, local businesses such as "
                     "clinics, restaurants, schools or shops.",
         sources=["places", "orgs", "lookalike"], default_roles=["Owner", "Founder", "CEO", "Director", "Manager", "Head"],
@@ -149,7 +153,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["directory", "marketplace", "franchise opportunity"]
     ),
     Playbook(
-        name="job_search", accept_guessed=True, title="Job and internship search",
+        name="job_search", family="jobs", accept_guessed=True, title="Job and internship search",
         description="Hiring managers, founders, CTOs or recruiters at companies, to ask for a job, internship or referral.",
         sources=["orgs", "jobs", "hn_hiring", "lookalike"], default_roles=["Founder", "Co-founder", "CTO", "Engineering Manager", "Head of Engineering",
                                           "Recruiter", "Talent", "Hiring Manager"],
@@ -169,7 +173,7 @@ _BUILTIN: List[Playbook] = [
         rank_weights={"fit": 0.45, "sim": 0.3, "timing": 0.15}
     ),
     Playbook(
-        name="fundraising", title="Investors",
+        name="fundraising", family="funding", title="Investors",
         description="Angel investors, VC funds or accelerators to raise money for a startup.",
         sources=["portfolio", "orgs", "lookalike"], default_roles=["Partner", "Managing Partner", "Principal", "Angel", "Investor", "Founder"],
         preferred_inboxes=["pitch", "pitches", "deals", "invest", "founders", "hello", "contact"],
@@ -189,7 +193,7 @@ _BUILTIN: List[Playbook] = [
         rank_weights={"fit": 0.5, "sim": 0.3}
     ),
     Playbook(
-        name="recruiting", title="Recruiting candidates",
+        name="recruiting", family="people", title="Recruiting candidates",
         description="Finding people to hire or invite: developers, designers, researchers, open-source contributors.",
         target_kind="person", sources=["github", "npm", "huggingface"], accept_inboxes=False,
         default_roles=["Engineer", "Developer", "Designer", "Researcher"],
@@ -203,7 +207,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["bot", "organization account"]
     ),
     Playbook(
-        name="pr_media", accept_guessed=True, allowed_org_classes=["media"], title="Journalists and media",
+        name="pr_media", family="media", accept_guessed=True, allowed_org_classes=["media"], title="Journalists and media",
         description="Journalists, editors, newsletter writers or podcasters, to pitch a story or get coverage.",
         target_kind="person", sources=["news", "gdelt", "podcasts", "beat_walk", "graph_walk"], accept_inboxes=True,
         preferred_inboxes=["news", "editor", "editorial", "tips", "press", "newsdesk", "story"],
@@ -220,7 +224,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["press release distribution", "sponsored content"]
     ),
     Playbook(
-        name="partnerships", title="Partnerships and collaborations",
+        name="partnerships", family="selling", commercial=True, title="Partnerships and collaborations",
         description="Organisations to partner with: co-marketing, integrations, distribution, community or "
                     "NGO/CSR partnerships, university-industry collaboration.",
         sources=["orgs", "lookalike", "graph_walk"], default_roles=["Partnerships", "Business Development", "Founder", "Head of", "Director"],
@@ -236,7 +240,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["directory", "listing site"]
     ),
     Playbook(
-        name="creators", allowed_org_classes=["media"], title="Creators, influencers and podcasts",
+        name="creators", family="media", allowed_org_classes=["media"], title="Creators, influencers and podcasts",
         description="YouTubers, Instagram creators, newsletter writers or podcast hosts for collaborations, "
                     "guest appearances or promotions.",
         target_kind="person", sources=["podcasts", "web", "orgs"], accept_inboxes=True,
@@ -254,7 +258,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["talent agency", "mcn"]
     ),
     Playbook(
-        name="speakers", allowed_org_classes=["academic", "media"], title="Speakers, judges and mentors",
+        name="speakers", family="people", allowed_org_classes=["academic", "media"], title="Speakers, judges and mentors",
         description="Experts to invite as speakers, judges, panelists, guests or mentors for an event or program.",
         target_kind="person", sources=["events", "web", "openalex", "arxiv"], accept_inboxes=False,
         default_roles=["Founder", "Director", "Head", "Professor", "Lead", "Principal"],
@@ -269,7 +273,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["speakers bureau", "booking agency"]
     ),
     Playbook(
-        name="customer_research", title="Customer interviews and beta users",
+        name="customer_research", family="selling", commercial=True, title="Customer interviews and beta users",
         description="People or businesses to interview, survey or recruit as beta testers or early customers.",
         sources=["places", "orgs"], default_roles=["Owner", "Founder", "Manager", "Head"],
         preferred_inboxes=["hello", "info", "contact"],
@@ -282,7 +286,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["directory", "marketplace"]
     ),
     Playbook(
-        name="suppliers", title="Suppliers and vendors",
+        name="suppliers", family="buying", title="Suppliers and vendors",
         description="Suppliers, manufacturers, vendors or service providers to buy from or get quotes from.",
         sources=["places", "orgs"], default_roles=["Sales", "Owner", "Manager"],
         preferred_inboxes=["sales", "info", "enquiry", "enquiries", "contact", "orders"],
@@ -296,7 +300,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["marketplace", "directory", "trading platform"]
     ),
     Playbook(
-        name="grants", allowed_org_classes=["nonprofit", "government"], title="Grants and CSR funding",
+        name="grants", family="funding", allowed_org_classes=["nonprofit", "government"], title="Grants and CSR funding",
         description="Foundations, CSR arms of companies or grant programmes to fund an NGO, research or social project.",
         sources=["orgs", "lookalike"], default_roles=["Program Officer", "CSR Head", "Program Director", "Trustee",
                                                        "Head of Sustainability", "Grants Manager"],
@@ -314,7 +318,7 @@ _BUILTIN: List[Playbook] = [
     ),
     # ── discovery v3: more use cases (docs/discovery-v3-plan.md §6) ──────────────────────────────────────────
     Playbook(
-        name="cofounder", title="Co-founder or technical partner",
+        name="cofounder", family="people", title="Co-founder or technical partner",
         description="A co-founder or early technical partner who has built things like what the sender is starting.",
         target_kind="person", sources=["github", "npm", "huggingface", "events", "web"], accept_inboxes=False,
         default_roles=["Engineer", "Founder", "Developer", "Researcher"],
@@ -328,7 +332,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["recruiter", "agency", "consultancy", "hiring manager"],
     ),
     Playbook(
-        name="advisors", title="Advisors and board members",
+        name="advisors", family="people", title="Advisors and board members",
         description="Experienced operators or investors to advise a company or join its board.",
         target_kind="person", sources=["orgs", "news", "events", "web"], accept_inboxes=False,
         default_roles=["Founder", "CEO", "CTO", "VP", "Partner", "Director"], min_seniority=0.6,
@@ -341,7 +345,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["coach for hire", "consultancy", "agency"],
     ),
     Playbook(
-        name="accelerators", title="Accelerators, incubators and programmes",
+        name="accelerators", family="funding", title="Accelerators, incubators and programmes",
         description="Accelerators, incubators, fellowships or startup programmes to apply to or partner with.",
         sources=["orgs", "events", "lookalike"], allowed_org_classes=["academic", "nonprofit", "government"],
         default_roles=["Program Manager", "Partner", "Director", "Head of Programs"],
@@ -356,7 +360,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["coworking space only", "consultancy", "paid course"],
     ),
     Playbook(
-        name="distributors", title="Distributors, dealers and resellers",
+        name="distributors", family="selling", commercial=True, title="Distributors, dealers and resellers",
         description="Distributors, dealers, resellers or channel partners to sell a product in a region.",
         sources=["places", "orgs", "events", "lookalike"],
         default_roles=["Owner", "Director", "Business Development", "Purchase Head", "Channel Manager"],
@@ -370,7 +374,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["manufacturer only", "retail shop", "directory"],
     ),
     Playbook(
-        name="government_tenders", title="Government buyers and tenders",
+        name="government_tenders", family="selling", commercial=True, title="Government buyers and tenders",
         description="Government departments, agencies or public bodies that buy what the sender offers, or have open tenders.",
         sources=["orgs", "news"], allowed_org_classes=["government"],
         default_roles=["Director", "Joint Secretary", "Procurement Officer", "Commissioner", "Program Officer"],
@@ -383,7 +387,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["tender aggregator", "consultancy", "news portal"],
     ),
     Playbook(
-        name="integrations", title="Integration and technology partners",
+        name="integrations", family="selling", commercial=True, title="Integration and technology partners",
         description="Products or platforms to integrate with, list on, or co-market with (APIs, marketplaces, app stores).",
         sources=["orgs", "lookalike", "google_play"], default_roles=["Partnerships", "Head of Partnerships", "Developer Relations", "Product Manager"],
         preferred_inboxes=["partners", "partnerships", "integrations", "bd", "hello"],
@@ -395,7 +399,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["agency", "reseller only", "directory"],
     ),
     Playbook(
-        name="seo_guest_posts", title="Guest posts and backlinks",
+        name="seo_guest_posts", family="media", title="Guest posts and backlinks",
         description="Blogs, newsletters and publications in a niche that accept guest posts or link to useful resources.",
         target_kind="org", sources=["orgs", "news"], allowed_org_classes=["media"],
         default_roles=["Editor", "Content Manager", "Founder"], preferred_inboxes=["editor", "contribute", "hello", "contact"],
@@ -407,7 +411,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["paid links", "link farm", "pbn", "casino"],
     ),
     Playbook(
-        name="brand_deals", title="Brand deals for creators",
+        name="brand_deals", family="media", commercial=True, title="Brand deals for creators",
         description="Brands that sponsor creators, podcasts or newsletters like the sender's.",
         sources=["orgs", "podcasts", "lookalike"], default_roles=["Brand Manager", "Influencer Marketing", "Partnerships", "Marketing Manager"],
         preferred_inboxes=["partnerships", "brand", "marketing", "collab", "hello"],
@@ -421,7 +425,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["influencer agency", "affiliate network", "marketplace"],
     ),
     Playbook(
-        name="campus_recruiting", title="Campus recruiting and student communities",
+        name="campus_recruiting", family="jobs", title="Campus recruiting and student communities",
         description="Placement cells, career offices and student clubs at colleges, to recruit or run programmes with students.",
         sources=["orgs", "places", "events"], allowed_org_classes=["academic"],
         default_roles=["Training and Placement Officer", "Placement Officer", "Career Services", "Club Lead", "Dean"],
@@ -434,7 +438,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["coaching institute", "online course seller", "admission consultancy"],
     ),
     Playbook(
-        name="school_outreach", title="Schools and educators",
+        name="school_outreach", family="local", title="Schools and educators",
         description="Schools, principals and teachers, to pilot an education product or programme.",
         sources=["places", "orgs"], allowed_org_classes=["academic", "nonprofit", "government"],
         default_roles=["Principal", "Head of School", "Academic Coordinator", "Teacher"],
@@ -447,7 +451,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["tuition centre", "coaching", "edtech company", "directory"],
     ),
     Playbook(
-        name="phd_positions", title="PhD and research positions",
+        name="phd_positions", family="research", title="PhD and research positions",
         description="Professors with funded projects who may take PhD students, postdocs or research interns.",
         target_kind="person", salutation="professor", sources=["openalex", "arxiv", "nsf_awards", "coauthors", "web"],
         allowed_org_classes=["academic"], accept_inboxes=False,
@@ -462,7 +466,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["retired", "emeritus", "adjunct"],
     ),
     Playbook(
-        name="awards_cfps", title="Awards, competitions and calls for proposals",
+        name="awards_cfps", family="funding", title="Awards, competitions and calls for proposals",
         description="Organisers of awards, competitions, grants-for-startups or conference calls the sender could enter.",
         sources=["orgs", "events", "news"], allowed_org_classes=["academic", "nonprofit", "government", "media"],
         default_roles=["Program Manager", "Organiser", "Editor", "Director"],
@@ -476,7 +480,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["paid award", "pay to enter", "directory"],
     ),
     Playbook(
-        name="volunteering", title="NGOs and volunteering",
+        name="volunteering", family="local", title="NGOs and volunteering",
         description="NGOs and community organisations to volunteer with, partner with or offer pro-bono help to.",
         sources=["orgs", "places"], allowed_org_classes=["nonprofit"],
         default_roles=["Founder", "Program Manager", "Volunteer Coordinator", "Director"],
@@ -489,7 +493,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["fundraising platform", "directory", "csr consultancy"],
     ),
     Playbook(
-        name="alumni", title="Alumni networking",
+        name="alumni", family="people", title="Alumni networking",
         description="Alumni of the sender's school or past employer working at target organisations or in target roles.",
         target_kind="person", sources=["web", "orgs", "news"], accept_inboxes=False,
         default_roles=["Engineer", "Manager", "Director", "Founder"],
@@ -501,7 +505,7 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["recruiter", "staffing agency"],
     ),
     Playbook(
-        name="general", title="General outreach",
+        name="general", family="other", title="General outreach",
         description="Anything else: organisations or people to contact for a purpose not covered above.",
         sources=["orgs"], default_roles=["Founder", "Director", "Head", "Manager"],
         preferred_inboxes=["hello", "contact", "info", "partnerships"],
@@ -541,9 +545,21 @@ def get_playbook(name: str) -> Playbook:
     return PLAYBOOKS.get(name) or PLAYBOOKS["general"]
 
 
+FAMILY_TITLES = {"research": "Research and academia", "people": "Individual people", "media": "Media and creators",
+                 "funding": "Money and programmes", "jobs": "Jobs and hiring", "selling": "Selling and partnerships",
+                 "buying": "Buying", "local": "Local and community", "other": "Anything else"}
+
+
 def catalog_text() -> str:
-    """The playbook menu shown to the planner LLM."""
-    return "\n".join(f'- "{pb.name}" ({pb.target_kind} targets): {pb.description}' for pb in PLAYBOOKS.values())
+    """The playbook menu shown to the planner LLM, grouped by family so near-neighbours are compared side by side."""
+    out = []
+    for fam, title in FAMILY_TITLES.items():
+        pbs = [pb for pb in PLAYBOOKS.values() if pb.family == fam]
+        if not pbs:
+            continue
+        out.append(f"{title}:")
+        out += [f'  - "{pb.name}" ({pb.target_kind} targets): {pb.description}' for pb in pbs]
+    return "\n".join(out)
 
 
 def to_dict(pb: Playbook) -> dict:

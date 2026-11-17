@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from typing import List, Optional
+from typing import Tuple, List, Optional
 from urllib.parse import urlsplit
 
 HONORIFICS = {
@@ -177,10 +177,53 @@ _REGION_ALIASES = [
 ]
 
 
+# Metro areas named as one place: any member city counts as inside it.
+_METROS = {
+    "delhi ncr": ["delhi", "new delhi", "gurgaon", "gurugram", "noida", "ghaziabad", "faridabad", "greater noida"],
+    "ncr": ["delhi", "new delhi", "gurgaon", "gurugram", "noida", "ghaziabad", "faridabad", "greater noida"],
+    "mumbai metropolitan region": ["mumbai", "bombay", "thane", "navi mumbai", "kalyan"],
+    "mmr": ["mumbai", "bombay", "thane", "navi mumbai", "kalyan"],
+    "bay area": ["san francisco", "oakland", "berkeley", "palo alto", "mountain view", "sunnyvale", "san jose",
+                 "menlo park", "redwood city", "santa clara", "cupertino"],
+    "sf bay area": ["san francisco", "oakland", "berkeley", "palo alto", "mountain view", "sunnyvale", "san jose",
+                    "menlo park", "redwood city", "santa clara", "cupertino"],
+    "greater london": ["london"], "nyc": ["new york", "brooklyn", "manhattan"], "new york city": ["new york", "brooklyn", "manhattan"],
+}
+_ABBREVIATIONS = {"blr": "Bangalore", "bengaluru": "Bangalore", "hyd": "Hyderabad", "mum": "Mumbai", "bom": "Mumbai",
+                  "sf": "San Francisco", "nyc": "New York City", "la": "Los Angeles", "dxb": "Dubai"}
+
+
 def region_terms(region: str) -> List[str]:
-    """'Bangalore' -> ['bangalore', 'bengaluru']"""
+    """'Bangalore' -> ['bangalore', 'bengaluru']; 'Delhi NCR' -> its member cities."""
     r = region.strip().lower()
+    if r in _METROS:
+        return sorted(set(_METROS[r] + [r]))
     for group in _REGION_ALIASES:
         if r in group:
             return sorted(group)
     return [r]
+
+
+def normalise_locations(values: List[str]) -> Tuple[List[str], Optional[bool]]:
+    """Clean what the user or the model wrote: 'near Indiranagar, BLR' -> 'Indiranagar, Bangalore'; 'remote' is not
+    a place (returned as remote_ok=True). Returns (locations, remote_ok or None)."""
+    out: List[str] = []
+    remote: Optional[bool] = None
+    for v in values or []:
+        text = re.sub(r"^\s*(near|around|in|within \d+\s*km of)\s+", "", str(v), flags=re.I).strip()
+        if not text:
+            continue
+        if re.fullmatch(r"(fully\s+)?remote( only| ok| friendly)?|anywhere|worldwide|global", text, re.I):
+            remote = True
+            continue
+        parts = []
+        for p in [x.strip() for x in text.split(",") if x.strip()]:
+            if re.fullmatch(r"remote", p, re.I):
+                remote = True
+                continue
+            parts.append(_ABBREVIATIONS.get(p.lower(), p))
+        if parts:
+            norm = ", ".join(parts)
+            if norm.lower() not in {o.lower() for o in out}:
+                out.append(norm)
+    return out, remote

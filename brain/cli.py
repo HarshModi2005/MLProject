@@ -138,7 +138,7 @@ def _run(deps, description, cv, about, name, n, location, uploads, playbook, top
             raise typer.BadParameter("No LLM key set. Use --topic/--objective to run without one.")
         res = run_intake(description, deps.llm, ConsoleUI(), sender, upload_paths=uploads, target_count=n,
                          locations=location, playbook=playbook, interactive=not yes,
-                         max_searches_ceiling=deps.settings.max_search_calls, sender_source=source)
+                         max_searches_ceiling=deps.settings.max_search_calls, sender_source=source, store=deps.store)
         spec, ctx, seeds, only = res.spec, res.ctx, res.seed_contacts, res.only_seeds
         console.print(f"[dim]Intake used {res.llm_calls} LLM call(s).[/dim]")
 
@@ -269,6 +269,7 @@ def bench(
     label: str = typer.Option("", help="Name for this run; results go to evals/results/<label>.json."),
     compare_to: Optional[str] = typer.Option(None, "--compare", help="A previous results JSON to diff against."),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
+    from_spec: bool = typer.Option(False, help="Use the scenarios' ready-made specs instead of running the intake on their prompts."),
 ):
     """Benchmark discovery on the scenarios in evals/scenarios (stops after judging unless --draft)."""
     from brain.bench import compare, run_bench
@@ -276,7 +277,8 @@ def bench(
     logging.basicConfig(level=logging.INFO if verbose else logging.WARNING, format="%(name)s: %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)
     report = run_bench(list(only) if only else None, replay=("strict" if strict else "replay") if replay else "",
-                       draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+                       draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"),
+                       from_prompt=not from_spec)
     t = Table(title=f"Benchmark {report['label']}")
     for col in ("Scenario", "label prec", "good@K", "prec@K", "mean", "orgs", "proof", "reach", "search", "LLM", "$", "s"):
         t.add_column(col)
@@ -315,6 +317,59 @@ def bench(
         console.print(d)
 
 
+@app.command()
+def profile(set_: Optional[List[str]] = typer.Option(None, "--set", help="key=value; keys: name, signature, "
+                                                      "postal_address, tone, language, exclusions (comma-separated)")):
+    """Show or edit what is remembered about you between campaigns (pre-fills every new campaign)."""
+    store = _deps().store
+    if set_:
+        data = {}
+        for kv in set_:
+            k, _, v = kv.partition("=")
+            data[k.strip()] = [x.strip() for x in v.split(",") if x.strip()] if k.strip() == "exclusions" else v.strip()
+        store.save_user_profile(data)
+    shown = {k: v for k, v in store.user_profile().items() if not k.startswith("_")}
+    console.print_json(json.dumps(shown))
+
+
+@app.command()
+def followups(campaign_id: str, n: int = typer.Option(1, help="Which follow-up to draft: 1 or 2."),
+              only_sent: bool = typer.Option(True, help="Only for emails marked sent (default) - else every draft.")):
+    """Draft follow-up number n for this campaign's emails: a new, true angle from unused evidence (1 LLM call each)."""
+    from brain.draft import followup_email
+    from brain.models import Draft
+    from brain.packs import get_pack
+
+    deps = _deps()
+    saved = deps.store.load_campaign(campaign_id)
+    if not saved:
+        raise typer.BadParameter(f"No campaign {campaign_id}")
+    spec = saved["spec"]
+    ctx = deps.store.load_context(campaign_id)
+    made = 0
+    for r in deps.store.results(campaign_id):
+        if not r.get("body") or (only_sent and r["status"] not in ("sent", "followed_up")):
+            continue
+        first = Draft(contact_id=r["contact_id"], to=r["email"] or "", subject=r["subject"] or "", body=r["body"])
+        d = followup_email(r["contact"], spec, get_pack(spec.pack), deps.llm, first, n=n, ctx=ctx)
+        if d is None:
+            continue
+        deps.store.save_followup(campaign_id, r["contact_id"], n, d)
+        made += 1
+        console.print(f"\n[bold]{r['name']}[/bold] <{d.to}>  {d.subject}\n{d.body}"
+                      + (f"\n[yellow]needs review: {'; '.join(d.issues)}[/yellow]" if d.issues else ""))
+    console.print(f"\n[dim]{made} follow-up(s) drafted and saved.{'' if made else ' (Mark sent emails as sent, or pass --no-only-sent.)'}[/dim]")
+
+
+@app.command("edit-draft")
+def edit_draft(campaign_id: str, contact_id: str, path: str = typer.Argument(..., help="A text file with your edited email.")):
+    """Save your edited version of a draft (marks it approved); your last 3 edits become style examples for new drafts."""
+    from pathlib import Path
+
+    _deps().store.record_edit(campaign_id, contact_id, Path(path).read_text(encoding="utf-8"))
+    console.print("Saved; future drafts will follow your edits' style.")
+
+
 @app.command("network-import")
 def network_import(path: str):
     """Import YOUR OWN contacts (LinkedIn Connections.csv, Google Contacts CSV, .vcf, or CSV name,email,company) so
@@ -346,6 +401,29 @@ def refresh(limit: int = typer.Option(500, help="How many remembered prospects t
 
     deps = _deps()
     console.print_json(json.dumps(do_refresh(deps.store, deps.fetcher, limit=limit)))
+
+
+@app.command("eval-intake")
+def eval_intake(only: Optional[List[str]] = typer.Option(None, help="Case id (evals/intake/cases.json). Repeatable.")):
+    """Score intent understanding on the intake cases (one cached LLM call per case)."""
+    from brain.intakeeval import run as run_eval
+
+    deps = _deps()
+    rep = run_eval(deps.llm, list(only) if only else None, progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+    console.print_json(json.dumps({k: rep[k] for k in ("cases", "check_accuracy", "cases_fully_right", "by_check")}))
+    console.print(f"[dim]LLM: {rep['llm'].get('paid_calls')} calls, ${rep['llm'].get('est_cost_usd')}; saved {rep['path']}[/dim]")
+
+
+@app.command("bench-drafts")
+def bench_drafts(run: str = typer.Option(..., help="A bench run label with judged shortlists."),
+                 only: Optional[List[str]] = typer.Option(None, help="Scenario name. Repeatable."),
+                 per: int = typer.Option(3, help="Drafts per scenario.")):
+    """Draft, fact-check and grade emails for a bench run's shortlists (no discovery spend)."""
+    from brain.drafteval import draft_eval
+
+    rep = draft_eval(run, list(only) if only else None, per=per, progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+    console.print_json(json.dumps({**rep["summary"], "llm_usd": rep["llm_usd"]}, default=str))
+    console.print(f"[dim]Saved {rep['path']}[/dim]")
 
 
 @app.command("bench-screen")

@@ -38,7 +38,10 @@ evidence says nothing about it), and let the overall score reflect them.
 Return JSON: {"results": [{"id": "<id>", "score": <int>, "reasons": ["<short reason>", "<short reason>"],
 "criteria": {"<criterion name>": <int>, ...},
 "hook": "<the single most relevant fact from this person's evidence, quoted or closely paraphrased, or null>",
-"hook_ref": <index of the evidence item the hook comes from, or null>}]}
+"hook_ref": <index of the evidence item the hook comes from, or null>,
+"sender_ref": <number of the SENDER FACT most relevant to this candidate, or null>,
+"why_now": "<a timing fact quoted from the evidence that makes now a good moment (hiring now, just raised, a recent
+article or episode, an open call), or null — never invent one>"}]}
 Include every candidate id exactly once. Keep each reason under 20 words."""
 
 
@@ -96,15 +99,37 @@ def sender_brief(spec: CampaignSpec) -> str:
     lines = [
         f"Sender: {s.name or 'unknown'} — {s.headline}".rstrip(" —"),
         f"Background: {squash(s.summary, 500)}" if s.summary else "",
-        "Facts: " + " | ".join(squash(h, 160) for h in s.highlights[:8]) if s.highlights else "",
+        ("SENDER FACTS:\n" + "\n".join(f"[{i}] {squash(h, 160)}" for i, h in enumerate(s.highlights[:12])))
+        if s.highlights else "",
         f"Objective: {spec.objective}",
         f"Ask: {spec.ask}" if spec.ask else "",
+        f"Offer: {spec.offer.value_prop}" + (f" (proof: {'; '.join(spec.offer.proof_points[:3])})" if spec.offer.proof_points else "")
+        if spec.offer.value_prop else "",
+        _constraints_line(spec),
         f"Looking for: {spec.persona.description}" if spec.persona.description else "",
         "Topics of interest: " + ", ".join(spec.topics),
         ("Target geography: " + ", ".join(spec.regions + [_country(c) for c in spec.countries])
          + " — organisations or people clearly based or active elsewhere are a poor fit") if spec.regions or spec.countries else "",
     ]
     return "\n".join(l for l in lines if l)
+
+
+def _constraints_line(spec: CampaignSpec) -> str:
+    k = spec.constraints
+    parts = [f"{k.size_min or 0}-{k.size_max or 'any'} employees" if (k.size_min or k.size_max) else "",
+             "stage: " + ", ".join(k.stages) if k.stages else "", f"seniority: {k.seniority}" if k.seniority else "",
+             "must: " + "; ".join(k.must) if k.must else "", "avoid: " + "; ".join(k.avoid) if k.avoid else ""]
+    parts = [p for p in parts if p]
+    return ("Limits set by the user (a candidate clearly outside them is a poor fit): " + " · ".join(parts)) if parts else ""
+
+
+def _in_evidence(text: str, c: Contact) -> bool:
+    low = (text or "").strip().lower()
+    if len(low) < 8:
+        return False
+    hay = " ".join([c.bio or "", c.title or ""] + [f"{e.text} {e.detail or ''}" for e in c.evidence]).lower()
+    probe = low[:40]
+    return probe in hay or any(e.text.lower()[:40] in low for e in c.evidence if len(e.text) >= 12)
 
 
 def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int = 8, ctx=None,
@@ -115,7 +140,9 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
 
     from brain.fit import profile_for, reach_factor
 
-    brief = sender_brief(with_context(spec, ctx))
+    full = with_context(spec, ctx)
+    brief_highlights = full.sender.highlights[:12]  # the numbered SENDER FACTS the judge's sender_ref points into
+    brief = sender_brief(full)
     if playbook is not None and playbook.judge_rubric:
         brief += f"\nWhat makes a good target here: {playbook.judge_rubric}"
     prof = profile_for(spec, playbook) if playbook is not None else spec.profile
@@ -182,6 +209,10 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
             if not c.hook:
                 pub = next((ev for ev in c.evidence if ev.kind == "publication"), None)
                 c.hook = pub.text if pub else None
+            ref = item.get("sender_ref")
+            c.sender_ref = ref if isinstance(ref, int) and 0 <= ref < len(brief_highlights) else None
+            wn = item.get("why_now")
+            c.why_now = squash(str(wn), 200) if isinstance(wn, str) and _in_evidence(wn, c) else None
             judged += 1
         for c in by_id.values():  # ids the model skipped
             c.flags.append("unjudged")

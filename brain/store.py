@@ -183,6 +183,25 @@ class NetworkRow(Base):
     imported_at = Column(DateTime, default=datetime.utcnow)
 
 
+class FollowupRow(Base):
+    __tablename__ = "brain_followups"
+    campaign_id = Column(String(64), primary_key=True)
+    contact_id = Column(String(64), primary_key=True)
+    n = Column(Integer, primary_key=True)
+    subject = Column(Text)
+    body = Column(Text)
+    issues_json = Column(Text)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class UserProfileRow(Base):
+    """What the system remembers about the user between campaigns (signature, tone, standing exclusions ...)."""
+    __tablename__ = "brain_user_profile"
+    id = Column(String(64), primary_key=True)
+    data_json = Column(Text)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 def query_template(query: str, topics: List[str], places: List[str]) -> Optional[str]:
     """'edtech sponsors Bangalore' -> '{topic} sponsors {place}'. None if the query has no topic in it."""
     out, has_topic = query, False
@@ -515,6 +534,54 @@ class Store:
     def network_clear(self) -> int:
         with self._Session.begin() as s:
             return s.query(NetworkRow).delete()
+
+    def save_followup(self, campaign_id: str, contact_id: str, n: int, draft: Draft) -> None:
+        with self._Session.begin() as s:
+            s.merge(FollowupRow(campaign_id=campaign_id, contact_id=contact_id, n=n, subject=draft.subject,
+                                body=draft.body, issues_json=json.dumps(draft.issues)))
+
+    def followups(self, campaign_id: str) -> List[Dict[str, Any]]:
+        with self._Session() as s:
+            rows = s.query(FollowupRow).filter(FollowupRow.campaign_id == campaign_id).order_by(FollowupRow.contact_id, FollowupRow.n).all()
+        return [{"contact_id": r.contact_id, "n": r.n, "subject": r.subject, "body": r.body,
+                 "issues": json.loads(r.issues_json or "[]")} for r in rows]
+
+    # ── the user ─────────────────────────────────────────────────────────────
+    PROFILE_KEYS = ("name", "signature", "postal_address", "tone", "exclusions", "language", "typical_asks")
+
+    def user_profile(self, user: str = "default") -> Dict[str, Any]:
+        with self._Session() as s:
+            row = s.get(UserProfileRow, user)
+        return json.loads(row.data_json) if row and row.data_json else {}
+
+    def save_user_profile(self, data: Dict[str, Any], user: str = "default") -> Dict[str, Any]:
+        cur = self.user_profile(user)
+        for k, v in data.items():
+            if k in self.PROFILE_KEYS and v not in (None, "", []):
+                if k in ("exclusions", "typical_asks"):
+                    v = list(dict.fromkeys(list(cur.get(k) or []) + list(v)))[-30:]
+                cur[k] = v
+        with self._Session.begin() as s:
+            s.merge(UserProfileRow(id=user, data_json=json.dumps(cur)))
+        return cur
+
+    # ── draft edits (the writer learns the user's style) ─────────────────────
+    def record_edit(self, campaign_id: str, contact_id: str, body: str) -> None:
+        """The user edited a draft before sending: keep the edited text as a style example."""
+        prof = self.user_profile()
+        edits = list(prof.get("_edited_emails") or [])
+        edits.append(body[:3000])
+        prof["_edited_emails"] = edits[-3:]
+        with self._Session.begin() as s:
+            s.merge(UserProfileRow(id="default", data_json=json.dumps(prof)))
+            row = s.get(ResultRow, (campaign_id, contact_id))
+            if row is not None:
+                row.body = body
+                row.issues_json = json.dumps([])
+                row.status = "approved"
+
+    def style_examples(self) -> List[str]:
+        return list(self.user_profile().get("_edited_emails") or [])
 
     def labels_from_review(self, campaign_id: str) -> Dict[str, List[str]]:
         """Human decisions as evaluation labels: approved/sent/replied are good, rejected is bad."""

@@ -60,5 +60,10 @@
   "facts": [
     "SDK adds 40 KB to the app",
     "Supports Android and Flutter"
+  ],
+  "prompt": "find mobile app development studios in India that build Android or Flutter apps, to pilot our lightweight crash-reporting SDK free for two months",
+  "playbook_ok": [
+    "integrations",
+    "customer_research"
   ]
 }

@@ -6,15 +6,54 @@
     "target_kind": "org",
     "objective": "A machine learning engineering internship at an AI startup",
     "ask": "A short call about an ML engineering internship",
-    "persona": {"description": "Founders or engineering leaders at AI/ML startups in Bangalore", "roles": ["Founder", "CTO", "Head of Engineering", "Engineering Manager"], "org_types": ["AI startup"]},
-    "topics": ["machine learning", "generative AI", "computer vision"],
-    "expanded_terms": ["LLM applications", "MLOps"],
-    "locations": ["Bangalore, India"],
-    "search_queries": ["AI startups Bangalore hiring machine learning engineers", "generative AI startups Bangalore"],
-    "preferred_inboxes": ["careers", "jobs", "hiring", "founders", "hello"]
+    "persona": {
+      "description": "Founders or engineering leaders at AI/ML startups in Bangalore",
+      "roles": [
+        "Founder",
+        "CTO",
+        "Head of Engineering",
+        "Engineering Manager"
+      ],
+      "org_types": [
+        "AI startup"
+      ]
+    },
+    "topics": [
+      "machine learning",
+      "generative AI",
+      "computer vision"
+    ],
+    "expanded_terms": [
+      "LLM applications",
+      "MLOps"
+    ],
+    "locations": [
+      "Bangalore, India"
+    ],
+    "search_queries": [
+      "AI startups Bangalore hiring machine learning engineers",
+      "generative AI startups Bangalore"
+    ],
+    "preferred_inboxes": [
+      "careers",
+      "jobs",
+      "hiring",
+      "founders",
+      "hello"
+    ]
   },
-  "sender": {"name": "Test Candidate", "headline": "Final-year CS student",
-             "summary": "Fine-tuned a 7B LLM for code review comments; built a YOLO-based defect detector deployed at a factory.",
-             "highlights": ["Project: fine-tuned a 7B LLM for code review comments", "Internship: YOLO defect detector deployed on a factory line"]},
-  "facts": ["Fine-tuned a 7B LLM for code review comments", "Built a YOLO-based defect detector deployed at a factory"]
+  "sender": {
+    "name": "Test Candidate",
+    "headline": "Final-year CS student",
+    "summary": "Fine-tuned a 7B LLM for code review comments; built a YOLO-based defect detector deployed at a factory.",
+    "highlights": [
+      "Project: fine-tuned a 7B LLM for code review comments",
+      "Internship: YOLO defect detector deployed on a factory line"
+    ]
+  },
+  "facts": [
+    "Fine-tuned a 7B LLM for code review comments",
+    "Built a YOLO-based defect detector deployed at a factory"
+  ],
+  "prompt": "I'm a final-year CS student looking for an ML engineering internship at an AI startup in Bangalore; reach founders or engineering leads"
 }

@@ -6,14 +6,50 @@
     "target_kind": "org",
     "objective": "Raise a pre-seed round for an AI tutoring startup",
     "ask": "A 20-minute call to discuss our pre-seed round",
-    "persona": {"description": "Pre-seed and seed investors in India who back edtech", "roles": ["Partner", "Principal", "Managing Partner"], "org_types": ["venture capital fund", "angel network"]},
-    "topics": ["edtech", "AI tutoring"],
-    "expanded_terms": ["education technology", "consumer learning"],
-    "locations": ["India"],
-    "search_queries": ["pre-seed edtech investors India", "venture capital funds investing in edtech India"],
-    "preferred_inboxes": ["pitch", "deals", "founders", "hello", "contact"]
+    "persona": {
+      "description": "Pre-seed and seed investors in India who back edtech",
+      "roles": [
+        "Partner",
+        "Principal",
+        "Managing Partner"
+      ],
+      "org_types": [
+        "venture capital fund",
+        "angel network"
+      ]
+    },
+    "topics": [
+      "edtech",
+      "AI tutoring"
+    ],
+    "expanded_terms": [
+      "education technology",
+      "consumer learning"
+    ],
+    "locations": [
+      "India"
+    ],
+    "search_queries": [
+      "pre-seed edtech investors India",
+      "venture capital funds investing in edtech India"
+    ],
+    "preferred_inboxes": [
+      "pitch",
+      "deals",
+      "founders",
+      "hello",
+      "contact"
+    ]
   },
-  "sender": {"name": "Test Founder", "headline": "Co-founder of an AI tutoring startup",
-             "summary": "AI tutor for class 9-12 maths with 3,000 monthly active students and 18% paid conversion."},
-  "facts": ["3,000 monthly active students", "18% paid conversion", "Raising $400k pre-seed"]
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Co-founder of an AI tutoring startup",
+    "summary": "AI tutor for class 9-12 maths with 3,000 monthly active students and 18% paid conversion."
+  },
+  "facts": [
+    "3,000 monthly active students",
+    "18% paid conversion",
+    "Raising $400k pre-seed"
+  ],
+  "prompt": "raising a pre-seed round for our edtech startup in India; find angel investors and seed funds that invest in edtech"
 }
