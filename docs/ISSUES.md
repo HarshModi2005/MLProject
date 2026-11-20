@@ -456,7 +456,7 @@ A new Serper key was added. Changes made from the round-3 findings (all with tes
 
 ## Re-run: before and after (same 26 scenarios, new code, label `stress_d`)
 
-Cost: $0.77 of model calls and 1,047 searches; wall-clock 2.6 hours with 4 scenarios in parallel.
+Cost: $0.77 of model calls and 1,047 searches; about 9,400 scenario-seconds in total, run 4 at a time.
 Three scenarios were invalid in the earlier run (search credits, round 3); they are left out of the comparison below (23 scenarios).
 
 | | before | after |
