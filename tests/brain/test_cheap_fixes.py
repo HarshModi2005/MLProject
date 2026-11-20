@@ -167,3 +167,8 @@ def test_inbox_rule_keeps_the_main_ask():
 
     rules = [v for v in vars(dr).values() if isinstance(v, dict) and "org_inbox" in v][0]
     assert "never replace the main ask" in rules["org_inbox"]
+
+
+@pytest.mark.parametrize("address", ["notificacionesjudiciales@unipiloto.edu.co", "merchant@atome.sg", "legal@x.com"])
+def test_legal_and_merchant_desks_are_service_addresses(address):
+    assert is_service_address(address)

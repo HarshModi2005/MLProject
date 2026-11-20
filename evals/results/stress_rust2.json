@@ -1,0 +1,143 @@
+{
+  "label": "stress_rust2",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 120,
+      "qualified": 120,
+      "reachable": 2,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 27,
+      "llm_paid_calls": 13,
+      "llm_usd": 0.0093,
+      "pages_fetched": 78,
+      "seconds": 213.0,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "extract": 5,
+        "prejudge": 6,
+        "judge": 1
+      },
+      "by_source": {
+        "github": 17,
+        "npm": 23,
+        "web": 164
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 2 of 15 wanted contacts have a confident address. This kind of campaign (Open-source maintainers and developers) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 0 confident prospects of the 15 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "github": 17,
+          "npm": 23,
+          "web": 80
+        },
+        "qualified": {
+          "web": 80,
+          "github": 17,
+          "npm": 23
+        },
+        "enriched": {
+          "web": 17,
+          "github": 7
+        },
+        "reachable": {
+          "github": 2
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "github": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 6.32,
+          "found": 17,
+          "new": 17,
+          "qualified": 4
+        },
+        "npm": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 3,
+          "llm_calls": 0,
+          "seconds": 2.71,
+          "found": 23,
+          "new": 23,
+          "qualified": 23
+        },
+        "web": {
+          "runs": 1,
+          "search_calls": 6,
+          "fetches": 19,
+          "llm_calls": 5,
+          "seconds": 25.57,
+          "found": 82,
+          "new": 82,
+          "qualified": 81
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "oss_maintainers",
+      "intake_playbook_ok": false,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "Rust async crates",
+        "Rust networking crates",
+        "Rust open-source maintainers"
+      ],
+      "intake_ask_type": "review",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "name": "stress_rust_maintainers",
+      "split": "stress",
+      "playbook": "oss_maintainers",
+      "target": 15
+    }
+  ],
+  "summary": {
+    "scenarios": 1,
+    "failed": 0,
+    "good@K": 0,
+    "good_reachable@K": 0,
+    "good_verified@K": 0,
+    "precision@K": 0.0,
+    "mean_score": 0.0,
+    "distinct_orgs": 0,
+    "proof_rate": 0.0,
+    "reachable": 2,
+    "search_calls": 27,
+    "llm_paid_calls": 13,
+    "llm_usd": 0.0093,
+    "seconds": 213.0,
+    "intake_playbook_ok": "0/1",
+    "intake_where_ok": "1/1",
+    "usd_per_good": null,
+    "judge_precision": 0.0,
+    "judge_precision_ci95": [
+      0.0,
+      0.204
+    ],
+    "sendable_precision": 0.0,
+    "verified_precision": 0.0
+  }
+}

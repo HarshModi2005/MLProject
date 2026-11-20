@@ -162,7 +162,9 @@ class EmailCandidate(BaseModel):
 
 
 _SERVICE_TOKENS = {"support", "service", "services", "helpdesk", "helpline", "customerservice", "customercare",
-                   "complaints", "grievance", "grievances", "billing", "noreply", "donotreply", "unsubscribe"}
+                   "complaints", "grievance", "grievances", "billing", "noreply", "donotreply", "unsubscribe",
+                   "legal", "privacy", "dpo", "abuse", "postmaster", "webmaster", "refunds", "merchant", "merchants",
+                   "notificaciones", "notificacionesjudiciales", "judiciales"}
 
 
 def is_service_address(address: str) -> bool:

@@ -2,205 +2,448 @@
   "run": "stress_c",
   "judge_model": "gpt-4.1",
   "scenarios": {
-    "stress_investors_multi": {
-      "playbook": "fundraising",
-      "objective": "To secure seed investment funding of $1.5M from suitable seed investors in the specified regions and sectors.",
-      "ask": "To get seed investors interested in investing $100k-$500k in the startup's seed round.",
+    "stress_jaipur_photographers": {
+      "playbook": "b2b_sales",
+      "objective": "To sell the album-design software to independent wedding photography studios in Jaipur and nearby cities in Rajasthan.",
+      "ask": "To schedule a demo or start a conversation about purchasing the album-design software.",
       "prospects": [
         {
-          "id": "17fac1ca0fcc25b0",
-          "name": "Quona Capital",
+          "id": "6bd3e80c598cf53d",
+          "name": "Shree Chunniya Studios",
           "kind": "org",
           "title": null,
-          "org": "Quona Capital",
-          "email": "info@quona.com",
+          "org": "Shree Chunniya Studios",
+          "email": "shreechunniyastudios@gmail.com",
           "tier": "inbox",
-          "score": 0.8372,
+          "score": 0.902,
           "sources": [
-            "list",
-            "portfolio",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Invests in fintech innovators advancing financial inclusion"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic org inbox, appropriate for VC fund.",
-          "why": "Quona Capital is a leading fintech VC active in India and Indonesia, fits sector and geography."
-        },
-        {
-          "id": "d79f27120e7f514d",
-          "name": "Init-6",
-          "kind": "org",
-          "title": null,
-          "org": "Init-6",
-          "email": "info@init-6.fund",
-          "tier": "inbox",
-          "score": 0.788,
-          "sources": [
-            "list",
-            "portfolio",
-            "lookalike"
-          ],
-          "pipeline_reason": [
-            "Focus on fintech and financial services"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Org inbox, fits for VC outreach.",
-          "why": "Init-6 is a Jakarta-based VC focused on fintech, matches sector, stage, and region."
-        },
-        {
-          "id": "9a219a897c5ae061",
-          "name": "Skystar Capital",
-          "kind": "org",
-          "title": null,
-          "org": "Skystar Capital",
-          "email": "contact@skystarcapital.com",
-          "tier": "inbox",
-          "score": 0.788,
-          "sources": [
-            "list",
-            "portfolio"
-          ],
-          "pipeline_reason": [
-            "Focus on FinTech and Financial Services in Indonesia"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Org inbox, suitable for VC approach.",
-          "why": "Skystar Capital is a VC investing in fintech in Indonesia, fits all criteria."
-        },
-        {
-          "id": "4970466eca7110cc",
-          "name": "Venturra",
-          "kind": "org",
-          "title": null,
-          "org": "Venturra",
-          "email": "all@venturra.com",
-          "tier": "inbox",
-          "score": 0.782,
-          "sources": [
-            "list",
-            "lookalike"
-          ],
-          "pipeline_reason": [
-            "Indonesia-focused early-stage VC"
-          ],
-          "verdict": "borderline",
-          "fit": 4,
-          "problems": [
-            "off_topic",
-            "weak_evidence"
-          ],
-          "address": "inbox",
-          "address_note": "Org-wide address, fine for VC.",
-          "why": "Venturra is early-stage VC in Indonesia, but no clear fintech/climate focus."
-        },
-        {
-          "id": "879f762dac70d512",
-          "name": "Kejorahq",
-          "kind": "org",
-          "title": null,
-          "org": "Kejorahq",
-          "email": "contact@kejorahq.com",
-          "tier": "inbox",
-          "score": 0.7388,
-          "sources": [
-            "list",
+            "places",
+            "web",
             "orgs",
             "lookalike"
           ],
           "pipeline_reason": [
-            "Invests from seed to late-stage in Southeast Asia"
+            "Specializes in wedding photography in Jaipur"
           ],
-          "verdict": "borderline",
-          "fit": 4,
-          "problems": [
-            "off_topic",
-            "weak_evidence"
-          ],
-          "address": "inbox",
-          "address_note": "Org inbox, standard for VC.",
-          "why": "Kejora invests seed in SE Asia, but sector focus not clearly fintech/climate."
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Generic studio Gmail, matches org name.",
+          "why": "Independent wedding photography studio in Jaipur, matches target exactly."
         },
         {
-          "id": "a944ac46ee240da0",
-          "name": "NEXEA",
+          "id": "b6fdc98343730219",
+          "name": "Pre-Wedding Shoot Jaipur",
+          "kind": "person",
+          "title": null,
+          "org": "Candid Life Photography",
+          "email": "candidlifejaipur@gmail.com",
+          "tier": "guess",
+          "score": 0.8692,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Award-winning wedding photographers in Jaipur since 2007"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio Gmail, matches org and city.",
+          "why": "Award-winning wedding photography studio in Jaipur, fits campaign perfectly."
+        },
+        {
+          "id": "437dca0dc1632397",
+          "name": "Sony Fashion Photography",
           "kind": "org",
           "title": null,
-          "org": "NEXEA",
-          "email": "hello@nexea.co",
+          "org": "Sony Fashion Photography",
+          "email": "contact@weddingphotographybysf.com",
           "tier": "inbox",
-          "score": 0.7388,
+          "score": 0.8561,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent wedding photography studio in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Business domain, matches org.",
+          "why": "Independent wedding photography studio in Jaipur, decision maker identified."
+        },
+        {
+          "id": "e2a94f483c689e7d",
+          "name": "CN Films Photography",
+          "kind": "org",
+          "title": null,
+          "org": "CN Films Photography",
+          "email": "cnfilmsphotography@gmail.com",
+          "tier": "inbox",
+          "score": 0.8496,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "pipeline_reason": [
+            "Listed among top wedding photographers in Jaipur and Rajasthan"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio Gmail, matches org.",
+          "why": "Top wedding photographer in Jaipur/Rajasthan, independent studio."
+        },
+        {
+          "id": "d0216805cb3d335c",
+          "name": "The Candid House",
+          "kind": "org",
+          "title": null,
+          "org": "The Candid House",
+          "email": "thecandidhouse@gmail.com",
+          "tier": "inbox",
+          "score": 0.8496,
           "sources": [
             "web",
-            "portfolio",
             "orgs"
           ],
           "pipeline_reason": [
-            "Early stage VC program for tech startups in Indonesia"
+            "Leading wedding photography company in Jaipur"
           ],
-          "verdict": "borderline",
-          "fit": 3,
-          "problems": [
-            "off_topic",
-            "weak_evidence"
-          ],
-          "address": "inbox",
-          "address_note": "Org inbox, fits for VC.",
-          "why": "NEXEA is early-stage VC in Indonesia, but sector fit (fintech/climate) is unclear."
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio Gmail, matches org.",
+          "why": "Leading wedding photography company in Jaipur, fits target exactly."
         },
         {
-          "id": "f5fc2fc97c4bdb09",
-          "name": "InvestIdea",
+          "id": "2242ea3180678026",
+          "name": "Viresh Studio",
           "kind": "org",
           "title": null,
-          "org": "InvestIdea",
-          "email": "info@investidea.ventures",
+          "org": "Viresh Studio",
+          "email": "vireshstudiojaipur@gmail.com",
           "tier": "inbox",
-          "score": 0.6402,
+          "score": 0.8496,
           "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Expert wedding and pre-wedding shoots in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio Gmail, matches org.",
+          "why": "Expert wedding photography studio in Jaipur, matches campaign target."
+        },
+        {
+          "id": "86cf20c7a4b49daf",
+          "name": "Hitesh Malpani",
+          "kind": "org",
+          "title": null,
+          "org": "Hitesh Malpani",
+          "email": "info@hiteshmalpani.com",
+          "tier": "inbox",
+          "score": 0.8484,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Wedding photographer and cinematographer based in Jaipur and Delhi"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Business domain, matches photographer.",
+          "why": "Independent wedding photographer in Jaipur, fits campaign perfectly."
+        },
+        {
+          "id": "643d5e59fcbeabc4",
+          "name": "Himanshi Photo Studio -",
+          "kind": "org",
+          "title": null,
+          "org": "Himanshi Photo Studio -",
+          "email": "himanshistudio7@gmail.com",
+          "tier": "inbox",
+          "score": 0.8287,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Offers wedding photography and related shoots"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio Gmail, matches org.",
+          "why": "Independent wedding photography studio in Jaipur, matches campaign target."
+        },
+        {
+          "id": "7caed450dfbfab79",
+          "name": "Photography Studio in Jaipur",
+          "kind": "org",
+          "title": null,
+          "org": "Photography Studio in Jaipur",
+          "email": "hello@jaipurphotostudio.com",
+          "tier": "inbox",
+          "score": 0.8178,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Professional wedding photography studio in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches studio domain, fits org target.",
+          "why": "Independent wedding photography studio in Jaipur, matches target exactly."
+        },
+        {
+          "id": "54241e0ffab8b764",
+          "name": "Dk Wedding Studio",
+          "kind": "org",
+          "title": null,
+          "org": "Dk Wedding Studio",
+          "email": "dkweddingstudio@gmail.com",
+          "tier": "inbox",
+          "score": 0.8116,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Reputed wedding photography studio in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Generic Gmail but matches studio name.",
+          "why": "Reputed wedding photography studio in Jaipur, fits campaign target."
+        },
+        {
+          "id": "37431615e43c351f",
+          "name": "Kumkumphotosjaipur",
+          "kind": "org",
+          "title": null,
+          "org": "Kumkumphotosjaipur",
+          "email": "kumkumphotosjaipur@gmail.com",
+          "tier": "inbox",
+          "score": 0.8116,
+          "sources": [
+            "places",
+            "web",
+            "orgs",
             "list",
             "lookalike"
           ],
           "pipeline_reason": [
-            "Multi-stage investment firm in Indonesia"
+            "Offers candid and pre wedding photography in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Gmail matches studio name, plausible for small business.",
+          "why": "Award-winning wedding photography studio in Jaipur, ideal target."
+        },
+        {
+          "id": "9474faff5d054dac",
+          "name": "Vogueshaire",
+          "kind": "org",
+          "title": null,
+          "org": "Vogueshaire",
+          "email": "info@vogueshaire.com",
+          "tier": "inbox",
+          "score": 0.8043,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Specializes in wedding photography in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio domain, fits org target.",
+          "why": "Independent wedding photography studio in Jaipur, matches campaign needs."
+        },
+        {
+          "id": "5a8b7c3c9554a7d6",
+          "name": "Weddingdiariesbyomp",
+          "kind": "org",
+          "title": null,
+          "org": "Weddingdiariesbyomp",
+          "email": "weddingdiariesbyomp@gmail.com",
+          "tier": "inbox",
+          "score": 0.8042,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Wedding photographer in Jaipur with strong local presence"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Gmail matches studio name, plausible for small studio.",
+          "why": "Wedding photographer in Jaipur, strong local presence, fits target."
+        },
+        {
+          "id": "61afc3f454b494c9",
+          "name": "Matrix Studio",
+          "kind": "org",
+          "title": null,
+          "org": "Matrix Studio",
+          "email": "ms@matrixstudio.in",
+          "tier": "inbox",
+          "score": 0.7664,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Known candid wedding photography studio in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Studio domain, plausible for org.",
+          "why": "Long-established wedding photography studio in Jaipur, ideal fit."
+        },
+        {
+          "id": "30b91a0718b746de",
+          "name": "Clikers Motion Picture",
+          "kind": "org",
+          "title": null,
+          "org": "Clikers Motion Picture",
+          "email": "clikersmotionpicture@gmail.com",
+          "tier": "inbox",
+          "score": 0.7664,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Luxury wedding photography and cinematic films in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Gmail matches studio name, plausible for small business.",
+          "why": "Luxury wedding photography studio in Jaipur, matches campaign target."
+        },
+        {
+          "id": "5c2147211e206f78",
+          "name": "GauRi Brothers",
+          "kind": "person",
+          "title": null,
+          "org": "Gauri Design",
+          "email": "gauridesignnagaur@gmail.com",
+          "tier": "guess",
+          "score": 0.7136,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Provides album design and photo editing services"
           ],
           "verdict": "borderline",
           "fit": 3,
           "problems": [
-            "off_topic",
-            "weak_evidence"
+            "off_topic"
           ],
+          "address": "plausible",
+          "address_note": "Gmail matches org, plausible for small business.",
+          "why": "Design agency offering album design, not a photography studio."
+        },
+        {
+          "id": "7025d11ee7389696",
+          "name": "Voila",
+          "kind": "org",
+          "title": null,
+          "org": "Voila",
+          "email": "contact@voilaindia.com",
+          "tier": "inbox",
+          "score": 0.7119,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Specializes in wedding picture albums and photography"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
           "address": "inbox",
-          "address_note": "Org inbox, plausible for VC.",
-          "why": "InvestIdea is early-stage VC, but sector fit (fintech/climate) not explicit."
+          "address_note": "Generic studio inbox, fits org target",
+          "why": "Voila is a Jaipur-based studio specializing in wedding albums\u2014ideal target for album-design software."
+        },
+        {
+          "id": "843ada5667794760",
+          "name": "PlaymatriX Studio",
+          "kind": "org",
+          "title": null,
+          "org": "PlaymatriX Studio",
+          "email": "playmatrixstudioofficial@gmail.com",
+          "tier": "inbox",
+          "score": 0.7065,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Photographs and films weddings in Jaipur"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Studio's official Gmail, fits org target",
+          "why": "PlaymatriX Studio is an independent wedding photography business in Jaipur\u2014matches campaign target perfectly."
         }
       ],
       "list": {
-        "coverage": 4.0,
+        "coverage": 5.0,
         "diversity": 4.0,
-        "missing": "No clear angel investors or India/Singapore-based funds; all are orgs, not individuals.",
+        "missing": "No obvious gaps; could add more from nearby Rajasthan cities for broader reach. | No explicit Studio Manager/Owner contacts; all org-level, no direct personal roles. | Could include more studios from nearby cities in Rajasthan, not just Jaipur.",
         "systemic_issues": [
-          "Sector focus often unclear",
-          "No direct angel investors",
-          "Few Singapore/India-specific VCs"
+          "org-level only, no named individuals",
+          "one off-topic design agency"
         ]
       },
       "emails": [
         {
-          "id": "17fac1ca0fcc25b0",
-          "to": "info@quona.com",
-          "subject": "Seeking seed investors for Indian green loans platform",
-          "body": "Hi David,\n\nQuona Capital's focus on fintech innovators advancing financial inclusion aligns with my work as co-founder of a climate-fintech platform. We match Indian MSMEs with green loans and have onboarded 1,200 MSMEs, disbursing Rs 9 crore.\n\nCurrently, we are raising a $1.5M seed round to scale further. I am looking for seed investors interested in investing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia.\n\nCould you point me to seed investors at Quona Capital who might be interested or to whoever handles this?\n\nBest regards,\nTest Founder",
+          "id": "6bd3e80c598cf53d",
+          "to": "shreechunniyastudios@gmail.com",
+          "subject": "Album design tool for wedding studios",
+          "body": "Hello Shree Chunniya Studios team,\n\nShree Chunniya Studios specializes in wedding photography in Mansarovar, Jaipur, which aligns with the focus of my album-design software.\n\nI founded a tool that lays out a 40-page wedding album in 10 minutes, currently used by 600 studios. This software could help your team save time on album creation without compromising quality.\n\nWould you be open to scheduling a demo or starting a conversation about how this tool might fit your workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -217,10 +460,10 @@
           "fix": ""
         },
         {
-          "id": "d79f27120e7f514d",
-          "to": "info@init-6.fund",
-          "subject": "Seeking seed investors in climate fintech",
-          "body": "Hello Init-6 team,\n\nI co-founded a climate-fintech startup that matches Indian MSMEs with green loans. We have onboarded 1,200 MSMEs and disbursed Rs 9 crore so far.\n\nWe are currently raising a $1.5M seed round and are looking for investors interested in contributing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia. \n\nCould you please point me to seed investors in your network who focus on these sectors and investment sizes, excluding corporate venture arms and accelerators? Your guidance would be very helpful.\n\nBest regards,\nTest Founder",
+          "id": "b6fdc98343730219",
+          "to": "candidlifejaipur@gmail.com",
+          "subject": "Album design software for Jaipur studios",
+          "body": "Hi Pre-Wedding,\n\nCandid Life Photography\u2019s award-winning reputation and extensive wedding portfolio in Jaipur caught my attention.\n\nI founded a software tool that lays out a 40-page wedding album in just 10 minutes. It is currently used by 600 studios and could help streamline your album creation process.\n\nWould you be open to a brief demo or conversation to see if this tool fits your workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -237,10 +480,10 @@
           "fix": ""
         },
         {
-          "id": "9a219a897c5ae061",
-          "to": "contact@skystarcapital.com",
-          "subject": "Seeking seed investors in fintech and climate",
-          "body": "Hello Skystar Capital team,\n\nI co-founded a climate-fintech platform that connects Indian MSMEs with green loans. We have onboarded 1,200 MSMEs and disbursed Rs 9 crore so far. We are currently raising a $1.5M seed round.\n\nGiven your focus on FinTech and Financial Services in Southeast Asia and Indonesia, I wanted to ask if you could point me to seed investors in your network who invest $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia. We are excluding corporate venture arms and accelerators.\n\nWould you be able to connect me to the right person or share relevant contacts? A brief reply would be much appreciated.\n\nBest regards,\nTest Founder",
+          "id": "437dca0dc1632397",
+          "to": "contact@weddingphotographybysf.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hi Chander,\n\nSony Fashion Photography offers wedding photography services in Jaipur and across India, including a limited-time deal for a free pre-wedding shoot.\n\nI am the founder of an album-design tool that lays out a 40-page wedding album in just 10 minutes. Currently, 600 studios use it to speed up their album creation process.\n\nWould you be open to scheduling a demo or starting a conversation about how this software might fit your studio\u2019s needs? If you\u2019re not the right person, could you please point me to whoever handles software or tool purchases at your studio?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -257,18 +500,1797 @@
           "fix": ""
         },
         {
-          "id": "4970466eca7110cc",
-          "to": "all@venturra.com",
-          "subject": "Early-stage investment in green loans",
-          "body": "Hello Venturra team,\n\nVenturra focuses on early-stage, high-growth technology companies in Southeast Asia. Our climate-fintech startup has onboarded 1,200 Indian MSMEs and disbursed Rs 9 crore in green loans.\n\nWe are raising a $1.5M seed round to grow our platform and impact. I would like to share more details or arrange a short call to discuss potential interest in this round.\n\nBest regards,\nTest Founder",
+          "id": "e2a94f483c689e7d",
+          "to": "cnfilmsphotography@gmail.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hi CN,\n\nCN Films Photography is recognized among the top wedding photographers in Jaipur and Rajasthan, known for your photo and video services with strong client ratings.\n\nI founded an album-design software that lays out a 40-page wedding album in just 10 minutes. Currently, 600 studios use this tool to speed up their album creation process.\n\nWould you be open to a short demo or conversation about how this software might support your album production? I can adapt to your schedule for a quick call or online presentation.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "junk_greeting:CN",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "d0216805cb3d335c",
+          "to": "thecandidhouse@gmail.com",
+          "subject": "Album design software for Jaipur studios",
+          "body": "Hello Candid House team,\n\nThe Candid House is a leading wedding photography company in Jaipur specializing in candid and pre-wedding shoots. I founded a software tool that lays out a 40-page wedding album in just 10 minutes, currently used by 600 studios.\n\nThis tool could help your team save time on album design while maintaining quality. I\u2019d like to offer a demo or start a conversation about how this software might fit your studio\u2019s workflow.\n\nWould you be open to scheduling a short demo to explore this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "2242ea3180678026",
+          "to": "vireshstudiojaipur@gmail.com",
+          "subject": "Streamline Wedding Albums for Viresh Studio",
+          "body": "Hello Viresh Studio team,\n\nViresh Studio\u2019s focus on expert wedding and pre-wedding shoots in Jaipur caught my attention.\n\nI founded an album-design tool used by 600 studios that lays out a 40-page wedding album in just 10 minutes. This software could help your team reduce the time spent on album creation while maintaining quality.\n\nWould you be open to a brief demo or a conversation about how this tool might fit your workflow? I can share how other studios have integrated it easily.\n\nLooking forward to your thoughts.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "86cf20c7a4b49daf",
+          "to": "info@hiteshmalpani.com",
+          "subject": "Album design tool for your wedding projects",
+          "body": "Hi Hitesh,\n\nYour work in wedding photography and filmmaking in Jaipur and Delhi caught my attention.\n\nI founded an album-design tool that lays out a 40-page wedding album in 10 minutes. Currently, 600 studios use this software to streamline their album creation process.\n\nCould you connect me with the person responsible for software or tool purchases at your studio? I would like to schedule a demo or start a conversation about how this tool might support your album production workflow.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "person_greeting_on_role_inbox:Hitesh",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "643d5e59fcbeabc4",
+          "to": "himanshistudio7@gmail.com",
+          "subject": "Streamline Wedding Album Design for Himanshi Studio",
+          "body": "Hello Himanshi Photo Studio - team,\n\nHimanshi Photo Studio focuses on capturing special moments through wedding and related photography. I founded a software tool that automates the layout of 40-page wedding albums in just 10 minutes. Currently, 600 studios use this tool to speed up their album design process.\n\nIf your team is interested, I can schedule a demo to show how this software works and discuss how it might fit your workflow. Would you be open to a brief conversation about this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "7caed450dfbfab79",
+          "to": "hello@jaipurphotostudio.com",
+          "subject": "Album design software for Jaipur studios",
+          "body": "Hello Photography Studio in Jaipur team,\n\nYour studio offers professional wedding and pre-wedding photography in Jaipur, including cinematic coverage. I founded a software tool that automatically lays out a 40-page wedding album in 10 minutes, currently used by 600 studios.\n\nThis software could simplify your album design process and save time. Could you connect me with the person responsible for software or tool purchases at your studio? I would like to schedule a demo or start a conversation about how this tool might fit your needs.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "54241e0ffab8b764",
+          "to": "dkweddingstudio@gmail.com",
+          "subject": "Quick album design for Dk Wedding Studio",
+          "body": "Hello Dk Wedding Studio team,\n\nDk Wedding Studio's reputation in wedding photography and celebrity clientele stands out in Jaipur.\n\nI founded a software tool that designs 40-page wedding albums in just 10 minutes. Currently, 600 studios use it to save time and streamline album creation.\n\nWould you be open to a brief demo or conversation about how this software might fit your studio's workflow? I can share how it works and answer any questions.\n\nPlease let me know a convenient time to connect.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "junk_greeting:Dk Wedding Studio team",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "37431615e43c351f",
+          "to": "kumkumphotosjaipur@gmail.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hello Kumkumphotosjaipur team,\n\nKumkum Photos offers candid and pre-wedding photography in Jaipur and is recognized as an award-winning studio since 2022. I founded a software tool used by 600 studios that lays out a 40-page wedding album in just 10 minutes.\n\nThis tool could help your team save time designing albums while maintaining quality. Would you be open to scheduling a brief demo or starting a conversation about how this software might fit your studio\u2019s workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "9474faff5d054dac",
+          "to": "info@vogueshaire.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hello Vogueshaire team,\n\nVogueshaire\u2019s work in candid, traditional, and cinematic wedding photography in Jaipur caught my attention.\n\nI founded a tool that automates the layout of 40-page wedding albums in just 10 minutes. Currently, 600 studios use this software to speed up their album design process.\n\nCould you connect me with the person responsible for software or tool purchases at your studio? I\u2019d like to schedule a demo or start a conversation about how this tool might support your workflow.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        }
+      ]
+    },
+    "stress_journalists_exclusions": {
+      "playbook": "pr_media",
+      "objective": "To secure interviews with Indian journalists who cover data privacy or health tech to discuss the report findings.",
+      "ask": "Request an interview to discuss the findings of the report on data leakage by Indian health apps.",
+      "prospects": [
+        {
+          "id": "b64e0957df100431",
+          "name": "Biplab Lenin",
+          "kind": "person",
+          "title": "Journalist",
+          "org": "Cyril Amarchand Mangaldas",
+          "email": "biplab.lenin@cyrilshroff.com",
+          "tier": "attributed",
+          "score": 0.85,
+          "sources": [
+            "news"
+          ],
+          "pipeline_reason": [
+            "Recent article on Indian health data protection"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "wrong_org_type"
+          ],
+          "address": "plausible",
+          "address_note": "Matches org domain, likely theirs",
+          "why": "Writes on health data but appears to work at a law firm, not a media outlet."
+        },
+        {
+          "id": "b4f202d1d66db522",
+          "name": "Amoha Basrur",
+          "kind": "person",
+          "title": "Journalist",
+          "org": "orfonline.org",
+          "email": "amoha.basrur@orfonline.org",
+          "tier": "attributed",
+          "score": 0.7,
+          "sources": [
+            "news"
+          ],
+          "pipeline_reason": [
+            "Wrote about Digital Personal Data Protection Act recently"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches org and name, likely theirs",
+          "why": "Covers data privacy for a major Indian publication; highly relevant to the ask."
+        },
+        {
+          "id": "f6b1ab2cdefd4e97",
+          "name": "Deepali Jain",
+          "kind": "person",
+          "title": "Journalist",
+          "org": "DQ",
+          "email": "deepalij@cybermedia.co.in",
+          "tier": "attributed",
+          "score": 0.6,
+          "sources": [
+            "news"
+          ],
+          "pipeline_reason": [
+            "Covers AI and enterprise tech, no clear focus on data privacy or health tech"
+          ],
+          "verdict": "borderline",
+          "fit": 2,
+          "problems": [
+            "off_topic",
+            "weak_evidence"
+          ],
+          "address": "plausible",
+          "address_note": "Matches org and name, likely theirs",
+          "why": "Covers tech and AI, but little evidence of focus on health data privacy."
+        }
+      ],
+      "list": {
+        "coverage": 3.0,
+        "diversity": 3.0,
+        "missing": "More journalists with a clear focus on health tech or data privacy in India.",
+        "systemic_issues": [
+          "Some prospects not at media outlets",
+          "Weak topical evidence for some",
+          "Limited number of highly relevant targets"
+        ]
+      },
+      "emails": [
+        {
+          "id": "b64e0957df100431",
+          "to": "biplab.lenin@cyrilshroff.com",
+          "subject": "Insights on Indian health data protection",
+          "body": "Hi Biplab,\n\nYour recent article, \"Mind Your Meds and Metrics: Navigating the Indian Health Data Protection Labyrinth,\" highlights critical issues in Indian health data protection.\n\nI recently audited 10 popular Indian health apps and found that 8 of them share user identifiers with third-party trackers. This report reveals significant privacy concerns that may interest your readership.\n\nWould you be open to an interview to discuss these findings and their implications for digital health privacy in India? I can provide exclusive insights and data from the audit to support your coverage.\n\nPlease let me know if you are interested in scheduling a conversation.\n\nBest regards,\nTest Researcher",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 3,
+          "unsupported": [
+            "your readership"
+          ],
+          "personal": 3,
+          "ask": 4,
+          "tone": 4,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Clarify the recipient's role and relevance; do not refer to 'your readership' for a lawyer, and tailor the ask to legal expertise."
+        },
+        {
+          "id": "b4f202d1d66db522",
+          "to": "amoha.basrur@orfonline.org",
+          "subject": "Insights on Indian Health Apps Privacy",
+          "body": "Hi Amoha,\n\nYour recent article on The Digital Personal Data Protection Act, 2023 caught my attention due to its focus on data privacy legislation in India.\n\nI audited 10 popular Indian health apps and found 8 sharing user identifiers with third-party trackers. These findings may be relevant to your coverage of data protection policies.\n\nWould you be open to an interview to discuss these findings and their implications for India\u2019s digital privacy landscape? I can provide exclusive insights from the audit to support your reporting.\n\nPlease let me know if you are interested.\n\nBest regards,\nTest Researcher",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "f6b1ab2cdefd4e97",
+          "to": "deepalij@cybermedia.co.in",
+          "subject": "Interview on Indian health app privacy leaks",
+          "body": "Hi Deepali,\n\nYour recent article on Hitachi's AI-led cybersecurity centre in Bengaluru highlights growing tech security efforts in India.\n\nI audited 10 popular Indian health apps and found that 8 share user identifiers with third-party trackers, raising privacy concerns.\n\nGiven your focus on enterprise tech and policy trends, would you be open to a brief interview to discuss these findings and their implications for privacy in Indian health technology?\n\nBest regards,\nTest Researcher",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 4,
+          "unsupported": [],
+          "personal": 3,
+          "ask": 4,
+          "tone": 4,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": false,
+          "problems": [
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Acknowledge recipient's broader tech focus and briefly justify why health app privacy is relevant to their beat."
+        }
+      ]
+    },
+    "stress_phd_neuro": {
+      "playbook": "phd_positions",
+      "objective": "To find and reach out to professors offering PhD positions in computational neuroscience focused on neural coding or spiking networks in Germany or the Netherlands, excluding Max Planck institutes.",
+      "ask": "Could you please consider me for any available PhD positions in your lab related to neural coding or spiking networks?",
+      "prospects": [
+        {
+          "id": "5abc4a5efc15edbb",
+          "name": "Jochen Triesch",
+          "kind": "person",
+          "title": null,
+          "org": "Frankfurt Institute for Advanced Studies",
+          "email": "triesch@fias.uni-frankfurt.de",
+          "tier": "attributed",
+          "score": 0.9294,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Recent publications on spiking neural networks and predictive coding"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches org and name, academic email.",
+          "why": "Professor at FIAS, Germany, with recent SNN/neural coding work."
+        },
+        {
+          "id": "47129c805e13172c",
+          "name": "Hans Armin Kestler",
+          "kind": "person",
+          "title": null,
+          "org": "Universit\u00e4t Ulm",
+          "email": "hans.kestler@uni-ulm.de",
+          "tier": "attributed",
+          "score": 0.9206,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Recent work on spiking neural networks"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "plausible",
+          "address_note": "University email, matches name/org.",
+          "why": "Recent SNN work, but main focus is bioinformatics/cancer, not core computational neuroscience."
+        },
+        {
+          "id": "6d646a0df67d14e1",
+          "name": "Said Hamdioui",
+          "kind": "person",
+          "title": "Professor",
+          "org": "Delft University of Technology",
+          "email": "s.hamdioui@tudelft.nl",
+          "tier": "attributed",
+          "score": 0.8809,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Recent publications on spiking neural networks"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "TU Delft email, matches name.",
+          "why": "Professor, recent SNN/neuromorphic computing publications, fits ask and geography."
+        },
+        {
+          "id": "5c9b5e70985a2513",
+          "name": "Thorsten Jungeblut",
+          "kind": "person",
+          "title": null,
+          "org": "Hochschule Bielefeld",
+          "email": "thorsten.jungeblut@hsbi.de",
+          "tier": "attributed",
+          "score": 0.8809,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Multiple recent publications on spiking neural networks"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "plausible",
+          "address_note": "Academic email, matches name/org.",
+          "why": "Recent SNN work, but focus is embedded/VLSI, not core computational neuroscience."
+        },
+        {
+          "id": "beab2af0d239fe7d",
+          "name": "Katrin Franke",
+          "kind": "person",
+          "title": null,
+          "org": "University of T\u00fcbingen",
+          "email": "kafranke@stanford.edu",
+          "tier": "attributed",
+          "score": 0.8721,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Research on neural code in visual neurons"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "address_not_theirs"
+          ],
+          "address": "doubtful",
+          "address_note": "Stanford email for T\u00fcbingen professor.",
+          "why": "Researches neural coding, but email likely not current/appropriate."
+        },
+        {
+          "id": "1ea0e6fc2331f549",
+          "name": "Shamini Koravuna",
+          "kind": "person",
+          "title": null,
+          "org": "Bielefeld University",
+          "email": "shaminik9646@gmail.com",
+          "tier": "guess",
+          "score": 0.8412,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Recent work on spiking neural networks"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "wrong_role_or_seniority",
+            "address_not_theirs",
+            "weak_evidence"
+          ],
+          "address": "doubtful",
+          "address_note": "Gmail, not institutional; unclear seniority.",
+          "why": "Likely not a PI/professor; address not institutional; evidence weak."
+        },
+        {
+          "id": "28c751df4cf70d16",
+          "name": "Mahyar Shahsavari",
+          "kind": "person",
+          "title": "Assistant Professor",
+          "org": "Radboud University Nijmegen",
+          "email": "mahyar.shahsavari@ru.nl",
+          "tier": "attributed",
+          "score": 0.8074,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Recent publications on spiking neural networks"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Radboud University email, matches name.",
+          "why": "Assistant Professor, Donders Institute, recent SNN work, fits ask and geography."
+        },
+        {
+          "id": "48a6acf398ba5590",
+          "name": "Tobias Gemmeke",
+          "kind": "person",
+          "title": null,
+          "org": "RWTH Aachen University",
+          "email": "gemmeke@ids.rwth-aachen.de",
+          "tier": "attributed",
+          "score": 0.8059,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Works on spiking neural networks"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "RWTH Aachen email, matches name.",
+          "why": "Recent SNN/computational neuroscience work, at German university."
+        },
+        {
+          "id": "5048d7206a3afb20",
+          "name": "Luisa Ramirez",
+          "kind": "person",
+          "title": null,
+          "org": "Johannes Gutenberg University Mainz",
+          "email": "luramire@uni-mainz.de",
+          "tier": "attributed",
+          "score": 0.7985,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Works on neural coding"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "wrong_role_or_seniority",
+            "weak_evidence"
+          ],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "No title or PI evidence; works on neural coding but unclear if group leader."
+        },
+        {
+          "id": "d51b181ccf324914",
+          "name": "Charlotte Frenkel",
+          "kind": "person",
+          "title": "Professor",
+          "org": "Delft University of Technology",
+          "email": "c.frenkel@tudelft.nl",
+          "tier": "attributed",
+          "score": 0.7824,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Works on spiking neural networks and neural computing"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "Professor, PI, works on spiking neural networks in NL; ideal fit."
+        },
+        {
+          "id": "aef550274bc59822",
+          "name": "Jorge F. Mej\u00edas",
+          "kind": "person",
+          "title": null,
+          "org": "University of Amsterdam",
+          "email": "j.f.mejias@uva.nl",
+          "tier": "attributed",
+          "score": 0.7735,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Works on neural dynamics and cortical column models relevant to neural coding"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [
+            "wrong_role_or_seniority"
+          ],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "Strong research fit, but unclear if PI; likely senior researcher."
+        },
+        {
+          "id": "14b533fcc39cdc79",
+          "name": "Johannes Schemmel",
+          "kind": "person",
+          "title": null,
+          "org": "Heidelberg University",
+          "email": "schemmel@ziti.uni-heidelberg.de",
+          "tier": "attributed",
+          "score": 0.7544,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Recent publications on spiking neural networks"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [
+            "wrong_role_or_seniority"
+          ],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "Works on spiking networks at university; unclear if PI but likely senior."
+        },
+        {
+          "id": "3ec4119073f734a9",
+          "name": "Marc Timme",
+          "kind": "person",
+          "title": null,
+          "org": "Center for Advancing Electronics Dresden",
+          "email": "marc.timme@tu-dresden.de",
+          "tier": "attributed",
+          "score": 0.7544,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Works on spiking neural networks"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [
+            "wrong_role_or_seniority"
+          ],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "Works on spiking networks, likely group leader, but title not explicit."
+        },
+        {
+          "id": "8525d41956789525",
+          "name": "Stefano Panzeri",
+          "kind": "person",
+          "title": null,
+          "org": "University Medical Center Hamburg-Eppendorf",
+          "email": "s.panzeri@uke.de",
+          "tier": "attributed",
+          "score": 0.7294,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Research on neural coding and spike timing"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "Strong PI in neural coding/spiking at German university hospital."
+        },
+        {
+          "id": "c94fd38ab89295ec",
+          "name": "Henk Corporaal",
+          "kind": "person",
+          "title": "Professor",
+          "org": "Eindhoven University of Technology",
+          "email": "h.corporaal@tue.nl",
+          "tier": "attributed",
+          "score": 0.6868,
+          "sources": [
+            "openalex"
+          ],
+          "pipeline_reason": [
+            "Works on spiking neural networks"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches university and name pattern",
+          "why": "Professor, works on spiking networks in NL; fits campaign well."
+        }
+      ],
+      "list": {
+        "coverage": 4.5,
+        "diversity": 4.5,
+        "missing": "Some top computational neuroscience labs in DE/NL (e.g., Berlin, Groningen, Nijmegen) not represented. | Explicit group leader/PI titles for some; more from smaller universities.",
+        "systemic_issues": [
+          "Some off-topic (VLSI/embedded focus over neuroscience)",
+          "Occasional non-institutional or mismatched emails",
+          "Unclear PI status for some entries",
+          "PI status unclear for several prospects",
+          "Some lack explicit title or group leader evidence"
+        ]
+      },
+      "emails": [
+        {
+          "id": "5abc4a5efc15edbb",
+          "to": "triesch@fias.uni-frankfurt.de",
+          "subject": "PhD inquiry: spiking networks at Frankfurt IAS",
+          "body": "Dear Jochen Triesch,\n\nI am completing an MSc in Physics with a thesis on spiking network models of cortex. My work involved developing and analyzing these models using Python and Brian2.\n\nI noticed your publications on spiking neural networks, including work on predictive coding and simulation tools. Although my thesis is not directly linked to your papers, my computational modeling skills might be relevant to your research.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities at the Frankfurt Institute for Advanced Studies and would appreciate any guidance on application procedures or openings.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "47129c805e13172c",
+          "to": "hans.kestler@uni-ulm.de",
+          "subject": "PhD positions in spiking neural networks",
+          "body": "Dear Hans Armin Kestler,\n\nI am an MSc Physics student working on a thesis about spiking network models of cortex. My research involves simulations using Python and Brian2, and I have presented two workshop posters on related topics.\n\nI noticed your publication on stochasticity in spiking-neural-network based Boolean networks at Universit\u00e4t Ulm. Although my thesis is focused on cortex models, I am interested in neural coding and spiking networks and would like to explore doctoral research in this area.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks?\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [],
+          "personal": 3,
+          "ask": 4,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Acknowledge the recipient's main research focus is bioinformatics/cancer and clarify why your background is relevant to their group."
+        },
+        {
+          "id": "6d646a0df67d14e1",
+          "to": "s.hamdioui@tudelft.nl",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Professor Hamdioui,\n\nI am a MSc Physics student completing a thesis on spiking network models of the cortex. My work involves simulation models using Python and Brian2, focusing on neural dynamics relevant to spiking neural networks.\n\nI read your paper \"On the Trustworthiness of Spiking Neural Networks and Neuromorphic Systems\" and found your research on neuromorphic computing and SNNs relevant to my interests.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities starting in the next academic cycle and would appreciate any guidance on applying.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "5c9b5e70985a2513",
+          "to": "thorsten.jungeblut@hsbi.de",
+          "subject": "Interest in PhD positions at Hochschule Bielefeld",
+          "body": "Dear Thorsten Jungeblut,\n\nI am completing my MSc in Physics with a thesis on spiking network models of cortex. I have presented two workshop posters on related topics, using Python and Brian2 for simulations.\n\nYour publications on spiking neural networks and their applications, including work on model selection and FPGA analysis, are relevant to my interests. While my experience focuses on computational modeling rather than hardware, I am keen to expand my expertise in spiking networks.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities at Hochschule Bielefeld and can start as soon as the position is available.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [],
+          "personal": 3,
+          "ask": 4,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Explicitly address the hardware/embedded focus of the lab and explain how your skills could contribute to their research."
+        },
+        {
+          "id": "beab2af0d239fe7d",
+          "to": "kafranke@stanford.edu",
+          "subject": "Seeking PhD opportunities in computational neuroscience",
+          "body": "Dear Katrin Franke,\n\nI am a MSc Physics student currently writing a thesis on spiking network models of cortex, using Python and Brian2 for computational modeling.\n\nYour paper, \"Letting the neural code speak: Automated characterization of monkey visual neurons through human language,\" drew my attention due to its focus on neural coding in visual neurons.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities in Germany or the Netherlands, excluding Max Planck institutes, and would appreciate any guidance on applying or discussing potential openings.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 4,
+          "tone": 5,
+          "salutation_ok": false,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "wrong_salutation",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Verify and use the correct institutional email address for Katrin Franke at University of T\u00fcbingen."
+        },
+        {
+          "id": "1ea0e6fc2331f549",
+          "to": "shaminik9646@gmail.com",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Shamini Koravuna,\n\nI am a MSc Physics student working on spiking network models of the cortex for my thesis. I have experience using Python and Brian2 to simulate these models.\n\nYour recent paper on Spiking Neural Network Models Analysis on Field Programmable Gate Arrays drew my attention due to its focus on SNN implementation challenges and applications. I am interested in neural coding and spiking networks and would like to pursue a PhD in this area.\n\nCould you please consider me for any available PhD positions in your lab at Bielefeld University related to neural coding or spiking networks? I would be happy to provide my CV or discuss my background further if you are interested.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 2,
+          "unsupported": [
+            "PhD positions in your lab at Bielefeld University"
+          ],
+          "personal": 2,
+          "ask": 2,
+          "tone": 4,
+          "salutation_ok": false,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "ask_misfit",
+            "wrong_salutation",
+            "ignores_recipient_context"
+          ],
+          "fix": "Do not ask for PhD positions from someone who is not a PI or group leader; verify recipient's role and use institutional address."
+        },
+        {
+          "id": "28c751df4cf70d16",
+          "to": "mahyar.shahsavari@ru.nl",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Professor Shahsavari,\n\nI am a MSc Physics student completing a thesis on spiking network models of cortex. Your recent paper on exploring the limitations of layer synchronization in spiking neural networks caught my attention.\n\nMy thesis work involves computational modeling of spiking networks using Python and Brian2. I am seeking a PhD position focused on neural coding or spiking networks and am interested in opportunities in your lab at Radboud University.\n\nCould you please consider me for any available PhD positions in these areas? I would appreciate any information on how to apply.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "48a6acf398ba5590",
+          "to": "gemmeke@ids.rwth-aachen.de",
+          "subject": "PhD interest in spiking neural networks",
+          "body": "Dear Tobias Gemmeke,\n\nI am a MSc Physics student working on spiking network models of cortex for my thesis, with experience in Python and Brian2. I recently read your paper on Balanced and Efficient Spiking Neural Networks from IJCNN 2025 and found your approach to efficient spiking models relevant to my research focus.\n\nMy work focuses on computational modeling of cortical spiking networks. I have not worked on hardware implementations like VLSI designs but am interested in neural coding and spiking networks and their efficiency.\n\nCould you please consider me for any available PhD positions in your lab at RWTH Aachen University related to neural coding or spiking networks? I am eager to start a PhD soon and would appreciate the opportunity to contribute.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "5048d7206a3afb20",
+          "to": "luramire@uni-mainz.de",
+          "subject": "PhD inquiry on neural coding research",
+          "body": "Dear Luisa Ramirez,\n\nI am a MSc Physics student completing a thesis on spiking network models of cortex, using Python and Brian2 for simulations.\n\nYour recent paper \"Probabilistic Models, Compressible Interactions, and Neural Coding\" is directly related to neural coding, a field I want to pursue in my PhD studies.\n\nI am seeking PhD positions in Germany or the Netherlands focused on neural coding or spiking networks, excluding Max Planck institutes.\n\nCould you please consider me for any available PhD positions in your lab related to these topics?\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 3,
+          "unsupported": [
+            "PhD positions in your lab"
+          ],
+          "personal": 3,
+          "ask": 3,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Confirm recipient is a PI or group leader before requesting PhD positions; otherwise, ask for advice or referrals."
+        },
+        {
+          "id": "d51b181ccf324914",
+          "to": "c.frenkel@tudelft.nl",
+          "subject": "PhD opportunity in spiking neural networks",
+          "body": "Dear Professor Frenkel,\n\nI am completing an MSc in Physics with a thesis on spiking network models of the cortex. Your paper on TESS, a scalable temporally and spatially local learning rule for spiking neural networks, caught my attention.\n\nMy thesis involved computational modeling of cortical spiking networks using Python and Brian2. I also presented two workshop posters on related topics. Although I have not worked on hardware or VLSI design, I have experience with spiking neural models that might be useful for your research on advanced neural computing.\n\nCould you please consider me for any available PhD positions in your lab related to spiking neural networks? I am interested in opportunities at Delft University of Technology and can start soon.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "aef550274bc59822",
+          "to": "j.f.mejias@uva.nl",
+          "subject": "PhD inquiry: spiking networks at UvA",
+          "body": "Dear Jorge F. Mej\u00edas,\n\nI am a MSc Physics student writing a thesis on spiking network models of cortex. I am interested in PhD positions focused on neural coding or spiking networks.\n\nI have developed spiking network models of cortex using Python and Brian2, which I presented in two workshop posters.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am particularly interested in opportunities at the University of Amsterdam.\n\nBest regards,\nTest Student",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
           ],
           "grounded": 4,
           "unsupported": [
-            "Venturra focuses on early-stage, high-growth technology companies in Southeast Asia."
+            "PhD positions in your lab"
           ],
+          "personal": 4,
+          "ask": 4,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "ask_misfit"
+          ],
+          "fix": "Clarify whether the recipient supervises PhD students or can refer you to the appropriate PI."
+        },
+        {
+          "id": "14b533fcc39cdc79",
+          "to": "schemmel@ziti.uni-heidelberg.de",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Johannes Schemmel,\n\nI am a MSc Physics student working on a thesis about spiking network models of cortex, with experience using Python and Brian2 for neural simulations.\n\nI read your paper on spiking neural network nonlinear demapping on neuromorphic hardware for optical communication. I am looking for PhD positions in computational neuroscience focused on neural coding or spiking networks in Germany or the Netherlands.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I would appreciate any information on openings or application procedures.\n\nBest regards,\nTest Student",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [
+            "PhD positions in your lab"
+          ],
+          "personal": 4,
+          "ask": 4,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "ask_misfit"
+          ],
+          "fix": "Check if recipient is a PI or group leader; if not, request information about relevant PhD opportunities in the department."
+        }
+      ]
+    },
+    "stress_podcast_climate": {
+      "playbook": "creators",
+      "objective": "Secure guest appearances for the founder on active climate-tech or clean-energy podcasts.",
+      "ask": "Request an opportunity for the founder to be a guest on their podcast.",
+      "prospects": [
+        {
+          "id": "6b84703581143c5b",
+          "name": "Lisa Cohn",
+          "kind": "person",
+          "title": "Podcast host",
+          "org": "Clean Energy Today",
+          "email": "lisa@cleanenergywriters.com",
+          "tier": "attributed",
+          "score": 0.95,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast focuses on clean energy transition"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches host's name and org domain",
+          "why": "Host of a clean energy podcast, recent episodes, direct contact."
+        },
+        {
+          "id": "24d915d5d8435964",
+          "name": "Bite-Size Climate Tech",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "Bite-Size Climate Tech",
+          "email": "lydia@lydiaclinzi.com",
+          "tier": "attributed",
+          "score": 0.9,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast focuses on climate solutions and clean energy"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Personalized to likely host, matches org",
+          "why": "Active climate-tech podcast, regular episodes, direct host email."
+        },
+        {
+          "id": "20d28306b0ba28f1",
+          "name": "Climate Solutions News | Insights on Sustainability & Climate Solutions",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "Climate Solutions News | Insights on Sustainability & Climate Solutions",
+          "email": "contact@reset-media.com",
+          "tier": "attributed",
+          "score": 0.9,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast covers sustainability and climate solutions"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic but appropriate for org contact",
+          "why": "Covers climate solutions, regular episodes, org-level contact."
+        },
+        {
+          "id": "bd00efa51bade703",
+          "name": "The Climate Cycle",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "The Climate Cycle",
+          "email": "hello@climatetechcanada.ca",
+          "tier": "attributed",
+          "score": 0.9,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast covers Canadian climate tech and energy"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, matches podcast domain",
+          "why": "Canadian climate-tech podcast, recent activity, org-level contact."
+        },
+        {
+          "id": "26c0254b9dd4c43a",
+          "name": "So Watt?",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "So Watt?",
+          "email": "media@originenergy.com.au",
+          "tier": "attributed",
+          "score": 0.8962,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast focuses on energy topics including batteries"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Media inbox for podcast's parent org",
+          "why": "Podcast covers batteries/energy, regular episodes, org inbox."
+        },
+        {
+          "id": "cc5822ef5ee72973",
+          "name": "Energy vs Climate: How climate is changing our energy systems",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "Energy vs Climate: How climate is changing our energy systems",
+          "email": "info@energyvsclimate.com",
+          "tier": "attributed",
+          "score": 0.85,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast focuses on energy and climate systems"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Podcast's info inbox, matches domain",
+          "why": "Covers energy/climate, regular episodes, org-level contact."
+        },
+        {
+          "id": "6485ea75b68e486c",
+          "name": "The Adapt Interviews",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "The Adapt Interviews",
+          "email": "louie@climateproof.news",
+          "tier": "attributed",
+          "score": 0.8435,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Focuses on adaptation technology, a climate-tech niche"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Personalized, matches org domain",
+          "why": "Focuses on adaptation tech, regular episodes, direct contact."
+        },
+        {
+          "id": "db0a427cd5756708",
+          "name": "Climate Confidential",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "Climate Confidential",
+          "email": "podcast@fultonring.com",
+          "tier": "attributed",
+          "score": 0.8,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast covers climate tech critically"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Podcast-specific inbox, matches org",
+          "why": "Covers climate tech, regular episodes, org-level contact."
+        },
+        {
+          "id": "228e04564d8935ac",
+          "name": "The Climate and Sustainability Series by 4WARD.earth",
+          "kind": "org",
+          "title": "Podcast host",
+          "org": "The Climate and Sustainability Series by 4WARD.earth",
+          "email": "matt@4ward.vc",
+          "tier": "attributed",
+          "score": 0.7962,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast covers climate and sustainability experts"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches org and likely host's name",
+          "why": "Active climate/sustainability podcast, regular episodes, host address, perfect topical fit."
+        },
+        {
+          "id": "6573149785cd7abf",
+          "name": "Mia Funk",
+          "kind": "person",
+          "title": "Podcast host",
+          "org": "Future Cities \u00b7 Sustainability, Energy, Innovation, Climate Change, Transport, Housing, Work, Circular Economy, Education & Environmental Solutions",
+          "email": "mia@creativeprocess.info",
+          "tier": "attributed",
+          "score": 0.7,
+          "sources": [
+            "podcasts"
+          ],
+          "pipeline_reason": [
+            "Podcast covers sustainability and energy topics"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic",
+            "weak_evidence"
+          ],
+          "address": "plausible",
+          "address_note": "Matches host's name and podcast domain",
+          "why": "Covers broad topics; climate/energy is only part of focus, recent episodes not on-topic."
+        },
+        {
+          "id": "6b6692503244c898",
+          "name": "Tim Montague",
+          "kind": "person",
+          "title": null,
+          "org": "Clean Power Hour",
+          "email": "tim@cleanpowerhour.com",
+          "tier": "attributed",
+          "score": 0.6938,
+          "sources": [
+            "web"
+          ],
+          "pipeline_reason": [
+            "Focus on battery storage projects relevant to sender"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Matches host and podcast domain",
+          "why": "Host of battery storage-focused podcast, highly relevant, address fits, recent activity."
+        }
+      ],
+      "list": {
+        "coverage": 4.5,
+        "diversity": 4.5,
+        "missing": "No major US/UK mainstream media podcasts; otherwise covers niche and regional shows. | More large media outlets, more international/region-specific shows, more producer contacts.",
+        "systemic_issues": [
+          "Some prospects are only tangentially on-topic",
+          "Few producer/content manager roles"
+        ]
+      },
+      "emails": [
+        {
+          "id": "6b84703581143c5b",
+          "to": "lisa@cleanenergywriters.com",
+          "subject": "Guest opportunity on Clean Energy Today podcast",
+          "body": "Hi Lisa,\n\nYour podcast Clean Energy Today covers innovations shaping the clean energy transition. I represent a battery scientist founder who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nGiven your recent episodes on grid services and cost reductions in storage, the founder could share experiences from building grid batteries and leading a startup focused on storage cost reduction.\n\nWould you be open to having the founder as a guest on Clean Energy Today to discuss these topics? A brief reply is appreciated to explore this further.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "24d915d5d8435964",
+          "to": "lydia@lydiaclinzi.com",
+          "subject": "Guest appearance opportunity on Bite-Size Climate Tech",
+          "body": "Hello Bite-Size Climate Tech team,\n\nYour podcast Bite-Size Climate Tech explores clean energy and circular batteries, topics that relate to our founder's work.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%. This background could provide your audience with insights into battery technology and cost reduction.\n\nWould you be open to featuring our founder as a guest on your show to discuss these topics? Please let me know if you need any additional information or a brief bio.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "20d28306b0ba28f1",
+          "to": "contact@reset-media.com",
+          "subject": "Guest opportunity for Climate Solutions News podcast",
+          "body": "Hello Climate Solutions News team,\n\nYour podcast Climate Solutions News covers innovative climate-tech and clean energy solutions.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nCould you connect me with the person who manages guest bookings for your podcast? I look forward to exploring a guest appearance opportunity.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "bd00efa51bade703",
+          "to": "hello@climatetechcanada.ca",
+          "subject": "Podcast guest inquiry for The Climate Cycle",
+          "body": "Hello Climate Cycle team,\n\nThe Climate Cycle explores the future of Canadian climate tech, including energy innovations. Your focus on founders building industries of tomorrow fits the context for our founder's background.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%. This experience may provide your listeners with insights into energy storage advancements.\n\nCould you please connect me with the person who manages guest bookings for The Climate Cycle? I would appreciate the opportunity to discuss a guest appearance.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "26c0254b9dd4c43a",
+          "to": "media@originenergy.com.au",
+          "subject": "Podcast guest request for So Watt?",
+          "body": "Hello So Watt? team,\n\nSo Watt? explores energy topics like electrification and batteries, which relates to our founder\u2019s work as a battery scientist. He has built grid batteries and leads a startup that cut storage costs by 22%.\n\nCould you connect me with the person who manages guest bookings for your podcast? We think your audience would benefit from hearing about battery technology and cost reduction from his perspective.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [
+            "junk_greeting:So Watt? team"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "cc5822ef5ee72973",
+          "to": "info@energyvsclimate.com",
+          "subject": "Guest opportunity for Energy vs Climate podcast",
+          "body": "Hello Energy vs Climate team,\n\nYour podcast Energy vs Climate explores how climate is changing energy systems, a timely topic given the evolving clean energy landscape.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nCould you connect me with the person who manages guest bookings for your podcast? We would appreciate the opportunity to contribute to your conversations on climate and energy.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "6485ea75b68e486c",
+          "to": "louie@climateproof.news",
+          "subject": "Guest opportunity: battery scientist on The Adapt Interviews",
+          "body": "Hello Adapt Interviews team,\n\nThe Adapt Interviews highlights early-stage adaptation technology founders. My founder has built grid batteries and led a startup that cut storage costs by 22%.\n\nTheir background includes hands-on experience in battery science and energy storage solutions.\n\nWould you be open to having my founder as a guest on your podcast to discuss their work and its relevance to adaptation technology?\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "db0a427cd5756708",
+          "to": "podcast@fultonring.com",
+          "subject": "Guest opportunity for Climate Confidential podcast",
+          "body": "Hi Climate,\n\nClimate Confidential hosts critical conversations on climate tech, including your recent series on climate risk.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that has cut storage costs by 22%.\n\nWould you be open to having our founder as a guest on Climate Confidential to discuss these developments and their implications for clean energy technology?\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "228e04564d8935ac",
+          "to": "matt@4ward.vc",
+          "subject": "Founder expertise for your climate podcast",
+          "body": "Hello Climate and Sustainability Series by 4WARD.earth team,\n\nI\u2019m reaching out because your podcast, The Climate and Sustainability Series by 4WARD.earth, hosts deep dives with climate and cleantech experts that align with our founder\u2019s background.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%. This experience offers practical insights into energy storage technology and cost reduction.\n\nWould you be open to having our founder as a guest on your podcast to discuss these topics? Please let me know if this could fit your upcoming episodes.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "6573149785cd7abf",
+          "to": "mia@creativeprocess.info",
+          "subject": "Guest opportunity on Future Cities podcast",
+          "body": "Hi Mia,\n\nYou host Future Cities, exploring sustainability, energy, and innovation in urban environments.\n\nOur founder is a battery scientist who previously built grid batteries and led a startup that cut storage costs by 22%. This experience offers insights into clean energy solutions relevant to your audience.\n\nWould you be open to having our founder as a guest on your podcast to share expertise on energy storage and innovation in sustainable cities?\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 3,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": false,
+          "problems": [
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Acknowledge the podcast's broader focus and ask if energy storage fits their upcoming editorial themes."
+        },
+        {
+          "id": "6b6692503244c898",
+          "to": "tim@cleanpowerhour.com",
+          "subject": "Discussing battery storage costs on Clean Power Hour",
+          "body": "Hi Tim,\n\nYour work on making battery storage projects financially viable by explaining demand charge reduction and ancillary services is relevant to our founder's background.\n\nHe is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nWould you be open to having him as a guest on Clean Power Hour to discuss cost reduction and project economics? Please let me know if this sounds interesting.\n\nBest regards,\nTest Publicist",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        }
+      ]
+    },
+    "stress_senior_data_hire": {
+      "playbook": "job_search",
+      "objective": "To identify and reach out to senior technology leaders at Singapore fintechs who may be hiring a Head of Data.",
+      "ask": "Request a job opportunity or referral for a Head of Data position.",
+      "prospects": [
+        {
+          "id": "c0e580aa66b6abae",
+          "name": "Flywire",
+          "kind": "org",
+          "title": null,
+          "org": "Flywire",
+          "email": "solutions@flywire.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "jobs"
+          ],
+          "pipeline_reason": [
+            "Flywire is a Singapore fintech with payment platform"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "inbox_where_person_needed"
+          ],
+          "address": "inbox",
+          "address_note": "Generic solutions@ inbox",
+          "why": "Org is relevant, but inbox not likely to reach a senior tech leader."
+        },
+        {
+          "id": "a5adb8dc4437d6d4",
+          "name": "Checkout.com",
+          "kind": "org",
+          "title": null,
+          "org": "Checkout.com",
+          "email": "team@checkout.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "jobs"
+          ],
+          "pipeline_reason": [
+            "Checkout.com fights fraud and improves payments"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "inbox_where_person_needed"
+          ],
+          "address": "inbox",
+          "address_note": "Generic team@ inbox",
+          "why": "Relevant fintech, but shared inbox unlikely to reach a decision-maker."
+        },
+        {
+          "id": "411f64803f2c6128",
+          "name": "Alex DeNeui",
+          "kind": "person",
+          "title": "CTO",
+          "org": "Coda",
+          "email": "alex@codapayments.com",
+          "tier": "guess",
+          "score": 0.7862,
+          "sources": [
+            "list",
+            "orgs",
+            "decision_maker"
+          ],
+          "pipeline_reason": [
+            "CTO at Singapore fintech listed in top fintech startups"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Likely CTO's direct email",
+          "why": "CTO at a top Singapore fintech, fits ask and target perfectly."
+        },
+        {
+          "id": "4d472c209a6aac4d",
+          "name": "Atome - Time to own it.",
+          "kind": "org",
+          "title": null,
+          "org": "Atome - Time to own it.",
+          "email": "merchant@atome.sg",
+          "tier": "inbox",
+          "score": 0.6843,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Fintech payments company based in Singapore"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "inbox_where_person_needed",
+            "weak_evidence"
+          ],
+          "address": "inbox",
+          "address_note": "merchant@ inbox, not hiring-specific",
+          "why": "Relevant org, but no hiring info and inbox not for tech leaders."
+        }
+      ],
+      "list": {
+        "coverage": 3.0,
+        "diversity": 3.0,
+        "missing": "Named CTOs/CDOs/VP Eng at more fintechs; direct emails for decision-makers.",
+        "systemic_issues": [
+          "Too many generic inboxes",
+          "Few direct decision-maker contacts",
+          "Weak hiring evidence for some orgs"
+        ]
+      },
+      "emails": [
+        {
+          "id": "c0e580aa66b6abae",
+          "to": "solutions@flywire.com",
+          "subject": "Head of Data role at Flywire",
+          "body": "Hello Flywire team,\n\nI am reaching out because Flywire is currently hiring for senior roles in payments, and I am interested in exploring Head of Data opportunities.\n\nWith 9 years of experience in payments, I led a 25-person data team and developed fraud models that cut losses by 31%. My background includes managing data initiatives that support payment platforms, which aligns with Flywire's focus on complex payment challenges.\n\nCould we schedule a brief call to discuss potential fit or any upcoming Head of Data roles at Flywire? I would appreciate any referral or guidance you can provide.\n\nThank you for considering this request.\n\nBest regards,\nTest Candidate",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [
+            "Flywire is currently hiring for senior roles in payments"
+          ],
+          "personal": 2,
+          "ask": 4,
+          "tone": 4,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "generic_opening",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Remove claim about Flywire hiring for senior roles and tailor the ask for a generic inbox, requesting forwarding to the relevant leader."
+        },
+        {
+          "id": "a5adb8dc4437d6d4",
+          "to": "team@checkout.com",
+          "subject": "Head of Data role inquiry at Checkout.com",
+          "body": "Hello Checkout.com team,\n\nI have 9 years of experience in payments, including leading a 25-person data team and building fraud models that cut losses by 31%.\n\nI am interested in Head of Data roles and would appreciate if you could connect me with the person responsible for hiring this position at Checkout.com.\n\nCould you please direct me to the appropriate contact or arrange a brief call to discuss this opportunity?\n\nBest regards,\nTest Candidate",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 2,
+          "ask": 4,
+          "tone": 4,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "generic_opening",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Acknowledge this is a shared inbox and directly request forwarding to the relevant data/tech leader."
+        },
+        {
+          "id": "411f64803f2c6128",
+          "to": "alex@codapayments.com",
+          "subject": "Data leadership for Coda's payment platform",
+          "body": "Hi Alex,\n\nWith nine years in payments, I led a 25-person data team and built fraud models that reduced losses by 31%. My experience includes managing data initiatives that support complex payment ecosystems, which relates to Coda's work unlocking 400+ local payment methods and cross-border monetization.\n\nI am interested in exploring Head of Data opportunities at Coda or any referrals you could provide. Would you be open to a brief call to discuss potential fits or direct me to the right contact?\n\nBest regards,\nTest Candidate",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 5,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "4d472c209a6aac4d",
+          "to": "merchant@atome.sg",
+          "subject": "Head of Data role inquiry at Atome",
+          "body": "Hello Atome team,\n\nAtome\u2019s role in enabling interest-free payment options at various Singapore brands aligns with my experience in payments data.\n\nI have 9 years in payments, led a 25-person data team, and built fraud models that cut losses by 31%. These skills may be relevant to your data challenges.\n\nI am seeking a Head of Data position and would value a brief call to discuss any openings or referrals at Atome.\n\nWould you be available for a short conversation this week?\n\nBest regards,\nTest Candidate",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 2,
+          "ask": 4,
+          "tone": 4,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "generic_opening",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Recognize this is a merchant inbox and request forwarding to the relevant data/tech leader."
+        }
+      ]
+    },
+    "stress_spanish_universities": {
+      "playbook": "partnerships",
+      "objective": "To establish exchange partnerships between the coding bootcamp and universities in Mexico, Colombia, and Chile.",
+      "ask": "To initiate a partnership discussion by contacting the international relations offices of target universities.",
+      "prospects": [
+        {
+          "id": "ed7694fa6cb81d9b",
+          "name": "Universidad del Rosario",
+          "kind": "org",
+          "title": null,
+          "org": "Universidad del Rosario",
+          "email": "tienda.rosarista@urosario.edu.co",
+          "tier": "inbox",
+          "score": 0.8099,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Universidad del Rosario offers academic mobility programs"
+          ],
+          "verdict": "borderline",
+          "fit": 4,
+          "problems": [
+            "inbox_where_person_needed",
+            "weak_evidence"
+          ],
+          "address": "inbox",
+          "address_note": "Generic university shop inbox, not international office.",
+          "why": "Target org is correct, but inbox is for the university shop, not international relations."
+        },
+        {
+          "id": "952b38cb03e836e8",
+          "name": "CAIE MEXICO",
+          "kind": "person",
+          "title": "Director of International Relations",
+          "org": "Universidad de la Sabana",
+          "email": "mexico@unisabana.edu.co",
+          "tier": "guess",
+          "score": 0.7822,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike",
+            "decision_maker"
+          ],
+          "pipeline_reason": [
+            "Director of International Relations at Universidad de la Sabana"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "address_not_theirs",
+            "wrong_geography",
+            "weak_evidence"
+          ],
+          "address": "wrong",
+          "address_note": "Email is for Mexico office, but org is Colombian.",
+          "why": "Address is for a Mexico office, but the university is in Colombia; role/org mismatch."
+        },
+        {
+          "id": "1e691eabae5fc0a5",
+          "name": "Universidad Piloto de Colombia",
+          "kind": "org",
+          "title": null,
+          "org": "Universidad Piloto de Colombia",
+          "email": "notificacionesjudiciales@unipiloto.edu.co",
+          "tier": "inbox",
+          "score": 0.7506,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Universidad Piloto de Colombia has student mobility programs"
+          ],
+          "verdict": "bad",
+          "fit": 3,
+          "problems": [
+            "inbox_where_person_needed",
+            "weak_evidence"
+          ],
+          "address": "inbox",
+          "address_note": "Legal notifications inbox, not international office.",
+          "why": "Inbox is for legal notifications, not international relations; no direct contact for target office."
+        },
+        {
+          "id": "d501114d719f019b",
+          "name": "CRAI UNAM",
+          "kind": "person",
+          "title": null,
+          "org": "UNAM",
+          "email": "crai@unam.mx",
+          "tier": "attributed",
+          "score": 0.75,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "International relations office at UNAM promotes academic cooperation and student mobility"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "CRAI is the correct international office at UNAM.",
+          "why": "CRAI is the international relations office at UNAM; address and org fit perfectly."
+        }
+      ],
+      "list": {
+        "coverage": 3.0,
+        "diversity": 3.0,
+        "missing": "Direct contacts for international offices at more universities in Chile and Mexico.",
+        "systemic_issues": [
+          "Many inboxes are generic or unrelated to international offices.",
+          "Weak evidence for role-address match.",
+          "Chile is missing from the shortlist."
+        ]
+      },
+      "emails": [
+        {
+          "id": "ed7694fa6cb81d9b",
+          "to": "tienda.rosarista@urosario.edu.co",
+          "subject": "Oportunidad de movilidad acad\u00e9mica conjunta",
+          "body": "Hello Universidad del Rosario team,\n\nDirijo un bootcamp de codificaci\u00f3n en Bangalore que forma a 400 graduados anualmente mediante programas intensivos de tres meses.\n\nS\u00e9 que Universidad del Rosario tiene un programa de movilidad acad\u00e9mica para cursar asignaturas o semestres completos en universidades nacionales e internacionales. Me gustar\u00eda explorar c\u00f3mo podr\u00edamos establecer un acuerdo de intercambio o colaboraci\u00f3n para que sus estudiantes puedan acceder a nuestros programas de inmersi\u00f3n en tecnolog\u00eda.\n\nCreo que esta alianza podr\u00eda complementar sus ofertas actuales y ampliar las opciones de movilidad para sus estudiantes.\n\n\u00bfPodr\u00edamos iniciar una conversaci\u00f3n con la oficina de relaciones internacionales para evaluar esta posibilidad? Estoy disponible para una llamada o reuni\u00f3n virtual en la fecha que les convenga.\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
           "personal": 3,
           "ask": 4,
           "tone": 5,
@@ -276,87 +2298,79 @@
           "reply_odds": "medium",
           "would_send": false,
           "problems": [
-            "unsupported_claim"
+            "ask_misfit",
+            "ignores_recipient_context"
           ],
-          "fix": "Remove the claim about Venturra's focus unless you can cite fintech/climate relevance."
+          "fix": "Send this email to the international relations office, not the university shop inbox."
         },
         {
-          "id": "879f762dac70d512",
-          "to": "contact@kejorahq.com",
-          "subject": "Seeking seed investors for climate-fintech startup",
-          "body": "Hello Kejorahq team,\n\nKejora Capital's focus on seed to late-stage investments in transformative Southeast Asian companies aligns with our climate-fintech platform's goals.\n\nWe have onboarded 1,200 Indian MSMEs and disbursed Rs 9 crore in green loans. We are currently raising a $1.5M seed round to expand our impact.\n\nCould you please direct me to seed investors within your network who invest $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia, excluding corporate venture arms and accelerators?\n\nBest regards,\nTest Founder",
+          "id": "952b38cb03e836e8",
+          "to": "mexico@unisabana.edu.co",
+          "subject": "Propuesta de alianza para internacionalizaci\u00f3n educativa",
+          "body": "Hi CAIE,\n\nDirige usted la gesti\u00f3n del marco estrat\u00e9gico para la internacionalizaci\u00f3n de la docencia en la Universidad de la Sabana. Por ello, me gustar\u00eda proponer una colaboraci\u00f3n que podr\u00eda enriquecer su oferta educativa.\n\nDirijo un bootcamp de programaci\u00f3n en Bangalore que grad\u00faa a 400 estudiantes anualmente mediante programas intensivos de tres meses. Nuestra experiencia en formaci\u00f3n pr\u00e1ctica podr\u00eda complementar la internacionalizaci\u00f3n de sus programas acad\u00e9micos.\n\n\u00bfPodr\u00eda indicarme la persona adecuada en su oficina de relaciones internacionales para iniciar una conversaci\u00f3n sobre posibles intercambios o alianzas? Estoy a disposici\u00f3n para discutir c\u00f3mo podemos aportar valor mutuo.\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
           "pipeline_grade": null,
-          "lint": [
-            "placeholder_sender"
-          ],
-          "grounded": 4,
+          "lint": [],
+          "grounded": 3,
           "unsupported": [
-            "Kejora Capital's focus on seed to late-stage investments in transformative Southeast Asian companies aligns with our climate-fintech platform's goals."
+            "Dirige usted la gesti\u00f3n del marco estrat\u00e9gico para la internacionalizaci\u00f3n de la docencia en la Universidad de la Sabana."
           ],
-          "personal": 3,
+          "personal": 2,
+          "ask": 3,
+          "tone": 4,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim",
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Remove the direct claim about the recipient's role and ensure the email is sent to the correct office in Colombia."
+        },
+        {
+          "id": "1e691eabae5fc0a5",
+          "to": "notificacionesjudiciales@unipiloto.edu.co",
+          "subject": "Propuesta de colaboraci\u00f3n para movilidad estudiantil",
+          "body": "Hi Universidad,\n\nDirijo un bootcamp de codificaci\u00f3n en Bangalore que grad\u00faa a 400 estudiantes al a\u00f1o mediante programas intensivos de 3 meses.\n\nConociendo el programa de movilidad estudiantil de la Universidad Piloto de Colombia, veo una oportunidad para establecer un intercambio que beneficie a sus estudiantes con experiencia pr\u00e1ctica y formaci\u00f3n acelerada en tecnolog\u00eda.\n\nMe gustar\u00eda iniciar una conversaci\u00f3n con la oficina de relaciones internacionales para explorar c\u00f3mo podr\u00edamos dise\u00f1ar un programa conjunto que complemente sus actuales opciones de movilidad.\n\n\u00bfPodr\u00edan indicarme el contacto adecuado para comenzar esta discusi\u00f3n?\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 2,
+          "ask": 4,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "low",
+          "would_send": false,
+          "problems": [
+            "ask_misfit",
+            "ignores_recipient_context"
+          ],
+          "fix": "Send this message to the international relations office, not the legal notifications inbox."
+        },
+        {
+          "id": "d501114d719f019b",
+          "to": "crai@unam.mx",
+          "subject": "Explorar alianza acad\u00e9mica con UNAM",
+          "body": "Hi CRAI,\n\nLa Coordinaci\u00f3n de Relaciones y Asuntos Internacionales de la UNAM promueve la cooperaci\u00f3n acad\u00e9mica y la movilidad estudiantil, lo que me lleva a contactarlos para explorar una posible colaboraci\u00f3n.\n\nDirijo un bootcamp de programaci\u00f3n en Bangalore que forma a 400 graduados anualmente mediante programas intensivos de tres meses. Considero que una alianza entre nuestra instituci\u00f3n y la UNAM podr\u00eda beneficiar a sus estudiantes y docentes mediante intercambios o programas conjuntos.\n\n\u00bfPodr\u00edamos iniciar una conversaci\u00f3n para evaluar c\u00f3mo establecer esta cooperaci\u00f3n? Me gustar\u00eda contactar a la oficina de relaciones internacionales para discutir detalles y posibles pasos a seguir.\n\nQuedo atento a su respuesta para coordinar una llamada o reuni\u00f3n virtual.\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "pipeline_grade": null,
+          "lint": [],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
           "ask": 5,
           "tone": 5,
           "salutation_ok": true,
-          "reply_odds": "medium",
-          "would_send": false,
-          "problems": [
-            "unsupported_claim"
-          ],
-          "fix": "Remove or soften the claim that Kejora's focus aligns with your platform's goals."
-        },
-        {
-          "id": "a944ac46ee240da0",
-          "to": "hello@nexea.co",
-          "subject": "Connecting with seed investors in India and Indonesia",
-          "body": "Hello NEXEA team,\n\nOur platform matches Indian MSMEs with green loans, onboarding 1,200 MSMEs and disbursing Rs 9 crore.\n\nWe are raising a $1.5M seed round to expand. Given NEXEA\u2019s focus on early-stage tech startups ready to grow, could you point me to seed investors investing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia?\n\nPlease direct me to the appropriate person or team for this inquiry. Thank you for your time.\n\nBest regards,\nTest Founder",
-          "pipeline_grade": null,
-          "lint": [
-            "placeholder_sender"
-          ],
-          "grounded": 4,
-          "unsupported": [
-            "Given NEXEA\u2019s focus on early-stage tech startups ready to grow"
-          ],
-          "personal": 3,
-          "ask": 5,
-          "tone": 5,
-          "salutation_ok": true,
-          "reply_odds": "medium",
-          "would_send": false,
-          "problems": [
-            "unsupported_claim"
-          ],
-          "fix": "Soften or remove the claim about NEXEA's focus unless you can cite fintech/climate relevance."
-        },
-        {
-          "id": "f5fc2fc97c4bdb09",
-          "to": "info@investidea.ventures",
-          "subject": "Seed investment opportunity in climate-fintech",
-          "body": "Hello InvestIdea team,\n\nInvestIdea\u2019s focus on generating social impact aligns with our work at a climate-fintech startup. We have developed a platform that matches Indian MSMEs with green loans, onboarding 1,200 MSMEs and disbursing Rs 9 crore.\n\nWe are currently raising a $1.5M seed round and are seeking seed investors interested in investing $100k-$500k. Could you point me to seed investors in India, Singapore, or Indonesia who focus on climate or fintech sectors, excluding corporate venture arms and accelerators?\n\nI would appreciate an introduction to the right person or team for this. Thank you for your time.\n\nBest regards,\nTest Founder",
-          "pipeline_grade": null,
-          "lint": [
-            "placeholder_sender"
-          ],
-          "grounded": 4,
-          "unsupported": [
-            "InvestIdea\u2019s focus on generating social impact aligns with our work at a climate-fintech startup."
-          ],
-          "personal": 3,
-          "ask": 5,
-          "tone": 5,
-          "salutation_ok": true,
-          "reply_odds": "medium",
-          "would_send": false,
-          "problems": [
-            "unsupported_claim"
-          ],
-          "fix": "Remove or soften the claim about InvestIdea's focus aligning with your startup."
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
         }
       ]
     }
   },
   "cost": {
-    "paid_calls": 2,
-    "est_usd": 0.0223
+    "paid_calls": 16,
+    "est_usd": 0.1587
   }
 }

@@ -278,10 +278,59 @@ only the sender's facts and the ask; add a deterministic check for "aligns with"
 ### J-09 Shortlists fall short on hard multi-constraint asks (note)
 `stress_investors_multi` delivered 7 of 15 and the judge calls 4 of them borderline on sector. Honest, but a user asking for 15 gets 3 good ones. Surface "good: 3, borderline: 4" in the review UI instead of one list.
 
-## Not run (and why)
-Eight complex scenarios (journalists with exclusions, Spanish universities, senior hire, neuroscience PhDs, photographers, podcasts, Rust maintainers,
-municipal IoT) had not finished when this was written; the first hour was lost to Groq throttling (S-01) and one process runs them sequentially.
-`bench` writes its summary JSON only at the end (S-02), so they are not in the repo. Re-run:
-`LLM_PROVIDER=openai brain bench --split stress --draft --label stress_full`, then `python tools/llm_judge.py --run stress_full`, and add the findings here.
-Also note `tools/llm_judge.py --only` writes `llm_judge_<run>_partial.json`, so two partial judgements of the same run overwrite each other;
-the per-scenario numbers above are from the console output.
+## Full stress run (all 10 complex scenarios)
+`LLM_PROVIDER=openai brain bench --only <the ten> --draft --label stress_c` finished (`evals/results/stress_c.json`): 10 scenarios,
+481 searches, 521 paid LLM calls, **$0.29**, 88 minutes. Pipeline judge precision 0.38 (CI 0.31-0.46), 69 drafts, 84% would-send.
+
+| scenario | wanted | shortlisted | independent judge: good / borderline / bad | notes |
+|---|---|---|---|---|
+| jaipur_photographers | 30 | 18 | 17 / 1 / 0 | best result: places + web; 12 of 12 emails sendable, but most are personal Gmail |
+| podcast_climate | 15 | 11 | 10 / 1 / 0 | 10 of 11 emails sendable |
+| phd_neuro | 15 | 15 | 10 / 4 / 1 | 5 of 12 emails sendable; 2 addresses not the person's |
+| journalists_exclusions | 20 | 3 | 1 / 2 / 0 | exclusions respected, but only 3 found (see J-10) |
+| senior_data_hire | 15 | 4 | 1 / 3 / 0 | companies, not people; wrong geography (see J-11) |
+| spanish_universities | 12 | 4 | 1 / 1 / 2 | store and legal-notices inboxes shortlisted (J-12, fixed) |
+| germany_machinery | 12 | 7 | see round-2 table | no German company (J-04) |
+| investors_multi | 15 | 7 | see round-2 table | 4 borderline on sector |
+| municipal_iot | 12 | **0** | n/a | see I-06 / J-13 |
+| rust_maintainers | 15 | **0** | n/a | no playbook, fixed; still 0 (J-14) |
+
+Judge-found problem counts over the six judged scenarios: weak_evidence 8, off_topic 5, wrong_role_or_seniority 5,
+inbox_where_person_needed 5, address_not_theirs 3, wrong_org_type 1, wrong_geography 1. Deterministic lint on the drafts:
+junk_greeting 3, person_greeting_on_role_inbox 1. The judge run cost about $0.16.
+
+### J-10 Journalist campaigns with exclusions return almost nobody (open)
+3 shortlisted of 20. One is a law-firm partner ("Biplab Lenin", Cyril Amarchand Mangaldas) who wrote a single article, which the judge calls borderline.
+The `news` source finds authors of recent articles, but the beat is narrow ("health data protection") and excluded outlets remove most of them.
+Fix: widen to adjacent beats with a lower weight and show the user "3 strong, N adjacent".
+
+### J-11 Job search returns employers, not a person to write to; wrong geography passes (open)
+`senior_data_hire` shortlisted `solutions@flywire.com` ("Flywire is a Singapore fintech": it is a Boston company with a Singapore office)
+and `merchant@atome.sg`, a merchant-support address. The jobs source finds companies hiring; the right recipient is the hiring manager or head of data.
+Fix: for `job_search`, run the decision-maker lookup on the hiring company and require the role evidence to name data/ML leadership.
+
+### J-12 Store, legal and notification inboxes shortlisted as the way in (fixed)
+`tienda.rosarista@urosario.edu.co` (the university shop) and `notificacionesjudiciales@unipiloto.edu.co` (legal notices) were chosen for a mobility-partnership ask.
+`is_service_address` now also rejects legal, privacy, dpo, abuse, postmaster, webmaster, refunds, merchant and the Spanish legal-notice names
+(a test covers them). Shops and stores are not rejected: for a local shop `shop@` can be the right inbox. Other Spanish-language desks (`tienda`, `contabilidad`) will still slip through.
+
+### J-13 Municipal buyers are not found through a places search (open)
+For "municipal corporations or water boards in Maharashtra and Gujarat" the run chose `b2b_sales`, searched Google Places (34 hits) and the web.
+50 candidates came in, only 2 had addresses and none passed the judge: the hits were private water-treatment firms. Government buyers belong to the
+`government_tenders` playbook, whose sources fit tender portals. Intake gave 0.9 confidence to the wrong playbook.
+Fix: when the target is a public body ("municipal", "water board", "ministry", "corporation") force `government_tenders` or ask.
+
+### J-14 Open-source maintainers: no playbook (fixed), but few reachable (open)
+"Find maintainers of popular Rust crates" was routed to `general`, which uses only the `orgs` source, so no developer was ever searched
+(0 of 34 candidates). I added the `oss_maintainers` playbook (sources: github, npm, web). The re-run (`stress_rust2`) now finds 120 candidates
+(github 17, npm 23, web 80) and the intake picks the new playbook, but only **2 have an address** and none passes the judge. GitHub users hide email,
+and npm lists maintainers of JavaScript packages, not Rust crates. Next steps: a crates.io source (owners of crates matching the topic, then the GitHub profile),
+and reading the commit email only where the maintainer published it as the project's contact.
+
+### Stale numbers in the scorecard
+The scorecard near the top still shows the first judge run (round 1). The tables in this section and in round 2 are current.
+
+## What still isn't done
+I-06, I-08, J-04, J-05, J-07, J-08, J-09 to J-11, J-13 and J-14 above are open. Re-running the whole stress set costs about 30 cents and 90 minutes.
+Re-run: `LLM_PROVIDER=openai brain bench --split stress --draft --label stress_full`, then `python tools/llm_judge.py --run stress_full`.
+`tools/llm_judge.py --only` writes `llm_judge_<run>_partial.json`, so two partial judgements of the same run overwrite each other.

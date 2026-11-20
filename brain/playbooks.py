@@ -508,6 +508,21 @@ _BUILTIN: List[Playbook] = [
         anti_patterns=["recruiter", "staffing agency"],
     ),
     Playbook(
+        name="oss_maintainers", family="people", title="Open-source maintainers and developers",
+        description="Maintainers or contributors of open-source libraries, tools or packages (Rust crates, npm, Python, Go...) "
+                    "to ask for API feedback, a review, adoption, a contribution or a collaboration.",
+        target_kind="person", sources=["github", "npm", "web"], accept_inboxes=False,
+        default_roles=["Maintainer", "Author", "Core contributor", "Engineer"],
+        query_templates=["{topic} crate maintainer", "{topic} library maintainer github"],
+        judge_rubric="A named person who maintains or leads a real, actively used open-source project on the topic "
+                     "(the evidence shows the project and their role in it).",
+        writing_notes="Name their project and one specific thing about it, say what you built in one sentence, "
+                      "ask for a small review or a look at a specific API, and make it cheap to say no.",
+        upload_prompts=["a list of the libraries or repositories you depend on or compete with"],
+        questions=["Which library or project is yours (link)?", "What exactly would you like from the maintainer?"],
+        anti_patterns=["recruiter", "staffing agency", "course", "bootcamp"],
+    ),
+    Playbook(
         name="general", family="other", title="General outreach",
         description="Anything else: organisations or people to contact for a purpose not covered above.",
         sources=["orgs"], default_roles=["Founder", "Director", "Head", "Manager"],
