@@ -334,10 +334,46 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     return out
 
 
+def _scenario_row(sc: Dict[str, Any], *, replay: str, draft: bool, out_dir: Path, from_prompt: bool, repeat: int,
+                  progress=print) -> Dict[str, Any]:
+    """Run one scenario (repeat times with fresh caches) and return its report row."""
+    runs = []
+    for i in range(max(1, repeat)):
+        progress(f"[bench] {sc['name']} ({sc.get('playbook')}, {sc.get('split', 'dev')})"
+                 + (f" run {i + 1}/{repeat}" if repeat > 1 else "") + " …")
+        sub = out_dir / f"rep{i + 1}" if repeat > 1 else out_dir
+        sub.mkdir(parents=True, exist_ok=True)
+        runs.append(run_scenario(sc, replay=replay, draft=draft, out_dir=sub, from_prompt=from_prompt,
+                                 cache_tag=f".rep{i + 1}" if repeat > 1 else ""))
+    row = runs[0]
+    done = [r for r in runs if "error" not in r]
+    if repeat > 1 and done:
+        goods = [r["good@K"] for r in done]
+        row = dict(done[0])
+        row["repeat"] = {"runs": len(done), "good@K": goods, "mean": round(sum(goods) / len(goods), 2),
+                         "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods)}
+    return row
+
+
+def _bench_worker(args: tuple) -> Dict[str, Any]:  # top level so a process pool can import it
+    sc, kw = args
+    return _scenario_row(sc, **kw, progress=lambda m: None)
+
+
+def _row_line(row: Dict[str, Any], name: str, repeat: int) -> str:
+    return f"[bench] {name}: " + (row.get("error") or
+            f"good@K {row['good@K']}/{row['target']}, reachable {row['reachable']}, "
+            f"{row['search_calls']} searches, {row['llm_paid_calls']} LLM calls (${row['llm_usd']})"
+            + (f", over {repeat} runs {row['repeat']['good@K']}" if row.get("repeat") else ""))
+
+
 def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool = False, label: str = "",
-              progress=print, from_prompt: bool = True, split: str = "", repeat: int = 1) -> Dict[str, Any]:
+              progress=print, from_prompt: bool = True, split: str = "", repeat: int = 1, parallel: int = 1) -> Dict[str, Any]:
     """split: only the "dev" or "holdout" scenarios. repeat: run every scenario this many times, each with its own
-    fresh cache (a repeat that reads the first run's cache measures nothing), and report the spread."""
+    fresh cache (a repeat that reads the first run's cache measures nothing), and report the spread.
+    parallel: scenarios run side by side in separate processes (they share the search and LLM accounts, so the
+    provider's rate limits bind sooner). The report is rewritten after every scenario, so an interrupted run keeps
+    what finished (<label>.partial.json)."""
     if repeat > 1 and replay:
         raise ValueError("--repeat measures live noise; it cannot be combined with --replay")
     scenarios = load_scenarios(only, split=split)
@@ -346,32 +382,43 @@ def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool
     stamp = time.strftime("%Y%m%dT%H%M%S")
     out_dir = RESULT_DIR / f"run_{label or stamp}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    rows = []
-    for sc in scenarios:
-        runs = []
-        for i in range(max(1, repeat)):
-            progress(f"[bench] {sc['name']} ({sc.get('playbook')}, {sc.get('split', 'dev')})"
-                     + (f" run {i + 1}/{repeat}" if repeat > 1 else "") + " …")
-            sub = out_dir / f"rep{i + 1}" if repeat > 1 else out_dir
-            sub.mkdir(parents=True, exist_ok=True)
-            runs.append(run_scenario(sc, replay=replay, draft=draft, out_dir=sub, from_prompt=from_prompt,
-                                     cache_tag=f".rep{i + 1}" if repeat > 1 else ""))
-        row = runs[0]
-        done = [r for r in runs if "error" not in r]
-        if repeat > 1 and done:
-            goods = [r["good@K"] for r in done]
-            row = dict(done[0])
-            row["repeat"] = {"runs": len(done), "good@K": goods, "mean": round(sum(goods) / len(goods), 2),
-                             "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods)}
-        rows.append(row)
-        progress(f"[bench] {sc['name']}: " + (row.get("error") or
-                 f"good@K {row['good@K']}/{row['target']}, reachable {row['reachable']}, "
-                 f"{row['search_calls']} searches, {row['llm_paid_calls']} LLM calls (${row['llm_usd']})"
-                 + (f", over {repeat} runs {row['repeat']['good@K']}" if row.get("repeat") else "")))
-    report = {"label": label or stamp, "replay": replay, "split": split or "all", "repeat": repeat, "rows": rows,
-              "summary": summarize(rows)}
+    rows: List[Dict[str, Any]] = []
+    partial = RESULT_DIR / f"{label or stamp}.partial.json"
+
+    def checkpoint(done: bool = False) -> Dict[str, Any]:
+        rep = {"label": label or stamp, "replay": replay, "split": split or "all", "repeat": repeat, "rows": rows,
+               "summary": summarize(rows) if rows else {}, "complete": done}
+        (RESULT_DIR / f"{label or stamp}.json" if done else partial).write_text(json.dumps(rep, indent=2, default=str), encoding="utf-8")
+        return rep
+
+    kw = dict(replay=replay, draft=draft, out_dir=out_dir, from_prompt=from_prompt, repeat=repeat)
+    if parallel > 1 and len(scenarios) > 1:
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+
+        with ProcessPoolExecutor(max_workers=min(parallel, len(scenarios))) as ex:
+            futures = {ex.submit(_bench_worker, (sc, kw)): sc for sc in scenarios}
+            for sc in scenarios:
+                progress(f"[bench] {sc['name']} queued")
+            for fut in as_completed(futures):
+                sc = futures[fut]
+                try:
+                    row = fut.result()
+                except Exception as e:  # a crashed worker must not lose the others
+                    row = {"name": sc["name"], "error": f"{type(e).__name__}: {e}"}
+                rows.append(row)
+                progress(_row_line(row, sc["name"], repeat))
+                checkpoint()
+        order = {sc["name"]: i for i, sc in enumerate(scenarios)}
+        rows.sort(key=lambda r: order.get(r.get("name"), 0))
+    else:
+        for sc in scenarios:
+            row = _scenario_row(sc, **kw, progress=progress)
+            rows.append(row)
+            progress(_row_line(row, sc["name"], repeat))
+            checkpoint()
+    report = checkpoint(done=True)
     path = RESULT_DIR / f"{label or stamp}.json"
-    path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
+    partial.unlink(missing_ok=True)
     report["path"] = str(path)
     return report
 

@@ -359,6 +359,7 @@ class OrgEnricher:
         self.max_people_searches = max_people_searches
         self._people_searches = 0
         self._resolves = 0
+        self._snippet_searches = 0
         self.max_resolves = 8  # raised to follow the campaign size in enrich_all
         self._lock = threading.Lock()
         self._pending: Dict[int, tuple] = {}  # organisations waiting for a decision-maker search (enrich_all)
@@ -528,6 +529,7 @@ class OrgEnricher:
         got = self.read_home(org)
         if not got:
             org.flags.append("site_unreachable")
+            self._from_snippets(org, spec)  # the site will not load; a search result may still quote its address
             return org
         self.stats["orgs_read"] += 1
         parsed, page_url = got
@@ -651,8 +653,42 @@ class OrgEnricher:
             org.add_email(EmailCandidate(address=personal[0], confidence=0.65, method="site", source_url=emails[personal[0]]))
             self.stats["site_contacts"] += 1
             return org
+        if self._from_snippets(org, spec):
+            self.stats["inbox_contacts"] += 1
+            return org
         self.stats["no_contact"] += 1
         return org
+
+    def _from_snippets(self, org: Contact, spec: CampaignSpec) -> bool:
+        """One search for the organisation's own address, read from result titles and snippets only (no page fetch).
+        Used when the site would not load or published nothing: 84% of the valid candidates lost in the stress runs had
+        no address at all. Only addresses on the organisation's own domain are taken, as an inbox (not a person)."""
+        from brain.emailfinder import extract_emails
+
+        if not org.org_domain:
+            return False
+        with self._lock:
+            if self._snippet_searches >= self.max_resolves:
+                return False
+            self._snippet_searches += 1
+        hits = self.search.search(f'"{org.name}" {org.org_domain} email contact', n=6)
+        found: Dict[str, str] = {}
+        for h in hits:
+            for addr in extract_emails(f"{h.title} {h.snippet}"):
+                if registrable_domain(addr.split("@")[1]) == org.org_domain:
+                    found.setdefault(addr.lower(), h.url)
+        if not found:
+            return False
+        preferred = [p.lower() for p in spec.preferred_inboxes]
+        ranked = sorted(found, key=lambda a: (_inbox_rank(a, preferred, spec.countries) is None,
+                                              _inbox_rank(a, preferred, spec.countries) or 0))
+        before = len(org.emails)
+        org.add_email(EmailCandidate(address=ranked[0], confidence=0.6, method="inbox", source_url=found[ranked[0]]))
+        if len(org.emails) > before:
+            org.flags.append("email_from_snippet")
+            self.stats["snippet_contacts"] = self.stats.get("snippet_contacts", 0) + 1
+            return True
+        return False
 
     def enrich_all(self, orgs: List[Contact], spec: CampaignSpec, pack: Pack) -> List[Contact]:
         roles = spec.profile.decision_roles or spec.persona.roles or pack.default_roles

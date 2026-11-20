@@ -127,7 +127,9 @@ def _github(run: ToolRun):
 
     src = GitHubSource(run.deps.settings, run.deps.cache)
     found = src.search(run.spec)
-    return found, {"people": len(found), "requests": src.requests}
+    if src.failures and hasattr(run.deps.search, "note_provider_failure"):
+        run.deps.search.note_provider_failure("GitHub", src.last_failure, src.failures, src.requests)
+    return found, {"people": len(found), "requests": src.requests, "failures": src.failures}
 
 
 @register("events", "Sponsors (or speakers) of similar past events, read from the events' own pages.", "search", True,

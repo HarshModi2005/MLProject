@@ -468,6 +468,7 @@ def bench(
     from_spec: bool = typer.Option(False, help="Use the scenarios' ready-made specs instead of running the intake on their prompts."),
     split: str = typer.Option("", help="Only the 'dev' (tuned on) or 'holdout' (never tuned on) scenarios."),
     repeat: int = typer.Option(1, help="Run each scenario N times with fresh caches to measure noise (costs N times as much)."),
+    parallel: int = typer.Option(1, help="Run N scenarios side by side (separate processes; they share the API accounts)."),
 ):
     """Benchmark discovery on the scenarios in evals/scenarios (stops after judging unless --draft)."""
     from brain.bench import compare, run_bench
@@ -476,7 +477,7 @@ def bench(
     logging.getLogger("httpx").setLevel(logging.WARNING)
     report = run_bench(list(only) if only else None, replay=("strict" if strict else "replay") if replay else "",
                        draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"),
-                       from_prompt=not from_spec, split=split, repeat=repeat)
+                       from_prompt=not from_spec, split=split, repeat=repeat, parallel=parallel)
     t = Table(title=f"Benchmark {report['label']}")
     for col in ("Scenario", "label prec", "good@K", "prec@K", "mean", "orgs", "proof", "reach", "search", "LLM", "$", "s"):
         t.add_column(col)

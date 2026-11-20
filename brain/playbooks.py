@@ -511,7 +511,7 @@ _BUILTIN: List[Playbook] = [
         name="oss_maintainers", family="people", title="Open-source maintainers and developers",
         description="Maintainers or contributors of open-source libraries, tools or packages (Rust crates, npm, Python, Go...) "
                     "to ask for API feedback, a review, adoption, a contribution or a collaboration.",
-        target_kind="person", sources=["github", "npm", "web"], accept_inboxes=False,
+        target_kind="person", sources=["github", "npm", "crates", "web"], accept_inboxes=False,
         default_roles=["Maintainer", "Author", "Core contributor", "Engineer"],
         query_templates=["{topic} crate maintainer", "{topic} library maintainer github"],
         judge_rubric="A named person who maintains or leads a real, actively used open-source project on the topic "

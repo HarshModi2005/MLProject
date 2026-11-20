@@ -280,3 +280,177 @@ def test_a_size_limit_in_an_also_clause_is_not_applied_to_everyone():
 
     text = "small installers in Kerala, and also large EPC firms with over 500 employees"
     assert size_from_text(text) == (None, None)
+
+
+# ── reach: a person's own site, its contact page, and search snippets ───────────────────────────────────────────
+
+class _Page:
+    def __init__(self, url, html="", ok=True):
+        self.url, self.html, self.ok, self.status, self.error = url, html, ok, 200 if ok else 0, ""
+
+
+class _FakeFetcher:
+    def __init__(self, pages):
+        self.pages = pages
+
+    def get(self, url):
+        return self.pages.get(url) or _Page(url, ok=False)
+
+
+def _person_enricher(pages, hits=()):
+    from brain.enrich import Enricher
+    from brain.settings import Settings
+
+    class S(_FakeSearch):
+        available = True
+
+    class O:
+        def person(self, _):
+            return [], []
+
+    return Enricher(_FakeFetcher(pages), S(list(hits)), O(), Settings())
+
+
+def test_address_on_a_personal_site_is_taken_even_if_it_is_not_a_profile_page():
+    home = "https://priyanair.dev/"
+    html = ('<html><head><title>Home</title></head><body><p>Notes on Rust and async runtimes, written slowly.</p>'
+            '<a href="mailto:priya@priyanair.dev">email me</a></body></html>')
+    e = _person_enricher({home: _Page(home, html)})
+    c = Contact(kind="person", name="Priya Nair", urls=[home])
+    e._enrich_one(c)
+    assert c.best_email and c.best_email.address == "priya@priyanair.dev"
+
+
+def test_contact_page_one_link_from_the_home_page_is_followed():
+    home, contact = "https://dev.example.org/", "https://dev.example.org/contact"
+    h1 = '<html><title>Home</title><body><p>Hi.</p><a href="/contact">Contact</a></body></html>'
+    h2 = '<html><title>Contact</title><body><p>Write to <a href="mailto:sam.ortiz@example.org">Sam</a></p></body></html>'
+    e = _person_enricher({home: _Page(home, h1), contact: _Page(contact, h2)})
+    c = Contact(kind="person", name="Sam Ortiz", urls=[home])
+    e._enrich_one(c)
+    assert c.best_email and c.best_email.address == "sam.ortiz@example.org"
+
+
+def test_a_platform_page_is_not_treated_as_the_persons_own_site():
+    gh = "https://github.com/someone"
+    html = '<html><title>x</title><body><a href="mailto:a@b.com">a</a><a href="mailto:c@d.com">c</a></body></html>'
+    e = _person_enricher({gh: _Page(gh, html)})
+    c = Contact(kind="person", name="Some One", urls=[gh])
+    e._enrich_one(c)
+    assert not c.emails
+
+
+def test_snippet_address_with_the_persons_name_is_used_when_the_site_will_not_load():
+    from brain.sources.websearch import Hit
+
+    hits = [Hit("https://lab.example.edu/people", "People", "Contact: jane.doe@lab.example.edu, office 4")]
+    e = _person_enricher({}, hits)
+    c = Contact(kind="person", name="Jane Doe", org="Example Lab", org_domain="lab.example.edu")
+    e._enrich_one(c)
+    assert c.best_email and c.best_email.address == "jane.doe@lab.example.edu"
+
+
+def test_organisation_with_an_unreachable_site_gets_its_address_from_a_search_snippet():
+    from brain.orgs import OrgEnricher
+    from brain.settings import Settings
+    from brain.sources.websearch import Hit
+
+    hits = [Hit("https://directory.example.com/x", "Royal Album, Jaipur", "Call 98xxxx or write to hello@royalalbum.in")]
+    e = OrgEnricher(fetcher=_FakeFetcher({}), search=_FakeSearch(hits), settings=Settings())
+    org = Contact(kind="org", name="Royal Album", org_domain="royalalbum.in")
+    e.enrich(org, CampaignSpec(id="c"), [])
+    assert "site_unreachable" in org.flags and org.best_email and org.best_email.address == "hello@royalalbum.in"
+    other = Contact(kind="org", name="Other", org_domain="other.in")
+    e2 = OrgEnricher(fetcher=_FakeFetcher({}), search=_FakeSearch([Hit("u", "t", "mail us at x@elsewhere.com")]), settings=Settings())
+    e2.enrich(other, CampaignSpec(id="c"), [])
+    assert other.best_email is None
+
+
+def test_github_rate_limits_reach_the_warning():
+    from brain.cache import Cache
+    from brain.settings import Settings
+    from brain.sources.websearch import WebSearch
+
+    ws = WebSearch(Settings(), Cache())
+    ws.note_provider_failure("GitHub", "HTTP 403, rate limited: set GITHUB_TOKEN", 9, 12)
+    msg = ws.provider_problem()
+    assert "GitHub failed 9 of 12" in msg and "GITHUB_TOKEN" in msg
+    ws2 = WebSearch(Settings(), Cache())
+    ws2.note_provider_failure("GitHub", "x", 1, 30)
+    assert ws2.provider_problem() == ""
+
+
+def test_crates_source_turns_owners_into_contacts_with_their_public_profile():
+    from types import SimpleNamespace
+
+    from brain.discovery.hooks.crates import search
+
+    class F:
+        def get_json(self, url, params=None, **kw):
+            if url.endswith("/crates"):
+                return {"crates": [{"id": "ratelimit", "description": "async rate limiter", "downloads": 5000, "max_version": "1.0"}]}
+            if url.endswith("/owner_user"):
+                return {"users": [{"login": "jdoe", "name": None, "kind": "user", "url": "https://github.com/jdoe"},
+                                  {"login": "rust-lang", "kind": "user"}]}
+            if "api.github.com/users/jdoe" in url:
+                return {"login": "jdoe", "name": "Priya Nair", "blog": "priyanair.dev", "email": "priya@priyanair.dev",
+                        "html_url": "https://github.com/jdoe", "company": "@Acme"}
+            return None
+
+    run = SimpleNamespace(deps=SimpleNamespace(fetcher=F()), spec=CampaignSpec(id="c", topics=["async rate limiting"]))
+    people, stats = search(run)
+    assert [p.name for p in people] == ["Priya Nair"] and stats["owners"] == 1
+    p = people[0]
+    assert p.best_email and p.best_email.address == "priya@priyanair.dev" and "https://priyanair.dev" in p.urls and p.org == "Acme"
+
+
+def test_negations_in_the_request_become_anti_patterns():
+    from brain.intake import negations_from_text
+
+    t = "find small installers (not distributors, not manufacturers) in Kerala, excluding agencies and also big firms"
+    assert negations_from_text(t) == ["distributors", "manufacturers", "agencies"]
+    assert negations_from_text("professors in Germany, excluding Max Planck institutes") == []
+    assert negations_from_text("find clinics in Pune") == []
+
+
+def test_a_set_aside_size_limit_is_shown_as_an_assumption():
+    from brain.intake import set_aside_size_note
+
+    assert "not applied to everyone" in set_aside_size_note("small installers, and also large EPC firms with over 500 employees")
+    assert set_aside_size_note("fintechs with 50 to 500 employees") == ""
+
+
+def test_token_window_waits_instead_of_exceeding_the_limit():
+    from brain.llm import _TokenWindow
+
+    clock = {"t": 1000.0}
+    slept = []
+
+    def sleep(d):
+        slept.append(d)
+        clock["t"] += d
+
+    w = _TokenWindow()
+    assert w.acquire("h", 5000, 8000, now=lambda: clock["t"], sleep=sleep) == 0
+    assert w.acquire("h", 2000, 8000, now=lambda: clock["t"], sleep=sleep) == 0
+    waited = w.acquire("h", 3000, 8000, now=lambda: clock["t"], sleep=sleep)  # 7000 used: must wait for the first to age out
+    assert waited > 0 and sum(slept) >= 55
+    assert w.acquire("h", 10, 0, now=lambda: clock["t"], sleep=sleep) == 0  # no limit configured
+
+
+def test_bench_writes_a_partial_report_after_each_scenario(tmp_path, monkeypatch):
+    import brain.bench as bench
+
+    seen = []
+
+    def fake_run(sc, **kw):
+        if seen:  # the first scenario has already been checkpointed when the second one starts
+            assert (tmp_path / "t.partial.json").exists()
+        seen.append(sc["name"])
+        return {"name": sc["name"], "split": "dev", "target": 5, "good@K": 3, "reachable": 4, "search_calls": 1,
+                "llm_paid_calls": 1, "llm_usd": 0.0}
+
+    monkeypatch.setattr(bench, "RESULT_DIR", tmp_path)
+    monkeypatch.setattr(bench, "run_scenario", fake_run)
+    rep = bench.run_bench(["academic_gnn", "b2b_dental_bangalore"], label="t", progress=lambda m: None)
+    assert len(rep["rows"]) == 2 and not (tmp_path / "t.partial.json").exists() and (tmp_path / "t.json").exists()

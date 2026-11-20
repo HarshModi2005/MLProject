@@ -444,6 +444,41 @@ def size_from_text(text: str) -> tuple:
     return (num(over.group(1)) if over else None, num(under.group(1)) if under else None)
 
 
+_NEGATION = re.compile(r"\b(?:not|no|never|excluding|exclude|except|without|avoid)\s+(?:any\s+|the\s+)?([a-z][a-z\-]*(?:\s+[a-z][a-z\-]*){0,2})", re.I)
+_NEG_STOP = {"and", "or", "but", "who", "that", "which", "in", "at", "with", "for", "of", "to", "also", "from", "by", "the", "a"}
+
+
+def negations_from_text(text: str) -> List[str]:
+    """Kinds of target the request rules out in words ("not distributors, not manufacturers", "excluding agencies").
+    The model often keeps the positive half of such a request and loses these; as anti-patterns they lower the fit of
+    look-alikes and are shown to the judge. Named organisations ("excluding Max Planck institutes") go the other way,
+    through exclude_organizations, so capitalised phrases are left alone."""
+    out: List[str] = []
+    for m in _NEGATION.finditer(text or ""):
+        raw = m.group(1)
+        if raw[:1].isupper() and not text[m.start(1):].startswith(raw.lower()):
+            continue  # a proper name: handled as an excluded organisation
+        words = []
+        for w in raw.lower().split():
+            if w in _NEG_STOP:
+                break
+            words.append(w)
+        phrase = " ".join(words)
+        if len(phrase) > 3 and phrase not in out and phrase not in {"sure", "only", "problem"}:
+            out.append(phrase)
+    return out[:6]
+
+
+def set_aside_size_note(text: str) -> str:
+    """The assumption to show when a size limit was left out because it belongs to an "also ..." clause."""
+    for rx in (_SIZE_RANGE, _SIZE_OVER, _SIZE_UNDER):
+        m = rx.search(text or "")
+        if m and re.search(r"\b(also|plus|as well as|but|except)\b", text[max(0, m.start() - 60):m.start()], re.I):
+            return (f"The request gives a size limit ('{m.group(0)}') for only part of the targets, so it was not applied to "
+                    "everyone. Say if it should be, or run it as a separate campaign.")
+    return ""
+
+
 def _constraints(data: Dict[str, Any], remote: Optional[bool]) -> Constraints:
     d = data.get("constraints") if isinstance(data.get("constraints"), dict) else {}
     rok = d.get("remote_ok")
@@ -668,6 +703,11 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
     if profile.get("language") and not data.get("language"):
         data["language"] = profile["language"]
     spec = build(data, sender, campaign_id=cid, target_count=target_count, locations=locations, playbook=playbook)
+    spec.profile.anti_patterns = list(dict.fromkeys(spec.profile.anti_patterns + negations_from_text(prompt)))[:10]
+    note = set_aside_size_note(prompt)
+    if note:
+        data.setdefault("assumptions", [])
+        data["assumptions"] = list(data["assumptions"]) + [note]
     if spec.constraints.size_min is None and spec.constraints.size_max is None:
         spec.constraints.size_min, spec.constraints.size_max = size_from_text(prompt)
     ctx.understanding = squash(str(data.get("understanding") or ""), 600)

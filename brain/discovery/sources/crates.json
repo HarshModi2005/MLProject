@@ -1,0 +1,10 @@
+{
+  "name": "crates",
+  "title": "Maintainers of Rust crates on the topic (crates.io), with their GitHub profile and the address or site they publish there.",
+  "adapter": "python",
+  "entry": "brain.discovery.hooks.crates:search",
+  "tier": 1, "cost": "free", "kinds": ["person"], "stage": "seed", "order": 43,
+  "proves": ["maintains_package", "open_source"], "yields_email": true,
+  "query": {"terms": ["topics", "expanded_terms:1"], "max": 3},
+  "policy": {"robots": "api", "rate_per_min": 60, "terms": "Public crates.io API and public GitHub profile data."}
+}

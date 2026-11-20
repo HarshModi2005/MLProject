@@ -452,6 +452,19 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     note_sources(funnel, "reachable", reachable)
     funnel["guessed_email_only"] = sum(1 for c in targets if c.emails and c not in reachable)
     progress(f"enrich: {len(reachable)} of {len(targets)} have a confident email")
+    # Candidates the pre-judge liked but that have no address we trust. In the stress runs these were 84% of everything
+    # lost after enrichment; they are listed for a person to resolve instead of vanishing from the funnel.
+    unreached = [c for c in targets if c not in reachable and (c.prejudge or 0) >= 0.7]
+    funnel["good_no_address_n"] = len(unreached)
+    funnel["good_no_address"] = [{"name": c.name, "org": c.org, "domain": c.org_domain, "kind": c.kind,
+                                  "why": c.prejudge_reason, "url": (c.urls or [None])[0],
+                                  "unconfirmed_address": c.best_email.address if c.best_email else None}
+                                 for c in unreached[:25]]
+    if unreached:
+        result.warnings.append(
+            f"{len(unreached)} well-matched candidate{'s' if len(unreached) != 1 else ''} had no address we trust and "
+            "were left off the shortlist (the first 25 are in the run's funnel under good_no_address). Add an address by hand "
+            "or a contact-data provider to include them.")
     from brain.discovery.reach.providers import hunter_available
 
     funnel["contact_provider"] = "hunter" if hunter_available() else "none"

@@ -12,7 +12,7 @@ from __future__ import annotations
 import logging
 import threading
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 import httpx
 
@@ -70,6 +70,7 @@ class WebSearch:
         self.replay_misses = 0
         self.failures = 0  # calls the provider rejected or that errored (out of credits, bad key, rate limit)
         self.last_failure = ""
+        self.other_failures: Dict[str, tuple] = {}  # provider -> (failed, of, last message), reported by other sources
         self._lock = threading.Lock()
 
     @property
@@ -105,12 +106,22 @@ class WebSearch:
             self.last_failure = detail or type(e).__name__
         log.warning("%s search failed for %r: %s", kind, query, detail or e)
 
+    def note_provider_failure(self, provider: str, message: str, failed: int, of: int) -> None:
+        with self._lock:
+            old = self.other_failures.get(provider, (0, 0, ""))
+            self.other_failures[provider] = (old[0] + failed, old[1] + of, message or old[2])
+
     def provider_problem(self, min_failures: int = 3) -> str:
-        """A sentence for the user when a real share of the searches failed; empty when the provider behaved."""
-        if self.failures < min_failures or self.failures < 0.2 * max(1, self.calls):
+        """A sentence for the user when a real share of a provider's calls failed; empty when everything behaved."""
+        parts = []
+        if self.failures >= min_failures and self.failures >= 0.2 * max(1, self.calls):
+            parts.append(f"The search provider failed {self.failures} of {self.calls} searches ({self.last_failure}).")
+        for name, (failed, of, msg) in self.other_failures.items():
+            if failed >= 2 and failed >= 0.2 * max(1, of):
+                parts.append(f"{name} failed {failed} of {of} requests ({msg}).")
+        if not parts:
             return ""
-        return (f"The search provider failed {self.failures} of {self.calls} searches ({self.last_failure}). Results are "
-                "incomplete because of that, not because nobody matches: fix the account or key and run again.")
+        return " ".join(parts) + " Results are incomplete because of that, not because nobody matches: fix the account or key and run again."
 
     @property
     def available(self) -> bool:
