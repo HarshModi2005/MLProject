@@ -255,3 +255,44 @@ def prefer_person(contacts: List[Contact]) -> List[Contact]:
     drop_person = {k for k in best_org if k in best_person and best_person[k] < best_org[k]}
     return [c for c in contacts if not ((c.kind == "org" and key(c) in drop_org)
                                         or (c.kind == "person" and key(c) in drop_person))]
+
+
+# ── several places asked for: reserve a share for each, and say which ones came up empty ───────────────────────
+
+def location_targets(spec) -> List[str]:
+    """The places a request lists separately: its regions when there are two or more, else its countries."""
+    if len(spec.regions) >= 2:
+        return list(spec.regions)
+    if len(spec.countries) >= 2 and not spec.regions:
+        return list(spec.countries)
+    return []
+
+
+def in_location(c: Contact, target: str) -> bool:
+    from brain.textutil import COUNTRY_CODES, region_terms
+
+    if len(target) == 2 and target.isupper():
+        names = [k for k, v in COUNTRY_CODES.items() if v == target and len(k) > 3]
+        text = f"{c.location_text or ''} {c.country or ''}".lower()
+        return c.country == target or any(n in text for n in names)
+    text = f"{c.location_text or ''} {c.org or ''} {c.name} {c.org_domain or ''}".lower()
+    return any(t in text for t in region_terms(target))
+
+
+def reserve_locations(contacts: List[Contact], targets: List[str], limit: int, floor: float) -> List[Contact]:
+    """Order `contacts` (best first) so that each requested place with a candidate above `floor` gets a fair share of
+    the first `limit` slots. A list for "Kerala and Tamil Nadu" that is all Kerala, or "Australia and New Zealand" that
+    is all Australia, was the pattern in three of the stress scenarios: ranking alone does not spread across places."""
+    if len(targets) < 2 or limit < len(targets):
+        return contacts
+    share = max(1, limit // (2 * len(targets)))  # half the list is reserved, split evenly; the rest goes by score
+    reserved: List[Contact] = []
+    for t in targets:
+        reserved += [c for c in contacts if (c.score or 0) >= floor and in_location(c, t) and c not in reserved][:share]
+    rest = [c for c in contacts if c not in reserved]
+    return sorted(reserved, key=lambda c: c.score or 0, reverse=True) + rest
+
+
+def location_gaps(contacts: List[Contact], targets: List[str]) -> List[str]:
+    """Requested places with nobody on the list."""
+    return [t for t in targets if len(targets) >= 2 and contacts and not any(in_location(c, t) for c in contacts)]

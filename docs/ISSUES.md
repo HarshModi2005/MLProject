@@ -334,3 +334,103 @@ The scorecard near the top still shows the first judge run (round 1). The tables
 I-06, I-08, J-04, J-05, J-07, J-08, J-09 to J-11, J-13 and J-14 above are open. Re-running the whole stress set costs about 30 cents and 90 minutes.
 Re-run: `LLM_PROVIDER=openai brain bench --split stress --draft --label stress_full`, then `python tools/llm_judge.py --run stress_full`.
 `tools/llm_judge.py --only` writes `llm_judge_<run>_partial.json`, so two partial judgements of the same run overwrite each other.
+
+
+---
+
+# Round 3: stage-by-stage audit
+
+`tools/stage_judge.py` grades each stage on its own (rubrics R1-R9, described in the file header) from the stage snapshots the
+pipeline already stores in each run's `brain_stages` table. It ran on the 10 stress scenarios above and on 16 new ones (`s2_*`:
+open-source maintainers, grants, volunteering, schools, awards, advisors, suppliers, brand deals, guest posts, alumni, PhD
+supervisors, customer interviews, co-founder, campus recruiting, a vague request and a self-contradicting one).
+Judge: OpenAI gpt-4.1, about $1.20 for both batches. Files: `evals/results/stage_judge_stress_c.json`, `stage_judge_s2.json`.
+
+**Three of the 26 scenarios are not evidence about quality.** The Serper account ran out of credits (HTTP 400 "Not enough credits")
+partway through the second batch: `s2_suppliers_cotton` (all 15 searches failed), `s2_brand_deals_travel` (26 failed calls) and
+`s2_seo_cybersecurity` (19). The pipeline swallowed the errors (K-03). The averages below leave those three out (23 scenarios).
+
+## What each stage scored (23 valid scenarios)
+
+| stage | measure | result |
+|---|---|---|
+| R1 intake | scored 5/5 | 19 of 23. Misses: vague request (2), self-contradicting request (4), size limit dropped (4), the Rust request routed to `general` (3) |
+| R2 candidate pool | share of a blind sample that is a valid target | 0.25 on average (range 0.00-0.67): raw pools are mostly noise, as expected |
+| R3 triage cut | valid targets among those dropped | 0.22 |
+| R3 enrichment cap | valid targets among those dropped | 0.15 |
+| R3 final cut | valid targets among those dropped | **0.39**, up to 1.00 (Spanish universities, co-founder) |
+| R3 kept | valid targets among the shortlist | 0.58 (blind, from the raw record only; the earlier judge, which sees the evidence, calls 91 of 136 prospects good) |
+| R4 recall probe | known good names found in the pool / in the shortlist | 0.36 / 0.07. The model also names some people that do not exist, so read this as a direction, not a rate |
+| R5 reach | addresses judged doubtful or wrong | 14 of about 200 |
+| R6 ranking | Kendall tau between pipeline score and independent fit | mean 0.52; negative in 4 scenarios (neuroscience PhDs, senior data hire, Spanish universities, medtech advisors) |
+| R7 drafts | factual claims not supported by the facts | 53 of 499 (11%) |
+| R8 reporting | "truthful" below 5 | 4 of 23. No scenario fell short without a warning |
+| R9 planning | judge's tool suggestions | low signal: it mostly suggests generic tools, so I do not act on it |
+
+## Issues
+
+### K-01 A hardcoded cap of 8 website lookups left valid candidates with no address (fixed, partly verified)
+`OrgEnricher.max_resolves = 8` per campaign. Candidates known only by name (from list pages and lookalikes) need one search each to find their
+website. In the 10 stress scenarios 106 candidates ended with `no_website` and, with them, no address. The cap now follows the campaign
+size (`min(80, 4 x target)`). Also fixed while reading that code: acronym domains were rejected (`unal.edu.co` for "Universidad Nacional de
+Colombia"; now accepted when the result title names the organisation in full), Google Maps and social pages could become an
+organisation's "website", and `is_aggregator(dom)` passed the domain as the name so directory domains were never skipped.
+Evidence after the fix is one scenario (`stress_municipal_iot`: reachable 2 to 8, with a different intake) because the credits ran out.
+
+### K-02 Most valid candidates are lost because no address is found (open, the dominant loss)
+Of 740 candidates that reached enrichment and were not shortlisted, **619 (84%) had no email at all**. The final cut therefore drops many valid
+targets (R3 final cut 0.39). Causes seen: no website (K-01), a site that would not load (33 in the stress batch, 1-8 per scenario in the second:
+dead domains, HTTP 403/503), and sites that load but publish no address. For people (open-source maintainers, alumni, co-founders) reachability was
+2 of 83, 1 of 75 and 1 of 85. Ideas, not built: read the contact page and `mailto:` links of a maintainer's own website, look the address up in
+search snippets when the site fails, offer an unverified-but-labelled role address for organisations when the playbook allows it, and show the
+user the unreachable-but-good candidates as a separate list ("good fit, no address: N") instead of dropping them.
+
+### K-03 A failing search provider looked like "nobody matches" (fixed)
+Out-of-credits errors were logged and swallowed; the run ended with "Discovery found nobody. Broaden the topics or locations." Searches that
+fail are now counted with the provider's own message, and the run says "The search provider failed N of M searches (HTTP 400: Not enough
+credits) ... not because nobody matches". Test added. The GitHub source has the same shape (it logs HTTP 403 for rate limits and returns
+nothing); `GITHUB_TOKEN` is not set in this environment and the unauthenticated limit is 60 requests an hour against up to 31 calls a run. I did not measure whether it was throttled.
+
+### K-04 Intake drops or misapplies constraints (partly fixed)
+- "50 to 500 employees" was dropped for the data-hire request; a pattern over the request text now fills it (offline check: 50-500). It does not
+  apply a limit that sits in an "also ..." clause: my first version set a minimum of 500 for the whole self-contradicting request.
+- Still open: a negative constraint ("not distributors, not manufacturers") is not carried into the structured campaign, and the conflict in
+  `s2_contradictory` (small installers vs. also large EPC firms) is not surfaced. I added a rule to the intake prompt and the model ignored it.
+  That needs a deterministic step: extract "not X" phrases into `anti_patterns` and compare size claims.
+
+### K-05 Public bodies as targets were routed to generic B2B sales (fixed on intake, not re-run end to end)
+"Municipal corporations or water boards" went to `b2b_sales` and returned private water firms. `public_buyer_playbook` redirects when the
+persona names a public body. Intake-only check: it now picks `government_tenders` (0.9).
+
+### K-06 A vague request was answered with an invented target group (fixed on intake)
+"i need people to talk to about my startup" became VC and mentor topics (R1 score 2). The intake now returns `general`, confidence 0.3,
+no topics, and an assumption that the request was too vague (intake-only check). Not tested through the whole pipeline: with no topics it returns little and says so.
+
+### K-07 Several requested places are not all covered (fixed offline, not re-run)
+"Kerala and Tamil Nadu" returned only Kerala; "Australia and New Zealand" only Australia; Mumbai weaker than Pune; Chile missing from Spanish
+universities. Ranking alone does not spread across places. `reserve_locations` now reserves half the list for the requested places (split
+evenly, only candidates above the fit floor) and the run warns when a requested place has nobody ("Nobody on the list is in Tamil Nadu").
+
+### K-08 The writer invents offer details (prompt rule added, not re-measured)
+53 of 499 claims were unsupported. The pattern is not about the recipient but about the offer: "the workshop requires minimal time from
+teachers" (the sender only said it was free), "does not require extra resources", "sponsoring my channel could connect your brand with young,
+budget-conscious travellers". `s2_school_stem_hyd`: 17 of 49 claims. A writer rule now forbids describing logistics, effort, cost or benefit the
+facts do not state. A deterministic check cannot catch these; the next run should re-measure.
+
+### K-09 Ranking ignores how central the topic is (prompt rule added, not re-measured)
+In the neuroscience run the top-scored professors (0.88-0.92) work mainly on chip design and bioinformatics, and the core computational
+neuroscientists sit lower (tau -0.25, top third scores lower than bottom third). The judge prompt now asks for centrality: a main field other than the topic is 40-65.
+
+### K-10 No source for Python or Rust package maintainers (open)
+`oss_maintainers` uses GitHub, npm and the web. npm lists JavaScript packages only. A PyPI source (no search API; needs a different route)
+and crates.io (public API with owners) would fix recall; reachability (K-02) limits the rest.
+
+### K-11 Dropped candidates leave no reason behind (open)
+The final cut stores neither a score nor a reason for candidates it drops, so the audit can say that 39% of what was dropped was valid but not
+why. Store `(score, flags, reason)` for every judged candidate in the stage snapshot.
+
+## Notes on the method
+- The blind candidate audit sees less than the pipeline did, so "kept 0.58" is a floor, not the shortlist's precision.
+- R9 and R4 are the weakest rubrics (R9 is generic; R4 relies on the model's memory). R1, R3, R5, R6 and R7 produced findings I could verify in the data.
+- Fixes marked "not re-measured" are covered by unit tests (289 pass) but not by a new live run, because search credits are exhausted.
+  To re-measure: top up Serper, then `LLM_PROVIDER=openai brain bench --split stress --draft --label stress_d` and `python tools/stage_judge.py --runs stress_d`.

@@ -1,0 +1,1080 @@
+{
+  "label": "s2_3",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 75,
+      "qualified": 56,
+      "reachable": 1,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 38,
+      "llm_paid_calls": 38,
+      "llm_usd": 0.0122,
+      "pages_fetched": 176,
+      "seconds": 248.2,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "extract": 6,
+        "triage": 13,
+        "extract_orgs": 12,
+        "prejudge": 5,
+        "judge": 1
+      },
+      "by_source": {
+        "web": 44,
+        "orgs": 55,
+        "news": 10
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 1 of 10 wanted contacts have a confident address. This kind of campaign (Alumni networking) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 0 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 45,
+          "orgs": 42,
+          "list": 20,
+          "news": 10
+        },
+        "qualified": {
+          "web": 27,
+          "orgs": 39,
+          "list": 20,
+          "news": 9
+        },
+        "enriched": {
+          "list": 13,
+          "orgs": 16,
+          "web": 4
+        },
+        "reachable": {
+          "list": 1,
+          "orgs": 1
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "web": {
+          "runs": 2,
+          "search_calls": 7,
+          "fetches": 25,
+          "llm_calls": 6,
+          "seconds": 27.0,
+          "found": 44,
+          "new": 23,
+          "qualified": 19
+        },
+        "orgs": {
+          "runs": 2,
+          "search_calls": 10,
+          "fetches": 4,
+          "llm_calls": 14,
+          "seconds": 46.5,
+          "found": 35,
+          "new": 31,
+          "qualified": 30
+        },
+        "news": {
+          "runs": 1,
+          "search_calls": 3,
+          "fetches": 29,
+          "llm_calls": 0,
+          "seconds": 30.25,
+          "found": 10,
+          "new": 10,
+          "qualified": 2
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "alumni",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "payments companies",
+        "financial technology companies",
+        "product management",
+        "software engineering"
+      ],
+      "intake_ask_type": "intro",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "name": "s2_alumni_iitm",
+      "split": "stress",
+      "playbook": "alumni",
+      "target": 10
+    },
+    {
+      "unique": 115,
+      "qualified": 114,
+      "reachable": 4,
+      "passed_judge": 2,
+      "shortlisted": 2,
+      "good@K": 1,
+      "precision@K": 0.083,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "guess": 2
+      },
+      "mean_score": 0.725,
+      "distinct_orgs": 2,
+      "proof_rate": 1.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 44,
+      "llm_paid_calls": 51,
+      "llm_usd": 0.0233,
+      "pages_fetched": 204,
+      "seconds": 367.5,
+      "usd_per_good": 0.067,
+      "llm_by_purpose": {
+        "intake": 1,
+        "replan_search": 1,
+        "triage": 18,
+        "extract_orgs": 15,
+        "prejudge": 9,
+        "judge": 2,
+        "draft": 4
+      },
+      "by_source": {
+        "places": 14,
+        "orgs": 106
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 4 of 12 wanted contacts have a confident address. This kind of campaign (Customer interviews and beta users) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 2 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 14,
+          "web": 24,
+          "orgs": 101,
+          "list": 77
+        },
+        "qualified": {
+          "web": 23,
+          "orgs": 100,
+          "places": 14,
+          "list": 77
+        },
+        "enriched": {
+          "places": 2,
+          "web": 2,
+          "orgs": 25,
+          "list": 23
+        },
+        "reachable": {
+          "places": 2,
+          "list": 6,
+          "orgs": 7,
+          "web": 1
+        },
+        "passed_judge": {
+          "places": 2
+        },
+        "shortlisted": {
+          "places": 2
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 8,
+          "fetches": 0,
+          "llm_calls": 1,
+          "seconds": 16.07,
+          "found": 14,
+          "new": 14,
+          "qualified": 7
+        },
+        "orgs": {
+          "runs": 2,
+          "search_calls": 11,
+          "fetches": 18,
+          "llm_calls": 20,
+          "seconds": 86.89,
+          "found": 59,
+          "new": 57,
+          "qualified": 55
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Delight Benedict",
+          "org": "Delightcb",
+          "email": "delightcb@gmail.com",
+          "score": 0.85,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Freelance UI/UX designer based in Kochi, Kerala, India"
+          ]
+        },
+        {
+          "name": "Vijay Singh Bisht",
+          "org": "Vijaybisht",
+          "email": "vijaybisht1706@gmail.com",
+          "score": 0.6,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Freelance graphic designer with UI design experience"
+          ]
+        }
+      ],
+      "intake_playbook": "customer_research",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": false,
+      "intake_where": [
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "freelance UI/UX design",
+        "international freelancing",
+        "freelance invoicing"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 2,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            2
+          ]
+        ],
+        "avg_specificity": 4.5,
+        "avg_relevance": 5.0,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": [
+          "Specify how the interview will benefit them."
+        ]
+      },
+      "emails": [
+        {
+          "to": "delightcb@gmail.com",
+          "subject": "Interview request from a fellow freelancer",
+          "body": "Hi Delight,\n\nI am building an invoicing tool for freelancers who bill international clients and want to understand their needs better.\n\nAs a freelance website and UI/UX designer in Kochi, your perspective would be very helpful. I am a product founder working on this tool but have not launched a product yet.\n\nWould you be willing to participate in a short interview to share your experience with invoicing international clients? There is no product to sell, just a conversation to learn from you.\n\nPlease let me know if you are open to this.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "vijaybisht1706@gmail.com",
+          "subject": "Invoicing challenges for international freelance clients",
+          "body": "Hi Vijay,\n\nI am building an invoicing tool for freelancers, focusing on those who bill international clients.\n\nYour work as a freelance graphic designer experienced in UI design and website development is relevant to this research. I want to understand the invoicing needs and challenges faced by freelancers like you.\n\nWould you be willing to participate in a short interview to share your experience with invoicing international clients? This is purely for research and not a sales call. Please reply if interested.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how the interview will benefit them."
+          }
+        }
+      ],
+      "name": "s2_customer_research_freelance",
+      "split": "stress",
+      "playbook": "customer_research",
+      "target": 12
+    },
+    {
+      "unique": 303,
+      "qualified": 300,
+      "reachable": 19,
+      "passed_judge": 17,
+      "shortlisted": 10,
+      "good@K": 10,
+      "precision@K": 1.0,
+      "good_reachable@K": 10,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 10
+      },
+      "mean_score": 0.83,
+      "distinct_orgs": 8,
+      "proof_rate": 0.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 34,
+      "llm_paid_calls": 39,
+      "llm_usd": 0.035,
+      "pages_fetched": 203,
+      "seconds": 506.6,
+      "usd_per_good": 0.0068,
+      "llm_by_purpose": {
+        "intake": 1,
+        "prejudge": 6,
+        "judge": 3,
+        "draft": 11,
+        "verify": 6,
+        "draft_fix": 10
+      },
+      "by_source": {
+        "openalex": 300,
+        "arxiv": 3
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Source nsf_awards: does not serve the campaign's countries; skipped."
+      ],
+      "source_funnel": {
+        "unique": {
+          "openalex": 300,
+          "arxiv": 3
+        },
+        "qualified": {
+          "openalex": 300
+        },
+        "enriched": {
+          "openalex": 61
+        },
+        "reachable": {
+          "openalex": 19
+        },
+        "passed_judge": {
+          "openalex": 17
+        },
+        "shortlisted": {
+          "openalex": 10
+        }
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 23.47,
+          "found": 300,
+          "new": 300,
+          "qualified": 281
+        },
+        "arxiv": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 6,
+          "llm_calls": 0,
+          "seconds": 79.7,
+          "found": 3,
+          "new": 3,
+          "qualified": 3
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Francesco Ricci",
+          "org": "Monash University",
+          "email": "francesco.ricci@monash.edu",
+          "score": 0.8886,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent work on coral reef microbial ecology aligns with sender's coral bleaching recovery thesis"
+          ]
+        },
+        {
+          "name": "Kathryn McMahon",
+          "org": "Edith Cowan University",
+          "email": "k.mcmahon@ecu.edu.au",
+          "score": 0.8568,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Research on coral and marine ecosystems matches sender's marine ecology interest"
+          ]
+        },
+        {
+          "name": "Michael J. Kingsford",
+          "org": "James Cook University",
+          "email": "michael.kingsford@jcu.edu.au",
+          "score": 0.85,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Distinguished Professor in Marine Biology at James Cook University"
+          ]
+        },
+        {
+          "name": "Peter J. Mumby",
+          "org": "The University of Queensland",
+          "email": "p.j.mumby@uq.edu.au",
+          "score": 0.85,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Researcher at University of Queensland with coral reef and marine ecology focus"
+          ]
+        },
+        {
+          "name": "Sean R. Connolly",
+          "org": "James Cook University",
+          "email": "sean.connolly@jcu.edu.au",
+          "score": 0.85,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Adjunct Professor at James Cook University with coral reef ecology research"
+          ]
+        },
+        {
+          "name": "Adriana Verg\u00e9s",
+          "org": "UNSW Sydney",
+          "email": "a.verges@unsw.edu.au",
+          "score": 0.85,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Professor in marine ecology at UNSW Sydney"
+          ]
+        },
+        {
+          "name": "Camille Mellin",
+          "org": "The University of Adelaide",
+          "email": "camille.mellin@adelaide.edu.au",
+          "score": 0.8091,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Research on coral and marine ecosystems and climate change effects on fishes"
+          ]
+        },
+        {
+          "name": "Stephen E. Swearer",
+          "org": "The University of Melbourne",
+          "email": "sswearer@unimelb.edu.au",
+          "score": 0.8,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Professor at University of Melbourne with marine and coral reef ecology research"
+          ]
+        },
+        {
+          "name": "Ana M. M. Sequeira",
+          "org": "Australian National University",
+          "email": "ana.sequeira@anu.edu.au",
+          "score": 0.8,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Associate Professor at Australian National University"
+          ]
+        },
+        {
+          "name": "Sterling B. Tebbett",
+          "org": "James Cook University",
+          "email": "sterling.tebbett@my.jcu.edu.au",
+          "score": 0.75,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Research on coral reef fish ecology at James Cook University"
+          ]
+        }
+      ],
+      "intake_playbook": "phd_positions",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "AU",
+        "NZ"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "marine ecology",
+        "coral reef ecology",
+        "marine biology",
+        "environmental science"
+      ],
+      "intake_ask_type": "apply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 10,
+        "pass_rate": 0.2,
+        "top_issues": [
+          [
+            "unsupported claim",
+            9
+          ]
+        ],
+        "avg_specificity": 4.0,
+        "avg_relevance": 4.0,
+        "avg_ask": 4.9,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.9,
+        "critiques": [
+          "Clarify how your thesis relates to microbial ecology.",
+          "Mention specific aspects of Kathryn's research that interest you.",
+          "Specify how your thesis aligns with his research focus.",
+          "Include a specific project or interest of Peter's that aligns with yours.",
+          "Mention how your skills could contribute to his research."
+        ]
+      },
+      "emails": [
+        {
+          "to": "francesco.ricci@monash.edu",
+          "subject": "Interest in coral reef research at Monash",
+          "body": "Dear Francesco Ricci,\n\nI am completing an MSc in marine biology with a thesis on coral bleaching recovery. Your recent paper on light-harvesting strategies and niche partitioning among Ostreobium lineages in coral reefs caught my attention.\n\nMy thesis examined coral recovery processes, which relates to coral reef ecosystems though not directly to microbial community ecology or spectral architecture. I am interested in pursuing a PhD in marine ecology and would appreciate your consideration for supervision.\n\nCould we discuss the possibility of PhD supervision in your lab at Monash University?\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: which relates to coral reef ecosystems though not directly to microbial community ecology or spectral architecture."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how your thesis relates to microbial ecology."
+          }
+        },
+        {
+          "to": "k.mcmahon@ecu.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Professor McMahon,\n\nI recently completed an MSc in marine biology with a thesis on coral bleaching recovery. This work provided me with experience in coral ecology and responses to environmental stressors.\n\nI am seeking PhD supervision in marine ecology in Australia or New Zealand to further develop my research skills. Your role at Edith Cowan University and research in marine and coastal ecosystems align with my interest in marine ecology.\n\nWould you be open to considering my application for PhD supervision at ECU? I can provide my thesis and CV for your review if you are interested.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: This work provided me with experience in coral ecology and responses to environmental stressors."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific aspects of Kathryn's research that interest you."
+          }
+        },
+        {
+          "to": "michael.kingsford@jcu.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Professor Kingsford,\n\nI recently completed an MSc in marine biology with a thesis on coral bleaching recovery. Your research covers marine ecosystems, coral reef fish ecology, and related marine biology fields at James Cook University.\n\nMy thesis involved studying coral responses to environmental stressors, which relates to marine ecology. I am interested in pursuing a PhD in marine ecology in Australia or New Zealand and am seeking supervision.\n\nCould you please let me know if you are currently accepting new PhD students in marine ecology at James Cook University?\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Your research covers marine ecosystems, coral reef fish ecology, and related marine biology fields at James Cook University."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how your thesis aligns with his research focus."
+          }
+        },
+        {
+          "to": "p.j.mumby@uq.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Peter J. Mumby,\n\nI am completing an MSc in marine biology with a thesis on coral bleaching recovery. My research focused on coral recovery processes, which may provide useful insights into population dynamics under stress.\n\nI am seeking PhD supervision in marine ecology and am interested in continuing research in coral reef ecology at The University of Queensland.\n\nCould you please consider supervising a PhD candidate in this area? I am keen to discuss how my background might fit within your current projects or interests.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: which may provide useful insights into population dynamics under stress."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a specific project or interest of Peter's that aligns with yours."
+          }
+        },
+        {
+          "to": "sean.connolly@jcu.edu.au",
+          "subject": "Interest in coral reef ecology PhD",
+          "body": "Dear Professor Connolly,\n\nI am a recent MSc graduate in marine biology, having completed a thesis on coral bleaching recovery. I am seeking PhD supervision in marine ecology in Australia or New Zealand.\n\nI read your 2026 Ecology Letters paper, \"Environmental Fluctuations Are Insufficient to Explain High Coral Biodiversity,\" which tests storage effect pathways in coral reef systems. My MSc work focused on coral bleaching recovery.\n\nWould you consider supervising a PhD student focused on marine ecology? I would appreciate the opportunity to discuss potential supervision.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention how your skills could contribute to his research."
+          }
+        },
+        {
+          "to": "a.verges@unsw.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Professor Verg\u00e9s,\n\nI recently completed an MSc in marine biology with a thesis on coral bleaching recovery. I am currently seeking PhD supervision in marine ecology in Australia or New Zealand.\n\nYour position as a Professor in marine ecology at UNSW Sydney and the Sydney Institute of Marine Science is of interest to me. While my thesis focused on coral bleaching recovery, I am keen to broaden my research scope in marine ecology and restoration.\n\nWould you consider supervising my PhD research? I can provide my thesis and discuss how my background might support your work.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific aspects of her research that align with your interests."
+          }
+        },
+        {
+          "to": "camille.mellin@adelaide.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Camille Mellin,\n\nI completed an MSc in marine biology with a thesis on coral bleaching recovery, involving fieldwork and ecosystem analysis.\n\nYour research at The University of Adelaide on coral and marine ecosystems and climate change effects on fishes is of great interest to me.\n\nCould you consider supervising a PhD candidate focused on marine ecology? I would appreciate the opportunity to discuss this possibility further.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: involving fieldwork and ecosystem analysis"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a specific example of your fieldwork experience."
+          }
+        },
+        {
+          "to": "sswearer@unimelb.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Professor Swearer,\n\nI am completing an MSc in marine biology with a thesis on coral bleaching recovery. Your recent work on coral reef fish and marine ecosystems at the University of Melbourne is highly relevant to my interest in marine ecology.\n\nAlthough my thesis focused on coral bleaching recovery, I aim to broaden my research into marine ecology. I am seeking PhD supervision in this field in Australia or New Zealand.\n\nWould you be open to discussing the possibility of supervising my PhD research? I can provide more details about my background and research interests at your convenience.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: I am completing an MSc in marine biology"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how your thesis relates to his current research."
+          }
+        },
+        {
+          "to": "ana.sequeira@anu.edu.au",
+          "subject": "PhD supervision inquiry in marine ecology",
+          "body": "Dear Professor Sequeira,\n\nI recently completed an MSc in marine biology with a thesis on coral bleaching recovery. While my work focused on coral ecosystems, I am interested in expanding into marine ecology and conservation.\n\nYour research at Australian National University covers marine animal studies, ichthyology, and marine ecosystems, which align with my interest in ecological research.\n\nWould you consider supervising a PhD candidate in marine ecology? I would appreciate any advice on potential opportunities for PhD supervision under your guidance.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Your research at Australian National University covers marine animal studies, ichthyology, and marine ecosystems, which align with my interest in ecological res"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more direct and specific regarding supervision."
+          }
+        },
+        {
+          "to": "sterling.tebbett@my.jcu.edu.au",
+          "subject": "Interest in coral reef fish ecology PhD",
+          "body": "Dear Sterling B. Tebbett,\n\nI recently completed an MSc in marine biology with a thesis on coral bleaching recovery. My research examined coral responses to environmental stress, which may provide insights into reef ecosystem resilience.\n\nI am looking for PhD supervision in marine ecology at James Cook University or elsewhere in Australia/New Zealand. I would appreciate the opportunity to discuss potential supervision in your research group, especially related to coral reef fish ecology and reef ecosystem functions.\n\nWould you be open to a brief conversation about possible PhD opportunities under your guidance?\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: My research examined coral responses to environmental stress, which may provide insights into reef ecosystem resilience.",
+            "unsupported claim: especially related to coral reef fish ecology and reef ecosystem functions."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how your research aligns with his recent publications."
+          }
+        }
+      ],
+      "name": "s2_phd_marine_aus",
+      "split": "stress",
+      "playbook": "phd_positions",
+      "target": 10
+    },
+    {
+      "unique": 61,
+      "qualified": 61,
+      "reachable": 10,
+      "passed_judge": 6,
+      "shortlisted": 6,
+      "good@K": 4,
+      "precision@K": 0.4,
+      "good_reachable@K": 4,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 1,
+        "inbox": 5
+      },
+      "mean_score": 0.74,
+      "distinct_orgs": 6,
+      "proof_rate": 0.5,
+      "personal_email_rate": 0.167,
+      "search_calls": 38,
+      "llm_paid_calls": 33,
+      "llm_usd": 0.018,
+      "pages_fetched": 267,
+      "seconds": 493.4,
+      "usd_per_good": 0.0138,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 9,
+        "extract_orgs": 3,
+        "prejudge": 5,
+        "judge": 2,
+        "draft": 6,
+        "verify": 3,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "orgs": 43,
+        "news": 24
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 6 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 26,
+          "orgs": 37,
+          "list": 11,
+          "news": 24
+        },
+        "qualified": {
+          "web": 26,
+          "orgs": 37,
+          "list": 11,
+          "news": 24
+        },
+        "enriched": {
+          "web": 23,
+          "orgs": 34,
+          "list": 11,
+          "news": 16
+        },
+        "reachable": {
+          "web": 8,
+          "orgs": 10,
+          "list": 2
+        },
+        "passed_judge": {
+          "web": 6,
+          "orgs": 6
+        },
+        "shortlisted": {
+          "web": 6,
+          "orgs": 6
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 3,
+          "search_calls": 16,
+          "fetches": 3,
+          "llm_calls": 12,
+          "seconds": 47.55,
+          "found": 43,
+          "new": 37,
+          "qualified": 32
+        },
+        "news": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 40,
+          "llm_calls": 0,
+          "seconds": 157.27,
+          "found": 24,
+          "new": 24,
+          "qualified": 7
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Repository Security",
+          "org": "Openssf",
+          "email": "security@openssf.org",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "OpenSSF is a security community with guest blogging available"
+          ]
+        },
+        {
+          "name": "Cm Alliance",
+          "org": "Cm Alliance",
+          "email": "info@cm-alliance.com",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Cm Alliance accepts cybersecurity guest blog writers"
+          ]
+        },
+        {
+          "name": "SecurityBlogs",
+          "org": "SecurityBlogs",
+          "email": "info@securityblogs.com.au",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Focuses on security brand visibility and SEO"
+          ]
+        },
+        {
+          "name": "Contrast Security",
+          "org": "Contrast Security",
+          "email": "robert.vamosi@contrastsecurity.com",
+          "score": 0.7331,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Has an application security blog with DevSecOps focus"
+          ]
+        },
+        {
+          "name": "DevSecOps",
+          "org": "DevSecOps",
+          "email": "info@devsecops.org",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "DevSecOps.org focuses on security and business practitioners"
+          ]
+        },
+        {
+          "name": "Legit Security",
+          "org": "Legit Security",
+          "email": "info@legitsecurity.com",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Legit Security focuses on AppSec and AI-generated code"
+          ]
+        }
+      ],
+      "intake_playbook": "seo_guest_posts",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "cybersecurity blogs",
+        "application security",
+        "DevSecOps",
+        "GitHub Actions security"
+      ],
+      "intake_ask_type": "apply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 6,
+        "pass_rate": 0.833,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ]
+        ],
+        "avg_specificity": 4.67,
+        "avg_relevance": 4.67,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.667,
+        "critiques": [
+          "Remove redundant phrases about guest blogging.",
+          "Clarify how your guide aligns with their focus.",
+          "No changes needed; it's well-crafted."
+        ]
+      },
+      "emails": [
+        {
+          "to": "security@openssf.org",
+          "subject": "Guest article proposal for OpenSSF blog",
+          "body": "Hi Repository,\n\nI understand OpenSSF offers guest blogging opportunities for Member organizations and Working Groups to share technical deep-dives or ecosystem updates.\n\nI have authored a practical guide to securing GitHub Actions and have six years of experience in application security. I believe this guide could provide value to your audience by addressing security practices in CI/CD pipelines, a topic relevant to open source software security.\n\nWould you please share the guidelines or process for submitting a guest article on your cybersecurity blog? I am interested in contributing and would like to understand how best to proceed.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@cm-alliance.com",
+          "subject": "Offering a guide for your cybersecurity blog",
+          "body": "Hello Cm Alliance team,\n\nYour site welcomes cybersecurity guest blog writers, which fits well with my recent work.\n\nI authored a practical guide to securing GitHub Actions, drawing on 6 years of experience in application security. Two post ideas that could interest your readers are practical steps to secure CI/CD pipelines and common security pitfalls in GitHub Actions workflows.\n\nCould you please share the guest post submission guidelines or the contact for guest article proposals? This will help me prepare a submission that meets your standards.\n\nPlease point me to whoever handles this if that is easier. I look forward to the possibility of contributing to your cybersecurity blog.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Remove redundant phrases about guest blogging."
+          }
+        },
+        {
+          "to": "info@securityblogs.com.au",
+          "subject": "Request for guest post submission guidelines",
+          "body": "Hello SecurityBlogs team,\n\nI am reaching out to inquire about submitting a guest article to your cybersecurity blog. I have authored a practical guide to securing GitHub Actions, drawing on my six years of experience as an application security engineer.\n\nGiven your focus on security brand visibility and your existing guest post submission process, I believe this guide could offer valuable insights to your readers. Two specific post ideas I have are securing CI/CD pipelines and best practices for GitHub Actions security.\n\nCould you please share the guest post submission guidelines or the contact for guest article proposals? I appreciate your time and look forward to your response.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Clarify how your guide aligns with their focus."
+          }
+        },
+        {
+          "to": "robert.vamosi@contrastsecurity.com",
+          "subject": "Guest article proposal for AppSec Observer",
+          "body": "Hi Contrast,\n\nI am interested in contributing a guest article to Contrast's AppSec Observer blog. I authored a practical guide on securing GitHub Actions, drawing from six years as an application security engineer.\n\nThe guide addresses common security challenges in GitHub Actions workflows. It could offer useful insights for your readers focused on application security and DevSecOps.\n\nCould you please share your guidelines or process for submitting guest articles? I can tailor the content to meet your editorial standards and audience.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@devsecops.org",
+          "subject": "Offering a practical guide for your DevSecOps blog",
+          "body": "Hello DevSecOps team,\n\nYour site supports security practitioners seeking innovative ways to embed security at scale. I authored a practical guide to securing GitHub Actions based on my 6 years in application security. This guide offers actionable steps for DevSecOps teams to improve CI/CD pipeline security.\n\nI believe this content aligns with your mission to share helpful tools and posts for security and business practitioners. Could you please share the guest post submission guidelines or the contact for guest article proposals? This will help me submit the guide for your review or suggest other relevant topics.\n\nPlease point me to whoever handles guest contributions if that is easier. I look forward to your guidance on contributing to your cybersecurity blog.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@legitsecurity.com",
+          "subject": "Guest article proposal on GitHub Actions security",
+          "body": "Hello Legit Security team,\n\nLegit Security\u2019s work on detecting and preventing AppSec risks in AI-generated code caught my attention.\n\nI authored a practical guide to securing GitHub Actions, drawing on six years of experience in application security.\n\nI would like to contribute a guest article to your cybersecurity blog. Could you please share the guest post submission guidelines or the contact for guest article proposals? If someone else handles this, please point me to the right contact.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Legit Security\u2019s work on detecting and preventing AppSec risks in AI-generated code caught my attention."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "No changes needed; it's well-crafted."
+          }
+        }
+      ],
+      "name": "s2_seo_cybersecurity",
+      "split": "stress",
+      "playbook": "seo_guest_posts",
+      "target": 10
+    }
+  ],
+  "summary": {
+    "scenarios": 4,
+    "failed": 0,
+    "good@K": 15,
+    "good_reachable@K": 14,
+    "good_verified@K": 0,
+    "precision@K": 0.371,
+    "mean_score": 0.574,
+    "distinct_orgs": 16,
+    "proof_rate": 0.375,
+    "reachable": 34,
+    "search_calls": 154,
+    "llm_paid_calls": 161,
+    "llm_usd": 0.0885,
+    "seconds": 1615.7,
+    "intake_playbook_ok": "4/4",
+    "intake_where_ok": "4/4",
+    "drafts": 18,
+    "draft_pass_rate": 0.389,
+    "would_send_rate": 0.833,
+    "usd_per_good": 0.0162,
+    "judge_precision": 0.357,
+    "judge_precision_ci95": [
+      0.23,
+      0.508
+    ],
+    "sendable_precision": 0.333,
+    "verified_precision": 0.0
+  }
+}

@@ -49,6 +49,10 @@ Rules:
   company"). Never claim someone introduced, referred or recommended the sender unless the evidence says so.
 - Never mention the recipient's email address, "inbox", "mailbox" or hope that the message "reaches" anyone. The reader
   must not be able to tell how the address was found or that it is shared.
+- Describe the offer ONLY with what SENDER FACTS and the offer terms say. Do not add how it works, how long or how
+  much effort it takes, what it costs the recipient, what it "requires" or "does not require", or what benefit it will
+  bring them ("saves time", "complements your range", "connects you with young travellers"). A claim about the
+  recipient's needs or about results the offer will produce is invented unless a fact states it.
 - Follow the SITUATION rules.
 - Plain text. No greeting line, no sign-off, no bullet points, no placeholders like [Name], at most one link.
 - No filler openers ("I hope this email finds you well"), no flattery adjectives, no hype, no exclamation marks.

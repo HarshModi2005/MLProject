@@ -56,7 +56,8 @@ from brain.judge import judge
 from brain.llm import LLM
 from brain.models import CampaignSpec, Contact, Draft
 from brain.packs import get_pack
-from brain.rank import diversify, filter_contacts, prefer_person, prescore
+from brain.rank import (diversify, filter_contacts, location_gaps, location_targets, prefer_person, prescore,
+                        reserve_locations)
 from brain.resolve import resolve
 from brain.settings import Settings
 from brain.sources.csvlist import load_csv
@@ -519,7 +520,15 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         unique = prefer_person(unique)
         if len(unique) < before_pref:
             funnel["dropped_inbox_for_person"] = before_pref - len(unique)
+        places = location_targets(spec)
+        if places:
+            unique = reserve_locations(unique, places, spec.target_count, st.shortlist_floor)
         capped = diversify(unique, spec.target_count, st.max_per_org, prior=prior_org, prior_cap=1 if org_campaign else None)
+        gaps = location_gaps(capped, places)
+        if gaps:
+            funnel["location_gaps"] = gaps
+            result.warnings.append(f"Nobody on the list is in {', '.join(gaps)} (you asked for {', '.join(places)}). "
+                                   "Candidates there were missing, unreachable or below the fit floor; search those places on their own.")
         if prior_org:
             funnel["dedup_org_cap"] = sum(1 for c in unique if c not in capped and prior_org.get(touch.org_key(c), 0)
                                           >= (1 if org_campaign else st.max_per_org))

@@ -259,3 +259,24 @@ def test_public_bodies_as_targets_use_the_government_playbook():
     clinics = {"persona": {"description": "Owners of independent dental clinics"}}
     assert public_buyer_playbook("b2b_sales", clinics) == "b2b_sales"
     assert public_buyer_playbook("investors", water) == "investors"  # only generic sales is redirected
+
+
+def test_each_requested_place_gets_a_share_and_empty_places_are_reported():
+    from brain.rank import in_location, location_gaps, location_targets, reserve_locations
+
+    spec = CampaignSpec(id="c", regions=["Kerala", "Tamil Nadu"], countries=["IN"])
+    assert location_targets(spec) == ["Kerala", "Tamil Nadu"]
+    assert location_targets(CampaignSpec(id="c", regions=["Pune"], countries=["IN"])) == []
+    ker = [Contact(id=f"k{i}", kind="org", name=f"K{i}", location_text="Kochi, Kerala", score=0.9 - i / 100) for i in range(8)]
+    tn = [Contact(id="t1", kind="org", name="T1", location_text="Chennai, Tamil Nadu", score=0.7)]
+    ordered = reserve_locations(ker + tn, ["Kerala", "Tamil Nadu"], 8, 0.6)
+    assert "t1" in [c.id for c in ordered[:8]]
+    assert location_gaps(ker, ["Kerala", "Tamil Nadu"]) == ["Tamil Nadu"]
+    assert in_location(Contact(name="x", country="NZ"), "NZ") and not in_location(Contact(name="x", country="AU"), "NZ")
+
+
+def test_a_size_limit_in_an_also_clause_is_not_applied_to_everyone():
+    from brain.intake import size_from_text
+
+    text = "small installers in Kerala, and also large EPC firms with over 500 employees"
+    assert size_from_text(text) == (None, None)

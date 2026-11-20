@@ -98,6 +98,13 @@ Rules:
 - criteria are qualities of a GOOD target beyond the topic, each with the SIGNAL that would prove it. Never make a
   criterion of a location (that is "locations") or a job title / role (that is "persona.roles"). Never use warm_path
   (it comes only from the user's imported contacts) and use uses_tech only when the user named a technology.
+- A request that does not say WHO should be contacted or WHAT is wanted from them ("people to talk to about my startup")
+  is too vague to search on. Do not invent a target group (investors, mentors, customers). Use playbook "general", set
+  playbook_confidence at most 0.3, keep topics to what the user actually said, say in "assumptions" that the request was
+  too vague, and put the two questions that would resolve it first in "questions".
+- When two constraints in the request conflict ("not distributors" and "also large EPC firms"; "only Germany" and
+  "also Italy"), keep both visible: apply the one stated first, list the other under "assumptions" as set aside, and
+  ask which the user means in "questions". Never drop either silently.
 - Topics are WHAT THE TARGET ORGANISATIONS OR PEOPLE ARE OR DO — never the sender's event, product or the role sought.
   Sponsors of a tech fest: the industries that sponsor such events ("developer tools", "edtech", "cloud platforms"),
   not "tech fests" or "hackathon sponsorship". A job search at AI startups: "AI startups", "machine learning
@@ -416,15 +423,24 @@ _SIZE_UNDER = re.compile(r"\b(?:under|fewer than|less than|below|at most|<)\s*(\
 
 def size_from_text(text: str) -> tuple:
     """(size_min, size_max) in employees when the request states them in words. The model leaves these out often
-    enough (a stage-judge run dropped "50 to 500 employees") that a plain pattern backs it up."""
+    enough (a stage-judge run dropped "50 to 500 employees") that a plain pattern backs it up. A limit that sits in
+    an "also ..." clause belongs to another kind of target ("small installers ... and also large EPC firms with over
+    500 employees"), so it is not applied to the whole campaign."""
     def num(x: str) -> int:
         return int(x.replace(",", ""))
 
-    m = _SIZE_RANGE.search(text or "")
-    if m:
+    text = text or ""
+
+    def clause_ok(m: "re.Match[str]") -> bool:
+        return not re.search(r"\b(also|plus|as well as|but|except)\b", text[max(0, m.start() - 60):m.start()], re.I)
+
+    m = _SIZE_RANGE.search(text)
+    if m and clause_ok(m):
         lo, hi = sorted((num(m.group(1)), num(m.group(2))))
         return lo, hi
-    over, under = _SIZE_OVER.search(text or ""), _SIZE_UNDER.search(text or "")
+    over, under = _SIZE_OVER.search(text), _SIZE_UNDER.search(text)
+    over = over if over and clause_ok(over) else None
+    under = under if under and clause_ok(under) else None
     return (num(over.group(1)) if over else None, num(under.group(1)) if under else None)
 
 

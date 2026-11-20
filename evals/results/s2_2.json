@@ -1,0 +1,1095 @@
+{
+  "label": "s2_2",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 335,
+      "qualified": 219,
+      "reachable": 10,
+      "passed_judge": 2,
+      "shortlisted": 2,
+      "good@K": 2,
+      "precision@K": 0.2,
+      "good_reachable@K": 2,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 1,
+        "inbox": 1
+      },
+      "mean_score": 0.745,
+      "distinct_orgs": 2,
+      "proof_rate": 0.5,
+      "personal_email_rate": 0.5,
+      "search_calls": 36,
+      "llm_paid_calls": 24,
+      "llm_usd": 0.0207,
+      "pages_fetched": 256,
+      "seconds": 560.0,
+      "usd_per_good": 0.0283,
+      "llm_by_purpose": {
+        "intake": 1,
+        "prejudge": 10,
+        "judge": 3,
+        "triage": 2,
+        "extract_orgs": 1,
+        "draft": 2,
+        "verify": 2,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "openalex": 300,
+        "orgs": 36
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 2 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "openalex": 299,
+          "web": 6,
+          "orgs": 36,
+          "list": 30
+        },
+        "qualified": {
+          "openalex": 183,
+          "web": 6,
+          "orgs": 36,
+          "list": 30
+        },
+        "enriched": {
+          "openalex": 85
+        },
+        "reachable": {
+          "openalex": 10,
+          "web": 3,
+          "orgs": 3
+        },
+        "passed_judge": {
+          "openalex": 1,
+          "web": 1,
+          "orgs": 1
+        },
+        "shortlisted": {
+          "openalex": 1,
+          "web": 1,
+          "orgs": 1
+        }
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 35.57,
+          "found": 300,
+          "new": 300,
+          "qualified": 300
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Jonathan Daniel Stallings",
+          "org": "Stanford Medicine",
+          "email": "jdstallings@dataindeed.org",
+          "score": 0.7533,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Involved in FDA-cleared AI medical device"
+          ]
+        },
+        {
+          "name": "Operon Strategist",
+          "org": "Operon Strategist",
+          "email": "enquiry@operonstrategist.com",
+          "score": 0.7367,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Expertise in medical device regulatory affairs and CDSCO, FDA compliance"
+          ]
+        }
+      ],
+      "intake_playbook": "advisors",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "medical device regulatory approval",
+        "Class II medical devices",
+        "CDSCO approval",
+        "FDA approval"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 2,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "unsupported claim",
+            2
+          ]
+        ],
+        "avg_specificity": 4.5,
+        "avg_relevance": 4.5,
+        "avg_ask": 4.5,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.5,
+        "critiques": [
+          "Clarify how your device relates to his expertise.",
+          "Make the ask more concise and direct."
+        ]
+      },
+      "emails": [
+        {
+          "to": "jdstallings@dataindeed.org",
+          "subject": "Request for mentorship on medical device approval",
+          "body": "Hi Jonathan,\n\nI am developing a low-cost portable ECG device currently in pilots at three hospitals. I am looking for guidance on navigating Class II medical device regulatory approvals with the FDA or CDSCO.\n\nYour work on the FDA-cleared AI-enabled software for assessing hemorrhage risk in trauma casualties stood out to me given its regulatory context. While my device differs, your experience with FDA clearance processes is valuable.\n\nWould you be open to a brief call to share any insights or advice on regulatory pathways for a medtech startup? A short conversation would be greatly appreciated.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Your work on the FDA-cleared AI-enabled software for assessing hemorrhage risk in trauma casualties stood out to me given its regulatory context."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how your device relates to his expertise."
+          }
+        },
+        {
+          "to": "enquiry@operonstrategist.com",
+          "subject": "Request for regulatory advice on ECG device",
+          "body": "Hello Operon Strategist team,\n\nI am developing a low-cost portable ECG device currently in pilots at three hospitals. We are preparing to navigate regulatory approval for Class II medical devices under CDSCO and FDA.\n\nYour firm\u2019s expertise in medical device regulatory affairs, including CDSCO registration and FDA compliance, fits the guidance we need. While I do not have direct experience with regulatory approvals, I am leading this device development and pilot deployment.\n\nCould you connect me with experts who have taken Class II medical devices through CDSCO or FDA approval? This would help ensure our device meets certification standards and supports our approval process.\n\nPlease point me to whoever handles this or advise on the best way to engage your advisory resources.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: While I do not have direct experience with regulatory approvals."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more concise and direct."
+          }
+        }
+      ],
+      "name": "s2_advisors_medtech",
+      "split": "stress",
+      "playbook": "advisors",
+      "target": 10
+    },
+    {
+      "unique": 94,
+      "qualified": 83,
+      "reachable": 10,
+      "passed_judge": 8,
+      "shortlisted": 8,
+      "good@K": 6,
+      "precision@K": 0.6,
+      "good_reachable@K": 5,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 7,
+        "guess": 1
+      },
+      "mean_score": 0.77,
+      "distinct_orgs": 8,
+      "proof_rate": 0.875,
+      "personal_email_rate": 0.125,
+      "search_calls": 33,
+      "llm_paid_calls": 48,
+      "llm_usd": 0.0274,
+      "pages_fetched": 230,
+      "seconds": 466.9,
+      "usd_per_good": 0.0099,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 11,
+        "extract_orgs": 10,
+        "prejudge": 6,
+        "judge": 3,
+        "draft": 8,
+        "verify": 3,
+        "draft_fix": 4
+      },
+      "by_source": {
+        "orgs": 76,
+        "events": 17,
+        "news": 12
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 8 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 26,
+          "orgs": 66,
+          "events": 17,
+          "list": 40,
+          "news": 12
+        },
+        "qualified": {
+          "web": 26,
+          "orgs": 55,
+          "list": 29,
+          "events": 11,
+          "news": 9
+        },
+        "enriched": {
+          "web": 19,
+          "orgs": 26,
+          "list": 7,
+          "events": 3
+        },
+        "reachable": {
+          "web": 7,
+          "orgs": 11,
+          "list": 4,
+          "events": 1
+        },
+        "passed_judge": {
+          "web": 6,
+          "orgs": 8,
+          "list": 2
+        },
+        "shortlisted": {
+          "web": 6,
+          "orgs": 8,
+          "list": 2
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 2,
+          "search_calls": 11,
+          "fetches": 18,
+          "llm_calls": 18,
+          "seconds": 69.13,
+          "found": 38,
+          "new": 32,
+          "qualified": 29
+        },
+        "events": {
+          "runs": 2,
+          "search_calls": 6,
+          "fetches": 16,
+          "llm_calls": 0,
+          "seconds": 27.52,
+          "found": 17,
+          "new": 17,
+          "qualified": 16
+        },
+        "news": {
+          "runs": 1,
+          "search_calls": 3,
+          "fetches": 29,
+          "llm_calls": 0,
+          "seconds": 10.86,
+          "found": 12,
+          "new": 12,
+          "qualified": 5
+        }
+      },
+      "shortlist": [
+        {
+          "name": "iTNT Hub",
+          "org": "iTNT Hub",
+          "email": "tnthub@tn.gov.in",
+          "score": 0.9042,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Tamil Nadu government-backed hardware accelerator and innovation challenges"
+          ]
+        },
+        {
+          "name": "Startup Grants India",
+          "org": "Startup Grants India",
+          "email": "team@startupgrantsindia.com",
+          "score": 0.8373,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Offers free accelerator for early-stage startups in India"
+          ]
+        },
+        {
+          "name": "TheIncubatorPro",
+          "org": "TheIncubatorPro",
+          "email": "hello@theincubatorpro.com",
+          "score": 0.8126,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Platform lists hardware accelerators, pitch competitions, grants in India"
+          ]
+        },
+        {
+          "name": "India In-Depth",
+          "org": "Pitch Karo India",
+          "email": "pitchkaroindia.com@gmail.com",
+          "score": 0.8,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Organises Pitch Karo India 2026, a nationwide pitch contest for startups"
+          ]
+        },
+        {
+          "name": "Marwari Catalysts",
+          "org": "Marwari Catalysts",
+          "email": "office@marwaricatalysts.com",
+          "score": 0.7388,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "India-based startup accelerator supporting early-stage startups"
+          ]
+        },
+        {
+          "name": "Venture Catalysts++",
+          "org": "Venture Catalysts++",
+          "email": "info@venturecatalysts.in",
+          "score": 0.7388,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "India-based integrated incubator offering funding and mentorship"
+          ]
+        },
+        {
+          "name": "iDEX",
+          "org": "iDEX",
+          "email": "mdfitt@gmail.com",
+          "score": 0.6843,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Runs Defence India Startup Challenge supporting startups with prototypes"
+          ]
+        },
+        {
+          "name": "nasscom",
+          "org": "nasscom",
+          "email": "info@nasscom.in",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Nasscom runs awards recognizing IT innovation, not hardware startup competitions"
+          ]
+        }
+      ],
+      "intake_playbook": "awards_cfps",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "hardware startup competitions",
+        "early-stage startup awards",
+        "hardware innovation challenges",
+        "startup accelerators",
+        "technology innovation awards"
+      ],
+      "intake_ask_type": "apply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 8,
+        "pass_rate": 0.875,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ]
+        ],
+        "avg_specificity": 5.0,
+        "avg_relevance": 5.0,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": []
+      },
+      "emails": [
+        {
+          "to": "tnthub@tn.gov.in",
+          "subject": "Seeking hardware startup challenges in Tamil Nadu",
+          "body": "Hello iTNT Hub team,\n\nI am the founder of a pre-seed hardware startup developing low-cost air quality sensors, with a prototype deployed in 20 schools.\n\nI see that iTNT Hub supports Tamil Nadu hardware startups through your Hardware Accelerator for Prototype and Product, and hosts Innovation Challenges with government and industry partners. I am exploring competitions, challenges, or awards that early-stage hardware startups like mine can apply to in India or globally.\n\nCould you provide information or introductions to relevant opportunities suitable for startups at my stage? Any guidance on how to engage with your accelerator or innovation challenges would also be appreciated.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "team@startupgrantsindia.com",
+          "subject": "Competitions for early-stage hardware startups",
+          "body": "Hello Startup Grants India team,\n\nI am the founder of a pre-seed hardware startup developing low-cost air quality sensors, with a prototype currently deployed in 20 schools.\n\nI am exploring relevant competitions, challenges, or awards that support early-stage hardware startups, particularly those based in India or open globally. Your platform\u2019s extensive database of over 7,000 programmes filtered by sector and stage seems like a valuable resource for this.\n\nCould you provide information or introductions to competitions, challenges, or awards suitable for early-stage hardware startups like mine? This would help us identify opportunities to accelerate our development and gain support.\n\nPlease point me to any relevant programmes or contacts within your network who handle these opportunities.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@theincubatorpro.com",
+          "subject": "Competitions for early-stage hardware startups",
+          "body": "Hello TheIncubatorPro team,\n\nI am working on a pre-seed hardware startup developing low-cost air quality sensors, with a prototype deployed in 20 schools.\n\nGiven TheIncubatorPro\u2019s focus on hardware accelerators, pitch competitions, and grants for hardware-first startups in India, I am reaching out to learn about relevant competitions, challenges, or awards that early-stage hardware startups like mine could apply to.\n\nCould you provide information or introductions to such opportunities? Please point me to the right resources or contacts within your network who handle these programs.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "pitchkaroindia.com@gmail.com",
+          "subject": "Pitch Karo India and hardware startups",
+          "body": "Hi India,\n\nI am the founder of a pre-seed hardware startup building low-cost air quality sensors, with a prototype deployed in 20 schools.\n\nI understand Pitch Karo India 2026 is a nationwide idea and pitch contest aimed at startups up to 10 years old. I am seeking competitions, challenges, or awards suitable for early-stage hardware startups like mine, particularly in India but also globally.\n\nCould you provide information or introductions to relevant contests or funding programmes that would fit my startup's stage and sector?\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "office@marwaricatalysts.com",
+          "subject": "Seeking hardware startup awards in India",
+          "body": "Hello Marwari Catalysts team,\n\nI am the founder of a pre-seed hardware startup developing low-cost air quality sensors. We have deployed a prototype in 20 schools and are now looking to identify competitions, challenges, or awards suitable for early-stage hardware startups.\n\nGiven Marwari Catalysts' role as a founder-first startup accelerator and venture studio backing over 200 startups in Tier 2 and 3 cities in India, I thought your team might have insights into relevant opportunities for startups like ours. We are particularly interested in programs that support hardware innovation at the early stage.\n\nCould you provide information or introductions to competitions, challenges, or awards that we could apply to? Please point me to whoever handles this if needed.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@venturecatalysts.in",
+          "subject": "Opportunities for hardware startups at Venture Catalysts",
+          "body": "Hello Venture Catalysts++ team,\n\nI am the founder of a pre-seed hardware startup developing low-cost air quality sensors. We have deployed a prototype in 20 schools and are looking to expand our reach and impact.\n\nI understand Venture Catalysts++ offers capital, mentorship, and market networks that help startups grow faster. Given your support for early-stage startups, I am seeking information on competitions, challenges, or awards that are suitable for hardware startups like ours, either in India or globally.\n\nCould you provide details or introductions to relevant programs where we might apply? This would help us identify opportunities for funding and mentorship aligned with our current stage.\n\nPlease let me know if you can point me to such competitions or awards, or to the appropriate team member who handles these opportunities.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "mdfitt@gmail.com",
+          "subject": "Seeking hardware startup challenges in India",
+          "body": "Hello iDEX team,\n\nI am the founder of a pre-seed hardware startup developing low-cost air quality sensors, with a prototype deployed in 20 schools.\n\nI understand iDEX runs the Defence India Startup Challenge to support startups creating prototypes and commercializing solutions. I am looking for competitions or awards suitable for early-stage hardware startups in India or globally.\n\nCould you provide information or introductions to relevant competitions, challenges, or awards for startups at our stage? Any guidance on eligibility or application processes would be appreciated.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@nasscom.in",
+          "subject": "Competitions for early-stage hardware startups",
+          "body": "Hello nasscom team,\n\nI am the founder of a pre-seed hardware startup developing low-cost air quality sensors, with a prototype deployed in 20 schools.\n\nI understand Nasscom organizes awards recognizing enterprises for innovative use of IT to meet business objectives. I am seeking information on competitions, challenges, or awards suitable for early-stage hardware startups in India or globally.\n\nCould you provide information or introductions to relevant competitions or awards that my startup could apply to? If this falls outside your scope, could you please point me to whoever handles such inquiries?\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Nasscom organizes awards recognizing enterprises for innovative use of IT to meet business objectives."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ],
+      "name": "s2_awards_hardware",
+      "split": "stress",
+      "playbook": "awards_cfps",
+      "target": 10
+    },
+    {
+      "unique": 158,
+      "qualified": 158,
+      "reachable": 17,
+      "passed_judge": 8,
+      "shortlisted": 8,
+      "good@K": 2,
+      "precision@K": 0.167,
+      "good_reachable@K": 2,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 2,
+        "inbox": 6
+      },
+      "mean_score": 0.691,
+      "distinct_orgs": 8,
+      "proof_rate": 0.875,
+      "personal_email_rate": 0.25,
+      "search_calls": 44,
+      "llm_paid_calls": 42,
+      "llm_usd": 0.0322,
+      "pages_fetched": 230,
+      "seconds": 481.8,
+      "usd_per_good": 0.0377,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 4,
+        "extract_orgs": 8,
+        "prejudge": 9,
+        "judge": 3,
+        "draft": 15
+      },
+      "by_source": {
+        "podcasts": 22,
+        "events": 64,
+        "orgs": 82,
+        "lookalike": 0
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 8 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "podcasts": 21,
+          "events": 64,
+          "orgs": 82,
+          "web": 15,
+          "list": 58
+        },
+        "qualified": {
+          "web": 15,
+          "orgs": 82,
+          "list": 58,
+          "podcasts": 21,
+          "events": 64
+        },
+        "enriched": {
+          "list": 54,
+          "orgs": 65,
+          "web": 8,
+          "events": 4,
+          "podcasts": 1
+        },
+        "reachable": {
+          "list": 13,
+          "orgs": 16,
+          "web": 2,
+          "podcasts": 1,
+          "events": 1
+        },
+        "passed_judge": {
+          "list": 8,
+          "orgs": 8
+        },
+        "shortlisted": {
+          "list": 8,
+          "orgs": 8
+        }
+      },
+      "ledger": {
+        "podcasts": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 35,
+          "llm_calls": 0,
+          "seconds": 15.81,
+          "found": 22,
+          "new": 22,
+          "qualified": 14
+        },
+        "events": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 14,
+          "llm_calls": 0,
+          "seconds": 21.79,
+          "found": 64,
+          "new": 64,
+          "qualified": 35
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 8,
+          "llm_calls": 12,
+          "seconds": 78.26,
+          "found": 82,
+          "new": 73,
+          "qualified": 68
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Holiday Packages",
+          "org": "EaseMyTrip",
+          "email": "holidays@easemytrip.com",
+          "score": 0.8,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Indian travel booking platform"
+          ]
+        },
+        {
+          "name": "Gift Cards",
+          "org": "Thomas Cook",
+          "email": "travelcards@thomascook.in",
+          "score": 0.75,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Indian travel booking platform"
+          ]
+        },
+        {
+          "name": "Myhaulstore",
+          "org": "Myhaulstore",
+          "email": "contact@myhaulstore.com",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Influencer marketing company in India connecting YouTube influencers"
+          ]
+        },
+        {
+          "name": "Zapplr Media",
+          "org": "Zapplr Media",
+          "email": "contact@zapplrmedia.com",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "South India's largest creator business with 50,000+ influencers"
+          ]
+        },
+        {
+          "name": "Confluencr",
+          "org": "Confluencr",
+          "email": "hello@confluencr.com",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "India's largest influencer marketing agency with travel focus"
+          ]
+        },
+        {
+          "name": "CarryPro",
+          "org": "CarryPro",
+          "email": "hello@carrypro.in",
+          "score": 0.6402,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Indian travel backpack brand fits travel gear topic"
+          ]
+        },
+        {
+          "name": "Tripole Gears Private Limited",
+          "org": "Tripole Gears Private Limited",
+          "email": "rohan@tripole.in",
+          "score": 0.6354,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Indian outdoor gear brand for trekkers and travellers"
+          ]
+        },
+        {
+          "name": "adventrasports",
+          "org": "adventrasports",
+          "email": "care@adventrasports.in",
+          "score": 0.6354,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Indian hiking and trekking gear brand"
+          ]
+        }
+      ],
+      "intake_playbook": "brand_deals",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "travel brands",
+        "backpacking brands",
+        "booking platforms",
+        "travel sponsorships"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 8,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            8
+          ],
+          [
+            "states a number not found in the source facts",
+            5
+          ]
+        ],
+        "avg_specificity": 4.88,
+        "avg_relevance": 4.88,
+        "avg_ask": 4.88,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.75,
+        "critiques": [
+          "Make the ask more direct and focused.",
+          "Remove offer to provide analytics; keep it simple."
+        ]
+      },
+      "emails": [
+        {
+          "to": "holidays@easemytrip.com",
+          "subject": "Sponsorship opportunity with budget travel channel",
+          "body": "Hi Holiday,\n\nI run a budget travel YouTube channel with 85,000 subscribers, with 40% of viewers aged 18 to 24.\n\nYour platform, EaseMyTrip, offers bookings for flights, hotels, trains, buses, and holidays, which fits well with my content focused on affordable travel.\n\nWould you be interested in sponsoring my channel to reach a young, engaged audience interested in budget travel? I\u2019m happy to discuss details and packages that work for you.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "states a number not found in the source facts: 000",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "travelcards@thomascook.in",
+          "subject": "Sponsorship opportunity with budget travel channel",
+          "body": "Hi Gift,\n\nI run a budget travel YouTube channel with 85,000 subscribers, 40% of whom are aged 18-24. My audience is engaged with affordable travel content.\n\nThomas Cook offers customized travel packages and is a leading travel booking platform in India. I believe sponsoring my channel could connect your brand with young, budget-conscious travelers.\n\nWould you be interested in sponsoring my channel to reach this audience? I\u2019d be glad to share more details and discuss potential collaboration.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "states a number not found in the source facts: 000",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@myhaulstore.com",
+          "subject": "Influencer marketing with a travel channel",
+          "body": "Hello Myhaulstore team,\n\nMy Haul Store connects brands with popular Instagram and YouTube influencers across India, including travel creators.\n\nI run a budget travel YouTube channel with 85,000 subscribers. Forty percent of my viewers are aged 18 to 24, providing targeted access to young travel enthusiasts.\n\nI am seeking sponsorship deals from travel, backpacking, and booking brands in India to promote through my channel. Would you be interested in sponsoring my channel to reach this engaged audience?\n\nPlease let me know if you handle sponsorships or brand collaborations, or could connect me with the appropriate person.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "states a number not found in the source facts: 000",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more direct and focused."
+          }
+        },
+        {
+          "to": "contact@zapplrmedia.com",
+          "subject": "Partner with a budget travel creator in South India",
+          "body": "Hello Zapplr Media team,\n\nI manage a budget travel YouTube channel with 85,000 subscribers, 40% of whom are aged 18-24. This audience is highly engaged and interested in travel content.\n\nZapplr Media\u2019s position as South India's largest creator business with over 50,000 influencers makes you an ideal partner to help connect my channel with relevant travel, backpacking, and booking brands in India.\n\nWould you be interested in sponsoring my channel to reach a young, engaged travel audience? Please let me know if you handle sponsorships or could connect me with the appropriate contact.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@confluencr.com",
+          "subject": "Sponsorship opportunity for your travel brands",
+          "body": "Hello Confluencr team,\n\nI run a budget travel YouTube channel with 85,000 subscribers. About 40% of my viewers are aged 18-24, a key demographic for travel brands.\n\nConfluencr is known as India's largest influencer marketing agency with a focus on travel campaigns. I believe my channel could offer targeted reach to young, engaged travel enthusiasts.\n\nWould you be interested in sponsoring my budget travel channel to promote your travel, backpacking, or booking clients? Please let me know or connect me with the person handling sponsorships or brand collaborations.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "states a number not found in the source facts: 000",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@carrypro.in",
+          "subject": "Reach young travelers with CarryPro gear",
+          "body": "Hello CarryPro team,\n\nI run a budget travel YouTube channel with 85k subscribers, 40% aged 18-24. My content targets young travelers interested in affordable travel options.\n\nCarryPro\u2019s premium travel backpacks and accessories handcrafted in India fit well with my audience\u2019s interests. I am interested in sponsorship deals to feature your products in my videos.\n\nWould you be interested in sponsoring my channel to reach this engaged young audience? Please connect me with the person who handles sponsorships or brand collaborations at CarryPro.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "rohan@tripole.in",
+          "subject": "Reach young Indian trekkers via YouTube",
+          "body": "Hello Tripole Gears Private Limited team,\n\nTripole Gears serves India\u2019s trekkers and travellers with outdoor gear. My YouTube channel focuses on budget travel and has 85,000 subscribers, with 40% aged 18-24.\n\nThis audience includes young travellers who may be interested in trekking gear like yours. I am seeking sponsorships from brands like Tripole Gears to promote relevant products.\n\nWould you be interested in sponsoring my channel to reach this engaged, young travel audience? I can provide more details on viewer engagement if you want to discuss further.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "states a number not found in the source facts: 000",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "care@adventrasports.in",
+          "subject": "Partner with a travel channel for your gear",
+          "body": "Hello adventrasports team,\n\nI run a budget travel YouTube channel with 85k subscribers, 40% aged 18-24, many interested in affordable adventure travel.\n\nAdventra Sports offers premium hiking and trekking gear in India. My audience could be a good match for your products, reaching young travelers exploring hiking and camping.\n\nWould you be interested in sponsoring my channel to connect with this engaged, travel-focused audience? I can provide channel analytics and discuss sponsorship options at your convenience.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Remove offer to provide analytics; keep it simple."
+          }
+        }
+      ],
+      "name": "s2_brand_deals_travel",
+      "split": "stress",
+      "playbook": "brand_deals",
+      "target": 12
+    },
+    {
+      "unique": 0,
+      "qualified": 0,
+      "reachable": 0,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 15,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0028,
+      "pages_fetched": 0,
+      "seconds": 3.9,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "replan_search": 1
+      },
+      "by_source": {
+        "places": 0,
+        "orgs": 0
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Discovery found nobody. Broaden the topics or locations."
+      ],
+      "source_funnel": {
+        "unique": {}
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 10,
+          "fetches": 0,
+          "llm_calls": 1,
+          "seconds": 3.41,
+          "found": 0,
+          "new": 0,
+          "qualified": 0
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.43,
+          "found": 0,
+          "new": 0,
+          "qualified": 0
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "suppliers",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Tamil Nadu",
+        "Gujarat",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "organic cotton fabric suppliers",
+        "GOTS-certified textile manufacturers",
+        "fabric suppliers in Tamil Nadu",
+        "fabric suppliers in Gujarat"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "name": "s2_suppliers_cotton",
+      "split": "stress",
+      "playbook": "suppliers",
+      "target": 12
+    }
+  ],
+  "summary": {
+    "scenarios": 4,
+    "failed": 0,
+    "good@K": 10,
+    "good_reachable@K": 9,
+    "good_verified@K": 0,
+    "precision@K": 0.242,
+    "mean_score": 0.551,
+    "distinct_orgs": 18,
+    "proof_rate": 0.562,
+    "reachable": 37,
+    "search_calls": 128,
+    "llm_paid_calls": 116,
+    "llm_usd": 0.0831,
+    "seconds": 1512.6,
+    "intake_playbook_ok": "4/4",
+    "intake_where_ok": "4/4",
+    "drafts": 18,
+    "draft_pass_rate": 0.389,
+    "would_send_rate": 0.833,
+    "usd_per_good": 0.0211,
+    "judge_precision": 0.227,
+    "judge_precision_ci95": [
+      0.128,
+      0.37
+    ],
+    "sendable_precision": 0.205,
+    "verified_precision": 0.0
+  }
+}
