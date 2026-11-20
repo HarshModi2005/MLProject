@@ -178,6 +178,7 @@ class LLM:
             raise LLMError(f"replay(strict): no recorded answer for '{purpose}'")
         system_full = system + "\nRespond with a single valid JSON object and nothing else."
         last_err = ""
+        current_user = user
         for attempt in range(6):  # room for model fallbacks plus one repair attempt
             if self.calls >= self.settings.llm_max_calls:
                 raise LLMBudgetExceeded(
@@ -187,7 +188,7 @@ class LLM:
             self.usage[purpose] += 1
             try:
                 self._reasoning = reasoning
-                raw = self._transport(model, system_full, user, temperature, max_tokens)
+                raw = self._transport(model, system_full, current_user, temperature, max_tokens)
             except (_ModelUnavailable, _RateLimited) as e:
                 self._dead.add(model)
                 nxt = self._pick(tier)
@@ -204,6 +205,9 @@ class LLM:
                 parsed = _extract_json(raw)
             except ValueError as e:
                 last_err = f"{e}: {raw[:200]!r}"
+                # Resending an identical request at temperature 0 fails the same way: show the model its mistake.
+                current_user = (user + f"\n\nYour previous reply could not be parsed as JSON ({e}). It began: "
+                                f"{raw[:300]!r}\nReply again with ONLY the corrected JSON object, no prose, no code fences.")
                 continue
             if use_cache:
                 self.cache.set("llm", key, parsed, ttl=30 * 86400)

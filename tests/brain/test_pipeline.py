@@ -172,7 +172,7 @@ def test_llm_gateway_caches_enforces_budget_and_fails_loudly(tmp_path):
 
     def transport(model, system, user, temperature, max_tokens):
         calls.append(user)
-        return "not json" if user == "bad" else '```json\n{"ok": true}\n```'
+        return "not json" if user.startswith("bad") else '```json\n{"ok": true}\n```'
 
     settings = Settings()
     settings.llm_max_calls = 3
@@ -192,6 +192,18 @@ def test_llm_gateway_caches_enforces_budget_and_fails_loudly(tmp_path):
         raise AssertionError("expected budget error")
     except LLMBudgetExceeded:
         pass
+
+
+def test_llm_parse_failure_is_fed_back_and_repaired():
+    seen = []
+
+    def transport(model, system, user, temperature, max_tokens):
+        seen.append(user)
+        return '{"ok": true}' if "could not be parsed" in user else "Sure! here you go"
+
+    llm = LLM(Settings(), Cache(), transport=transport)
+    assert llm.json(system="s", user="u", purpose="p") == {"ok": True}
+    assert len(seen) == 2 and seen[0] == "u" and "Sure! here you go" in seen[1]
 
 
 def test_spec_is_built_in_one_call(tmp_path):

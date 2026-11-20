@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import logging
 from typing import List
 
 from brain.models import CampaignSpec, stable_id
 from brain.store import Store
+
+log = logging.getLogger("brain.bridge")
 
 
 def export_to_review(store: Store, spec: CampaignSpec, include_flagged: bool = False) -> int:
@@ -26,6 +29,10 @@ def export_to_review(store: Store, spec: CampaignSpec, include_flagged: bool = F
         if r["status"] == "needs_review" and not include_flagged:
             continue
         c = r["contact"]
+        why = store.blocked_reason(c)  # discovery checked this too, but the do-not-contact list may have grown since
+        if why:
+            log.warning("not exporting %s: %s", c.name, why)
+            continue
         pubs: List[Publication] = [Publication(title=e.text, year=e.year, url=e.url)
                                    for e in c.evidence if e.kind == "publication"][:5]
         legacy.save_professor(ProfessorProfile(

@@ -18,3 +18,15 @@ __pycache__/
 # Benchmark recordings and per-run databases (results JSON is kept)
 evals/cache/
 evals/results/run_*/
+
+# Personal data and run artefacts that must not be committed
+outreach.db
+*.db-journal
+run_logs/
+HarshModi.pdf
+main (*).aux
+main (*).log
+main (*).out
+main (*).toc
+main (*).pdf
+hello.txt

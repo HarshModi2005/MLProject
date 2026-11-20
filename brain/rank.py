@@ -43,13 +43,15 @@ def filter_contacts(
     regions = [r.lower() for r in spec.regions]
 
     terms = [t for r in spec.regions for t in region_terms(r)]
+    # Whole-word match: a short place such as "goa" must not hit "goals".
+    term_re = re.compile(r"(?<![a-z0-9])(?:" + "|".join(re.escape(t) for t in terms) + r")(?![a-z0-9])") if terms else None
 
     def in_region(c: Contact) -> bool:
         parts = [c.location_text, c.org]
         if c.kind == "org":  # an organisation's own description usually says where it is
             parts += [c.bio] + [ev.text + " " + (ev.detail or "") for ev in c.evidence[:4]]
         where = " ".join(x for x in parts if x).lower()
-        return any(t in where for t in terms)
+        return bool(term_re and term_re.search(where))
 
     # Organisations whose location is confirmed by a structured source vouch for people found on their sites.
     regional_domains = {registrable_domain(c.org_domain) for c in contacts if c.org_domain and c.location_text and in_region(c)}

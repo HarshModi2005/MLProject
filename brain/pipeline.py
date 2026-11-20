@@ -89,6 +89,20 @@ def count_sources(contacts: List[Contact]) -> Dict[str, int]:
     return out
 
 
+def note_prejudge_agreement(funnel: Dict[str, Any], judged: List[Contact]) -> None:
+    """Pre-judge vs judge on the candidates that got both. Rejected candidates are never judged, so this only sees
+    one side: a high `low_pre_good` (screened low, judged good) means the screen is too strict."""
+    st = funnel.setdefault("prejudge_agreement", {"both": 0, "low_pre_good": 0, "high_pre_bad": 0})
+    for c in judged:
+        if c.prejudge is None or c.score is None:
+            continue
+        st["both"] += 1
+        if c.prejudge < 0.5 and c.score >= 0.7:
+            st["low_pre_good"] += 1
+        if c.prejudge >= 0.7 and c.score < 0.5:
+            st["high_pre_bad"] += 1
+
+
 def note_sources(funnel: Dict[str, Any], stage: str, contacts: List[Contact], add: bool = False) -> None:
     """funnel["source_funnel"][stage][source] = candidates at that stage; shows which sources survive to the end."""
     sf = funnel.setdefault("source_funnel", {})
@@ -288,6 +302,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     def judge_stage(to_judge: List[Contact]) -> List[Contact]:
         n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack)
         funnel["judged"] = funnel.get("judged", 0) + n
+        note_prejudge_agreement(funnel, to_judge)
         passed = [c for c in to_judge if c.score is not None and c.score >= MIN_JUDGED_SCORE]
         for c in to_judge:  # negative feedback for any later search
             if c.score is not None and c.score < MIN_JUDGED_SCORE and c.reasons and len(ctx.rejected_reasons) < 20:

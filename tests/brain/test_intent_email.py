@@ -190,6 +190,7 @@ def test_draft_uses_situation_why_now_and_structured_ask():
 
     spec = _spec(ask_detail=Ask(type="review", text="try our SDK", link="https://cal.com/riya", inbox_text="who handles QA?"),
                  offer=Offer(value_prop="crash reporting SDK that adds 40 KB to an app"))
+    spec.sender = spec.sender.model_copy(update={"postal_address": "1 Main Street, Pune 411001"})
     body = ("QuickClinic is a well-rated medical app on Google Play, and I noticed you are hiring Flutter developers now, "
             "which usually means new releases are coming.\n\nOur SDK adds crash reporting to an app in about 40 KB, so "
             "your team sees the exact line that failed without slowing the app down for patients.\n\n"
@@ -200,6 +201,21 @@ def test_draft_uses_situation_why_now_and_structured_ask():
     assert "WHY NOW: Hiring now: Flutter developer" in prompt and "Link to include: https://cal.com/riya" in prompt
     assert "SITUATION: Writing to the person's own address" in prompt and "STRONGEST FIT: publishes apps" in prompt
     assert d.subject == "Crash reports for QuickClinic" and d.ok, d.issues
+
+
+def test_commercial_draft_without_postal_address_is_flagged():
+    c = _contact(why_now="Hiring now: Flutter developer", sender_ref=1, criteria={"publishes apps": 0.9})
+    body = ("QuickClinic is a well-rated medical app on Google Play, and I noticed you are hiring Flutter developers now, "
+            "which usually means new releases are coming.\n\nOur SDK adds crash reporting to an app in about 40 KB, so "
+            "your team sees the exact line that failed without slowing the app down for patients.\n\n"
+            "Would you try it on QuickClinic for two months?")
+    llm = FakeLLM({"draft": {"subjects": ["Crash reports for QuickClinic"], "body": body}})
+    d = dr.draft_email(c, _spec(), get_playbook("b2b_sales"), llm)
+    assert any("postal address" in i for i in d.issues)
+    spec = _spec()
+    spec.sender = spec.sender.model_copy(update={"postal_address": "1 Main Street, Pune 411001"})
+    d2 = dr.draft_email(c, spec, get_playbook("b2b_sales"), FakeLLM({"draft": {"subjects": ["Crash reports for QuickClinic"], "body": body}}))
+    assert not any("postal address" in i for i in d2.issues) and "1 Main Street" in d2.body
 
 
 # ── step 7: follow-ups ───────────────────────────────────────────────────────
