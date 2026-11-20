@@ -1,0 +1,47 @@
+{
+  "name": "stress_scale_vc_50",
+  "split": "stress",
+  "playbook": "fundraising",
+  "target_count": 50,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Raise a pre-seed round for a B2B SaaS startup",
+    "ask": "A 20-minute call about our pre-seed",
+    "persona": {
+      "description": "Pre-seed and seed investors in India who back B2B SaaS",
+      "roles": [
+        "Partner",
+        "Principal"
+      ],
+      "org_types": [
+        "venture capital fund",
+        "angel network"
+      ]
+    },
+    "topics": [
+      "B2B SaaS",
+      "developer tools",
+      "enterprise software"
+    ],
+    "locations": [
+      "India"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of a B2B SaaS startup",
+    "summary": "Invoice-reconciliation SaaS; 40 paying customers, Rs 25 lakh ARR."
+  },
+  "facts": [
+    "40 paying customers",
+    "Rs 25 lakh ARR"
+  ],
+  "prompt": "raising a pre-seed for an Indian B2B SaaS startup; find as many seed and pre-seed funds and angel networks in India that back B2B SaaS as you can",
+  "playbook_ok": [
+    "fundraising"
+  ],
+  "settings": {
+    "max_search_calls": 200,
+    "llm_max_calls": 500
+  }
+}

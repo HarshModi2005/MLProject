@@ -187,3 +187,71 @@ borderline cases, and calibrate both graders against human labels before using e
 
 Reproduce: `python tools/llm_judge.py --run <label> --drafts evals/results/drafts_<label>.json` (needs `OPENAI_API_KEY`;
 `JUDGE_MODEL` / `JUDGE_BASE_URL` / `JUDGE_API_KEY` change the judge; results are cached, so a rerun is free).
+
+
+---
+
+# Round 2: stress cases and scale (20 Nov, after the fixes above)
+
+New scenarios in `evals/scenarios/stress_*.json` (`--split stress`): 12 harder cases (multi-constraint investors, exclusion
+lists, Spanish outreach, cross-border distributors, a senior hire, PhD positions, hyper-local, podcasts, open-source
+maintainers, municipal IoT) and two large ones (50 investors, 40 clinics). Run with `brain bench --split stress --draft`.
+Judge: `python tools/llm_judge.py --run <label>` (it now reads the drafts the run stored in its own databases).
+**Only part of the set finished** (see "Not run" below); what finished is reported here.
+
+## Scale and infrastructure findings
+
+- **S-01 The default LLM provider cannot be used at scale.** On Groq's on-demand tier the pipeline models hit 8,000 tokens per minute
+  (`gpt-oss-120b`/`gpt-oss-20b`) and 1,000 output tokens per minute (the `qwen` fallback). Two benchmark processes sharing one
+  key throttled each other to a crawl, and org-page extraction, pre-judge and judge batches failed with HTTP 429
+  (some candidates are then silently left out as "unjudged"). I switched the stress runs to OpenAI (`LLM_PROVIDER=openai`).
+  Fix: a per-provider token-bucket in `brain/llm.py` (wait instead of fail), a warning when more than a few batches are lost
+  to rate limits, and a documented minimum tier for production.
+- **S-02 Wall-clock is dominated by fetching, not the model.** Each scenario takes 10-20 minutes with 30-60 searches; ten scenarios
+  in sequence is hours. Bench runs scenarios one after another, so a failure late in the set loses the summary JSON
+  (it is only written at the end). Fix: write the report after every scenario, add `--parallel N` for scenarios.
+- **S-03 Cost is small.** `stress_scale_clinics_40`: 61 searches, 80 LLM calls, $0.068 for 40 targets (good@K 28/40 by the
+  pipeline's own score); `stress_germany_machinery`: 31 searches, 51 calls, $0.030.
+
+## Quality findings (independent judge)
+
+| Scenario | n | judge good / borderline / bad | emails "would send" |
+|---|---|---|---|
+| stress_scale_clinics_40 | 40 | 36 / 3 / 1 | 12/12 (judge's view; lint below disagrees) |
+| stress_germany_machinery | 7 | 2 / 4 / 1 | 3/7 |
+
+### J-01 Organisations greeted by a made-up first name through a shared inbox (fixed)
+`info@omhappyteeth.com` got "Hi OM,", `info@clinicaderm.in` "Hi Clinica,", `contact@jehangiroracare.com` "Hi Jehangir,",
+`info@sorma.net` "Hi Sorma,". The "one-person business under its owner's name" rule fired for any name that looked like
+two or three capitalised words. The judge approved four of these. Fix: never greet an organisation by a person's name when its address is a shared inbox
+(`brain/draft.py` `salutation`). Test: `test_org_named_like_a_person_is_not_greeted_through_a_shared_inbox`.
+
+### J-02 For distribution asks the shared-inbox rule replaced the real ask with a referral request (fixed)
+`stress_germany_machinery`: three of four drafts were judged `ask_misfit`/`ask_unclear`: "Directly ask if they are interested in
+distributing your products, not for referrals." The `org_inbox` situation told the writer the ONE ask is the shared-inbox
+ask ("point me to whoever handles this") when one is set. Now the main ask is made in full and the referral line may only be a closing clause.
+
+### J-03 A website builder is shortlisted as a clinic (fixed)
+`Weebly` (`weebly.com`) with a clinic's Gmail address, judged bad. Site builders and free hosts (weebly, wixsite, wordpress,
+blogspot, business.site, godaddysites, squarespace, linktr.ee …) are now in `AGGREGATOR_DOMAINS` and skipped before judging.
+
+### J-04 Multi-country requests cover only some countries (open)
+`stress_germany_machinery` asked for Germany, Italy and Poland: the shortlist has Italy and Poland and no German company
+(judge: "No German targets"). `stress_scale_clinics_40` asked for Mumbai, Pune and Hyderabad: judge notes "No Hyderabad clinics" in one batch and
+"No Pune clinics" in another. Fix: per-location quotas in the search plan and a coverage line per requested location
+(`coverage` in the funnel reports totals only).
+
+### J-05 Manufacturers and ambiguous organisations still pass distributor asks (open)
+Germany run: UOP S.p.A. (a manufacturer) was shortlisted; four more are "unclear if distributor or manufacturer"
+(Luna Polska, POLTRA, Sorma, Baritools). The competitor gate (I-04) depends on the judge model knowing; evidence of the
+organisation's role (does the site say "distributor", "dealer", "reseller", "authorised") is not extracted. Fix: add a
+`role_in_value_chain` signal from the organisation's own pages and make it a required criterion for distributor/reseller playbooks.
+
+### J-06 Personal Gmail addresses for local clinics tier as `guess` and `inbox` (note)
+Many clinic contacts are a doctor's own Gmail (`drrinkykapoor@gmail.com`). That is plausible for solo practices
+(judge: good), but is the case where "reachable" and "verified" differ most. Keep these out of auto-send until bounce rates by tier are known (`brain outcomes`).
+
+## Not run (and why)
+The 10 complex scenarios and `stress_scale_vc_50` were still running when this was written. Groq throttling cost most of the
+first hour (S-01). Re-run: `LLM_PROVIDER=openai brain bench --split stress --draft --label stress_full`, then
+`python tools/llm_judge.py --run stress_full` and add the findings here.

@@ -113,8 +113,10 @@ def salutation(contact: Contact, pack: Pack) -> str:
         first = dm_name.split() if looks_like_person_name(dm_name) else []  # "At SIM" is not someone to greet
         if first:  # found the right person but only the shared inbox: address them through it
             return f"Hi {_greet_name(first)},"
-        if looks_like_person_name(contact.name):  # a one-person business listed under its owner's name
-            return f"Hi {_greet_name(clean_name(contact.name).split())},"
+        best = contact.best_email
+        shared = bool(best) and (best.method == "inbox" or is_role_address(best.address))
+        if looks_like_person_name(contact.name) and not shared:  # a one-person business listed under its owner's name
+            return f"Hi {_greet_name(clean_name(contact.name).split())},"  # (never through info@: "Hi OM," for "Om Happy Teeth")
         return f"Hello {team_name(contact.name)} team,"
     tokens = clean_name(contact.name).split()
     if not tokens:
@@ -376,8 +378,9 @@ SITUATION_RULES = {
                                  "person: do not comment on the address. Keep ONE ask; you may end it with a short clause "
                                  "such as 'or point me to whoever handles this' — never a second request."),
     "org_inbox": ("The email goes to a shared team inbox: write to the team and make it easy to forward. The ONE ask is "
-                  "the SHARED-INBOX ASK if one is given (to be pointed to the right person), otherwise the main ask — "
-                  "never both."),
+                  "the main ask, in full. You may end with a short clause such as the SHARED-INBOX ASK (or point me to "
+                  "whoever handles this) — never a second request, and never replace the main ask with a request for "
+                  "a referral."),
     "warm_direct": "The sender is already connected to this person (see evidence): mention it once, plainly, first.",
     "warm_intro": ("The sender knows someone at this organisation (see evidence): you may mention that connection once, "
                    "plainly; do not claim they referred or introduced the sender."),

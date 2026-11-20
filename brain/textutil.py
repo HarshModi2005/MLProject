@@ -249,6 +249,9 @@ AGGREGATOR_DOMAINS = {
     "tradeindia.com", "linkedin.com", "facebook.com", "instagram.com", "wikipedia.org", "medium.com", "quora.com",
     "reddit.com", "yourstory.com", "inc42.com", "startupindia.gov.in", "f6s.com", "dealroom.co", "pitchbook.com",
     "cbinsights.com", "betalist.com", "indeed.com", "naukri.com", "ycombinator.com", "themanifest.com",
+    # website builders and free hosts: a page there says nothing about who owns it
+    "weebly.com", "wixsite.com", "wix.com", "wordpress.com", "blogspot.com", "business.site", "godaddysites.com",
+    "squarespace.com", "linktr.ee", "carrd.co", "webflow.io", "myshopify.com", "sites.google.com",
 }
 _AGGREGATOR_NAME = re.compile(r"\b(directory|listings?|marketplace|top \d+|best \d+|list of|rankings?|reviews? of)\b|"
                               r"\btop[\s-]?startups\b", re.I)

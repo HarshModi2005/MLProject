@@ -66,7 +66,8 @@ def test_summary_pools_across_scenarios_and_reports_the_holdout_separately():
 def test_scenarios_are_split_and_the_holdout_is_never_empty_or_mislabelled():
     allsc = bench.load_scenarios()
     dev, hold = bench.load_scenarios(split="dev"), bench.load_scenarios(split="holdout")
-    assert len(allsc) == len(dev) + len(hold) and len(hold) >= 6 and len(dev) >= 10
+    stress = bench.load_scenarios(split="stress")  # complicated and large cases, run on demand (docs/ISSUES.md)
+    assert len(allsc) == len(dev) + len(hold) + len(stress) and len(hold) >= 6 and len(dev) >= 10
     assert {s["name"] for s in dev}.isdisjoint({s["name"] for s in hold})
     from brain.playbooks import get_playbook
 

@@ -1,0 +1,40 @@
+{
+  "name": "stress_journalists_exclusions",
+  "split": "stress",
+  "playbook": "pr_media",
+  "target_count": 20,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Coverage for a data-privacy report on Indian health apps",
+    "ask": "An interview for a story on the report",
+    "persona": {
+      "description": "Technology and health journalists in India covering privacy, excluding Times of India and Hindustan Times",
+      "roles": [
+        "Journalist",
+        "Reporter",
+        "Editor"
+      ]
+    },
+    "topics": [
+      "data privacy",
+      "health apps",
+      "DPDP Act"
+    ],
+    "locations": [
+      "India"
+    ]
+  },
+  "sender": {
+    "name": "Test Researcher",
+    "headline": "Security researcher at a privacy lab",
+    "summary": "Audited 10 Indian health apps and found 8 sharing identifiers with third-party trackers."
+  },
+  "facts": [
+    "8 of 10 health apps leak identifiers",
+    "Audit covered 10 apps"
+  ],
+  "prompt": "we published a report showing 8 of 10 popular Indian health apps leak user data; find journalists in India who cover data privacy or health tech for an interview, but skip anyone at Times of India or Hindustan Times",
+  "playbook_ok": [
+    "pr_media"
+  ]
+}

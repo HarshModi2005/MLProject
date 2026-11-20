@@ -1,0 +1,47 @@
+{
+  "name": "stress_investors_multi",
+  "split": "stress",
+  "playbook": "fundraising",
+  "target_count": 15,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Raise a seed round for a climate-fintech startup",
+    "ask": "A 30-minute intro call about our seed round",
+    "persona": {
+      "description": "Seed-stage climate and fintech investors in India or Southeast Asia, cheque size $100k-$500k, not corporate VCs",
+      "roles": [
+        "Partner",
+        "Principal",
+        "Investor"
+      ],
+      "org_types": [
+        "venture capital fund",
+        "angel network"
+      ]
+    },
+    "topics": [
+      "climate fintech",
+      "carbon markets",
+      "sustainable finance"
+    ],
+    "locations": [
+      "India",
+      "Singapore",
+      "Indonesia"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Co-founder of a climate-fintech startup",
+    "summary": "Platform matching Indian MSMEs with green loans; 1,200 MSMEs onboarded, Rs 9 crore disbursed."
+  },
+  "facts": [
+    "1,200 MSMEs onboarded",
+    "Rs 9 crore in loans disbursed",
+    "Raising a $1.5M seed"
+  ],
+  "prompt": "we're raising a $1.5M seed for a climate-fintech startup that helps Indian MSMEs access green loans; find seed investors in India, Singapore or Indonesia who write $100k-$500k cheques in climate or fintech, but NOT corporate venture arms or accelerators",
+  "playbook_ok": [
+    "fundraising"
+  ]
+}

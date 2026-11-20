@@ -145,3 +145,25 @@ def test_professor_title_only_with_evidence():
     assert salutation(Contact(kind="person", name="Swagatam Das", title="Professor"), pack) == "Dear Professor Das,"
     assert salutation(Contact(kind="person", name="Subhankar Mishra"), pack) == "Dear Subhankar Mishra,"
     assert salutation(Contact(kind="person", name="A B", title="Researcher"), pack) == "Dear Dr. B,"
+
+
+def test_org_named_like_a_person_is_not_greeted_through_a_shared_inbox():
+    pack = get_pack("b2b_sales")
+    org = Contact(kind="org", name="Om Happy Teeth")
+    org.add_email(EmailCandidate(address="info@omhappyteeth.com", confidence=0.7, method="inbox"))
+    assert salutation(org, pack) == "Hello Om Happy Teeth team,"
+    assert salutation(Contact(kind="org", name="Gaurav Singh"), pack) == "Hi Gaurav,"  # no shared inbox: the owner's own
+
+
+def test_site_builders_are_not_organisations():
+    from brain.textutil import is_aggregator
+
+    assert is_aggregator("Weebly", "weebly.com") and is_aggregator("Khoja Dental", "khojadental.com") is False
+    assert is_aggregator("x", "weebly.com")
+
+
+def test_inbox_rule_keeps_the_main_ask():
+    import brain.draft as dr
+
+    rules = [v for v in vars(dr).values() if isinstance(v, dict) and "org_inbox" in v][0]
+    assert "never replace the main ask" in rules["org_inbox"]

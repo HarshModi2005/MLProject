@@ -1,0 +1,46 @@
+{
+  "name": "stress_spanish_universities",
+  "split": "stress",
+  "playbook": "partnerships",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Partner with Latin American universities for a student exchange",
+    "ask": "A 20-minute call about an exchange agreement",
+    "persona": {
+      "description": "International relations offices of universities in Mexico, Colombia and Chile, writing in Spanish",
+      "roles": [
+        "Director of International Relations",
+        "Coordinador"
+      ],
+      "org_types": [
+        "university"
+      ]
+    },
+    "topics": [
+      "student exchange",
+      "international cooperation"
+    ],
+    "locations": [
+      "Mexico",
+      "Colombia",
+      "Chile"
+    ],
+    "language": "Spanish"
+  },
+  "sender": {
+    "name": "Test Director",
+    "headline": "Director of a coding bootcamp",
+    "summary": "Bangalore bootcamp with 400 graduates a year; runs 3-month immersion programs."
+  },
+  "facts": [
+    "400 graduates a year",
+    "3-month immersion programs"
+  ],
+  "prompt": "we run a coding bootcamp in Bangalore and want exchange partnerships with universities in Mexico, Colombia and Chile; find their international relations offices and write in Spanish",
+  "playbook_ok": [
+    "partnerships",
+    "school_outreach",
+    "campus_recruiting"
+  ]
+}

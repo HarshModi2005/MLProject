@@ -105,14 +105,23 @@ def _load(run_dir: Path, name: str):
     db = sqlite3.connect(run_dir / f"{name}.db")
     spec_json, = db.execute("select spec_json from brain_campaigns limit 1").fetchone()
     spec = CampaignSpec.model_validate_json(spec_json)
-    rows = db.execute("select r.contact_id, r.score, r.reasons_json, c.data_json from brain_results r "
-                      "join brain_contacts c on c.id = r.contact_id where r.status = 'shortlisted' "
+    rows = db.execute("select r.contact_id, r.score, r.reasons_json, c.data_json, r.status, r.email, r.subject, r.body "
+                      "from brain_results r join brain_contacts c on c.id = r.contact_id "
+                      "where r.status in ('shortlisted', 'needs_review', 'drafted', 'approved') "
                       "order by r.score desc").fetchall()
-    items = []
-    for cid, score, reasons, data in rows:
+    items, seen, emails = [], set(), {}
+    for cid, score, reasons, data, status, addr, subject, body in rows:
+        if cid in seen:
+            continue
+        seen.add(cid)
+        if len(items) >= max(spec.target_count, 1):
+            continue
         c = Contact.model_validate_json(data)
         c.id = cid
         items.append((c, float(score or 0), json.loads(reasons or "[]")))
+        if body:
+            emails[cid] = {"to": addr or "", "subject": subject or "", "body": body}
+    _load.emails = emails  # drafts the run itself stored
     return spec, items
 
 
@@ -245,10 +254,10 @@ def main() -> int:
                               "sources": c.sources, "pipeline_reason": reasons[:1], **r})
         sc: Dict[str, Any] = {"playbook": spec.pack, "objective": spec.objective, "ask": spec.ask,
                               "prospects": prospects, "list": p.get("list", {})}
-        emails = emails_by_scn.get(name) or []
+        emails = emails_by_scn.get(name) or [dict(e, to=e.get("to") or "") for e in _load.emails.values()]
         if emails:
             by_addr = {(c.best_email.address if c.best_email else ""): c for c, _, _ in items}
-            pairs = [(by_addr[e["to"]], e) for e in emails if e.get("to") in by_addr]
+            pairs = [(by_addr[e["to"]], e) for e in emails if e.get("to") in by_addr][:12]
             if pairs:
                 print(f"{name}: judging {len(pairs)} emails …")
                 g = judge_emails(llm, spec, pairs, by_id)

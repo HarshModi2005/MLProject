@@ -1,0 +1,1190 @@
+{
+  "run": "stress_scale",
+  "judge_model": "gpt-4.1",
+  "scenarios": {
+    "stress_scale_clinics_40": {
+      "playbook": "b2b_sales",
+      "objective": "To sell your WhatsApp appointment-reminder tool to independent dental and skin clinics in the specified cities.",
+      "ask": "To schedule a meeting or call to discuss how your WhatsApp reminder tool can help reduce no-shows at their clinics.",
+      "prospects": [
+        {
+          "id": "3351742959def65f",
+          "name": "OM Happy Teeth",
+          "kind": "org",
+          "title": null,
+          "org": "OM Happy Teeth",
+          "email": "info@omhappyteeth.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Pune, matches target exactly."
+        },
+        {
+          "id": "7848564435d0b364",
+          "name": "smileagain",
+          "kind": "org",
+          "title": null,
+          "org": "smileagain",
+          "email": "info@smileagain.in",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Mumbai offering advanced dentistry"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Mumbai, fits campaign perfectly."
+        },
+        {
+          "id": "9a528a520a5fcbde",
+          "name": "Hasya Dental Care",
+          "kind": "org",
+          "title": null,
+          "org": "Hasya Dental Care",
+          "email": "contact@hasyadentalcare.in",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Hyderabad, matches target and geography."
+        },
+        {
+          "id": "d136c6f741e85093",
+          "name": "Clinica Derm",
+          "kind": "org",
+          "title": null,
+          "org": "Clinica Derm",
+          "email": "info@clinicaderm.in",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent skin clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent skin clinic in Hyderabad, fits campaign exactly."
+        },
+        {
+          "id": "c74c07f851b14f8e",
+          "name": "Sikhi Skin & Hair Clinic",
+          "kind": "org",
+          "title": null,
+          "org": "Sikhi Skin & Hair Clinic",
+          "email": "info@sikhiskinclinic.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent skin clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent skin clinic in Hyderabad, matches target and geography."
+        },
+        {
+          "id": "12da9132cd1441b5",
+          "name": "Jehangir OraCare",
+          "kind": "org",
+          "title": null,
+          "org": "Jehangir OraCare",
+          "email": "contact@jehangiroracare.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Pune, fits campaign perfectly."
+        },
+        {
+          "id": "eb8840d33c244525",
+          "name": "Smile dental -",
+          "kind": "org",
+          "title": null,
+          "org": "Smile dental -",
+          "email": "info@smiledentalandimplantcentre.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Single clinic in Secunderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Secunderabad (Hyderabad), matches target."
+        },
+        {
+          "id": "c0773ba9a45550a8",
+          "name": "Dr. Vora's Dental Care",
+          "kind": "org",
+          "title": null,
+          "org": "Dr. Vora's Dental Care",
+          "email": "contact@drvorasdental.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "orgs",
+            "places"
+          ],
+          "pipeline_reason": [
+            "Single clinic in Mulund (Mumbai)"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Mumbai, fits campaign exactly."
+        },
+        {
+          "id": "3e9488ad8166f0ab",
+          "name": "White Petals Dental Clinic",
+          "kind": "org",
+          "title": null,
+          "org": "White Petals Dental Clinic",
+          "email": "drjunaid.kapadia@gmail.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Likely clinic owner's email",
+          "why": "Independent dental clinic in Mumbai, direct contact for decision-maker."
+        },
+        {
+          "id": "58b64b9c161bc4ec",
+          "name": "Dr. Ankuja Mhaske",
+          "kind": "org",
+          "title": null,
+          "org": "Dr. Ankuja Mhaske",
+          "email": "ankuja.mhaske@gmail.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Skin care clinic in Pune with specialist aesthetic physician"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Likely clinic owner's email",
+          "why": "Independent skin clinic in Pune, direct contact for owner/decision-maker."
+        },
+        {
+          "id": "d2951cfeb4e2132c",
+          "name": "My Skin My Health",
+          "kind": "org",
+          "title": null,
+          "org": "My Skin My Health",
+          "email": "myskinmyhealth@gmail.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "places",
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Dermatology clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic's own email, matches org name",
+          "why": "Independent dermatology clinic in Mumbai, fits target exactly."
+        },
+        {
+          "id": "215a5370f29f7e6d",
+          "name": "Vinaykia Dental Care",
+          "kind": "org",
+          "title": null,
+          "org": "Vinaykia Dental Care",
+          "email": "care@vinaykiadentalcare.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Single clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic domain, matches org",
+          "why": "Independent dental clinic in Pune, direct clinic contact."
+        },
+        {
+          "id": "8457a9363ede4324",
+          "name": "Cosmodental Clinic",
+          "kind": "org",
+          "title": null,
+          "org": "Cosmodental Clinic",
+          "email": "cosmodentalclinicpune@gmail.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Single clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic's own Gmail, matches org",
+          "why": "Independent dental clinic in Pune, direct contact."
+        },
+        {
+          "id": "718f30f5ff9c56ce",
+          "name": "Smile Concepts Multispeciality Clinic",
+          "kind": "org",
+          "title": null,
+          "org": "Smile Concepts Multispeciality Clinic",
+          "email": "smileconceptsdentalclinic@gmail.com",
+          "tier": "inbox",
+          "score": 0.8602,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic's own Gmail, matches org",
+          "why": "Independent dental clinic in Mumbai, direct contact."
+        },
+        {
+          "id": "e8e5a0700ac081c4",
+          "name": "Puneaesthetic",
+          "kind": "org",
+          "title": null,
+          "org": "Puneaesthetic",
+          "email": "puneaesthetics@gmail.com",
+          "tier": "inbox",
+          "score": 0.8504,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dermatology clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic's own Gmail, matches org",
+          "why": "Independent dermatology clinic in Pune, fits target."
+        },
+        {
+          "id": "73b0c2fad62c4df4",
+          "name": "Pratik Chheda",
+          "kind": "person",
+          "title": null,
+          "org": "Procare Dental",
+          "email": "pratik.s.chheda@gmail.com",
+          "tier": "guess",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Mumbai"
+          ],
+          "verdict": "borderline",
+          "fit": 4,
+          "problems": [
+            "weak_evidence"
+          ],
+          "address": "plausible",
+          "address_note": "Likely personal email, matches name/org",
+          "why": "Clinic is a fit, but unclear if this is owner/manager or just a dentist."
+        },
+        {
+          "id": "e9eb1ed38be96e43",
+          "name": "RINKY KAPOOR",
+          "kind": "person",
+          "title": null,
+          "org": "Rinky Kapoor",
+          "email": "drrinkykapoor@gmail.com",
+          "tier": "guess",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Top dermatologist in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Personal/professional Gmail, matches name",
+          "why": "Top dermatologist in Mumbai, likely owner/decision-maker, fits skin clinic target."
+        },
+        {
+          "id": "248b795e2416f86b",
+          "name": "Priti Munde",
+          "kind": "person",
+          "title": "Founder",
+          "org": "Ddspune",
+          "email": "dr.pritimunde@gmail.com",
+          "tier": "guess",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Personal/professional Gmail, matches name",
+          "why": "Founder of independent dental clinic in Pune, ideal decision-maker."
+        },
+        {
+          "id": "073dd3bc74fdcafd",
+          "name": "Dr. Rashmi Shetty",
+          "kind": "org",
+          "title": null,
+          "org": "Dr. Rashmi Shetty",
+          "email": "info@drrashmishetty.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Cosmetic dermatologist and skin clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic info@ address, matches org",
+          "why": "Skin clinic in Mumbai, inbox appropriate for org-level outreach."
+        },
+        {
+          "id": "29c6326c514384bf",
+          "name": "https://thedailyaesthetics.com/",
+          "kind": "org",
+          "title": null,
+          "org": "https://thedailyaesthetics.com/",
+          "email": "info@thedailyaesthetics.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Skin care clinic in Pune matches skin clinic target"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic info@ address, matches org",
+          "why": "Independent skin clinic in Pune, inbox suitable for clinic-level ask."
+        },
+        {
+          "id": "1b7774dcacbaf13e",
+          "name": "V Dentis - Dental Care",
+          "kind": "org",
+          "title": null,
+          "org": "V Dentis - Dental Care",
+          "email": "info@vdentis.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Family focused dental practice in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic info@ address, matches org",
+          "why": "Independent dental clinic in Pune, inbox appropriate for org target."
+        },
+        {
+          "id": "699ff45e33a5f222",
+          "name": "Thedentalspecialists",
+          "kind": "org",
+          "title": null,
+          "org": "Thedentalspecialists",
+          "email": "info@thedentalspecialists.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Single clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic info@ address, matches org",
+          "why": "Single-location dental clinic in Hyderabad, fits target perfectly."
+        },
+        {
+          "id": "ca0e6aac10fe240e",
+          "name": "Diamond Dental Hospital",
+          "kind": "org",
+          "title": null,
+          "org": "Diamond Dental Hospital",
+          "email": "info@thediamonddental.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic info@ address, matches org",
+          "why": "Independent dental clinic in Hyderabad, inbox suitable for org-level outreach."
+        },
+        {
+          "id": "e4dc76de425665b3",
+          "name": "Dentist Pune",
+          "kind": "org",
+          "title": null,
+          "org": "Dentist Pune",
+          "email": "info@dentist-pune.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic info@ address, matches org",
+          "why": "Independent dental clinic in Pune, inbox appropriate for clinic-level ask."
+        },
+        {
+          "id": "516276b09fe66044",
+          "name": "Fab Aesthetics.",
+          "kind": "org",
+          "title": null,
+          "org": "Fab Aesthetics.",
+          "email": "info@fabaesthetics.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Skin clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, matches org.",
+          "why": "Independent skin clinic in Mumbai, matches target exactly."
+        },
+        {
+          "id": "9a3958b30ee0b536",
+          "name": "Acme Dental Lounge",
+          "kind": "org",
+          "title": null,
+          "org": "Acme Dental Lounge",
+          "email": "info@www.acmedental.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox, plausible.",
+          "why": "Independent dental clinic in Pune, fits campaign perfectly."
+        },
+        {
+          "id": "c77cba2057d592d7",
+          "name": "My Smile Dental Clinic",
+          "kind": "org",
+          "title": null,
+          "org": "My Smile Dental Clinic",
+          "email": "info@mysmiledentalclinic.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic inbox, matches org.",
+          "why": "Independent dental clinic in Mumbai, ideal target."
+        },
+        {
+          "id": "8d40a617e89ec8a8",
+          "name": "Weebly",
+          "kind": "org",
+          "title": null,
+          "org": "Weebly",
+          "email": "khojadental@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dental clinic with cosmetic dentist & implantologist"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "address_not_theirs",
+            "wrong_org_type",
+            "weak_evidence"
+          ],
+          "address": "wrong",
+          "address_note": "Email is for khojadental, not Weebly.",
+          "why": "Weebly is a website builder, not a clinic; address mismatch."
+        },
+        {
+          "id": "d2ec8c112e95f96b",
+          "name": "Stmotherteresadentalandcosmeticclinic",
+          "kind": "org",
+          "title": null,
+          "org": "Stmotherteresadentalandcosmeticclinic",
+          "email": "smtmcdhmgr@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic with many reviews"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "wrong_geography",
+            "weak_evidence"
+          ],
+          "address": "inbox",
+          "address_note": "Generic clinic inbox.",
+          "why": "No location evidence; could be outside target cities."
+        },
+        {
+          "id": "7e86b54cecbdecb4",
+          "name": "Synergy Dental Clinic Pune",
+          "kind": "org",
+          "title": null,
+          "org": "Synergy Dental Clinic Pune",
+          "email": "synergydentalclinic05@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic inbox, matches org.",
+          "why": "Independent dental clinic in Pune, fits campaign well."
+        },
+        {
+          "id": "d06f791af165c582",
+          "name": "SkinEthics",
+          "kind": "org",
+          "title": null,
+          "org": "SkinEthics",
+          "email": "skinethicspune@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Leading dermatologist in Pune"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic inbox, matches org.",
+          "why": "Independent skin clinic in Pune, ideal target."
+        },
+        {
+          "id": "732bd82e296d7ec0",
+          "name": "Celestee Clinics",
+          "kind": "org",
+          "title": null,
+          "org": "Celestee Clinics",
+          "email": "celesteecommunications@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Skin clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Clinic inbox, matches org.",
+          "why": "Independent skin clinic in Hyderabad, fits campaign exactly."
+        },
+        {
+          "id": "3ffa1a84f38987b7",
+          "name": "Dr Preethi skin clinic",
+          "kind": "org",
+          "title": null,
+          "org": "Dr Preethi skin clinic",
+          "email": "preethiskinclinics@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Skin clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Generic but matches clinic name",
+          "why": "Independent skin clinic in Hyderabad, matches target exactly."
+        },
+        {
+          "id": "0a56e30d3f5c61a7",
+          "name": "Riyaanz Aesthetic",
+          "kind": "org",
+          "title": null,
+          "org": "Riyaanz Aesthetic",
+          "email": "riyaanzaesthetic@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Skin clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic name matches address",
+          "why": "Independent skin clinic in Hyderabad, fits campaign perfectly."
+        },
+        {
+          "id": "2232731f31121d7c",
+          "name": "Website",
+          "kind": "org",
+          "title": null,
+          "org": "Website",
+          "email": "trisadental@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places",
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic name matches address",
+          "why": "Independent dental clinic in Mumbai, ideal target."
+        },
+        {
+          "id": "59198c0f167d459f",
+          "name": "National Dental Care",
+          "kind": "org",
+          "title": null,
+          "org": "National Dental Care",
+          "email": "hydndc@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic name matches address",
+          "why": "Independent dental clinic in Hyderabad, matches target."
+        },
+        {
+          "id": "051b67c801046ae1",
+          "name": "Dental Expert",
+          "kind": "org",
+          "title": null,
+          "org": "Dental Expert",
+          "email": "dentalexpertclinic@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs",
+            "list"
+          ],
+          "pipeline_reason": [
+            "Independent dental clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic name matches address",
+          "why": "Independent dental clinic in Mumbai, fits campaign."
+        },
+        {
+          "id": "dc7035f2bd2bc2be",
+          "name": "One Health Dental",
+          "kind": "org",
+          "title": null,
+          "org": "One Health Dental",
+          "email": "onehealthdentalclinic@gmail.com",
+          "tier": "inbox",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Mumbai"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Clinic name matches address",
+          "why": "Independent dental clinic in Mumbai, ideal target."
+        },
+        {
+          "id": "5e7ba5013ce78a0f",
+          "name": "Vista Dental Studio",
+          "kind": "org",
+          "title": null,
+          "org": "Vista Dental Studio",
+          "email": "sarannikhil@gmail.com",
+          "tier": "inbox",
+          "score": 0.8015,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dental clinic in Hyderabad"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Likely principal's name, matches clinic",
+          "why": "Independent dental clinic in Hyderabad, fits campaign."
+        },
+        {
+          "id": "d87b9c0f0163ad31",
+          "name": "Charudatta Narke",
+          "kind": "person",
+          "title": null,
+          "org": "Sanjivani Skin Care",
+          "email": "drcharudattasnarke99@gmail.com",
+          "tier": "guess",
+          "score": 0.8,
+          "sources": [
+            "places"
+          ],
+          "pipeline_reason": [
+            "Dermatologist at Sanjivani Skin Care"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "wrong_role_or_seniority",
+            "weak_evidence"
+          ],
+          "address": "plausible",
+          "address_note": "Doctor's name, plausible for clinic owner",
+          "why": "Individual dermatologist, unclear if owner/manager; clinic independence not confirmed."
+        }
+      ],
+      "list": {
+        "coverage": 5.0,
+        "diversity": 5.0,
+        "missing": "No missing types; both dental and skin clinics in all target cities are present. | Hyderabad clinics, more explicit Operations/Clinic Managers, more skin clinics. | None; covers both dental and skin clinics in all target cities. | None; covers both dental and skin clinics in all target cities. | No Pune clinics; all are dental or skin clinics as required.",
+        "systemic_issues": [
+          "No Hyderabad clinics",
+          "Mostly owner/doctor contacts, few managers",
+          "One entry (Weebly) is a misidentified org with wrong address.",
+          "One clinic lacks clear location evidence.",
+          "No Pune representation",
+          "Mostly generic inboxes, not named managers"
+        ]
+      },
+      "emails": [
+        {
+          "id": "3351742959def65f",
+          "to": "info@omhappyteeth.com",
+          "subject": "Reducing no-shows at OM Happy Teeth",
+          "body": "Hi OM,\n\nOM Happy Teeth provides world-class dental treatment in Pimple Saudagar, and maintaining high patient attendance is vital for your practice.\n\nI founded a clinic software startup that helped 12 clinics reduce appointment no-shows by a third using WhatsApp reminders. This simple tool improved patient communication without adding complexity.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss if this solution might help your clinic? I am happy to schedule a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "junk_greeting:OM",
+            "person_greeting_on_role_inbox:OM",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "7848564435d0b364",
+          "to": "info@smileagain.in",
+          "subject": "Reduce no-shows at Smile again dental clinics",
+          "body": "Hello smileagain team,\n\nI see Smile again offers advanced dental care in Dadar west and is listed among the best dental clinics in Mumbai.\n\nI founded a clinic software startup that uses WhatsApp reminders to cut no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your dental practice.\n\nCould you please connect me with the person responsible for clinic operations or patient communications to discuss this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "9a528a520a5fcbde",
+          "to": "contact@hasyadentalcare.in",
+          "subject": "Reduce no-shows at Hasya Dental Care",
+          "body": "Hello Hasya Dental Care team,\n\nHasya Dental Care provides advanced dental treatments in Hyderabad, including Invisalign and dental implants. I founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders.\n\nThis tool might help your team improve patient attendance without adding administrative burden. Could you connect me with the person responsible for clinic operations or patient communications to discuss this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "d136c6f741e85093",
+          "to": "info@clinicaderm.in",
+          "subject": "Reduce No-Shows at Clinica Derm with WhatsApp",
+          "body": "Hi Clinica,\n\nClinica Derm has earned trust from over 2500 clients in Hyderabad with treatments like mole and acne care. Managing appointment no-shows can be a challenge for independent clinics like yours.\n\nI founded a clinic software startup where WhatsApp reminders reduced no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your clinic.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this solution might support your team? I am happy to schedule a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "person_greeting_on_role_inbox:Clinica",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "c74c07f851b14f8e",
+          "to": "info@sikhiskinclinic.com",
+          "subject": "Reducing no-shows at Sikhi Skin & Hair Clinic",
+          "body": "Hello Sikhi Skin & Hair Clinic team,\n\nYour clinic in Kondapur serves many patients seeking skin and hair care with Dr. Ayiswarya Marreddy. Managing patient appointments efficiently is key to maintaining high service levels.\n\nI founded a clinic software startup that implemented WhatsApp reminders, which reduced no-shows by a third across 12 clinics. This approach could support your patient communication and appointment adherence.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might help your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "12da9132cd1441b5",
+          "to": "contact@jehangiroracare.com",
+          "subject": "Reduce no-shows at Jehangir OraCare clinics",
+          "body": "Hi Jehangir,\n\nJehangir OraCare's focus on advanced dental implants and surgeries in Pune highlights your commitment to patient care.\n\nAt my clinic software startup, we implemented WhatsApp reminders that reduced no-shows by a third across 12 clinics. This tool could support your patient communications and appointment adherence.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this might help your team? I am available for a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "person_greeting_on_role_inbox:Jehangir",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "3e9488ad8166f0ab",
+          "to": "drjunaid.kapadia@gmail.com",
+          "subject": "Reduce no-shows at White Petals Dental Clinic",
+          "body": "Hello White Petals Dental Clinic team,\n\nWhite Petals Superspeciality Dental Clinic offers expert dental services in Dongri, Mumbai, which likely involves managing patient appointments closely.\n\nI founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders. This tool could help improve your appointment attendance without adding complexity.\n\nWould you be open to a brief call to discuss how this WhatsApp reminder tool might support your clinic\u2019s scheduling needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "58b64b9c161bc4ec",
+          "to": "ankuja.mhaske@gmail.com",
+          "subject": "WhatsApp reminders for your Pune clinic",
+          "body": "Hi Ankuja,\n\nYour skin care clinic in Pune has a strong reputation and many patient reviews.\n\nI founded a clinic software startup and used WhatsApp reminders to cut no-shows by a third for 12 clinics.\n\nCould we schedule a brief call to discuss if this tool might help reduce missed appointments at your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "73b0c2fad62c4df4",
+          "to": "pratik.s.chheda@gmail.com",
+          "subject": "Cut no-shows at Procare Dental with WhatsApp",
+          "body": "Hi Pratik,\n\nProcare Dental in Mumbai uses state-of-the-art machinery to provide quality dental treatments. I founded a clinic software startup that applied WhatsApp reminders to reduce no-shows by a third across 12 clinics.\n\nThis tool could help your clinic improve appointment attendance without disrupting your current workflow. I\u2019d like to schedule a brief call to discuss how this reminder system might fit your patient communication.\n\nWould you be available for a quick conversation this week to explore this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 3,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "e9eb1ed38be96e43",
+          "to": "drrinkykapoor@gmail.com",
+          "subject": "Reduce appointment no-shows at your skin clinic",
+          "body": "Hi RINKY,\n\nDr. Rinky Kapoor, your expertise in skin, nail, and hair care treatments in Mumbai stands out.\n\nI founded a clinic software startup that implemented WhatsApp reminders and successfully cut no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your clinic.\n\nWould you be open to a brief call to discuss how this reminder system might support your practice? I can share how it works and answer any questions you have.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "248b795e2416f86b",
+          "to": "dr.pritimunde@gmail.com",
+          "subject": "Reduce no-shows at Ddspune with WhatsApp",
+          "body": "Hi Priti,\n\nI see that Ddspune offers high-quality dental care in Pune under your leadership. I founded a clinic software startup that uses WhatsApp reminders to reduce no-shows. For 12 clinics, these reminders cut no-shows by a third.\n\nThis tool might help improve patient attendance at your clinic without adding extra work. Would you be open to a brief call to explore if this fits your needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "073dd3bc74fdcafd",
+          "to": "info@drrashmishetty.com",
+          "subject": "WhatsApp reminders for Dr. Rashmi Shetty Clinic",
+          "body": "Hi Rashmi,\n\nYour skin clinic in Mumbai, led by Dr. Rashmi Shetty, is recognized for cosmetic dermatology.\n\nI founded a clinic software startup that implemented WhatsApp reminders, cutting no-shows by a third across 12 clinics.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might benefit your clinic? I am available for a brief call or meeting at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "pipeline_grade": null,
+          "lint": [
+            "person_greeting_on_role_inbox:Rashmi",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        }
+      ]
+    }
+  },
+  "cost": {
+    "paid_calls": 6,
+    "est_usd": 0.0651
+  }
+}
