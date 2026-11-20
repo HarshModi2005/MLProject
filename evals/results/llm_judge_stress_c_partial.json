@@ -2,26 +2,151 @@
   "run": "stress_c",
   "judge_model": "gpt-4.1",
   "scenarios": {
-    "stress_germany_machinery": {
-      "playbook": "distributors",
-      "objective": "To find and engage distributors in Germany, Italy, and Poland who can distribute the user's carbide CNC cutting tools.",
-      "ask": "Would you be interested in distributing high-quality carbide CNC cutting tools from an established manufacturer in India?",
+    "stress_investors_multi": {
+      "playbook": "fundraising",
+      "objective": "To secure seed investment funding of $1.5M from suitable seed investors in the specified regions and sectors.",
+      "ask": "To get seed investors interested in investing $100k-$500k in the startup's seed round.",
       "prospects": [
         {
-          "id": "cb75bc4f0fd345de",
-          "name": "Luna Polska Sp. z o.o.",
+          "id": "17fac1ca0fcc25b0",
+          "name": "Quona Capital",
           "kind": "org",
           "title": null,
-          "org": "Luna Polska Sp. z o.o.",
-          "email": "info@lunapolska.pl",
+          "org": "Quona Capital",
+          "email": "info@quona.com",
           "tier": "inbox",
-          "score": 0.8259,
+          "score": 0.8372,
           "sources": [
             "list",
+            "portfolio",
             "orgs"
           ],
           "pipeline_reason": [
-            "Leading supplier of hand tools and measuring equipment in Poland"
+            "Invests in fintech innovators advancing financial inclusion"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, appropriate for VC fund.",
+          "why": "Quona Capital is a leading fintech VC active in India and Indonesia, fits sector and geography."
+        },
+        {
+          "id": "d79f27120e7f514d",
+          "name": "Init-6",
+          "kind": "org",
+          "title": null,
+          "org": "Init-6",
+          "email": "info@init-6.fund",
+          "tier": "inbox",
+          "score": 0.788,
+          "sources": [
+            "list",
+            "portfolio",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Focus on fintech and financial services"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Org inbox, fits for VC outreach.",
+          "why": "Init-6 is a Jakarta-based VC focused on fintech, matches sector, stage, and region."
+        },
+        {
+          "id": "9a219a897c5ae061",
+          "name": "Skystar Capital",
+          "kind": "org",
+          "title": null,
+          "org": "Skystar Capital",
+          "email": "contact@skystarcapital.com",
+          "tier": "inbox",
+          "score": 0.788,
+          "sources": [
+            "list",
+            "portfolio"
+          ],
+          "pipeline_reason": [
+            "Focus on FinTech and Financial Services in Indonesia"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Org inbox, suitable for VC approach.",
+          "why": "Skystar Capital is a VC investing in fintech in Indonesia, fits all criteria."
+        },
+        {
+          "id": "4970466eca7110cc",
+          "name": "Venturra",
+          "kind": "org",
+          "title": null,
+          "org": "Venturra",
+          "email": "all@venturra.com",
+          "tier": "inbox",
+          "score": 0.782,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Indonesia-focused early-stage VC"
+          ],
+          "verdict": "borderline",
+          "fit": 4,
+          "problems": [
+            "off_topic",
+            "weak_evidence"
+          ],
+          "address": "inbox",
+          "address_note": "Org-wide address, fine for VC.",
+          "why": "Venturra is early-stage VC in Indonesia, but no clear fintech/climate focus."
+        },
+        {
+          "id": "879f762dac70d512",
+          "name": "Kejorahq",
+          "kind": "org",
+          "title": null,
+          "org": "Kejorahq",
+          "email": "contact@kejorahq.com",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Invests from seed to late-stage in Southeast Asia"
+          ],
+          "verdict": "borderline",
+          "fit": 4,
+          "problems": [
+            "off_topic",
+            "weak_evidence"
+          ],
+          "address": "inbox",
+          "address_note": "Org inbox, standard for VC.",
+          "why": "Kejora invests seed in SE Asia, but sector focus not clearly fintech/climate."
+        },
+        {
+          "id": "a944ac46ee240da0",
+          "name": "NEXEA",
+          "kind": "org",
+          "title": null,
+          "org": "NEXEA",
+          "email": "hello@nexea.co",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "portfolio",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Early stage VC program for tech startups in Indonesia"
           ],
           "verdict": "borderline",
           "fit": 3,
@@ -30,198 +155,56 @@
             "weak_evidence"
           ],
           "address": "inbox",
-          "address_note": "Generic org inbox, plausible",
-          "why": "Focus is on hand tools and measuring equipment, not clearly CNC cutting tools."
+          "address_note": "Org inbox, fits for VC.",
+          "why": "NEXEA is early-stage VC in Indonesia, but sector fit (fintech/climate) is unclear."
         },
         {
-          "id": "50827de13dc64c5a",
-          "name": "Finzoo",
+          "id": "f5fc2fc97c4bdb09",
+          "name": "InvestIdea",
           "kind": "org",
           "title": null,
-          "org": "Finzoo",
-          "email": "fin@finzoo.pl",
+          "org": "InvestIdea",
+          "email": "info@investidea.ventures",
           "tier": "inbox",
-          "score": 0.8196,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Distributor of high-quality cutting tools in Poland"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Org inbox, matches org domain",
-          "why": "Strong evidence of distributing cutting tools, ISO 9001, fits target perfectly."
-        },
-        {
-          "id": "11e3155bf09061f5",
-          "name": "POLTRA",
-          "kind": "org",
-          "title": null,
-          "org": "POLTRA",
-          "email": "poltra@poltra.pl",
-          "tier": "inbox",
-          "score": 0.7358,
+          "score": 0.6402,
           "sources": [
             "list",
-            "orgs"
+            "lookalike"
           ],
           "pipeline_reason": [
-            "Listed as top 25 metal cutting tool distributor in Poland"
+            "Multi-stage investment firm in Indonesia"
           ],
           "verdict": "borderline",
           "fit": 3,
           "problems": [
+            "off_topic",
             "weak_evidence"
           ],
           "address": "inbox",
-          "address_note": "Org inbox, matches org domain",
-          "why": "Listed as distributor but also appears to manufacture; role ambiguity."
-        },
-        {
-          "id": "200e9ce39e822bc3",
-          "name": "utensilline.it",
-          "kind": "org",
-          "title": null,
-          "org": "utensilline.it",
-          "email": "info@utensilline.it",
-          "tier": "inbox",
-          "score": 0.7168,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Distributes tools and industrial equipment in Italy"
-          ],
-          "verdict": "good",
-          "fit": 4,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic org inbox, plausible",
-          "why": "Distributes industrial tools, no evidence of manufacturing, fits ask."
-        },
-        {
-          "id": "d3e6f6b814af858f",
-          "name": "Sorma Spa",
-          "kind": "org",
-          "title": null,
-          "org": "Sorma Spa",
-          "email": "info@sorma.net",
-          "tier": "inbox",
-          "score": 0.6323,
-          "sources": [
-            "list",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Listed as top 25 industrial cutting tool supplier in Italy"
-          ],
-          "verdict": "borderline",
-          "fit": 3,
-          "problems": [
-            "weak_evidence"
-          ],
-          "address": "inbox",
-          "address_note": "Generic org inbox, plausible",
-          "why": "Listed as supplier, unclear if distributor or manufacturer."
-        },
-        {
-          "id": "2b6e80351652642b",
-          "name": "Baritools s.r.l.",
-          "kind": "org",
-          "title": null,
-          "org": "Baritools s.r.l.",
-          "email": "commerciale@baritools.it",
-          "tier": "inbox",
-          "score": 0.6274,
-          "sources": [
-            "list",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Listed as top 25 industrial cutting tool supplier in Italy"
-          ],
-          "verdict": "borderline",
-          "fit": 3,
-          "problems": [
-            "weak_evidence"
-          ],
-          "address": "inbox",
-          "address_note": "Org inbox, matches org domain",
-          "why": "Sells precision tools, unclear if distributor or manufacturer."
-        },
-        {
-          "id": "cab647398ed414e6",
-          "name": "UOP S.p.A.",
-          "kind": "org",
-          "title": null,
-          "org": "UOP S.p.A.",
-          "email": "info@uop.it",
-          "tier": "inbox",
-          "score": 0.6123,
-          "sources": [
-            "list",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Listed as top 25 industrial cutting tool supplier in Italy"
-          ],
-          "verdict": "bad",
-          "fit": 2,
-          "problems": [
-            "wrong_org_type"
-          ],
-          "address": "inbox",
-          "address_note": "Org inbox, matches org domain",
-          "why": "Primarily a manufacturer, not a distributor as required by the ask."
+          "address_note": "Org inbox, plausible for VC.",
+          "why": "InvestIdea is early-stage VC, but sector fit (fintech/climate) not explicit."
         }
       ],
       "list": {
-        "coverage": 3.0,
-        "diversity": 3.0,
-        "missing": "German distributors, more clear-cut non-manufacturing distributors, more decision-maker contacts.",
+        "coverage": 4.0,
+        "diversity": 4.0,
+        "missing": "No clear angel investors or India/Singapore-based funds; all are orgs, not individuals.",
         "systemic_issues": [
-          "Too many orgs with unclear distributor/manufacturer status",
-          "No German targets",
-          "Few direct decision-maker contacts"
+          "Sector focus often unclear",
+          "No direct angel investors",
+          "Few Singapore/India-specific VCs"
         ]
       },
       "emails": [
         {
-          "id": "cb75bc4f0fd345de",
-          "to": "info@lunapolska.pl",
-          "subject": "Rajkot carbide inserts for Luna Polska",
-          "body": "Hello Luna Polska Sp. z o.o. team,\n\nYour listing among the Top 25 metal cutting tool distributors in Poland caught my attention. We are a Rajkot-based manufacturer of carbide inserts, ISO 9001 certified, exporting to 14 countries.\n\nOur products include high-quality carbide CNC cutting tools that might complement your current offering of hand tools, measuring equipment, and metal devices. While we do not manufacture power tools or woodworking machinery, our carbide cutting tools could add value to your metal tool distribution catalogue.\n\nCould you connect me with distributors at Luna Polska who sell industrial cutting tools but are not manufacturers? I would appreciate an introduction to the right person to discuss potential collaboration.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "17fac1ca0fcc25b0",
+          "to": "info@quona.com",
+          "subject": "Seeking seed investors for Indian green loans platform",
+          "body": "Hi David,\n\nQuona Capital's focus on fintech innovators advancing financial inclusion aligns with my work as co-founder of a climate-fintech platform. We match Indian MSMEs with green loans and have onboarded 1,200 MSMEs, disbursing Rs 9 crore.\n\nCurrently, we are raising a $1.5M seed round to scale further. I am looking for seed investors interested in investing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia.\n\nCould you point me to seed investors at Quona Capital who might be interested or to whoever handles this?\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
-          "lint": [],
-          "grounded": 3,
-          "unsupported": [
-            "Your listing among the Top 25 metal cutting tool distributors in Poland caught my attention."
+          "lint": [
+            "placeholder_sender"
           ],
-          "personal": 3,
-          "ask": 2,
-          "tone": 4,
-          "salutation_ok": true,
-          "reply_odds": "low",
-          "would_send": false,
-          "problems": [
-            "unsupported_claim",
-            "ask_misfit",
-            "ask_unclear"
-          ],
-          "fix": "Clarify the recipient's relevance to CNC cutting tools and make a direct, relevant ask about distribution."
-        },
-        {
-          "id": "50827de13dc64c5a",
-          "to": "fin@finzoo.pl",
-          "subject": "Carbide cutting tools for your distribution",
-          "body": "Hello Finzoo team,\n\nFinzoo distributes high-quality cutting tools from global manufacturers like ACHTECK and KARCAN and holds ISO 9001 certification.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We are ISO 9001 certified and export to 14 countries. Our carbide CNC cutting tools may complement your current product range in Poland, Germany, and Italy.\n\nWould you be interested in distributing our products? I can provide samples or arrange a call to discuss details.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [],
           "grounded": 5,
           "unsupported": [],
           "personal": 4,
@@ -231,127 +214,143 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": "No change needed."
+          "fix": ""
         },
         {
-          "id": "11e3155bf09061f5",
-          "to": "poltra@poltra.pl",
-          "subject": "Opportunity to expand your cutting tool range",
-          "body": "Hi Zbigniew,\n\nPOLTRA is listed among the Top 25 metal cutting tool distributors in Poland, which suggests your catalogue includes cutting tools for CNC machining.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We are ISO 9001 certified and currently export to 14 countries. Our focus is on carbide CNC cutting tools produced under strict quality standards.\n\nWould you be interested in distributing our carbide CNC cutting tools in Germany, Italy, or Poland? I can provide samples or discuss terms that support your margin and product range.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [],
-          "grounded": 4,
-          "unsupported": [
-            "which suggests your catalogue includes cutting tools for CNC machining"
-          ],
-          "personal": 3,
-          "ask": 5,
-          "tone": 4,
-          "salutation_ok": true,
-          "reply_odds": "medium",
-          "would_send": true,
-          "problems": [
-            "unsupported_claim"
-          ],
-          "fix": "Remove the assumption about their catalogue and focus on their listed distributor status."
-        },
-        {
-          "id": "200e9ce39e822bc3",
-          "to": "info@utensilline.it",
-          "subject": "Distributing carbide CNC tools in Italy and Europe",
-          "body": "Hello utensilline.it team,\n\nYour team distributes tools, instrumentation, and equipment for machine tools in Italy, including Rivoli. We are a Rajkot-based manufacturer of carbide inserts, ISO 9001 certified, exporting to 14 countries.\n\nWe produce high-quality carbide CNC cutting tools suitable for industrial applications. Our experience exporting to multiple countries shows our capability to meet international standards and demand.\n\nCould you connect me with distributors in Germany, Italy, or Poland who sell industrial cutting tools but are not manufacturers themselves? I would appreciate an introduction to the right contacts in your network.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [],
-          "grounded": 3,
-          "unsupported": [
-            "Could you connect me with distributors in Germany, Italy, or Poland who sell industrial cutting tools but are not manufacturers themselves?"
-          ],
-          "personal": 3,
-          "ask": 2,
-          "tone": 4,
-          "salutation_ok": true,
-          "reply_odds": "low",
-          "would_send": false,
-          "problems": [
-            "ask_unclear",
-            "ask_misfit",
-            "unsupported_claim"
-          ],
-          "fix": "Directly ask if they are interested in distributing your products, not for referrals."
-        },
-        {
-          "id": "d3e6f6b814af858f",
-          "to": "info@sorma.net",
-          "subject": "Potential partnership for cutting tools in Italy",
-          "body": "Hi Sorma,\n\nYour company is listed among the Top 25 industrial cutting tool suppliers in Italy, which suggests a strong presence in the market.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We hold ISO 9001 certification and currently export to 14 countries. Our products include high-quality carbide CNC cutting tools.\n\nWould you be able to connect me with distributors who sell industrial cutting tools but are not manufacturers? I am particularly interested in contacts in Germany, Italy, and Poland who might consider distributing our products.\n\nThank you for forwarding this to the appropriate person on your team if needed.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "d79f27120e7f514d",
+          "to": "info@init-6.fund",
+          "subject": "Seeking seed investors in climate fintech",
+          "body": "Hello Init-6 team,\n\nI co-founded a climate-fintech startup that matches Indian MSMEs with green loans. We have onboarded 1,200 MSMEs and disbursed Rs 9 crore so far.\n\nWe are currently raising a $1.5M seed round and are looking for investors interested in contributing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia. \n\nCould you please point me to seed investors in your network who focus on these sectors and investment sizes, excluding corporate venture arms and accelerators? Your guidance would be very helpful.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
-            "person_greeting_on_role_inbox:Sorma"
+            "placeholder_sender"
           ],
-          "grounded": 3,
-          "unsupported": [
-            "which suggests a strong presence in the market",
-            "Would you be able to connect me with distributors who sell industrial cutting tools but are not manufacturers?"
-          ],
-          "personal": 2,
-          "ask": 2,
-          "tone": 4,
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
           "salutation_ok": true,
-          "reply_odds": "low",
-          "would_send": false,
-          "problems": [
-            "unsupported_claim",
-            "ask_unclear",
-            "ask_misfit",
-            "generic_opening"
-          ],
-          "fix": "Make a direct ask about their own distribution interest, not for referrals."
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
         },
         {
-          "id": "2b6e80351652642b",
-          "to": "commerciale@baritools.it",
-          "subject": "Carbide cutting tools for Baritools s.r.l.",
-          "body": "Hello Baritools s.r.l. team,\n\nBaritools s.r.l. is recognized among Italy's top 25 industrial cutting tool suppliers, specializing in high-precision mechanical tools.\n\nI manage exports at a Rajkot-based manufacturer of carbide inserts, ISO 9001 certified, with experience exporting to 14 countries. We produce carbide CNC cutting tools that may complement your existing product range.\n\nWould you be interested in distributing our high-quality carbide CNC cutting tools from India? I can provide samples or arrange a call to discuss details.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "9a219a897c5ae061",
+          "to": "contact@skystarcapital.com",
+          "subject": "Seeking seed investors in fintech and climate",
+          "body": "Hello Skystar Capital team,\n\nI co-founded a climate-fintech platform that connects Indian MSMEs with green loans. We have onboarded 1,200 MSMEs and disbursed Rs 9 crore so far. We are currently raising a $1.5M seed round.\n\nGiven your focus on FinTech and Financial Services in Southeast Asia and Indonesia, I wanted to ask if you could point me to seed investors in your network who invest $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia. We are excluding corporate venture arms and accelerators.\n\nWould you be able to connect me to the right person or share relevant contacts? A brief reply would be much appreciated.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
-          "lint": [],
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": ""
+        },
+        {
+          "id": "4970466eca7110cc",
+          "to": "all@venturra.com",
+          "subject": "Early-stage investment in green loans",
+          "body": "Hello Venturra team,\n\nVenturra focuses on early-stage, high-growth technology companies in Southeast Asia. Our climate-fintech startup has onboarded 1,200 Indian MSMEs and disbursed Rs 9 crore in green loans.\n\nWe are raising a $1.5M seed round to grow our platform and impact. I would like to share more details or arrange a short call to discuss potential interest in this round.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
           "grounded": 4,
           "unsupported": [
-            "Baritools s.r.l. is recognized among Italy's top 25 industrial cutting tool suppliers"
+            "Venturra focuses on early-stage, high-growth technology companies in Southeast Asia."
           ],
           "personal": 3,
-          "ask": 5,
-          "tone": 4,
+          "ask": 4,
+          "tone": 5,
           "salutation_ok": true,
           "reply_odds": "medium",
-          "would_send": true,
+          "would_send": false,
           "problems": [
             "unsupported_claim"
           ],
-          "fix": "Remove the claim about being recognized among the top 25 suppliers."
+          "fix": "Remove the claim about Venturra's focus unless you can cite fintech/climate relevance."
         },
         {
-          "id": "cab647398ed414e6",
-          "to": "info@uop.it",
-          "subject": "Carbide CNC tools distribution in Germany, Italy, Poland",
-          "body": "Hello UOP S.p.A. team,\n\nYour work designing and producing standard and tailor-made tools in solid carbide and high-speed steel aligns with the market for carbide CNC cutting tools.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We are ISO 9001 certified and currently export to 14 countries. Our products include high-quality carbide CNC cutting tools suited for industrial machining.\n\nCould you connect me with distributors in Germany, Italy, or Poland who sell industrial cutting tools but do not manufacture them? I would like to explore the possibility of supplying them with our carbide tools.\n\nThank you for forwarding this to the appropriate contact within your team.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "879f762dac70d512",
+          "to": "contact@kejorahq.com",
+          "subject": "Seeking seed investors for climate-fintech startup",
+          "body": "Hello Kejorahq team,\n\nKejora Capital's focus on seed to late-stage investments in transformative Southeast Asian companies aligns with our climate-fintech platform's goals.\n\nWe have onboarded 1,200 Indian MSMEs and disbursed Rs 9 crore in green loans. We are currently raising a $1.5M seed round to expand our impact.\n\nCould you please direct me to seed investors within your network who invest $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia, excluding corporate venture arms and accelerators?\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
-          "lint": [],
-          "grounded": 3,
-          "unsupported": [
-            "Could you connect me with distributors in Germany, Italy, or Poland who sell industrial cutting tools but do not manufacture them?"
+          "lint": [
+            "placeholder_sender"
           ],
-          "personal": 2,
-          "ask": 2,
-          "tone": 4,
+          "grounded": 4,
+          "unsupported": [
+            "Kejora Capital's focus on seed to late-stage investments in transformative Southeast Asian companies aligns with our climate-fintech platform's goals."
+          ],
+          "personal": 3,
+          "ask": 5,
+          "tone": 5,
           "salutation_ok": true,
-          "reply_odds": "low",
+          "reply_odds": "medium",
           "would_send": false,
           "problems": [
-            "ask_misfit",
-            "ask_unclear",
-            "ignores_recipient_context"
+            "unsupported_claim"
           ],
-          "fix": "Do not ask a manufacturer for distributor referrals; only contact distributors directly."
+          "fix": "Remove or soften the claim that Kejora's focus aligns with your platform's goals."
+        },
+        {
+          "id": "a944ac46ee240da0",
+          "to": "hello@nexea.co",
+          "subject": "Connecting with seed investors in India and Indonesia",
+          "body": "Hello NEXEA team,\n\nOur platform matches Indian MSMEs with green loans, onboarding 1,200 MSMEs and disbursing Rs 9 crore.\n\nWe are raising a $1.5M seed round to expand. Given NEXEA\u2019s focus on early-stage tech startups ready to grow, could you point me to seed investors investing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia?\n\nPlease direct me to the appropriate person or team for this inquiry. Thank you for your time.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [
+            "Given NEXEA\u2019s focus on early-stage tech startups ready to grow"
+          ],
+          "personal": 3,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim"
+          ],
+          "fix": "Soften or remove the claim about NEXEA's focus unless you can cite fintech/climate relevance."
+        },
+        {
+          "id": "f5fc2fc97c4bdb09",
+          "to": "info@investidea.ventures",
+          "subject": "Seed investment opportunity in climate-fintech",
+          "body": "Hello InvestIdea team,\n\nInvestIdea\u2019s focus on generating social impact aligns with our work at a climate-fintech startup. We have developed a platform that matches Indian MSMEs with green loans, onboarding 1,200 MSMEs and disbursing Rs 9 crore.\n\nWe are currently raising a $1.5M seed round and are seeking seed investors interested in investing $100k-$500k. Could you point me to seed investors in India, Singapore, or Indonesia who focus on climate or fintech sectors, excluding corporate venture arms and accelerators?\n\nI would appreciate an introduction to the right person or team for this. Thank you for your time.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 4,
+          "unsupported": [
+            "InvestIdea\u2019s focus on generating social impact aligns with our work at a climate-fintech startup."
+          ],
+          "personal": 3,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "medium",
+          "would_send": false,
+          "problems": [
+            "unsupported_claim"
+          ],
+          "fix": "Remove or soften the claim about InvestIdea's focus aligning with your startup."
         }
       ]
     }

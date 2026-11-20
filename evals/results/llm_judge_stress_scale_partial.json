@@ -2,966 +2,783 @@
   "run": "stress_scale",
   "judge_model": "gpt-4.1",
   "scenarios": {
-    "stress_scale_clinics_40": {
-      "playbook": "b2b_sales",
-      "objective": "To sell your WhatsApp appointment-reminder tool to independent dental and skin clinics in the specified cities.",
-      "ask": "To schedule a meeting or call to discuss how your WhatsApp reminder tool can help reduce no-shows at their clinics.",
+    "stress_scale_vc_50": {
+      "playbook": "fundraising",
+      "objective": "To identify and reach out to seed and pre-seed venture funds and angel networks in India that invest in B2B SaaS startups for raising pre-seed funding.",
+      "ask": "Request an introduction or information on how to apply for pre-seed or seed funding from Indian investors who back B2B SaaS startups.",
       "prospects": [
         {
-          "id": "3351742959def65f",
-          "name": "OM Happy Teeth",
+          "id": "fd4a7b1c088e68b5",
+          "name": "Eximius VC",
           "kind": "org",
           "title": null,
-          "org": "OM Happy Teeth",
-          "email": "info@omhappyteeth.com",
+          "org": "Eximius VC",
+          "email": "pitches@eximiusvc.com",
           "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Pune, matches target exactly."
-        },
-        {
-          "id": "7848564435d0b364",
-          "name": "smileagain",
-          "kind": "org",
-          "title": null,
-          "org": "smileagain",
-          "email": "info@smileagain.in",
-          "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "list",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Mumbai offering advanced dentistry"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Mumbai, fits campaign perfectly."
-        },
-        {
-          "id": "9a528a520a5fcbde",
-          "name": "Hasya Dental Care",
-          "kind": "org",
-          "title": null,
-          "org": "Hasya Dental Care",
-          "email": "contact@hasyadentalcare.in",
-          "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Hyderabad, matches target and geography."
-        },
-        {
-          "id": "d136c6f741e85093",
-          "name": "Clinica Derm",
-          "kind": "org",
-          "title": null,
-          "org": "Clinica Derm",
-          "email": "info@clinicaderm.in",
-          "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent skin clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent skin clinic in Hyderabad, fits campaign exactly."
-        },
-        {
-          "id": "c74c07f851b14f8e",
-          "name": "Sikhi Skin & Hair Clinic",
-          "kind": "org",
-          "title": null,
-          "org": "Sikhi Skin & Hair Clinic",
-          "email": "info@sikhiskinclinic.com",
-          "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent skin clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent skin clinic in Hyderabad, matches target and geography."
-        },
-        {
-          "id": "12da9132cd1441b5",
-          "name": "Jehangir OraCare",
-          "kind": "org",
-          "title": null,
-          "org": "Jehangir OraCare",
-          "email": "contact@jehangiroracare.com",
-          "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Pune, fits campaign perfectly."
-        },
-        {
-          "id": "eb8840d33c244525",
-          "name": "Smile dental -",
-          "kind": "org",
-          "title": null,
-          "org": "Smile dental -",
-          "email": "info@smiledentalandimplantcentre.com",
-          "tier": "inbox",
-          "score": 0.8865,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Single clinic in Secunderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Secunderabad (Hyderabad), matches target."
-        },
-        {
-          "id": "c0773ba9a45550a8",
-          "name": "Dr. Vora's Dental Care",
-          "kind": "org",
-          "title": null,
-          "org": "Dr. Vora's Dental Care",
-          "email": "contact@drvorasdental.com",
-          "tier": "inbox",
-          "score": 0.8865,
+          "score": 0.8949,
           "sources": [
             "list",
             "orgs",
-            "places"
+            "web"
           ],
           "pipeline_reason": [
-            "Single clinic in Mulund (Mumbai)"
+            "India's only sector-differentiated pre-seed fund"
           ],
           "verdict": "good",
           "fit": 5,
           "problems": [],
           "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Mumbai, fits campaign exactly."
+          "address_note": "Generic fund pipeline address",
+          "why": "Pre-seed VC in India, invests in SaaS, inbox is appropriate."
         },
         {
-          "id": "3e9488ad8166f0ab",
-          "name": "White Petals Dental Clinic",
+          "id": "0d94a5dcbf6fa77d",
+          "name": "3One4Capital",
           "kind": "org",
           "title": null,
-          "org": "White Petals Dental Clinic",
-          "email": "drjunaid.kapadia@gmail.com",
+          "org": "3One4Capital",
+          "email": "hello@3one4capital.com",
           "tier": "inbox",
-          "score": 0.8798,
+          "score": 0.8933,
           "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Likely clinic owner's email",
-          "why": "Independent dental clinic in Mumbai, direct contact for decision-maker."
-        },
-        {
-          "id": "58b64b9c161bc4ec",
-          "name": "Dr. Ankuja Mhaske",
-          "kind": "org",
-          "title": null,
-          "org": "Dr. Ankuja Mhaske",
-          "email": "ankuja.mhaske@gmail.com",
-          "tier": "inbox",
-          "score": 0.8798,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Skin care clinic in Pune with specialist aesthetic physician"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Likely clinic owner's email",
-          "why": "Independent skin clinic in Pune, direct contact for owner/decision-maker."
-        },
-        {
-          "id": "d2951cfeb4e2132c",
-          "name": "My Skin My Health",
-          "kind": "org",
-          "title": null,
-          "org": "My Skin My Health",
-          "email": "myskinmyhealth@gmail.com",
-          "tier": "inbox",
-          "score": 0.8798,
-          "sources": [
-            "places",
             "list",
-            "orgs"
+            "orgs",
+            "lookalike"
           ],
           "pipeline_reason": [
-            "Dermatology clinic in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic's own email, matches org name",
-          "why": "Independent dermatology clinic in Mumbai, fits target exactly."
-        },
-        {
-          "id": "215a5370f29f7e6d",
-          "name": "Vinaykia Dental Care",
-          "kind": "org",
-          "title": null,
-          "org": "Vinaykia Dental Care",
-          "email": "care@vinaykiadentalcare.com",
-          "tier": "inbox",
-          "score": 0.8798,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Single clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic domain, matches org",
-          "why": "Independent dental clinic in Pune, direct clinic contact."
-        },
-        {
-          "id": "8457a9363ede4324",
-          "name": "Cosmodental Clinic",
-          "kind": "org",
-          "title": null,
-          "org": "Cosmodental Clinic",
-          "email": "cosmodentalclinicpune@gmail.com",
-          "tier": "inbox",
-          "score": 0.8798,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Single clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic's own Gmail, matches org",
-          "why": "Independent dental clinic in Pune, direct contact."
-        },
-        {
-          "id": "718f30f5ff9c56ce",
-          "name": "Smile Concepts Multispeciality Clinic",
-          "kind": "org",
-          "title": null,
-          "org": "Smile Concepts Multispeciality Clinic",
-          "email": "smileconceptsdentalclinic@gmail.com",
-          "tier": "inbox",
-          "score": 0.8602,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic's own Gmail, matches org",
-          "why": "Independent dental clinic in Mumbai, direct contact."
-        },
-        {
-          "id": "e8e5a0700ac081c4",
-          "name": "Puneaesthetic",
-          "kind": "org",
-          "title": null,
-          "org": "Puneaesthetic",
-          "email": "puneaesthetics@gmail.com",
-          "tier": "inbox",
-          "score": 0.8504,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dermatology clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic's own Gmail, matches org",
-          "why": "Independent dermatology clinic in Pune, fits target."
-        },
-        {
-          "id": "73b0c2fad62c4df4",
-          "name": "Pratik Chheda",
-          "kind": "person",
-          "title": null,
-          "org": "Procare Dental",
-          "email": "pratik.s.chheda@gmail.com",
-          "tier": "guess",
-          "score": 0.85,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Mumbai"
-          ],
-          "verdict": "borderline",
-          "fit": 4,
-          "problems": [
-            "weak_evidence"
-          ],
-          "address": "plausible",
-          "address_note": "Likely personal email, matches name/org",
-          "why": "Clinic is a fit, but unclear if this is owner/manager or just a dentist."
-        },
-        {
-          "id": "e9eb1ed38be96e43",
-          "name": "RINKY KAPOOR",
-          "kind": "person",
-          "title": null,
-          "org": "Rinky Kapoor",
-          "email": "drrinkykapoor@gmail.com",
-          "tier": "guess",
-          "score": 0.85,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Top dermatologist in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Personal/professional Gmail, matches name",
-          "why": "Top dermatologist in Mumbai, likely owner/decision-maker, fits skin clinic target."
-        },
-        {
-          "id": "248b795e2416f86b",
-          "name": "Priti Munde",
-          "kind": "person",
-          "title": "Founder",
-          "org": "Ddspune",
-          "email": "dr.pritimunde@gmail.com",
-          "tier": "guess",
-          "score": 0.85,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Personal/professional Gmail, matches name",
-          "why": "Founder of independent dental clinic in Pune, ideal decision-maker."
-        },
-        {
-          "id": "073dd3bc74fdcafd",
-          "name": "Dr. Rashmi Shetty",
-          "kind": "org",
-          "title": null,
-          "org": "Dr. Rashmi Shetty",
-          "email": "info@drrashmishetty.com",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Cosmetic dermatologist and skin clinic in Mumbai"
+            "Pre-seed to Series A focus including SaaS"
           ],
           "verdict": "good",
           "fit": 5,
           "problems": [],
           "address": "inbox",
-          "address_note": "Clinic info@ address, matches org",
-          "why": "Skin clinic in Mumbai, inbox appropriate for org-level outreach."
+          "address_note": "General fund contact, fits org ask",
+          "why": "Early-stage VC, invests in SaaS, inbox is suitable for org."
         },
         {
-          "id": "29c6326c514384bf",
-          "name": "https://thedailyaesthetics.com/",
+          "id": "53f5dc337bb0c058",
+          "name": "StartupXseed",
           "kind": "org",
           "title": null,
-          "org": "https://thedailyaesthetics.com/",
-          "email": "info@thedailyaesthetics.com",
+          "org": "StartupXseed",
+          "email": "ideas@startupxseed.in",
           "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places",
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Skin care clinic in Pune matches skin clinic target"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic info@ address, matches org",
-          "why": "Independent skin clinic in Pune, inbox suitable for clinic-level ask."
-        },
-        {
-          "id": "1b7774dcacbaf13e",
-          "name": "V Dentis - Dental Care",
-          "kind": "org",
-          "title": null,
-          "org": "V Dentis - Dental Care",
-          "email": "info@vdentis.com",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Family focused dental practice in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic info@ address, matches org",
-          "why": "Independent dental clinic in Pune, inbox appropriate for org target."
-        },
-        {
-          "id": "699ff45e33a5f222",
-          "name": "Thedentalspecialists",
-          "kind": "org",
-          "title": null,
-          "org": "Thedentalspecialists",
-          "email": "info@thedentalspecialists.in",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Single clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic info@ address, matches org",
-          "why": "Single-location dental clinic in Hyderabad, fits target perfectly."
-        },
-        {
-          "id": "ca0e6aac10fe240e",
-          "name": "Diamond Dental Hospital",
-          "kind": "org",
-          "title": null,
-          "org": "Diamond Dental Hospital",
-          "email": "info@thediamonddental.com",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic info@ address, matches org",
-          "why": "Independent dental clinic in Hyderabad, inbox suitable for org-level outreach."
-        },
-        {
-          "id": "e4dc76de425665b3",
-          "name": "Dentist Pune",
-          "kind": "org",
-          "title": null,
-          "org": "Dentist Pune",
-          "email": "info@dentist-pune.com",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic info@ address, matches org",
-          "why": "Independent dental clinic in Pune, inbox appropriate for clinic-level ask."
-        },
-        {
-          "id": "516276b09fe66044",
-          "name": "Fab Aesthetics.",
-          "kind": "org",
-          "title": null,
-          "org": "Fab Aesthetics.",
-          "email": "info@fabaesthetics.in",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Skin clinic in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, matches org.",
-          "why": "Independent skin clinic in Mumbai, matches target exactly."
-        },
-        {
-          "id": "9a3958b30ee0b536",
-          "name": "Acme Dental Lounge",
-          "kind": "org",
-          "title": null,
-          "org": "Acme Dental Lounge",
-          "email": "info@www.acmedental.in",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox, plausible.",
-          "why": "Independent dental clinic in Pune, fits campaign perfectly."
-        },
-        {
-          "id": "c77cba2057d592d7",
-          "name": "My Smile Dental Clinic",
-          "kind": "org",
-          "title": null,
-          "org": "My Smile Dental Clinic",
-          "email": "info@mysmiledentalclinic.com",
-          "tier": "inbox",
-          "score": 0.8372,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic inbox, matches org.",
-          "why": "Independent dental clinic in Mumbai, ideal target."
-        },
-        {
-          "id": "8d40a617e89ec8a8",
-          "name": "Weebly",
-          "kind": "org",
-          "title": null,
-          "org": "Weebly",
-          "email": "khojadental@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dental clinic with cosmetic dentist & implantologist"
-          ],
-          "verdict": "bad",
-          "fit": 2,
-          "problems": [
-            "address_not_theirs",
-            "wrong_org_type",
-            "weak_evidence"
-          ],
-          "address": "wrong",
-          "address_note": "Email is for khojadental, not Weebly.",
-          "why": "Weebly is a website builder, not a clinic; address mismatch."
-        },
-        {
-          "id": "d2ec8c112e95f96b",
-          "name": "Stmotherteresadentalandcosmeticclinic",
-          "kind": "org",
-          "title": null,
-          "org": "Stmotherteresadentalandcosmeticclinic",
-          "email": "smtmcdhmgr@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic with many reviews"
-          ],
-          "verdict": "borderline",
-          "fit": 3,
-          "problems": [
-            "wrong_geography",
-            "weak_evidence"
-          ],
-          "address": "inbox",
-          "address_note": "Generic clinic inbox.",
-          "why": "No location evidence; could be outside target cities."
-        },
-        {
-          "id": "7e86b54cecbdecb4",
-          "name": "Synergy Dental Clinic Pune",
-          "kind": "org",
-          "title": null,
-          "org": "Synergy Dental Clinic Pune",
-          "email": "synergydentalclinic05@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic inbox, matches org.",
-          "why": "Independent dental clinic in Pune, fits campaign well."
-        },
-        {
-          "id": "d06f791af165c582",
-          "name": "SkinEthics",
-          "kind": "org",
-          "title": null,
-          "org": "SkinEthics",
-          "email": "skinethicspune@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Leading dermatologist in Pune"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic inbox, matches org.",
-          "why": "Independent skin clinic in Pune, ideal target."
-        },
-        {
-          "id": "732bd82e296d7ec0",
-          "name": "Celestee Clinics",
-          "kind": "org",
-          "title": null,
-          "org": "Celestee Clinics",
-          "email": "celesteecommunications@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places",
-            "web",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Skin clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "inbox",
-          "address_note": "Clinic inbox, matches org.",
-          "why": "Independent skin clinic in Hyderabad, fits campaign exactly."
-        },
-        {
-          "id": "3ffa1a84f38987b7",
-          "name": "Dr Preethi skin clinic",
-          "kind": "org",
-          "title": null,
-          "org": "Dr Preethi skin clinic",
-          "email": "preethiskinclinics@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Skin clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Generic but matches clinic name",
-          "why": "Independent skin clinic in Hyderabad, matches target exactly."
-        },
-        {
-          "id": "0a56e30d3f5c61a7",
-          "name": "Riyaanz Aesthetic",
-          "kind": "org",
-          "title": null,
-          "org": "Riyaanz Aesthetic",
-          "email": "riyaanzaesthetic@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Skin clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic name matches address",
-          "why": "Independent skin clinic in Hyderabad, fits campaign perfectly."
-        },
-        {
-          "id": "2232731f31121d7c",
-          "name": "Website",
-          "kind": "org",
-          "title": null,
-          "org": "Website",
-          "email": "trisadental@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places",
-            "list",
-            "orgs"
-          ],
-          "pipeline_reason": [
-            "Dental clinic in Mumbai"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic name matches address",
-          "why": "Independent dental clinic in Mumbai, ideal target."
-        },
-        {
-          "id": "59198c0f167d459f",
-          "name": "National Dental Care",
-          "kind": "org",
-          "title": null,
-          "org": "National Dental Care",
-          "email": "hydndc@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Independent dental clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic name matches address",
-          "why": "Independent dental clinic in Hyderabad, matches target."
-        },
-        {
-          "id": "051b67c801046ae1",
-          "name": "Dental Expert",
-          "kind": "org",
-          "title": null,
-          "org": "Dental Expert",
-          "email": "dentalexpertclinic@gmail.com",
-          "tier": "inbox",
-          "score": 0.8309,
+          "score": 0.8865,
           "sources": [
             "web",
             "orgs",
             "list"
           ],
           "pipeline_reason": [
-            "Independent dental clinic in Mumbai"
+            "B2B early stage investor with sector agnostic but includes SaaS"
           ],
           "verdict": "good",
           "fit": 5,
           "problems": [],
-          "address": "plausible",
-          "address_note": "Clinic name matches address",
-          "why": "Independent dental clinic in Mumbai, fits campaign."
+          "address": "inbox",
+          "address_note": "Fund's idea submission inbox",
+          "why": "Early-stage B2B investor, includes SaaS, inbox is correct."
         },
         {
-          "id": "dc7035f2bd2bc2be",
-          "name": "One Health Dental",
+          "id": "145476c45748e24f",
+          "name": "BdsVC",
           "kind": "org",
           "title": null,
-          "org": "One Health Dental",
-          "email": "onehealthdentalclinic@gmail.com",
+          "org": "BdsVC",
+          "email": "info@bdsvc.com",
           "tier": "inbox",
-          "score": 0.8309,
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "BdsVC invests from pre-seed to Series A"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Fund's info inbox, standard for org",
+          "why": "Pre-seed/seed VC, SaaS focus, inbox is appropriate."
+        },
+        {
+          "id": "3781f58e5a0d68e0",
+          "name": "Kalaari Capital",
+          "kind": "org",
+          "title": null,
+          "org": "Kalaari Capital",
+          "email": "info@kalaari.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Kalaari Capital is an early-stage, technology-focused VC in Bengaluru"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "General info inbox for fund",
+          "why": "Early-stage tech VC, India, inbox is suitable."
+        },
+        {
+          "id": "03faeba571d5df06",
+          "name": "Endiya",
+          "kind": "org",
+          "title": null,
+          "org": "Endiya",
+          "email": "contact@endiya.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Early-stage VC fund focused on enterprise and SaaS"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Fund's contact inbox, fits org ask",
+          "why": "Early-stage VC, SaaS/enterprise focus, inbox is correct."
+        },
+        {
+          "id": "e6461128b6183e4c",
+          "name": "PedalStart",
+          "kind": "org",
+          "title": null,
+          "org": "PedalStart",
+          "email": "connect@pedalstart.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Indian startup accelerator backing pre-seed founders"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Accelerator's main contact inbox",
+          "why": "Pre-seed accelerator, India, inbox is appropriate."
+        },
+        {
+          "id": "b94f27222972f57c",
+          "name": "Venture Catalysts++",
+          "kind": "org",
+          "title": null,
+          "org": "Venture Catalysts++",
+          "email": "info@venturecatalysts.in",
+          "tier": "inbox",
+          "score": 0.8559,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "India's largest early-stage investment platform"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Investment platform's info inbox",
+          "why": "Large early-stage platform, pre-seed/seed, inbox is suitable."
+        },
+        {
+          "id": "c642dd96231e4ff5",
+          "name": "Unicorn India Ventures (UIV)",
+          "kind": "org",
+          "title": null,
+          "org": "Unicorn India Ventures (UIV)",
+          "email": "info@unicornivc.com",
+          "tier": "inbox",
+          "score": 0.8474,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "pipeline_reason": [
+            "Early-stage VC focusing on SaaS and seed stage"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, appropriate for VC.",
+          "why": "Early-stage VC in India, SaaS/seed focus, inbox is standard."
+        },
+        {
+          "id": "55193b6b7efd3047",
+          "name": "PrimeVP",
+          "kind": "org",
+          "title": null,
+          "org": "PrimeVP",
+          "email": "info@primevp.in",
+          "tier": "inbox",
+          "score": 0.8389,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "pipeline_reason": [
+            "Early-stage VC backing SaaS startups"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, fits VC outreach.",
+          "why": "PrimeVP is a top Indian seed VC with SaaS focus."
+        },
+        {
+          "id": "bc6775d7cabe446f",
+          "name": "Hyderabad Angels",
+          "kind": "org",
+          "title": null,
+          "org": "Hyderabad Angels",
+          "email": "info@hyderabadangels.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Hyderabad Angels backs seed and pre-seed startups across India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Angel network shared inbox, appropriate.",
+          "why": "Hyderabad Angels is a major Indian angel network, invests at seed/pre-seed."
+        },
+        {
+          "id": "e77020bbec64a206",
+          "name": "100 Unicorns",
+          "kind": "org",
+          "title": null,
+          "org": "100 Unicorns",
+          "email": "info@100unicorns.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "100Unicorns provides seed funding and mentorship to early-stage startups in India"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Org inbox, fits accelerator/VC.",
+          "why": "100 Unicorns is an Indian accelerator VC, does seed/pre-seed, sector-agnostic."
+        },
+        {
+          "id": "d080ef9c7ab91133",
+          "name": "Startup Grants India",
+          "kind": "org",
+          "title": null,
+          "org": "Startup Grants India",
+          "email": "team@startupgrantsindia.com",
+          "tier": "inbox",
+          "score": 0.8372,
           "sources": [
             "web",
             "orgs"
           ],
           "pipeline_reason": [
-            "Dental clinic in Mumbai"
+            "Lists 59 angel networks in India, many seed and pre-seed"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "aggregator_or_directory",
+            "not_a_real_target"
+          ],
+          "address": "inbox",
+          "address_note": "Directory, not an investor.",
+          "why": "Startup Grants India is a directory, not a fund or network itself."
+        },
+        {
+          "id": "fcee4e4fbb988ff4",
+          "name": "Sasha Mirchandani",
+          "kind": "person",
+          "title": "Founder and Managing Partner",
+          "org": "Kae Capital",
+          "email": "sasha@kae-capital.com",
+          "tier": "attributed",
+          "score": 0.8224,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Pre-seed/seed focus including SaaS"
           ],
           "verdict": "good",
           "fit": 5,
           "problems": [],
           "address": "plausible",
-          "address_note": "Clinic name matches address",
-          "why": "Independent dental clinic in Mumbai, ideal target."
+          "address_note": "Direct email for Kae Capital founder.",
+          "why": "Sasha Mirchandani is a relevant decision-maker at a top Indian seed VC."
         },
         {
-          "id": "5e7ba5013ce78a0f",
-          "name": "Vista Dental Studio",
+          "id": "31442e286b4b51f7",
+          "name": "Scalable",
           "kind": "org",
           "title": null,
-          "org": "Vista Dental Studio",
-          "email": "sarannikhil@gmail.com",
+          "org": "Scalable",
+          "email": "hello@scalable.ventures",
           "tier": "inbox",
-          "score": 0.8015,
+          "score": 0.788,
           "sources": [
-            "places"
+            "web",
+            "portfolio"
           ],
           "pipeline_reason": [
-            "Dental clinic in Hyderabad"
-          ],
-          "verdict": "good",
-          "fit": 5,
-          "problems": [],
-          "address": "plausible",
-          "address_note": "Likely principal's name, matches clinic",
-          "why": "Independent dental clinic in Hyderabad, fits campaign."
-        },
-        {
-          "id": "d87b9c0f0163ad31",
-          "name": "Charudatta Narke",
-          "kind": "person",
-          "title": null,
-          "org": "Sanjivani Skin Care",
-          "email": "drcharudattasnarke99@gmail.com",
-          "tier": "guess",
-          "score": 0.8,
-          "sources": [
-            "places"
-          ],
-          "pipeline_reason": [
-            "Dermatologist at Sanjivani Skin Care"
+            "Venture studio building early-stage B2B SaaS startups"
           ],
           "verdict": "borderline",
           "fit": 3,
           "problems": [
-            "wrong_role_or_seniority",
-            "weak_evidence"
+            "weak_evidence",
+            "wrong_geography"
+          ],
+          "address": "inbox",
+          "address_note": "Org inbox, but unclear if India-based.",
+          "why": "Venture studio model, unclear if they invest in Indian startups or just build them."
+        },
+        {
+          "id": "180da7b366b64b36",
+          "name": "Beta Boom",
+          "kind": "org",
+          "title": null,
+          "org": "Beta Boom",
+          "email": "hello@betaboom.com",
+          "tier": "inbox",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "pipeline_reason": [
+            "Pre-seed and seed VC fund"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "wrong_geography"
+          ],
+          "address": "inbox",
+          "address_note": "Org inbox, but not India-focused.",
+          "why": "Beta Boom invests outside Silicon Valley, but no evidence of India focus."
+        },
+        {
+          "id": "996b9a571251daad",
+          "name": "The Chennai Angels",
+          "kind": "org",
+          "title": null,
+          "org": "The Chennai Angels",
+          "email": "connect@thechennaiangels.com",
+          "tier": "inbox",
+          "score": 0.782,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "The Chennai Angels is a leading angel investment network in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, appropriate for angel network.",
+          "why": "Leading Indian angel network, invests in diverse startups including B2B SaaS."
+        },
+        {
+          "id": "4022f88a3d771a8f",
+          "name": "Good Capital Investment Group",
+          "kind": "org",
+          "title": null,
+          "org": "Good Capital Investment Group",
+          "email": "info@goodcapitalinvestmentgroup.com",
+          "tier": "inbox",
+          "score": 0.7642,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Pre-seed to seed focus on early-stage tech VC"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "weak_evidence",
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Generic org inbox, plausible for org.",
+          "why": "Bio focuses on financial advisory, not clearly a VC/angel fund; SaaS VC mention is weak."
+        },
+        {
+          "id": "46310d5759b920a5",
+          "name": "Bharat Angels Networks",
+          "kind": "person",
+          "title": "Founder",
+          "org": "Bharatangelsnetworks",
+          "email": "bharatangelsnetworks@gmail.com",
+          "tier": "guess",
+          "score": 0.75,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Bharat Angels bridges Indian startups with global investors"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Likely founder's direct email.",
+          "why": "Founder of an Indian angel network with B2B SaaS relevance."
+        },
+        {
+          "id": "ab8f338c5ec896b3",
+          "name": "Anand Lunia",
+          "kind": "person",
+          "title": null,
+          "org": "IndiaQuotient",
+          "email": "anand@indiaquotient.in",
+          "tier": "attributed",
+          "score": 0.75,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Early-stage investor backing SaaS and tech-led businesses"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Direct email, matches name and org.",
+          "why": "Early-stage investor, listed as pre-seed/seed, invests in SaaS/tech in India."
+        },
+        {
+          "id": "2f53be9b1c6c9fb3",
+          "name": "Ajuniorvc",
+          "kind": "org",
+          "title": null,
+          "org": "Ajuniorvc",
+          "email": "team@ajuniorvc.com",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Pre-seed VC fund investing in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Team inbox, appropriate for fund.",
+          "why": "Pre-seed VC fund in India, invests in B2B SaaS."
+        },
+        {
+          "id": "54a4d2321822a497",
+          "name": "TGC Capital Partners",
+          "kind": "org",
+          "title": null,
+          "org": "TGC Capital Partners",
+          "email": "hello@tgccapitalpartners.com",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Invests in B2B SaaS startups in India"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Generic org inbox, plausible.",
+          "why": "Invests in B2B SaaS but targets higher ARR than typical pre-seed/seed."
+        },
+        {
+          "id": "2fdf54d759b219ca",
+          "name": "PitchDecks.in",
+          "kind": "org",
+          "title": null,
+          "org": "PitchDecks.in",
+          "email": "hello@pitchdecks.in",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Connects Indian startups with investors"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "aggregator_or_directory",
+            "not_a_real_target"
+          ],
+          "address": "inbox",
+          "address_note": "Generic org inbox, but not an investor.",
+          "why": "Platform/aggregator, not a fund or angel network itself."
+        },
+        {
+          "id": "debb70cf23708a0a",
+          "name": "Gayathry S",
+          "kind": "person",
+          "title": null,
+          "org": "Venture Center",
+          "email": "gayathry.s@venturecenter.co.in",
+          "tier": "attributed",
+          "score": 0.7,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Associated with Startup India Seed Fund Scheme"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
           ],
           "address": "plausible",
-          "address_note": "Doctor's name, plausible for clinic owner",
-          "why": "Individual dermatologist, unclear if owner/manager; clinic independence not confirmed."
+          "address_note": "Direct email, matches org.",
+          "why": "Incubator/seed scheme contact, not a VC/angel network; may help but not core target."
+        },
+        {
+          "id": "47c7c5d83c06b67b",
+          "name": "seedfund",
+          "kind": "org",
+          "title": null,
+          "org": "seedfund",
+          "email": "info@seedfund.in",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Seedfund pioneers early stage investment ecosystem in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, fits VC fund.",
+          "why": "Established early-stage VC in India, fits B2B SaaS pre-seed ask."
+        },
+        {
+          "id": "f29366fbe3087683",
+          "name": "Indian Investment Network",
+          "kind": "org",
+          "title": null,
+          "org": "Indian Investment Network",
+          "email": "admin@investmentnetwork.in",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Connects entrepreneurs with angel investors in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Org admin inbox, fits angel network.",
+          "why": "Large Indian angel network, matches B2B SaaS/early-stage focus."
+        },
+        {
+          "id": "c42c2f63ad8c6c47",
+          "name": "startupfunds.in",
+          "kind": "org",
+          "title": null,
+          "org": "startupfunds.in",
+          "email": "team@startupfunds.in",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "lookalike",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Lists seed and pre-seed funding options for Indian startups"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "aggregator_or_directory",
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Team@, fits org/aggregator.",
+          "why": "Appears to be a funding aggregator, not a direct investor."
+        },
+        {
+          "id": "20297d406d27a613",
+          "name": "IIMCIP",
+          "kind": "org",
+          "title": null,
+          "org": "IIMCIP",
+          "email": "contact@iimcip.org",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Indian accelerator promoting entrepreneurship and innovation"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Contact@, fits accelerator.",
+          "why": "Accelerator, not a fund/angel network; may not invest directly."
+        },
+        {
+          "id": "3f692008985ba06e",
+          "name": "Z47",
+          "kind": "org",
+          "title": null,
+          "org": "Z47",
+          "email": "namaste@z47.com",
+          "tier": "inbox",
+          "score": 0.6843,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Backs early-stage technology startups in India"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Namaste@, fits org.",
+          "why": "Early-stage tech VC, plausible for B2B SaaS pre-seed ask."
+        },
+        {
+          "id": "31267b8949d793fd",
+          "name": "Marwari Catalysts",
+          "kind": "org",
+          "title": null,
+          "org": "Marwari Catalysts",
+          "email": "office@marwaricatalysts.com",
+          "tier": "inbox",
+          "score": 0.6402,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Startup accelerator and venture studio in India"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Office@, fits accelerator/fund.",
+          "why": "Accelerator/fund supporting early-stage Indian startups."
+        },
+        {
+          "id": "6f5087f5ccea2c18",
+          "name": "InvestHind",
+          "kind": "org",
+          "title": null,
+          "org": "InvestHind",
+          "email": "contact@investhind.com",
+          "tier": "inbox",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Gateway to India's top investors and startups"
+          ],
+          "verdict": "borderline",
+          "fit": 2,
+          "problems": [
+            "weak_evidence",
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Contact@, fits org.",
+          "why": "No clear evidence of B2B SaaS or seed/pre-seed focus."
         }
       ],
       "list": {
-        "coverage": 5.0,
-        "diversity": 5.0,
-        "missing": "No missing types; both dental and skin clinics in all target cities are present. | Hyderabad clinics, more explicit Operations/Clinic Managers, more skin clinics. | None; covers both dental and skin clinics in all target cities. | None; covers both dental and skin clinics in all target cities. | No Pune clinics; all are dental or skin clinics as required.",
+        "coverage": 4.2,
+        "diversity": 4.2,
+        "missing": "No clear angel networks; all are funds or accelerators. | Some regional/sector-specific Indian angel networks and micro-VCs; more direct partner contacts. | More mainstream seed VCs, sector-specific SaaS funds, and larger angel syndicates. | Direct contacts at top-tier B2B SaaS-focused VCs, more named partners, some pure-play SaaS funds.",
         "systemic_issues": [
-          "No Hyderabad clinics",
-          "Mostly owner/doctor contacts, few managers",
-          "One entry (Weebly) is a misidentified org with wrong address.",
-          "One clinic lacks clear location evidence.",
-          "No Pune representation",
-          "Mostly generic inboxes, not named managers"
+          "No direct angel network contacts",
+          "All generic inboxes, no named decision makers",
+          "Some non-India or unclear geography targets",
+          "Inclusion of directories/aggregators",
+          "Few direct partner/decision-maker contacts",
+          "Some off-topic or aggregator entries"
         ]
       },
       "emails": [
         {
-          "id": "3351742959def65f",
-          "to": "info@omhappyteeth.com",
-          "subject": "Reducing no-shows at OM Happy Teeth",
-          "body": "Hi OM,\n\nOM Happy Teeth provides world-class dental treatment in Pimple Saudagar, and maintaining high patient attendance is vital for your practice.\n\nI founded a clinic software startup that helped 12 clinics reduce appointment no-shows by a third using WhatsApp reminders. This simple tool improved patient communication without adding complexity.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss if this solution might help your clinic? I am happy to schedule a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [
-            "junk_greeting:OM",
-            "person_greeting_on_role_inbox:OM",
-            "placeholder_sender"
-          ],
-          "grounded": 5,
-          "unsupported": [],
-          "personal": 4,
-          "ask": 5,
-          "tone": 5,
-          "salutation_ok": true,
-          "reply_odds": "high",
-          "would_send": true,
-          "problems": [],
-          "fix": ""
-        },
-        {
-          "id": "7848564435d0b364",
-          "to": "info@smileagain.in",
-          "subject": "Reduce no-shows at Smile again dental clinics",
-          "body": "Hello smileagain team,\n\nI see Smile again offers advanced dental care in Dadar west and is listed among the best dental clinics in Mumbai.\n\nI founded a clinic software startup that uses WhatsApp reminders to cut no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your dental practice.\n\nCould you please connect me with the person responsible for clinic operations or patient communications to discuss this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "fd4a7b1c088e68b5",
+          "to": "pitches@eximiusvc.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hi Eximius,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, with 40 paying customers and Rs 25 lakh ARR. We are preparing to raise pre-seed funding to scale further.\n\nEximius VC invests in SaaS startups at the pre-seed and seed stages, which aligns with our current funding needs. Could you please share how I might apply for pre-seed or seed funding through Eximius Ventures or if an introduction to the relevant team member is possible? A brief call to discuss this would be appreciated.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -975,13 +792,13 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "9a528a520a5fcbde",
-          "to": "contact@hasyadentalcare.in",
-          "subject": "Reduce no-shows at Hasya Dental Care",
-          "body": "Hello Hasya Dental Care team,\n\nHasya Dental Care provides advanced dental treatments in Hyderabad, including Invisalign and dental implants. I founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders.\n\nThis tool might help your team improve patient attendance without adding administrative burden. Could you connect me with the person responsible for clinic operations or patient communications to discuss this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "0d94a5dcbf6fa77d",
+          "to": "hello@3one4capital.com",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS",
+          "body": "Hello 3One4Capital team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an ARR of Rs 25 lakh.\n\nI see that 3One4Capital invests in early-stage SaaS companies from pre-seed to Series A in India. I am exploring pre-seed or seed funding options to grow our business.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at 3One4Capital? I would appreciate any guidance on how to apply or engage with your fund.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -995,34 +812,13 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "d136c6f741e85093",
-          "to": "info@clinicaderm.in",
-          "subject": "Reduce No-Shows at Clinica Derm with WhatsApp",
-          "body": "Hi Clinica,\n\nClinica Derm has earned trust from over 2500 clients in Hyderabad with treatments like mole and acne care. Managing appointment no-shows can be a challenge for independent clinics like yours.\n\nI founded a clinic software startup where WhatsApp reminders reduced no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your clinic.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this solution might support your team? I am happy to schedule a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [
-            "person_greeting_on_role_inbox:Clinica",
-            "placeholder_sender"
-          ],
-          "grounded": 5,
-          "unsupported": [],
-          "personal": 4,
-          "ask": 5,
-          "tone": 5,
-          "salutation_ok": true,
-          "reply_odds": "high",
-          "would_send": true,
-          "problems": [],
-          "fix": ""
-        },
-        {
-          "id": "c74c07f851b14f8e",
-          "to": "info@sikhiskinclinic.com",
-          "subject": "Reducing no-shows at Sikhi Skin & Hair Clinic",
-          "body": "Hello Sikhi Skin & Hair Clinic team,\n\nYour clinic in Kondapur serves many patients seeking skin and hair care with Dr. Ayiswarya Marreddy. Managing patient appointments efficiently is key to maintaining high service levels.\n\nI founded a clinic software startup that implemented WhatsApp reminders, which reduced no-shows by a third across 12 clinics. This approach could support your patient communication and appointment adherence.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might help your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "53f5dc337bb0c058",
+          "to": "ideas@startupxseed.in",
+          "subject": "Introduction request for B2B SaaS seed funding",
+          "body": "Hello StartupXseed team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nI see that StartupXseed invests in early-stage B2B ventures across sectors including SaaS, which aligns with my current stage and product focus. I am exploring pre-seed or seed funding options to scale further.\n\nCould you please guide me on how to apply for funding or connect me with the appropriate contacts at StartupXseed who handle B2B SaaS startups? A brief introduction or information on your process would be greatly appreciated.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -1036,34 +832,13 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "12da9132cd1441b5",
-          "to": "contact@jehangiroracare.com",
-          "subject": "Reduce no-shows at Jehangir OraCare clinics",
-          "body": "Hi Jehangir,\n\nJehangir OraCare's focus on advanced dental implants and surgeries in Pune highlights your commitment to patient care.\n\nAt my clinic software startup, we implemented WhatsApp reminders that reduced no-shows by a third across 12 clinics. This tool could support your patient communications and appointment adherence.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this might help your team? I am available for a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [
-            "person_greeting_on_role_inbox:Jehangir",
-            "placeholder_sender"
-          ],
-          "grounded": 5,
-          "unsupported": [],
-          "personal": 4,
-          "ask": 5,
-          "tone": 5,
-          "salutation_ok": true,
-          "reply_odds": "high",
-          "would_send": true,
-          "problems": [],
-          "fix": ""
-        },
-        {
-          "id": "3e9488ad8166f0ab",
-          "to": "drjunaid.kapadia@gmail.com",
-          "subject": "Reduce no-shows at White Petals Dental Clinic",
-          "body": "Hello White Petals Dental Clinic team,\n\nWhite Petals Superspeciality Dental Clinic offers expert dental services in Dongri, Mumbai, which likely involves managing patient appointments closely.\n\nI founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders. This tool could help improve your appointment attendance without adding complexity.\n\nWould you be open to a brief call to discuss how this WhatsApp reminder tool might support your clinic\u2019s scheduling needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "145476c45748e24f",
+          "to": "info@bdsvc.com",
+          "subject": "Seeking pre-seed funding contacts at BdsVC",
+          "body": "Hello BdsVC team,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently looking to raise pre-seed funding to scale further. BdsVC\u2019s focus on early-stage SaaS startups in India aligns with our stage and sector.\n\nCould you please connect me with the person or team handling pre-seed or seed investments for B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -1077,13 +852,13 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "58b64b9c161bc4ec",
-          "to": "ankuja.mhaske@gmail.com",
-          "subject": "WhatsApp reminders for your Pune clinic",
-          "body": "Hi Ankuja,\n\nYour skin care clinic in Pune has a strong reputation and many patient reviews.\n\nI founded a clinic software startup and used WhatsApp reminders to cut no-shows by a third for 12 clinics.\n\nCould we schedule a brief call to discuss if this tool might help reduce missed appointments at your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "3781f58e5a0d68e0",
+          "to": "info@kalaari.com",
+          "subject": "Request for pre-seed investment contact at Kalaari",
+          "body": "Hello Kalaari Capital team,\n\nKalaari Capital's focus on early-stage tech startups aligns with my current stage as founder of a B2B SaaS startup.\n\nMy company provides invoice-reconciliation software, currently serving 40 paying customers and generating Rs 25 lakh in ARR.\n\nI am exploring pre-seed or seed funding options to support growth and would appreciate if you could connect me with the person or team managing investments in B2B SaaS startups at Kalaari Capital.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -1097,33 +872,13 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "73b0c2fad62c4df4",
-          "to": "pratik.s.chheda@gmail.com",
-          "subject": "Cut no-shows at Procare Dental with WhatsApp",
-          "body": "Hi Pratik,\n\nProcare Dental in Mumbai uses state-of-the-art machinery to provide quality dental treatments. I founded a clinic software startup that applied WhatsApp reminders to reduce no-shows by a third across 12 clinics.\n\nThis tool could help your clinic improve appointment attendance without disrupting your current workflow. I\u2019d like to schedule a brief call to discuss how this reminder system might fit your patient communication.\n\nWould you be available for a quick conversation this week to explore this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
-          "pipeline_grade": null,
-          "lint": [
-            "placeholder_sender"
-          ],
-          "grounded": 5,
-          "unsupported": [],
-          "personal": 3,
-          "ask": 5,
-          "tone": 5,
-          "salutation_ok": true,
-          "reply_odds": "medium",
-          "would_send": true,
-          "problems": [],
-          "fix": ""
-        },
-        {
-          "id": "e9eb1ed38be96e43",
-          "to": "drrinkykapoor@gmail.com",
-          "subject": "Reduce appointment no-shows at your skin clinic",
-          "body": "Hi RINKY,\n\nDr. Rinky Kapoor, your expertise in skin, nail, and hair care treatments in Mumbai stands out.\n\nI founded a clinic software startup that implemented WhatsApp reminders and successfully cut no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your clinic.\n\nWould you be open to a brief call to discuss how this reminder system might support your practice? I can share how it works and answer any questions you have.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "03faeba571d5df06",
+          "to": "contact@endiya.com",
+          "subject": "Introduction request for seed funding at Endiya",
+          "body": "Hello Endiya team,\n\nI am founder of a B2B SaaS startup offering invoice-reconciliation services. We have 40 paying customers and generate Rs 25 lakh ARR.\n\nI understand Endiya focuses on early-stage investments in enterprise and SaaS startups, including seed rounds for Indian product companies. While my startup operates in B2B SaaS, I am currently exploring pre-seed or seed funding options.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at Endiya? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -1137,13 +892,13 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "248b795e2416f86b",
-          "to": "dr.pritimunde@gmail.com",
-          "subject": "Reduce no-shows at Ddspune with WhatsApp",
-          "body": "Hi Priti,\n\nI see that Ddspune offers high-quality dental care in Pune under your leadership. I founded a clinic software startup that uses WhatsApp reminders to reduce no-shows. For 12 clinics, these reminders cut no-shows by a third.\n\nThis tool might help improve patient attendance at your clinic without adding extra work. Would you be open to a brief call to explore if this fits your needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "e6461128b6183e4c",
+          "to": "connect@pedalstart.com",
+          "subject": "Pre-seed funding inquiry for B2B SaaS startup",
+          "body": "Hello PedalStart team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and generate Rs 25 lakh in annual recurring revenue.\n\nI am interested in raising pre-seed funding and understand PedalStart leads rounds with $150K cheques for idea-stage and pre-seed founders. Given your focus on supporting startups from idea to next raise, I would appreciate any information or introductions to Indian investors who back B2B SaaS startups at the pre-seed or seed stage.\n\nCould you please advise on how to apply for funding through PedalStart or connect me with the relevant contacts?\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
             "placeholder_sender"
@@ -1157,16 +912,15 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
         },
         {
-          "id": "073dd3bc74fdcafd",
-          "to": "info@drrashmishetty.com",
-          "subject": "WhatsApp reminders for Dr. Rashmi Shetty Clinic",
-          "body": "Hi Rashmi,\n\nYour skin clinic in Mumbai, led by Dr. Rashmi Shetty, is recognized for cosmetic dermatology.\n\nI founded a clinic software startup that implemented WhatsApp reminders, cutting no-shows by a third across 12 clinics.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might benefit your clinic? I am available for a brief call or meeting at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "id": "b94f27222972f57c",
+          "to": "info@venturecatalysts.in",
+          "subject": "Seeking pre-seed funding info for B2B SaaS startup",
+          "body": "Hello Venture Catalysts++ team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nI am exploring pre-seed or seed funding opportunities with Indian investors who support B2B SaaS startups. Given Venture Catalysts++ is India's largest early-stage investment platform providing capital and development support, I wanted to reach out.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
           "pipeline_grade": null,
           "lint": [
-            "person_greeting_on_role_inbox:Rashmi",
             "placeholder_sender"
           ],
           "grounded": 5,
@@ -1178,13 +932,94 @@
           "reply_odds": "high",
           "would_send": true,
           "problems": [],
-          "fix": ""
+          "fix": "No change needed."
+        },
+        {
+          "id": "c642dd96231e4ff5",
+          "to": "info@unicornivc.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hello Unicorn India Ventures team,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently exploring pre-seed or seed funding opportunities to grow our B2B SaaS business.\n\nSince Unicorn India Ventures focuses on early-stage technology-driven startups including SaaS at seed and early growth, could you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups?\n\nI would appreciate any guidance on how to apply or whom to contact for such funding at your firm.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "55193b6b7efd3047",
+          "to": "info@primevp.in",
+          "subject": "Seeking pre-seed funding guidance for B2B SaaS",
+          "body": "Hello PrimeVP team,\n\nPrimeVP backs early-stage SaaS startups, with over 50 investments and a focus on seed rounds in fintech, SaaS, and edtech.\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation software, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I am interested in exploring funding opportunities and would appreciate guidance on how to apply.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "bc6775d7cabe446f",
+          "to": "info@hyderabadangels.in",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS startup",
+          "body": "Hi Hyderabad,\n\nHyderabad Angels' long-standing role in backing seed and pre-seed startups across India caught my attention.\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at Hyderabad Angels? I am exploring options to raise pre-seed funding and would appreciate guidance on how to apply or proceed.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "person_greeting_on_role_inbox:Hyderabad",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "e77020bbec64a206",
+          "to": "info@100unicorns.in",
+          "subject": "Intro request for seed funding at 100 Unicorns",
+          "body": "Hello 100 Unicorns team,\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation software. We currently serve 40 paying customers and have reached Rs 25 lakh in ARR.\n\nI understand 100 Unicorns supports early-stage startups in India with seed funding and mentorship. I am looking to raise pre-seed or seed funding to grow further.\n\nCould you connect me with the person or team handling investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed with 100 Unicorns.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
         }
       ]
     }
   },
   "cost": {
-    "paid_calls": 6,
-    "est_usd": 0.0651
+    "paid_calls": 5,
+    "est_usd": 0.0621
   }
 }

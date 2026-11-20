@@ -210,8 +210,19 @@ Judge: `python tools/llm_judge.py --run <label>` (it now reads the drafts the ru
 - **S-02 Wall-clock is dominated by fetching, not the model.** Each scenario takes 10-20 minutes with 30-60 searches; ten scenarios
   in sequence is hours. Bench runs scenarios one after another, so a failure late in the set loses the summary JSON
   (it is only written at the end). Fix: write the report after every scenario, add `--parallel N` for scenarios.
-- **S-03 Cost is small.** `stress_scale_clinics_40`: 61 searches, 80 LLM calls, $0.068 for 40 targets (good@K 28/40 by the
-  pipeline's own score); `stress_germany_machinery`: 31 searches, 51 calls, $0.030.
+- **S-03 Scale numbers (OpenAI models, one process each, 20 Nov):**
+
+  | Run | wanted | shortlisted | reachable | searches | LLM calls | $ | wall-clock |
+  |---|---|---|---|---|---|---|---|
+  | stress_scale_clinics_40 | 40 | 31 | 64 | 61 | 80 | 0.068 | 8.7 min |
+  | stress_scale_vc_50 | 50 | 31 | 37 | 133 | 168 | 0.080 | 17 min |
+  | stress_germany_machinery | 12 | 7 | 13 | 31 | 51 | 0.030 | n/a |
+  | stress_investors_multi | 15 | 7 | 11 | 44 | 64 | n/a | n/a |
+
+  Cost stays under 10 cents per run; time and searches grow roughly linearly with the target. **Neither scale run filled its quota**:
+  31 of 40 and 31 of 50. The 0.6 floor stops padding and the coverage warning says so, which is the intended behaviour, but it means "50 investors in India" is
+  really about 30 for this engine today. In the VC run, 204 of 227 candidates qualified and only 37 had a confident address,
+  so reachability, not discovery, is the limit (the run's own warning asks for `HUNTER_API_KEY`).
 
 ## Quality findings (independent judge)
 
@@ -219,6 +230,8 @@ Judge: `python tools/llm_judge.py --run <label>` (it now reads the drafts the ru
 |---|---|---|---|
 | stress_scale_clinics_40 | 40 | 36 / 3 / 1 | 12/12 (judge's view; lint below disagrees) |
 | stress_germany_machinery | 7 | 2 / 4 / 1 | 3/7 |
+| stress_scale_vc_50 | 31 | 21 / 7 / 3 | 12/12 (first 12 judged) |
+| stress_investors_multi | 7 | 3 / 4 / 0 | 3/7 |
 
 ### J-01 Organisations greeted by a made-up first name through a shared inbox (fixed)
 `info@omhappyteeth.com` got "Hi OM,", `info@clinicaderm.in` "Hi Clinica,", `contact@jehangiroracare.com` "Hi Jehangir,",
@@ -251,7 +264,24 @@ organisation's role (does the site say "distributor", "dealer", "reseller", "aut
 Many clinic contacts are a doctor's own Gmail (`drrinkykapoor@gmail.com`). That is plausible for solo practices
 (judge: good), but is the case where "reachable" and "verified" differ most. Keep these out of auto-send until bounce rates by tier are known (`brain outcomes`).
 
+### J-07 New kinds of directory slip past the aggregator list (open)
+`stress_scale_vc_50`: Startup Grants India (0.84, rank 1 by score), PitchDecks.in (0.74) and startupfunds.in (0.69) are directories or
+aggregators, not funds; the pipeline's model did not set `competitor_or_directory`. The static list and name patterns cannot know new sites. Fix: a second cheap
+check on the organisation's own homepage text ("we list/connect/curate …" vs "we invest …"), or a required criterion "makes the investment itself".
+
+### J-08 The writer claims a fit the evidence does not state (open)
+`stress_investors_multi`: all four drafts to Indonesian seed funds were judged `unsupported_claim` ("Kejora's focus aligns with your platform's goals")
+because the investors' sector focus (climate or fintech) is not in the evidence; the shortlist itself had four borderline sector matches of seven.
+The "do not claim alignment" rule is in the prompt but the fact-check did not flag them. Fix: when no evidence item names the sender's sector, the draft must state
+only the sender's facts and the ask; add a deterministic check for "aligns with", "fits your focus", "your focus on X" where X is not in the evidence.
+
+### J-09 Shortlists fall short on hard multi-constraint asks (note)
+`stress_investors_multi` delivered 7 of 15 and the judge calls 4 of them borderline on sector. Honest, but a user asking for 15 gets 3 good ones. Surface "good: 3, borderline: 4" in the review UI instead of one list.
+
 ## Not run (and why)
-The 10 complex scenarios and `stress_scale_vc_50` were still running when this was written. Groq throttling cost most of the
-first hour (S-01). Re-run: `LLM_PROVIDER=openai brain bench --split stress --draft --label stress_full`, then
-`python tools/llm_judge.py --run stress_full` and add the findings here.
+Eight complex scenarios (journalists with exclusions, Spanish universities, senior hire, neuroscience PhDs, photographers, podcasts, Rust maintainers,
+municipal IoT) had not finished when this was written; the first hour was lost to Groq throttling (S-01) and one process runs them sequentially.
+`bench` writes its summary JSON only at the end (S-02), so they are not in the repo. Re-run:
+`LLM_PROVIDER=openai brain bench --split stress --draft --label stress_full`, then `python tools/llm_judge.py --run stress_full`, and add the findings here.
+Also note `tools/llm_judge.py --only` writes `llm_judge_<run>_partial.json`, so two partial judgements of the same run overwrite each other;
+the per-scenario numbers above are from the console output.

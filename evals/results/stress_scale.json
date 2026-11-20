@@ -1,0 +1,2180 @@
+{
+  "label": "stress_scale",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 234,
+      "qualified": 233,
+      "reachable": 64,
+      "passed_judge": 54,
+      "shortlisted": 31,
+      "good@K": 28,
+      "precision@K": 0.7,
+      "good_reachable@K": 24,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 27,
+        "guess": 4
+      },
+      "mean_score": 0.814,
+      "distinct_orgs": 31,
+      "proof_rate": 0.645,
+      "personal_email_rate": 0.129,
+      "search_calls": 61,
+      "llm_paid_calls": 80,
+      "llm_usd": 0.0678,
+      "pages_fetched": 190,
+      "seconds": 521.4,
+      "usd_per_good": 0.0045,
+      "llm_by_purpose": {
+        "intake": 1,
+        "replan_search": 1,
+        "extract_orgs": 8,
+        "triage": 8,
+        "prejudge": 13,
+        "judge": 8,
+        "draft": 34
+      },
+      "by_source": {
+        "places": 124,
+        "orgs": 133
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 31 confident prospects of the 40 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 124,
+          "web": 67,
+          "orgs": 131,
+          "list": 65
+        },
+        "qualified": {
+          "places": 123,
+          "web": 67,
+          "orgs": 131,
+          "list": 65
+        },
+        "enriched": {
+          "places": 89,
+          "list": 52,
+          "orgs": 83,
+          "web": 32
+        },
+        "reachable": {
+          "places": 49,
+          "list": 5,
+          "orgs": 26,
+          "web": 21
+        },
+        "passed_judge": {
+          "list": 4,
+          "orgs": 23,
+          "places": 40,
+          "web": 19
+        },
+        "shortlisted": {
+          "places": 18,
+          "list": 1,
+          "orgs": 16,
+          "web": 15
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 26,
+          "fetches": 0,
+          "llm_calls": 1,
+          "seconds": 60.57,
+          "found": 124,
+          "new": 124,
+          "qualified": 124
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 15,
+          "fetches": 6,
+          "llm_calls": 16,
+          "seconds": 82.01,
+          "found": 133,
+          "new": 118,
+          "qualified": 115
+        }
+      },
+      "shortlist": [
+        {
+          "name": "OM Happy Teeth",
+          "org": "OM Happy Teeth",
+          "email": "info@omhappyteeth.com",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent dental clinic in Pune"
+          ]
+        },
+        {
+          "name": "smileagain",
+          "org": "smileagain",
+          "email": "info@smileagain.in",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Dental clinic in Mumbai offering advanced dentistry"
+          ]
+        },
+        {
+          "name": "Hasya Dental Care",
+          "org": "Hasya Dental Care",
+          "email": "contact@hasyadentalcare.in",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent dental clinic in Hyderabad"
+          ]
+        },
+        {
+          "name": "Clinica Derm",
+          "org": "Clinica Derm",
+          "email": "info@clinicaderm.in",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent skin clinic in Hyderabad"
+          ]
+        },
+        {
+          "name": "Sikhi Skin & Hair Clinic",
+          "org": "Sikhi Skin & Hair Clinic",
+          "email": "info@sikhiskinclinic.com",
+          "score": 0.8865,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent skin clinic in Hyderabad"
+          ]
+        },
+        {
+          "name": "Jehangir OraCare",
+          "org": "Jehangir OraCare",
+          "email": "contact@jehangiroracare.com",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Independent dental clinic in Pune"
+          ]
+        },
+        {
+          "name": "White Petals Dental Clinic",
+          "org": "White Petals Dental Clinic",
+          "email": "drjunaid.kapadia@gmail.com",
+          "score": 0.8798,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent dental clinic in Mumbai"
+          ]
+        },
+        {
+          "name": "Dr. Ankuja Mhaske",
+          "org": "Dr. Ankuja Mhaske",
+          "email": "ankuja.mhaske@gmail.com",
+          "score": 0.8798,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Skin care clinic in Pune with specialist aesthetic physician"
+          ]
+        },
+        {
+          "name": "Pratik Chheda",
+          "org": "Procare Dental",
+          "email": "pratik.s.chheda@gmail.com",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Dental clinic in Mumbai"
+          ]
+        },
+        {
+          "name": "RINKY KAPOOR",
+          "org": "Rinky Kapoor",
+          "email": "drrinkykapoor@gmail.com",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Top dermatologist in Mumbai"
+          ]
+        },
+        {
+          "name": "Priti Munde",
+          "org": "Ddspune",
+          "email": "dr.pritimunde@gmail.com",
+          "score": 0.85,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Independent dental clinic in Pune"
+          ]
+        },
+        {
+          "name": "Dr. Rashmi Shetty",
+          "org": "Dr. Rashmi Shetty",
+          "email": "info@drrashmishetty.com",
+          "score": 0.8372,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Cosmetic dermatologist and skin clinic in Mumbai"
+          ]
+        },
+        {
+          "name": "https://thedailyaesthetics.com/",
+          "org": "https://thedailyaesthetics.com/",
+          "email": "info@thedailyaesthetics.com",
+          "score": 0.8372,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Skin care clinic in Pune matches skin clinic target"
+          ]
+        },
+        {
+          "name": "V Dentis - Dental Care",
+          "org": "V Dentis - Dental Care",
+          "email": "info@vdentis.com",
+          "score": 0.8372,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Family focused dental practice in Pune"
+          ]
+        },
+        {
+          "name": "Weebly",
+          "org": "Weebly",
+          "email": "khojadental@gmail.com",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic with cosmetic dentist & implantologist"
+          ]
+        },
+        {
+          "name": "Stmotherteresadentalandcosmeticclinic",
+          "org": "Stmotherteresadentalandcosmeticclinic",
+          "email": "smtmcdhmgr@gmail.com",
+          "score": 0.8309,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent dental clinic with many reviews"
+          ]
+        },
+        {
+          "name": "Synergy Dental Clinic Pune",
+          "org": "Synergy Dental Clinic Pune",
+          "email": "synergydentalclinic05@gmail.com",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Independent dental clinic in Pune"
+          ]
+        },
+        {
+          "name": "SkinEthics",
+          "org": "SkinEthics",
+          "email": "skinethicspune@gmail.com",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading dermatologist in Pune"
+          ]
+        },
+        {
+          "name": "Charudatta Narke",
+          "org": "Sanjivani Skin Care",
+          "email": "drcharudattasnarke99@gmail.com",
+          "score": 0.8,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dermatologist at Sanjivani Skin Care"
+          ]
+        },
+        {
+          "name": "Theestheticclinics",
+          "org": "Theestheticclinics",
+          "email": "info@theestheticclinics.com",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Cosmetic skin treatment center in Mumbai"
+          ]
+        },
+        {
+          "name": "Dryuvrajmoreskin",
+          "org": "Dryuvrajmoreskin",
+          "email": "dryuvrajmore@yahoo.co.in",
+          "score": 0.782,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Skin clinic specializing in acne and skin issues"
+          ]
+        },
+        {
+          "name": "M Aesthetics",
+          "org": "M Aesthetics",
+          "email": "maestheticsskinclinic@gmail.com",
+          "score": 0.782,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Skin clinic in Pune with advanced dermatology solutions"
+          ]
+        },
+        {
+          "name": "Evolve Cosmetic Clinic",
+          "org": "Evolve Cosmetic Clinic",
+          "email": "evolvecosmeticsurgeryclinic@gmail.com",
+          "score": 0.782,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Cosmetic clinic in Mumbai with skin treatments"
+          ]
+        },
+        {
+          "name": "Taj",
+          "org": "Taj",
+          "email": "tajskinclinic@gmail.com",
+          "score": 0.782,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Skin care clinic in Pune with qualified dermatologist"
+          ]
+        },
+        {
+          "name": "The Bombay Skin Clinic",
+          "org": "The Bombay Skin Clinic",
+          "email": "thebombayskinclinic@gmail.com",
+          "score": 0.782,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Skin clinic in Mumbai in target cities"
+          ]
+        },
+        {
+          "name": "Skinworld India",
+          "org": "Skinworld India",
+          "email": "info@skinworldindia.com",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading dermatology and skin care clinic in Pune"
+          ]
+        },
+        {
+          "name": "Royal Dental Clinics",
+          "org": "Royal Dental Clinics",
+          "email": "info@royaldentalclinics.com",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Dental clinic in Mumbai"
+          ]
+        },
+        {
+          "name": "Sabka Dentist",
+          "org": "Sabka Dentist",
+          "email": "info@sabkadentist.com",
+          "score": 0.7388,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic with good reviews"
+          ]
+        },
+        {
+          "name": "Akruti Plastic & Cosmetic Surgery Centre",
+          "org": "Akruti Plastic & Cosmetic Surgery Centre",
+          "email": "info@akruti.co.in",
+          "score": 0.6895,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Cosmetic surgery and hair transplantation clinic in Hyderabad"
+          ]
+        },
+        {
+          "name": "Allure Medspa",
+          "org": "Allure Medspa",
+          "email": "enquiry@alluremedspa.in",
+          "score": 0.6895,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Cosmetic and plastic surgery clinic in Mumbai"
+          ]
+        },
+        {
+          "name": "Eledent Dental Hospitals",
+          "org": "Eledent Dental Hospitals",
+          "email": "contact@eledenthospitals.com",
+          "score": 0.6895,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Hyderabad matches target city and specialty"
+          ]
+        }
+      ],
+      "intake_playbook": "b2b_sales",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Mumbai",
+        "Pune",
+        "Hyderabad",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "dental clinics",
+        "skin clinics",
+        "healthcare providers"
+      ],
+      "intake_ask_type": "call",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 31,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            31
+          ]
+        ],
+        "avg_specificity": 4.26,
+        "avg_relevance": 4.32,
+        "avg_ask": 4.94,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.774,
+        "critiques": [
+          "Specify the potential benefits for their specific services.",
+          "Mention specific services that could benefit from reminders.",
+          "Include more specific details about their clinic's needs.",
+          "Clarify how the tool integrates with their current systems.",
+          "Highlight specific challenges they might face with no-shows."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@omhappyteeth.com",
+          "subject": "Reducing no-shows at OM Happy Teeth",
+          "body": "Hi OM,\n\nOM Happy Teeth provides world-class dental treatment in Pimple Saudagar, and maintaining high patient attendance is vital for your practice.\n\nI founded a clinic software startup that helped 12 clinics reduce appointment no-shows by a third using WhatsApp reminders. This simple tool improved patient communication without adding complexity.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss if this solution might help your clinic? I am happy to schedule a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@smileagain.in",
+          "subject": "Reduce no-shows at Smile again dental clinics",
+          "body": "Hello smileagain team,\n\nI see Smile again offers advanced dental care in Dadar west and is listed among the best dental clinics in Mumbai.\n\nI founded a clinic software startup that uses WhatsApp reminders to cut no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your dental practice.\n\nCould you please connect me with the person responsible for clinic operations or patient communications to discuss this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@hasyadentalcare.in",
+          "subject": "Reduce no-shows at Hasya Dental Care",
+          "body": "Hello Hasya Dental Care team,\n\nHasya Dental Care provides advanced dental treatments in Hyderabad, including Invisalign and dental implants. I founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders.\n\nThis tool might help your team improve patient attendance without adding administrative burden. Could you connect me with the person responsible for clinic operations or patient communications to discuss this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@clinicaderm.in",
+          "subject": "Reduce No-Shows at Clinica Derm with WhatsApp",
+          "body": "Hi Clinica,\n\nClinica Derm has earned trust from over 2500 clients in Hyderabad with treatments like mole and acne care. Managing appointment no-shows can be a challenge for independent clinics like yours.\n\nI founded a clinic software startup where WhatsApp reminders reduced no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your clinic.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this solution might support your team? I am happy to schedule a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@sikhiskinclinic.com",
+          "subject": "Reducing no-shows at Sikhi Skin & Hair Clinic",
+          "body": "Hello Sikhi Skin & Hair Clinic team,\n\nYour clinic in Kondapur serves many patients seeking skin and hair care with Dr. Ayiswarya Marreddy. Managing patient appointments efficiently is key to maintaining high service levels.\n\nI founded a clinic software startup that implemented WhatsApp reminders, which reduced no-shows by a third across 12 clinics. This approach could support your patient communication and appointment adherence.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might help your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@jehangiroracare.com",
+          "subject": "Reduce no-shows at Jehangir OraCare clinics",
+          "body": "Hi Jehangir,\n\nJehangir OraCare's focus on advanced dental implants and surgeries in Pune highlights your commitment to patient care.\n\nAt my clinic software startup, we implemented WhatsApp reminders that reduced no-shows by a third across 12 clinics. This tool could support your patient communications and appointment adherence.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this might help your team? I am available for a brief call at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the potential benefits for their specific services."
+          }
+        },
+        {
+          "to": "drjunaid.kapadia@gmail.com",
+          "subject": "Reduce no-shows at White Petals Dental Clinic",
+          "body": "Hello White Petals Dental Clinic team,\n\nWhite Petals Superspeciality Dental Clinic offers expert dental services in Dongri, Mumbai, which likely involves managing patient appointments closely.\n\nI founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders. This tool could help improve your appointment attendance without adding complexity.\n\nWould you be open to a brief call to discuss how this WhatsApp reminder tool might support your clinic\u2019s scheduling needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific services that could benefit from reminders."
+          }
+        },
+        {
+          "to": "ankuja.mhaske@gmail.com",
+          "subject": "WhatsApp reminders for your Pune clinic",
+          "body": "Hi Ankuja,\n\nYour skin care clinic in Pune has a strong reputation and many patient reviews.\n\nI founded a clinic software startup and used WhatsApp reminders to cut no-shows by a third for 12 clinics.\n\nCould we schedule a brief call to discuss if this tool might help reduce missed appointments at your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Include more specific details about their clinic's needs."
+          }
+        },
+        {
+          "to": "pratik.s.chheda@gmail.com",
+          "subject": "Cut no-shows at Procare Dental with WhatsApp",
+          "body": "Hi Pratik,\n\nProcare Dental in Mumbai uses state-of-the-art machinery to provide quality dental treatments. I founded a clinic software startup that applied WhatsApp reminders to reduce no-shows by a third across 12 clinics.\n\nThis tool could help your clinic improve appointment attendance without disrupting your current workflow. I\u2019d like to schedule a brief call to discuss how this reminder system might fit your patient communication.\n\nWould you be available for a quick conversation this week to explore this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how the tool integrates with their current systems."
+          }
+        },
+        {
+          "to": "drrinkykapoor@gmail.com",
+          "subject": "Reduce appointment no-shows at your skin clinic",
+          "body": "Hi RINKY,\n\nDr. Rinky Kapoor, your expertise in skin, nail, and hair care treatments in Mumbai stands out.\n\nI founded a clinic software startup that implemented WhatsApp reminders and successfully cut no-shows by a third across 12 clinics. This tool could help improve appointment attendance at your clinic.\n\nWould you be open to a brief call to discuss how this reminder system might support your practice? I can share how it works and answer any questions you have.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Highlight specific challenges they might face with no-shows."
+          }
+        },
+        {
+          "to": "dr.pritimunde@gmail.com",
+          "subject": "Reduce no-shows at Ddspune with WhatsApp",
+          "body": "Hi Priti,\n\nI see that Ddspune offers high-quality dental care in Pune under your leadership. I founded a clinic software startup that uses WhatsApp reminders to reduce no-shows. For 12 clinics, these reminders cut no-shows by a third.\n\nThis tool might help improve patient attendance at your clinic without adding extra work. Would you be open to a brief call to explore if this fits your needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@drrashmishetty.com",
+          "subject": "WhatsApp reminders for Dr. Rashmi Shetty Clinic",
+          "body": "Hi Rashmi,\n\nYour skin clinic in Mumbai, led by Dr. Rashmi Shetty, is recognized for cosmetic dermatology.\n\nI founded a clinic software startup that implemented WhatsApp reminders, cutting no-shows by a third across 12 clinics.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might benefit your clinic? I am available for a brief call or meeting at your convenience.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more direct and specific."
+          }
+        },
+        {
+          "to": "info@thedailyaesthetics.com",
+          "subject": "Cut no-shows at your skin care clinic",
+          "body": "Hello https://thedailyaesthetics.com/ team,\n\nYour clinic, The Daily Aesthetics, has a strong reputation with 4.7 stars from 1200 reviews, showing your commitment to patient care.\n\nI founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might help your clinic reduce no-shows? A brief call or meeting would be great.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Clarify the ask to be more straightforward."
+          }
+        },
+        {
+          "to": "info@vdentis.com",
+          "subject": "Reduce No-Shows at Your Dental Clinic",
+          "body": "Hello V Dentis team,\n\nYour focus on preventive care and patient well-being at V Dentis caught my attention. I developed a WhatsApp reminder tool that reduced no-shows by a third across 12 clinics. This tool could support your team in maintaining high appointment adherence and patient satisfaction.\n\nCould you connect me with the person responsible for clinic operations or patient communications? I would like to discuss how this solution might help your dental practice.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Simplify the ask for clarity."
+          }
+        },
+        {
+          "to": "khojadental@gmail.com",
+          "subject": "Reduce no-shows at Weebly dental clinic",
+          "body": "Hello Weebly team,\n\nI noticed Weebly is a dental clinic with Dr. Khoja as a cosmetic dentist and implantologist. Your clinic\u2019s strong rating of 4.8 with 63 reviews shows patient trust and engagement.\n\nI founded a clinic software startup that implemented WhatsApp reminders, which cut no-shows by a third across 12 clinics. This approach could help your practice reduce missed appointments without adding complexity.\n\nWould you be open to a brief call to discuss how WhatsApp reminders might fit your clinic\u2019s workflow and patient communication? I\u2019m happy to share details and answer any questions.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more concise."
+          }
+        },
+        {
+          "to": "smtmcdhmgr@gmail.com",
+          "subject": "Cut no-shows at your dental clinic by a third",
+          "body": "Hello Stmotherteresadentalandcosmeticclinic team,\n\nYour dental clinic's 4.9 rating from 1800 reviews shows strong patient engagement, yet no-shows may still impact your schedule.\n\nI founded a clinic software startup that uses WhatsApp reminders to cut no-shows by a third across 12 clinics. This tool sends timely appointment reminders via WhatsApp, a platform patients frequently use.\n\nWould you be open to a brief call to discuss how this approach might help reduce no-shows at your clinic? I can share details on how the system works and the results other clinics have seen.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "synergydentalclinic05@gmail.com",
+          "subject": "Reduce no-shows at Synergy Dental Clinic Pune",
+          "body": "Hello Synergy Dental Clinic Pune team,\n\nYour clinic offers advanced dental implants and cosmetic dentistry led by Dr. Madhavi Mhapuskar.\n\nI founded a clinic software startup that used WhatsApp reminders to reduce no-shows by a third for 12 clinics.\n\nWould you be open to a short call to discuss how this tool could help improve patient attendance at your clinic?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "skinethicspune@gmail.com",
+          "subject": "Reduce no-shows at SkinEthics with WhatsApp",
+          "body": "Hello SkinEthics team,\n\nSkinEthics provides ethical skin, hair, and cosmetic treatments in Pune. I founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders.\n\nThis tool might help your clinics improve attendance without extra effort. I\u2019d like to schedule a call to discuss how this could work for SkinEthics.\n\nWould you be available for a brief conversation next week to explore this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "drcharudattasnarke99@gmail.com",
+          "subject": "Reduce no-shows at Sanjivani Skin Care",
+          "body": "Hi Charudatta,\n\nI see you are a dermatologist at Sanjivani Skin Care with a strong patient rating. I founded a clinic software startup that implemented WhatsApp reminders, which cut no-shows by a third for 12 clinics.\n\nSince you run an independent skin care clinic, this tool might help you improve appointment attendance without adding staff workload. Would you be open to a brief call to discuss how WhatsApp reminders could fit your clinic's needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@theestheticclinics.com",
+          "subject": "Reduce no-shows with WhatsApp reminders",
+          "body": "Hello Theestheticclinics team,\n\nYour clinic offers advanced cosmetic skin treatments by top dermatologists in Mumbai. Managing appointments must be crucial for your patient care.\n\nI founded a clinic software startup that used WhatsApp reminders to reduce no-shows by a third across 12 clinics. This tool helps improve patient attendance without adding workflow complexity.\n\nCould you connect me with the person responsible for clinic operations or patient communications? I would like to discuss how this solution might support your team.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 3,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more direct and specific."
+          }
+        },
+        {
+          "to": "dryuvrajmore@yahoo.co.in",
+          "subject": "Cut no-shows at your skin clinic by 33%",
+          "body": "Hello Dryuvrajmoreskin team,\n\nDryuvrajmoreskin specializes in treating skin conditions like acne and bacterial infections, which require consistent patient follow-up.\n\nI founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders. This tool could support your patient engagement and appointment adherence.\n\nWould you be open to a brief call to discuss how WhatsApp reminders might help reduce no-shows at your clinics?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how it fits their specific treatments."
+          }
+        },
+        {
+          "to": "maestheticsskinclinic@gmail.com",
+          "subject": "Reduce no-shows at M Aesthetics Skin Clinic",
+          "body": "Hi M Aesthetics,\n\nM Aesthetics Skin Clinic Pune offers advanced dermatology solutions across Baner, Balewadi, Sus, and Pashan. I founded a clinic software startup that implemented WhatsApp reminders, reducing no-shows by a third for 12 clinics.\n\nThis tool could help your clinics improve appointment attendance without extra effort. I\u2019d like to schedule a call to discuss how this WhatsApp reminder system might fit your patient engagement needs.\n\nWould you be available for a brief meeting next week to explore this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits for their clinic's location."
+          }
+        },
+        {
+          "to": "evolvecosmeticsurgeryclinic@gmail.com",
+          "subject": "Reduce no-shows at Evolve Cosmetic Clinic",
+          "body": "Hello Evolve Cosmetic Clinic team,\n\nEvolve Cosmetic Clinic offers advanced cosmetic and skin treatments with a focus on patient care and modern technology. I founded a clinic software startup that uses WhatsApp reminders to cut no-shows by a third for 12 clinics.\n\nGiven your patient-centered approach, I believe this tool could help reduce missed appointments at your clinic. It is designed to fit into existing workflows without disruption.\n\nWould you be open to a brief call to discuss how this WhatsApp reminder system might support your team in Mumbai?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a specific example of improved patient care."
+          }
+        },
+        {
+          "to": "tajskinclinic@gmail.com",
+          "subject": "Cut appointment no-shows for Taj Skin clinic",
+          "body": "Hello Taj team,\n\nTaj Skin\u2019s strong local presence and top-rated dermatologist caught my attention. I founded a clinic software startup that uses WhatsApp reminders to reduce no-shows. For 12 clinics, these reminders cut no-shows by a third.\n\nSince Taj Skin serves many patients, this tool could help improve appointment attendance without adding extra staff work. I\u2019d like to schedule a call to discuss how this could fit your clinic\u2019s workflow and patient communication.\n\nWould you be available for a brief call next week to explore this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how it integrates with their existing systems."
+          }
+        },
+        {
+          "to": "thebombayskinclinic@gmail.com",
+          "subject": "Cut no-shows at Bombay Skin Clinic with WhatsApp",
+          "body": "Hello Bombay Skin Clinic team,\n\nThe Bombay Skin Clinic offers advanced dermatology and hair treatments in South Mumbai and Bandra. I founded a clinic software startup that helped 12 clinics reduce no-shows by a third using WhatsApp appointment reminders.\n\nI believe this tool could support your patient engagement and appointment attendance. Would you be open to a brief call to discuss how WhatsApp reminders might fit your clinic\u2019s workflow?\n\nPlease let me know a convenient time for you to connect.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific challenges they might face with no-shows."
+          }
+        },
+        {
+          "to": "info@skinworldindia.com",
+          "subject": "Reduce no-shows at Skinworld India clinics",
+          "body": "Hi Skinworld,\n\nSkinworld India offers comprehensive treatments for skin and hair concerns in Pune. I founded a clinic software startup that used WhatsApp reminders to reduce no-shows by a third across 12 clinics.\n\nThis tool could help your dermatology clinic improve patient attendance without extra staff effort. I would like to schedule a call to discuss how this solution might fit your operations.\n\nCould you please connect me with the person responsible for clinic operations or patient communications to explore this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how the tool aligns with their specific services."
+          }
+        },
+        {
+          "to": "info@royaldentalclinics.com",
+          "subject": "Reducing no-shows at Royal Dental Clinics",
+          "body": "Hello Royal Dental Clinics team,\n\nRoyal Dental Clinics is recognized as the best dental clinic in Mumbai and leads in single-day oral care treatments in India. I founded a clinic software startup that implemented WhatsApp reminders, cutting no-shows by a third across 12 clinics.\n\nI believe this tool could help your clinic reduce appointment no-shows and improve patient communication. Could you connect me with the person responsible for clinic operations or patient communications to discuss how this might fit your needs?\n\nI am available for a brief call at your convenience to share details and answer any questions.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits for single-day treatments."
+          }
+        },
+        {
+          "to": "info@sabkadentist.com",
+          "subject": "Reduce no-shows at Sabka Dentist clinics",
+          "body": "Hi Sabka,\n\nSabka Dentist offers quality dental care including braces and implants, which likely involves managing many patient appointments.\n\nI founded a clinic software startup that implemented WhatsApp reminders, reducing no-shows by a third across 12 clinics. This experience could support your patient communication efforts.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this tool might help your clinics?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Include more specific details about their services."
+          }
+        },
+        {
+          "to": "info@akruti.co.in",
+          "subject": "Reduce no-shows at Akruti Plastic & Cosmetic Surgery",
+          "body": "Hello Akruti Plastic & Cosmetic Surgery Centre team,\n\nI understand Akruti Plastic & Cosmetic Surgery Centre operates independent clinics in Kukatpally and Kondapur. My startup developed a WhatsApp reminder tool that cut no-shows by a third for 12 clinics.\n\nThis tool could help improve appointment attendance for your plastic surgery and hair transplantation services. I\u2019d like to schedule a call to discuss how it might fit your clinic\u2019s needs.\n\nCould you please connect me with the person responsible for clinic operations or patient communications?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how the tool benefits both locations."
+          }
+        },
+        {
+          "to": "enquiry@alluremedspa.in",
+          "subject": "Reduce no-shows at Allure Medspa with WhatsApp",
+          "body": "Hi Allure,\n\nYour team at Allure Medspa supports cosmetic and plastic surgery patients in Mumbai, with a strong local reputation and many reviews.\n\nI founded a clinic software startup that implemented WhatsApp reminders, cutting no-shows by a third for 12 clinics. This tool could help your patient communications and appointment attendance.\n\nCould you connect me with the person responsible for clinic operations or patient communications to discuss how this might fit your needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Highlight specific challenges in cosmetic surgery appointments."
+          }
+        },
+        {
+          "to": "contact@eledenthospitals.com",
+          "subject": "Reduce No-Shows at Eledent Dental Hospitals",
+          "body": "Hello Eledent Dental Hospitals team,\n\nEledent Dental Hospitals offers a wide range of dental services in Hyderabad and is highly rated by patients. I founded a clinic software startup that implemented WhatsApp reminders, reducing no-shows by a third across 12 clinics.\n\nI believe this tool could help your team improve appointment attendance and patient communication. Could you connect me with the person responsible for clinic operations or patient communications to discuss a brief call or meeting?\n\nI look forward to exploring how this approach might support your patient engagement efforts.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the potential benefits for Eledent directly."
+          }
+        }
+      ],
+      "name": "stress_scale_clinics_40",
+      "split": "stress",
+      "playbook": "b2b_sales",
+      "target": 40
+    },
+    {
+      "unique": 227,
+      "qualified": 204,
+      "reachable": 37,
+      "passed_judge": 31,
+      "shortlisted": 31,
+      "good@K": 24,
+      "precision@K": 0.48,
+      "good_reachable@K": 23,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 27,
+        "attributed": 3,
+        "guess": 1
+      },
+      "mean_score": 0.786,
+      "distinct_orgs": 31,
+      "proof_rate": 0.516,
+      "personal_email_rate": 0.129,
+      "search_calls": 133,
+      "llm_paid_calls": 168,
+      "llm_usd": 0.0801,
+      "pages_fetched": 410,
+      "seconds": 1022.7,
+      "usd_per_good": 0.0088,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 65,
+        "extract_orgs": 30,
+        "prejudge": 10,
+        "judge": 5,
+        "replan_search": 1,
+        "draft": 31,
+        "verify": 10,
+        "draft_fix": 8
+      },
+      "by_source": {
+        "jobs": 10,
+        "portfolio": 12,
+        "orgs": 255,
+        "lookalike": 97
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 37 of 50 wanted contacts have a confident address. This kind of campaign (Investors) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 31 confident prospects of the 50 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "jobs": 10,
+          "web": 91,
+          "portfolio": 12,
+          "orgs": 177,
+          "list": 133,
+          "lookalike": 56
+        },
+        "qualified": {
+          "web": 73,
+          "portfolio": 11,
+          "orgs": 157,
+          "list": 127,
+          "lookalike": 50,
+          "jobs": 10
+        },
+        "enriched": {
+          "web": 39,
+          "portfolio": 5,
+          "orgs": 122,
+          "list": 113,
+          "lookalike": 35,
+          "jobs": 5
+        },
+        "reachable": {
+          "web": 23,
+          "orgs": 29,
+          "list": 20,
+          "lookalike": 14,
+          "portfolio": 2
+        },
+        "passed_judge": {
+          "list": 18,
+          "orgs": 26,
+          "web": 19,
+          "lookalike": 10,
+          "portfolio": 2
+        },
+        "shortlisted": {
+          "list": 18,
+          "orgs": 26,
+          "web": 19,
+          "lookalike": 10,
+          "portfolio": 2
+        }
+      },
+      "ledger": {
+        "jobs": {
+          "runs": 1,
+          "search_calls": 6,
+          "fetches": 41,
+          "llm_calls": 0,
+          "seconds": 85.73,
+          "found": 10,
+          "new": 10,
+          "qualified": 10
+        },
+        "portfolio": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 28,
+          "llm_calls": 10,
+          "seconds": 102.18,
+          "found": 12,
+          "new": 12,
+          "qualified": 12
+        },
+        "orgs": {
+          "runs": 3,
+          "search_calls": 63,
+          "fetches": 17,
+          "llm_calls": 54,
+          "seconds": 269.65,
+          "found": 212,
+          "new": 166,
+          "qualified": 166
+        },
+        "lookalike": {
+          "runs": 2,
+          "search_calls": 12,
+          "fetches": 9,
+          "llm_calls": 16,
+          "seconds": 79.11,
+          "found": 70,
+          "new": 39,
+          "qualified": 35
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Eximius VC",
+          "org": "Eximius VC",
+          "email": "pitches@eximiusvc.com",
+          "score": 0.8949,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "reasons": [
+            "India's only sector-differentiated pre-seed fund"
+          ]
+        },
+        {
+          "name": "3One4Capital",
+          "org": "3One4Capital",
+          "email": "hello@3one4capital.com",
+          "score": 0.8933,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "reasons": [
+            "Pre-seed to Series A focus including SaaS"
+          ]
+        },
+        {
+          "name": "StartupXseed",
+          "org": "StartupXseed",
+          "email": "ideas@startupxseed.in",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs",
+            "list"
+          ],
+          "reasons": [
+            "B2B early stage investor with sector agnostic but includes SaaS"
+          ]
+        },
+        {
+          "name": "BdsVC",
+          "org": "BdsVC",
+          "email": "info@bdsvc.com",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "BdsVC invests from pre-seed to Series A"
+          ]
+        },
+        {
+          "name": "Kalaari Capital",
+          "org": "Kalaari Capital",
+          "email": "info@kalaari.com",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Kalaari Capital is an early-stage, technology-focused VC in Bengaluru"
+          ]
+        },
+        {
+          "name": "Endiya",
+          "org": "Endiya",
+          "email": "contact@endiya.com",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Early-stage VC fund focused on enterprise and SaaS"
+          ]
+        },
+        {
+          "name": "PedalStart",
+          "org": "PedalStart",
+          "email": "connect@pedalstart.com",
+          "score": 0.8798,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Indian startup accelerator backing pre-seed founders"
+          ]
+        },
+        {
+          "name": "Venture Catalysts++",
+          "org": "Venture Catalysts++",
+          "email": "info@venturecatalysts.in",
+          "score": 0.8559,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "India's largest early-stage investment platform"
+          ]
+        },
+        {
+          "name": "Unicorn India Ventures (UIV)",
+          "org": "Unicorn India Ventures (UIV)",
+          "email": "info@unicornivc.com",
+          "score": 0.8474,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "reasons": [
+            "Early-stage VC focusing on SaaS and seed stage"
+          ]
+        },
+        {
+          "name": "PrimeVP",
+          "org": "PrimeVP",
+          "email": "info@primevp.in",
+          "score": 0.8389,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "reasons": [
+            "Early-stage VC backing SaaS startups"
+          ]
+        },
+        {
+          "name": "Hyderabad Angels",
+          "org": "Hyderabad Angels",
+          "email": "info@hyderabadangels.in",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "reasons": [
+            "Hyderabad Angels backs seed and pre-seed startups across India"
+          ]
+        },
+        {
+          "name": "100 Unicorns",
+          "org": "100 Unicorns",
+          "email": "info@100unicorns.in",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "100Unicorns provides seed funding and mentorship to early-stage startups in India"
+          ]
+        },
+        {
+          "name": "Startup Grants India",
+          "org": "Startup Grants India",
+          "email": "team@startupgrantsindia.com",
+          "score": 0.8372,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Lists 59 angel networks in India, many seed and pre-seed"
+          ]
+        },
+        {
+          "name": "Sasha Mirchandani",
+          "org": "Kae Capital",
+          "email": "sasha@kae-capital.com",
+          "score": 0.8224,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "reasons": [
+            "Pre-seed/seed focus including SaaS"
+          ]
+        },
+        {
+          "name": "Beta Boom",
+          "org": "Beta Boom",
+          "email": "hello@betaboom.com",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "reasons": [
+            "Pre-seed and seed VC fund"
+          ]
+        },
+        {
+          "name": "Scalable",
+          "org": "Scalable",
+          "email": "hello@scalable.ventures",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "reasons": [
+            "Venture studio building early-stage B2B SaaS startups"
+          ]
+        },
+        {
+          "name": "The Chennai Angels",
+          "org": "The Chennai Angels",
+          "email": "connect@thechennaiangels.com",
+          "score": 0.782,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "The Chennai Angels is a leading angel investment network in India"
+          ]
+        },
+        {
+          "name": "Good Capital Investment Group",
+          "org": "Good Capital Investment Group",
+          "email": "info@goodcapitalinvestmentgroup.com",
+          "score": 0.7642,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Pre-seed to seed focus on early-stage tech VC"
+          ]
+        },
+        {
+          "name": "Bharat Angels Networks",
+          "org": "Bharatangelsnetworks",
+          "email": "bharatangelsnetworks@gmail.com",
+          "score": 0.75,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Bharat Angels bridges Indian startups with global investors"
+          ]
+        },
+        {
+          "name": "Anand Lunia",
+          "org": "IndiaQuotient",
+          "email": "anand@indiaquotient.in",
+          "score": 0.75,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "reasons": [
+            "Early-stage investor backing SaaS and tech-led businesses"
+          ]
+        },
+        {
+          "name": "Ajuniorvc",
+          "org": "Ajuniorvc",
+          "email": "team@ajuniorvc.com",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Pre-seed VC fund investing in India"
+          ]
+        },
+        {
+          "name": "TGC Capital Partners",
+          "org": "TGC Capital Partners",
+          "email": "hello@tgccapitalpartners.com",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Invests in B2B SaaS startups in India"
+          ]
+        },
+        {
+          "name": "PitchDecks.in",
+          "org": "PitchDecks.in",
+          "email": "hello@pitchdecks.in",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Connects Indian startups with investors"
+          ]
+        },
+        {
+          "name": "Gayathry S",
+          "org": "Venture Center",
+          "email": "gayathry.s@venturecenter.co.in",
+          "score": 0.7,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Associated with Startup India Seed Fund Scheme"
+          ]
+        },
+        {
+          "name": "seedfund",
+          "org": "seedfund",
+          "email": "info@seedfund.in",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Seedfund pioneers early stage investment ecosystem in India"
+          ]
+        },
+        {
+          "name": "Indian Investment Network",
+          "org": "Indian Investment Network",
+          "email": "admin@investmentnetwork.in",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Connects entrepreneurs with angel investors in India"
+          ]
+        },
+        {
+          "name": "startupfunds.in",
+          "org": "startupfunds.in",
+          "email": "team@startupfunds.in",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "lookalike",
+            "orgs"
+          ],
+          "reasons": [
+            "Lists seed and pre-seed funding options for Indian startups"
+          ]
+        },
+        {
+          "name": "IIMCIP",
+          "org": "IIMCIP",
+          "email": "contact@iimcip.org",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Indian accelerator promoting entrepreneurship and innovation"
+          ]
+        },
+        {
+          "name": "Z47",
+          "org": "Z47",
+          "email": "namaste@z47.com",
+          "score": 0.6843,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Backs early-stage technology startups in India"
+          ]
+        },
+        {
+          "name": "Marwari Catalysts",
+          "org": "Marwari Catalysts",
+          "email": "office@marwaricatalysts.com",
+          "score": 0.6402,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Startup accelerator and venture studio in India"
+          ]
+        },
+        {
+          "name": "InvestHind",
+          "org": "InvestHind",
+          "email": "contact@investhind.com",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Gateway to India's top investors and startups"
+          ]
+        }
+      ],
+      "intake_playbook": "fundraising",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "B2B SaaS startups",
+        "early-stage venture capital",
+        "angel investment networks",
+        "pre-seed funding",
+        "seed funding"
+      ],
+      "intake_ask_type": "intro",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 31,
+        "pass_rate": 0.871,
+        "top_issues": [
+          [
+            "unsupported claim",
+            4
+          ]
+        ],
+        "avg_specificity": 4.81,
+        "avg_relevance": 4.84,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": [
+          "Specify the exact person or team for better clarity.",
+          "Clarify the specific funding process at PedalStart.",
+          "Mention specific interests of Venture Catalysts++ for better alignment.",
+          "Include a specific request for funding application details.",
+          "Add a specific mention of PrimeVP's investment criteria."
+        ]
+      },
+      "emails": [
+        {
+          "to": "pitches@eximiusvc.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hi Eximius,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, with 40 paying customers and Rs 25 lakh ARR. We are preparing to raise pre-seed funding to scale further.\n\nEximius VC invests in SaaS startups at the pre-seed and seed stages, which aligns with our current funding needs. Could you please share how I might apply for pre-seed or seed funding through Eximius Ventures or if an introduction to the relevant team member is possible? A brief call to discuss this would be appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@3one4capital.com",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS",
+          "body": "Hello 3One4Capital team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an ARR of Rs 25 lakh.\n\nI see that 3One4Capital invests in early-stage SaaS companies from pre-seed to Series A in India. I am exploring pre-seed or seed funding options to grow our business.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at 3One4Capital? I would appreciate any guidance on how to apply or engage with your fund.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "ideas@startupxseed.in",
+          "subject": "Introduction request for B2B SaaS seed funding",
+          "body": "Hello StartupXseed team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nI see that StartupXseed invests in early-stage B2B ventures across sectors including SaaS, which aligns with my current stage and product focus. I am exploring pre-seed or seed funding options to scale further.\n\nCould you please guide me on how to apply for funding or connect me with the appropriate contacts at StartupXseed who handle B2B SaaS startups? A brief introduction or information on your process would be greatly appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@bdsvc.com",
+          "subject": "Seeking pre-seed funding contacts at BdsVC",
+          "body": "Hello BdsVC team,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently looking to raise pre-seed funding to scale further. BdsVC\u2019s focus on early-stage SaaS startups in India aligns with our stage and sector.\n\nCould you please connect me with the person or team handling pre-seed or seed investments for B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@kalaari.com",
+          "subject": "Request for pre-seed investment contact at Kalaari",
+          "body": "Hello Kalaari Capital team,\n\nKalaari Capital's focus on early-stage tech startups aligns with my current stage as founder of a B2B SaaS startup.\n\nMy company provides invoice-reconciliation software, currently serving 40 paying customers and generating Rs 25 lakh in ARR.\n\nI am exploring pre-seed or seed funding options to support growth and would appreciate if you could connect me with the person or team managing investments in B2B SaaS startups at Kalaari Capital.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@endiya.com",
+          "subject": "Introduction request for seed funding at Endiya",
+          "body": "Hello Endiya team,\n\nI am founder of a B2B SaaS startup offering invoice-reconciliation services. We have 40 paying customers and generate Rs 25 lakh ARR.\n\nI understand Endiya focuses on early-stage investments in enterprise and SaaS startups, including seed rounds for Indian product companies. While my startup operates in B2B SaaS, I am currently exploring pre-seed or seed funding options.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at Endiya? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the exact person or team for better clarity."
+          }
+        },
+        {
+          "to": "connect@pedalstart.com",
+          "subject": "Pre-seed funding inquiry for B2B SaaS startup",
+          "body": "Hello PedalStart team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and generate Rs 25 lakh in annual recurring revenue.\n\nI am interested in raising pre-seed funding and understand PedalStart leads rounds with $150K cheques for idea-stage and pre-seed founders. Given your focus on supporting startups from idea to next raise, I would appreciate any information or introductions to Indian investors who back B2B SaaS startups at the pre-seed or seed stage.\n\nCould you please advise on how to apply for funding through PedalStart or connect me with the relevant contacts?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify the specific funding process at PedalStart."
+          }
+        },
+        {
+          "to": "info@venturecatalysts.in",
+          "subject": "Seeking pre-seed funding info for B2B SaaS startup",
+          "body": "Hello Venture Catalysts++ team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nI am exploring pre-seed or seed funding opportunities with Indian investors who support B2B SaaS startups. Given Venture Catalysts++ is India's largest early-stage investment platform providing capital and development support, I wanted to reach out.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific interests of Venture Catalysts++ for better alignment."
+          }
+        },
+        {
+          "to": "info@unicornivc.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hello Unicorn India Ventures team,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently exploring pre-seed or seed funding opportunities to grow our B2B SaaS business.\n\nSince Unicorn India Ventures focuses on early-stage technology-driven startups including SaaS at seed and early growth, could you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups?\n\nI would appreciate any guidance on how to apply or whom to contact for such funding at your firm.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a specific request for funding application details."
+          }
+        },
+        {
+          "to": "info@primevp.in",
+          "subject": "Seeking pre-seed funding guidance for B2B SaaS",
+          "body": "Hello PrimeVP team,\n\nPrimeVP backs early-stage SaaS startups, with over 50 investments and a focus on seed rounds in fintech, SaaS, and edtech.\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation software, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I am interested in exploring funding opportunities and would appreciate guidance on how to apply.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Add a specific mention of PrimeVP's investment criteria."
+          }
+        },
+        {
+          "to": "info@hyderabadangels.in",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS startup",
+          "body": "Hi Hyderabad,\n\nHyderabad Angels' long-standing role in backing seed and pre-seed startups across India caught my attention.\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at Hyderabad Angels? I am exploring options to raise pre-seed funding and would appreciate guidance on how to apply or proceed.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@100unicorns.in",
+          "subject": "Intro request for seed funding at 100 Unicorns",
+          "body": "Hello 100 Unicorns team,\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation software. We currently serve 40 paying customers and have reached Rs 25 lakh in ARR.\n\nI understand 100 Unicorns supports early-stage startups in India with seed funding and mentorship. I am looking to raise pre-seed or seed funding to grow further.\n\nCould you connect me with the person or team handling investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed with 100 Unicorns.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "team@startupgrantsindia.com",
+          "subject": "Connecting with Indian B2B SaaS seed funds",
+          "body": "Hello Startup Grants India team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We have 40 paying customers and an annual recurring revenue of Rs 25 lakh.\n\nI understand Startup Grants India lists 59 angel networks in India, with many focused on seed and pre-seed stages. I am looking to raise pre-seed or seed funding from investors who back B2B SaaS startups in India.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? A brief introduction or guidance on how to apply would be appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "sasha@kae-capital.com",
+          "subject": "Seeking Pre-seed Funding for B2B SaaS Startup",
+          "body": "Hi Sasha,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nI see that Kae Capital invests in pre-seed and seed rounds for SaaS companies, which aligns with my current funding stage.\n\nCould you please advise on how to apply for pre-seed or seed funding with Kae Capital, or introduce me to the relevant contacts for startups like mine?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@betaboom.com",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS",
+          "body": "Hi Beta,\n\nI have founded a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with Rs 25 lakh ARR.\n\nI am exploring pre-seed or seed funding options from Indian investors who back B2B SaaS companies. Could you connect me with the person or team handling such investments at Beta Boom?\n\nI look forward to any guidance or an introduction to the relevant contact for raising pre-seed funding.\n\nBest regards,\nTest Founder",
+          "issues": [
+            "unsupported claim: I am exploring pre-seed or seed funding options from Indian investors who back B2B SaaS companies."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@scalable.ventures",
+          "subject": "Intro request: pre-seed investors for SaaS startups",
+          "body": "Hello Scalable team,\n\nI am the founder of an invoice-reconciliation SaaS with 40 paying customers and Rs 25 lakh ARR.\n\nYour venture studio supports early-stage B2B SaaS startups through hands-on help and proven playbooks, which aligns with my current stage.\n\nCould you connect me with the person or team handling pre-seed or seed investments for B2B SaaS startups at Scalable? I would appreciate guidance on how to apply or discuss funding opportunities.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "connect@thechennaiangels.com",
+          "subject": "Funding options for B2B SaaS startups",
+          "body": "Hello Chennai Angels team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation with 40 paying customers and Rs 25 lakh ARR.\n\nThe Chennai Angels is a leading angel investment network in India, known for investing in early-stage startups including B2B SaaS.\n\nCould you please share how startups like mine can apply for pre-seed or seed funding through your network, or introduce me to investors interested in B2B SaaS? A short call or guidance on next steps would be appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [
+            "unsupported claim: The Chennai Angels is a leading angel investment network in India, known for investing in early-stage startups including B2B SaaS."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@goodcapitalinvestmentgroup.com",
+          "subject": "Connecting on early-stage B2B SaaS investment",
+          "body": "Hello Good Capital Investment Group team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and have achieved Rs 25 lakh in ARR.\n\nI understand Good Capital Investment Group focuses on pre-seed to seed investments in early-stage technology ventures, including enterprise software. While my startup is not in fintech or AI, it operates in enterprise software, which aligns with your investment areas.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or present our startup for funding consideration.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "bharatangelsnetworks@gmail.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hi Bharat,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and have achieved Rs 25 lakh in ARR.\n\nI am looking for pre-seed or seed funding from investors in India who support B2B SaaS startups. Given Bharat Angels Networks' role as an investment platform connecting Indian startups with global investors, I believe you could provide guidance or an introduction to relevant investors.\n\nCould you please share how I might apply for funding through your network or connect me with appropriate contacts? I am available for a brief call if that helps.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "anand@indiaquotient.in",
+          "subject": "Seeking pre-seed funding advice for B2B SaaS",
+          "body": "Hi Anand,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR. We are exploring pre-seed funding options to scale our business.\n\nIndia Quotient is known as an early-stage investor supporting disruptive businesses aimed at Indian consumers, including consumer internet and tech-led companies at seed and early traction stages.\n\nCould you please advise how to apply for pre-seed or seed funding through India Quotient or suggest relevant contacts in India focused on B2B SaaS startups? A brief introduction or guidance on next steps would be appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [
+            "unsupported claim: India Quotient is known as an early-stage investor supporting disruptive businesses aimed at Indian consumers, including consumer internet and tech-led companie"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "team@ajuniorvc.com",
+          "subject": "Inquiry on pre-seed funding for B2B SaaS startup",
+          "body": "Hello Ajuniorvc team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We have 40 paying customers and generate Rs 25 lakh in annual recurring revenue.\n\nSince Ajuniorvc is a SEBI-regulated pre-seed fund investing in India and supports early-stage startups like ours, I am reaching out to learn more about your pre-seed funding process.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@tgccapitalpartners.com",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS",
+          "body": "Hello TGC Capital Partners team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and have reached Rs 25 lakh ARR.\n\nI am exploring pre-seed or seed funding opportunities to scale further.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or initiate discussions.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@pitchdecks.in",
+          "subject": "Request: Connect to pre-seed B2B SaaS investors",
+          "body": "Hello PitchDecks.in team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with Rs 25 lakh ARR.\n\nI understand PitchDecks.in connects Indian startups with investors, including those leading pre-seed and seed rounds with a software or B2B thesis.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at your organisation? I am looking to explore funding opportunities relevant to my startup stage.\n\nThank you for any guidance or introduction you can provide.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "gayathry.s@venturecenter.co.in",
+          "subject": "Inquiry about seed funding for B2B SaaS startup",
+          "body": "Hi Gayathry,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nI am exploring options to raise pre-seed or seed funding to scale our product and would like to understand how to approach Indian investors who back B2B SaaS startups.\n\nCould you please guide me on how to apply or connect me with the appropriate contacts within seed funding networks or venture funds? A brief introduction or information on the application process would be very helpful.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@seedfund.in",
+          "subject": "Intro request for early-stage SaaS investment",
+          "body": "Hello seedfund team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nSeedfund\u2019s two decades of experience in early-stage investments and focus on determined teams with grounded plans aligns with my current funding needs. I am exploring pre-seed or seed funding options to scale our operations.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed with Seedfund for potential investment.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "admin@investmentnetwork.in",
+          "subject": "Seeking connections for pre-seed B2B SaaS funding",
+          "body": "Hello Indian Investment Network team,\n\nI am founder of a B2B SaaS startup focused on invoice reconciliation. We have 40 paying customers and generate Rs 25 lakh ARR.\n\nI am looking to raise pre-seed or seed funding from Indian investors who support B2B SaaS startups. Since the India Angel Investment Network connects entrepreneurs with angel investors in India, I am reaching out to ask if you could connect me with the person or team handling pre-seed or seed investments in this sector.\n\nCould you please direct me to the appropriate contact or provide information on how to apply for such funding through your network?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "team@startupfunds.in",
+          "subject": "Connecting on seed funding for SaaS startup",
+          "body": "Hello startupfunds.in team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently have 40 paying customers and an annual recurring revenue of Rs 25 lakh.\n\nI am exploring options to raise pre-seed funding to scale further and came across your platform listing various funding opportunities for Indian startups.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at your organization? I would appreciate any guidance on how to apply or proceed with funding opportunities listed on startupfunds.in.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@iimcip.org",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS",
+          "body": "Hello IIMCIP team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently have 40 paying customers and an annual recurring revenue of Rs 25 lakh.\n\nIIM Calcutta Innovation Park promotes entrepreneurship and innovation in India. As we look to raise pre-seed funding to grow our SaaS business, I would appreciate it if you could connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups.\n\nCould you please direct me to the right contact or share how to apply for such funding through your network?\n\nBest regards,\nTest Founder",
+          "issues": [
+            "unsupported claim: IIM Calcutta Innovation Park promotes entrepreneurship and innovation in India."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "namaste@z47.com",
+          "subject": "Introduction request for early-stage B2B SaaS funding",
+          "body": "Hello Z47 team,\n\nZ47 supports technology startups from their earliest stages, focusing on Indian consumer and global enterprise markets. I am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently raising pre-seed funding to scale our B2B SaaS product. Given your focus on early-stage technology startups, I would appreciate an introduction or guidance on how to apply for pre-seed or seed funding from Indian investors who back B2B SaaS startups.\n\nWould you be open to a brief call or sharing the best next steps for engaging with your network?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "office@marwaricatalysts.com",
+          "subject": "Connecting with pre-seed investors in India",
+          "body": "Hi Marwari,\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation services. We currently have 40 paying customers and an ARR of Rs 25 lakh.\n\nI understand Marwari Catalysts supports over 200 startups as a founder-first accelerator and venture studio focused on Tier 2 & 3 founders. I am exploring pre-seed or seed funding options in India for B2B SaaS companies like ours.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or pitch to your fund or network.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@investhind.com",
+          "subject": "Seeking pre-seed investment contacts at InvestHind",
+          "body": "Hello InvestHind team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and have reached an annual recurring revenue of Rs 25 lakh.\n\nI understand InvestHind connects startups with top investors in India. I am looking to raise pre-seed funding to grow further and would like to know how to apply or get introduced to investors interested in B2B SaaS startups.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in this sector? A brief introduction or guidance on the next steps would be appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None, this email is well-crafted."
+          }
+        }
+      ],
+      "name": "stress_scale_vc_50",
+      "split": "stress",
+      "playbook": "fundraising",
+      "target": 50
+    }
+  ],
+  "summary": {
+    "scenarios": 2,
+    "failed": 0,
+    "good@K": 52,
+    "good_reachable@K": 47,
+    "good_verified@K": 0,
+    "precision@K": 0.59,
+    "mean_score": 0.8,
+    "distinct_orgs": 62,
+    "proof_rate": 0.581,
+    "reachable": 101,
+    "search_calls": 194,
+    "llm_paid_calls": 248,
+    "llm_usd": 0.1479,
+    "seconds": 1544.1,
+    "intake_playbook_ok": "2/2",
+    "intake_where_ok": "2/2",
+    "drafts": 62,
+    "draft_pass_rate": 0.435,
+    "would_send_rate": 0.887,
+    "usd_per_good": 0.0066,
+    "judge_precision": 0.578,
+    "judge_precision_ci95": [
+      0.475,
+      0.675
+    ],
+    "sendable_precision": 0.522,
+    "verified_precision": 0.0
+  }
+}
