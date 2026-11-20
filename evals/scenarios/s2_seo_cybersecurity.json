@@ -1,0 +1,35 @@
+{
+  "name": "s2_seo_cybersecurity",
+  "split": "stress",
+  "playbook": "seo_guest_posts",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Place a guest post on cybersecurity blogs",
+    "ask": "Publish a guest article",
+    "persona": {
+      "description": "Cybersecurity blogs and publications that accept contributed articles",
+      "roles": [
+        "Editor"
+      ]
+    },
+    "topics": [
+      "cybersecurity blog",
+      "write for us security"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Security engineer",
+    "summary": "Wrote a practical guide to securing GitHub Actions; 6 years in AppSec"
+  },
+  "facts": [
+    "guide to securing GitHub Actions",
+    "6 years in application security"
+  ],
+  "prompt": "I'm an AppSec engineer and wrote a guide to securing GitHub Actions; find cybersecurity blogs that accept guest articles",
+  "playbook_ok": [
+    "seo_guest_posts"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "s2_awards_hardware",
+  "split": "stress",
+  "playbook": "awards_cfps",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Enter an early-stage hardware startup in competitions",
+    "ask": "Submit our application",
+    "persona": {
+      "description": "Competitions, challenges and awards for early-stage hardware or deeptech startups in India",
+      "roles": [
+        "Programme manager"
+      ]
+    },
+    "topics": [
+      "hardware startup competition",
+      "deeptech challenge"
+    ],
+    "locations": [
+      "India"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Startup founder",
+    "summary": "Pre-seed hardware startup building low-cost air quality sensors; prototype deployed in 20 schools"
+  },
+  "facts": [
+    "low-cost air quality sensors",
+    "prototype in 20 schools"
+  ],
+  "prompt": "we're a pre-seed air quality sensor startup in India; find competitions, challenges or awards for early-stage hardware startups we can apply to",
+  "playbook_ok": [
+    "awards_cfps",
+    "accelerators",
+    "grants"
+  ]
+}

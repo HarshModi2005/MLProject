@@ -1,0 +1,38 @@
+{
+  "name": "s2_volunteer_animal_pune",
+  "split": "stress",
+  "playbook": "volunteering",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Find NGOs that need weekend volunteers",
+    "ask": "A weekend volunteering slot",
+    "persona": {
+      "description": "Animal welfare shelters and NGOs in Pune",
+      "roles": [
+        "Volunteer coordinator",
+        "Founder"
+      ]
+    },
+    "topics": [
+      "animal shelter",
+      "animal rescue"
+    ],
+    "locations": [
+      "Pune"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Software engineer",
+    "summary": "Can give two weekends a month; experience with web design and fundraising posters"
+  },
+  "facts": [
+    "two weekends a month",
+    "can design posters and a website"
+  ],
+  "prompt": "I'm a software engineer in Pune who wants to volunteer two weekends a month; find animal shelters or rescue NGOs that need help",
+  "playbook_ok": [
+    "volunteering"
+  ]
+}

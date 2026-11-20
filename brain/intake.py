@@ -284,11 +284,28 @@ def _merge_questions(data: Dict[str, Any], extra: List[Dict[str, str]], limit: i
     return out[:limit]
 
 
+_PUBLIC_BUYER = re.compile(r"\b(municipal(ity|ities)?|municipal corporations?|nagar ?palika|mahapalika|panchayats?|water boards?|"
+                           r"public (works|utilit\w+|sector)|government (departments?|agenc\w+|bod\w+|offices?)|"
+                           r"ministr(y|ies)|state (electricity|transport|water) \w+|civic bod\w+|city councils?)\b", re.I)
+
+
+def public_buyer_playbook(name: str, data: Dict[str, Any]) -> str:
+    """A request to sell to municipal corporations or water boards was routed to generic B2B sales, which searches
+    Google Maps and returns private water-treatment firms (stress_municipal_iot: 0 of 12). When the TARGETS are public
+    bodies, the government playbook is the one that knows tenders, procurement officers and public-body inboxes."""
+    if name != "b2b_sales":
+        return name
+    persona = data.get("persona") if isinstance(data.get("persona"), dict) else {}
+    text = f"{persona.get('description') or ''} {data.get('target_brief') or ''}"
+    return "government_tenders" if _PUBLIC_BUYER.search(text) else name
+
+
 def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, target_count: Optional[int],
           locations: Optional[List[str]], playbook: Optional[str]) -> CampaignSpec:
     name = playbook or (data.get("playbook") or data.get("pack"))
     if name == "general" and data.get("pack") in PLAYBOOKS and data.get("pack") != "general":
         name = data.get("pack")
+    name = public_buyer_playbook(name, data)
     pb = get_playbook(name if name in PLAYBOOKS else "general")
     locs, remote = normalise_locations(locations if locations else [str(x) for x in data.get("locations") or []])
     countries, regions = split_locations(locs)
@@ -390,6 +407,25 @@ def _offer(data: Dict[str, Any]) -> Offer:
     d = data.get("offer") if isinstance(data.get("offer"), dict) else {}
     return Offer(value_prop=_str(d.get("value_prop")), terms=_str(d.get("terms")), audience=_str(d.get("audience")),
                  proof_points=[squash(str(p), 200) for p in d.get("proof_points") or [] if str(p).strip()][:6])
+
+
+_SIZE_RANGE = re.compile(r"\b(\d[\d,]*)\s*(?:to|-|–|and)\s*(\d[\d,]*)\s*(?:\+\s*)?(?:employees|people|staff|headcount)\b", re.I)
+_SIZE_OVER = re.compile(r"\b(?:over|more than|above|at least|>)\s*(\d[\d,]*)\s*(?:\+\s*)?(?:employees|people|staff)\b", re.I)
+_SIZE_UNDER = re.compile(r"\b(?:under|fewer than|less than|below|at most|<)\s*(\d[\d,]*)\s*(?:employees|people|staff)\b", re.I)
+
+
+def size_from_text(text: str) -> tuple:
+    """(size_min, size_max) in employees when the request states them in words. The model leaves these out often
+    enough (a stage-judge run dropped "50 to 500 employees") that a plain pattern backs it up."""
+    def num(x: str) -> int:
+        return int(x.replace(",", ""))
+
+    m = _SIZE_RANGE.search(text or "")
+    if m:
+        lo, hi = sorted((num(m.group(1)), num(m.group(2))))
+        return lo, hi
+    over, under = _SIZE_OVER.search(text or ""), _SIZE_UNDER.search(text or "")
+    return (num(over.group(1)) if over else None, num(under.group(1)) if under else None)
 
 
 def _constraints(data: Dict[str, Any], remote: Optional[bool]) -> Constraints:
@@ -616,6 +652,8 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
     if profile.get("language") and not data.get("language"):
         data["language"] = profile["language"]
     spec = build(data, sender, campaign_id=cid, target_count=target_count, locations=locations, playbook=playbook)
+    if spec.constraints.size_min is None and spec.constraints.size_max is None:
+        spec.constraints.size_min, spec.constraints.size_max = size_from_text(prompt)
     ctx.understanding = squash(str(data.get("understanding") or ""), 600)
     ctx.target_brief = spec.persona.description
     ctx.assumptions = [str(a) for a in data.get("assumptions") or []][:10]

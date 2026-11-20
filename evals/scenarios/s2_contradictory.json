@@ -1,0 +1,40 @@
+{
+  "name": "s2_contradictory",
+  "split": "stress",
+  "playbook": "b2b_sales",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Sell solar inverters to installers",
+    "ask": "A pricing call",
+    "persona": {
+      "description": "Small solar installers in Kerala and Tamil Nadu, not distributors and not manufacturers",
+      "roles": [
+        "Owner"
+      ]
+    },
+    "topics": [
+      "solar installation",
+      "rooftop solar"
+    ],
+    "locations": [
+      "Kerala",
+      "Tamil Nadu"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Inverter brand",
+    "summary": "Make 3-10 kW string inverters, 5 year warranty"
+  },
+  "facts": [
+    "3-10 kW string inverters",
+    "5 year warranty"
+  ],
+  "prompt": "we make 3 to 10 kW solar inverters; find small installers (not distributors, not manufacturers) in Kerala and Tamil Nadu, and also large EPC firms with over 500 employees",
+  "playbook_ok": [
+    "b2b_sales",
+    "distributors",
+    "partnerships"
+  ]
+}

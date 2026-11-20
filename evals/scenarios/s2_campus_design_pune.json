@@ -1,0 +1,40 @@
+{
+  "name": "s2_campus_design_pune",
+  "split": "stress",
+  "playbook": "campus_recruiting",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Recruit design interns from colleges",
+    "ask": "Permission to present to the design department",
+    "persona": {
+      "description": "Design colleges and university design departments in Pune and Mumbai",
+      "roles": [
+        "Placement officer",
+        "Head of department"
+      ]
+    },
+    "topics": [
+      "industrial design",
+      "product design college"
+    ],
+    "locations": [
+      "Pune",
+      "Mumbai"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Hiring manager",
+    "summary": "Product design studio hiring 4 interns for six months"
+  },
+  "facts": [
+    "hiring 4 design interns",
+    "six-month paid internship"
+  ],
+  "prompt": "we are a product design studio hiring four paid interns; find design colleges and departments in Pune and Mumbai whose placement cell we should contact",
+  "playbook_ok": [
+    "campus_recruiting",
+    "school_outreach"
+  ]
+}

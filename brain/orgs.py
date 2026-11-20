@@ -344,6 +344,12 @@ def _role_fits(title: Optional[str], roles: List[str]) -> bool:
     return any(r.lower() in t or t in r.lower() for r in roles)
 
 
+# Pages that are about an organisation but are not its own website (a result for "<name> official website" can be one).
+NOT_OWN_SITE = {"google.com", "facebook.com", "instagram.com", "linkedin.com", "youtube.com", "twitter.com", "x.com",
+                "wikipedia.org", "justdial.com", "indiamart.com", "tripadvisor.com", "yelp.com", "pinterest.com",
+                "crunchbase.com", "zaubacorp.com", "tofler.in"}
+
+
 class OrgEnricher:
     def __init__(self, fetcher: Fetcher, search: WebSearch, settings: Settings, find_people: bool = False,
                  max_people_searches: int = 6, store=None, accept_prior: bool = False):
@@ -353,7 +359,7 @@ class OrgEnricher:
         self.max_people_searches = max_people_searches
         self._people_searches = 0
         self._resolves = 0
-        self.max_resolves = 8
+        self.max_resolves = 8  # raised to follow the campaign size in enrich_all
         self._lock = threading.Lock()
         self._pending: Dict[int, tuple] = {}  # organisations waiting for a decision-maker search (enrich_all)
         self.stats = {"orgs_read": 0, "sites_resolved": 0, "person_contacts": 0, "inbox_contacts": 0,
@@ -424,7 +430,9 @@ class OrgEnricher:
         return c
 
     def _resolve_site(self, org: Contact, spec: CampaignSpec) -> None:
-        """Find the official website of an organisation known only by name (one search, capped per campaign)."""
+        """Find the official website of an organisation known only by name (one search, capped per campaign).
+        A hit is accepted when the domain carries a word of the name, or, for acronym domains (unal.edu.co for
+        "Universidad Nacional de Colombia"), when the result's title or snippet names the organisation in full."""
         with self._lock:
             if self._resolves >= self.max_resolves or not _plausible_org_name(org.name):
                 return
@@ -432,12 +440,14 @@ class OrgEnricher:
         place = (spec.regions or [""])[0]
         hits = self.search.search(f'"{org.name}" {place} official website', n=5)
         tokens = [t for t in re.findall(r"[a-z0-9]+", org.name.lower()) if len(t) > 2]
-        for h in hits:
+        full = " ".join(re.findall(r"[a-z0-9]+", org.name.lower()))
+        for rank, h in enumerate(hits):
             dom = registrable_domain(h.url)
             label = dom.split(".")[0]
-            if is_aggregator(dom):
+            if is_aggregator(domain=dom) or dom in NOT_OWN_SITE:
                 continue
-            if any(t in label for t in tokens) or label in "".join(tokens):
+            said = " ".join(re.findall(r"[a-z0-9]+", f"{h.title} {h.snippet}".lower()))
+            if any(t in label for t in tokens) or label in "".join(tokens) or (rank < 2 and len(full) > 8 and full in said):
                 org.org_domain = dom
                 org.country = org.country or country_from_domain(dom)
                 org.add_url(f"https://{host_of(h.url)}/")
@@ -507,6 +517,9 @@ class OrgEnricher:
         go to the best-ranked organisations in order rather than to whichever thread gets there first."""
         if "channel_verified" in org.flags and org.emails:
             return org  # the channel already gave a published address (e.g. a podcast feed): nothing to look up
+        if org.org_domain in NOT_OWN_SITE:  # a map or social page is not the organisation's own site
+            org.add_url(f"https://{org.org_domain}/")
+            org.org_domain = None
         if not org.org_domain:
             self._resolve_site(org, spec)
         if not org.org_domain:
@@ -643,6 +656,9 @@ class OrgEnricher:
 
     def enrich_all(self, orgs: List[Contact], spec: CampaignSpec, pack: Pack) -> List[Contact]:
         roles = spec.profile.decision_roles or spec.persona.roles or pack.default_roles
+        # One search per organisation known only by name. A fixed 8 left 106 of ~300 valid, named candidates in the
+        # stress runs with no website and so no address; the cap now follows the size of the campaign.
+        self.max_resolves = max(self.max_resolves, min(80, 4 * spec.target_count))
 
         def one(o: Contact) -> Contact:
             try:

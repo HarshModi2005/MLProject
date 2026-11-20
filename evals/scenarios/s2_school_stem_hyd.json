@@ -1,0 +1,38 @@
+{
+  "name": "s2_school_stem_hyd",
+  "split": "stress",
+  "playbook": "school_outreach",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Run a free robotics workshop",
+    "ask": "Permission to run a one-hour workshop",
+    "persona": {
+      "description": "CBSE and ICSE schools in Hyderabad with a middle-school STEM or robotics club",
+      "roles": [
+        "Principal",
+        "Head of STEM"
+      ]
+    },
+    "topics": [
+      "school robotics club",
+      "STEM workshop"
+    ],
+    "locations": [
+      "Hyderabad"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Robotics educator",
+    "summary": "Taught 1,500 students; kit costs schools nothing for the pilot"
+  },
+  "facts": [
+    "taught 1,500 students",
+    "free pilot workshop"
+  ],
+  "prompt": "I run robotics workshops for kids; find CBSE or ICSE schools in Hyderabad that would host a free one-hour workshop",
+  "playbook_ok": [
+    "school_outreach"
+  ]
+}

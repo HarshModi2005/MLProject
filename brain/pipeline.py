@@ -380,8 +380,11 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         store.checkpoint(spec.id, "discover", contacts)
         store.save_context(spec.id, ctx)
         progress(f"discover: {funnel['found_raw']} records → {len(contacts)} unique candidates")
+    problem = deps.search.provider_problem() if hasattr(deps.search, "provider_problem") else ""
+    if problem:
+        result.warnings.insert(0, problem)
     if not contacts:
-        result.warnings.append("Discovery found nobody. Broaden the topics or locations.")
+        result.warnings.append("Discovery found nobody." + ("" if problem else " Broaden the topics or locations."))
         return finish("empty")
     if last == 0:
         return finish("partial")

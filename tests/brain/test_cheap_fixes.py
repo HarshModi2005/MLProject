@@ -172,3 +172,90 @@ def test_inbox_rule_keeps_the_main_ask():
 @pytest.mark.parametrize("address", ["notificacionesjudiciales@unipiloto.edu.co", "merchant@atome.sg", "legal@x.com"])
 def test_legal_and_merchant_desks_are_service_addresses(address):
     assert is_service_address(address)
+
+
+# ── stage-judge findings: valid targets lost because no website was resolved ─────────────────────────────────
+
+class _FakeSearch:
+    def __init__(self, hits):
+        self.hits, self.queries = hits, []
+
+    def search(self, q, n=5, raw=False):
+        self.queries.append(q)
+        return self.hits
+
+
+def _enricher(hits):
+    from brain.orgs import OrgEnricher
+    from brain.settings import Settings
+
+    return OrgEnricher(fetcher=None, search=_FakeSearch(hits), settings=Settings())
+
+
+def test_acronym_domain_is_resolved_from_the_result_title():
+    from brain.sources.websearch import Hit
+
+    e = _enricher([Hit("https://unal.edu.co/", "Universidad Nacional de Colombia - Sede Bogotá", "")])
+    org = Contact(kind="org", name="Universidad Nacional de Colombia")
+    e._resolve_site(org, CampaignSpec(id="c"))
+    assert org.org_domain == "unal.edu.co"
+
+
+def test_directory_and_social_results_are_not_the_website():
+    from brain.sources.websearch import Hit
+
+    hits = [Hit("https://www.justdial.com/Jaipur/Sony-Fashion", "Sony Fashion - Justdial", ""),
+            Hit("https://www.facebook.com/sonyfashion", "Sony Fashion", "")]
+    e = _enricher(hits)
+    org = Contact(kind="org", name="Sony Fashion")
+    e._resolve_site(org, CampaignSpec(id="c"))
+    assert org.org_domain is None
+
+
+def test_resolution_cap_follows_the_campaign_size():
+    from brain.packs import get_pack
+
+    e = _enricher([])
+    e.enrich_all([], CampaignSpec(id="c", target_count=30), get_pack("general"))
+    assert e.max_resolves == 80 or e.max_resolves >= 30 * 3
+
+
+def test_size_limits_are_read_from_the_request():
+    from brain.intake import size_from_text
+
+    assert size_from_text("fintechs with 50 to 500 employees who might hire") == (50, 500)
+    assert size_from_text("companies with over 1,000 employees") == (1000, None)
+    assert size_from_text("startups under 20 people") == (None, 20)
+    assert size_from_text("find clinics in Pune") == (None, None)
+
+
+def test_search_provider_failures_are_reported_not_swallowed():
+    import httpx
+
+    from brain.cache import Cache
+    from brain.settings import Settings
+    from brain.sources.websearch import WebSearch
+
+    def handler(request):
+        return httpx.Response(400, json={"message": "Not enough credits", "statusCode": 400})
+
+    st = Settings()
+    st.serper_api_key = "k"
+    ws = WebSearch(st, Cache(), httpx.Client(transport=httpx.MockTransport(handler)))
+    for i in range(4):
+        assert ws.search(f"query {i}") == []
+    msg = ws.provider_problem()
+    assert "4 of 4" in msg and "Not enough credits" in msg and "not because nobody matches" in msg
+    ok = WebSearch(st, Cache(), httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(200, json={"organic": []}))))
+    ok.search("fine query")
+    assert ok.provider_problem() == ""
+
+
+def test_public_bodies_as_targets_use_the_government_playbook():
+    from brain.intake import public_buyer_playbook
+
+    water = {"persona": {"description": "Decision makers responsible for water management in municipal corporations or water boards"}}
+    assert public_buyer_playbook("b2b_sales", water) == "government_tenders"
+    clinics = {"persona": {"description": "Owners of independent dental clinics"}}
+    assert public_buyer_playbook("b2b_sales", clinics) == "b2b_sales"
+    assert public_buyer_playbook("investors", water) == "investors"  # only generic sales is redirected

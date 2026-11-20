@@ -1,0 +1,40 @@
+{
+  "name": "s2_brand_deals_travel",
+  "split": "stress",
+  "playbook": "brand_deals",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Get brand sponsorships for a budget travel channel",
+    "ask": "A call about a sponsored video",
+    "persona": {
+      "description": "Budget travel, backpacking gear and travel-booking brands in India that sponsor YouTube creators",
+      "roles": [
+        "Influencer marketing manager",
+        "Marketing head"
+      ]
+    },
+    "topics": [
+      "budget travel",
+      "backpacking gear",
+      "travel booking"
+    ],
+    "locations": [
+      "India"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "YouTube creator",
+    "summary": "Budget travel channel, 85k subscribers, 40% viewers aged 18-24"
+  },
+  "facts": [
+    "85k subscribers",
+    "40% of viewers aged 18-24"
+  ],
+  "prompt": "I run a budget travel YouTube channel with 85k subscribers; find travel, backpacking and booking brands in India that sponsor creators",
+  "playbook_ok": [
+    "brand_deals",
+    "partnerships"
+  ]
+}

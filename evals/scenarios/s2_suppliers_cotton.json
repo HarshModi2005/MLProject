@@ -1,0 +1,38 @@
+{
+  "name": "s2_suppliers_cotton",
+  "split": "stress",
+  "playbook": "suppliers",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Source organic cotton fabric",
+    "ask": "A quote and minimum order quantity",
+    "persona": {
+      "description": "Certified organic cotton fabric and yarn manufacturers in Tamil Nadu and Gujarat",
+      "roles": [
+        "Sales head"
+      ]
+    },
+    "topics": [
+      "GOTS organic cotton fabric",
+      "organic cotton yarn"
+    ],
+    "locations": [
+      "Tamil Nadu",
+      "Gujarat"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "D2C apparel founder",
+    "summary": "Small baby clothing brand; first order 2,000 metres"
+  },
+  "facts": [
+    "baby clothing brand",
+    "first order 2,000 metres"
+  ],
+  "prompt": "we make baby clothes and need GOTS-certified organic cotton fabric suppliers in Tamil Nadu or Gujarat for a 2,000 metre first order",
+  "playbook_ok": [
+    "suppliers"
+  ]
+}

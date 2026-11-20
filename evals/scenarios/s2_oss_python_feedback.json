@@ -1,0 +1,37 @@
+{
+  "name": "s2_oss_python_feedback",
+  "split": "stress",
+  "playbook": "oss_maintainers",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Get API feedback on a new Python library",
+    "ask": "A 15-minute look at the API and one piece of feedback",
+    "persona": {
+      "description": "Maintainers of popular Python data-validation or CLI libraries",
+      "roles": [
+        "Maintainer"
+      ]
+    },
+    "topics": [
+      "python data validation",
+      "python cli library"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Solo developer",
+    "summary": "Built a small Python library for typed config loading; 400 GitHub stars"
+  },
+  "facts": [
+    "400 GitHub stars",
+    "typed config loading for Python"
+  ],
+  "prompt": "I built a typed config-loading library for Python; find maintainers of popular Python validation or CLI libraries who could give API feedback",
+  "playbook_ok": [
+    "oss_maintainers",
+    "recruiting",
+    "general"
+  ]
+}

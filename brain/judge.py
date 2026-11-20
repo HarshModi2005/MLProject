@@ -36,6 +36,9 @@ product, score 0. Also score 0 for publishers, directories and media sites that 
 Role in the ask matters. For asks to distribute, resell, partner, sponsor, buy, invest or hire, an organisation that
 makes or sells the SAME thing as the sender (a competitor) is not a fit, and neither is a directory, ranking, marketplace or
 publisher that only lists or covers organisations: set "competitor_or_directory" true and score at most 25.
+Centrality matters for people. Their MAIN line of work must be the topic. A person whose main field is another one (chip design,
+bioinformatics, philosophy of mind, speech and hearing) and who has a paper or two touching the topic is "right field but wrong
+focus": 40-65, not 80+. Do not score by how many papers or how senior; score by how central the topic is to what they do.
 Geography matters. If a target geography is given and the candidate is clearly based or active only elsewhere, set
 "region_ok" false (true if it fits, null if the evidence does not say) and score at most 40.
 
