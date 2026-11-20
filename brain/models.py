@@ -129,6 +129,11 @@ class CampaignSpec(BaseModel):
     language: str = ""  # language of the emails; "" = English
     playbook_confidence: Optional[float] = None
     playbook_alternatives: List[str] = Field(default_factory=list)
+    # Bulk outreach (brain/touch.py, brain/series.py): batches of one brief share a series and never repeat a person.
+    series_id: str = ""  # "" = this campaign is its own series
+    no_repeat: str = "series"  # series | workspace | cooldown
+    cooldown_days: int = 90  # cooldown mode: earlier touches expire after this many days
+    recycle: str = "ask"  # ask | auto | never: offer earlier, undecided people again when new matches are very few
 
     def query_text(self) -> str:
         """Text the cheap pre-ranker matches candidates against."""

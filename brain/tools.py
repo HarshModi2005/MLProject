@@ -36,6 +36,7 @@ class ToolRun:
     planner: "object"  # brain.searchplan.SearchPlanner
     budget: Optional[int] = None  # search calls this run may spend (None = whatever is left)
     winners: List[Contact] = field(default_factory=list)  # best prospects so far, for expansion tools
+    blocked: Optional[Callable[[Contact], Optional[str]]] = None  # why a candidate must not be offered again (touch ledger)
 
 
 @dataclass

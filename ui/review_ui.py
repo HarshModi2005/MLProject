@@ -7,6 +7,7 @@ and edit/approve/reject draft emails.
 """
 
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -65,6 +66,24 @@ def get_professor(db_session, prof_id: str) -> DbProfessor:
     """Fetch the associated professor from the DB."""
     return db_session.query(DbProfessor).filter(DbProfessor.id == prof_id).first()
 
+def render_standby(db) -> None:
+    """Drafts parked with "Standby": recall one to put it back in the review queue."""
+    parked = db.query(DbEmail).filter(DbEmail.status == EmailStatus.STANDBY.value).all()
+    if not parked:
+        return
+    with st.expander(f"⏸ {len(parked)} on standby"):
+        for email in parked:
+            c1, c2 = st.columns([6, 1])
+            c1.markdown(f"**{email.recipient_name}** · {email.subject[:60]}")
+            if c2.button("Recall", key=f"recall_{email.id}"):
+                email.status = EmailStatus.DRAFT.value
+                db.commit()
+                from brain import bridge
+
+                bridge.record_decision(email.session_id, email.professor_id, "recalled")
+                st.rerun()
+
+
 def render_dashboard():
     """Main Streamlit dashboard to review emails."""
     st.title("🤖 Autonomous Outreach - Review Dashboard")
@@ -74,6 +93,7 @@ def render_dashboard():
     try:
         pending = fetch_pending_emails(db)
 
+        render_standby(db)
         if not pending:
             st.info("No pending draft emails to review at the moment.")
             return
@@ -107,17 +127,29 @@ def render_dashboard():
                     edited_subj = st.text_input("Subject Line", value=email.subject)
                     edited_body = st.text_area("Email Body", value=email.body, height=300)
 
-                    col1, col2, col3 = st.columns([1, 1, 6])
+                    col1, col2, col3, col4 = st.columns([1, 1, 1, 5])
 
                     with col1:
                         approve = st.form_submit_button("✅ Approve", use_container_width=True)
                     with col2:
-                        reject = st.form_submit_button("❌ Reject", use_container_width=True)
+                        standby = st.form_submit_button("⏸ Standby", use_container_width=True,
+                                                        help="Not now: keep for later. Skipped by new batches; offered again "
+                                                             "only if few new matches are found, or when you recall it.")
+                    with col3:
+                        reject = st.form_submit_button("❌ Reject", use_container_width=True,
+                                                       help="Never offered again in this outreach.")
 
                     if approve:
                         to_addr = (edited_to or "").strip()
                         if not to_addr or "@" not in to_addr:
                             st.error("Enter a valid recipient email in **To** before approving.")
+                            st.stop()
+
+                        from brain import bridge
+
+                        blocked = bridge.send_gate(to_addr, email.session_id or "")
+                        if blocked:  # the last line of defence: do-not-contact, already emailed, paused, daily cap
+                            st.error(f"Not sent. {blocked}")
                             st.stop()
 
                         email.recipient_email = to_addr
@@ -145,7 +177,9 @@ def render_dashboard():
 
                         if success:
                             email.status = EmailStatus.SENT.value
+                            email.sent_at = datetime.utcnow()  # the daily cap and the follow-up engine count from this
                             db.commit()
+                            bridge.record_decision(email.session_id, email.professor_id, "sent")
                             st.success(
                                 f"Email sent successfully to {prof.name if prof else 'Unknown'}!"
                             )
@@ -156,9 +190,20 @@ def render_dashboard():
                             )
 
                         st.rerun()
+                    elif standby:
+                        email.status = EmailStatus.STANDBY.value
+                        db.commit()
+                        from brain import bridge
+
+                        bridge.record_decision(email.session_id, email.professor_id, "standby")
+                        st.info(f"{prof.name if prof else 'Unknown'} is on standby.")
+                        st.rerun()
                     elif reject:
                         email.status = EmailStatus.REJECTED.value
                         db.commit()
+                        from brain import bridge
+
+                        bridge.record_decision(email.session_id, email.professor_id, "rejected")
                         st.warning(f"Email to {prof.name if prof else 'Unknown'} Rejected.")
                         st.rerun()
     finally:

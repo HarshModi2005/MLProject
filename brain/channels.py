@@ -493,5 +493,6 @@ def discover_memory(run) -> Tuple[List[Contact], Dict]:
     store = run.deps.store
     if not getattr(run.deps.settings, "use_memory", True) or not hasattr(store, "known_prospects"):
         return [], {}
-    found = store.known_prospects(run.spec, profile_for(run.spec, run.playbook), limit=run.spec.target_count * 3)
+    found = store.known_prospects(run.spec, profile_for(run.spec, run.playbook), limit=run.spec.target_count * 3,
+                                  is_blocked=run.blocked)  # people already shown or contacted must not fill the quota
     return found, {"known": len(found)}

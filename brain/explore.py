@@ -45,6 +45,7 @@ class ExploreResult:
     warnings: List[str] = field(default_factory=list)
     ledger: Dict[str, Dict[str, float]] = field(default_factory=dict)  # per source: spend and yield
     fit: str = "rule"  # what decided "qualified": the hand-written rule or a learned model
+    skipped: Dict[str, int] = field(default_factory=dict)  # candidates dropped at once because earlier batches covered them
 
 
 def choose_tools(spec: CampaignSpec, pb: Playbook, prof: ProspectProfile, *, has_seeds: bool,
@@ -82,9 +83,12 @@ def _ucb(st: Dict[str, float], total_runs: int, prior: Optional[Dict[str, float]
 def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Optional[List[Contact]] = None,
             budget: int, rounds: int = 3, need: Optional[int] = None,
             progress: Callable[[str], None] = lambda m: None, winners: Optional[List[Contact]] = None,
-            tools: Optional[List[str]] = None) -> ExploreResult:
+            tools: Optional[List[str]] = None,
+            blocked: Optional[Callable[[Contact], Optional[str]]] = None) -> ExploreResult:
     """Run discovery until `need` qualified prospects exist or `budget` search calls are spent.
-    `winners` (e.g. the judge's picks in a backfill) start expansion immediately; `tools` overrides the choice."""
+    `winners` (e.g. the judge's picks in a backfill) start expansion immediately; `tools` overrides the choice.
+    `blocked` (the touch ledger) drops people an earlier batch already covered the moment a tool returns them, so they
+    neither count towards `need` nor use up a tool's yield: the explorer keeps searching until NEW people are found."""
     prof = profile_for(spec, pb)
     need = need or planner.need
     res = ExploreResult()
@@ -137,7 +141,7 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
         before = search.calls
         with ledger.measure(name, deps) as entry:
             try:
-                found, stats = tool.fn(ToolRun(spec, pb, ctx, deps, planner, budget=allowance, winners=win))
+                found, stats = tool.fn(ToolRun(spec, pb, ctx, deps, planner, budget=allowance, winners=win, blocked=blocked))
             except Exception as e:  # one failing tool must not sink the campaign
                 log.warning("tool %s failed: %s", name, e)
                 res.warnings.append(f"Tool '{name}' failed: {e}")
@@ -145,6 +149,15 @@ def explore(spec: CampaignSpec, pb: Playbook, ctx, deps, planner, *, seeds: Opti
                 entry["errors"] = 1
                 return 0
             cost = search.calls - before
+            if blocked:
+                kept_found = []
+                for c in found:
+                    why = blocked(c)
+                    if why:
+                        res.skipped[why] = res.skipped.get(why, 0) + 1
+                    else:
+                        kept_found.append(c)
+                found = kept_found
             for c in found:  # credit the tool that found it (the per-source funnel and ledger key on this)
                 if name not in c.sources:
                     c.sources.append(name)

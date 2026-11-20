@@ -112,6 +112,28 @@ named people in companies, a shortlist that never pads, a calibrated score, prom
 (`brain outcome`, `brain outcomes`) and per-user workspaces (`brain --workspace`). Held-out scenarios, repeat runs and a
 terminal labeller (`brain bench-label`) make the benchmark honest. See [docs/production-hardening.md](docs/production-hardening.md).
 
+### Bulk outreach: "find me more", never the same person twice
+```bash
+python main.py brain run "Find sponsors for our college tech fest" --about "..."      # batch 1 (starts a series)
+python main.py brain more <campaign-id> -n 20                                          # 20 NEW people, never a repeat
+python main.py brain more <campaign-id> --until 200 --batch-size 20 --budget-searches 300
+python main.py brain seen <campaign-id>                    # everyone covered so far, by state
+python main.py brain standby <email|id>   /  recall <email|id>      # "not now" / take it back
+python main.py brain reject <email|id>    /  release <email|id>     # "never" / undo
+python main.py brain exclude already_emailed.txt           # addresses, domains or full names, one per line
+```
+Every person shown or emailed goes into a ledger under all their identifiers (address, ORCID, name + organisation), so
+the same person is recognised even when found again by another source or without an address. `--no-repeat series`
+(default) | `workspace` | `cooldown --cooldown-days N` decides what counts as "again"; anyone already emailed, bounced or
+unsubscribed is never offered in any mode. **Rejected** people never return; **standby** people wait, and come back only
+if new matches are very few and you agree (`--recycle ask|auto|never`), with their stored draft, not a new one. When
+new people run out, `more` widens in steps (new queries, lookalikes of your best finds, and with `--widen topics|geo`
+neighbouring topics / a wider place) and finally says the pool is used up. The fit floor is never lowered to fill a batch.
+Every email still needs your approval in the review UI (which now has Approve / Standby / Reject); a send gate there
+rechecks do-not-contact, a daily cap (`BRAIN_DAILY_SEND_CAP`, 100) and a minimum gap (`BRAIN_MIN_SEND_DELAY`, 30s), and a
+series pauses itself when its bounce rate passes `BRAIN_BOUNCE_PAUSE` (5%, after `BRAIN_BOUNCE_MIN_SENT` = 20 sends;
+`brain series-resume` lifts it). Design and status: [docs/no-repeat-bulk-plan.md](docs/no-repeat-bulk-plan.md).
+
 ### Grounded context
 
 `brain/context.py` holds the agent's working memory: the confirmed understanding, sourced facts about the

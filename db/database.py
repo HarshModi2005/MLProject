@@ -176,6 +176,36 @@ def save_draft_email(draft: DraftEmail, session_id: Optional[str] = None) -> Non
             db.add(row)
 
 
+def get_email_status(email_id: str) -> Optional[str]:
+    """The status of one email, or None when there is no such email."""
+    with db_session() as db:
+        row = db.get(Email, email_id)
+        return row.status if row else None
+
+
+def set_email_status_by_professor(session_id: str, professor_id: str, status: str) -> int:
+    """Set the review status of a person's draft in one batch (used by `brain standby / recall / release`)."""
+    with db_session() as db:
+        rows = db.query(Email).filter(Email.session_id == session_id, Email.professor_id == professor_id,
+                                      Email.status.in_(["draft", "standby", "rejected", "approved"])).all()
+        for r in rows:
+            r.status = status
+        return len(rows)
+
+
+def move_email(old_id: str, new_id: str, session_id: str) -> bool:
+    """A person offered again in a later batch keeps ONE review row: the existing draft moves to the new batch (new id and
+    session) and goes back to `draft`, instead of the review showing the same person twice."""
+    with db_session() as db:
+        row = db.get(Email, old_id)
+        if row is None or db.get(Email, new_id) is not None:
+            return False
+        if row.status not in ("draft", "standby"):
+            return False  # approved / sent / rejected: a decision stands, never recycled
+        row.id, row.session_id, row.status = new_id, session_id, "draft"
+        return True
+
+
 def mark_email_sent(email_id: str) -> None:
     """Update an email's status to 'sent' and record send timestamp."""
     with db_session() as db:
