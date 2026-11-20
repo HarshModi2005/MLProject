@@ -361,7 +361,7 @@ partway through the second batch: `s2_suppliers_cotton` (all 15 searches failed)
 | R3 final cut | valid targets among those dropped | **0.39**, up to 1.00 (Spanish universities, co-founder) |
 | R3 kept | valid targets among the shortlist | 0.58 (blind, from the raw record only; the earlier judge, which sees the evidence, calls 91 of 136 prospects good) |
 | R4 recall probe | known good names found in the pool / in the shortlist | 0.36 / 0.07. The model also names some people that do not exist, so read this as a direction, not a rate |
-| R5 reach | addresses judged doubtful or wrong | 14 of about 200 |
+| R5 reach | addresses judged doubtful or wrong | 10 of 136 |
 | R6 ranking | Kendall tau between pipeline score and independent fit | mean 0.52; negative in 4 scenarios (neuroscience PhDs, senior data hire, Spanish universities, medtech advisors) |
 | R7 drafts | factual claims not supported by the facts | 53 of 499 (11%) |
 | R8 reporting | "truthful" below 5 | 4 of 23. No scenario fell short without a warning |
@@ -381,7 +381,7 @@ Evidence after the fix is one scenario (`stress_municipal_iot`: reachable 2 to 8
 Of 740 candidates that reached enrichment and were not shortlisted, **619 (84%) had no email at all**. The final cut therefore drops many valid
 targets (R3 final cut 0.39). Causes seen: no website (K-01), a site that would not load (33 in the stress batch, 1-8 per scenario in the second:
 dead domains, HTTP 403/503), and sites that load but publish no address. For people (open-source maintainers, alumni, co-founders) reachability was
-2 of 83, 1 of 75 and 1 of 85. Ideas, not built: read the contact page and `mailto:` links of a maintainer's own website, look the address up in
+2 of 83 candidates (open-source), 1 of 70 (alumni) and 1 of 85 (co-founder). Ideas, not built: read the contact page and `mailto:` links of a maintainer's own website, look the address up in
 search snippets when the site fails, offer an unverified-but-labelled role address for organisations when the playbook allows it, and show the
 user the unreachable-but-good candidates as a separate list ("good fit, no address: N") instead of dropping them.
 
