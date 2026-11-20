@@ -60,6 +60,12 @@ class Settings:
     llm_model_fast: str = field(default_factory=lambda: os.getenv("LLM_MODEL_FAST", _preset(3)))
     # Tried in order when a model is rate-limited for longer than a minute (e.g. a daily token cap).
     llm_fallback_models: str = field(default_factory=lambda: os.getenv("LLM_FALLBACK_MODELS", _preset(4)))
+    # The fact-checker should not share the writer's blind spots. LLM_MODEL_VERIFY picks it (default: the fast model,
+    # which differs from the writer's strong model); LLM_VERIFY_BASE_URL / LLM_VERIFY_API_KEY point it at another
+    # provider altogether (any OpenAI-compatible endpoint), which is the strongest independence.
+    llm_model_verify: str = field(default_factory=lambda: os.getenv("LLM_MODEL_VERIFY", ""))
+    llm_verify_base_url: str = field(default_factory=lambda: os.getenv("LLM_VERIFY_BASE_URL", ""))
+    llm_verify_api_key: str = field(default_factory=lambda: os.getenv("LLM_VERIFY_API_KEY", ""))
     # Reasoning models (gpt-oss, qwen3) think before answering; "low" keeps that cheap. Empty = provider default.
     llm_reasoning_effort: str = field(default_factory=lambda: os.getenv("LLM_REASONING_EFFORT", "low"))
     # Hard ceiling on LLM calls per campaign run. Cached calls are free and not counted.
@@ -73,7 +79,8 @@ class Settings:
     # OpenAlex (free key gives a private daily budget; works without one).
     openalex_api_key: str = field(default_factory=lambda: os.getenv("OPENALEX_API_KEY", ""))
 
-    # Storage
+    # Storage. `workspace` isolates one user's data from another's: its own database and cache (brain/workspace.py).
+    workspace: str = field(default_factory=lambda: os.getenv("BRAIN_WORKSPACE", "default") or "default")
     database_url: str = field(default_factory=lambda: os.getenv("DATABASE_URL", "sqlite:///./outreach.db"))
     cache_path: str = field(default_factory=lambda: os.getenv("BRAIN_CACHE_PATH", "./.brain_cache.sqlite"))
 
@@ -99,6 +106,10 @@ class Settings:
     explore_rounds: int = field(default_factory=lambda: _int("BRAIN_EXPLORE_ROUNDS", 3))
     backfill: bool = field(default_factory=lambda: os.getenv("BRAIN_BACKFILL", "1") not in ("0", "false", "no"))
     use_memory: bool = field(default_factory=lambda: os.getenv("BRAIN_MEMORY", "1") not in ("0", "false", "no"))
+    # The shortlist never pads: a candidate scoring below this is left out even if that leaves fewer than wanted
+    # (the run then says "found N of K" instead of filling the list with weak fits).
+    judge_prescore_weight: float = field(default_factory=lambda: _float("BRAIN_JUDGE_PRESCORE_WEIGHT", 0.0))  # old value 0.2
+    shortlist_floor: float = field(default_factory=lambda: _float("BRAIN_SHORTLIST_FLOOR", 0.6))
     # Precision layer (brain/discovery/precision): org-type gate, pre-judge before enrichment, learned fit model.
     org_type_gate: bool = field(default_factory=lambda: os.getenv("BRAIN_ORG_TYPE_GATE", "1") not in ("0", "false", "no"))
     prejudge: bool = field(default_factory=lambda: os.getenv("BRAIN_PREJUDGE", "1") not in ("0", "false", "no"))
@@ -110,3 +121,9 @@ class Settings:
     # Replay (benchmarks): "" = live; "replay" = network answers only from the cache (misses are skipped, never
     # fetched), LLM calls still allowed; "strict" = LLM calls also only from the cache.
     replay: str = field(default_factory=lambda: os.getenv("BRAIN_REPLAY", "").lower())
+
+    def __post_init__(self) -> None:
+        from brain import workspace
+
+        self.workspace = workspace.clean(self.workspace)
+        self.cache_path = workspace.scope_path(self.cache_path, self.workspace)  # cached model outputs are per user

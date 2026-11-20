@@ -1,0 +1,43 @@
+{
+  "name": "customer_research_smb_accounting",
+  "split": "holdout",
+  "note": "HELD OUT: never used to tune prompts, thresholds or playbooks. Do not edit after its first scored run.",
+  "playbook": "customer_research",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Interviews with small-business owners about bookkeeping pain",
+    "ask": "A 20-minute call about how you handle bookkeeping today",
+    "persona": {
+      "description": "Owners of small retail and service businesses in Pune who keep their own books",
+      "roles": [
+        "Owner",
+        "Founder"
+      ],
+      "org_types": [
+        "small business"
+      ]
+    },
+    "topics": [
+      "small business bookkeeping",
+      "retail shop owners"
+    ],
+    "expanded_terms": [
+      "GST filing",
+      "accounting software for small shops"
+    ],
+    "locations": [
+      "Pune, India"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Building accounting software for small shops",
+    "summary": "Researching how owner-run shops in Pune handle GST and daily bookkeeping before building."
+  },
+  "facts": [
+    "Researching GST and bookkeeping workflows of small shops",
+    "Not selling anything yet"
+  ],
+  "prompt": "we're researching how small shop owners in Pune handle GST and bookkeeping before building accounting software, find owners of small retail and service businesses willing to talk for 20 minutes"
+}

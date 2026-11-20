@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import logging
+import os
 from typing import List, Optional
 
 import typer
@@ -17,6 +18,15 @@ from brain.models import SenderProfile
 
 app = typer.Typer(help="Discovery, ranking and drafting engine for any cold-outreach campaign.", no_args_is_help=True)
 console = Console()
+
+
+@app.callback()
+def _main(workspace: str = typer.Option("", "--workspace", "-w", help="Whose data to use. Each workspace has its own "
+                                       "database and cache; nothing is shared between workspaces (env BRAIN_WORKSPACE).")):
+    if workspace:
+        from brain.workspace import clean
+
+        os.environ["BRAIN_WORKSPACE"] = clean(workspace)
 
 
 def _deps():
@@ -270,6 +280,8 @@ def bench(
     compare_to: Optional[str] = typer.Option(None, "--compare", help="A previous results JSON to diff against."),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
     from_spec: bool = typer.Option(False, help="Use the scenarios' ready-made specs instead of running the intake on their prompts."),
+    split: str = typer.Option("", help="Only the 'dev' (tuned on) or 'holdout' (never tuned on) scenarios."),
+    repeat: int = typer.Option(1, help="Run each scenario N times with fresh caches to measure noise (costs N times as much)."),
 ):
     """Benchmark discovery on the scenarios in evals/scenarios (stops after judging unless --draft)."""
     from brain.bench import compare, run_bench
@@ -278,7 +290,7 @@ def bench(
     logging.getLogger("httpx").setLevel(logging.WARNING)
     report = run_bench(list(only) if only else None, replay=("strict" if strict else "replay") if replay else "",
                        draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"),
-                       from_prompt=not from_spec)
+                       from_prompt=not from_spec, split=split, repeat=repeat)
     t = Table(title=f"Benchmark {report['label']}")
     for col in ("Scenario", "label prec", "good@K", "prec@K", "mean", "orgs", "proof", "reach", "search", "LLM", "$", "s"):
         t.add_column(col)
@@ -303,6 +315,16 @@ def bench(
     if srcs.row_count:
         console.print(srcs)
     console.print_json(json.dumps(report["summary"]))
+    sm = report["summary"]
+    if sm.get("judge_precision") is not None:
+        line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]})"
+        line += f"  ·  good AND reachable {sm.get('sendable_precision')}  ·  good AND verified {sm.get('verified_precision')}"
+        if sm.get("label_precision") is not None:
+            ci = sm["label_precision_ci95"]
+            line += f"\nHUMAN-label precision {sm['label_precision']} (95% CI {ci[0]}–{ci[1]}, labelled {sm['labeled_slots']} slots)"
+        else:
+            line += "\n[yellow]No human labels: precision above is the pipeline's own judge. Run `brain bench-label`.[/yellow]"
+        console.print(line)
     console.print(f"[dim]Saved {report['path']}[/dim]")
     if compare_to:
         with open(compare_to, encoding="utf-8") as fh:
@@ -463,6 +485,85 @@ def bench_labels(
             console.print(f"Wrote {path}")
         except FileNotFoundError as e:
             console.print(f"[yellow]{e}[/yellow]")
+
+
+@app.command("bench-label-status")
+def bench_label_status(min_labels: int = typer.Option(30, help="Labels wanted per scenario.")):
+    """How many human labels each scenario has, and how many more are needed before precision can be trusted."""
+    from brain.bench import label_status
+
+    t = Table(title=f"Human labels (want {min_labels} per scenario)")
+    for col in ("Scenario", "split", "sheet", "candidates", "labelled", "good", "bad", "wrong addr", "still needed"):
+        t.add_column(col)
+    for r in label_status(min_labels):
+        t.add_row(r["name"], r["split"], "yes" if r["sheet"] else "[red]no[/red]", str(r["candidates"]), str(r["labeled"]),
+                  str(r["good"]), str(r["bad"]), str(r["wrong_address"]),
+                  "[green]0[/green]" if not r["needed"] else f"[yellow]{r['needed']}[/yellow]")
+    console.print(t)
+
+
+@app.command()
+def outcome(campaign_id: str, who: str = typer.Argument(..., help="The contact id or the email address."),
+            kind: str = typer.Argument(..., help="sent | bounced | replied | positive | negative | unsubscribed | spam"),
+            detail: str = typer.Option("", help="Optional note, e.g. the bounce message.")):
+    """Record what happened to a sent email. Bounces suppress the address and demote a bad email convention; replies
+    label the prospect good."""
+    learned = _deps().store.record_outcome(campaign_id, who, kind, detail)
+    if learned is None:
+        console.print(f"[red]No result for {who} in campaign {campaign_id}.[/red]")
+        raise typer.Exit(1)
+    console.print_json(json.dumps(learned))
+
+
+@app.command()
+def outcomes(campaign_id: Optional[str] = typer.Argument(None, help="One campaign, or all."),
+             sync: bool = typer.Option(False, "--sync", help="First pull sent/replied/bounced from the review UI's tables.")):
+    """Bounce and reply rates by how the address was found and how far it was trusted: the real test of the engine."""
+    store = _deps().store
+    if sync:
+        from brain.bridge import sync_outcomes
+
+        console.print(f"[dim]Synced from the review tables: {sync_outcomes(store)}[/dim]")
+    sm = store.outcome_summary(campaign_id)
+    for title, key in (("By address tier when sent", "by_tier"), ("By how the address was found", "by_method")):
+        t = Table(title=title)
+        for col in ("", "sent", "bounced", "bounce rate", "replied", "reply rate", "unsubscribed"):
+            t.add_column(col)
+        for name, b in sorted(sm[key].items()):
+            t.add_row(name, str(b["sent"]), str(b["bounced"]), str(b["bounce_rate"]), str(b["replied"]),
+                      str(b["reply_rate"]), str(b["unsubscribed"]))
+        console.print(t)
+    console.print(f"Emails sent: {sm['sent']}")
+
+
+@app.command()
+def calibrate(save: bool = typer.Option(False, "--save", help="Store the model if it beats the raw score out of fold."),
+              folder: str = typer.Option("evals/labels", help="Label sheets to learn from.")):
+    """Fit the score calibrator on your human labels, check it out of fold, and keep it only if it beats the raw score."""
+    from brain import calibrate as cal
+
+    rows = cal.rows_from_sheets(folder)
+    out = cal.train(rows)
+    console.print_json(json.dumps(out["report"]))
+    if out["model"] is None:
+        console.print(f"[yellow]Not calibrated: {out['reason']}.[/yellow]")
+        return
+    console.print("[green]The calibrated score beats the raw score out of fold.[/green]")
+    if save:
+        cal.save(_deps().store, out["model"])
+        console.print("Saved: new campaigns now rank by calibrated probability of a good prospect.")
+    else:
+        console.print("Re-run with --save to use it.")
+
+
+@app.command("bench-label")
+def bench_label(scenario: str = typer.Argument(..., help="Scenario name."),
+                limit: int = typer.Option(0, help="Stop after this many labels (0 = all).")):
+    """Label a scenario's candidates in the terminal: g good, b bad, w wrong address, s skip, q quit."""
+    from brain.bench import label_interactive
+
+    n = label_interactive(scenario, ask=lambda m: typer.prompt(m, prompt_suffix=""), say=console.print, limit=limit)
+    console.print(f"Labelled {n} candidates.")
 
 
 @app.command()

@@ -342,6 +342,6 @@ def test_label_sheets_export_and_feed_the_bench(tmp_path, monkeypatch):
     sheet["candidates"][0]["label"] = "good"
     sheet["candidates"][1]["label"] = "bad"
     path.write_text(json.dumps(sheet))
-    assert bench.load_labels("sc", labels) == {"good": ["priya@paper.in"], "bad": ["Some Show"]}
+    assert bench.load_labels("sc", labels) == {"good": ["priya@paper.in"], "bad": ["Some Show"], "wrong_address": []}
     bench.export_label_sheet("r1", "sc", folder=labels)  # re-export keeps the labels
     assert bench.load_labels("sc", labels)["good"] == ["priya@paper.in"]

@@ -1,0 +1,45 @@
+{
+  "name": "phd_positions_climate",
+  "split": "holdout",
+  "note": "HELD OUT: never used to tune prompts, thresholds or playbooks. Do not edit after its first scored run.",
+  "playbook": "phd_positions",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "person",
+    "objective": "A PhD position in climate modelling in Europe",
+    "ask": "Whether you are taking PhD students for 2027 and what the next step is",
+    "persona": {
+      "description": "Professors in Europe working on climate and weather modelling who may take PhD students",
+      "roles": [
+        "Professor",
+        "Group Leader"
+      ],
+      "org_types": [
+        "university"
+      ]
+    },
+    "topics": [
+      "climate modelling",
+      "numerical weather prediction"
+    ],
+    "expanded_terms": [
+      "earth system models",
+      "machine learning for climate"
+    ],
+    "locations": [
+      "Germany",
+      "Netherlands",
+      "Switzerland"
+    ]
+  },
+  "sender": {
+    "name": "Test Student",
+    "headline": "Master's student in atmospheric science",
+    "summary": "Thesis on downscaling precipitation with neural networks; published one workshop paper."
+  },
+  "facts": [
+    "Master's thesis on precipitation downscaling with neural networks",
+    "One workshop paper on ML for climate"
+  ],
+  "prompt": "I'm finishing a master's in atmospheric science (thesis on neural-network precipitation downscaling) and want a PhD in climate modelling in Germany, the Netherlands or Switzerland - find professors who might take students for 2027"
+}

@@ -119,7 +119,9 @@ def test_full_run_and_llm_call_budget(tmp_path):
     # 6 calls for 3 emails.
     assert f["cost"]["llm"]["paid_calls"] == 6
     assert f["cost"]["llm"]["by_purpose"] == {"prejudge": 1, "judge": 1, "draft": 3, "verify": 1}
-    assert f["fact_check"] == {"checked": 3, "flagged": 0, "fixed": 0, "still_flagged": 0}
+    fc = {k: v for k, v in f["fact_check"].items() if k not in ("verifier", "independent_of_writer")}
+    assert fc == {"checked": 3, "flagged": 0, "fixed": 0, "still_flagged": 0}
+    assert f["fact_check"]["independent_of_writer"] is True  # the checker is not the model that wrote the drafts
 
 
 def test_resume_repeats_no_paid_work(tmp_path):
@@ -238,7 +240,8 @@ def test_fact_check_rewrites_unsupported_claims(tmp_path):
     target = assign_id(people[0])
     deps, script = make_deps(tmp_path, people, ScriptedLLM(unsupported={target: ["your work on privacy"]}))
     result = run_campaign(spec(3), deps)
-    assert result.funnel["fact_check"] == {"checked": 3, "flagged": 1, "fixed": 1, "still_flagged": 0}
+    fc = {k: v for k, v in result.funnel["fact_check"].items() if k not in ("verifier", "independent_of_writer")}
+    assert fc == {"checked": 3, "flagged": 1, "fixed": 1, "still_flagged": 0}
     assert all(d.ok for d in result.drafts.values())
     assert deps.llm.usage["draft_fix"] == 1 and deps.llm.usage["verify"] == 2  # initial batch + re-check of the rewrite
 

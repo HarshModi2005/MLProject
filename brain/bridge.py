@@ -41,6 +41,9 @@ def export_to_review(store: Store, spec: CampaignSpec, include_flagged: bool = F
             relevance_score=r["score"] or 0.0,
         ), session_id=spec.id)
         notes = "; ".join(r["reasons"])
+        from brain.discovery.reach.tiers import contact_tier
+
+        notes += f" | ADDRESS: {contact_tier(c)}"  # verified | attributed | inbox | guess: how far to trust the recipient
         if r["issues"]:
             notes += " | CHECK: " + "; ".join(r["issues"])
         legacy.save_draft_email(DraftEmail(
@@ -49,3 +52,32 @@ def export_to_review(store: Store, spec: CampaignSpec, include_flagged: bool = F
         ), session_id=spec.id)
         n += 1
     return n
+
+
+def sync_outcomes(store: Store) -> dict:
+    """Pull what happened to sent emails out of the legacy review/send tables (status sent / replied / bounced, kept up
+    to date by the Gmail sender and the reply monitor) into the brain's outcome log, where it teaches the engine:
+    bounces suppress addresses and demote bad email conventions, replies label good prospects. Safe to run repeatedly."""
+    from sqlalchemy import text
+
+    stats = {"sent": 0, "replied": 0, "bounced": 0, "unmatched": 0}
+    if not getattr(store, "_has_legacy_emails", False):
+        return stats
+    with store._Session() as s:
+        rows = s.execute(text("SELECT lower(recipient_email), status FROM emails WHERE status IN "
+                              "('sent','replied','followed_up','bounced') AND recipient_email IS NOT NULL")).fetchall()
+    kinds = {"sent": "sent", "followed_up": "sent", "replied": "replied", "bounced": "bounced"}
+    for address, status in rows:
+        matches = store.results_by_email(address)
+        if not matches:
+            stats["unmatched"] += 1
+            continue
+        for campaign_id, contact_id in matches:
+            kind = kinds[status]
+            if kind != "sent" and not store.has_outcome(campaign_id, contact_id, "sent"):
+                store.record_outcome(campaign_id, contact_id, "sent")  # a reply or bounce implies it was sent
+                stats["sent"] += 1
+            if not store.has_outcome(campaign_id, contact_id, kind):
+                store.record_outcome(campaign_id, contact_id, kind)
+                stats[kind] += 1
+    return stats

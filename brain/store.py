@@ -10,8 +10,9 @@ It is also the brain's long-term memory:
     campaigns before any search is paid for (`known_prospects`, the `memory` discovery tool);
   * which query templates found qualified prospects, per playbook (`learned_templates`);
   * human review decisions become evaluation labels (`labels_from_review`).
-NOTE: memory is shared across all campaigns in this database. In a multi-user deployment, scope it
-per account before enabling BRAIN_MEMORY.
+NOTE: memory is shared across all campaigns in ONE workspace. Give every user their own workspace
+(Store(url, workspace=user_id), BRAIN_WORKSPACE or `brain --workspace`): each gets separate storage, so nothing
+learned for one user can reach another (brain/workspace.py).
 """
 
 from __future__ import annotations
@@ -90,6 +91,23 @@ class SuppressionRow(Base):
     value = Column(String(250), primary_key=True)  # an email address or a domain
     reason = Column(String(200))
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class OutcomeRow(Base):
+    """What actually happened to an email after it was sent: the only ground truth the engine ever gets."""
+    __tablename__ = "brain_outcomes"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    campaign_id = Column(String(64), index=True)
+    contact_id = Column(String(64), index=True)
+    address = Column(String(250), index=True)
+    kind = Column(String(16), index=True)  # sent | bounced | replied | positive | negative | unsubscribed | spam
+    method = Column(String(24))  # how the address was found (mailto, pattern_global, hunter ...)
+    tier = Column(String(16))  # verified | attributed | inbox | guess | unattributed, when it was sent
+    detail = Column(Text, default="")
+    at = Column(DateTime, default=datetime.utcnow)
+
+
+OUTCOME_KINDS = ("sent", "bounced", "replied", "positive", "negative", "unsubscribed", "spam")
 
 
 class QueryStatRow(Base):
@@ -217,9 +235,18 @@ def query_template(query: str, topics: List[str], places: List[str]) -> Optional
 
 
 class Store:
-    def __init__(self, database_url: str = "sqlite:///:memory:"):
+    def __init__(self, database_url: str = "sqlite:///:memory:", workspace: str = "default"):
+        """`workspace` isolates one user's data from another's (brain/workspace.py): its own file or schema."""
+        from brain.workspace import clean, scope_url
+
+        self.workspace = clean(workspace)
+        database_url, schema = scope_url(database_url, self.workspace)
         args = {"check_same_thread": False} if database_url.startswith("sqlite") else {}
         self.engine = create_engine(database_url, connect_args=args)
+        if schema:  # PostgreSQL: every table of this store lives in the workspace's own schema
+            with self.engine.begin() as conn:
+                conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{schema}"'))
+            self.engine = self.engine.execution_options(schema_translate_map={None: schema})
         Base.metadata.create_all(self.engine)
         self._Session = sessionmaker(bind=self.engine, expire_on_commit=False)
         self._has_legacy_emails = inspect(self.engine).has_table("emails")
@@ -584,14 +611,118 @@ class Store:
         return list(self.user_profile().get("_edited_emails") or [])
 
     def labels_from_review(self, campaign_id: str) -> Dict[str, List[str]]:
-        """Human decisions as evaluation labels: approved/sent/replied are good, rejected is bad."""
-        good, bad = [], []
+        """Human decisions and real outcomes as evaluation labels: approved/sent/replied are good, rejected is bad, and a
+        bounce is `wrong_address` (right person or not, the address was not theirs)."""
+        good, bad, wrong = [], [], []
         for r in self.results(campaign_id):
-            if r["status"] in ("approved", "sent", "replied", "followed_up"):
+            if r["status"] == "bounced":
+                wrong.append(r["email"] or r["name"])
+            elif r["status"] in ("approved", "sent", "replied", "followed_up"):
                 good.append(r["email"] or r["name"])
             elif r["status"] == "rejected":
                 bad.append(r["email"] or r["name"])
-        return {"good": good, "bad": bad}
+        return {"good": good, "bad": bad, "wrong_address": wrong}
+
+    # ── real outcomes (the engine's only ground truth) ───────────────────────
+    def record_outcome(self, campaign_id: str, who: str, kind: str, detail: str = "") -> Optional[Dict[str, Any]]:
+        """Record what happened to the email sent to `who` (a contact id or an address) in this campaign, and learn:
+          bounced       suppress the address; if it was a guess, demote the email convention that produced it
+          unsubscribed  suppress the address for good;  spam: suppress it too
+          replied / positive   a reply: mark the result and label the prospect good for the fit model
+        Returns what was learned, or None when no such result exists."""
+        from brain.discovery.reach.tiers import email_tier
+        from brain.emailfinder import _patterns
+
+        if kind not in OUTCOME_KINDS:
+            raise ValueError(f"outcome must be one of {OUTCOME_KINDS}")
+        who = (who or "").strip()
+        with self._Session() as s:
+            row = (s.query(ResultRow).filter(ResultRow.campaign_id == campaign_id)
+                   .filter((ResultRow.contact_id == who) | (ResultRow.email == who.lower())).first())
+            crow = s.get(ContactRow, row.contact_id) if row else None
+            camp = s.get(CampaignRow, campaign_id)
+        if row is None:
+            return None
+        address = (row.email or "").lower()
+        contact = Contact.model_validate_json(crow.data_json) if crow and crow.data_json else None
+        cand = next((e for e in contact.emails if e.address == address), None) if contact else None
+        tier = email_tier(contact, cand) if contact and cand else ""
+        learned: Dict[str, Any] = {"address": address, "kind": kind, "tier": tier, "method": cand.method if cand else ""}
+        with self._Session.begin() as s:
+            s.add(OutcomeRow(campaign_id=campaign_id, contact_id=row.contact_id, address=address, kind=kind,
+                             method=learned["method"], tier=tier, detail=detail[:500]))
+            res = s.get(ResultRow, (campaign_id, row.contact_id))
+            if res is not None:
+                if kind in ("sent", "bounced"):
+                    res.status = kind
+                elif kind in ("replied", "positive"):
+                    res.status = "replied"
+        if kind in ("bounced", "unsubscribed", "spam") and address:
+            self.suppress(address, kind)
+            learned["suppressed"] = True
+        if kind == "bounced" and contact and cand and "@" in address:
+            local, domain = address.split("@", 1)
+            for pname, value in _patterns(contact.name).items():
+                if value == local:
+                    learned["pattern_demoted"] = self._demote_pattern(domain, pname)
+                    break
+        if kind in ("replied", "positive") and contact and camp:
+            spec = CampaignSpec.model_validate_json(camp.spec_json)
+            self.label_fit_examples(spec.pack, good=[contact.name], bad=[])
+            learned["labelled_good"] = True
+        return learned
+
+    def _demote_pattern(self, domain: str, pattern: str, by: int = 2) -> bool:
+        """A convention that produced a bounce is less trustworthy: lower its support, forget it at zero."""
+        with self._Session.begin() as s:
+            row = s.get(DomainPatternRow, (domain, pattern))
+            if row is None:
+                return False
+            row.support = (row.support or 0) - by
+            if row.support <= 0:
+                s.delete(row)
+        return True
+
+    def outcome_summary(self, campaign_id: Optional[str] = None) -> Dict[str, Any]:
+        """Bounce and reply rates, overall and by how the address was found and how far it was trusted when sent. This
+        is how "attributed" and "verified" get tested against reality."""
+        with self._Session() as s:
+            q = s.query(OutcomeRow)
+            if campaign_id:
+                q = q.filter(OutcomeRow.campaign_id == campaign_id)
+            rows = q.all()
+        sent = {(r.campaign_id, r.contact_id) for r in rows if r.kind == "sent"}
+
+        def bucket(key) -> Dict[str, Dict[str, Any]]:
+            out: Dict[str, Dict[str, Any]] = {}
+            for r in rows:
+                k = key(r) or "unknown"
+                b = out.setdefault(k, {"sent": 0, "bounced": 0, "replied": 0, "unsubscribed": 0})
+                if r.kind == "sent":
+                    b["sent"] += 1
+                elif r.kind in ("bounced", "unsubscribed"):
+                    b[r.kind] += 1
+                elif r.kind in ("replied", "positive"):
+                    b["replied"] += 1
+            for b in out.values():
+                n = b["sent"] or 0
+                b["bounce_rate"] = round(b["bounced"] / n, 3) if n else None
+                b["reply_rate"] = round(b["replied"] / n, 3) if n else None
+            return out
+
+        total = bucket(lambda r: "all")["all"] if rows else {"sent": 0, "bounced": 0, "replied": 0}
+        return {"sent": len(sent), "total": total, "by_tier": bucket(lambda r: r.tier), "by_method": bucket(lambda r: r.method)}
+
+    def results_by_email(self, address: str) -> List[tuple]:
+        """(campaign_id, contact_id) of every result addressed to this email."""
+        with self._Session() as s:
+            rows = s.query(ResultRow.campaign_id, ResultRow.contact_id).filter(ResultRow.email == address.lower()).all()
+        return [(r[0], r[1]) for r in rows]
+
+    def has_outcome(self, campaign_id: str, contact_id: str, kind: str) -> bool:
+        with self._Session() as s:
+            return s.query(OutcomeRow).filter(OutcomeRow.campaign_id == campaign_id, OutcomeRow.contact_id == contact_id,
+                                              OutcomeRow.kind == kind).first() is not None
 
     # ── do-not-contact ───────────────────────────────────────────────────────
     def suppress(self, value: str, reason: str = "manual") -> None:

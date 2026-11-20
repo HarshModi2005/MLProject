@@ -150,6 +150,10 @@ class EmailCandidate(BaseModel):
     confidence: float = 0.0
     method: str = ""  # mailto | text | directory | orcid | pattern | provided
     source_url: Optional[str] = None
+    # Did anything check that the mailbox exists? "" = not checked; else deliverable | undeliverable | catch_all |
+    # unknown (brain/discovery/reach/verify.py). `verified_by` names the checker (smtp, hunter, mx).
+    deliverability: str = ""
+    verified_by: str = ""
 
 
 class Contact(BaseModel):
@@ -179,7 +183,8 @@ class Contact(BaseModel):
     prescore: float = 0.0
     prejudge: Optional[float] = None  # cheap LLM screen before enrichment (brain/discovery/precision/prejudge.py)
     prejudge_reason: Optional[str] = None
-    score: Optional[float] = None
+    score: Optional[float] = None  # the final ranking score: calibrated P(good) when a calibrator exists, else fit x reach
+    fit: Optional[float] = None  # the judge's fit for this sender and ask (0-1), before reachability is considered
     reasons: List[str] = Field(default_factory=list)
     hook: Optional[str] = None
     why_now: Optional[str] = None  # a timing fact from the evidence (hiring, just raised, new article), set by the judge
@@ -224,10 +229,16 @@ class Draft(BaseModel):
     subject: str
     body: str
     issues: List[str] = Field(default_factory=list)  # non-empty => needs human attention
+    address_tier: str = ""  # verified | attributed | inbox | guess | unattributed (brain/discovery/reach/tiers.py)
 
     @property
     def ok(self) -> bool:
         return not self.issues
+
+    @property
+    def sendable(self) -> bool:
+        """Safe to send without a person re-checking it: the draft passed every check AND the mailbox is verified."""
+        return self.ok and self.address_tier == "verified"
 
 
 def stable_id(*parts: str) -> str:

@@ -1,5 +1,6 @@
 {
   "name": "investors_edtech",
+  "split": "dev",
   "playbook": "fundraising",
   "target_count": 5,
   "spec": {
