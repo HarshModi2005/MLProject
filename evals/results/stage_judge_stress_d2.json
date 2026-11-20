@@ -1,0 +1,4833 @@
+{
+  "runs": "stress_d",
+  "judge_model": "gpt-4.1",
+  "scenarios": {
+    "s2_awards_hardware": {
+      "run": "stress_d",
+      "prompt": "we're a pre-seed air quality sensor startup in India; find competitions, challenges or awards for early-stage hardware startups we can apply to",
+      "playbook": "awards_cfps",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 151,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "awards_cfps",
+        "playbook_note": "Matches request for competitions/awards for early-stage hardware startups.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "early-stage/hardware startup",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "India",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "competitions, challenges or awards",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "apply to (not just observe or attend)",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.16,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 14,
+            "yes": 0,
+            "maybe": 2,
+            "no": 8,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_role": 3,
+              "wrong_geography": 5,
+              "other": 2
+            },
+            "examples": [
+              {
+                "name": "Anjali Jain",
+                "org": "Inc42",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "Journalist, not a competition organizer.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Visit website \u2192",
+                "org": "Visit website \u2192",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Ireland-based, not India-focused.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Anirudh T.",
+                "org": "Inc42",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "Journalist, not a competition organizer.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "AdvantEdge Founders",
+                "org": "AdvantEdge Founders",
+                "verdict": "maybe",
+                "code": "other",
+                "note": "Indian incubator, may run relevant challenges.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Visit website \u2192",
+                "org": "Visit website \u2192",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Ireland-based, not India-focused.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Visit website \u2192",
+                "org": "Visit website \u2192",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Ireland-based, not India-focused.",
+                "sources": [
+                  "events"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 97,
+            "yes": 1,
+            "maybe": 2,
+            "no": 5,
+            "yes_rate": 0.12,
+            "codes": {
+              "no_evidence": 7
+            },
+            "examples": [
+              {
+                "name": "Headstart Network",
+                "org": "Headstart Network",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Scooptacular",
+                "org": "Scooptacular",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of running competitions; only a sponsor.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Keesal Young Logan",
+                "org": "Keesal Young Logan",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "Only a sponsor, not an organizer of competitions.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "GoDaddy",
+                "org": "GoDaddy",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "Sponsor, not organizer of competitions or awards.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+                "org": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Runs startup programs; unclear if direct competitions.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Meta",
+                "org": "Meta",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "Sponsor, not organizer of competitions or awards.",
+                "sources": [
+                  "events"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 30,
+            "yes": 4,
+            "maybe": 6,
+            "no": 0,
+            "yes_rate": 0.4,
+            "codes": {
+              "no_evidence": 6
+            },
+            "examples": [
+              {
+                "name": "Startup Dangal",
+                "org": "Startup Dangal",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "India In-Depth",
+                "org": "Pitch Karo India",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "HOS",
+                "org": "HOS",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Mentions grants but no clear competitions or awards.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "CIIE.CO",
+                "org": "CIIE.CO",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Incubator; may run competitions but not explicit here.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "10000 Start-Ups",
+                "org": "10000 Start-Ups",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Supports tech startups; no explicit mention of competitions or awards.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "techgig.com",
+                "org": "techgig.com",
+                "verdict": "yes",
+                "code": null,
+                "note": "Runs Innovation Challenge for societal/environmental problems; fits hardware/air quality startup.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 0,
+            "maybe": 7,
+            "no": 3,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_geography": 2,
+              "no_evidence": 7,
+              "directory_or_aggregator": 1
+            },
+            "examples": [
+              {
+                "name": "Highway1",
+                "org": "Highway1",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "US-based; request is for India.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "IKP EDEN",
+                "org": "IKP EDEN",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Hardware incubator; may run competitions but not explicit here.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "iTNT Hub",
+                "org": "iTNT Hub",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Incubator/accelerator; unclear if runs competitions or awards.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Innovation Works",
+                "org": "Innovation Works",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "US-based; not India-focused.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Theincubatorpro",
+                "org": "Theincubatorpro",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Mentions pitch competitions, but unclear if runs them directly.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Amrita Technology Business Incubator",
+                "org": "Amritatbi",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Incubator with grants; unclear if runs competitions/awards.",
+                "sources": [
+                  "web",
+                  "orgs",
+                  "list"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "news": {
+            "n": 5,
+            "yes": 0,
+            "no": 4
+          },
+          "events": {
+            "n": 9,
+            "yes": 0,
+            "no": 9
+          },
+          "list": {
+            "n": 10,
+            "yes": 0,
+            "no": 2
+          },
+          "orgs": {
+            "n": 24,
+            "yes": 5,
+            "no": 3
+          },
+          "web": {
+            "n": 15,
+            "yes": 5,
+            "no": 1
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 5,
+        "in_shortlist": 0,
+        "recall_pool": 0.42,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Startup India",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "India Innovation Growth Programme (IIGP)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "NASSCOM Center of Excellence - IoT & AI",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "CIIE.CO (Centre for Innovation Incubation and Entrepreneurship)",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Electronics India Innovation Challenge (MeitY)",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Tata Social Enterprise Challenge",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "DST-Lockheed Martin India Innovation Growth Programme",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Qualcomm Design in India Challenge",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "India Electronics and Semiconductor Association (IESA)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Startup Karnataka Elevate",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "TiE Delhi-NCR",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Villgro Innovations Foundation",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 4,
+        "borderline": 4,
+        "bad": 2
+      },
+      "prospect_problems": {
+        "off_topic": 1,
+        "aggregator_or_directory": 1,
+        "wrong_geography": 2,
+        "weak_evidence": 2,
+        "wrong_role_or_seniority": 1,
+        "inbox_where_person_needed": 1
+      },
+      "prospects": [
+        {
+          "name": "Amrita Technology Business Incubator",
+          "org": "Amrita Technology Business Incubator",
+          "email": "info@amritatbi.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Directly supports hardware startups in India with grants and competitions.",
+          "problems": []
+        },
+        {
+          "name": "TheIncubatorPro",
+          "org": "TheIncubatorPro",
+          "email": "hello@theincubatorpro.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Runs hardware startup competitions and accelerators in India.",
+          "problems": []
+        },
+        {
+          "name": "iTNT Hub",
+          "org": "iTNT Hub",
+          "email": "tnthub@tn.gov.in",
+          "score": 0.8309,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Government-backed hardware accelerator for Indian startups.",
+          "problems": []
+        },
+        {
+          "name": "iDEX",
+          "org": "iDEX",
+          "email": "mdfitt@gmail.com",
+          "score": 0.8309,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Focuses on defence innovation; only relevant if startup fits defence sector.",
+          "problems": [
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Startup Grants India",
+          "org": "Startup Grants India",
+          "email": "team@startupgrantsindia.com",
+          "score": 0.788,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Aggregator platform, not a direct competition organizer.",
+          "problems": [
+            "aggregator_or_directory"
+          ]
+        },
+        {
+          "name": "IKP EDEN",
+          "org": "IKP EDEN",
+          "email": "contact@ikpeden.com",
+          "score": 0.788,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Deep science/hardware incubator with grants and programs for startups.",
+          "problems": []
+        },
+        {
+          "name": "Highway1",
+          "org": "Highway1",
+          "email": "hello@highway1.io",
+          "score": 0.788,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "No evidence of Indian presence; likely US-based.",
+          "problems": [
+            "wrong_geography"
+          ]
+        },
+        {
+          "name": "Innovation Works",
+          "org": "Innovation Works",
+          "email": "info@innovationworks.org",
+          "score": 0.7388,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "No evidence of Indian presence; likely US-based.",
+          "problems": [
+            "wrong_geography"
+          ]
+        },
+        {
+          "name": "Vigyan Purashkar",
+          "org": "India Science, Technology & Innovation",
+          "email": "vigyanisti@gmail.com",
+          "score": 0.7,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "ISTI is a repository, not a competition organizer; unclear if this person runs awards.",
+          "problems": [
+            "weak_evidence",
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Iith",
+          "org": "Iith",
+          "email": "office.stores@iith.ac.in",
+          "score": 0.6895,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "IIT Hyderabad incubator is relevant, but inbox is generic and not competition-specific.",
+          "problems": [
+            "inbox_where_person_needed",
+            "weak_evidence"
+          ]
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 3,
+        "cannot_grant": 1,
+        "not_send": 3,
+        "tiers": {
+          "inbox": 9,
+          "guess": 1
+        },
+        "det_flags": {
+          "free_mail_for_org": 1
+        },
+        "rows": [
+          {
+            "id": "9243f068394e6dbd",
+            "name": "Amrita Technology Business Incubator",
+            "address": "info@amritatbi.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for incubator; likely monitored by relevant staff."
+          },
+          {
+            "id": "46d9e83a531e19bf",
+            "name": "TheIncubatorPro",
+            "address": "hello@theincubatorpro.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "hello@ is standard for org queries; suitable for this ask."
+          },
+          {
+            "id": "816bd0fd5d08a6ec",
+            "name": "iTNT Hub",
+            "address": "tnthub@tn.gov.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Hub's main inbox; likely reaches relevant staff."
+          },
+          {
+            "id": "7819ef40c5966aed",
+            "name": "iDEX",
+            "address": "mdfitt@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "doubtful",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Gmail address, not org domain; unclear if official."
+          },
+          {
+            "id": "d080ef9c7ab91133",
+            "name": "Startup Grants India",
+            "address": "team@startupgrantsindia.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "team@ is standard for org-wide queries; appropriate."
+          },
+          {
+            "id": "efa936b327c376e0",
+            "name": "IKP EDEN",
+            "address": "contact@ikpeden.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "contact@ is suitable for general queries to this org."
+          },
+          {
+            "id": "5d0ac2ec030db1ac",
+            "name": "Highway1",
+            "address": "hello@highway1.io",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "hello@ is a valid, monitored org address."
+          },
+          {
+            "id": "a0e34c1abb2dc10b",
+            "name": "Innovation Works",
+            "address": "info@innovationworks.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "info@ is standard for org queries; appropriate for this ask."
+          },
+          {
+            "id": "f46c3ffe1dd04812",
+            "name": "Vigyan Purashkar",
+            "address": "vigyanisti@gmail.com",
+            "tier": "guess",
+            "flags": [],
+            "address_belongs": "doubtful",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Gmail, not org domain; unclear if monitored by org."
+          },
+          {
+            "id": "86538cb884ea7198",
+            "name": "Iith",
+            "address": "office.stores@iith.ac.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "doubtful",
+            "addressee_can_grant": "no",
+            "action": "drop",
+            "note": "office.stores@ is likely a procurement/billing desk, not relevant."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 0.64,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 2.67,
+        "inversions_ge2": 2,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 8,
+          "list": 2
+        },
+        "by_country": {
+          "IN": 7,
+          "?": 3
+        },
+        "max_country_share": 0.7
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 33,
+        "supported": 33,
+        "unsupported": 0,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 1.0,
+        "emails_with_unsupported": 0,
+        "mean_specific": 2.5,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "info@amritatbi.com",
+            "claims": []
+          },
+          {
+            "to": "hello@theincubatorpro.com",
+            "claims": []
+          },
+          {
+            "to": "tnthub@tn.gov.in",
+            "claims": []
+          },
+          {
+            "to": "mdfitt@gmail.com",
+            "claims": []
+          },
+          {
+            "to": "team@startupgrantsindia.com",
+            "claims": []
+          },
+          {
+            "to": "contact@ikpeden.com",
+            "claims": []
+          },
+          {
+            "to": "hello@highway1.io",
+            "claims": []
+          },
+          {
+            "to": "info@innovationworks.org",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 3.0,
+        "diversity": 3.0,
+        "missing": "Major pan-India startup competitions, sector-specific hardware awards, more government innovation challenges. | Direct contacts for specific competitions, more award/innovation challenge organizers.",
+        "systemic_issues": [
+          "Some US/global orgs not relevant for India",
+          "Includes aggregator/directory not direct organizers",
+          "weak_evidence",
+          "generic or indirect contacts"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 4,
+        "actionable": 4,
+        "false_reassurance": [
+          "shortlisted: 10",
+          "no warning about relevance or quality shortfall"
+        ],
+        "missing_message": "Some shortlisted competitions are not India-specific or directly relevant; several major Indian hardware/startup awards and direct organizer contacts are missing.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "portfolio",
+            "why": "Investors often list competitions or awards for startups."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "events",
+            "why": "No valid targets found in blind sample."
+          },
+          {
+            "tool": "news",
+            "why": "Almost all candidates were invalid for this request."
+          },
+          {
+            "tool": "list",
+            "why": "Very low yield of valid targets from sampled candidates."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Too much effort on low-yield tools; web/orgs produced most valid results."
+      }
+    },
+    "s2_cofounder_agritech": {
+      "run": "stress_d",
+      "prompt": "I'm an agronomist starting a crop-advisory company and need a technical co-founder; find ML engineers who built crop disease detection or precision agriculture projects",
+      "playbook": "cofounder",
+      "wanted": 10,
+      "shortlisted": 0,
+      "pool": 177,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "cofounder",
+        "playbook_note": "Correct: seeking a technical co-founder with relevant ML experience.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "technical co-founder",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "ML engineers who built crop disease detection or precision agriculture projects",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [
+          "org_types: Agtech startups, Research labs, Precision agriculture companies"
+        ],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.23,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 20,
+            "yes": 0,
+            "maybe": 1,
+            "no": 9,
+            "yes_rate": 0.0,
+            "codes": {
+              "off_topic": 9,
+              "no_evidence": 1
+            },
+            "examples": [
+              {
+                "name": "1keyfe",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Image cropper, not crop disease or agriculture ML.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "ds-boyce",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Image cropper tool, unrelated to agriculture or ML.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "camsong",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Precision arithmetic, not agriculture or ML.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "tompenguin",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Machine learning experience, but no agriculture/crop evidence.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "Christopher Roberts",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Academic administrator, no ML or agriculture evidence.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "amzn-oss",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "AWS ML SDK maintainer, no agriculture/crop focus.",
+                "sources": [
+                  "npm"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 100,
+            "yes": 0,
+            "maybe": 3,
+            "no": 5,
+            "yes_rate": 0.0,
+            "codes": {
+              "off_topic": 4,
+              "no_evidence": 4
+            },
+            "examples": [
+              {
+                "name": "Chase Rainwater",
+                "org": null,
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Food supply chain focus, no evidence of ML or crop disease work.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "\u7a1a\u6656",
+                "org": "HUAWEI Research",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of agriculture or crop disease ML work.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Gustavo Machado",
+                "org": null,
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of ML or agriculture project involvement.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "electron-nightly",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Focuses on desktop app frameworks, not agriculture or ML.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "Isabella Condotta",
+                "org": null,
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of ML or agriculture project involvement.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Doug Britton",
+                "org": null,
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "ML in poultry robotics, not crop disease or precision ag.",
+                "sources": [
+                  "events"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 57,
+            "yes": 7,
+            "maybe": 1,
+            "no": 2,
+            "yes_rate": 0.7,
+            "codes": {
+              "no_evidence": 3
+            },
+            "examples": [
+              {
+                "name": "adhikkesh",
+                "org": null,
+                "verdict": "yes",
+                "code": "",
+                "note": "Published rice crop disease detection ML model.",
+                "sources": [
+                  "huggingface"
+                ]
+              },
+              {
+                "name": "James Schnable",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Involved in AI in agriculture, but no project specifics.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "TJ",
+                "org": "Apex",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of ML or agriculture expertise.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Shwetask",
+                "org": null,
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "huggingface"
+                ]
+              },
+              {
+                "name": "cropcare",
+                "org": null,
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "huggingface"
+                ]
+              },
+              {
+                "name": "sudoping01",
+                "org": null,
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "huggingface"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          }
+        },
+        "by_source": {
+          "npm": {
+            "n": 9,
+            "yes": 0,
+            "no": 8
+          },
+          "events": {
+            "n": 8,
+            "yes": 0,
+            "no": 4
+          },
+          "github": {
+            "n": 4,
+            "yes": 0,
+            "no": 4
+          },
+          "huggingface": {
+            "n": 7,
+            "yes": 7,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 11,
+        "in_pool": 1,
+        "in_shortlist": 0,
+        "recall_pool": 0.09,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "David Hughes",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sanket Kale",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sankalp Sharma",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rikin Gandhi",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sanjeev Krishnan",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Siddharth Dialani",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rohit Sharma",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Suma Prashant",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Ramesh Raskar",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Srinivasa Rao",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sriram Raghavan",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "list_level": {},
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "",
+        "det_shortfall": 10,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "arxiv",
+            "why": "Finds ML engineers publishing crop disease detection/precision ag papers."
+          },
+          {
+            "tool": "openalex",
+            "why": "Finds researchers with relevant ML agriculture publications."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "events",
+            "why": "No valid targets in sample; event speakers not a good fit."
+          },
+          {
+            "tool": "npm",
+            "why": "No valid targets; few relevant agri-ML packages."
+          },
+          {
+            "tool": "github",
+            "why": "No valid targets; hard to filter for agri-ML expertise."
+          }
+        ],
+        "effort_spent_where_it_pays": 2,
+        "top_problem": "Most effort spent on tools yielding no valid targets; only Huggingface produced relevant candidates."
+      }
+    },
+    "s2_grants_rural_girls": {
+      "run": "stress_d",
+      "prompt": "we run a coding programme for rural girls in 12 villages and need CSR funding; find foundations and company CSR teams that fund girls' education in Rajasthan and Madhya Pradesh",
+      "playbook": "grants",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 73,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "grants",
+        "playbook_note": "Correct: seeking grants/CSR funding for NGO.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "funding for girls' education",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "CSR teams and foundations",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "Rajasthan and Madhya Pradesh",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.39,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 42,
+            "yes": 4,
+            "maybe": 3,
+            "no": 1,
+            "yes_rate": 0.5,
+            "codes": {
+              "off_topic": 2,
+              "stale": 1,
+              "wrong_geography": 1
+            },
+            "examples": [
+              {
+                "name": "Wep",
+                "org": "Wep",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Focuses on women entrepreneurship, not directly girls' education.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Satyarthi",
+                "org": "Satyarthi",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Shikshaseva",
+                "org": "Shikshaseva",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Cryamerica",
+                "org": "Cryamerica",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Focus on women's livelihoods, not specifically girls' education.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Globalgiving",
+                "org": "Globalgiving",
+                "verdict": "maybe",
+                "code": "stale",
+                "note": "Project no longer accepting donations; org may still be relevant.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Chambalfertilisers",
+                "org": "Chambalfertilisers",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 21,
+            "yes": 3,
+            "maybe": 4,
+            "no": 3,
+            "yes_rate": 0.3,
+            "codes": {
+              "no_evidence": 4,
+              "directory_or_aggregator": 2,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "Saxena Family Foundation",
+                "org": "Saxena Family Foundation",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "I Can Foundation India",
+                "org": "I Can Foundation India",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Sandeep Kaur Bathala",
+                "org": "CRY America",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "CRY America is relevant but no direct CSR funding evidence.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Thehumanityprject",
+                "org": "Thehumanityprject",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Appears to be a platform or aggregator, not a funder.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Education Above All Foundation",
+                "org": "Education Above All Foundation",
+                "verdict": "yes",
+                "code": "",
+                "note": "Foundation supporting girls' education in Rajasthan and Madhya Pradesh.",
+                "sources": [
+                  "web",
+                  "orgs",
+                  "list"
+                ]
+              },
+              {
+                "name": "ICFAI University Jaipur",
+                "org": "ICFAI University Jaipur",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "University with outreach, but no clear CSR funding for girls' education.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 1,
+            "maybe": 5,
+            "no": 4,
+            "yes_rate": 0.1,
+            "codes": {
+              "no_evidence": 2,
+              "wrong_org_type": 4,
+              "": 3
+            },
+            "examples": [
+              {
+                "name": "Sathi Saath Nibhana Foundation",
+                "org": "Sathi Saath Nibhana Foundation",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "NGO in education, but no direct CSR funding evidence.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Sambhali Trust",
+                "org": "Sambhali Trust",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Supports girls' education, but no direct CSR funding evidence.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SGJSS",
+                "org": "SGJSS",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "NGO, not a funder or CSR team.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Sky Social",
+                "org": "Sky Social",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "NGO, not a funder or CSR team.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Vimukti Sanstha",
+                "org": "Vimukti Sanstha",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "NGO, not a funder or CSR team.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SK Foundation",
+                "org": "SK Foundation",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Foundation with CSR activity supporting girls' education in Rajasthan.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 21,
+            "yes": 7,
+            "no": 4
+          },
+          "orgs": {
+            "n": 28,
+            "yes": 8,
+            "no": 8
+          },
+          "list": {
+            "n": 8,
+            "yes": 2,
+            "no": 4
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 1,
+        "in_shortlist": 0,
+        "recall_pool": 0.08,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Azim Premji Foundation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Tata Trusts",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Infosys Foundation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "HDFC Bank Parivartan",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Reliance Foundation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Aditya Birla Group CSR",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Bharti Foundation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Vedanta Foundation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Mahindra Foundation (Nanhi Kali)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Godrej CSR",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Siemens India CSR",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Cairn India CSR (Vedanta Group)",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "bad": 7,
+        "borderline": 2,
+        "good": 1
+      },
+      "prospect_problems": {
+        "wrong_org_type": 8,
+        "not_a_real_target": 7,
+        "weak_evidence": 1
+      },
+      "prospects": [
+        {
+          "name": "Sathi Saath Nibhana Foundation",
+          "org": "Sathi Saath Nibhana Foundation",
+          "email": "saathisaathnibhanafoundation@gmail.com",
+          "score": 0.8891,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "This is an NGO, not a funder or CSR team; unlikely to provide funding.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "Sambhali Trust",
+          "org": "Sambhali Trust",
+          "email": "info@sambhali.org",
+          "score": 0.8467,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "This is a nonprofit implementer, not a funder or CSR team.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "Vimukti Sanstha",
+          "org": "Vimukti Sanstha",
+          "email": "admin@vimuktisanstha.org",
+          "score": 0.8467,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "This is a grassroots NGO, not a funding body or CSR department.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "SGJSS",
+          "org": "SGJSS",
+          "email": "info@sgjss.org",
+          "score": 0.8461,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "This is an NGO implementer, not a funder or CSR team.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "Protsahan India Foundation",
+          "org": "Protsahan India Foundation",
+          "email": "info@protsahan.co.in",
+          "score": 0.8379,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "Social impact NGO, not a funding source or CSR team.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "Bal Sansar Sanstha",
+          "org": "Bal Sansar Sanstha",
+          "email": "info@balsansarindia.com",
+          "score": 0.7968,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "NGO implementer, not a funder or CSR department.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "Shiksha Kala Foundation",
+          "org": "Shiksha Kala Foundation",
+          "email": "shikshaandkalafoundation@gmail.com",
+          "score": 0.7419,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "NGO implementer, not a funding body or CSR team.",
+          "problems": [
+            "wrong_org_type",
+            "not_a_real_target"
+          ]
+        },
+        {
+          "name": "SK Foundation",
+          "org": "SK Foundation",
+          "email": "csr@skfoundation.in",
+          "score": 0.7331,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Some evidence of CSR/funding activity, but unclear if they fund external projects.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Welcome to G R Infraprojects Limited",
+          "org": "Welcome to G R Infraprojects Limited",
+          "email": "info@grinfra.com",
+          "score": 0.7312,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Active in Rajasthan, has funded girls' school maintenance, fits CSR target.",
+          "problems": []
+        },
+        {
+          "name": "Sky Social",
+          "org": "Sky Social",
+          "email": "skysocialorg@gmail.com",
+          "score": 0.7312,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Not a funder or CSR team, but collaborates with CSR initiatives in MP.",
+          "problems": [
+            "wrong_org_type"
+          ]
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 0,
+        "tiers": {
+          "inbox": 10
+        },
+        "det_flags": {
+          "free_mail_for_org": 3
+        },
+        "rows": [
+          {
+            "id": "9d90ea8a8cbdce36",
+            "name": "Sathi Saath Nibhana Foundation",
+            "address": "saathisaathnibhanafoundation@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Generic org inbox; likely reaches decision makers in small foundations."
+          },
+          {
+            "id": "5d73ae64c550df06",
+            "name": "Sambhali Trust",
+            "address": "info@sambhali.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Info@ for a small NGO; likely monitored by decision makers."
+          },
+          {
+            "id": "998f3139ed3ad593",
+            "name": "Vimukti Sanstha",
+            "address": "admin@vimuktisanstha.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Admin@ for a small NGO; likely reaches relevant staff."
+          },
+          {
+            "id": "2e974dbf12c865f8",
+            "name": "SGJSS",
+            "address": "info@sgjss.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Info@ for a small NGO; likely reaches decision makers."
+          },
+          {
+            "id": "e1f21ac7128c4ea9",
+            "name": "Protsahan India Foundation",
+            "address": "info@protsahan.co.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Info@ for a small NGO; likely reaches decision makers."
+          },
+          {
+            "id": "287e316490f48f5a",
+            "name": "Bal Sansar Sanstha",
+            "address": "info@balsansarindia.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Info@ for a small NGO; likely reaches decision makers."
+          },
+          {
+            "id": "77ba1e76b30a3206",
+            "name": "Shiksha Kala Foundation",
+            "address": "shikshaandkalafoundation@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Gmail for org; likely monitored by founders or decision makers."
+          },
+          {
+            "id": "681c6a19243fa8a4",
+            "name": "SK Foundation",
+            "address": "csr@skfoundation.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "CSR@ address; directly relevant for CSR funding requests."
+          },
+          {
+            "id": "33e021df553ae322",
+            "name": "Welcome to G R Infraprojects Limited",
+            "address": "info@grinfra.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Info@ for a large company; may not reach CSR team directly."
+          },
+          {
+            "id": "9350fbc435355ffc",
+            "name": "Sky Social",
+            "address": "skysocialorg@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Gmail for org; likely monitored by founders or decision makers."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": -1.0,
+        "mean_fit_top_third": 2.0,
+        "mean_fit_bottom_third": 3.67,
+        "inversions_ge2": 8,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 6,
+          "list": 4
+        },
+        "by_country": {
+          "IN": 9,
+          "?": 1
+        },
+        "max_country_share": 0.9
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 33,
+        "supported": 27,
+        "unsupported": 6,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.82,
+        "emails_with_unsupported": 5,
+        "mean_specific": 1.7,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {
+          "junk_greeting": 1
+        },
+        "bad_claims": [
+          {
+            "to": "saathisaathnibhanafoundation@gmail.com",
+            "claims": [
+              {
+                "text": "Since 2019, our trust has been registered and actively engaged in this work",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@sambhali.org",
+            "claims": [
+              {
+                "text": "Our trust has been registered since 2019",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "admin@vimuktisanstha.org",
+            "claims": [
+              {
+                "text": "Since 2019, I have run a registered trust teaching coding skills to 300 girls across 12 villages",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@sgjss.org",
+            "claims": []
+          },
+          {
+            "to": "info@protsahan.co.in",
+            "claims": []
+          },
+          {
+            "to": "info@balsansarindia.com",
+            "claims": []
+          },
+          {
+            "to": "shikshaandkalafoundation@gmail.com",
+            "claims": []
+          },
+          {
+            "to": "csr@skfoundation.in",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 2.0,
+        "diversity": 2.5,
+        "missing": "Corporate CSR teams, private/corporate foundations, grant managers, actual funders. | Corporate CSR teams and major foundations directly funding girls' education.",
+        "systemic_issues": [
+          "All are NGOs/implementers, not funders",
+          "No corporate CSR contacts",
+          "No evidence of grantmaking roles",
+          "Some prospects are not direct funders",
+          "Lack of specific CSR role contacts"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 2,
+        "actionable": 2,
+        "false_reassurance": [
+          "shortlisted: 10",
+          "pipeline_precision@K_it_reports: 1.0"
+        ],
+        "missing_message": "The list contains almost no actual funders or CSR contacts; most are NGOs, not grantmakers. You need to source corporate CSR teams and foundations directly funding girls' education.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "places",
+            "why": "Local CSR offices and foundations often listed on Google Maps."
+          },
+          {
+            "tool": "portfolio",
+            "why": "Investor portfolio pages may list CSR initiatives and grantees."
+          },
+          {
+            "tool": "news",
+            "why": "Recent articles may mention active CSR projects or grants in the region."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "list",
+            "why": "Low valid rate; many irrelevant or outdated entries."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Missed local discovery via 'places' and recent activity via 'news'; 'list' tool had low yield."
+      }
+    },
+    "s2_school_stem_hyd": {
+      "run": "stress_d",
+      "prompt": "I run robotics workshops for kids; find CBSE or ICSE schools in Hyderabad that would host a free one-hour workshop",
+      "playbook": "school_outreach",
+      "wanted": 12,
+      "shortlisted": 11,
+      "pool": 102,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "school_outreach",
+        "playbook_note": "Correct: outreach to schools for piloting an education program.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "CBSE or ICSE schools",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "in Hyderabad",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "host a free one-hour workshop",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.26,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 1,
+            "size": 1,
+            "yes": 0,
+            "maybe": 0,
+            "no": 1,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_org_type": 1
+            },
+            "examples": [
+              {
+                "name": "ICSE",
+                "org": "ICSE",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "STEM research center, not a school.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 71,
+            "yes": 1,
+            "maybe": 1,
+            "no": 6,
+            "yes_rate": 0.12,
+            "codes": {
+              "wrong_org_type": 4,
+              "no_evidence": 1,
+              "wrong_geography": 2
+            },
+            "examples": [
+              {
+                "name": "Timeschools",
+                "org": "Timeschools",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Hyderabad Institute of Technology and Management",
+                "org": "Hyderabad Institute of Technology and Management",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Institute of technology, not a school for kids.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "People Helping Children",
+                "org": "People Helping Children",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "NGO, not a school.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Teach and Learn Child Development Center (CDC)- Best Behavioral, Occupational, Speech Therapy Near Me in Kondapur, Hyderabad",
+                "org": "Teach and Learn Child Development Center (CDC)- Best Behavioral, Occupational, Speech Therapy Near Me in Kondapur, Hyderabad",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Child development/therapy center, not a school.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Oakridge International School",
+                "org": "Oakridge International School",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "International school in Hyderabad; curriculum not specified.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Board Of Secondary Education Telangana State",
+                "org": "Board Of Secondary Education Telangana State",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Education board, not a school.",
+                "sources": [
+                  "places"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 19,
+            "yes": 5,
+            "maybe": 0,
+            "no": 2,
+            "yes_rate": 0.5,
+            "codes": {
+              "other": 2
+            },
+            "examples": [
+              {
+                "name": "Gprhschool",
+                "org": "Gprhschool",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Stemmantra",
+                "org": "Stemmantra",
+                "verdict": "no",
+                "code": "other",
+                "note": "STEM vendor, not a school.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Santoshreddyinternationalschools",
+                "org": "Santoshreddyinternationalschools",
+                "verdict": "unsure",
+                "code": "no_evidence",
+                "note": "No curriculum info; location fits.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "BBM Education",
+                "org": "BBM Education",
+                "verdict": "no",
+                "code": "other",
+                "note": "STEM/robotics provider, not a school.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Oakridge",
+                "org": "Oakridge",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "St Josephs School",
+                "org": "St Josephs School",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 11,
+            "yes": 8,
+            "maybe": 2,
+            "no": 0,
+            "yes_rate": 0.8,
+            "codes": {
+              "no_evidence": 2
+            },
+            "examples": [
+              {
+                "name": "Suchitra",
+                "org": "Suchitra",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Global Techno School",
+                "org": "Global Techno School",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit CBSE/ICSE evidence, but likely a school.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "EuroSchool",
+                "org": "EuroSchool",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Stmartinshighschool",
+                "org": "Stmartinshighschool",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Dsehyd",
+                "org": "Dsehyd",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Vikas The Concept School -",
+                "org": "Vikas The Concept School -",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 8,
+            "yes": 6,
+            "no": 2
+          },
+          "orgs": {
+            "n": 12,
+            "yes": 9,
+            "no": 2
+          },
+          "places": {
+            "n": 17,
+            "yes": 5,
+            "no": 7
+          },
+          "list": {
+            "n": 4,
+            "yes": 3,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 3,
+        "in_shortlist": 1,
+        "recall_pool": 0.25,
+        "recall_shortlist": 0.08,
+        "entities": [
+          {
+            "name": "Delhi Public School Hyderabad",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Oakridge International School",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Chirec International School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Jubilee Hills Public School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Meridian School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Gitanjali Senior School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "DAV Public School, Safilguda",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "P Obul Reddy Public School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Johnson Grammar School",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sanskriti School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Silver Oaks International School",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "The Hyderabad Public School",
+            "in_pool": true,
+            "in_shortlist": true
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 10,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "weak_evidence": 1,
+        "off_topic": 1
+      },
+      "prospects": [
+        {
+          "name": "Dsehyd",
+          "org": "Dsehyd",
+          "email": "frontoffice.bh@dsehyd.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Top CBSE school in Hyderabad, principal named, fits campaign perfectly.",
+          "problems": []
+        },
+        {
+          "name": "Niraj Public School",
+          "org": "Niraj Public School",
+          "email": "info@nirajpublicschool.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "ICSE school in Hyderabad, vice principal named, matches campaign ask.",
+          "problems": []
+        },
+        {
+          "name": "Suchitra",
+          "org": "Suchitra",
+          "email": "info@suchitra.in",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "CBSE school in Hyderabad, offers STEM/Makerspace, fits campaign.",
+          "problems": []
+        },
+        {
+          "name": "Vikas The Concept School -",
+          "org": "Vikas The Concept School -",
+          "email": "info@vikasconcept.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "CBSE school in Hyderabad, K-12, fits campaign requirements.",
+          "problems": []
+        },
+        {
+          "name": "International School In Hyderabad",
+          "org": "International School In Hyderabad",
+          "email": "info@thegaudium.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "CBSE curriculum in Hyderabad, STEM focus, matches campaign.",
+          "problems": []
+        },
+        {
+          "name": "Kairos Global School",
+          "org": "Kairos Global School",
+          "email": "info@kairosgs.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "CBSE school in Hyderabad, holistic/innovative learning, fits campaign.",
+          "problems": []
+        },
+        {
+          "name": "EuroSchool",
+          "org": "EuroSchool",
+          "email": "connect@euroschoolindia.com",
+          "score": 0.8309,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "EuroSchool is a chain; unclear if this is Hyderabad-specific.",
+          "problems": [
+            "weak_evidence",
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Hpsbegumpet",
+          "org": "Hpsbegumpet",
+          "email": "contactus@hpsbegumpet.org.in",
+          "score": 0.788,
+          "verdict": "good",
+          "fit": 5,
+          "why": "ICSE school in Hyderabad, fits campaign requirements.",
+          "problems": []
+        },
+        {
+          "name": "Stmartinshighschool",
+          "org": "Stmartinshighschool",
+          "email": "info@stmartinshighschool.in",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 5,
+          "why": "ICSE school in Hyderabad, matches target exactly.",
+          "problems": []
+        },
+        {
+          "name": "Global Techno School",
+          "org": "Global Techno School",
+          "email": "info@globalschoolhyd.com",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 5,
+          "why": "High school in Hyderabad, fits campaign criteria.",
+          "problems": []
+        },
+        {
+          "name": "The Clement Grammar School",
+          "org": "The Clement Grammar School",
+          "email": "info@theclementgrammarschool.com",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Hyderabad high school, fits campaign requirements.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 11,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 2,
+        "tiers": {
+          "inbox": 11
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "4feaf6de4aec6861",
+            "name": "Dsehyd",
+            "address": "frontoffice.bh@dsehyd.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Front office may not forward; seek principal's direct email."
+          },
+          {
+            "id": "6e3c31a4f384b68b",
+            "name": "Niraj Public School",
+            "address": "info@nirajpublicschool.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; decision maker identified."
+          },
+          {
+            "id": "211fa1039b312794",
+            "name": "Suchitra",
+            "address": "info@suchitra.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; decision maker identified."
+          },
+          {
+            "id": "925169383204f9b2",
+            "name": "Vikas The Concept School -",
+            "address": "info@vikasconcept.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; no decision maker but likely reaches admin."
+          },
+          {
+            "id": "c1dbd412a246918c",
+            "name": "International School In Hyderabad",
+            "address": "info@thegaudium.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; no decision maker but likely reaches admin."
+          },
+          {
+            "id": "79b1bb9824e9e9b5",
+            "name": "Kairos Global School",
+            "address": "info@kairosgs.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; no decision maker but likely reaches admin."
+          },
+          {
+            "id": "278b78af89262800",
+            "name": "EuroSchool",
+            "address": "connect@euroschoolindia.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Connect@ is main school inbox; decision maker identified."
+          },
+          {
+            "id": "5010ac81e756b83e",
+            "name": "Hpsbegumpet",
+            "address": "contactus@hpsbegumpet.org.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Contactus@ is main school inbox; no decision maker but likely reaches admin."
+          },
+          {
+            "id": "786209e202c04288",
+            "name": "Stmartinshighschool",
+            "address": "info@stmartinshighschool.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; no decision maker but likely reaches admin."
+          },
+          {
+            "id": "387d9a8af117e28c",
+            "name": "Global Techno School",
+            "address": "info@globalschoolhyd.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for school; no decision maker but likely reaches admin."
+          },
+          {
+            "id": "66b7b020c0315148",
+            "name": "The Clement Grammar School",
+            "address": "info@theclementgrammarschool.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; may not reach decision maker for workshops."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 11,
+        "kendall_tau_score_vs_fit": 0.2,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 5.0,
+        "inversions_ge2": 4,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 4,
+          "places": 6,
+          "list": 1
+        },
+        "by_country": {
+          "IN": 10,
+          "?": 1
+        },
+        "max_country_share": 0.91
+      },
+      "R7_drafts": {
+        "n": 11,
+        "claims": 57,
+        "supported": 42,
+        "unsupported": 15,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.74,
+        "emails_with_unsupported": 9,
+        "mean_specific": 2.09,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "frontoffice.bh@dsehyd.com",
+            "claims": []
+          },
+          {
+            "to": "info@nirajpublicschool.com",
+            "claims": [
+              {
+                "text": "This one-hour robotics workshop is designed to fit easily into the school schedule",
+                "about": "sender",
+                "status": "unsupported"
+              },
+              {
+                "text": "requires minimal time from teachers",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@suchitra.in",
+            "claims": [
+              {
+                "text": "It requires minimal time from teachers",
+                "about": "sender",
+                "status": "unsupported"
+              },
+              {
+                "text": "could complement your existing activities",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@vikasconcept.com",
+            "claims": [
+              {
+                "text": "aims to introduce children to robotics in an engaging way",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@thegaudium.com",
+            "claims": [
+              {
+                "text": "Workshop requires minimal time from teachers.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@kairosgs.com",
+            "claims": [
+              {
+                "text": "Workshop requires minimal time commitment from teachers.",
+                "about": "world",
+                "status": "unsupported"
+              },
+              {
+                "text": "Workshop provides hands-on learning.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "connect@euroschoolindia.com",
+            "claims": [
+              {
+                "text": "Workshop requires minimal time from teachers.",
+                "about": "world",
+                "status": "unsupported"
+              },
+              {
+                "text": "Workshop provides hands-on robotics experience.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "contactus@hpsbegumpet.org.in",
+            "claims": [
+              {
+                "text": "Workshop requires minimal time from teachers.",
+                "about": "world",
+                "status": "unsupported"
+              },
+              {
+                "text": "Workshop aims to engage students in practical learning.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 5.0,
+        "diversity": 4.0,
+        "missing": "Could include more ICSE-only schools and explicit extracurricular coordinators. | No explicit mention of CBSE schools or specific roles (e.g., Principal).",
+        "systemic_issues": [
+          "Most contacts are generic inboxes, not named roles",
+          "One entry (EuroSchool) may not be Hyderabad-specific",
+          "No individual contacts, only generic inboxes"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "Most contacts are generic inboxes, not named individuals; you may need to research or call to reach the right person.",
+        "det_shortfall": 1,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "jobs",
+            "why": "Could surface schools actively hiring, indicating openness to new programs."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "places",
+            "why": "High invalid rate; many listings not CBSE/ICSE or not schools."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Too many irrelevant results from 'places'; more filtering for curriculum needed."
+      }
+    },
+    "s2_vague_prompt": {
+      "run": "stress_d",
+      "prompt": "i need people to talk to about my startup",
+      "playbook": "general",
+      "wanted": 8,
+      "shortlisted": 8,
+      "pool": 122,
+      "R1_intake": {
+        "playbook_correct": false,
+        "best_playbook": "advisors",
+        "playbook_note": "General is too vague; 'advisors' fits startup founders seeking conversations.",
+        "topics_faithful": 2,
+        "topics_issue": "Topics are empty; should reflect 'startup advice, feedback, mentorship'.",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [],
+        "invented": [
+          "roles: Founder, Director, Head, Manager"
+        ],
+        "request_quality": "vague",
+        "handled_well": true,
+        "ask_fit": 4,
+        "overall": 3,
+        "top_problem": "Playbook is too generic; roles and topics are invented or missing."
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.13,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 67,
+            "yes": 0,
+            "maybe": 8,
+            "no": 0,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_org_type": 8
+            },
+            "examples": [
+              {
+                "name": "Founder Institute",
+                "org": "Founder Institute",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Accelerator, not a person, but relevant for startup conversations.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Pandemic Studios",
+                "org": "Pandemic Studios",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Org profile, but founder/GP is relevant for startup talks.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Super.com",
+                "org": "Super.com",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Org profile, but founder is relevant for startup conversations.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "AfterHours",
+                "org": "AfterHours",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Incubator/collective, not a person, but relevant for startup talks.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Hydro Flask",
+                "org": "Hydro Flask",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Org profile, but founder/advisor is relevant for startup conversations.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Nextdoor",
+                "org": "Nextdoor",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Org profile, but co-founder/investor is relevant for startup talks.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 47,
+            "yes": 2,
+            "maybe": 4,
+            "no": 4,
+            "yes_rate": 0.2,
+            "codes": {
+              "wrong_org_type": 2,
+              "directory_or_aggregator": 3,
+              "off_topic": 1,
+              "no_evidence": 2
+            },
+            "examples": [
+              {
+                "name": "New Hampshire Tech Alliance",
+                "org": "New Hampshire Tech Alliance",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Tech alliance/org, but runs founder networking events.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Mucker Capital",
+                "org": "Mucker Capital",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "VC firm, not a person, but relevant for startup conversations.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Google Cloud Webinars",
+                "org": "Google Cloud Webinars",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Webinar series, not a person or direct contact.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Acalog",
+                "org": "Acalog",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Academic program, not a person or network for startup conversations.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Tampa.dev",
+                "org": "Tampa.dev",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Events calendar, not a direct contact or community.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Startupspace",
+                "org": "Startupspace",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Workshop listing, not a person or interactive community.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 8,
+            "size": 8,
+            "yes": 7,
+            "maybe": 1,
+            "no": 0,
+            "yes_rate": 0.88,
+            "codes": {
+              "no_evidence": 1
+            },
+            "examples": [
+              {
+                "name": "Antler",
+                "org": "Antler",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Venture firm, may offer conversations but not explicit.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Founders Network",
+                "org": "Founders Network",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs",
+                  "list"
+                ]
+              },
+              {
+                "name": "Techstars",
+                "org": "Techstars",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "New World Angels",
+                "org": "New World Angels",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "GrowthMentor",
+                "org": "GrowthMentor",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "500",
+                "org": "500",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "list": {
+            "n": 13,
+            "yes": 4,
+            "no": 0
+          },
+          "orgs": {
+            "n": 26,
+            "yes": 9,
+            "no": 4
+          },
+          "web": {
+            "n": 14,
+            "yes": 6,
+            "no": 4
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 4,
+        "in_shortlist": 2,
+        "recall_pool": 0.33,
+        "recall_shortlist": 0.17,
+        "entities": [
+          {
+            "name": "Y Combinator",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Techstars",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "500 Global",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "First Round Capital",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Paul Graham",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Jason Calacanis",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Naval Ravikant",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sam Altman",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Seth Godin",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Indie Hackers",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Product Hunt",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Startup Grind",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 8
+      },
+      "prospect_problems": {},
+      "prospects": [
+        {
+          "name": "GrowthMentor",
+          "org": "GrowthMentor",
+          "email": "hello@growthmentor.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 4,
+          "why": "GrowthMentor directly serves early-stage founders seeking conversations and mentorship.",
+          "problems": []
+        },
+        {
+          "name": "Founders Network",
+          "org": "Founders Network",
+          "email": "questions@foundersnetwork.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Founders Network is a peer mentorship community for startup founders, matching the ask.",
+          "problems": []
+        },
+        {
+          "name": "500",
+          "org": "500",
+          "email": "partnerships@500.co",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 4,
+          "why": "500 is a major accelerator/VC for early-stage startups, relevant for founder outreach.",
+          "problems": []
+        },
+        {
+          "name": "Entrepreneurs First",
+          "org": "Entrepreneurs First",
+          "email": "partnerships@joinef.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Entrepreneurs First invests in and supports early-stage founders, matching the campaign.",
+          "problems": []
+        },
+        {
+          "name": "Startup Wise Guys",
+          "org": "Startup Wise Guys",
+          "email": "hello@startupwiseguys.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Startup Wise Guys is a global accelerator for early-stage founders, relevant for outreach.",
+          "problems": []
+        },
+        {
+          "name": "Techstars",
+          "org": "Techstars",
+          "email": "info@techstars.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Techstars is a leading accelerator for early-stage startups, highly relevant for founders.",
+          "problems": []
+        },
+        {
+          "name": "New World Angels",
+          "org": "New World Angels",
+          "email": "jessica@newworldangels.com",
+          "score": 0.8798,
+          "verdict": "good",
+          "fit": 4,
+          "why": "New World Angels provides funding/support for early-stage startups, matching the ask.",
+          "problems": []
+        },
+        {
+          "name": "Antler",
+          "org": "Antler",
+          "email": "rike@antler.co",
+          "score": 0.8798,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Antler is a global early-stage investor and startup generator, highly relevant.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 8,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 5,
+        "tiers": {
+          "inbox": 8
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "e47e587369e560c7",
+            "name": "GrowthMentor",
+            "address": "hello@growthmentor.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic hello@ for a startup-focused org; likely reaches relevant team."
+          },
+          {
+            "id": "273fe96b302e1219",
+            "name": "Founders Network",
+            "address": "questions@foundersnetwork.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "questions@ likely monitored by relevant staff; suitable for startup conversations."
+          },
+          {
+            "id": "9eff28bf0862e8d1",
+            "name": "500",
+            "address": "partnerships@500.co",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "partnerships@ may filter out general startup asks; find a person."
+          },
+          {
+            "id": "3608644fc7886c1b",
+            "name": "Entrepreneurs First",
+            "address": "partnerships@joinef.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "partnerships@ may not handle general startup conversations; seek a direct contact."
+          },
+          {
+            "id": "a87f96b7df9ed0fa",
+            "name": "Startup Wise Guys",
+            "address": "hello@startupwiseguys.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "hello@ for a startup org; likely reaches relevant team."
+          },
+          {
+            "id": "2bf12343606727ec",
+            "name": "Techstars",
+            "address": "info@techstars.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "info@ at large org may not reach decision makers; find a person."
+          },
+          {
+            "id": "352f644c4cc5a18a",
+            "name": "New World Angels",
+            "address": "jessica@newworldangels.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Personal address at org; unclear if Jessica is relevant contact."
+          },
+          {
+            "id": "de800f52b68bde31",
+            "name": "Antler",
+            "address": "rike@antler.co",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Personal address at org; unclear if Rike is relevant contact."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 8,
+        "kendall_tau_score_vs_fit": null,
+        "mean_fit_top_third": 4.0,
+        "mean_fit_bottom_third": 4.0,
+        "inversions_ge2": 0,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 4,
+          "list": 4
+        },
+        "by_country": {
+          "?": 8
+        },
+        "max_country_share": 1.0
+      },
+      "R7_drafts": {
+        "n": 8,
+        "claims": 20,
+        "supported": 20,
+        "unsupported": 0,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 1.0,
+        "emails_with_unsupported": 0,
+        "mean_specific": 2.5,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "hello@growthmentor.com",
+            "claims": []
+          },
+          {
+            "to": "questions@foundersnetwork.com",
+            "claims": []
+          },
+          {
+            "to": "partnerships@500.co",
+            "claims": []
+          },
+          {
+            "to": "partnerships@joinef.com",
+            "claims": []
+          },
+          {
+            "to": "hello@startupwiseguys.com",
+            "claims": []
+          },
+          {
+            "to": "info@techstars.com",
+            "claims": []
+          },
+          {
+            "to": "jessica@newworldangels.com",
+            "claims": []
+          },
+          {
+            "to": "rike@antler.co",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 4.0,
+        "missing": "Direct individual founders, non-investor/accelerator mentors, or startup-focused community leaders.",
+        "systemic_issues": [
+          "All orgs, no direct individuals",
+          "Heavy accelerator/investor focus",
+          "No sector-specific or niche communities"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 4,
+        "actionable": 4,
+        "false_reassurance": [
+          "No mention that all contacts are orgs, not individuals",
+          "No warning about lack of sector/niche diversity"
+        ],
+        "missing_message": "All shortlisted contacts are organizations, not direct individuals; consider supplementing with founder or community leader contacts for better outreach.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 3,
+        "missed_tools": [
+          {
+            "tool": "news",
+            "why": "Journalists covering startups are often open to conversations."
+          },
+          {
+            "tool": "events",
+            "why": "Speakers/sponsors at startup events are highly relevant."
+          },
+          {
+            "tool": "portfolio",
+            "why": "Investors and their portfolio founders are open to startup discussions."
+          },
+          {
+            "tool": "podcasts",
+            "why": "Podcast hosts/guests in startup topics are approachable."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "list",
+            "why": "Low conversion rate; unclear what 'list' refers to."
+          }
+        ],
+        "effort_spent_where_it_pays": 3,
+        "top_problem": "Missed several high-yield tools for startup conversations; effort spread thinly across moderately relevant sources."
+      }
+    },
+    "stress_investors_multi": {
+      "run": "stress_d",
+      "prompt": "we're raising a $1.5M seed for a climate-fintech startup that helps Indian MSMEs access green loans; find seed investors in India, Singapore or Indonesia who write $100k-$500k cheques in climate or fintech, but NOT corporate venture arms or accelerators",
+      "playbook": "fundraising",
+      "wanted": 15,
+      "shortlisted": 10,
+      "pool": 104,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "fundraising",
+        "playbook_note": "Fundraising is the correct playbook for this request.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 4,
+        "location_issue": "Indonesia missing from regions; only in regions, not countries.",
+        "constraints": [
+          {
+            "constraint": "seed investors",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "India, Singapore or Indonesia",
+            "preserved": "partly"
+          },
+          {
+            "constraint": "$100k-$500k cheque size",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "climate or fintech",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "NOT corporate venture arms",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "NOT accelerators",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 4,
+        "top_problem": "Indonesia missing from countries; only present in regions. Otherwise, all constraints and intent are preserved."
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.31,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 13,
+            "yes": 2,
+            "maybe": 6,
+            "no": 2,
+            "yes_rate": 0.2,
+            "codes": {
+              "off_topic": 6,
+              "no_evidence": 2
+            },
+            "examples": [
+              {
+                "name": "AC Ventures",
+                "org": "AC Ventures",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "No direct evidence of climate or fintech focus.",
+                "sources": [
+                  "list",
+                  "portfolio",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Skystar Capital",
+                "org": "Skystar Capital",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Early-stage, but no clear climate or fintech focus.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Sangam Ventures",
+                "org": "Sangam Ventures",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "UMG IdeaLab",
+                "org": "UMG IdeaLab",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "No direct evidence of climate or fintech investment.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Openspace Capital",
+                "org": "Openspace Capital",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Invests in financial services, but climate focus unclear.",
+                "sources": [
+                  "list",
+                  "portfolio",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Ascent Venture Group",
+                "org": "Ascent Venture Group",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of climate or fintech focus.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 60,
+            "yes": 3,
+            "maybe": 3,
+            "no": 2,
+            "yes_rate": 0.38,
+            "codes": {
+              "no_evidence": 3,
+              "off_topic": 1,
+              "wrong_org_type": 1
+            },
+            "examples": [
+              {
+                "name": "Gisela Ludiarto",
+                "org": "Gisela Ludiarto",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Private equity, unclear cheque size or stage fit.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Gaurav Agrawal",
+                "org": "Gaurav Agrawal",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Angel investor focused on education, not climate or fintech.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Ankur Capital",
+                "org": "Ankur Capital",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Early-stage, agritech/healthtech; unclear cheque size or fintech focus.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SEEDS Capital",
+                "org": "SEEDS Capital",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Government co-investment arm, not a direct VC or angel.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Gan Kapital",
+                "org": "Gan Kapital",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Udyat Ventures",
+                "org": "Udyat Ventures",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 21,
+            "yes": 3,
+            "maybe": 3,
+            "no": 4,
+            "yes_rate": 0.3,
+            "codes": {
+              "directory_or_aggregator": 3,
+              "wrong_size": 1,
+              "no_evidence": 3
+            },
+            "examples": [
+              {
+                "name": "Vertex Ventures Southeast Asia & India",
+                "org": "Vertex Ventures Southeast Asia & India",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Startup Grants India",
+                "org": "Startup Grants India",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Directory/aggregator, not a direct investor.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Alpha JWC",
+                "org": "Alpha JWC",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "portfolio",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Startup Fundraising Platform",
+                "org": "Startup Fundraising Platform",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Platform, not a direct investor.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "ABC Impact",
+                "org": "ABC Impact",
+                "verdict": "no",
+                "code": "wrong_size",
+                "note": "Private equity, likely invests larger than seed.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "ADB Ventures",
+                "org": "ADB Ventures",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No cheque size info; sector and region fit.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 1,
+            "maybe": 8,
+            "no": 1,
+            "yes_rate": 0.1,
+            "codes": {
+              "no_evidence": 8,
+              "wrong_org_type": 1
+            },
+            "examples": [
+              {
+                "name": "Skystar Capital",
+                "org": "Skystar Capital",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Venturra",
+                "org": "Venturra",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No cheque size or sector clarity; early-stage focus.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Nexea",
+                "org": "Nexea",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Early-stage VC in Indonesia, but no cheque size or sector evidence.",
+                "sources": [
+                  "web",
+                  "portfolio"
+                ]
+              },
+              {
+                "name": "Kejorahq",
+                "org": "Kejorahq",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Seed investor in Indonesia, but no cheque size or sector specifics.",
+                "sources": [
+                  "list",
+                  "lookalike"
+                ]
+              },
+              {
+                "name": "ADB Ventures",
+                "org": "ADB Ventures",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Climate investor in Asia-Pacific, but cheque size not specified.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Intudo",
+                "org": "Intudo",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Indonesian VC, but no sector or cheque size evidence.",
+                "sources": [
+                  "list",
+                  "portfolio"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "list": {
+            "n": 34,
+            "yes": 9,
+            "no": 6
+          },
+          "portfolio": {
+            "n": 24,
+            "yes": 5,
+            "no": 6
+          },
+          "orgs": {
+            "n": 18,
+            "yes": 7,
+            "no": 3
+          },
+          "web": {
+            "n": 5,
+            "yes": 1,
+            "no": 3
+          },
+          "lookalike": {
+            "n": 1,
+            "yes": 0,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 1,
+        "in_shortlist": 0,
+        "recall_pool": 0.08,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Better Capital",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Blume Ventures",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Ankur Capital",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Surge (Sequoia India/SEA seed program)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Antler India",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "500 Southeast Asia",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "January Capital",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Wavemaker Partners",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Insignia Ventures Partners",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "SeedPlus",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Capria Ventures",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Patamar Capital",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 8,
+        "bad": 1,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "wrong_org_type": 1,
+        "weak_evidence": 1
+      },
+      "prospects": [
+        {
+          "name": "Intudo",
+          "org": "Intudo",
+          "email": "mail@intudovc.com",
+          "score": 0.788,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Independent Indonesian VC, early-stage, tech focus, fits ask and region.",
+          "problems": []
+        },
+        {
+          "name": "ADB Ventures -",
+          "org": "ADB Ventures -",
+          "email": "info@ventures.adb.org",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Invests seed/early in climate in Asia, covers India, fits ask.",
+          "problems": []
+        },
+        {
+          "name": "NEXEA",
+          "org": "NEXEA",
+          "email": "hello@nexea.co",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Early-stage VC, Indonesia, tech focus, plausible for climate/fintech.",
+          "problems": []
+        },
+        {
+          "name": "Skystar Capital",
+          "org": "Skystar Capital",
+          "email": "contact@skystarcapital.com",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 5,
+          "why": "SE Asia/Indonesia VC, fintech focus, fits ask and region.",
+          "problems": []
+        },
+        {
+          "name": "Init-6",
+          "org": "Init-6",
+          "email": "info@init-6.fund",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Indonesian VC, fintech focus, early-stage, matches ask.",
+          "problems": []
+        },
+        {
+          "name": "Venturra",
+          "org": "Venturra",
+          "email": "all@venturra.com",
+          "score": 0.7331,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Indonesia/Southeast Asia early-stage VC, tech focus, plausible fit.",
+          "problems": []
+        },
+        {
+          "name": "Kirk McDonald",
+          "org": "New Energy Nexus",
+          "email": "kirk.mcdonald@newenergynexus.com",
+          "score": 0.7,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "New Energy Nexus is a non-profit/accelerator, not a VC or seed fund.",
+          "problems": [
+            "wrong_org_type"
+          ]
+        },
+        {
+          "name": "Spiral Ventures",
+          "org": "Spiral Ventures",
+          "email": "contact.asia@spiral-ventures.com",
+          "score": 0.6895,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Listed as climate VC, but main focus is IT/internet, climate/fintech unclear.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "C4D Partners",
+          "org": "C4D Partners",
+          "email": "info@c4dpartners.com",
+          "score": 0.6698,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Impact investor focused on SMEs and green businesses in India; matches sector, stage, and geography.",
+          "problems": []
+        },
+        {
+          "name": "Kejorahq",
+          "org": "Kejorahq",
+          "email": "contact@kejorahq.com",
+          "score": 0.6402,
+          "verdict": "good",
+          "fit": 4,
+          "why": "VC investing seed-stage in Southeast Asia, including Indonesia; sector and geography fit, plausible check size.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 1,
+        "not_send": 2,
+        "tiers": {
+          "inbox": 9,
+          "attributed": 1
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "4f32f63e9e42bf75",
+            "name": "Intudo",
+            "address": "mail@intudovc.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, likely monitored by decision makers."
+          },
+          {
+            "id": "7742aaccb53afa7f",
+            "name": "ADB Ventures -",
+            "address": "info@ventures.adb.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "drop",
+            "note": "ADB Ventures is a corporate/DFI; not a fit per exclusion."
+          },
+          {
+            "id": "a944ac46ee240da0",
+            "name": "NEXEA",
+            "address": "hello@nexea.co",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, suitable for funding requests."
+          },
+          {
+            "id": "9a219a897c5ae061",
+            "name": "Skystar Capital",
+            "address": "contact@skystarcapital.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, likely reaches decision makers."
+          },
+          {
+            "id": "d79f27120e7f514d",
+            "name": "Init-6",
+            "address": "info@init-6.fund",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, suitable for investment outreach."
+          },
+          {
+            "id": "4970466eca7110cc",
+            "name": "Venturra",
+            "address": "all@venturra.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "All@ likely reaches partners at small VC."
+          },
+          {
+            "id": "67e3d762c4421ca6",
+            "name": "Kirk McDonald",
+            "address": "kirk.mcdonald@newenergynexus.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Person may not be investor or decision maker."
+          },
+          {
+            "id": "febb7428ec84febd",
+            "name": "Spiral Ventures",
+            "address": "contact.asia@spiral-ventures.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, suitable for investment outreach."
+          },
+          {
+            "id": "4cd0f931c1008dbd",
+            "name": "C4D Partners",
+            "address": "info@c4dpartners.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, suitable for investment outreach."
+          },
+          {
+            "id": "879f762dac70d512",
+            "name": "Kejorahq",
+            "address": "contact@kejorahq.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic VC inbox, suitable for investment outreach."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 0.67,
+        "mean_fit_top_third": 4.67,
+        "mean_fit_bottom_third": 3.67,
+        "inversions_ge2": 2,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "list": 9,
+          "web": 1
+        },
+        "by_country": {
+          "?": 6,
+          "IN": 4
+        },
+        "max_country_share": 0.6
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 40,
+        "supported": 37,
+        "unsupported": 3,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.93,
+        "emails_with_unsupported": 3,
+        "mean_specific": 2.2,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "mail@intudovc.com",
+            "claims": [
+              {
+                "text": "Intudo\u2019s recent closing of $125M across Indonesia-only funds",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@ventures.adb.org",
+            "claims": []
+          },
+          {
+            "to": "hello@nexea.co",
+            "claims": []
+          },
+          {
+            "to": "contact@skystarcapital.com",
+            "claims": []
+          },
+          {
+            "to": "info@init-6.fund",
+            "claims": []
+          },
+          {
+            "to": "all@venturra.com",
+            "claims": []
+          },
+          {
+            "to": "kirk.mcdonald@newenergynexus.com",
+            "claims": []
+          },
+          {
+            "to": "contact.asia@spiral-ventures.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 4.0,
+        "missing": "Direct India-focused seed VCs, more pure-play climate/fintech angels, Singapore-based funds. | Individual angels, more fintech-specific funds, Singapore-based investors.",
+        "systemic_issues": [
+          "Some orgs have weak sector evidence",
+          "Non-profit/accelerator included",
+          "Few direct India/Singapore VCs"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "Some shortlisted contacts are not pure-play VCs or have weak sector/location fit; consider manual review to remove non-investors or accelerators.",
+        "det_shortfall": 5,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "jobs",
+            "why": "May surface active investors hiring in target regions/sectors."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "web",
+            "why": "Low valid rate; staff/team pages less relevant for investor discovery."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Web tool produced few valid targets; more focus on portfolio/orgs would improve results."
+      }
+    },
+    "stress_municipal_iot": {
+      "run": "stress_d",
+      "prompt": "we make IoT smart water meters and want a 3-month pilot with municipal corporations or water boards in Maharashtra and Gujarat",
+      "playbook": "government_tenders",
+      "wanted": 12,
+      "shortlisted": 3,
+      "pool": 60,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "government_tenders",
+        "playbook_note": "Correct: government/public bodies for pilot procurement.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "3-month pilot",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "municipal corporations or water boards",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "Maharashtra and Gujarat",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.18,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 49,
+            "yes": 1,
+            "maybe": 1,
+            "no": 6,
+            "yes_rate": 0.12,
+            "codes": {
+              "wrong_role": 4,
+              "off_topic": 2,
+              "unsure": 1
+            },
+            "examples": [
+              {
+                "name": "Aditya Menon",
+                "org": "The Quint",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "Journalist, not a municipal or water board decision maker.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Imarcgroup",
+                "org": "Imarcgroup",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Market research firm, not a municipal corporation or water board.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Mit",
+                "org": "Mit",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Academic project, not a municipal corporation or water board.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Shubham Kurale",
+                "org": "The Indian Express",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "Journalist, not a municipal or water board decision maker.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Sachin Tiwale",
+                "org": "India Water Portal",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "Journalist, not a municipal or water board decision maker.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Arjun Brij",
+                "org": "Swarajya",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "Journalist, not a municipal or water board decision maker.",
+                "sources": [
+                  "news"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 8,
+            "size": 8,
+            "yes": 2,
+            "maybe": 3,
+            "no": 3,
+            "yes_rate": 0.25,
+            "codes": {
+              "off_topic": 1,
+              "unsure": 1,
+              "no_evidence": 3,
+              "wrong_org_type": 1
+            },
+            "examples": [
+              {
+                "name": "Icid",
+                "org": "Icid",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Water management association, not a municipal corporation or water board.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Pib",
+                "org": "Pib",
+                "verdict": "maybe",
+                "code": "unsure",
+                "note": "Central government, may influence pilots but not a direct target.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Ulbdataportal",
+                "org": "Ulbdataportal",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Portal for ULBs, unclear if decision maker or aggregator.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Mahaswsm",
+                "org": "Mahaswsm",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Synthesyslive",
+                "org": "Synthesyslive",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of being a municipal corporation or water board.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Vishvaraj Environment Limited",
+                "org": "Vishvaraj Environment Limited",
+                "verdict": "maybe",
+                "code": "wrong_org_type",
+                "note": "Private utility, not a municipal corporation or water board.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 3,
+            "size": 3,
+            "yes": 3,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": 1.0,
+            "codes": {},
+            "examples": [
+              {
+                "name": "Maharashtra",
+                "org": "Maharashtra",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Surat Municipal Corporation",
+                "org": "Surat Municipal Corporation",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Aurangabadmahapalika",
+                "org": "Aurangabadmahapalika",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "news": {
+            "n": 4,
+            "yes": 0,
+            "no": 4
+          },
+          "web": {
+            "n": 14,
+            "yes": 6,
+            "no": 5
+          },
+          "orgs": {
+            "n": 15,
+            "yes": 6,
+            "no": 5
+          },
+          "list": {
+            "n": 1,
+            "yes": 0,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 11,
+        "in_pool": 5,
+        "in_shortlist": 2,
+        "recall_pool": 0.45,
+        "recall_shortlist": 0.18,
+        "entities": [
+          {
+            "name": "Brihanmumbai Municipal Corporation (BMC)",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Pune Municipal Corporation (PMC)",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Nashik Municipal Corporation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Nagpur Municipal Corporation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Thane Municipal Corporation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Ahmedabad Municipal Corporation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Surat Municipal Corporation",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Vadodara Municipal Corporation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rajkot Municipal Corporation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Maharashtra Jeevan Pradhikaran",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Gujarat Water Supply and Sewerage Board",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 2,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "weak_evidence": 1,
+        "wrong_org_type": 1
+      },
+      "prospects": [
+        {
+          "name": "Surat Municipal Corporation",
+          "org": "Surat Municipal Corporation",
+          "email": "ns@suratmunicipal.gov.in",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Surat Municipal Corporation is a prime target; inbox is appropriate for org-level outreach.",
+          "problems": []
+        },
+        {
+          "name": "Maharashtra",
+          "org": "Maharashtra",
+          "email": "exadmin@maharashtra.gov.in",
+          "score": 0.8372,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Address is for the state, not the water board; unclear if it reaches the right decision makers.",
+          "problems": [
+            "weak_evidence",
+            "wrong_org_type"
+          ]
+        },
+        {
+          "name": "Aurangabadmahapalika",
+          "org": "Aurangabadmahapalika",
+          "email": "contact@aurangabadmahapalika.org",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Municipal corporation with water responsibility; inbox is suitable for initial approach.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 3,
+        "belongs_bad": 1,
+        "cannot_grant": 1,
+        "not_send": 3,
+        "tiers": {
+          "inbox": 3
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "96a07169e58c4c30",
+            "name": "Surat Municipal Corporation",
+            "address": "ns@suratmunicipal.gov.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic address; unclear if it reaches decision maker for pilot projects."
+          },
+          {
+            "id": "03fc56cb353ab5e3",
+            "name": "Maharashtra",
+            "address": "exadmin@maharashtra.gov.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "doubtful",
+            "addressee_can_grant": "no",
+            "action": "drop",
+            "note": "Address likely for ex-administration; not suitable for pilot project requests."
+          },
+          {
+            "id": "aa3ad638d8f8e485",
+            "name": "Aurangabadmahapalika",
+            "address": "contact@aurangabadmahapalika.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic contact; unclear if it reaches pilot project decision makers."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 3,
+        "kendall_tau_score_vs_fit": 1.0,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 5.0,
+        "inversions_ge2": 1,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 3
+        },
+        "by_country": {
+          "IN": 3
+        },
+        "max_country_share": 1.0
+      },
+      "R7_drafts": {
+        "n": 3,
+        "claims": 9,
+        "supported": 9,
+        "unsupported": 0,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 1.0,
+        "emails_with_unsupported": 0,
+        "mean_specific": 2.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "ns@suratmunicipal.gov.in",
+            "claims": []
+          },
+          {
+            "to": "exadmin@maharashtra.gov.in",
+            "claims": []
+          },
+          {
+            "to": "contact@aurangabadmahapalika.org",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 4.0,
+        "missing": "Named water board officials, more cities, direct technology/project contacts.",
+        "systemic_issues": [
+          "Shared inboxes, not direct decision makers",
+          "Some orgs too broad (state vs. board)",
+          "Few named individuals"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "The shortlist contains only shared inboxes, not direct decision makers; expect low response rates unless you add a contact-data provider.",
+        "det_shortfall": 9,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "places",
+            "why": "Google Maps can directly surface municipal offices and water boards in target states."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "news",
+            "why": "No valid targets found; news rarely lists direct decision makers for pilots."
+          },
+          {
+            "tool": "list",
+            "why": "No valid targets; unclear source or relevance for this context."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Too much effort on news and list; more direct org/places search would yield better results."
+      }
+    },
+    "stress_rust_maintainers": {
+      "error": "LLMError: LLM request failed: HTTP 429: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhausted\"\n    }\n}\n"
+    }
+  },
+  "cost": {
+    "calls": 85,
+    "usd": 0.454
+  }
+}

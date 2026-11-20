@@ -1,0 +1,4327 @@
+{
+  "runs": "stress_d",
+  "judge_model": "gpt-4.1",
+  "scenarios": {
+    "s2_advisors_medtech": {
+      "run": "stress_d",
+      "prompt": "I'm building a low-cost portable ECG device and need advisors who have taken Class II medical devices through CDSCO or FDA approval",
+      "playbook": "advisors",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 304,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "advisors",
+        "playbook_note": "Advisors is the correct playbook for this request.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "advisors who have taken Class II medical devices through CDSCO or FDA approval",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.05,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 149,
+            "yes": 0,
+            "maybe": 8,
+            "no": 2,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 8,
+              "wrong_role": 1,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "T. Gowthami",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Regulatory affairs background, but no direct device approval evidence.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Michael J. A. Reid",
+                "org": "University of California, San Francisco",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Expert in regulation, but no direct evidence of device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Daniel G. Ostermayer",
+                "org": "University of Arizona",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Involved in FDA-cleared device publication, unclear if led approval process.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Xin Sun",
+                "org": "National Medical Products Administration",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Regulatory research in China, unclear direct device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Diana Bradford",
+                "org": "United States Food and Drug Administration",
+                "verdict": "no",
+                "code": "wrong_role",
+                "note": "FDA reviewer, not an advisor or external expert.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Paolo Bragan\u00f2",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Published on device approval pathways, unclear direct approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 83,
+            "yes": 1,
+            "maybe": 4,
+            "no": 3,
+            "yes_rate": 0.12,
+            "codes": {
+              "off_topic": 4,
+              "no_evidence": 3
+            },
+            "examples": [
+              {
+                "name": "William F. Pierce",
+                "org": "United States Food and Drug Administration",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Focus is on oncology drugs, not medical devices.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Zachary Kraft",
+                "org": "Long Island University",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Expertise is in pharmaceuticals, not medical devices.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Jacob M. Gluski",
+                "org": "Northwell Health",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Has regulatory knowledge, but unclear if direct device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Stephan Windecker",
+                "org": "University of Bern",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Regulatory focus is Europe, not FDA or CDSCO.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Beatriz G. de la Torre",
+                "org": "University of KwaZulu-Natal",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Focus is on biologics, not medical devices.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Sanket Shishir Dhruva",
+                "org": "San Francisco VA Medical Center",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Expert in device regulation, but focus is high-risk (Class III) devices.",
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 62,
+            "yes": 0,
+            "maybe": 7,
+            "no": 3,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 7,
+              "off_topic": 3
+            },
+            "examples": [
+              {
+                "name": "Lokeshwar Sai Santosh Bhenderu",
+                "org": "Houston Methodist",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Experience with device recalls and approvals, but in neurosurgery context.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Bellal A Joseph",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Involved in software as a medical device, unclear if broader device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Florence T. Bourgeois",
+                "org": "Boston Children's Hospital",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Expert in regulatory science, but no direct evidence of Class II device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Francisco G Vital-Lopez",
+                "org": "Henry M. Jackson Foundation",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Experience with FDA-cleared software devices; unclear if Class II or hardware ECG relevant.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Kurt Yaeger",
+                "org": "Houston Methodist",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Regulatory analysis of neurosurgical devices; unclear direct Class II ECG device experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Leandro Pecchia",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Expertise in ECG and device regulation, but no direct evidence of CDSCO/FDA Class II approval.",
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 5,
+            "maybe": 5,
+            "no": 0,
+            "yes_rate": 0.5,
+            "codes": {
+              "no_evidence": 5
+            },
+            "examples": [
+              {
+                "name": "Jana Kurucova",
+                "org": "Edwards Lifesciences (Switzerland)",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Involved in device regulatory priorities; unclear direct Class II ECG approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Maven Profcon Services LLP",
+                "org": "Maven Profcon Services LLP",
+                "verdict": "yes",
+                "code": null,
+                "note": "Medical device regulatory consulting, explicit FDA 510(k) experience for Class II devices.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Ariel Dora Stern",
+                "org": "Hasso Plattner Institute",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Expert on regulation, but no direct evidence of device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Timo Minssen",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Expert on regulation, but no direct evidence of device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Ra\u015fit Din\u00e7",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "FDA regulatory pathways knowledge, but unclear if direct approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Atish S. Mundada",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Knowledge of Indian approval process, but unclear if direct device approval experience.",
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "openalex": {
+            "n": 33,
+            "yes": 1,
+            "no": 8
+          },
+          "web": {
+            "n": 5,
+            "yes": 5,
+            "no": 0
+          },
+          "orgs": {
+            "n": 5,
+            "yes": 5,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 1,
+        "in_shortlist": 0,
+        "recall_pool": 0.08,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Dr. Sreeram Ramagopalan",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. Rajiv Nath (AiMeD)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. V. Premnath (Venture Center, Pune)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sathguru Management Consultants",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Emergo by UL",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Freyr Solutions",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. S. Eswara Reddy (Former CDSCO DCGI)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. Anurag Bagaria (Kemwell Biopharma)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. GSK Velu (Trivitron Healthcare)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "NAMSA",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. Shilpa Sharma (Regulatory Affairs, Medtronic India)",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. Sandeep Budhiraja (Max Healthcare, Medical Devices Committee)",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 5,
+        "borderline": 4,
+        "bad": 1
+      },
+      "prospect_problems": {
+        "off_topic": 3,
+        "weak_evidence": 3
+      },
+      "prospects": [
+        {
+          "name": "Operon Strategist",
+          "org": "Operon Strategist",
+          "email": "enquiry@operonstrategist.com",
+          "score": 0.8287,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Leading medtech regulatory consulting firm with CDSCO and FDA expertise.",
+          "problems": []
+        },
+        {
+          "name": "Maven Profcon Services LLP",
+          "org": "Maven Profcon Services LLP",
+          "email": "enquiry@mavenprofserv.com",
+          "score": 0.7794,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Trusted regulatory consulting firm with FDA 510(k) experience.",
+          "problems": []
+        },
+        {
+          "name": "Artixio",
+          "org": "Artixio",
+          "email": "info@artixio.com",
+          "score": 0.7794,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Regulatory consulting firm with CDSCO submission and approval expertise.",
+          "problems": []
+        },
+        {
+          "name": "Ariel Dora Stern",
+          "org": "Hasso Plattner Institute",
+          "email": "ariel.stern@hpi.de",
+          "score": 0.7761,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Academic with research on regulatory policy, but not a practicing advisor.",
+          "problems": [
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Glenn Stiegman",
+          "org": "MCRA",
+          "email": "gstiegman@mcra.com",
+          "score": 0.7413,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Senior consultant at leading FDA regulatory consulting firm.",
+          "problems": []
+        },
+        {
+          "name": "Ra\u015fit Din\u00e7",
+          "org": null,
+          "email": "rasitdinc@hotmail.com",
+          "score": 0.725,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Researcher with FDA regulatory knowledge, unclear if advisor/consultant.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Timo Minssen",
+          "org": null,
+          "email": "emailtimo.minssen@jur.ku.dk",
+          "score": 0.6924,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "Expert in EU law, not FDA or CDSCO; not relevant geography.",
+          "problems": [
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Atish S. Mundada",
+          "org": null,
+          "email": "atishmundada@rediffmail.com",
+          "score": 0.6826,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Published on CDSCO process, but unclear if practitioner or advisor.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Jana Kurucova",
+          "org": "Edwards Lifesciences (Switzerland)",
+          "email": "jana_kurucova@edwards.com",
+          "score": 0.6576,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Expertise is in EU regulatory priorities, not FDA/CDSCO or Class II specifics.",
+          "problems": [
+            "weak_evidence",
+            "off_topic"
+          ]
+        },
+        {
+          "name": "ALKU",
+          "org": "ALKU",
+          "email": "info@alku.com",
+          "score": 0.6317,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Firm specializes in medical device regulatory consulting, including regulatory affairs.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 2,
+        "tiers": {
+          "inbox": 4,
+          "attributed": 5,
+          "guess": 1
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "a8c747d58cd64b1f",
+            "name": "Operon Strategist",
+            "address": "enquiry@operonstrategist.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic consulting org inbox; likely reaches relevant advisors."
+          },
+          {
+            "id": "63cb8a762f161d40",
+            "name": "Maven Profcon Services LLP",
+            "address": "enquiry@mavenprofserv.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Consulting org; generic inbox likely monitored by advisors."
+          },
+          {
+            "id": "5b0de2d6c5cfc7da",
+            "name": "Artixio",
+            "address": "info@artixio.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Consulting org; info@ likely reaches relevant team."
+          },
+          {
+            "id": "762d8c95d6a018f7",
+            "name": "Ariel Dora Stern",
+            "address": "ariel.stern@hpi.de",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic address; person likely to respond."
+          },
+          {
+            "id": "4760f5055f2df134",
+            "name": "Glenn Stiegman",
+            "address": "gstiegman@mcra.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct professional address; person likely to advise."
+          },
+          {
+            "id": "90be13e7177b17fe",
+            "name": "Ra\u015fit Din\u00e7",
+            "address": "rasitdinc@hotmail.com",
+            "tier": "guess",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic Hotmail; unclear if correct or relevant."
+          },
+          {
+            "id": "e4b94feba02660c6",
+            "name": "Timo Minssen",
+            "address": "emailtimo.minssen@jur.ku.dk",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Academic address; likely reaches person."
+          },
+          {
+            "id": "5620786cc1b5be55",
+            "name": "Atish S. Mundada",
+            "address": "atishmundada@rediffmail.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Personal Rediffmail; unclear if still used professionally."
+          },
+          {
+            "id": "61c18d5e3ec5b13f",
+            "name": "Jana Kurucova",
+            "address": "jana_kurucova@edwards.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct corporate address; person likely to advise."
+          },
+          {
+            "id": "16093be64d8473c6",
+            "name": "ALKU",
+            "address": "info@alku.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Consulting org; info@ likely reaches relevant team."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 0.52,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 3.33,
+        "inversions_ge2": 2,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 5,
+          "openalex": 5
+        },
+        "by_country": {
+          "?": 7,
+          "DE": 1,
+          "DK": 1,
+          "CH": 1
+        },
+        "max_country_share": 0.7
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 46,
+        "supported": 42,
+        "unsupported": 1,
+        "contradicted": 0,
+        "puffery": 3,
+        "claim_support_rate": 0.98,
+        "emails_with_unsupported": 1,
+        "mean_specific": 2.4,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "enquiry@operonstrategist.com",
+            "claims": []
+          },
+          {
+            "to": "enquiry@mavenprofserv.com",
+            "claims": []
+          },
+          {
+            "to": "info@artixio.com",
+            "claims": []
+          },
+          {
+            "to": "ariel.stern@hpi.de",
+            "claims": []
+          },
+          {
+            "to": "gstiegman@mcra.com",
+            "claims": []
+          },
+          {
+            "to": "rasitdinc@hotmail.com",
+            "claims": []
+          },
+          {
+            "to": "emailtimo.minssen@jur.ku.dk",
+            "claims": []
+          },
+          {
+            "to": "atishmundada@rediffmail.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 3.5,
+        "diversity": 3.5,
+        "missing": "More named individual regulatory consultants with proven Class II device approval track record. | Direct FDA/CDSCO Class II device approval experts, individual regulatory advisors.",
+        "systemic_issues": [
+          "Several academics/researchers, not all practicing advisors",
+          "Some weak evidence of direct advisory experience",
+          "Weak evidence for direct Class II/FDA/CDSCO experience",
+          "Over-reliance on org-level consulting firms"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 3,
+        "actionable": 4,
+        "false_reassurance": [
+          "Shortlist of 10 presented as fully meeting the request",
+          "No explicit mention that only 5 are strong matches",
+          "No warning about borderline or weak evidence for experience"
+        ],
+        "missing_message": "Only half the shortlist are strong matches; several lack clear Class II approval experience or direct advisory roles. Consider manual vetting or sourcing more specialized consultants.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "news",
+            "why": "Journalists sometimes cover regulatory experts or advisors in device approval stories."
+          },
+          {
+            "tool": "events",
+            "why": "Speakers at regulatory/medical device events are often experienced advisors."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "openalex",
+            "why": "Very low yield; most researchers not relevant as regulatory advisors."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Too much effort on openalex; missed event/news sources for regulatory advisors."
+      }
+    },
+    "s2_brand_deals_travel": {
+      "run": "stress_d",
+      "prompt": "I run a budget travel YouTube channel with 85k subscribers; find travel, backpacking and booking brands in India that sponsor creators",
+      "playbook": "brand_deals",
+      "wanted": 12,
+      "shortlisted": 12,
+      "pool": 170,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "brand_deals",
+        "playbook_note": "Correct: seeking brands that sponsor creators.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "brands in India",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "travel, backpacking and booking brands",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "brands that sponsor creators",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.24,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 5,
+            "size": 5,
+            "yes": 0,
+            "maybe": 0,
+            "no": 5,
+            "yes_rate": 0.0,
+            "codes": {
+              "off_topic": 5
+            },
+            "examples": [
+              {
+                "name": "Tech4TH",
+                "org": "Tech4TH",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Tech solutions, not travel/backpacking/booking brand.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "VidMob",
+                "org": "VidMob",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "VidMob is a creative platform, not a travel brand.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "ttec",
+                "org": "ttec",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "TTEC is a customer experience company, not travel-related.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Verndale",
+                "org": "Verndale",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Verndale is a digital agency, not a travel brand.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Translations",
+                "org": "Translations",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Translations.com is a language service, not travel/backpacking/booking.",
+                "sources": [
+                  "events"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 119,
+            "yes": 1,
+            "maybe": 0,
+            "no": 7,
+            "yes_rate": 0.12,
+            "codes": {
+              "no_evidence": 2,
+              "off_topic": 1,
+              "wrong_geography": 4
+            },
+            "examples": [
+              {
+                "name": "Base44",
+                "org": "Base44",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence it's a travel/backpacking/booking brand.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Quantum Metric",
+                "org": "Quantum Metric",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Quantum Metric is analytics, not travel/backpacking/booking.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "World U",
+                "org": "World U",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence it's a travel/backpacking/booking brand.",
+                "sources": [
+                  "events"
+                ]
+              },
+              {
+                "name": "Germany Travel Podcast with Lena Brandt",
+                "org": "Germany Travel Podcast with Lena Brandt",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Germany-focused, not India-based travel brand.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "DANI STASI",
+                "org": "This Italian Brand",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Italy-focused, not India-based travel brand.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Doug Parker",
+                "org": "Cruise Radio: Weekly Cruise News & Travel Tips",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Cruise-focused, not India-based or India-focused.",
+                "sources": [
+                  "podcasts"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 34,
+            "yes": 5,
+            "maybe": 0,
+            "no": 5,
+            "yes_rate": 0.5,
+            "codes": {
+              "wrong_org_type": 1,
+              "directory_or_aggregator": 3,
+              "wrong_geography": 1
+            },
+            "examples": [
+              {
+                "name": "Backpacking & Blisters: A Hiking, Backpacking, and Adventure Show",
+                "org": "Backpacking & Blisters: A Hiking, Backpacking, and Adventure Show",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Podcast, not a travel brand or sponsor.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Woodland",
+                "org": "Woodland",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Adfluencehub",
+                "org": "Adfluencehub",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Influencer marketing agency, not a travel brand.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Zach Davis",
+                "org": "Backpacker Radio",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "US-based, not India-focused.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Holiday Packages",
+                "org": "EaseMyTrip",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Pitchpinemedia",
+                "org": "Pitchpinemedia",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Marketing agency, not a travel brand.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 12,
+            "yes": 8,
+            "maybe": 0,
+            "no": 2,
+            "yes_rate": 0.8,
+            "codes": {
+              "off_topic": 2
+            },
+            "examples": [
+              {
+                "name": "Tripfactory",
+                "org": "Tripfactory",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Ibibo Group",
+                "org": "Ibibo Group",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "QORUZ",
+                "org": "QORUZ",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Influencer platform, not a travel brand.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "IXIGO",
+                "org": "IXIGO",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Gostops",
+                "org": "Gostops",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Zapplr Media",
+                "org": "Zapplr Media",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Influencer agency, not a travel brand.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "events": {
+            "n": 9,
+            "yes": 0,
+            "no": 9
+          },
+          "podcasts": {
+            "n": 5,
+            "yes": 0,
+            "no": 5
+          },
+          "list": {
+            "n": 15,
+            "yes": 11,
+            "no": 4
+          },
+          "orgs": {
+            "n": 19,
+            "yes": 14,
+            "no": 5
+          },
+          "web": {
+            "n": 4,
+            "yes": 3,
+            "no": 1
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 6,
+        "in_shortlist": 4,
+        "recall_pool": 0.5,
+        "recall_shortlist": 0.33,
+        "entities": [
+          {
+            "name": "MakeMyTrip",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Yatra",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Goibibo",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Cleartrip",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "OYO Rooms",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Hostelworld India",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Zostel",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Treebo Hotels",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "FabHotels",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Ixigo",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Savaari Car Rentals",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Backpackers Hostel India",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 4,
+        "borderline": 6,
+        "bad": 2
+      },
+      "prospect_problems": {
+        "off_topic": 4,
+        "wrong_org_type": 2,
+        "inbox_where_person_needed": 4
+      },
+      "prospects": [
+        {
+          "name": "MakeMyTrip",
+          "org": "MakeMyTrip",
+          "email": "triphelp@makemytrip.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Top Indian travel booking brand, known to sponsor creators, fits campaign perfectly.",
+          "problems": []
+        },
+        {
+          "name": "Gostops",
+          "org": "Gostops",
+          "email": "hello@gostops.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Indian hostel brand targeting Gen Z, offers influencer collaborations, ideal for sponsorship ask.",
+          "problems": []
+        },
+        {
+          "name": "Ibibo Group",
+          "org": "Ibibo Group",
+          "email": "first.last@ibibo.com",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Major Indian travel group, owns relevant booking platforms, strong sponsorship potential.",
+          "problems": []
+        },
+        {
+          "name": "Tripjack",
+          "org": "Tripjack",
+          "email": "salessupport@tripjack.com",
+          "score": 0.8619,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Primarily B2B travel portal for agents, less likely to sponsor creators directly.",
+          "problems": [
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Zapplr Media",
+          "org": "Zapplr Media",
+          "email": "contact@zapplrmedia.com",
+          "score": 0.8619,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Influencer agency, not a travel brand; could connect to brands but not a direct sponsor.",
+          "problems": [
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Qoruz",
+          "org": "Qoruz",
+          "email": "hr@qoruz.com",
+          "score": 0.8373,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "Influencer marketing tool/platform, not a travel brand or direct sponsor.",
+          "problems": [
+            "off_topic",
+            "wrong_org_type"
+          ]
+        },
+        {
+          "name": "Grynow",
+          "org": "Grynow",
+          "email": "info@grynow.in",
+          "score": 0.8373,
+          "verdict": "bad",
+          "fit": 2,
+          "why": "Influencer marketing agency, not a travel brand or booking platform.",
+          "problems": [
+            "off_topic",
+            "wrong_org_type"
+          ]
+        },
+        {
+          "name": "Goibibo",
+          "org": "Goibibo",
+          "email": "travel@goibibo.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Leading Indian travel booking brand, fits campaign target and ask.",
+          "problems": []
+        },
+        {
+          "name": "Cleartrip",
+          "org": "Cleartrip",
+          "email": "customersupport@cleartrip.com",
+          "score": 0.8372,
+          "verdict": "borderline",
+          "fit": 4,
+          "why": "Cleartrip is a top travel booking brand, but this is a support inbox, not a marketing contact.",
+          "problems": [
+            "inbox_where_person_needed"
+          ]
+        },
+        {
+          "name": "TripFactory",
+          "org": "TripFactory",
+          "email": "care@tripfactory.com",
+          "score": 0.8372,
+          "verdict": "borderline",
+          "fit": 4,
+          "why": "TripFactory is a relevant travel brand, but this is a general inbox, not a direct marketing contact.",
+          "problems": [
+            "inbox_where_person_needed"
+          ]
+        },
+        {
+          "name": "Redbus",
+          "org": "Redbus",
+          "email": "grievanceofficer@redbus.in",
+          "score": 0.788,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Redbus is a fit, but this inbox is for complaints, not sponsorship or marketing.",
+          "problems": [
+            "inbox_where_person_needed"
+          ]
+        },
+        {
+          "name": "ixigo",
+          "org": "ixigo",
+          "email": "customersupport@ixigo.com",
+          "score": 0.788,
+          "verdict": "borderline",
+          "fit": 4,
+          "why": "ixigo is a strong fit, but this is a support inbox, not a marketing/partnership contact.",
+          "problems": [
+            "inbox_where_person_needed"
+          ]
+        }
+      ],
+      "R5_reach": {
+        "n": 12,
+        "belongs_bad": 1,
+        "cannot_grant": 8,
+        "not_send": 9,
+        "tiers": {
+          "inbox": 12
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "139aff8303604017",
+            "name": "MakeMyTrip",
+            "address": "triphelp@makemytrip.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Triphelp is likely a support desk, not sponsorship decision makers."
+          },
+          {
+            "id": "3feeef0495e0c1ea",
+            "name": "Gostops",
+            "address": "hello@gostops.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Hello@ likely reaches marketing; decision maker identified."
+          },
+          {
+            "id": "7ec0f596059bc392",
+            "name": "Ibibo Group",
+            "address": "first.last@ibibo.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "doubtful",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "First.last@ is a placeholder, not a real inbox."
+          },
+          {
+            "id": "7ac877f4df4f9d4d",
+            "name": "Tripjack",
+            "address": "salessupport@tripjack.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Salessupport is likely a sales/support desk, not sponsorship."
+          },
+          {
+            "id": "0ab6ef0cd1ba6a87",
+            "name": "Zapplr Media",
+            "address": "contact@zapplrmedia.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Contact@ is suitable for small orgs and sponsorship."
+          },
+          {
+            "id": "7d4e233dcd786ef5",
+            "name": "Qoruz",
+            "address": "hr@qoruz.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "HR@ is for hiring, not sponsorship."
+          },
+          {
+            "id": "d48eff6685b423ee",
+            "name": "Grynow",
+            "address": "info@grynow.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Info@ is suitable for sponsorship at this org size."
+          },
+          {
+            "id": "2bee542a62df303c",
+            "name": "Goibibo",
+            "address": "travel@goibibo.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Travel@ likely handles bookings, not sponsorship."
+          },
+          {
+            "id": "33c36b826bdb2bff",
+            "name": "Cleartrip",
+            "address": "customersupport@cleartrip.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Customersupport@ is for support, not sponsorship."
+          },
+          {
+            "id": "e5420b7c59790ccb",
+            "name": "TripFactory",
+            "address": "care@tripfactory.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Care@ is a support desk, not sponsorship."
+          },
+          {
+            "id": "79402f3f8542de5e",
+            "name": "Redbus",
+            "address": "grievanceofficer@redbus.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Grievance officer cannot grant sponsorship requests."
+          },
+          {
+            "id": "8bd04657d855ae1f",
+            "name": "ixigo",
+            "address": "customersupport@ixigo.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "Customer support cannot grant sponsorship requests."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 12,
+        "kendall_tau_score_vs_fit": 0.28,
+        "mean_fit_top_third": 4.5,
+        "mean_fit_bottom_third": 3.75,
+        "inversions_ge2": 10,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 3,
+          "list": 9
+        },
+        "by_country": {
+          "IN": 9,
+          "?": 3
+        },
+        "max_country_share": 0.75
+      },
+      "R7_drafts": {
+        "n": 12,
+        "claims": 60,
+        "supported": 50,
+        "unsupported": 10,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.83,
+        "emails_with_unsupported": 9,
+        "mean_specific": 2.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "triphelp@makemytrip.com",
+            "claims": [
+              {
+                "text": "This fits well with my audience interested in affordable travel.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "hello@gostops.com",
+            "claims": [
+              {
+                "text": "My audience is young budget travelers interested in affordable options across India.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "first.last@ibibo.com",
+            "claims": [
+              {
+                "text": "18-24 is a key demographic for travel brands.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "salessupport@tripjack.com",
+            "claims": [
+              {
+                "text": "My content targets young travelers interested in affordable travel options.",
+                "about": "sender",
+                "status": "unsupported"
+              },
+              {
+                "text": "Your platform\u2019s reach in flights and hotels aligns with the interests of my audience.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "contact@zapplrmedia.com",
+            "claims": [
+              {
+                "text": "A sponsorship could connect your travel-related brands with my engaged audience.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "hr@qoruz.com",
+            "claims": [
+              {
+                "text": "This group may interest your clients.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@grynow.in",
+            "claims": [
+              {
+                "text": "This matches a key travel audience segment.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "travel@goibibo.com",
+            "claims": [
+              {
+                "text": "This audience includes many young travelers who may use platforms like yours.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 3.5,
+        "missing": "Backpacking gear brands, more direct brand partnership/marketing manager contacts. | Backpacking gear brands, direct marketing/partnership contacts, smaller niche travel brands.",
+        "systemic_issues": [
+          "Too many influencer agencies/tools, not direct travel brands",
+          "Few direct decision-maker emails",
+          "Lack of gear brands",
+          "All addresses are generic inboxes",
+          "No direct marketing/partnership contacts",
+          "No gear brands, only booking platforms"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 3,
+        "actionable": 3,
+        "false_reassurance": [
+          "Shortlist count matches request but quality is low",
+          "No mention of lack of direct decision-maker contacts",
+          "No mention of overrepresentation of agencies/tools"
+        ],
+        "missing_message": "Most contacts are generic or agencies; few direct brand partnership/marketing contacts and no gear brands. Manually add missing types or refine search criteria.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "places",
+            "why": "Could surface local travel agencies and booking offices in India."
+          },
+          {
+            "tool": "jobs",
+            "why": "May reveal brands actively investing in marketing or partnerships."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "events",
+            "why": "No valid targets; event sponsors not relevant for this niche."
+          },
+          {
+            "tool": "podcasts",
+            "why": "No valid targets; podcasts rarely represent sponsoring brands."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Effort wasted on events and podcasts; more focus needed on direct brand discovery."
+      }
+    },
+    "s2_contradictory": {
+      "run": "stress_d",
+      "prompt": "we make 3 to 10 kW solar inverters; find small installers (not distributors, not manufacturers) in Kerala and Tamil Nadu, and also large EPC firms with over 500 employees",
+      "playbook": "b2b_sales",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 94,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "b2b_sales",
+        "playbook_note": "Correct: B2B sales to installers/EPCs.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "small installers (not distributors, not manufacturers)",
+            "preserved": "partly"
+          },
+          {
+            "constraint": "Kerala and Tamil Nadu",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "large EPC firms with over 500 employees",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 4,
+        "top_problem": "Installer exclusions (not distributors/manufacturers) only partly enforced; org_types/expanded_terms may include them."
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.59,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 63,
+            "yes": 4,
+            "maybe": 3,
+            "no": 1,
+            "yes_rate": 0.5,
+            "codes": {
+              "no_evidence": 3,
+              "competitor": 1
+            },
+            "examples": [
+              {
+                "name": "Sunsenz by Moopens Energy Solutions",
+                "org": "Sunsenz by Moopens Energy Solutions",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Corrtechenergy",
+                "org": "Corrtechenergy",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No evidence of solar or regional focus.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Armstech Engineers Private Limited",
+                "org": "Armstech Engineers Private Limited",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Mechanical contractor; unclear if solar installer.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Renewsys India Pvt. Ltd.",
+                "org": "Renewsys India Pvt. Ltd.",
+                "verdict": "no",
+                "code": "competitor",
+                "note": "Manufacturer, not installer or EPC.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Solis Green",
+                "org": "Solis Green",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SUNNYDAY SOLAR",
+                "org": "SUNNYDAY SOLAR",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 21,
+            "yes": 8,
+            "maybe": 2,
+            "no": 0,
+            "yes_rate": 0.8,
+            "codes": {
+              "no_evidence": 2
+            },
+            "examples": [
+              {
+                "name": "Jeevaditya Solar Power",
+                "org": "Jeevaditya Solar Power",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Saipem India Projects Private Limited",
+                "org": "Saipem India Projects Private Limited",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Engineering consultant; unclear if EPC or installer.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Solar Installation Company in Tamil Nadu",
+                "org": "Solar Installation Company in Tamil Nadu",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places",
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Comorin Solar",
+                "org": "Comorin Solar",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Evosun",
+                "org": "Evosun",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Adam EPC",
+                "org": "Adam EPC",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No size info; EPC in Kerala, but unclear if >500 employees.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 7,
+            "maybe": 3,
+            "no": 0,
+            "yes_rate": 0.7,
+            "codes": {
+              "no_evidence": 3
+            },
+            "examples": [
+              {
+                "name": "Illumine",
+                "org": "Illumine",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places",
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "INKEL Limited",
+                "org": "INKEL Limited",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "EPC in Kerala, but no employee count evidence.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Renergy Systems India Pvt Ltd",
+                "org": "Renergy Systems India Pvt Ltd",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "GSL Energy",
+                "org": "GSL Energy",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Solarrun",
+                "org": "Solarrun",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places",
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SEDNA Energy Systems",
+                "org": "SEDNA Energy Systems",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "places": {
+            "n": 19,
+            "yes": 17,
+            "no": 0
+          },
+          "web": {
+            "n": 9,
+            "yes": 5,
+            "no": 0
+          },
+          "orgs": {
+            "n": 12,
+            "yes": 5,
+            "no": 1
+          },
+          "list": {
+            "n": 3,
+            "yes": 0,
+            "no": 1
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 11,
+        "in_pool": 3,
+        "in_shortlist": 0,
+        "recall_pool": 0.27,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Solgen Power",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sunlit Solar",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Green Energy Solutions",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Radiant Solar",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Orb Energy",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Fourth Partner Energy",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Tata Power Solar",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sterling and Wilson Solar",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Mahindra Susten",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Vikram Solar",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Waaree Energies",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 10
+      },
+      "prospect_problems": {
+        "weak_evidence": 6
+      },
+      "prospects": [
+        {
+          "name": "EKK Infrastructure Limited",
+          "org": "EKK Infrastructure Limited",
+          "email": "info@ekk.co.in",
+          "score": 0.788,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Large EPC firm in Kerala, fits both geography and org type.",
+          "problems": []
+        },
+        {
+          "name": "GSL Energy",
+          "org": "GSL Energy",
+          "email": "info@gslenergy.in",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Solar installer in Kerala, but unclear on size; still plausible.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Renaatus",
+          "org": "Renaatus",
+          "email": "bd@renaatus.com",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Large EPC firm in Tamil Nadu, matches all criteria.",
+          "problems": []
+        },
+        {
+          "name": "SolarRun",
+          "org": "SolarRun",
+          "email": "info@solarrun.in",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Solar installer in Chennai, but size not confirmed; still plausible.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "INKEL Limited",
+          "org": "INKEL Limited",
+          "email": "info@inkel.in",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Kerala EPC/solar project firm, but unclear if >500 employees.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Illumine",
+          "org": "Illumine",
+          "email": "info@illumineenergy.com",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Kerala solar installer, size unclear but local and active.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "SEDNA Energy Systems",
+          "org": "SEDNA Energy Systems",
+          "email": "info@sednaenergy.in",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Kerala solar installer, size unclear but active and relevant.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Renergy Systems India Pvt. Ltd.",
+          "org": "Renergy Systems India Pvt. Ltd.",
+          "email": "info@renergyindia.com",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Kerala solar solutions provider, size unclear but plausible.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "PowerGENE",
+          "org": "PowerGENE",
+          "email": "info@powergenesolar.com",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Kerala-based solar installer, fits target geography and org type.",
+          "problems": []
+        },
+        {
+          "name": "Solarich Green Power",
+          "org": "Solarich Green Power",
+          "email": "info@solarichgreenpower.com",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Tamil Nadu-based solar installer, fits target geography and org type.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 10,
+        "tiers": {
+          "inbox": 10
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "f2c82cdb30bee6b4",
+            "name": "EKK Infrastructure Limited",
+            "address": "info@ekk.co.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "150d62f31a502f4d",
+            "name": "GSL Energy",
+            "address": "info@gslenergy.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "099e82cd2eefc8de",
+            "name": "Renaatus",
+            "address": "bd@renaatus.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "bd@ may reach business development, but not always a decision maker."
+          },
+          {
+            "id": "1bbd16002ed5c527",
+            "name": "SolarRun",
+            "address": "info@solarrun.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "4ef869f700759b2d",
+            "name": "INKEL Limited",
+            "address": "info@inkel.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "f52a7d1801578115",
+            "name": "Illumine",
+            "address": "info@illumineenergy.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "info@; decision maker identified, but not direct email."
+          },
+          {
+            "id": "edcb4bbaf956bf57",
+            "name": "SEDNA Energy Systems",
+            "address": "info@sednaenergy.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "55f6172444fc3a17",
+            "name": "Renergy Systems India Pvt. Ltd.",
+            "address": "info@renergyindia.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "780fd94762dc36a9",
+            "name": "PowerGENE",
+            "address": "info@powergenesolar.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          },
+          {
+            "id": "cc9e2f5a0eff6739",
+            "name": "Solarich Green Power",
+            "address": "info@solarichgreenpower.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic info@; unclear if decision maker will see."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 1.0,
+        "mean_fit_top_third": 4.67,
+        "mean_fit_bottom_third": 4.0,
+        "inversions_ge2": 0,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 2,
+          "places": 7,
+          "list": 1
+        },
+        "by_country": {
+          "IN": 9,
+          "?": 1
+        },
+        "max_country_share": 0.9
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 33,
+        "supported": 22,
+        "unsupported": 7,
+        "contradicted": 0,
+        "puffery": 4,
+        "claim_support_rate": 0.76,
+        "emails_with_unsupported": 7,
+        "mean_specific": 2.4,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "info@ekk.co.in",
+            "claims": [
+              {
+                "text": "Our inverters could be relevant to your solar installation projects.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@gslenergy.in",
+            "claims": [
+              {
+                "text": "Our inverters could be relevant for your installation projects given your focus on solar solutions in Kerala.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "bd@renaatus.com",
+            "claims": [
+              {
+                "text": "Suitable for various solar installations.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@solarrun.in",
+            "claims": [
+              {
+                "text": "Our inverters could be a product option for your installations.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@inkel.in",
+            "claims": [
+              {
+                "text": "We aim to connect with small solar installers and large EPC firms in Kerala and Tamil Nadu for sales or distribution.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@illumineenergy.com",
+            "claims": []
+          },
+          {
+            "to": "info@sednaenergy.in",
+            "claims": []
+          },
+          {
+            "to": "info@renergyindia.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 3.5,
+        "missing": "More large EPCs with >500 employees, more Tamil Nadu coverage, more direct decision-maker contacts. | No large EPC firms with 500+ employees; no named decision-makers.",
+        "systemic_issues": [
+          "Weak evidence on company size for many installers",
+          "Mostly generic inboxes, few named decision-makers",
+          "Tamil Nadu underrepresented compared to Kerala",
+          "org inboxes only, no personal contacts",
+          "no evidence of large EPC firms",
+          "no role/seniority info"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 3,
+        "actionable": 3,
+        "false_reassurance": [
+          "10 well-matched candidates had no address we trust and were left off the shortlist",
+          "shortlisted: 10"
+        ],
+        "missing_message": "No large EPC firms with 500+ employees or named decision-makers were found; Tamil Nadu and decision-maker coverage are weak.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "jobs",
+            "why": "Can help identify large EPC firms by employee count."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "list",
+            "why": "Very low valid rate; mostly irrelevant or outdated."
+          }
+        ],
+        "effort_spent_where_it_pays": 5,
+        "top_problem": "Missed using jobs tool for large EPCs; list tool produced mostly invalid results."
+      }
+    },
+    "s2_oss_python_feedback": {
+      "run": "stress_d",
+      "prompt": "I built a typed config-loading library for Python; find maintainers of popular Python validation or CLI libraries who could give API feedback",
+      "playbook": "oss_maintainers",
+      "wanted": 12,
+      "shortlisted": 2,
+      "pool": 101,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "oss_maintainers",
+        "playbook_note": "Correct: seeking API feedback from OSS maintainers.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "maintainers of popular Python validation or CLI libraries",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.03,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 79,
+            "yes": 0,
+            "maybe": 2,
+            "no": 6,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 2,
+              "off_topic": 6
+            },
+            "examples": [
+              {
+                "name": "Rafaella Ballerini",
+                "org": null,
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No evidence of Python validation/CLI library maintenance.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Serhii Potapov",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Maintains Rust library, not Python validation/CLI.",
+                "sources": [
+                  "crates"
+                ]
+              },
+              {
+                "name": "mathuraditya724",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Maintains npm/OpenAPI tools, not Python validation/CLI.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "Yang Luo",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Maintains Rust authorization library, not Python validation/CLI.",
+                "sources": [
+                  "crates"
+                ]
+              },
+              {
+                "name": "Donne Martin",
+                "org": "facebook",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No evidence of Python validation/CLI library maintenance.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Stefano Buliani",
+                "org": "Amazon Web Services",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Maintains AWS Lambda Rust runtime, not Python validation/CLI.",
+                "sources": [
+                  "crates"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 20,
+            "yes": 1,
+            "maybe": 0,
+            "no": 9,
+            "yes_rate": 0.1,
+            "codes": {
+              "off_topic": 9
+            },
+            "examples": [
+              {
+                "name": "cameronrohani",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Maintains npm validation libs, not Python.",
+                "sources": [
+                  "npm"
+                ]
+              },
+              {
+                "name": "Sebasti\u00e1n Ram\u00edrez",
+                "org": "FastAPI Cloud",
+                "verdict": "yes",
+                "code": null,
+                "note": "Maintainer of FastAPI and Typer, both popular Python validation/CLI libraries.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Krish C Naik",
+                "org": "Panasonic IIC",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "No evidence of Python validation/CLI library maintenance.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Grant Sanderson",
+                "org": "3Blue1Brown",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Math content creator, not a Python validation/CLI maintainer.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Rafaella Ballerini",
+                "org": null,
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Programming content creator, no evidence of relevant library maintenance.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "Ryan Dahl",
+                "org": "denoland",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "No evidence of Python validation/CLI library maintenance.",
+                "sources": [
+                  "github"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 2,
+            "size": 2,
+            "yes": 1,
+            "maybe": 1,
+            "no": 0,
+            "yes_rate": 0.5,
+            "codes": {
+              "no_evidence": 1
+            },
+            "examples": [
+              {
+                "name": "Armin Ronacher",
+                "org": "Earendil",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Flask creator; possible CLI/validation experience, but not explicit.",
+                "sources": [
+                  "github"
+                ]
+              },
+              {
+                "name": "David Bieber",
+                "org": null,
+                "verdict": "yes",
+                "code": null,
+                "note": "Works on Python Fire, a popular Python CLI library.",
+                "sources": [
+                  "web"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "github": {
+            "n": 12,
+            "yes": 1,
+            "no": 8
+          },
+          "crates": {
+            "n": 4,
+            "yes": 0,
+            "no": 4
+          },
+          "npm": {
+            "n": 3,
+            "yes": 0,
+            "no": 3
+          },
+          "web": {
+            "n": 1,
+            "yes": 1,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 11,
+        "in_pool": 1,
+        "in_shortlist": 1,
+        "recall_pool": 0.09,
+        "recall_shortlist": 0.09,
+        "entities": [
+          {
+            "name": "Samuel Colvin",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sebastian Ram\u00edrez",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Anders Hovm\u00f6ller",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Hynek Schlawack",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Raphael Pierzina",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Andrey Vlasovskikh",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Omry Yadan",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "David Lord",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Armin Ronacher",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "James Saryerwinnie",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Julien Danjou",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 1,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "off_topic": 1
+      },
+      "prospects": [
+        {
+          "name": "David Bieber",
+          "org": null,
+          "email": "david810@gmail.com",
+          "score": 0.75,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Maintainer of Python Fire, a popular CLI library; fits target perfectly.",
+          "problems": []
+        },
+        {
+          "name": "Armin Ronacher",
+          "org": "Earendil",
+          "email": "armin.ronacher@active-4.com",
+          "score": 0.7,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Famous Python dev, but not known for validation/CLI libs; relevance is weaker.",
+          "problems": [
+            "off_topic"
+          ]
+        }
+      ],
+      "R5_reach": {
+        "n": 2,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 0,
+        "tiers": {
+          "guess": 1,
+          "attributed": 1
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "b37711f7a2cb5bcf",
+            "name": "David Bieber",
+            "address": "david810@gmail.com",
+            "tier": "guess",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Likely David's personal address; he can grant API feedback."
+          },
+          {
+            "id": "c684ee84d3215081",
+            "name": "Armin Ronacher",
+            "address": "armin.ronacher@active-4.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Address attributed to Armin; he can grant API feedback."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 2,
+        "kendall_tau_score_vs_fit": 1.0,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 3.0,
+        "inversions_ge2": 0,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 1,
+          "github": 1
+        },
+        "by_country": {
+          "?": 1,
+          "AT": 1
+        },
+        "max_country_share": 0.5
+      },
+      "R7_drafts": {
+        "n": 2,
+        "claims": 9,
+        "supported": 9,
+        "unsupported": 0,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 1.0,
+        "emails_with_unsupported": 0,
+        "mean_specific": 3.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "david810@gmail.com",
+            "claims": []
+          },
+          {
+            "to": "armin.ronacher@active-4.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 3.0,
+        "diversity": 2.0,
+        "missing": "No maintainers of validation libraries (e.g., pydantic, marshmallow); only one CLI maintainer.",
+        "systemic_issues": [
+          "Over-focus on general Python figures",
+          "Lack of validation library maintainers"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "No maintainers of validation libraries were found; only one CLI maintainer is included.",
+        "det_shortfall": 10,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 2,
+        "missed_tools": [
+          {
+            "tool": "pypi",
+            "why": "Directly targets Python package maintainers, highly relevant for Python libraries."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "npm",
+            "why": "Targets JavaScript, not Python; produced only invalid candidates."
+          },
+          {
+            "tool": "crates",
+            "why": "Targets Rust, not Python; produced only invalid candidates."
+          }
+        ],
+        "effort_spent_where_it_pays": 2,
+        "top_problem": "Effort wasted on irrelevant ecosystems (npm, crates); missed direct Python maintainer sources like PyPI."
+      }
+    },
+    "s2_seo_cybersecurity": {
+      "run": "stress_d",
+      "prompt": "I'm an AppSec engineer and wrote a guide to securing GitHub Actions; find cybersecurity blogs that accept guest articles",
+      "playbook": "seo_guest_posts",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 77,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "seo_guest_posts",
+        "playbook_note": "Correct: seeking blogs that accept guest posts.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "accept guest articles",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "cybersecurity blogs",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.51,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 19,
+            "yes": 2,
+            "maybe": 6,
+            "no": 0,
+            "yes_rate": 0.25,
+            "codes": {
+              "no_evidence": 5,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "troyhunt.com",
+                "org": "troyhunt.com",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No evidence guest articles are accepted.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SiteLock Blog",
+                "org": "SiteLock Blog",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Cybersecurity blog, but no evidence of guest post acceptance.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "BH Consulting\u2019s Security Watch Blog",
+                "org": "BH Consulting\u2019s Security Watch Blog",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Cybersecurity blog, unclear if guest posts are accepted.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Gitguardian",
+                "org": "Gitguardian",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Cybersecurity relevant, but no evidence of guest post acceptance.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Naked Security",
+                "org": "Naked Security",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Cybersecurity blog, but no evidence of guest post acceptance.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Phpkb",
+                "org": "Phpkb",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Guest posts accepted, but unclear if cybersecurity is a main topic.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 48,
+            "yes": 6,
+            "maybe": 2,
+            "no": 2,
+            "yes_rate": 0.6,
+            "codes": {
+              "no_evidence": 3,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "Tech Zealots",
+                "org": "Tech Zealots",
+                "verdict": "yes",
+                "code": null,
+                "note": "Accepts original guest articles on cybersecurity topics.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Itsecurityexpert",
+                "org": "Itsecurityexpert",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Cybersecurity blog, but no evidence of guest post acceptance.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "socinvestigation.com",
+                "org": "socinvestigation.com",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Easy Cloud Solutions",
+                "org": "Easy Cloud Solutions",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Primarily AWS/cloud MSP, some cybersecurity, unclear blog focus.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "emergingtechs.net",
+                "org": "emergingtechs.net",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "securityonline.info",
+                "org": "securityonline.info",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 6,
+            "maybe": 3,
+            "no": 1,
+            "yes_rate": 0.6,
+            "codes": {
+              "no_evidence": 3,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "Troy Hunt",
+                "org": "Troy Hunt",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "Personal blog, no evidence of guest posts.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SecurityBlogs",
+                "org": "SecurityBlogs",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Repository Security",
+                "org": "Openssf",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "OpenSSF has a blog, unclear if guest posts accepted.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Cm Alliance",
+                "org": "Cm Alliance",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "DevOps.com",
+                "org": "DevOps.com",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "DevOps focus; may accept AppSec but not pure cybersecurity.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "PowerDMARC",
+                "org": "PowerDMARC",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "list": {
+            "n": 15,
+            "yes": 5,
+            "no": 3
+          },
+          "orgs": {
+            "n": 28,
+            "yes": 14,
+            "no": 3
+          },
+          "web": {
+            "n": 13,
+            "yes": 9,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 0,
+        "in_shortlist": 0,
+        "recall_pool": 0.0,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "The Hacker News",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Infosec Writeups",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Peerlyst",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Security Boulevard",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dark Reading",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Tripwire State of Security",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "CISO Mag",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "InfoSec Resources (InfoSec Institute)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "SecurityWeek",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Packet Storm",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "BleepingComputer",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "SANS Internet Storm Center",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 8,
+        "borderline": 2
+      },
+      "prospect_problems": {
+        "weak_evidence": 2
+      },
+      "prospects": [
+        {
+          "name": "Phil Muncaster",
+          "org": "Infosecurity Magazine",
+          "email": "philmuncaster@gmail.com",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Infosecurity Magazine is a top infosec publication, welcomes guest pitches, and contact is plausible.",
+          "problems": []
+        },
+        {
+          "name": "DevOps.com",
+          "org": "DevOps.com",
+          "email": "editor@devops.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "DevOps.com is relevant, accepts guest posts, and covers DevSecOps/security.",
+          "problems": []
+        },
+        {
+          "name": "Latest Hacking News",
+          "org": "Latest Hacking News",
+          "email": "contact@latesthackingnews.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Latest Hacking News is a cybersecurity blog, accepts guest articles, and address is appropriate.",
+          "problems": []
+        },
+        {
+          "name": "SecurityBlogs",
+          "org": "SecurityBlogs",
+          "email": "info@securityblogs.com.au",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 4,
+          "why": "SecurityBlogs is security-focused, has explicit guest article process, and address is suitable.",
+          "problems": []
+        },
+        {
+          "name": "Repository Security",
+          "org": "Openssf",
+          "email": "security@openssf.org",
+          "score": 0.8,
+          "verdict": "good",
+          "fit": 4,
+          "why": "OpenSSF is a major security org, blog accepts contributions, and address is appropriate.",
+          "problems": []
+        },
+        {
+          "name": "Appsecops",
+          "org": "Appsecops",
+          "email": "info@appsecops.com",
+          "score": 0.788,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Appsecops is highly relevant to AppSec/DevSecOps, accepts articles, and address is plausible.",
+          "problems": []
+        },
+        {
+          "name": "PowerDMARC",
+          "org": "PowerDMARC",
+          "email": "sales@powerdmarc.com",
+          "score": 0.7388,
+          "verdict": "good",
+          "fit": 4,
+          "why": "PowerDMARC is cybersecurity-focused, invites expert content, and address is plausible for org.",
+          "problems": []
+        },
+        {
+          "name": "BH Consulting",
+          "org": "BH Consulting",
+          "email": "info@bhconsulting.ie",
+          "score": 0.7388,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "BH Consulting is a security firm with a blog, but unclear if they accept guest posts.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Troy Hunt",
+          "org": "Troy Hunt",
+          "email": "troy@troyhunt.com",
+          "score": 0.6843,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Troy Hunt runs a top security blog, but no evidence he accepts guest posts.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Cm Alliance",
+          "org": "Cm Alliance",
+          "email": "info@cm-alliance.com",
+          "score": 0.6402,
+          "verdict": "good",
+          "fit": 4,
+          "why": "They explicitly accept cybersecurity guest articles, though for a fee.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 1,
+        "not_send": 3,
+        "tiers": {
+          "guess": 1,
+          "inbox": 8,
+          "attributed": 1
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "7eb1bd9998032664",
+            "name": "Phil Muncaster",
+            "address": "philmuncaster@gmail.com",
+            "tier": "guess",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Personal Gmail, not clearly tied to publication authority."
+          },
+          {
+            "id": "a5e3d35cf7e2d2e2",
+            "name": "DevOps.com",
+            "address": "editor@devops.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Editor address; likely correct for guest article submissions."
+          },
+          {
+            "id": "113975a8efc91237",
+            "name": "Latest Hacking News",
+            "address": "contact@latesthackingnews.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic contact for a small org; likely reaches editorial team."
+          },
+          {
+            "id": "21ed2cf0aa0cf9cb",
+            "name": "SecurityBlogs",
+            "address": "info@securityblogs.com.au",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Info@ for a blog; likely reaches decision makers for guest posts."
+          },
+          {
+            "id": "ffc013e638b94ac0",
+            "name": "Repository Security",
+            "address": "security@openssf.org",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Security@ may be for incident reporting, not editorial."
+          },
+          {
+            "id": "2725f76235d43402",
+            "name": "Appsecops",
+            "address": "info@appsecops.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Info@ for a blog; likely reaches editorial team."
+          },
+          {
+            "id": "d87edd224d779944",
+            "name": "PowerDMARC",
+            "address": "sales@powerdmarc.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "drop",
+            "note": "Sales@ cannot grant editorial requests."
+          },
+          {
+            "id": "0e8b96d21a2f2c71",
+            "name": "BH Consulting",
+            "address": "info@bhconsulting.ie",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Info@ for a small org; likely reaches decision makers."
+          },
+          {
+            "id": "096bbb27242a3a81",
+            "name": "Troy Hunt",
+            "address": "troy@troyhunt.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct address for blog owner; appropriate for guest post requests."
+          },
+          {
+            "id": "af4e3a52fddc35e3",
+            "name": "Cm Alliance",
+            "address": "info@cm-alliance.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Info@ for a blog; likely reaches editorial team."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 0.72,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 3.33,
+        "inversions_ge2": 0,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 7,
+          "list": 3
+        },
+        "by_country": {
+          "?": 8,
+          "AU": 1,
+          "IE": 1
+        },
+        "max_country_share": 0.8
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 43,
+        "supported": 42,
+        "unsupported": 1,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.98,
+        "emails_with_unsupported": 1,
+        "mean_specific": 2.8,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {
+          "junk_greeting": 2
+        },
+        "bad_claims": [
+          {
+            "to": "philmuncaster@gmail.com",
+            "claims": []
+          },
+          {
+            "to": "editor@devops.com",
+            "claims": []
+          },
+          {
+            "to": "contact@latesthackingnews.com",
+            "claims": []
+          },
+          {
+            "to": "info@securityblogs.com.au",
+            "claims": [
+              {
+                "text": "Advice may benefit your readers.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "security@openssf.org",
+            "claims": []
+          },
+          {
+            "to": "info@appsecops.com",
+            "claims": []
+          },
+          {
+            "to": "sales@powerdmarc.com",
+            "claims": []
+          },
+          {
+            "to": "info@bhconsulting.ie",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 3.5,
+        "missing": "More niche GitHub Actions or CI/CD security blogs; more global language diversity. | Major infosec news sites, more technical DevSecOps blogs, and non-fee-based platforms.",
+        "systemic_issues": [
+          "Most contacts are generic inboxes",
+          "Few direct editor/manager contacts",
+          "One org unclear on guest post policy",
+          "Weak evidence for guest post acceptance",
+          "Fee-based guest posting",
+          "Lack of editor/content manager contacts"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 4,
+        "actionable": 4,
+        "false_reassurance": [
+          "shortlisted 10 (implies all are strong matches)",
+          "no explicit mention of generic inboxes or fee-based posts"
+        ],
+        "missing_message": "Most contacts are generic inboxes or fee-based; few direct editor contacts. Consider manual research or alternate sources for higher-quality, editor-level outreach.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "news",
+            "why": "Recent articles can reveal active blogs open to guest posts."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "list",
+            "why": "Low valid rate; many lists outdated or irrelevant."
+          }
+        ],
+        "effort_spent_where_it_pays": 5,
+        "top_problem": "Missed news tool; list tool produced many invalid or outdated blog candidates."
+      }
+    },
+    "s2_volunteer_animal_pune": {
+      "run": "stress_d",
+      "prompt": "I'm a software engineer in Pune who wants to volunteer two weekends a month; find animal shelters or rescue NGOs that need help",
+      "playbook": "volunteering",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 63,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "volunteering",
+        "playbook_note": "Correct: volunteering with NGOs/orgs.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "animal shelters or rescue NGOs",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "Pune",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "need help/volunteers",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "two weekends a month",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.66,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 42,
+            "yes": 5,
+            "maybe": 3,
+            "no": 0,
+            "yes_rate": 0.62,
+            "codes": {
+              "wrong_geography": 2,
+              "no_evidence": 1
+            },
+            "examples": [
+              {
+                "name": "Paws care",
+                "org": "Paws care",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "People for Animals",
+                "org": "People for Animals",
+                "verdict": "maybe",
+                "code": "wrong_geography",
+                "note": "Appears based in New Delhi, not Pune.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Connectfor",
+                "org": "Connectfor",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No clear Pune location, but relevant volunteer opportunity.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Care Of Stray Dog's",
+                "org": "Care Of Stray Dog's",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Animal Lover Akky",
+                "org": "Animal Lover Akky",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Volunteer with Pune Pet Park",
+                "org": "Volunteer with Pune Pet Park",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 11,
+            "yes": 6,
+            "maybe": 4,
+            "no": 0,
+            "yes_rate": 0.6,
+            "codes": {
+              "off_topic": 1,
+              "no_evidence": 3
+            },
+            "examples": [
+              {
+                "name": "Myfurries",
+                "org": "Myfurries",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Animal Rescue Trust",
+                "org": "Animal Rescue Trust",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Petofy",
+                "org": "Petofy",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Appears more as a pet adoption platform than a shelter/NGO.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Mission Possible Pet House",
+                "org": "Mission Possible Pet House",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Listed as NGO, but no direct evidence of volunteer needs.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "SAWO",
+                "org": "SAWO",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Mentions volunteering, but unclear if Pune-based.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Paws Care",
+                "org": "Paws Care",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 9,
+            "maybe": 0,
+            "no": 1,
+            "yes_rate": 0.9,
+            "codes": {
+              "directory_or_aggregator": 1
+            },
+            "examples": [
+              {
+                "name": "Welcome To Karma Foundation",
+                "org": "Welcome To Karma Foundation",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "BCS Pune",
+                "org": "BCS Pune",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Make New Life, NGO in Pune",
+                "org": "Make New Life, NGO in Pune",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Canine Control & Care",
+                "org": "Canine Control & Care",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Connecting Volunteers to NGOs",
+                "org": "Connecting Volunteers to NGOs",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Volunteer matching platform, not an animal shelter/NGO itself.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Animalfarmrescue",
+                "org": "Animalfarmrescue",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "list": {
+            "n": 12,
+            "yes": 10,
+            "no": 0
+          },
+          "orgs": {
+            "n": 28,
+            "yes": 20,
+            "no": 1
+          },
+          "web": {
+            "n": 16,
+            "yes": 10,
+            "no": 1
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 7,
+        "in_pool": 4,
+        "in_shortlist": 1,
+        "recall_pool": 0.57,
+        "recall_shortlist": 0.14,
+        "entities": [
+          {
+            "name": "ResQ Charitable Trust",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Blue Cross Society of Pune",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "People For Animals Pune",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Mission Possible Foundation",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Animal Adoption & Rescue Team (AART)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Pet Owners and Animal Lovers (PAL)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "The Pawsh",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 9,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "aggregator_or_directory": 1
+      },
+      "prospects": [
+        {
+          "name": "BCS Pune",
+          "org": "BCS Pune",
+          "email": "info@bcspune.org",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Animal welfare NGO in Pune, fits campaign ask and geography.",
+          "problems": []
+        },
+        {
+          "name": "SAW",
+          "org": "SAW",
+          "email": "info@sawct.org",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Active animal welfare trust in Pune, rescues and rehomes animals.",
+          "problems": []
+        },
+        {
+          "name": "Animalfarmrescue",
+          "org": "Animalfarmrescue",
+          "email": "animalfarm.pune@gmail.com",
+          "score": 0.8798,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Animal rescue NGO in Pune, actively seeks volunteers.",
+          "problems": []
+        },
+        {
+          "name": "Animal Rescue Trust, Pune",
+          "org": "Animal Rescue Trust, Pune",
+          "email": "info@animalrescuetrust.org",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Registered animal rescue trust in Pune, fits campaign perfectly.",
+          "problems": []
+        },
+        {
+          "name": "Resqct",
+          "org": "Resqct",
+          "email": "info@resqct.org",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Active animal rescue NGO in Pune, relevant to ask.",
+          "problems": []
+        },
+        {
+          "name": "Make New Life, NGO in Pune",
+          "org": "Make New Life, NGO in Pune",
+          "email": "mayurpasare@gmail.com",
+          "score": 0.8309,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Animal rescue NGO in Pune, sanctuary for animals, fits ask.",
+          "problems": []
+        },
+        {
+          "name": "Connecting Volunteers to NGOs",
+          "org": "Connecting Volunteers to NGOs",
+          "email": "contact@connectfor.org",
+          "score": 0.788,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Aggregator platform, not a direct animal shelter/NGO.",
+          "problems": [
+            "aggregator_or_directory"
+          ]
+        },
+        {
+          "name": "Welcome To Karma Foundation",
+          "org": "Welcome To Karma Foundation",
+          "email": "report@karmafoundation.ngo",
+          "score": 0.782,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Animal welfare and rescue NGO in Pune, fits campaign.",
+          "problems": []
+        },
+        {
+          "name": "Voiceless India",
+          "org": "Voiceless India",
+          "email": "outreach@voicelessindia.org",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Animal rights NGO in Pune, likely to need volunteers.",
+          "problems": []
+        },
+        {
+          "name": "Canine Control & Care",
+          "org": "Canine Control & Care",
+          "email": "admin@caninecontrolandcare.org",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Animal welfare NGO in Pune, directly relevant and likely to need volunteers.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 1,
+        "not_send": 1,
+        "tiers": {
+          "inbox": 10
+        },
+        "det_flags": {
+          "free_mail_for_org": 2
+        },
+        "rows": [
+          {
+            "id": "aba49cacc12033fd",
+            "name": "BCS Pune",
+            "address": "info@bcspune.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic org inbox, likely reaches decision makers."
+          },
+          {
+            "id": "b6489ddb864afdf0",
+            "name": "SAW",
+            "address": "info@sawct.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic org inbox, suitable for volunteer offers."
+          },
+          {
+            "id": "c295d4ef68e96a71",
+            "name": "Animalfarmrescue",
+            "address": "animalfarm.pune@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Gmail, but likely monitored by org for volunteer offers."
+          },
+          {
+            "id": "2335b2371298a080",
+            "name": "Animal Rescue Trust, Pune",
+            "address": "info@animalrescuetrust.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Standard org info address, appropriate for outreach."
+          },
+          {
+            "id": "613e42f7e0755e62",
+            "name": "Resqct",
+            "address": "info@resqct.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic org inbox, likely reaches relevant staff."
+          },
+          {
+            "id": "13d76f6151f72096",
+            "name": "Make New Life, NGO in Pune",
+            "address": "mayurpasare@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Personal Gmail, likely principal or founder."
+          },
+          {
+            "id": "91a8d04d2e6a56c5",
+            "name": "Connecting Volunteers to NGOs",
+            "address": "contact@connectfor.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic org inbox, suitable for volunteer outreach."
+          },
+          {
+            "id": "fafe6353f404fc38",
+            "name": "Welcome To Karma Foundation",
+            "address": "report@karmafoundation.ngo",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "no",
+            "action": "drop",
+            "note": "\u2018report@\u2019 likely for complaints, not volunteer coordination."
+          },
+          {
+            "id": "5727219168e5ec9d",
+            "name": "Voiceless India",
+            "address": "outreach@voicelessindia.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "\u2018outreach@\u2019 is appropriate for volunteer offers."
+          },
+          {
+            "id": "046207fbea9a6da7",
+            "name": "Canine Control & Care",
+            "address": "admin@caninecontrolandcare.org",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "\u2018admin@\u2019 likely reaches decision makers or coordinators."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 0.62,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 4.67,
+        "inversions_ge2": 2,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 8,
+          "list": 2
+        },
+        "by_country": {
+          "IN": 8,
+          "?": 2
+        },
+        "max_country_share": 0.8
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 48,
+        "supported": 45,
+        "unsupported": 3,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.94,
+        "emails_with_unsupported": 2,
+        "mean_specific": 2.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "info@bcspune.org",
+            "claims": []
+          },
+          {
+            "to": "info@sawct.org",
+            "claims": []
+          },
+          {
+            "to": "animalfarm.pune@gmail.com",
+            "claims": []
+          },
+          {
+            "to": "info@animalrescuetrust.org",
+            "claims": []
+          },
+          {
+            "to": "info@resqct.org",
+            "claims": []
+          },
+          {
+            "to": "mayurpasare@gmail.com",
+            "claims": []
+          },
+          {
+            "to": "contact@connectfor.org",
+            "claims": []
+          },
+          {
+            "to": "report@karmafoundation.ngo",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.5,
+        "diversity": 3.5,
+        "missing": "Could include more direct contacts for volunteer coordinators or ops managers. | No individual coordinators or smaller shelters; only org-level inboxes.",
+        "systemic_issues": [
+          "few direct decision-maker emails",
+          "one aggregator included",
+          "No named individual contacts",
+          "Only general org inboxes",
+          "No evidence of specific volunteer needs"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 4,
+        "actionable": 4,
+        "false_reassurance": [
+          "No mention that only general org inboxes are provided",
+          "No mention that specific volunteer needs are not confirmed",
+          "No explicit warning about lack of individual contacts"
+        ],
+        "missing_message": "Most contacts are generic org inboxes, not individual coordinators, and volunteer needs are not confirmed\u2014follow up to verify fit.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "places",
+            "why": "Google Maps often lists local animal shelters and NGOs directly."
+          }
+        ],
+        "wasteful_tools": [],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Missed using 'places', which could yield more direct and up-to-date local shelter contacts."
+      }
+    },
+    "stress_jaipur_photographers": {
+      "error": "LLMError: LLM request failed: HTTP 429: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhausted\"\n    }\n}\n"
+    },
+    "stress_phd_neuro": {
+      "error": "LLMError: LLM request failed: HTTP 429: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhausted\"\n    }\n}\n"
+    },
+    "stress_senior_data_hire": {
+      "error": "LLMError: LLM request failed: HTTP 429: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhausted\"\n    }\n}\n"
+    }
+  },
+  "cost": {
+    "calls": 87,
+    "usd": 0.463
+  }
+}

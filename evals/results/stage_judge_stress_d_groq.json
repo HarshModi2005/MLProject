@@ -1,0 +1,28 @@
+{
+  "runs": "stress_d",
+  "judge_model": "openai/gpt-oss-120b",
+  "scenarios": {
+    "stress_jaipur_photographers": {
+      "error": "LLMError: All configured models are unavailable or rate-limited (openai/gpt-oss-120b rate-limited for 389s). Wait for the limit to reset or set LLM_FALLBACK_MODELS."
+    },
+    "stress_phd_neuro": {
+      "error": "LLMError: All configured models are unavailable or rate-limited (HTTP 400: {\"error\":{\"message\":\"'model' : doesn't match any schema from 'anyOf'\",\"type\":\"invalid_request_error\"}}\n). Wait for the limit to reset or set LLM_FALLBACK_MODELS."
+    },
+    "stress_podcast_climate": {
+      "error": "LLMError: All configured models are unavailable or rate-limited (HTTP 400: {\"error\":{\"message\":\"'model' : doesn't match any schema from 'anyOf'\",\"type\":\"invalid_request_error\"}}\n). Wait for the limit to reset or set LLM_FALLBACK_MODELS."
+    },
+    "stress_rust_maintainers": {
+      "error": "LLMError: All configured models are unavailable or rate-limited (HTTP 400: {\"error\":{\"message\":\"'model' : doesn't match any schema from 'anyOf'\",\"type\":\"invalid_request_error\"}}\n). Wait for the limit to reset or set LLM_FALLBACK_MODELS."
+    },
+    "stress_senior_data_hire": {
+      "error": "LLMError: All configured models are unavailable or rate-limited (HTTP 400: {\"error\":{\"message\":\"'model' : doesn't match any schema from 'anyOf'\",\"type\":\"invalid_request_error\"}}\n). Wait for the limit to reset or set LLM_FALLBACK_MODELS."
+    },
+    "stress_spanish_universities": {
+      "error": "LLMError: All configured models are unavailable or rate-limited (HTTP 400: {\"error\":{\"message\":\"'model' : doesn't match any schema from 'anyOf'\",\"type\":\"invalid_request_error\"}}\n). Wait for the limit to reset or set LLM_FALLBACK_MODELS."
+    }
+  },
+  "cost": {
+    "calls": 21,
+    "usd": 0.0
+  }
+}

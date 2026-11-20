@@ -454,3 +454,11 @@ def test_bench_writes_a_partial_report_after_each_scenario(tmp_path, monkeypatch
     monkeypatch.setattr(bench, "run_scenario", fake_run)
     rep = bench.run_bench(["academic_gnn", "b2b_dental_bangalore"], label="t", progress=lambda m: None)
     assert len(rep["rows"]) == 2 and not (tmp_path / "t.partial.json").exists() and (tmp_path / "t.json").exists()
+
+
+def test_a_request_with_no_target_is_not_searched():
+    from brain.pipeline import is_too_vague
+
+    assert is_too_vague(CampaignSpec(id="c", playbook_confidence=0.3))
+    assert not is_too_vague(CampaignSpec(id="c", playbook_confidence=0.3, topics=["dental clinics"]))
+    assert not is_too_vague(CampaignSpec(id="c"))  # confidence unknown: a hand-built spec is searched as before

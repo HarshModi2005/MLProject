@@ -39,6 +39,10 @@ publisher that only lists or covers organisations: set "competitor_or_directory"
 Centrality matters for people. Their MAIN line of work must be the topic. A person whose main field is another one (chip design,
 bioinformatics, philosophy of mind, speech and hearing) and who has a paper or two touching the topic is "right field but wrong
 focus": 40-65, not 80+. Do not score by how many papers or how senior; score by how central the topic is to what they do.
+For asks to fund, grant, sponsor financially, donate or provide CSR money, the target must be a body that GIVES money: a
+foundation, a company's CSR or giving programme, a grant scheme, an agency with a funding window. A nonprofit that does
+the same kind of work as the sender (an NGO running education programmes, when the sender wants education funding) is a
+peer, not a funder: set "competitor_or_directory" true and score at most 25, unless the evidence says it also makes grants.
 Geography matters. If a target geography is given and the candidate is clearly based or active only elsewhere, set
 "region_ok" false (true if it fits, null if the evidence does not say) and score at most 40.
 

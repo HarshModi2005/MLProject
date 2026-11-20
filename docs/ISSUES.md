@@ -425,12 +425,93 @@ neuroscientists sit lower (tau -0.25, top third scores lower than bottom third).
 `oss_maintainers` uses GitHub, npm and the web. npm lists JavaScript packages only. A PyPI source (no search API; needs a different route)
 and crates.io (public API with owners) would fix recall; reachability (K-02) limits the rest.
 
-### K-11 Dropped candidates leave no reason behind (open)
-The final cut stores neither a score nor a reason for candidates it drops, so the audit can say that 39% of what was dropped was valid but not
-why. Store `(score, flags, reason)` for every judged candidate in the stage snapshot.
+### K-11 Dropped candidates leave no reason behind (partly wrong, corrected in round 4)
+Candidates that reached the judge do have a score stored (`brain_stages.judge.extra.judged`). Those dropped earlier for having no address were never
+judged, so they carry only the pre-judge score. The audit's "dropped at the final cut" group is mostly that second kind (see K-02).
 
 ## Notes on the method
 - The blind candidate audit sees less than the pipeline did, so "kept 0.58" is a floor, not the shortlist's precision.
 - R9 and R4 are the weakest rubrics (R9 is generic; R4 relies on the model's memory). R1, R3, R5, R6 and R7 produced findings I could verify in the data.
 - Fixes marked "not re-measured" are covered by unit tests (289 pass) but not by a new live run, because search credits are exhausted.
   To re-measure: top up Serper, then `LLM_PROVIDER=openai brain bench --split stress --draft --label stress_d` and `python tools/stage_judge.py --runs stress_d`.
+
+
+---
+
+# Round 4: reach work, infrastructure, and a full re-run
+
+A new Serper key was added. Changes made from the round-3 findings (all with tests; 301 pass):
+
+- **Reach (K-02).** Person enrichment reads a person's own website (a link from their profile), accepting the address on pages that are not "profile pages",
+  and follows one or two `/contact` or `/about` links. Search-result snippets are read for an address that carries the person's name (people) or sits on the
+  organisation's domain (organisations, taken as an inbox). When a site will not load, the snippet fallback runs instead of giving up. Candidates the pre-judge
+  liked (0.7+) but that still have no trusted address are now listed in the run's funnel (`good_no_address`) with a warning, instead of vanishing.
+- **crates.io source** (K-10): owners of popular Rust crates, with their public GitHub profile (name, public email, own website). `oss_maintainers` uses it.
+- **Intake (K-04, K-05, K-06).** "not X" phrases become anti-patterns; a size limit inside an "also ..." clause is shown as a set-aside assumption instead of
+  applied to everyone; a request with no target at all (no topics, confidence 0.35 or less) now stops with a question instead of searching (see below).
+- **Loud failures (K-03).** GitHub rate limits and errors reach the run's warnings the same way search failures do.
+- **Infrastructure.** A per-provider token window in `brain/llm.py` waits instead of failing under a tokens-per-minute limit (default 6,500 on Groq;
+  `LLM_TPM` overrides); `brain bench --parallel N`; the bench report is rewritten after every scenario (`<label>.partial.json`).
+- **Judge prompts.** Centrality for people (round 3) and, new, "a funder must give money": an NGO doing the same work as a sender who wants funding is a peer.
+
+## Re-run: before and after (same 26 scenarios, new code, label `stress_d`)
+
+Cost: $0.77 of model calls and 1,047 searches; wall-clock 2.6 hours with 4 scenarios in parallel.
+Three scenarios were invalid in the earlier run (search credits, round 3); they are left out of the comparison below (23 scenarios).
+
+| | before | after |
+|---|---|---|
+| contacts shortlisted (of 295 wanted) | 136 (46%) | 191 (65%) |
+| candidates with a confident address | 224 | 393 |
+| good@K by the pipeline's own judge | 113 | 169 |
+
+Biggest moves: `s2_advisors_medtech` 2 to 10 shortlisted, `s2_vague_prompt` 2 to 8 (see below, this one is wrong), `stress_senior_data_hire` 4 to 11,
+`stress_rust_maintainers` 0 to 6, `stress_municipal_iot` 0 to 3, `s2_oss_python_feedback` 0 to 2, `stress_jaipur_photographers` 18 to 25.
+Addresses came from search snippets for about 79 candidates (39 organisations, 40 people) and from a personal site for 12.
+Still no address for the strongest candidates: 444 well-matched candidates were listed under `good_no_address` across the 26 runs.
+
+Where it did not improve or got worse (one run each, so some of this is noise: the pipeline's judge moves a candidate across the 0.6 floor run to run):
+`stress_germany_machinery` 7 to 4 (reachable unchanged at 13), `s2_customer_research_freelance` 2 to 0, `s2_campus_design_pune` reachable 17 to 10,
+`s2_alumni_iitm` and `s2_cofounder_agritech` still 0 (reachable went from 1 to 11 and 1 to 7, but the judge passed none: they are companies, not alumni or builders).
+
+## Stage judge on the re-run (OpenAI gpt-4.1, the same vendor as the pipeline here)
+
+Only 20 of 26 scenarios were judged: **the OpenAI account ran out of credits while the judge was running**. A second judge on Groq (a different vendor) failed on rate
+limits and a request error, so `stress_jaipur_photographers`, `stress_phd_neuro`, `stress_senior_data_hire`, `stress_podcast_climate`,
+`stress_spanish_universities` and `stress_rust_maintainers` have no stage-judge result for the new run. On the 17 scenarios valid in both runs:
+
+| measure | before | after |
+|---|---|---|
+| shortlist as a share of what was wanted | 0.46 | 0.62 |
+| independent verdict on prospects: good / borderline / bad | 52 / 27 / 5 | 81 / 19 / 13 |
+| valid targets among those dropped at the final cut | 0.40 | 0.32 |
+| blind precision of the shortlist | 0.55 | 0.57 |
+| claims supported by the facts | 0.89 | 0.91 |
+| R8 "truthful" (1-5) | 4.71 | 4.41 |
+| intake scored 5/5 | 0.88 | 0.76 |
+| rank agreement (Kendall tau) | 0.68 | 0.55 |
+
+Longer lists carry more weak entries, so more "bad" prospects in absolute terms was expected; the share of good ones went up (62% to 72%). The drops in
+"truthful", intake and tau are not explained by one cause and one run cannot separate them from noise. They are worth a repeat run (`--repeat 3`) before drawing a conclusion.
+
+## New findings
+
+### L-01 A vague request was answered with a guess (fixed after this run)
+With no topics, the planner invented a target group from the word "startup" and the run returned eight accelerators (R1 3/5). `is_too_vague` now stops the run with a message asking who the targets are, before any search is spent.
+
+### L-02 Grants: implementers pass as funders (prompt rule added, not re-measured)
+`s2_grants_rural_girls`: 7 of 10 prospects are NGOs that run girls' education programmes, not funders (R8 2/5: "almost no actual funders or CSR contacts"). The pipeline judge
+now treats a same-work nonprofit as a peer for funding asks. This needs a model run to confirm; both model accounts were out of credits.
+
+### L-03 Wrong organisation type and wrong country still pass (open)
+Examples: EY partners as "journalists" (`stress_journalists_exclusions`), US accelerators for an India request (`s2_awards_hardware`: Highway1, Innovation Works).
+The region rule only fires when the evidence says the place is elsewhere; silence counts as a pass. For asks tied to a country, "no evidence of presence" should score lower than "present".
+
+### L-04 Candidates without an address remain the largest lost group (open)
+444 `good_no_address` candidates across 26 runs. Without a contact-data provider (Hunter key not set) there is no further automatic route; the list is
+there so a person can add addresses or decide to pay for a provider.
+
+## What was not verified
+- The OpenAI and Groq accounts were both out of credit at the end, so the L-02 prompt rule, the centrality rule, the writer rule (K-08) and the `is_too_vague` stop were not re-measured on a model run.
+  The vague stop is covered by a unit test; the rest only by prompt inspection.
+- The independent judge was the same vendor as the pipeline for every run in rounds 3 and 4. A human-label pass (`brain bench-label`) is still the missing reference.

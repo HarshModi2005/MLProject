@@ -1,0 +1,4253 @@
+{
+  "runs": "stress_d",
+  "judge_model": "gpt-4.1",
+  "scenarios": {
+    "s2_alumni_iitm": {
+      "run": "stress_d",
+      "prompt": "I'm a final year at IIT Madras interested in payments; find IIT Madras alumni in product or engineering at Indian payments companies",
+      "playbook": "alumni",
+      "wanted": 10,
+      "shortlisted": 0,
+      "pool": 112,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "alumni",
+        "playbook_note": "Correct: alumni at target orgs/roles.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "IIT Madras alumni",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "product or engineering roles",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "Indian payments companies",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.0,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 17,
+            "yes": 0,
+            "maybe": 0,
+            "no": 10,
+            "yes_rate": 0.0,
+            "codes": {
+              "directory_or_aggregator": 7,
+              "wrong_org_type": 1,
+              "off_topic": 2
+            },
+            "examples": [
+              {
+                "name": "Bangalore Urban",
+                "org": "Wellfound",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Listicle, not an individual alumnus.",
+                "sources": [
+                  "web"
+                ]
+              },
+              {
+                "name": "Companies Hiring Amidst Layoffs",
+                "org": "Wellfound",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Listicle, not an individual alumnus.",
+                "sources": [
+                  "web"
+                ]
+              },
+              {
+                "name": "Efinancialcareers",
+                "org": "Efinancialcareers",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Organization, not an IIT Madras alumnus.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Non Profit",
+                "org": "Wellfound",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Listicle, not an individual alumnus.",
+                "sources": [
+                  "web"
+                ]
+              },
+              {
+                "name": "Ellen Glover",
+                "org": "Built In",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Journalist, not a payments company employee or alumnus.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Ashley Brownridge",
+                "org": "Built In",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Reporter, not a payments company employee or alumnus.",
+                "sources": [
+                  "web"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 61,
+            "yes": 0,
+            "maybe": 0,
+            "no": 8,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 5,
+              "off_topic": 3
+            },
+            "examples": [
+              {
+                "name": "Razorpay",
+                "org": "Razorpay",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Payhuddle",
+                "org": "Payhuddle",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Jasleen Taneja",
+                "org": "Education Times",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Journalist, not a payments company engineer or product alum.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Soutik Biswas",
+                "org": "BBC",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Journalist, not a payments company engineer or product alum.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Paytm For Business",
+                "org": "Paytm For Business",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Jacob Zinkula",
+                "org": "Business Insider",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Journalist, not a payments company engineer or product alum.",
+                "sources": [
+                  "news"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 34,
+            "yes": 0,
+            "maybe": 0,
+            "no": 10,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 9,
+              "wrong_geography": 1
+            },
+            "examples": [
+              {
+                "name": "PhonePe",
+                "org": "PhonePe",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Infibeam Avenues Limited",
+                "org": "Infibeam Avenues Limited",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "VertoFX",
+                "org": "VertoFX",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "London-based, not India-focused payments company.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "IDFC FIRST Bank",
+                "org": "IDFC FIRST Bank",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Billdesk",
+                "org": "Billdesk",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Airpay",
+                "org": "Airpay",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of IIT Madras alumni or specific person.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 12,
+            "yes": 0,
+            "no": 12
+          },
+          "orgs": {
+            "n": 16,
+            "yes": 0,
+            "no": 16
+          },
+          "news": {
+            "n": 4,
+            "yes": 0,
+            "no": 4
+          },
+          "list": {
+            "n": 12,
+            "yes": 0,
+            "no": 12
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 7,
+        "in_pool": 5,
+        "in_shortlist": 0,
+        "recall_pool": 0.71,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Harshil Mathur",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Shashank Kumar",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Ankit Gera",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sampad Swain",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Vivek Lohcheb",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Anirban Mukherjee",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Saurabh Tandon",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "list_level": {},
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "You received zero usable contacts; consider broadening your criteria or sourcing contact data to get results.",
+        "det_shortfall": 10,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 2,
+        "missed_tools": [
+          {
+            "tool": "linkedin",
+            "why": "Best source for alumni and current roles, especially for IIT Madras alumni."
+          },
+          {
+            "tool": "memory",
+            "why": "Could reuse past alumni or payments outreach data."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "orgs",
+            "why": "Found no valid alumni in target roles."
+          },
+          {
+            "tool": "list",
+            "why": "No valid candidates; lists rarely specify alumni or roles."
+          },
+          {
+            "tool": "web",
+            "why": "Staff/team pages seldom mention alumni status."
+          },
+          {
+            "tool": "news",
+            "why": "Journalists rarely cover alumni in specific roles."
+          }
+        ],
+        "effort_spent_where_it_pays": 1,
+        "top_problem": "No tool used could reliably surface IIT Madras alumni in specific roles; LinkedIn is essential."
+      }
+    },
+    "s2_campus_design_pune": {
+      "run": "stress_d",
+      "prompt": "we are a product design studio hiring four paid interns; find design colleges and departments in Pune and Mumbai whose placement cell we should contact",
+      "playbook": "campus_recruiting",
+      "wanted": 10,
+      "shortlisted": 9,
+      "pool": 65,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "campus_recruiting",
+        "playbook_note": "Correct: placement cells at design colleges for recruiting interns.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "design colleges and departments",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "in Pune and Mumbai",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "placement cell",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "hiring four paid interns",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.18,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 46,
+            "yes": 1,
+            "maybe": 2,
+            "no": 5,
+            "yes_rate": 0.12,
+            "codes": {
+              "no_evidence": 2,
+              "wrong_geography": 2,
+              "directory_or_aggregator": 2,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "Insdindia",
+                "org": "Insdindia",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Moderncollegepune",
+                "org": "Moderncollegepune",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No clear evidence of design department.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Gicededu",
+                "org": "Gicededu",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Vocational/career org, unclear if design focus.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Naz",
+                "org": "Naz",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Not in Pune or Mumbai.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Newschool",
+                "org": "Newschool",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Not in Pune or Mumbai.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "ArtBound Initiative",
+                "org": "ArtBound Initiative",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Internship placement service, not a college.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 2,
+            "maybe": 6,
+            "no": 2,
+            "yes_rate": 0.2,
+            "codes": {
+              "no_evidence": 2,
+              "off_topic": 4,
+              "maybe": 1,
+              "directory_or_aggregator": 1
+            },
+            "examples": [
+              {
+                "name": "Pdeacoem",
+                "org": "Pdeacoem",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No evidence of design department.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Bvuniversity",
+                "org": "Bvuniversity",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Engineering/management, unclear if design department.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Dypvp",
+                "org": "Dypvp",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "No evidence of design department; general placement cell.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "IIT Bombay - Indian Institute of Technology, IDC School of Design, Mumbai",
+                "org": "IIT Bombay - Indian Institute of Technology, IDC School of Design, Mumbai",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "PIMPRI CHINCHWAD COLLEGE OF ENGINEERING",
+                "org": "PIMPRI CHINCHWAD COLLEGE OF ENGINEERING",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Engineering focus; unclear if design programs exist.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Mituniversity",
+                "org": "Mituniversity",
+                "verdict": "maybe",
+                "code": "maybe",
+                "note": "School of Architecture; may overlap with design, but not explicit.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 9,
+            "size": 9,
+            "yes": 4,
+            "maybe": 5,
+            "no": 0,
+            "yes_rate": 0.44,
+            "codes": {
+              "no_evidence": 5
+            },
+            "examples": [
+              {
+                "name": "Dypcaac",
+                "org": "Dypcaac",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Mentions design, but unclear location and details.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "International School of Design",
+                "org": "International School of Design",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Soft",
+                "org": "Soft",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "DPU School of Design",
+                "org": "DPU School of Design",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "DESPU, Leading University for Higher Education",
+                "org": "DESPU, Leading University for Higher Education",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit mention of design department.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "DBIT, Mumbai",
+                "org": "DBIT, Mumbai",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No evidence of design programs.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 25,
+            "yes": 6,
+            "no": 6
+          },
+          "orgs": {
+            "n": 27,
+            "yes": 7,
+            "no": 7
+          },
+          "list": {
+            "n": 2,
+            "yes": 1,
+            "no": 1
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 3,
+        "in_shortlist": 3,
+        "recall_pool": 0.25,
+        "recall_shortlist": 0.25,
+        "entities": [
+          {
+            "name": "MIT Institute of Design",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Symbiosis Institute of Design",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "ISDI - School of Design & Innovation",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "National Institute of Design, Maharashtra",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Raffles Design International Mumbai",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Whistling Woods International - School of Design",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "L.S. Raheja School of Art",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sir J.J. Institute of Applied Art",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Bharati Vidyapeeth College of Fine Arts",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "DYPDC School of Design",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Vishwakarma University - Faculty of Art and Design",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "IDC School of Design, IIT Bombay",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 7,
+        "borderline": 2
+      },
+      "prospect_problems": {
+        "weak_evidence": 1,
+        "off_topic": 1
+      },
+      "prospects": [
+        {
+          "name": "Symbiosis Institute of Design, Pune",
+          "org": "Symbiosis Institute of Design, Pune",
+          "email": "info@sid.edu.in",
+          "score": 0.9357,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Symbiosis Institute of Design, Pune, has a placement cell and relevant contact.",
+          "problems": []
+        },
+        {
+          "name": "Mitsd",
+          "org": "Mitsd",
+          "email": "register@mitsd.edu.in",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "MIT School of Design, Pune, has an active placement cell and is a design college.",
+          "problems": []
+        },
+        {
+          "name": "DPU School of Design",
+          "org": "DPU School of Design",
+          "email": "info.sod@dpu.edu.in",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "DPU School of Design, Pune, offers design programs and placement support.",
+          "problems": []
+        },
+        {
+          "name": "International School of Design",
+          "org": "International School of Design",
+          "email": "info@insdpunepcmc.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "International School of Design, PCMC, has a placement cell and relevant contact.",
+          "problems": []
+        },
+        {
+          "name": "Dypcaac",
+          "org": "Dypcaac",
+          "email": "principal@dypcaac.ac.in",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "D. Y. Patil College of Applied Arts & Crafts, Pune, has a placement department.",
+          "problems": []
+        },
+        {
+          "name": "Vupune",
+          "org": "Vupune",
+          "email": "est.section@vupune.ac.in",
+          "score": 0.8309,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Vishwakarma University, Pune, has a design faculty and placement office.",
+          "problems": []
+        },
+        {
+          "name": "DESPU, Leading University for Higher Education",
+          "org": "DESPU, Leading University for Higher Education",
+          "email": "vc.office@despu.edu.in",
+          "score": 0.788,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "DESPU offers diverse courses, but direct design/placement cell evidence is weak.",
+          "problems": [
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "DBIT, Mumbai",
+          "org": "DBIT, Mumbai",
+          "email": "dbittpocell@gmail.com",
+          "score": 0.7331,
+          "verdict": "borderline",
+          "fit": 2,
+          "why": "DBIT, Mumbai, is primarily engineering; unclear if design programs exist.",
+          "problems": [
+            "off_topic"
+          ]
+        },
+        {
+          "name": "Soft",
+          "org": "Soft",
+          "email": "itsoft@soft.ac.in",
+          "score": 0.6895,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Design college in Mumbai with active placement drives; inbox is appropriate for placement cell contact.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 9,
+        "belongs_bad": 0,
+        "cannot_grant": 3,
+        "not_send": 3,
+        "tiers": {
+          "inbox": 9
+        },
+        "det_flags": {
+          "free_mail_for_org": 1
+        },
+        "rows": [
+          {
+            "id": "2aa1b26c18187059",
+            "name": "Symbiosis Institute of Design, Pune",
+            "address": "info@sid.edu.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Generic info@, likely reaches admin or placement cell."
+          },
+          {
+            "id": "0a5ad0faed1961ef",
+            "name": "Mitsd",
+            "address": "register@mitsd.edu.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "register@ likely admissions, not placement/careers."
+          },
+          {
+            "id": "f9d3a60567b44ee8",
+            "name": "DPU School of Design",
+            "address": "info.sod@dpu.edu.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "info.sod@ is department-specific, likely routed to relevant staff."
+          },
+          {
+            "id": "e36215c7bba1ed2e",
+            "name": "International School of Design",
+            "address": "info@insdpunepcmc.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "info@, but decision maker identified; likely reaches placement cell."
+          },
+          {
+            "id": "8acf47db2e0a9cf2",
+            "name": "Dypcaac",
+            "address": "principal@dypcaac.ac.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "Principal@ likely reaches someone who can forward to placement."
+          },
+          {
+            "id": "3c81163e68c01fef",
+            "name": "Vupune",
+            "address": "est.section@vupune.ac.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "est.section@ is establishment/HR, not placement/careers."
+          },
+          {
+            "id": "9394feb453ed7492",
+            "name": "DESPU, Leading University for Higher Education",
+            "address": "vc.office@despu.edu.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "unclear",
+            "action": "send",
+            "note": "VC office may forward to placement cell."
+          },
+          {
+            "id": "9c52378aa3cabdd2",
+            "name": "DBIT, Mumbai",
+            "address": "dbittpocell@gmail.com",
+            "tier": "inbox",
+            "flags": [
+              "free_mail_for_org"
+            ],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "dbittpocell@ is the Training & Placement Cell."
+          },
+          {
+            "id": "857b025aade8fcba",
+            "name": "Soft",
+            "address": "itsoft@soft.ac.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "itsoft@ is IT support, not placement/careers."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 9,
+        "kendall_tau_score_vs_fit": 0.81,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 3.0,
+        "inversions_ge2": 1,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 9
+        },
+        "by_country": {
+          "IN": 9
+        },
+        "max_country_share": 1.0
+      },
+      "R7_drafts": {
+        "n": 9,
+        "claims": 23,
+        "supported": 20,
+        "unsupported": 3,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.87,
+        "emails_with_unsupported": 3,
+        "mean_specific": 2.22,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "info@sid.edu.in",
+            "claims": [
+              {
+                "text": "We offer internships that provide hands-on experience in product design.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "register@mitsd.edu.in",
+            "claims": [
+              {
+                "text": "We are contacting design colleges in Pune and Mumbai to offer these internships to students.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info.sod@dpu.edu.in",
+            "claims": [
+              {
+                "text": "Our studio offers a structured internship that provides practical experience in product design.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "info@insdpunepcmc.com",
+            "claims": []
+          },
+          {
+            "to": "principal@dypcaac.ac.in",
+            "claims": []
+          },
+          {
+            "to": "est.section@vupune.ac.in",
+            "claims": []
+          },
+          {
+            "to": "vc.office@despu.edu.in",
+            "claims": []
+          },
+          {
+            "to": "dbittpocell@gmail.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 4.0,
+        "missing": "Mumbai-based design colleges and universities with design departments are underrepresented. | Some other design colleges or universities in Pune and Mumbai may not be included.",
+        "systemic_issues": [
+          "Mumbai design colleges lacking",
+          "Some weak evidence for design focus",
+          "A few generic or non-placement addresses"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "Mumbai-based design colleges and universities with design departments are underrepresented; broaden search or add sources to improve coverage.",
+        "det_shortfall": 1,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 3,
+        "missed_tools": [
+          {
+            "tool": "places",
+            "why": "Google Maps often lists colleges with contact info and departments."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "list",
+            "why": "Low yield: only 1 valid from 2 sampled, no shortlist."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Missed 'places' tool, which is strong for local colleges and direct contacts."
+      }
+    },
+    "s2_customer_research_freelance": {
+      "run": "stress_d",
+      "prompt": "I'm building an invoicing tool for freelancers and want to interview freelance UI/UX designers in India who bill international clients",
+      "playbook": "customer_research",
+      "wanted": 12,
+      "shortlisted": 0,
+      "pool": 112,
+      "R1_intake": {
+        "playbook_correct": false,
+        "best_playbook": "recruiting",
+        "playbook_note": "Should use 'recruiting' for finding and interviewing individuals.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "freelance UI/UX designers",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "in India",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "who bill international clients",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 4,
+        "top_problem": "Used 'customer_research' (org targets) instead of 'recruiting' (person targets) for individual interviews."
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.0,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 75,
+            "yes": 0,
+            "maybe": 2,
+            "no": 6,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 2,
+              "competitor": 1,
+              "wrong_org_type": 2,
+              "directory_or_aggregator": 2,
+              "wrong_geography": 1
+            },
+            "examples": [
+              {
+                "name": "#1 Freelance UI/UX Designer in India\u200b",
+                "org": "#1 Freelance UI/UX Designer in India\u200b",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Individual freelancer, but no evidence of billing international clients.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Axelcrm",
+                "org": "Axelcrm",
+                "verdict": "no",
+                "code": "competitor",
+                "note": "CRM tool for freelancers, not a freelance designer.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Freelancer India Consulting Partners",
+                "org": "Freelancer India Consulting Partners",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "HR consulting firm, not a freelance designer.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Unlimited Design",
+                "org": "Unlimited Design",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Possible freelancer, but no evidence of international billing.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "iCoderz Solutions",
+                "org": "iCoderz Solutions",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Listed on a directory, not an individual freelancer.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Freelancer",
+                "org": "Freelancer",
+                "verdict": "no",
+                "code": "directory_or_aggregator",
+                "note": "Freelance marketplace, not an individual designer.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 37,
+            "yes": 0,
+            "maybe": 6,
+            "no": 4,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_org_type": 1,
+              "no_evidence": 5,
+              "off_topic": 1,
+              "wrong_geography": 1,
+              "directory_or_aggregator": 2
+            },
+            "examples": [
+              {
+                "name": "Start Designs",
+                "org": "Start Designs",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Design agency, not an individual freelancer.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "CreoWis Technologies",
+                "org": "CreoWis Technologies",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Possible freelancer, but no evidence of international billing.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Kanika Gupta",
+                "org": "Kanika Gupta",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Focus on web design, not clear on UI/UX or international billing.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Sanca99",
+                "org": "Sanca99",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "No evidence of India location or international freelance UI/UX work.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Designer Thameem",
+                "org": "Designer Thameem",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "UI/UX designer in India, but unclear if bills international clients.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Dhananjay M.",
+                "org": "Dhananjay M.",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "India-based UI/UX designer, but no proof of international billing.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 6,
+            "yes": 0,
+            "no": 3
+          },
+          "orgs": {
+            "n": 15,
+            "yes": 0,
+            "no": 7
+          },
+          "places": {
+            "n": 3,
+            "yes": 0,
+            "no": 3
+          },
+          "list": {
+            "n": 9,
+            "yes": 0,
+            "no": 4
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 6,
+        "in_shortlist": 0,
+        "recall_pool": 0.5,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Aashish Barnwal",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Shivani Sharma",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Saptarshi Prakash",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Ansh Mehra",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Priyanka Gupta",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rohan Kapoor",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Amit Jakhu",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sneha Patel",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Akshay Khot",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rutuja Jadhav",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rahul Chakraborty",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Shivam Bansal",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "list_level": {},
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "No prospects were delivered; you must broaden your criteria or add a contact-data provider to get any results.",
+        "det_shortfall": 12,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 2,
+        "missed_tools": [
+          {
+            "tool": "github",
+            "why": "Freelance designers often showcase work and contact info on GitHub."
+          },
+          {
+            "tool": "npm",
+            "why": "Some UI/UX freelancers publish design-related npm packages."
+          },
+          {
+            "tool": "podcasts",
+            "why": "Podcasts feature freelance designers as guests."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "places",
+            "why": "Google Maps lists agencies, not freelancers."
+          },
+          {
+            "tool": "orgs",
+            "why": "Web org lists rarely feature individual freelancers."
+          },
+          {
+            "tool": "web",
+            "why": "Staff/team pages are for agencies, not solo freelancers."
+          }
+        ],
+        "effort_spent_where_it_pays": 1,
+        "top_problem": "Tools focused on agencies, not independent freelancers; no valid targets found."
+      }
+    },
+    "s2_phd_marine_aus": {
+      "run": "stress_d",
+      "prompt": "I finished an MSc on coral bleaching recovery; find marine ecology professors in Australia or New Zealand who could supervise a PhD",
+      "playbook": "phd_positions",
+      "wanted": 10,
+      "shortlisted": 10,
+      "pool": 302,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "phd_positions",
+        "playbook_note": "Correct: user seeks PhD supervision from professors.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "marine ecology professors",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "in Australia or New Zealand",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "could supervise a PhD",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.44,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 152,
+            "yes": 2,
+            "maybe": 5,
+            "no": 3,
+            "yes_rate": 0.2,
+            "codes": {
+              "off_topic": 8
+            },
+            "examples": [
+              {
+                "name": "Carlos Alvarez\u2010Roa",
+                "org": "Australian Institute of Marine Science",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Suchai Worachananant",
+                "org": "The University of Queensland",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Focus on management, not direct coral bleaching recovery.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "David I. Warton",
+                "org": "UNSW Sydney",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Ecology/statistics focus, not marine or coral-specific.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Suhelen Egan",
+                "org": "UNSW Sydney",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Marine microbial focus, not directly coral bleaching recovery.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Jan M. Strugnell",
+                "org": "James Cook University",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Cephalopods/marine invertebrates, not coral bleaching.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Melissa S. Naugle",
+                "org": "Southern Cross University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 112,
+            "yes": 5,
+            "maybe": 3,
+            "no": 0,
+            "yes_rate": 0.62,
+            "codes": {
+              "off_topic": 3
+            },
+            "examples": [
+              {
+                "name": "Ariel K. Pezner",
+                "org": "University of Technology Sydney",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Michael V. W. Cuttler",
+                "org": "The University of Western Australia",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Cindy Bessey",
+                "org": "Commonwealth Scientific and Industrial Research Organisation",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Kai Georg Schulz",
+                "org": "Southern Cross University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Will F. Figueira",
+                "org": "The University of Sydney",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Marine ecology but little direct coral bleaching evidence.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Adrianne L. Jenner",
+                "org": "Queensland University of Technology",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Mathematical modeling focus, not direct marine ecology supervision.",
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 28,
+            "yes": 8,
+            "maybe": 2,
+            "no": 0,
+            "yes_rate": 0.8,
+            "codes": {
+              "off_topic": 2
+            },
+            "examples": [
+              {
+                "name": "Andrew H. Baird",
+                "org": "ARC Centre of Excellence for Coral Reef Studies",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Mark Edward Baird",
+                "org": "Commonwealth Scientific and Industrial Research Organisation",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Adriana Verg\u00e9s",
+                "org": "UNSW Sydney",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Focus on marine plants, less direct coral bleaching evidence.",
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Elizabeth Ann Dinsdale",
+                "org": "Flinders University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "David R. Bellwood",
+                "org": "James Cook University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Sean R. Connolly",
+                "org": "James Cook University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 10,
+            "size": 10,
+            "yes": 10,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": 1.0,
+            "codes": {},
+            "examples": [
+              {
+                "name": "Juliano Morais",
+                "org": "James Cook University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Peter J. Mumby",
+                "org": "The University of Queensland",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Camille Mellin",
+                "org": "The University of Adelaide",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Emma F. Camp",
+                "org": "University of Technology Sydney",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Karen E. Joyce",
+                "org": "James Cook University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              },
+              {
+                "name": "Peter Butcherine",
+                "org": "Southern Cross University",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "openalex"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "openalex": {
+            "n": 38,
+            "yes": 25,
+            "no": 3
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 12,
+        "in_shortlist": 9,
+        "recall_pool": 1.0,
+        "recall_shortlist": 0.75,
+        "entities": [
+          {
+            "name": "Professor Ove Hoegh-Guldberg",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor Madeleine van Oppen",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Professor Peter Mumby",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor David Booth",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor Andrew Baird",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor Terry Hughes",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Dr. Tracy Ainsworth",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor Maria Byrne",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor Simon Davy",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Dr. James Bell",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Professor Steve Smith",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Professor Sean Connolly",
+            "in_pool": true,
+            "in_shortlist": true
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 9,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "wrong_role_or_seniority": 7,
+        "weak_evidence": 1
+      },
+      "prospects": [
+        {
+          "name": "Peter Butcherine",
+          "org": "Southern Cross University",
+          "email": "peter.butcherine@scu.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Research Fellow with direct, recent coral bleaching recovery work at an Australian university.",
+          "problems": []
+        },
+        {
+          "name": "Tracy Danielle Ainsworth",
+          "org": "UNSW Sydney",
+          "email": "tracy.ainsworth@unsw.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Active coral bleaching researcher at UNSW; role not specified but likely senior enough for supervision.",
+          "problems": [
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Emma F. Camp",
+          "org": "University of Technology Sydney",
+          "email": "emma.camp@uts.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Recent coral bleaching recovery research; likely supervises PhDs despite missing explicit title.",
+          "problems": [
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Peter J. Mumby",
+          "org": "The University of Queensland",
+          "email": "p.j.mumby@uq.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Leading coral bleaching researcher at UQ; likely supervises PhDs though title not shown.",
+          "problems": [
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Camille Mellin",
+          "org": "The University of Adelaide",
+          "email": "camille.mellin@adelaide.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Recent coral bleaching risk research; likely supervises PhDs, though title not explicit.",
+          "problems": [
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Karen E. Joyce",
+          "org": "James Cook University",
+          "email": "karen.joyce@jcu.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Recent coral bleaching studies at JCU; likely supervises PhDs, though title not explicit.",
+          "problems": [
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Scott F. Heron",
+          "org": "James Cook University",
+          "email": "scott.heron@jcu.edu.au",
+          "score": 0.9,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Active coral bleaching researcher at JCU; likely supervises PhDs, though title not explicit.",
+          "problems": [
+            "wrong_role_or_seniority"
+          ]
+        },
+        {
+          "name": "Juliano Morais",
+          "org": "James Cook University",
+          "email": "juliano.morais@my.jcu.edu.au",
+          "score": 0.85,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Research-active but likely a junior researcher or PhD student, not a supervisor.",
+          "problems": [
+            "wrong_role_or_seniority",
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Maria Byrne",
+          "org": "The University of Sydney",
+          "email": "maria.byrne@sydney.edu.au",
+          "score": 0.85,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Active marine ecology researcher with coral bleaching recovery publications at an Australian university.",
+          "problems": []
+        },
+        {
+          "name": "Chris Roelfsema",
+          "org": "The University of Queensland",
+          "email": "c.roelfsema@uq.edu.au",
+          "score": 0.85,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Recent coral bleaching research, marine ecology focus, at a leading Australian university.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 10,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 1,
+        "tiers": {
+          "attributed": 10
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "041036204069b498",
+            "name": "Peter Butcherine",
+            "address": "peter.butcherine@scu.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; likely to supervise or advise."
+          },
+          {
+            "id": "5f86ab0721ef9fa8",
+            "name": "Tracy Danielle Ainsworth",
+            "address": "tracy.ainsworth@unsw.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Personal academic email; appropriate for supervision inquiry."
+          },
+          {
+            "id": "31e09f302f8e7ef2",
+            "name": "Emma F. Camp",
+            "address": "emma.camp@uts.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; suitable for PhD supervision request."
+          },
+          {
+            "id": "a0e8d7c5a437349e",
+            "name": "Peter J. Mumby",
+            "address": "p.j.mumby@uq.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; likely to reach the professor."
+          },
+          {
+            "id": "2724bd38734ad1db",
+            "name": "Camille Mellin",
+            "address": "camille.mellin@adelaide.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Personal academic email; appropriate for this ask."
+          },
+          {
+            "id": "4428e65f76e858ea",
+            "name": "Karen E. Joyce",
+            "address": "karen.joyce@jcu.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; suitable for supervision inquiry."
+          },
+          {
+            "id": "17c712f36625c0e2",
+            "name": "Scott F. Heron",
+            "address": "scott.heron@jcu.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; appropriate for this request."
+          },
+          {
+            "id": "6d5b2b1a308ab342",
+            "name": "Juliano Morais",
+            "address": "juliano.morais@my.jcu.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "my.jcu.edu.au may be a student address; verify status."
+          },
+          {
+            "id": "9ed086dcd93fe9df",
+            "name": "Maria Byrne",
+            "address": "maria.byrne@sydney.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; suitable for supervision inquiry."
+          },
+          {
+            "id": "2084ae9017948b5a",
+            "name": "Chris Roelfsema",
+            "address": "c.roelfsema@uq.edu.au",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct academic email; appropriate for this ask."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 10,
+        "kendall_tau_score_vs_fit": 1.0,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 4.33,
+        "inversions_ge2": 2,
+        "duplicate_orgs": 3,
+        "by_first_source": {
+          "openalex": 10
+        },
+        "by_country": {
+          "AU": 10
+        },
+        "max_country_share": 1.0
+      },
+      "R7_drafts": {
+        "n": 10,
+        "claims": 35,
+        "supported": 32,
+        "unsupported": 3,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.91,
+        "emails_with_unsupported": 2,
+        "mean_specific": 2.5,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {
+          "junk_greeting": 1
+        },
+        "bad_claims": [
+          {
+            "to": "peter.butcherine@scu.edu.au",
+            "claims": []
+          },
+          {
+            "to": "tracy.ainsworth@unsw.edu.au",
+            "claims": []
+          },
+          {
+            "to": "emma.camp@uts.edu.au",
+            "claims": []
+          },
+          {
+            "to": "p.j.mumby@uq.edu.au",
+            "claims": []
+          },
+          {
+            "to": "camille.mellin@adelaide.edu.au",
+            "claims": []
+          },
+          {
+            "to": "karen.joyce@jcu.edu.au",
+            "claims": [
+              {
+                "text": "I do not have experience in remote sensing.",
+                "about": "sender",
+                "status": "unsupported"
+              },
+              {
+                "text": "I have worked on coral health and recovery processes.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "scott.heron@jcu.edu.au",
+            "claims": [
+              {
+                "text": "My research investigated recovery mechanisms following bleaching events.",
+                "about": "sender",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "juliano.morais@my.jcu.edu.au",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 5.0,
+        "diversity": 4.0,
+        "missing": "New Zealand-based professors; explicit senior titles (Professor, Assoc Prof, etc.) | No New Zealand targets; all are from large Australian universities.",
+        "systemic_issues": [
+          "Many entries lack explicit seniority/title",
+          "No NZ targets",
+          "One likely junior researcher included",
+          "No NZ representation"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "No New Zealand professors were found; all shortlisted contacts are from Australia. Consider searching NZ institutions separately or expanding your sources.",
+        "det_shortfall": 0,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 3,
+        "missed_tools": [
+          {
+            "tool": "web",
+            "why": "Staff/team pages confirm professorial status and supervision eligibility."
+          },
+          {
+            "tool": "coauthors",
+            "why": "Finds additional relevant professors via collaboration networks."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "arxiv",
+            "why": "Very few candidates found; not a primary source for AU/NZ marine ecology."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Missed web and coauthors tools, limiting coverage and verification of professorial status."
+      }
+    },
+    "s2_suppliers_cotton": {
+      "run": "stress_d",
+      "prompt": "we make baby clothes and need GOTS-certified organic cotton fabric suppliers in Tamil Nadu or Gujarat for a 2,000 metre first order",
+      "playbook": "suppliers",
+      "wanted": 12,
+      "shortlisted": 9,
+      "pool": 83,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "suppliers",
+        "playbook_note": "Correct: seeking suppliers for a specific material and order.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "GOTS-certified organic cotton fabric",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "suppliers in Tamil Nadu or Gujarat",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "first order 2,000 metres",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.14,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 0,
+            "size": 0,
+            "yes": 0,
+            "maybe": 0,
+            "no": 0,
+            "yes_rate": null,
+            "codes": {},
+            "examples": []
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 54,
+            "yes": 0,
+            "maybe": 6,
+            "no": 2,
+            "yes_rate": 0.0,
+            "codes": {
+              "no_evidence": 5,
+              "wrong_geography": 2,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "Organic Cotton fabric manufacturers in India",
+                "org": "Organic Cotton fabric manufacturers in India",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit GOTS certification or location evidence.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Eco-Fab Textiles",
+                "org": "Eco-Fab Textiles",
+                "verdict": "maybe",
+                "code": "wrong_geography",
+                "note": "Located in New Delhi, not Tamil Nadu or Gujarat.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Rajlakshmi Cotton Mills",
+                "org": "Rajlakshmi Cotton Mills",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Located in Kolkata, not Tamil Nadu or Gujarat.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Green Tailor",
+                "org": "Green Tailor",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "GOTS-certified, but location in TN/GJ not confirmed.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Chetna Organic",
+                "org": "Chetna Organic",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Farmer-producer, not a fabric supplier.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Arvind Limited",
+                "org": "Arvind Limited",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Major textile org in Gujarat, but GOTS not explicit.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 20,
+            "yes": 3,
+            "maybe": 6,
+            "no": 1,
+            "yes_rate": 0.3,
+            "codes": {
+              "no_evidence": 6,
+              "directory_or_aggregator": 1
+            },
+            "examples": [
+              {
+                "name": "Srikalyanexport",
+                "org": "Srikalyanexport",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Dhi Textile",
+                "org": "Dhi Textile",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Fabric manufacturer in Gujarat, GOTS not explicit.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Msquare Exports",
+                "org": "Msquare Exports",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit GOTS certification evidence.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Fivepventure",
+                "org": "Fivepventure",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Sri Balaji Textiles",
+                "org": "Sri Balaji Textiles",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit GOTS certification evidence.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "organicclothingsindia.com",
+                "org": "organicclothingsindia.com",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit GOTS certification evidence.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 9,
+            "size": 9,
+            "yes": 6,
+            "maybe": 3,
+            "no": 0,
+            "yes_rate": 0.67,
+            "codes": {
+              "no_evidence": 3
+            },
+            "examples": [
+              {
+                "name": "JcraftEco",
+                "org": "JcraftEco",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "No explicit GOTS certification evidence.",
+                "sources": [
+                  "places",
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Herbal Fab",
+                "org": "Herbal Fab",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places",
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Bamboo Lycra Fabric",
+                "org": "Suvetah",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "GOTS sourcing mentioned, but not direct supplier evidence.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Purecotz Eco Lifestyles",
+                "org": "Purecotz Eco Lifestyles",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Ramesh Exports",
+                "org": "Ramesh Exports",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "places",
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Go Organnic",
+                "org": "Go Organnic",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Manufacturer of clothing, not clear if fabric supply.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 9,
+            "yes": 4,
+            "no": 0
+          },
+          "orgs": {
+            "n": 25,
+            "yes": 9,
+            "no": 3
+          },
+          "list": {
+            "n": 17,
+            "yes": 6,
+            "no": 3
+          },
+          "places": {
+            "n": 6,
+            "yes": 3,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 3,
+        "in_shortlist": 0,
+        "recall_pool": 0.25,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Pratibha Syntex",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "KG Fabriks",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Suvin Cotton Mills",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Arvind Limited",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Vardhman Textiles",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Anubha Industries",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sulochana Cotton Spinning Mills",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "KPR Mill Limited",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Siyaram Silk Mills (Organic Division)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Bhaskar Denim",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Pioneer Group",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Shree Renga Polymers",
+            "in_pool": false,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 9
+      },
+      "prospect_problems": {},
+      "prospects": [
+        {
+          "name": "Ramesh Exports",
+          "org": "Ramesh Exports",
+          "email": "info@rameshexports.in",
+          "score": 0.8865,
+          "verdict": "good",
+          "fit": 5,
+          "why": "GOTS-certified organic cotton manufacturer in Tamil Nadu, fits ask and geography.",
+          "problems": []
+        },
+        {
+          "name": "BKS",
+          "org": "BKS",
+          "email": "jobprocess@bkstextiles.in",
+          "score": 0.8798,
+          "verdict": "good",
+          "fit": 5,
+          "why": "GOTS-certified textile producer, sustainable woven fabric, fits ask and region.",
+          "problems": []
+        },
+        {
+          "name": "Loyal Textiles",
+          "org": "Loyal Textiles",
+          "email": "secretarial@loyaltextiles.com",
+          "score": 0.8798,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Large GOTS-certified textile manufacturer in India, fits ask and geography.",
+          "problems": []
+        },
+        {
+          "name": "Go Organnic",
+          "org": "Go Organnic",
+          "email": "info@goorgannic.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "GOTS-certified organic cotton clothing manufacturer in Gujarat, fits ask and region.",
+          "problems": []
+        },
+        {
+          "name": "Herbal Fab",
+          "org": "Herbal Fab",
+          "email": "info@herbalfab.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "GOTS-certified organic fabric supplier, offers organic cotton, fits ask and geography.",
+          "problems": []
+        },
+        {
+          "name": "Purecotz Eco Lifestyles",
+          "org": "Purecotz Eco Lifestyles",
+          "email": "contact@purecotz.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "GOTS-certified textile producer, specializes in sustainable textiles, fits ask and region.",
+          "problems": []
+        },
+        {
+          "name": "Sri Kalyan Export Pvt Ltd",
+          "org": "Sri Kalyan Export Pvt Ltd",
+          "email": "kalyan@srikalyanexportindia.com",
+          "score": 0.782,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Manufacturer of GOTS-certified organic cotton voile fabric in Tamil Nadu, fits ask.",
+          "problems": []
+        },
+        {
+          "name": "JcraftEco",
+          "org": "JcraftEco",
+          "email": "namaste@jcrafteco.com",
+          "score": 0.7331,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Organic fabric manufacturer, supplies organic cotton, but GOTS-certification not explicit.",
+          "problems": []
+        },
+        {
+          "name": "Bamboo Lycra Fabric",
+          "org": "Suvetah",
+          "email": "fabrics@suvetah.com",
+          "score": 0.7,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Suvetah supplies GOTS-certified organic cotton, fits geography and order size.",
+          "problems": []
+        }
+      ],
+      "R5_reach": {
+        "n": 9,
+        "belongs_bad": 0,
+        "cannot_grant": 2,
+        "not_send": 3,
+        "tiers": {
+          "inbox": 8,
+          "attributed": 1
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "f20690527a721045",
+            "name": "Ramesh Exports",
+            "address": "info@rameshexports.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Generic info@ for supplier; likely reaches decision maker."
+          },
+          {
+            "id": "0f20b3627aa805d2",
+            "name": "BKS",
+            "address": "jobprocess@bkstextiles.in",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "jobprocess@ likely HR or recruitment, not sales or quotes."
+          },
+          {
+            "id": "27ac1abc287695ee",
+            "name": "Loyal Textiles",
+            "address": "secretarial@loyaltextiles.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "no",
+            "action": "look_up_person",
+            "note": "secretarial@ likely admin, not sales or commercial."
+          },
+          {
+            "id": "31eb827fd4b78c02",
+            "name": "Go Organnic",
+            "address": "info@goorgannic.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "info@ for small supplier; likely reaches right person."
+          },
+          {
+            "id": "11815ae1c127316b",
+            "name": "Herbal Fab",
+            "address": "info@herbalfab.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "info@ for supplier; suitable for quote requests."
+          },
+          {
+            "id": "2119c411652d6c62",
+            "name": "Purecotz Eco Lifestyles",
+            "address": "contact@purecotz.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "contact@ for supplier; likely reaches sales or owner."
+          },
+          {
+            "id": "4031ed2772302ec1",
+            "name": "Sri Kalyan Export Pvt Ltd",
+            "address": "kalyan@srikalyanexportindia.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Direct company email; likely decision maker or sales."
+          },
+          {
+            "id": "c371dd3ef68a7ec6",
+            "name": "JcraftEco",
+            "address": "namaste@jcrafteco.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "namaste@ is main contact; suitable for supplier inquiry."
+          },
+          {
+            "id": "064b3bc81e58c25c",
+            "name": "Bamboo Lycra Fabric",
+            "address": "fabrics@suvetah.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "fabrics@ may be generic; unclear if decision maker reads."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 9,
+        "kendall_tau_score_vs_fit": 0.75,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 4.67,
+        "inversions_ge2": 0,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "places": 4,
+          "list": 3,
+          "web": 2
+        },
+        "by_country": {
+          "IN": 9
+        },
+        "max_country_share": 1.0
+      },
+      "R7_drafts": {
+        "n": 9,
+        "claims": 31,
+        "supported": 31,
+        "unsupported": 0,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 1.0,
+        "emails_with_unsupported": 0,
+        "mean_specific": 2.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {
+          "junk_greeting": 1
+        },
+        "bad_claims": [
+          {
+            "to": "info@rameshexports.in",
+            "claims": []
+          },
+          {
+            "to": "jobprocess@bkstextiles.in",
+            "claims": []
+          },
+          {
+            "to": "secretarial@loyaltextiles.com",
+            "claims": []
+          },
+          {
+            "to": "info@goorgannic.com",
+            "claims": []
+          },
+          {
+            "to": "info@herbalfab.com",
+            "claims": []
+          },
+          {
+            "to": "contact@purecotz.com",
+            "claims": []
+          },
+          {
+            "to": "kalyan@srikalyanexportindia.com",
+            "claims": []
+          },
+          {
+            "to": "namaste@jcrafteco.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 5.0,
+        "diversity": 4.5,
+        "missing": "No clear missing types; all are GOTS or organic cotton suppliers in target regions. | Could include more direct contacts (Sales/BD Manager) and more Gujarat-based suppliers.",
+        "systemic_issues": []
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "To get closer to 12, try adding more Gujarat suppliers or direct sales contacts; current list is strong but not full.",
+        "det_shortfall": 3,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "news",
+            "why": "Recent articles may mention active or new GOTS suppliers."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "events",
+            "why": "No shortlisted; likely few relevant suppliers from event data."
+          }
+        ],
+        "effort_spent_where_it_pays": 5,
+        "top_problem": "Events tool added little value; otherwise, strong focus on supplier-rich sources."
+      }
+    },
+    "stress_germany_machinery": {
+      "run": "stress_d",
+      "prompt": "we make carbide CNC cutting tools in Rajkot, India and want distributors in Germany, Italy and Poland that already sell industrial cutting tools; not manufacturers",
+      "playbook": "distributors",
+      "wanted": 12,
+      "shortlisted": 4,
+      "pool": 94,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "distributors",
+        "playbook_note": "Correct: seeking distributors for industrial tools.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "distributors in Germany, Italy and Poland",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "already sell industrial cutting tools",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "not manufacturers",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.02,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 1,
+            "size": 1,
+            "yes": 0,
+            "maybe": 0,
+            "no": 1,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_org_type": 1
+            },
+            "examples": [
+              {
+                "name": "FATPOL TOOLS",
+                "org": "FATPOL TOOLS",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Manufacturer, not a distributor.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 74,
+            "yes": 0,
+            "maybe": 3,
+            "no": 5,
+            "yes_rate": 0.0,
+            "codes": {
+              "wrong_org_type": 5,
+              "": 3
+            },
+            "examples": [
+              {
+                "name": "Rinaldi",
+                "org": "Rinaldi",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Producer/manufacturer, not a distributor.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Dimar",
+                "org": "Dimar",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Manufacturer, not a distributor.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "LINO SELLA",
+                "org": "LINO SELLA",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Manufacturer, not a distributor.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Hoffmann Group Italia S.P.A",
+                "org": "Hoffmann Group Italia S.P.A",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Industrial tool supplier; unclear if also a manufacturer.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Conmetall Meister Gmbh",
+                "org": "Conmetall Meister Gmbh",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Industrial tool supplier; unclear if also a manufacturer.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "German Tools Gmbh",
+                "org": "German Tools Gmbh",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Machine construction, not a distributor.",
+                "sources": [
+                  "places"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 15,
+            "yes": 0,
+            "maybe": 6,
+            "no": 4,
+            "yes_rate": 0.0,
+            "codes": {
+              "": 6,
+              "off_topic": 1,
+              "wrong_org_type": 3
+            },
+            "examples": [
+              {
+                "name": "Wemaro Tools GmbH",
+                "org": "Wemaro Tools GmbH",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Sells precision tools; unclear if also a manufacturer. Possible distributor.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "GT TOOLS",
+                "org": "GT TOOLS",
+                "verdict": "no",
+                "code": "off_topic",
+                "note": "Focuses on woodworking tools, not industrial cutting tools.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "Metric Fasteners and Tools",
+                "org": "Metric Fasteners and Tools",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Distributes industrial cutting tools; unclear if also manufactures.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Aceti",
+                "org": "Aceti",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Manufacturer and distributor; user wants non-manufacturers.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Industrial Supplies Nord",
+                "org": "Industrial Supplies Nord",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Wholesaler for industrial brands; unclear if cutting tools included.",
+                "sources": [
+                  "places"
+                ]
+              },
+              {
+                "name": "M.GI. Tools",
+                "org": "M.GI. Tools",
+                "verdict": "maybe",
+                "code": "",
+                "note": "Provides cutting tool solutions; unclear if manufacturer or distributor.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 4,
+            "size": 4,
+            "yes": 2,
+            "maybe": 2,
+            "no": 0,
+            "yes_rate": 0.5,
+            "codes": {
+              "off_topic": 2
+            },
+            "examples": [
+              {
+                "name": "Finzoo",
+                "org": "Finzoo",
+                "verdict": "yes",
+                "code": "",
+                "note": "Distributor of industrial cutting tools in Poland.",
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Tecnomat",
+                "org": "Tecnomat",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Focuses on general tools, not clear on industrial cutting tools.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "utensilline.it",
+                "org": "utensilline.it",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "web",
+                  "orgs"
+                ]
+              },
+              {
+                "name": "Hoffmann Group eShop",
+                "org": "Hoffmann Group eShop",
+                "verdict": "maybe",
+                "code": "off_topic",
+                "note": "Large distributor, but unclear if only distributor or also manufacturer.",
+                "sources": [
+                  "list",
+                  "orgs"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "web": {
+            "n": 11,
+            "yes": 2,
+            "no": 4
+          },
+          "orgs": {
+            "n": 19,
+            "yes": 2,
+            "no": 8
+          },
+          "list": {
+            "n": 8,
+            "yes": 0,
+            "no": 4
+          },
+          "places": {
+            "n": 4,
+            "yes": 0,
+            "no": 2
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 5,
+        "in_shortlist": 1,
+        "recall_pool": 0.42,
+        "recall_shortlist": 0.08,
+        "entities": [
+          {
+            "name": "Hoffmann Group",
+            "in_pool": true,
+            "in_shortlist": true
+          },
+          {
+            "name": "Sartorius Werkzeuge GmbH & Co. KG",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Reinhold Beck Maschinenbau GmbH",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Kr\u00fcger Industrievertretungen GmbH",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Utensileria Revelli S.r.l.",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Sorma S.p.A.",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "F.lli Paris S.r.l.",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Poltools Sp. z o.o.",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "P.P.H.U. TECHNIKA S.C.",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "TBI Technology Sp. z o.o.",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "WNT Deutschland GmbH (part of Ceratizit Group, but acts as distributor)",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Mikron Tools Polska",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "good": 3,
+        "borderline": 1
+      },
+      "prospect_problems": {
+        "weak_evidence": 1
+      },
+      "prospects": [
+        {
+          "name": "Finzoo",
+          "org": "Finzoo",
+          "email": "fin@finzoo.pl",
+          "score": 0.8798,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Clear distributor of cutting tools in Poland, fits target perfectly.",
+          "problems": []
+        },
+        {
+          "name": "Hoffmann Group eShop",
+          "org": "Hoffmann Group eShop",
+          "email": "hct@hoffmann-group.com",
+          "score": 0.8372,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Major German distributor of cutting tools, ideal for this ask.",
+          "problems": []
+        },
+        {
+          "name": "utensilline.it",
+          "org": "utensilline.it",
+          "email": "info@utensilline.it",
+          "score": 0.8278,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Italian distributor of carbide and industrial tools, matches campaign exactly.",
+          "problems": []
+        },
+        {
+          "name": "Tecnomat",
+          "org": "Tecnomat",
+          "email": "jane.doe@tecnomat.it",
+          "score": 0.7388,
+          "verdict": "borderline",
+          "fit": 3,
+          "why": "Listed as supplier, but evidence for cutting tools distribution is weak.",
+          "problems": [
+            "weak_evidence"
+          ]
+        }
+      ],
+      "R5_reach": {
+        "n": 4,
+        "belongs_bad": 1,
+        "cannot_grant": 0,
+        "not_send": 3,
+        "tiers": {
+          "inbox": 4
+        },
+        "det_flags": {},
+        "rows": [
+          {
+            "id": "50827de13dc64c5a",
+            "name": "Finzoo",
+            "address": "fin@finzoo.pl",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Generic address; unclear if decision maker will see."
+          },
+          {
+            "id": "636966cf354763da",
+            "name": "Hoffmann Group eShop",
+            "address": "hct@hoffmann-group.com",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Likely a team inbox; unclear if decision maker will read."
+          },
+          {
+            "id": "200e9ce39e822bc3",
+            "name": "utensilline.it",
+            "address": "info@utensilline.it",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Info@ for likely small distributor; suitable for outreach."
+          },
+          {
+            "id": "c93a72bee258c538",
+            "name": "Tecnomat",
+            "address": "jane.doe@tecnomat.it",
+            "tier": "inbox",
+            "flags": [],
+            "address_belongs": "doubtful",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "Address does not match decision maker; verify before sending."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 4,
+        "kendall_tau_score_vs_fit": 1.0,
+        "mean_fit_top_third": 5.0,
+        "mean_fit_bottom_third": 3.0,
+        "inversions_ge2": 0,
+        "duplicate_orgs": 0,
+        "by_first_source": {
+          "web": 2,
+          "list": 2
+        },
+        "by_country": {
+          "IT": 2,
+          "PL": 1,
+          "DE": 1
+        },
+        "max_country_share": 0.5
+      },
+      "R7_drafts": {
+        "n": 4,
+        "claims": 25,
+        "supported": 25,
+        "unsupported": 0,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 1.0,
+        "emails_with_unsupported": 0,
+        "mean_specific": 2.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "fin@finzoo.pl",
+            "claims": []
+          },
+          {
+            "to": "hct@hoffmann-group.com",
+            "claims": []
+          },
+          {
+            "to": "info@utensilline.it",
+            "claims": []
+          },
+          {
+            "to": "jane.doe@tecnomat.it",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 4.0,
+        "diversity": 4.0,
+        "missing": "More mid-sized or regional distributors, more direct decision-maker contacts.",
+        "systemic_issues": [
+          "some weak evidence for specific product focus",
+          "few direct decision-maker emails"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "Direct decision-maker contacts are scarce; consider manual research or a contact-data provider for better emails.",
+        "det_shortfall": 8,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "events",
+            "why": "Industrial tool expos list relevant distributors and resellers."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "places",
+            "why": "Mostly found retailers or manufacturers, not distributors."
+          },
+          {
+            "tool": "list",
+            "why": "Low yield of valid distributor targets."
+          },
+          {
+            "tool": "lookalike",
+            "why": "No valid targets reached shortlist."
+          }
+        ],
+        "effort_spent_where_it_pays": 3,
+        "top_problem": "Too many irrelevant candidates; not enough focus on true distributors. Missed event-based discovery."
+      }
+    },
+    "stress_journalists_exclusions": {
+      "run": "stress_d",
+      "prompt": "we published a report showing 8 of 10 popular Indian health apps leak user data; find journalists in India who cover data privacy or health tech for an interview, but skip anyone at Times of India or Hindustan Times",
+      "playbook": "pr_media",
+      "wanted": 20,
+      "shortlisted": 6,
+      "pool": 119,
+      "R1_intake": {
+        "playbook_correct": true,
+        "best_playbook": "pr_media",
+        "playbook_note": "Correct: targeting journalists for media outreach.",
+        "topics_faithful": 5,
+        "topics_issue": "",
+        "location_faithful": 5,
+        "location_issue": "",
+        "constraints": [
+          {
+            "constraint": "journalists in India",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "cover data privacy or health tech",
+            "preserved": "yes"
+          },
+          {
+            "constraint": "skip anyone at Times of India or Hindustan Times",
+            "preserved": "yes"
+          }
+        ],
+        "invented": [],
+        "request_quality": "clear",
+        "handled_well": true,
+        "ask_fit": 5,
+        "overall": 5,
+        "top_problem": ""
+      },
+      "R2_R3_candidates": {
+        "pool_precision_est": 0.21,
+        "strata": {
+          "dropped_triage": {
+            "sampled": 10,
+            "size": 11,
+            "yes": 2,
+            "maybe": 3,
+            "no": 5,
+            "yes_rate": 0.2,
+            "codes": {
+              "excluded_by_user": 5,
+              "wrong_geography": 2,
+              "off_topic": 1
+            },
+            "examples": [
+              {
+                "name": "Manish Mimami",
+                "org": "YourStory.com",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Neha Saini",
+                "org": "The Times of India",
+                "verdict": "no",
+                "code": "excluded_by_user",
+                "note": "Times of India explicitly excluded by user.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Sana Khan",
+                "org": "Modern Diplomacy",
+                "verdict": "maybe",
+                "code": "wrong_geography",
+                "note": "Based in EU, covers Indian privacy law.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Sanjay Sharma",
+                "org": "The Times of India",
+                "verdict": "no",
+                "code": "excluded_by_user",
+                "note": "Times of India explicitly excluded by user.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Gokul Ankari",
+                "org": "The Times of India",
+                "verdict": "no",
+                "code": "excluded_by_user",
+                "note": "Times of India explicitly excluded by user.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Anne Florentyna",
+                "org": "Inc42",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "news"
+                ]
+              }
+            ]
+          },
+          "dropped_enrich_cap": {
+            "sampled": 8,
+            "size": 37,
+            "yes": 0,
+            "maybe": 1,
+            "no": 7,
+            "yes_rate": 0.0,
+            "codes": {
+              "other": 1,
+              "wrong_geography": 5,
+              "no_evidence": 2
+            },
+            "examples": [
+              {
+                "name": "Lalit Kalra",
+                "org": "EY",
+                "verdict": "maybe",
+                "code": "other",
+                "note": "Data privacy coverage, but works at EY, not media.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Thomas Synaepa-Addison",
+                "org": "Africa Data Privacy",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "Focuses on Africa, not India.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Joseph Dehner",
+                "org": "Data Privacy Detective",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "No evidence of India focus.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Data Privacy Matters \u6570\u636e\u9690\u79c1ABC",
+                "org": "Data Privacy Matters \u6570\u636e\u9690\u79c1ABC",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "China/Hong Kong focus, not India.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Institute for Health Technology Transformation | iHT\u00b2 | Health IT | Information Technology",
+                "org": "Institute for Health Technology Transformation | iHT\u00b2 | Health IT | Information Technology",
+                "verdict": "no",
+                "code": "no_evidence",
+                "note": "No evidence of India or journalist role.",
+                "sources": [
+                  "podcasts"
+                ]
+              },
+              {
+                "name": "Sydney P. Freedberg",
+                "org": "International Consortium of Investigative Journalists - ICIJ",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "No evidence of India focus.",
+                "sources": [
+                  "news"
+                ]
+              }
+            ]
+          },
+          "dropped_final": {
+            "sampled": 10,
+            "size": 65,
+            "yes": 3,
+            "maybe": 5,
+            "no": 2,
+            "yes_rate": 0.3,
+            "codes": {
+              "other": 1,
+              "no_evidence": 4,
+              "wrong_geography": 2
+            },
+            "examples": [
+              {
+                "name": "Shakeel Sobhan",
+                "org": "DW.com",
+                "verdict": "maybe",
+                "code": "other",
+                "note": "Covers India, but not clear on data privacy/health tech.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Parth Pandya",
+                "org": "www.mindinventory.com \u203a blog \u203a healthcare-technology-trends",
+                "verdict": "yes",
+                "code": null,
+                "note": "Covers healthcare technology trends in India.",
+                "sources": [
+                  "beat_walk"
+                ]
+              },
+              {
+                "name": "Ramakrishna Bhooma Goud",
+                "org": "Frontiers",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Covers health apps in India, but unclear if journalist or academic.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Liv McMahon",
+                "org": "BBC",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "No evidence of India focus or relevant beat.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Denise Ajiri",
+                "org": "International Consortium of Investigative Journalists - ICIJ",
+                "verdict": "no",
+                "code": "wrong_geography",
+                "note": "No evidence of India focus or health/data privacy beat.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Aroon Deep",
+                "org": "The Hindu",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "news"
+                ]
+              }
+            ]
+          },
+          "kept": {
+            "sampled": 6,
+            "size": 6,
+            "yes": 3,
+            "maybe": 1,
+            "no": 2,
+            "yes_rate": 0.5,
+            "codes": {
+              "wrong_org_type": 2,
+              "no_evidence": 1
+            },
+            "examples": [
+              {
+                "name": "Joe Mathew",
+                "org": "Fortune India",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Mini Gupta",
+                "org": "EY",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Works at EY, not a journalist.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Lalit Kalra",
+                "org": "EY",
+                "verdict": "no",
+                "code": "wrong_org_type",
+                "note": "Works at EY, not a media outlet.",
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Suchitra Kalyan Mohanty",
+                "org": "The New Indian Express",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Cherylann Mollan",
+                "org": "BBC",
+                "verdict": "yes",
+                "code": null,
+                "note": null,
+                "sources": [
+                  "news"
+                ]
+              },
+              {
+                "name": "Deepali Jain",
+                "org": "DQ",
+                "verdict": "maybe",
+                "code": "no_evidence",
+                "note": "Covers cybersecurity, but no clear data privacy or health tech focus.",
+                "sources": [
+                  "news"
+                ]
+              }
+            ]
+          }
+        },
+        "by_source": {
+          "news": {
+            "n": 28,
+            "yes": 7,
+            "no": 11
+          },
+          "podcasts": {
+            "n": 5,
+            "yes": 0,
+            "no": 5
+          },
+          "beat_walk": {
+            "n": 1,
+            "yes": 1,
+            "no": 0
+          }
+        }
+      },
+      "R4_recall": {
+        "probe_n": 12,
+        "in_pool": 3,
+        "in_shortlist": 0,
+        "recall_pool": 0.25,
+        "recall_shortlist": 0.0,
+        "entities": [
+          {
+            "name": "Nilesh Christopher",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Aman Sethi",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Varsha Bansal",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Annie Philip",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rohin Dharmakumar",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Mohana Basu",
+            "in_pool": true,
+            "in_shortlist": false
+          },
+          {
+            "name": "Jahnavi Sen",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Arindam Mukherjee",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Neha Alawadhi",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Rohit Saran",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Anirudh Regidi",
+            "in_pool": false,
+            "in_shortlist": false
+          },
+          {
+            "name": "Aditi Agrawal",
+            "in_pool": true,
+            "in_shortlist": false
+          }
+        ]
+      },
+      "prospect_verdicts": {
+        "bad": 2,
+        "good": 4
+      },
+      "prospect_problems": {
+        "wrong_org_type": 2,
+        "off_topic": 2,
+        "weak_evidence": 3
+      },
+      "prospects": [
+        {
+          "name": "Mini Gupta",
+          "org": "EY",
+          "email": "mini.gupta@in.ey.com",
+          "score": 0.75,
+          "verdict": "bad",
+          "fit": 1,
+          "why": "EY is a consultancy, not a news outlet; no evidence of journalism role.",
+          "problems": [
+            "wrong_org_type",
+            "off_topic",
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Lalit Kalra",
+          "org": "EY",
+          "email": "lalit.kalra@in.ey.com",
+          "score": 0.75,
+          "verdict": "bad",
+          "fit": 1,
+          "why": "EY is not a media org; no proof this is a journalist covering news.",
+          "problems": [
+            "wrong_org_type",
+            "off_topic",
+            "weak_evidence"
+          ]
+        },
+        {
+          "name": "Joe Mathew",
+          "org": "Fortune India",
+          "email": "joe.mathew@fortuneindia.com",
+          "score": 0.7,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Covers health tech for a major Indian publication; ideal target.",
+          "problems": []
+        },
+        {
+          "name": "Suchitra Kalyan Mohanty",
+          "org": "The New Indian Express",
+          "email": "skmohanty@newindianexpress.com",
+          "score": 0.7,
+          "verdict": "good",
+          "fit": 5,
+          "why": "Covers data privacy law for a major Indian news outlet.",
+          "problems": []
+        },
+        {
+          "name": "Deepali Jain",
+          "org": "DQ",
+          "email": "deepalij@cybermedia.co.in",
+          "score": 0.65,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Covers cybersecurity and tech for Indian tech media.",
+          "problems": []
+        },
+        {
+          "name": "Cherylann Mollan",
+          "org": "BBC",
+          "email": "cherylannmollan@gmail.com",
+          "score": 0.6,
+          "verdict": "good",
+          "fit": 4,
+          "why": "Covers privacy issues for BBC in India; address is plausible but not confirmed.",
+          "problems": [
+            "weak_evidence"
+          ]
+        }
+      ],
+      "R5_reach": {
+        "n": 6,
+        "belongs_bad": 0,
+        "cannot_grant": 0,
+        "not_send": 2,
+        "tiers": {
+          "attributed": 5,
+          "guess": 1
+        },
+        "det_flags": {
+          "domain_differs_from_org": 1
+        },
+        "rows": [
+          {
+            "id": "07291081b36352b9",
+            "name": "Mini Gupta",
+            "address": "mini.gupta@in.ey.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "EY is not a media org; verify journalism role."
+          },
+          {
+            "id": "5bb4bd9769030c8b",
+            "name": "Lalit Kalra",
+            "address": "lalit.kalra@in.ey.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "unclear",
+            "action": "look_up_person",
+            "note": "EY is not a media org; verify journalism role."
+          },
+          {
+            "id": "8cb5ced558a3ad84",
+            "name": "Joe Mathew",
+            "address": "joe.mathew@fortuneindia.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Address matches journalist at Fortune India."
+          },
+          {
+            "id": "2af8fc2c1f1c4f01",
+            "name": "Suchitra Kalyan Mohanty",
+            "address": "skmohanty@newindianexpress.com",
+            "tier": "attributed",
+            "flags": [],
+            "address_belongs": "yes",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Address matches journalist at New Indian Express."
+          },
+          {
+            "id": "f6b1ab2cdefd4e97",
+            "name": "Deepali Jain",
+            "address": "deepalij@cybermedia.co.in",
+            "tier": "attributed",
+            "flags": [
+              "domain_differs_from_org"
+            ],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Likely correct for DQ journalist; domain is publisher's."
+          },
+          {
+            "id": "1cb64b07786ce740",
+            "name": "Cherylann Mollan",
+            "address": "cherylannmollan@gmail.com",
+            "tier": "guess",
+            "flags": [],
+            "address_belongs": "probably",
+            "addressee_can_grant": "yes",
+            "action": "send",
+            "note": "Likely personal email; journalist can grant interview."
+          }
+        ]
+      },
+      "R6_ranking": {
+        "n": 6,
+        "kendall_tau_score_vs_fit": -0.33,
+        "mean_fit_top_third": 1.0,
+        "mean_fit_bottom_third": 4.0,
+        "inversions_ge2": 8,
+        "duplicate_orgs": 1,
+        "by_first_source": {
+          "news": 6
+        },
+        "by_country": {
+          "?": 6
+        },
+        "max_country_share": 1.0
+      },
+      "R7_drafts": {
+        "n": 6,
+        "claims": 24,
+        "supported": 18,
+        "unsupported": 6,
+        "contradicted": 0,
+        "puffery": 0,
+        "claim_support_rate": 0.75,
+        "emails_with_unsupported": 4,
+        "mean_specific": 2.0,
+        "spammy": 0,
+        "length_bad": 0,
+        "subject_bad": 0,
+        "lint": {},
+        "bad_claims": [
+          {
+            "to": "mini.gupta@in.ey.com",
+            "claims": [
+              {
+                "text": "This highlights concerns about user data protection in health technology.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "lalit.kalra@in.ey.com",
+            "claims": [
+              {
+                "text": "This report highlights significant gaps in user data protection within the health tech space.",
+                "about": "world",
+                "status": "unsupported"
+              },
+              {
+                "text": "An interview to discuss these findings could add perspective on health app data practices.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "joe.mathew@fortuneindia.com",
+            "claims": [
+              {
+                "text": "These findings highlight data sharing practices in apps within the health-tech sector.",
+                "about": "world",
+                "status": "unsupported"
+              },
+              {
+                "text": "This could provide additional perspective on health technology and privacy concerns in India.",
+                "about": "recipient",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "skmohanty@newindianexpress.com",
+            "claims": [
+              {
+                "text": "This raises concerns about user data leaks in a sector critical to public health.",
+                "about": "world",
+                "status": "unsupported"
+              }
+            ]
+          },
+          {
+            "to": "deepalij@cybermedia.co.in",
+            "claims": []
+          },
+          {
+            "to": "cherylannmollan@gmail.com",
+            "claims": []
+          }
+        ]
+      },
+      "list_level": {
+        "coverage": 3.0,
+        "diversity": 3.0,
+        "missing": "More tech/health journalists from Indian digital news portals and regional outlets.",
+        "systemic_issues": [
+          "Non-media orgs (EY) misidentified as journalists",
+          "Some weak evidence for role or address"
+        ]
+      },
+      "R8_reporting": {
+        "truthful": 5,
+        "actionable": 5,
+        "false_reassurance": [],
+        "missing_message": "Some shortlisted contacts are not true journalists or have weak evidence for their role/address; manual review is needed.",
+        "det_shortfall": 14,
+        "det_shortfall_without_warning": false,
+        "det_bad_share_hidden": false
+      },
+      "R9_planning": {
+        "tools_right": 4,
+        "missed_tools": [
+          {
+            "tool": "openalex",
+            "why": "May surface academic journalists or researchers writing for media."
+          }
+        ],
+        "wasteful_tools": [
+          {
+            "tool": "podcasts",
+            "why": "No valid journalist targets found in blind sample."
+          }
+        ],
+        "effort_spent_where_it_pays": 4,
+        "top_problem": "Too much effort on podcasts; news tool yielded most valid journalist leads."
+      }
+    },
+    "stress_podcast_climate": {
+      "error": "LLMError: LLM request failed: HTTP 429: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhausted\"\n    }\n}\n"
+    },
+    "stress_spanish_universities": {
+      "error": "LLMError: LLM request failed: HTTP 429: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhausted\"\n    }\n}\n"
+    }
+  },
+  "cost": {
+    "calls": 90,
+    "usd": 0.471
+  }
+}

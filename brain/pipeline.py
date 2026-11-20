@@ -153,6 +153,12 @@ class RunResult:
     warnings: List[str] = field(default_factory=list)
 
 
+def is_too_vague(spec: CampaignSpec) -> bool:
+    """Intake found no topics and little confidence in any playbook: there is nothing to search for."""
+    return not spec.topics and (spec.playbook_confidence is not None and spec.playbook_confidence <= 0.35) \
+        and not spec.persona.org_types and not spec.persona.roles and not spec.organizations
+
+
 def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume: bool = True,
                  csv_path: Optional[str] = None, progress: Callable[[str], None] = lambda m: None,
                  ctx: Optional[CampaignContext] = None, seed_contacts: Optional[List[Contact]] = None,
@@ -221,6 +227,13 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         store.save_campaign(spec, status, funnel)
         store.save_context(spec.id, ctx)
         return result
+
+    if is_too_vague(spec):
+        # Intake could not tell who to contact. Searching anyway makes the planner invent a target group (the vague
+        # stress request came back as eight accelerators), which reads as a result and is a guess.
+        result.warnings.append("The request does not say who to contact or what you want from them, so nothing was searched. "
+                               "Say who the targets are (for example 'dental clinics in Pune' or 'professors working on X') and run again.")
+        return finish("needs_input")
 
     planner = SearchPlanner(spec, pack, ctx, deps.llm,
                             learned_templates=store.learned_templates(pack.name) if st.use_memory else None)
