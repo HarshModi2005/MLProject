@@ -1,0 +1,50 @@
+{
+  "name": "suppliers_cafe_beans",
+  "split": "holdout",
+  "note": "HELD OUT: never used to tune prompts, thresholds or playbooks. Do not edit after its first scored run.",
+  "playbook": "suppliers",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Source specialty coffee beans for a new cafe chain",
+    "ask": "A quote and sample for 200 kg per month of specialty arabica",
+    "persona": {
+      "description": "Specialty coffee roasters and estates in South India that supply cafes wholesale",
+      "roles": [
+        "Sales Manager",
+        "Owner"
+      ],
+      "org_types": [
+        "coffee roaster",
+        "estate"
+      ]
+    },
+    "topics": [
+      "specialty coffee roasters",
+      "arabica coffee wholesale"
+    ],
+    "expanded_terms": [
+      "coffee estates",
+      "single origin coffee"
+    ],
+    "locations": [
+      "Karnataka, India",
+      "Tamil Nadu, India"
+    ],
+    "preferred_inboxes": [
+      "sales",
+      "wholesale",
+      "orders"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of a cafe chain",
+    "summary": "Opening 4 cafes in Pune this year; needs about 200 kg of specialty beans a month."
+  },
+  "facts": [
+    "Opening 4 cafes in Pune",
+    "Needs about 200 kg of beans per month"
+  ],
+  "prompt": "we're opening four cafes in Pune and need about 200 kg a month of specialty arabica, find roasters and estates in Karnataka and Tamil Nadu that sell wholesale"
+}

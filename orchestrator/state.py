@@ -36,6 +36,7 @@ class EmailStatus(str, Enum):
     DRAFT      = "draft"
     APPROVED   = "approved"
     REJECTED   = "rejected"
+    STANDBY    = "standby"      # "not now": parked, skipped by normal batches, offered again only on request or when matches are few
     SENT       = "sent"
     REPLIED    = "replied"
     FOLLOWED_UP = "followed_up"

@@ -1,5 +1,6 @@
 {
   "name": "b2b_app_devs",
+  "split": "dev",
   "playbook": "b2b_sales",
   "target_count": 5,
   "spec": {

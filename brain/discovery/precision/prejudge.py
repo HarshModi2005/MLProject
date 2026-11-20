@@ -68,13 +68,16 @@ def prejudge(contacts: List[Contact], spec: CampaignSpec, llm, prof=None, batch_
     todo = [c for c in contacts if c.prejudge is None]
     if not todo or llm is None or not getattr(llm, "available", False):
         return 0
+    from brain.safety import guard, scrub
+
+    scrub(todo)
     head = brief(spec, prof)
     done = 0
     for start in range(0, len(todo), batch_size):
         batch = todo[start:start + batch_size]
         by_id = {c.id: c for c in batch}
         try:
-            data = llm.json(system=SYSTEM, user=head + "\n\nCandidates:\n" + json.dumps([card(c) for c in batch],
+            data = llm.json(system=guard(SYSTEM), user=head + "\n\nCandidates:\n" + json.dumps([card(c) for c in batch],
                                                                                     ensure_ascii=False),
                             purpose="prejudge", tier="fast", max_tokens=40 * len(batch) + 120)
         except Exception as e:  # screening is an optimisation: never let it sink the campaign

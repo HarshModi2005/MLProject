@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import logging
+import os
 from typing import List, Optional
 
 import typer
@@ -17,6 +18,15 @@ from brain.models import SenderProfile
 
 app = typer.Typer(help="Discovery, ranking and drafting engine for any cold-outreach campaign.", no_args_is_help=True)
 console = Console()
+
+
+@app.callback()
+def _main(workspace: str = typer.Option("", "--workspace", "-w", help="Whose data to use. Each workspace has its own "
+                                       "database and cache; nothing is shared between workspaces (env BRAIN_WORKSPACE).")):
+    if workspace:
+        from brain.workspace import clean
+
+        os.environ["BRAIN_WORKSPACE"] = clean(workspace)
 
 
 def _deps():
@@ -36,6 +46,12 @@ def _print_funnel(funnel: dict) -> None:
     console.print(t)
     if funnel.get("dropped"):
         console.print(f"[dim]Filtered out: {funnel['dropped']}[/dim]")
+    if funnel.get("dedup"):
+        console.print(f"[dim]Already covered, skipped before any spend where possible: {funnel['dedup']}[/dim]")
+    sup = funnel.get("supply")
+    if sup:
+        console.print(f"[dim]Supply — asked {sup['requested']}: {sup['fresh']} new, {sup['recycled']} offered again; "
+                      f"fresh yield {sup['fresh_yield']}[/dim]")
     cost = funnel.get("cost") or {}
     if cost:
         llm = cost.get("llm", {})
@@ -77,14 +93,24 @@ def run(
     to_review: bool = typer.Option(False, help="Also copy finished drafts into the review UI."),
     yes: bool = typer.Option(False, "--yes", "-y", help="Skip questions and verification (use defaults)."),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
+    no_repeat: str = typer.Option("series", "--no-repeat", help="Who counts as already covered: series (default: nobody "
+                                  "shown or contacted in this outreach, nor anyone ever emailed) | workspace (anyone in any "
+                                  "campaign) | cooldown (earlier touches expire after --cooldown-days)."),
+    cooldown_days: int = typer.Option(90, help="With --no-repeat cooldown: days before someone may be offered again."),
+    recycle: Optional[str] = typer.Option(None, help="When new matches are very few: ask | auto | never offer earlier, "
+                                          "undecided people again (default ask; with --yes and no answer, never)."),
+    exclude_file: Optional[str] = typer.Option(None, "--exclude-file", help="A file of addresses, domains or full names "
+                                               "(one per line) that must never be contacted."),
 ):
-    """Run a campaign: verify what you want, find recipients, rank them, find emails, draft."""
+    """Run a campaign: verify what you want, find recipients, rank them, find emails, draft.
+    Run `brain more <id>` afterwards for the next batch of NEW people."""
     logging.basicConfig(level=logging.INFO if verbose else logging.WARNING, format="%(name)s: %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)
     deps = _deps()
     try:
         _run(deps, description, cv, about, name, n, location, upload or [], playbook, topic, objective, people_csv,
-             upto, to_review, yes)
+             upto, to_review, yes, no_repeat=no_repeat, cooldown_days=cooldown_days, recycle=recycle,
+             exclude_file=exclude_file)
     except LLMError as e:
         console.print(f"[red]Stopped: the language model is unavailable — {e}[/red]")
         console.print("[dim]Any finished stages are saved; continue later with `python main.py brain resume <id>`.[/dim]")
@@ -116,8 +142,14 @@ def _sender(deps, cv, about, name):
     return sender, source
 
 
+def _confirm_recycle(info: dict) -> bool:
+    return typer.confirm(f"Only {info['fresh']} new of {info['wanted']} found. {info['undecided']} earlier suggestions are "
+                         f"still undecided and {info['standby']} are on standby. Include {info['offer']} of them?",
+                         default=False)
+
+
 def _run(deps, description, cv, about, name, n, location, uploads, playbook, topic, objective, people_csv, upto,
-         to_review, yes):
+         to_review, yes, no_repeat="series", cooldown_days=90, recycle=None, exclude_file=None):
     from brain.context import CampaignContext
     from brain.intake import ConsoleUI, run_intake
     from brain.pipeline import run_campaign
@@ -142,12 +174,21 @@ def _run(deps, description, cv, about, name, n, location, uploads, playbook, top
         spec, ctx, seeds, only = res.spec, res.ctx, res.seed_contacts, res.only_seeds
         console.print(f"[dim]Intake used {res.llm_calls} LLM call(s).[/dim]")
 
+    from brain.touch import MODES, RECYCLE
+
+    if no_repeat not in MODES or (recycle and recycle not in RECYCLE):
+        raise typer.BadParameter(f"--no-repeat must be one of {MODES}; --recycle one of {RECYCLE}")
+    spec.no_repeat, spec.cooldown_days = no_repeat, cooldown_days
+    spec.recycle = recycle or "ask"  # --yes skips questions; it is not consent to re-offer earlier people
+    if exclude_file:
+        n_ex = deps.store.import_external(_read_lines(exclude_file))
+        console.print(f"[dim]{n_ex} do-not-contact entries imported from {exclude_file}.[/dim]")
     where = ", ".join(spec.regions + spec.countries) or "anywhere"
     console.print(Panel(
         f"[bold]{spec.objective}[/bold]\nPlaybook: {spec.pack} · Looking for: {', '.join(spec.topics)}\n"
         f"Where: {where} · Target: {spec.target_count} · Campaign id: [cyan]{spec.id}[/cyan]", title="Campaign"))
     result = run_campaign(spec, deps, upto=upto, csv_path=people_csv, ctx=ctx, seed_contacts=seeds, only_seeds=only,
-                          progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+                          progress=lambda m: console.print(f"[dim]{m}[/dim]"), confirm_recycle=_confirm_recycle)
     _print_shortlist(result.shortlist, result.drafts)
     _print_funnel(result.funnel)
     for w in result.warnings:
@@ -158,6 +199,7 @@ def _run(deps, description, cv, about, name, n, location, uploads, playbook, top
         console.print(f"[green]{export_to_review(deps.store, spec)} drafts copied to the review UI "
                       f"(python main.py review).[/green]")
     console.print(f"\nSee drafts: [cyan]python main.py brain show {spec.id} --drafts[/cyan]")
+    console.print(f"Want more people? [cyan]python main.py brain more {spec.id} -n 20[/cyan] (never repeats anyone).")
 
 
 @app.command()
@@ -245,6 +287,160 @@ def export(campaign_id: str, out: Optional[str] = typer.Option(None, help="Write
         console.print(f"{export_to_review(store, saved['spec'], include_flagged)} drafts copied to the review UI.")
 
 
+def _read_lines(path: str) -> List[str]:
+    with open(path, encoding="utf-8") as f:
+        return [ln.strip() for ln in f if ln.strip() and not ln.lstrip().startswith("#")]
+
+
+@app.command()
+def more(
+    ref: str = typer.Argument(..., help="The series or any campaign id in it."),
+    n: int = typer.Option(20, "-n", help="How many new people to find in this batch."),
+    until: Optional[int] = typer.Option(None, "--until", help="Keep running batches until this many people in total."),
+    batch_size: int = typer.Option(20, help="With --until: people per batch."),
+    budget_searches: Optional[int] = typer.Option(None, help="With --until: stop after this many search calls."),
+    widen: Optional[str] = typer.Option(None, help="How far to widen when new people run out: topics | geo. Default: "
+                                        "lookalikes only; your topics and places are never widened without this."),
+    recycle: Optional[str] = typer.Option(None, help="ask | auto | never: offer earlier undecided / standby people "
+                                          "again when new matches are very few (default: the series' setting)."),
+    to_review: bool = typer.Option(False, help="Also copy the drafts into the review UI."),
+    yes: bool = typer.Option(False, "--yes", "-y", help="Do not ask (recycling follows --recycle, else never)."),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+):
+    """The next batch of an outreach: NEW people only, never anyone shown, rejected or emailed before."""
+    from brain.series import SeriesPaused, more as run_more, until as run_until
+
+    logging.basicConfig(level=logging.INFO if verbose else logging.WARNING, format="%(name)s: %(message)s")
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    deps = _deps()
+    kw = dict(widen=(widen or "") if widen is not None else None, recycle=recycle,
+              confirm_recycle=None if yes else _confirm_recycle,
+              progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+    if widen and widen not in ("topics", "geo"):
+        raise typer.BadParameter("--widen must be topics or geo")
+    try:
+        if until:
+            outcomes = run_until(deps, ref, until, batch_size=batch_size, budget_searches=budget_searches, **kw)
+        else:
+            outcomes = [run_more(deps, ref, n, **kw)]
+    except (KeyError, SeriesPaused) as e:
+        console.print(f"[red]{e.args[0] if e.args else e}[/red]")
+        raise typer.Exit(1)
+    except LLMError as e:
+        console.print(f"[red]Stopped: the language model is unavailable — {e}[/red]")
+        raise typer.Exit(2)
+    for i, b in enumerate(outcomes, 1):
+        for res in b.results:
+            _print_shortlist(res.shortlist, res.drafts)
+        console.print(Panel(f"Asked {b.requested}: [bold]{b.fresh} new[/bold], {b.recycled} offered again, "
+                            f"{b.covered_skipped} candidates skipped as already covered. Widening rung {b.rung_reached}."
+                            + (f"\n[yellow]{b.stopped}[/yellow]" if b.stopped else ""), title=f"Batch {i}"))
+        for w in b.warnings:
+            console.print(f"[yellow]! {w}[/yellow]")
+        if to_review:
+            from brain.bridge import export_to_review
+
+            for res in b.results:
+                export_to_review(deps.store, res.spec)
+    console.print(f"Series [cyan]{outcomes[0].series_id}[/cyan]: `brain seen {outcomes[0].series_id}` shows everyone covered so far.")
+
+
+@app.command()
+def seen(ref: str = typer.Argument(..., help="The series or any campaign id in it."),
+         state: Optional[str] = typer.Option(None, help="Only this state (surfaced, drafted, approved, sent, rejected, standby...)."),
+         limit: int = typer.Option(40, help="Rows to print.")):
+    """Everyone this outreach has covered: counts by state, then who."""
+    from brain.series import resolve_series
+    from brain.touch import summarize
+
+    store = _deps().store
+    try:
+        sid = resolve_series(store, ref)
+    except KeyError as e:
+        raise typer.BadParameter(str(e.args[0]))
+    rows = store.seen(sid)
+    console.print(f"Series {sid}: " + ", ".join(f"{v} {k}" for k, v in sorted(summarize(rows).items())) if rows else "Nobody yet.")
+    t = Table("Name", "Organisation", "State", "Campaign")
+    for r in [r for r in rows if not state or r["state"] == state][:limit]:
+        t.add_row(r["name"], r["org"], r["state"], r["campaign_id"])
+    console.print(t)
+
+
+def _decide(who: str, status: str, campaign: Optional[str]) -> None:
+    from brain.bridge import legacy_set_status
+
+    store = _deps().store
+    res = store.decide(who, status, campaign)
+    if not res:
+        raise typer.BadParameter(f"No unsent result for {who!r}" + (f" in {campaign}" if campaign else "") + ".")
+    legacy_set_status(res["campaign_id"], res["contact_id"], status)
+    console.print(f"{who}: {res['was']} -> {status}")
+
+
+@app.command()
+def standby(who: str = typer.Argument(..., help="A contact id or email address."),
+            campaign: Optional[str] = typer.Option(None, help="Which campaign, if the person is in several.")):
+    """Park someone: not now. New batches skip them; they come back only if new matches are very few, or with `recall`."""
+    _decide(who, "standby", campaign)
+
+
+@app.command()
+def reject(who: str = typer.Argument(..., help="A contact id or email address."),
+           campaign: Optional[str] = typer.Option(None)):
+    """Never offer this person again in this outreach."""
+    _decide(who, "rejected", campaign)
+
+
+def _revive(who: str, campaign: Optional[str]) -> None:
+    from brain.bridge import legacy_set_status
+
+    res = _deps().store.revive(who, campaign)
+    if not res:
+        raise typer.BadParameter(f"{who!r} is not on standby or rejected" + (f" in {campaign}" if campaign else "") + ".")
+    legacy_set_status(res["campaign_id"], res["contact_id"], "draft")
+    console.print(f"{who}: {res['was']} -> back to undecided (draft shown in the review again).")
+
+
+@app.command()
+def recall(who: str = typer.Argument(..., help="A contact id or email address."), campaign: Optional[str] = typer.Option(None)):
+    """Take someone off standby."""
+    _revive(who, campaign)
+
+
+@app.command()
+def release(who: str = typer.Argument(..., help="A contact id or email address."), campaign: Optional[str] = typer.Option(None)):
+    """Undo a rejection (the only way a rejected person can come back)."""
+    _revive(who, campaign)
+
+
+@app.command("series")
+def series_cmd():
+    """List outreaches (series) and whether any is paused."""
+    t = Table("Id", "Status", "Batches", "No-repeat", "Rung", "Objective")
+    for r in _deps().store.list_series():
+        t.add_row(r["id"], r["status"], str(r["batches"]), r["mode"], str(r["rung"]), r["objective"][:60])
+    console.print(t)
+
+
+@app.command("series-resume")
+def series_resume(ref: str):
+    """Lift a pause (set when too many emails bounced) after checking where the addresses came from."""
+    from brain.series import resolve_series
+
+    store = _deps().store
+    sid = resolve_series(store, ref)
+    store.resume_series(sid)
+    console.print(f"Series {sid} is active again; the bounce rate is counted afresh from now. "
+                  f"Bounces before now: {store.series_health(sid)}")
+
+
+@app.command()
+def exclude(path: str = typer.Argument(..., help="A file of addresses, domains or full names, one per line.")):
+    """Never contact these people / domains, in any campaign (imports a do-not-contact or already-emailed list)."""
+    n = _deps().store.import_external(_read_lines(path))
+    console.print(f"{n} entries added to the do-not-contact list.")
+
+
 @app.command()
 def suppress(value: str, reason: str = "manual"):
     """Never contact this email address or domain again, in any campaign."""
@@ -270,6 +466,8 @@ def bench(
     compare_to: Optional[str] = typer.Option(None, "--compare", help="A previous results JSON to diff against."),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
     from_spec: bool = typer.Option(False, help="Use the scenarios' ready-made specs instead of running the intake on their prompts."),
+    split: str = typer.Option("", help="Only the 'dev' (tuned on) or 'holdout' (never tuned on) scenarios."),
+    repeat: int = typer.Option(1, help="Run each scenario N times with fresh caches to measure noise (costs N times as much)."),
 ):
     """Benchmark discovery on the scenarios in evals/scenarios (stops after judging unless --draft)."""
     from brain.bench import compare, run_bench
@@ -278,7 +476,7 @@ def bench(
     logging.getLogger("httpx").setLevel(logging.WARNING)
     report = run_bench(list(only) if only else None, replay=("strict" if strict else "replay") if replay else "",
                        draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"),
-                       from_prompt=not from_spec)
+                       from_prompt=not from_spec, split=split, repeat=repeat)
     t = Table(title=f"Benchmark {report['label']}")
     for col in ("Scenario", "label prec", "good@K", "prec@K", "mean", "orgs", "proof", "reach", "search", "LLM", "$", "s"):
         t.add_column(col)
@@ -303,6 +501,16 @@ def bench(
     if srcs.row_count:
         console.print(srcs)
     console.print_json(json.dumps(report["summary"]))
+    sm = report["summary"]
+    if sm.get("judge_precision") is not None:
+        line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]})"
+        line += f"  ·  good AND reachable {sm.get('sendable_precision')}  ·  good AND verified {sm.get('verified_precision')}"
+        if sm.get("label_precision") is not None:
+            ci = sm["label_precision_ci95"]
+            line += f"\nHUMAN-label precision {sm['label_precision']} (95% CI {ci[0]}–{ci[1]}, labelled {sm['labeled_slots']} slots)"
+        else:
+            line += "\n[yellow]No human labels: precision above is the pipeline's own judge. Run `brain bench-label`.[/yellow]"
+        console.print(line)
     console.print(f"[dim]Saved {report['path']}[/dim]")
     if compare_to:
         with open(compare_to, encoding="utf-8") as fh:
@@ -463,6 +671,85 @@ def bench_labels(
             console.print(f"Wrote {path}")
         except FileNotFoundError as e:
             console.print(f"[yellow]{e}[/yellow]")
+
+
+@app.command("bench-label-status")
+def bench_label_status(min_labels: int = typer.Option(30, help="Labels wanted per scenario.")):
+    """How many human labels each scenario has, and how many more are needed before precision can be trusted."""
+    from brain.bench import label_status
+
+    t = Table(title=f"Human labels (want {min_labels} per scenario)")
+    for col in ("Scenario", "split", "sheet", "candidates", "labelled", "good", "bad", "wrong addr", "still needed"):
+        t.add_column(col)
+    for r in label_status(min_labels):
+        t.add_row(r["name"], r["split"], "yes" if r["sheet"] else "[red]no[/red]", str(r["candidates"]), str(r["labeled"]),
+                  str(r["good"]), str(r["bad"]), str(r["wrong_address"]),
+                  "[green]0[/green]" if not r["needed"] else f"[yellow]{r['needed']}[/yellow]")
+    console.print(t)
+
+
+@app.command()
+def outcome(campaign_id: str, who: str = typer.Argument(..., help="The contact id or the email address."),
+            kind: str = typer.Argument(..., help="sent | bounced | replied | positive | negative | unsubscribed | spam"),
+            detail: str = typer.Option("", help="Optional note, e.g. the bounce message.")):
+    """Record what happened to a sent email. Bounces suppress the address and demote a bad email convention; replies
+    label the prospect good."""
+    learned = _deps().store.record_outcome(campaign_id, who, kind, detail)
+    if learned is None:
+        console.print(f"[red]No result for {who} in campaign {campaign_id}.[/red]")
+        raise typer.Exit(1)
+    console.print_json(json.dumps(learned))
+
+
+@app.command()
+def outcomes(campaign_id: Optional[str] = typer.Argument(None, help="One campaign, or all."),
+             sync: bool = typer.Option(False, "--sync", help="First pull sent/replied/bounced from the review UI's tables.")):
+    """Bounce and reply rates by how the address was found and how far it was trusted: the real test of the engine."""
+    store = _deps().store
+    if sync:
+        from brain.bridge import sync_outcomes
+
+        console.print(f"[dim]Synced from the review tables: {sync_outcomes(store)}[/dim]")
+    sm = store.outcome_summary(campaign_id)
+    for title, key in (("By address tier when sent", "by_tier"), ("By how the address was found", "by_method")):
+        t = Table(title=title)
+        for col in ("", "sent", "bounced", "bounce rate", "replied", "reply rate", "unsubscribed"):
+            t.add_column(col)
+        for name, b in sorted(sm[key].items()):
+            t.add_row(name, str(b["sent"]), str(b["bounced"]), str(b["bounce_rate"]), str(b["replied"]),
+                      str(b["reply_rate"]), str(b["unsubscribed"]))
+        console.print(t)
+    console.print(f"Emails sent: {sm['sent']}")
+
+
+@app.command()
+def calibrate(save: bool = typer.Option(False, "--save", help="Store the model if it beats the raw score out of fold."),
+              folder: str = typer.Option("evals/labels", help="Label sheets to learn from.")):
+    """Fit the score calibrator on your human labels, check it out of fold, and keep it only if it beats the raw score."""
+    from brain import calibrate as cal
+
+    rows = cal.rows_from_sheets(folder)
+    out = cal.train(rows)
+    console.print_json(json.dumps(out["report"]))
+    if out["model"] is None:
+        console.print(f"[yellow]Not calibrated: {out['reason']}.[/yellow]")
+        return
+    console.print("[green]The calibrated score beats the raw score out of fold.[/green]")
+    if save:
+        cal.save(_deps().store, out["model"])
+        console.print("Saved: new campaigns now rank by calibrated probability of a good prospect.")
+    else:
+        console.print("Re-run with --save to use it.")
+
+
+@app.command("bench-label")
+def bench_label(scenario: str = typer.Argument(..., help="Scenario name."),
+                limit: int = typer.Option(0, help="Stop after this many labels (0 = all).")):
+    """Label a scenario's candidates in the terminal: g good, b bad, w wrong address, s skip, q quit."""
+    from brain.bench import label_interactive
+
+    n = label_interactive(scenario, ask=lambda m: typer.prompt(m, prompt_suffix=""), say=console.print, limit=limit)
+    console.print(f"Labelled {n} candidates.")
 
 
 @app.command()

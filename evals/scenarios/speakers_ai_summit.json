@@ -1,5 +1,6 @@
 {
   "name": "speakers_ai_summit",
+  "split": "dev",
   "playbook": "speakers",
   "target_count": 5,
   "spec": {

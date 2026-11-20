@@ -213,13 +213,21 @@ def prescore(contacts: List[Contact], spec: CampaignSpec, pack: Pack, backend: s
     return sorted(contacts, key=lambda c: c.prescore, reverse=True)
 
 
-def diversify(contacts: List[Contact], limit: int, max_per_org: int) -> List[Contact]:
-    """Take the best `limit` contacts while capping how many come from one organisation."""
+def diversify(contacts: List[Contact], limit: int, max_per_org: int, prior: Optional[Dict[str, int]] = None,
+              prior_cap: Optional[int] = None) -> List[Contact]:
+    """Take the best `limit` contacts while capping how many come from one organisation.
+    `prior` is how many people each organisation already has in earlier batches of this series (the cap counts them);
+    `prior_cap` lowers the cap for organisations that already have someone (organisation campaigns: one per organisation)."""
+    from brain.touch import org_key
+
+    prior = prior or {}
     out: List[Contact] = []
     per_org: Dict[str, int] = Counter()
     for c in contacts:
-        org = (c.org_ror or c.org_domain or c.org or c.id).lower()
-        if per_org[org] >= max_per_org:
+        org = org_key(c) or c.id.lower()
+        before = prior.get(org, 0)
+        cap = prior_cap if (prior_cap and before) else max_per_org
+        if per_org[org] + before >= cap:
             continue
         per_org[org] += 1
         out.append(c)

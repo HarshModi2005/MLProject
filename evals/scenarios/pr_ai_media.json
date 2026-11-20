@@ -1,5 +1,6 @@
 {
   "name": "pr_ai_media",
+  "split": "dev",
   "playbook": "pr_media",
   "target_count": 5,
   "spec": {

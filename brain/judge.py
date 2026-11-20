@@ -14,6 +14,7 @@ import re
 from typing import Dict, List
 
 from brain.llm import LLM, LLMError
+from brain.safety import guard, scrub
 from brain.models import CampaignSpec, Contact
 from brain.textutil import squash
 
@@ -133,12 +134,19 @@ def _in_evidence(text: str, c: Contact) -> bool:
 
 
 def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int = 8, ctx=None,
-          playbook=None) -> int:
-    """Sets score / reasons / hook on each contact in place. Returns the number judged by the LLM.
-    Contacts the model could not score keep score=None and are flagged, never silently defaulted."""
+          playbook=None, prescore_weight: float = 0.0, calibrator=None) -> int:
+    """Sets fit / score / reasons / hook on each contact in place. Returns the number judged by the LLM.
+    Contacts the model could not score keep score=None and are flagged, never silently defaulted.
+
+    `fit` is the judge's view of the match alone. `score` is what ranks: with a calibrator (brain/calibrate.py, fitted on
+    human labels and only kept if it beats the raw score) it is the probability a human would call this a good prospect;
+    without one it is fit x a reachability factor. The lexical pre-score no longer enters it (prescore_weight=0): it is
+    noise relative to the judge and made "0.7 = good" mean different things in different campaigns."""
     from brain.draft import with_context
 
     from brain.fit import profile_for, reach_factor
+
+    scrub(contacts)  # scraped text may instruct the model: remove it before it reaches the prompt
 
     full = with_context(spec, ctx)
     brief_highlights = full.sender.highlights[:12]  # the numbered SENDER FACTS the judge's sender_ref points into
@@ -159,7 +167,7 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
         by_id = {c.id: c for c in batch}
         user = brief + "\n\nCandidates:\n" + json.dumps([_card(c) for c in batch], ensure_ascii=False)
         try:
-            data = llm.json(system=SYSTEM, user=user, purpose="judge", tier="strong",
+            data = llm.json(system=guard(SYSTEM), user=user, purpose="judge", tier="strong",
                             max_tokens=180 * len(batch) + 200)
         except LLMError as e:
             log.warning("judge batch failed: %s", e)
@@ -195,8 +203,16 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
                         score *= 0.5
                         c.flags.append("missing_required:" + ", ".join(missing))
             reach = reach_factor(c) if c.emails else 1.0
-            c.score = round((0.8 * score + 0.2 * c.prescore) * (0.85 + 0.15 * reach), 4)
+            c.fit = round(score, 4)
+            c.score = round(((1 - prescore_weight) * score + prescore_weight * c.prescore) * (0.85 + 0.15 * reach), 4)
+            if calibrator is not None:
+                c.score = round(calibrator.prob(c), 4)
+                if "calibrated" not in c.flags:
+                    c.flags.append("calibrated")
             c.reasons = [squash(str(r), 160) for r in (item.get("reasons") or [])[:3]]
+            if "injection_suspect" in c.flags:  # its sources tried to instruct the model: half the trust, said out loud
+                c.score = round(c.score * 0.5, 4)
+                c.reasons.insert(0, "source text tried to instruct the model; treated as untrusted")
             hook = item.get("hook")
             ref = item.get("hook_ref")
             # Trust the pointer over the model's wording: the hook must be real evidence.

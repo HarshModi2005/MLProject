@@ -1,0 +1,48 @@
+{
+  "name": "campus_recruiting_nit",
+  "split": "holdout",
+  "note": "HELD OUT: never used to tune prompts, thresholds or playbooks. Do not edit after its first scored run.",
+  "playbook": "campus_recruiting",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Campus hiring drive for software engineering freshers",
+    "ask": "Could we schedule a placement drive for next semester",
+    "persona": {
+      "description": "Training and placement cells at engineering colleges in Tamil Nadu",
+      "roles": [
+        "Training and Placement Officer",
+        "Placement Coordinator"
+      ],
+      "org_types": [
+        "college"
+      ]
+    },
+    "topics": [
+      "engineering college placements",
+      "training and placement cell"
+    ],
+    "expanded_terms": [
+      "campus recruitment",
+      "placement officer"
+    ],
+    "locations": [
+      "Tamil Nadu, India"
+    ],
+    "preferred_inboxes": [
+      "placement",
+      "tpo",
+      "training"
+    ]
+  },
+  "sender": {
+    "name": "Test Recruiter",
+    "headline": "Talent lead at a product startup",
+    "summary": "Hiring 15 software engineering freshers for Chennai; offers 8-12 LPA."
+  },
+  "facts": [
+    "Hiring 15 software engineering freshers",
+    "Chennai-based, 8-12 LPA"
+  ],
+  "prompt": "we're a Chennai product startup hiring 15 software engineering freshers, find the placement cells of engineering colleges in Tamil Nadu so we can arrange a campus drive"
+}

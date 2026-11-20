@@ -1,5 +1,6 @@
 {
   "name": "sponsors_tech_fest",
+  "split": "dev",
   "playbook": "sponsorship",
   "target_count": 6,
   "spec": {
@@ -57,5 +58,5 @@
     "The fest draws 5000+ students from 120 colleges",
     "Last year's edition had 40 workshops and a 36-hour hackathon"
   ],
-  "prompt": "find sponsors for our college tech fest in India \u2014 companies that sponsored student tech fests or hackathons before"
+  "prompt": "find sponsors for our college tech fest in India — companies that sponsored student tech fests or hackathons before"
 }

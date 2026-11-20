@@ -1,0 +1,50 @@
+{
+  "name": "integrations_hr_saas",
+  "split": "holdout",
+  "note": "HELD OUT: never used to tune prompts, thresholds or playbooks. Do not edit after its first scored run.",
+  "playbook": "integrations",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Integration partnerships for our payroll API with HR software companies",
+    "ask": "A short call about listing our payroll API as an integration",
+    "persona": {
+      "description": "HR and workforce-management software companies that could integrate a payroll API",
+      "roles": [
+        "Head of Partnerships",
+        "Product Manager",
+        "Founder"
+      ],
+      "org_types": [
+        "software company"
+      ]
+    },
+    "topics": [
+      "HR software",
+      "workforce management software"
+    ],
+    "expanded_terms": [
+      "payroll",
+      "HRMS",
+      "applicant tracking"
+    ],
+    "locations": [
+      "India"
+    ],
+    "preferred_inboxes": [
+      "partnerships",
+      "partners",
+      "integrations"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of a payroll API company",
+    "summary": "A payroll and compliance API for Indian SMEs with a public developer portal."
+  },
+  "facts": [
+    "Payroll and statutory compliance API for Indian SMEs",
+    "Public developer documentation and sandbox"
+  ],
+  "prompt": "we built a payroll compliance API for Indian SMEs, find HR software and HRMS companies in India that might integrate it"
+}

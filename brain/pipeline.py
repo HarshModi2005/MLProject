@@ -30,16 +30,19 @@ Everything else — discovery, page reading, email finding, dedupe, filtering, p
 from __future__ import annotations
 
 import logging
+import math
 import time
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Sequence
 
+from brain import touch
 from brain.cache import Cache
 from brain.context import CampaignContext
 from brain.discovery.graph import record as graph_record
 from brain.discovery.reach.patterns import learn as learn_patterns, threshold as reach_threshold
 from brain.discovery.reach.providers import tag_tech
-from brain.discovery.reach.verify import verify_guesses
+from brain.discovery.reach.tiers import contact_tier, counts as tier_counts
+from brain.discovery.reach.verify import verify_addresses
 from brain.discovery.precision.orgtype import gate as org_type_gate
 from brain.discovery.precision.prejudge import prejudge, reorder as reorder_screened
 from brain.explore import explore
@@ -65,6 +68,9 @@ from brain.store import Store
 log = logging.getLogger("brain.pipeline")
 
 STAGES = ["discover", "rank", "enrich", "judge", "draft"]
+
+# Playbook families whose targets are named people inside companies, where free web sources rarely publish an address.
+PERSON_AT_COMPANY_FAMILIES = ("funding", "jobs", "media", "selling", "people")
 
 
 HANDLE_SOURCES = ("npm", "huggingface", "github")  # people known by a username, not a full name
@@ -133,7 +139,7 @@ def build_deps(settings: Optional[Settings] = None) -> Deps:
     return Deps(
         settings=settings, cache=cache, llm=LLM(settings, cache), fetcher=Fetcher(settings, cache),
         search=WebSearch(settings, cache), orcid=Orcid(settings, cache),
-        openalex=OpenAlexSource(settings, cache), store=Store(settings.database_url),
+        openalex=OpenAlexSource(settings, cache), store=Store(settings.database_url, workspace=settings.workspace),
     )
 
 
@@ -149,10 +155,13 @@ class RunResult:
 def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume: bool = True,
                  csv_path: Optional[str] = None, progress: Callable[[str], None] = lambda m: None,
                  ctx: Optional[CampaignContext] = None, seed_contacts: Optional[List[Contact]] = None,
-                 only_seeds: bool = False) -> RunResult:
+                 only_seeds: bool = False,
+                 confirm_recycle: Optional[Callable[[Dict[str, Any]], bool]] = None) -> RunResult:
     """ctx: the campaign context from the intake (loaded from the store when resuming).
     seed_contacts: people/organisations from the user's uploaded lists, always considered.
-    only_seeds: skip discovery tools and work only on the user's list."""
+    only_seeds: skip discovery tools and work only on the user's list.
+    confirm_recycle: asked when new matches are very few but earlier, undecided people could fill the batch
+    (spec.recycle == "ask"); it gets {"fresh", "wanted", "undecided", "standby", "offer"} and returns yes/no."""
     if upto not in STAGES:
         raise ValueError(f"upto must be one of {STAGES}")
     started = time.time()
@@ -160,6 +169,9 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     if ctx is None:
         ctx = store.load_context(spec.id) if resume else CampaignContext()
     store.save_context(spec.id, ctx)
+    scope = store.ensure_series(spec)  # which earlier batches count as "already covered" (brain/touch.py)
+    prior_org = store.org_counts(scope.series_id)  # people per organisation put forward in earlier batches
+    org_campaign = (spec.target_kind or pack.target_kind) == "org"
     # A per-campaign Serper budget sized to the target, never above the configured ceiling.
     total_budget = search_budget(spec.target_count, st.max_search_calls)
     reach_min = reach_threshold(st, pack)  # lower when the playbook accepts flagged guesses
@@ -169,7 +181,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     enrich_ceiling = budget_start + int(total_budget * 0.85)
 
     def blocked(c: Contact) -> Optional[str]:
-        return ctx.is_excluded(c.name, [e.address for e in c.emails], c.org_domain or "") or store.blocked_reason(c)
+        return ctx.is_excluded(c.name, [e.address for e in c.emails], c.org_domain or "") or store.blocked_reason(c, scope)
     result = RunResult(spec=spec)
     funnel: Dict[str, Any] = (store.load_campaign(spec.id) or {}).get("funnel", {}) if resume else {}
     store.save_campaign(spec, "running", funnel)
@@ -202,6 +214,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 funnel["query_stats_recorded"] = True
             except Exception as e:  # learning is a bonus; never fail a campaign over it
                 log.warning("could not record query stats: %s", e)
+        funnel["dedup"] = dedup_summary(funnel)
+        funnel["supply"] = supply_summary(spec, funnel, result)
         result.funnel = funnel
         store.save_campaign(spec, status, funnel)
         store.save_context(spec.id, ctx)
@@ -279,7 +293,15 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             funnel["dropped_after_reading_sites"] = merged
         out = resolve(out)  # a newly found email can reveal two records are one person
         # Addresses are known now, so the do-not-contact check can be exact.
-        out = [c for c in out if not blocked(c)]
+        keep_out = []
+        for c in out:
+            why = blocked(c)
+            if why:
+                late = funnel.setdefault("dropped_after_enrich", {})
+                late[why] = late.get(why, 0) + 1
+            else:
+                keep_out.append(c)
+        out = keep_out
         # Enrichment creates new candidates (decision-makers, people listed on sites): they must look like real people
         # and pass the same cheap screen as everyone else before they can reach the judge.
         implausible = [c for c in out if not plausible_person(c)]
@@ -299,11 +321,20 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         funnel["enrichment"] = enrich_stats
         return out
 
+    from brain import calibrate
+
+    calibrator = calibrate.load(store)  # fitted on human labels, kept only if it beat the raw score (brain/calibrate.py)
+    if calibrator is not None:
+        funnel["calibrated_on_labels"] = calibrator.n
+    judged_log: List[Dict[str, Any]] = []  # every judged candidate's signals: a human label turns each into training data
+
     def judge_stage(to_judge: List[Contact]) -> List[Contact]:
-        n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack)
+        n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack,
+                  prescore_weight=st.judge_prescore_weight, calibrator=calibrator)
+        judged_log.extend(calibrate.row(c) for c in to_judge if c.score is not None)
         funnel["judged"] = funnel.get("judged", 0) + n
         note_prejudge_agreement(funnel, to_judge)
-        passed = [c for c in to_judge if c.score is not None and c.score >= MIN_JUDGED_SCORE]
+        passed = [c for c in to_judge if c.score is not None and c.score >= st.shortlist_floor]
         for c in to_judge:  # negative feedback for any later search
             if c.score is not None and c.score < MIN_JUDGED_SCORE and c.reasons and len(ctx.rejected_reasons) < 20:
                 ctx.rejected_reasons.append(f"{c.name}: {c.reasons[0]}")
@@ -330,7 +361,10 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         else:
             deps.search.budget = budget_start + discovery_budget
             ex = explore(spec, pack, ctx, deps, planner, seeds=raw, budget=discovery_budget,
-                         rounds=st.explore_rounds, progress=progress)
+                         rounds=st.explore_rounds, progress=progress, blocked=blocked)
+            for why, n in ex.skipped.items():
+                d = funnel.setdefault("dedup_discovery", {})
+                d[why] = d.get(why, 0) + n
             contacts = ex.contacts
             by_source.update({k: v for k, v in ex.by_source.items() if k != "your_lists"})
             for name, stats in ex.tool_stats.items():
@@ -382,7 +416,8 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         unreadable = lambda c: c.kind == "org" and not c.org_domain and not c.emails  # noqa: E731
         order = [c for c in ranked if not unreadable(c)] + [c for c in ranked if unreadable(c)]
         order = [c for c in order if "prejudge_reject" not in c.flags]  # screened out: not worth the lookups
-        targets = diversify(order, n_enrich, max_per_org=st.max_per_org * 4)
+        targets = diversify(order, n_enrich, max_per_org=st.max_per_org * 4, prior=prior_org,
+                            prior_cap=1 if org_campaign else None)
         # Remember who was tried BEFORE enriching: enrichment can drop a candidate or turn an organisation into
         # the person found inside it (a new id), and neither may be enriched twice.
         done = {c.id for c in targets} | {c.org_domain for c in targets if c.org_domain}
@@ -413,6 +448,15 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     note_sources(funnel, "reachable", reachable)
     funnel["guessed_email_only"] = sum(1 for c in targets if c.emails and c not in reachable)
     progress(f"enrich: {len(reachable)} of {len(targets)} have a confident email")
+    from brain.discovery.reach.providers import hunter_available
+
+    funnel["contact_provider"] = "hunter" if hunter_available() else "none"
+    if len(reachable) < spec.target_count and pack.family in PERSON_AT_COMPANY_FAMILIES and not hunter_available():
+        # Said plainly, because it is structural: a named person's address inside a company is rarely published.
+        result.warnings.append(
+            f"Only {len(reachable)} of {spec.target_count} wanted contacts have a confident address. This kind of campaign "
+            f"({pack.title or pack.name}) needs a contact-data provider to reach named people inside companies: set "
+            f"HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.")
     if reachable:
         try:  # verified, reachable prospects become memory for later campaigns
             store.upsert_contacts(reachable)
@@ -432,11 +476,15 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         cp = None  # judging failed last time (e.g. rate limit): redo it rather than resume an empty result
     if cp:
         shortlist = cp["contacts"]
+        if (cp.get("extra") or {}).get("recycled"):
+            funnel["recycled"] = cp["extra"]["recycled"]
     else:
         to_judge = reachable[: spec.target_count * 3]  # a wider pool for the judge: it, not the pre-score, decides
-        checked = verify_guesses(to_judge, deps.fetcher)  # a guessed address must at least be deliverable
+        # Every address is checked before it can be shortlisted (MX always; SMTP / Hunter when enabled): undeliverable
+        # ones are dropped, the verdict is kept on the address and decides its tier.
+        checked = verify_addresses(to_judge, deps.fetcher, limit=len(to_judge))
         if checked["checked"]:
-            funnel["guess_verification"] = checked
+            funnel["address_verification"] = checked
             to_judge = [c for c in to_judge if has_usable_email(c, reach_min)]
         if deps.llm.available:
             progress(f"judge: assessing fit for {len(to_judge)} people…")
@@ -445,7 +493,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             if st.backfill and len(scored) < spec.target_count and not only_seeds and not csv_path:
                 scored += backfill(spec, pack, ctx, deps, planner, scored, known=ranked + targets,
                                    rank_stage=rank_stage, enrich_stage=enrich_stage, judge_stage=judge_stage,
-                                   funnel=funnel, progress=progress, ceiling=budget_start + total_budget)
+                                   funnel=funnel, progress=progress, ceiling=budget_start + total_budget, blocked=blocked)
                 funnel["passed_judge"] = len(scored)
         else:
             result.warnings.append("No LLM key: ranking used the lexical pre-score only and no emails were drafted.")
@@ -464,14 +512,40 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 continue
             seen_addr.add(addr)
             unique.append(c)
-        shortlist = diversify(unique, spec.target_count, st.max_per_org)
-        funnel["shortlisted"] = len(shortlist)
-        note_sources(funnel, "passed_judge", [c for c in scored if c.score is not None and c.score >= MIN_JUDGED_SCORE])
+        capped = diversify(unique, spec.target_count, st.max_per_org, prior=prior_org, prior_cap=1 if org_campaign else None)
+        if prior_org:
+            funnel["dedup_org_cap"] = sum(1 for c in unique if c not in capped and prior_org.get(touch.org_key(c), 0)
+                                          >= (1 if org_campaign else st.max_per_org))
+        # Take these people for this batch, atomically: a person another batch (running at the same time) claimed first is
+        # dropped here, so two batches can never both put the same person in front of the user.
+        shortlist, lost = store.claim_batch(spec.id, scope, capped)
+        if lost:
+            funnel["dedup_claim_lost"] = len(lost)
+        recycled_rows = plan_recycle(spec, scope, store, len(shortlist), funnel, result.warnings, confirm_recycle)
+        moved = store.recycle_into(spec.id, scope, recycled_rows) if recycled_rows else []
+        moved_ids = {m["contact_id"] for m in moved}
+        recycled_rows = [r for r in recycled_rows if r["contact_id"] in moved_ids]  # one decided meanwhile is not offered
+        for r in recycled_rows:  # undecided / standby people from earlier batches: kept score and draft, flagged
+            rc = r["contact"]
+            rc.score = rc.score if rc.score is not None else r["score"]
+            if "previously_shown" not in rc.flags:
+                rc.flags.append("previously_shown")
+        funnel["shortlisted"] = len(shortlist) + len(recycled_rows)
+        funnel["address_tiers"] = tier_counts(shortlist + [r["contact"] for r in recycled_rows])
+        funnel["coverage"] = coverage(spec.target_count, shortlist + [r["contact"] for r in recycled_rows], st.shortlist_floor,
+                                      covered=covered_count(funnel), recycled=len(recycled_rows))
+        if funnel["coverage"]["short_by"]:
+            result.warnings.append(funnel["coverage"]["message"])
+        note_sources(funnel, "passed_judge", [c for c in scored if c.score is not None and c.score >= st.shortlist_floor])
         note_sources(funnel, "shortlisted", shortlist)
         store.upsert_contacts(shortlist)
-        store.checkpoint(spec.id, "judge", shortlist,
-                         extra={"unjudged": sum(1 for c in to_judge if "unjudged" in c.flags and deps.llm.available)})
         store.save_results(spec.id, shortlist, {})
+        funnel["recycled"] = moved
+        shortlist = shortlist + [r["contact"] for r in recycled_rows]
+        store.checkpoint(spec.id, "judge", shortlist,
+                         extra={"unjudged": sum(1 for c in to_judge if "unjudged" in c.flags and deps.llm.available),
+                                "judged": judged_log, "recycled": moved})
+    recycled_ids = {m["contact_id"] for m in funnel.get("recycled") or []}
     result.shortlist = shortlist
     progress(f"judge: {len(shortlist)} shortlisted")
     if last == 3 or not shortlist or not deps.llm.available:
@@ -480,30 +554,125 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     # ── 5. draft ─────────────────────────────────────────────────────────────
     if hasattr(store, "style_examples"):  # the user's own edited emails teach the writer their style
         ctx.style_examples = list(dict.fromkeys(store.style_examples() + list(ctx.style_examples)))[:3]
-    progress(f"draft: writing {len(shortlist)} emails…")
+    fresh_list = [c for c in shortlist if c.id not in recycled_ids]  # recycled people already have their draft
+    progress(f"draft: writing {len(fresh_list)} emails…")
     drafts: Dict[str, Draft] = {}
     failed = 0
-    for c in shortlist:
+    for c in fresh_list:
         d = draft_email(c, spec, pack, deps.llm, ctx=ctx)
         if d is None:
             failed += 1
         else:
             drafts[c.id] = d
     progress("draft: fact-checking drafts…")
-    funnel["fact_check"] = verify_and_fix(shortlist, drafts, spec, pack, deps.llm, ctx=ctx)
-    for c in shortlist:  # a guessed address is never sent without a human looking at it
+    funnel["fact_check"] = verify_and_fix(fresh_list, drafts, spec, pack, deps.llm, ctx=ctx)
+    for c in fresh_list:  # a guessed address is never sent without a human looking at it
         best = c.best_email
-        if c.id in drafts and best and best.method in ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior"):
-            drafts[c.id].issues.append(f"recipient address {best.address} is a guess from the organisation's usual "
-                                       f"email format ({best.method}); verify it before sending")
-    store.save_results(spec.id, shortlist, drafts)
-    result.drafts = drafts
+        d = drafts.get(c.id)
+        if d is None:
+            continue
+        d.address_tier = contact_tier(c)
+        if best and best.method in ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior") and d.address_tier != "verified":
+            d.issues.append(f"recipient address {best.address} is a guess from the organisation's usual "
+                            f"email format ({best.method}); verify it before sending")
+        elif d.address_tier == "unattributed":
+            d.issues.append(f"nothing ties {best.address if best else 'the address'} to {c.name}; check it is theirs before sending")
+    store.save_results(spec.id, fresh_list, drafts)
+    result.drafts = dict(drafts)
+    for r in store.results(spec.id):  # the stored drafts of recycled people are part of this batch's review
+        if r["contact_id"] in recycled_ids and r["body"] and r["email"]:
+            result.drafts[r["contact_id"]] = Draft(contact_id=r["contact_id"], to=r["email"], subject=r["subject"] or "",
+                                                   body=r["body"], issues=r["issues"])
     funnel.update({"drafted_ok": sum(1 for d in drafts.values() if d.ok),
                    "drafts_need_review": sum(1 for d in drafts.values() if not d.ok),
                    "drafts_failed": failed})
     if failed:
         result.warnings.append(f"{failed} drafts could not be generated (LLM error or budget); re-run to retry them.")
     return finish("done")
+
+
+COVERED = ("already_surfaced", "already_contacted", "rejected_earlier", "on_standby")
+
+
+def dedup_summary(funnel: Dict[str, Any]) -> Dict[str, int]:
+    """Who was skipped because an earlier batch (or a send, a rejection, a standby) already covered them, by reason and
+    across every stage: discovery, ranking, after enrichment, the per-organisation cap and the batch claim."""
+    out: Dict[str, int] = {}
+    for part in (funnel.get("dedup_discovery"), funnel.get("dropped"), funnel.get("dropped_after_enrich")):
+        for k, v in (part or {}).items():
+            if k in COVERED or k in ("do_not_contact", "suppressed"):
+                out[k] = out.get(k, 0) + int(v)
+    if funnel.get("dedup_org_cap"):
+        out["org_cap"] = int(funnel["dedup_org_cap"])
+    if funnel.get("dedup_claim_lost"):
+        out["claim_lost"] = int(funnel["dedup_claim_lost"])
+    return out
+
+
+def covered_count(funnel: Dict[str, Any]) -> int:
+    d = dedup_summary(funnel)
+    return sum(d.get(k, 0) for k in COVERED) + d.get("claim_lost", 0)
+
+
+def supply_summary(spec: CampaignSpec, funnel: Dict[str, Any], result: "RunResult") -> Dict[str, Any]:
+    """What this batch delivered against what was asked: new people, recycled people, how much was already covered, and
+    the fresh yield (qualified candidates that were new / all qualified candidates found). `exhausted` means the pool
+    for this brief could not fill the batch with NEW people."""
+    recycled = len(funnel.get("recycled") or [])
+    fresh = max(0, len(result.shortlist) - recycled)
+    covered = covered_count(funnel)
+    qualified = int(funnel.get("qualified", 0))
+    return {"requested": spec.target_count, "fresh": fresh, "recycled": recycled, "covered_skipped": covered,
+            "fresh_yield": round(qualified / (qualified + covered), 3) if (qualified + covered) else 1.0,
+            "exhausted": fresh < spec.target_count}
+
+
+def plan_recycle(spec: CampaignSpec, scope: touch.Scope, store: Store, fresh_n: int, funnel: Dict[str, Any],
+                 warnings: List[str], confirm: Optional[Callable[[Dict[str, Any]], bool]],
+                 exclude: Sequence[str] = ()) -> List[Dict[str, Any]]:
+    """When NEW matches are very few (fewer than max(3, wanted/2)) and the user wants more, earlier people who passed
+    the fit floor but were never decided on, or were put on standby, may be offered again, best score first. Never
+    rejected people, never anyone already emailed. Their stored score and draft are reused: no new LLM calls."""
+    wanted = spec.target_count
+    threshold = min(wanted, max(3, math.ceil(wanted / 2)))
+    if fresh_n >= threshold or spec.recycle == "never" or fresh_n >= wanted:
+        return []
+    pool = []
+    for r in store.soft_pool(scope, exclude_campaign=[spec.id, *exclude]):  # `exclude`: batches of this same call
+        if store.blocked_reason(r["contact"], None) is None:  # a send or suppression since then still wins
+            pool.append(r)
+    if not pool:
+        return []
+    offer = pool[: wanted - fresh_n]
+    info = {"fresh": fresh_n, "wanted": wanted, "undecided": sum(1 for r in pool if r["status"] != "standby"),
+            "standby": sum(1 for r in pool if r["status"] == "standby"), "offer": len(offer)}
+    mode = spec.recycle
+    yes = mode == "auto" or (mode == "ask" and confirm is not None and bool(confirm(info)))
+    funnel["recycle_offer"] = {**info, "accepted": yes}
+    if not yes:
+        if mode == "ask" and confirm is None:
+            warnings.append(f"Only {fresh_n} new of {wanted}. {info['undecided']} earlier suggestions are still undecided and "
+                            f"{info['standby']} are on standby: run again with --recycle auto to include them.")
+        return []
+    return offer
+
+
+def coverage(wanted: int, shortlist: List[Contact], floor: float, covered: int = 0, recycled: int = 0) -> Dict[str, Any]:
+    """What the run actually delivered against what was asked for, stated plainly. A short list is a correct answer
+    when the alternative is padding it with weak fits or addresses nothing ties to the person."""
+    tiers = tier_counts(shortlist)
+    sendable = tiers.get("verified", 0)
+    short_by = max(0, wanted - len(shortlist))
+    msg = ""
+    if short_by:
+        msg = (f"Found {len(shortlist)} confident prospect{'s' if len(shortlist) != 1 else ''} of the {wanted} wanted: "
+               f"the list stops at fit {floor:g} instead of filling it with weaker matches. Broaden the topics or "
+               f"locations, or add a contact-data provider, to find more.")
+    if covered and short_by:
+        msg += f" {covered} candidates were skipped because earlier batches already covered them."
+    return {"wanted": wanted, "delivered": len(shortlist), "short_by": short_by, "floor": floor,
+            "verified_address": sendable, "needs_address_check": len(shortlist) - sendable, "message": msg,
+            "already_covered": covered, "recycled": recycled}
 
 
 def learn_fit(spec: CampaignSpec, pack, store: Store, contacts: List[Contact]) -> Dict[str, Any]:
@@ -532,7 +701,8 @@ def learn_fit(spec: CampaignSpec, pack, store: Store, contacts: List[Contact]) -
 
 def backfill(spec: CampaignSpec, pack, ctx: CampaignContext, deps: Deps, planner: SearchPlanner,
              winners: List[Contact], *, known: List[Contact], rank_stage, enrich_stage, judge_stage,
-             funnel: Dict[str, Any], progress: Callable[[str], None], ceiling: int) -> List[Contact]:
+             funnel: Dict[str, Any], progress: Callable[[str], None], ceiling: int,
+             blocked: Optional[Callable[[Contact], Optional[str]]] = None) -> List[Contact]:
     """Too few candidates passed the judge: search once more, seeded with the ones that did (lookalikes,
     co-authors, the best-performing tool) and steered away from why the others failed. Only NEW candidates
     are ranked, enriched and judged, so nothing is paid for twice."""
@@ -546,7 +716,10 @@ def backfill(spec: CampaignSpec, pack, ctx: CampaignContext, deps: Deps, planner
     planner.need = max(10, missing * 4)
     planner.replanned = False  # one more replan, now with winners and rejection reasons
     ex = explore(spec, pack, ctx, deps, planner, budget=max(0, left - 1), rounds=2, need=planner.need,
-                 winners=winners[:5], progress=progress)
+                 winners=winners[:5], progress=progress, blocked=blocked)
+    for why, n in ex.skipped.items():
+        d = funnel.setdefault("dedup_discovery", {})
+        d[why] = d.get(why, 0) + n
     seen = {c.id for c in known} | {c.org_domain for c in known if c.kind == "org" and c.org_domain}
     fresh = [c for c in ex.contacts if c.id not in seen and not (c.kind == "org" and c.org_domain in seen)]
     stats: Dict[str, Any] = {"found": len(fresh), "spent": ex.rounds[-1]["spent"] if ex.rounds else 0}
