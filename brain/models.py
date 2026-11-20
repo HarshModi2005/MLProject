@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -161,6 +161,19 @@ class EmailCandidate(BaseModel):
     verified_by: str = ""
 
 
+_SERVICE_TOKENS = {"support", "service", "services", "helpdesk", "helpline", "customerservice", "customercare",
+                   "complaints", "grievance", "grievances", "billing", "noreply", "donotreply", "unsubscribe"}
+
+
+def is_service_address(address: str) -> bool:
+    """True when a word of the local part marks a customer-service desk (frontline-service@, support.apac@)."""
+    import re
+
+    local = address.split("@")[0].lower()
+    return bool(re.sub(r"[._+\-]", "", local) in _SERVICE_TOKENS or
+                any(t in _SERVICE_TOKENS for t in re.split(r"[._+\-]", local) if t))
+
+
 class Contact(BaseModel):
     id: str = ""
     kind: str = "person"  # person | org (an organisation reached through its shared inbox)
@@ -181,7 +194,7 @@ class Contact(BaseModel):
     sources: List[str] = Field(default_factory=list)
     # For an organisation reached through its shared inbox: the person in the right role, if one was found
     # ({"name", "title", "source"}), so the email can be addressed to them.
-    decision_maker: Optional[Dict[str, str]] = None
+    decision_maker: Optional[Dict[str, Any]] = None
     criteria: Dict[str, float] = Field(default_factory=dict)  # support per fit criterion (cheap, then judged)
 
     # filled by ranking
@@ -203,6 +216,8 @@ class Contact(BaseModel):
     def add_email(self, cand: EmailCandidate) -> None:
         addr = cand.address.strip().lower()
         cand.address = addr
+        if is_service_address(addr):  # support@, frontline-service@ ...: a desk that answers customers, never outreach
+            return
         for e in self.emails:
             if e.address == addr:
                 if cand.confidence > e.confidence:

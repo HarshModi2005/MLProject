@@ -56,7 +56,7 @@ from brain.judge import judge
 from brain.llm import LLM
 from brain.models import CampaignSpec, Contact, Draft
 from brain.packs import get_pack
-from brain.rank import diversify, filter_contacts, prescore
+from brain.rank import diversify, filter_contacts, prefer_person, prescore
 from brain.resolve import resolve
 from brain.settings import Settings
 from brain.sources.csvlist import load_csv
@@ -512,6 +512,10 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 continue
             seen_addr.add(addr)
             unique.append(c)
+        before_pref = len(unique)
+        unique = prefer_person(unique)
+        if len(unique) < before_pref:
+            funnel["dropped_inbox_for_person"] = before_pref - len(unique)
         capped = diversify(unique, spec.target_count, st.max_per_org, prior=prior_org, prior_cap=1 if org_campaign else None)
         if prior_org:
             funnel["dedup_org_cap"] = sum(1 for c in unique if c not in capped and prior_org.get(touch.org_key(c), 0)

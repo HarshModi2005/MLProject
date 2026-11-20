@@ -14,6 +14,12 @@ HONORIFICS = {
 
 # Words that appear in navigation, headings and organisation names but never in a person's name.
 NOT_NAME_WORDS = {
+    # more section and corporate-page words ("Corporate Governance", "Frontline Workplace")
+    "corporate", "governance", "frontline", "workplace", "workforce", "relations", "sustainability", "responsibility",
+    "csr", "esg", "culture", "strategy", "operations", "transformation", "digital", "global", "worldwide", "business",
+    "industries", "industrial", "financial", "investor", "stakeholders", "shareholders", "communication",
+    "communications", "marketing", "sales", "advisory", "consulting", "learning", "academy", "foundation", "trust",
+    "at", "by", "as", "is", "with", "from", "via", "about", "new", "latest",
     # page sections and company words that make page titles look like names ("Partner Spotlight")
     "partner", "partners", "partnership", "spotlight", "customer", "customers", "stories", "story", "sponsor",
     "sponsors", "member", "members", "community", "featured", "insights", "resources", "webinar", "webinars",
@@ -112,6 +118,11 @@ def looks_like_person_name(raw: str) -> bool:
             return False
         if not (bare[0].isupper() or bare.lower() in {"de", "van", "von", "der", "bin", "al", "la", "di", "da"}):
             return False
+    # an acronym next to ordinary words is a title or an organisation ("At SIM", "Program Officer ISB"), not a person;
+    # a name written wholly in capitals ("RAJ KUMAR") is fine
+    caps = [t for t in tokens if len(t.strip(".")) >= 3 and t.strip(".").isupper()]
+    if caps and len(caps) < len(tokens):
+        return False
     # at least one token longer than an initial
     return any(len(t.strip(".")) > 1 for t in tokens)
 
@@ -227,3 +238,25 @@ def normalise_locations(values: List[str]) -> Tuple[List[str], Optional[bool]]:
             if norm.lower() not in {o.lower() for o in out}:
                 out.append(norm)
     return out, remote
+
+
+# Sites that list or write about organisations. They are sources, never targets, for hiring, partnership, sponsorship,
+# fundraising or press asks ("Topstartups", "Clutch", "Crunchbase").
+AGGREGATOR_DOMAINS = {
+    "topstartups.io", "clutch.co", "goodfirms.co", "g2.com", "capterra.com", "crunchbase.com", "producthunt.com",
+    "angel.co", "wellfound.com", "glassdoor.com", "ambitionbox.com", "tracxn.com", "growjo.com", "zoominfo.com",
+    "apollo.io", "owler.com", "dnb.com", "yellowpages.com", "justdial.com", "sulekha.com", "indiamart.com",
+    "tradeindia.com", "linkedin.com", "facebook.com", "instagram.com", "wikipedia.org", "medium.com", "quora.com",
+    "reddit.com", "yourstory.com", "inc42.com", "startupindia.gov.in", "f6s.com", "dealroom.co", "pitchbook.com",
+    "cbinsights.com", "betalist.com", "indeed.com", "naukri.com", "ycombinator.com", "themanifest.com",
+}
+_AGGREGATOR_NAME = re.compile(r"\b(directory|listings?|marketplace|top \d+|best \d+|list of|rankings?|reviews? of)\b|"
+                              r"\btop[\s-]?startups\b", re.I)
+
+
+def is_aggregator(name: str = "", domain: str = "") -> bool:
+    """A directory, ranking or marketplace rather than an organisation that does the thing itself."""
+    dom = registrable_domain(domain) if domain else ""
+    if dom and dom in AGGREGATOR_DOMAINS:
+        return True
+    return bool(name and _AGGREGATOR_NAME.search(name))

@@ -145,7 +145,7 @@ def test_situations_are_computed_in_code():
         == "person_guessed_address"
     inbox = [EmailCandidate(address="hello@byte.in", confidence=0.7, method="inbox")]
     assert dr.situation(Contact(kind="org", name="ByteStudio", emails=inbox,
-                                decision_maker={"name": "Asha Rao", "title": "CTO"})) == "decision_maker_via_inbox"
+                                decision_maker={"name": "Asha Rao", "title": "CTO", "confidence": 0.9})) == "decision_maker_via_inbox"
     assert dr.situation(Contact(kind="org", name="ByteStudio", emails=inbox)) == "org_inbox"
     own = [EmailCandidate(address="dentiszone@gmail.com", confidence=0.65, method="site")]
     assert dr.situation(Contact(kind="org", name="Dentis Zone", emails=own)) == "person_own_address"  # the clinic's own Gmail
@@ -263,7 +263,7 @@ def test_salutations_handle_initials_owner_named_businesses_and_long_names():
     assert dr.salutation(Contact(kind="org", name="Gaurav Singh"), pb) == "Hi Gaurav,"
     assert dr.salutation(Contact(kind="org", name="The TWIML AI Podcast (formerly This Week in Machine Learning)"), pb) \
         == "Hello TWIML AI Podcast team,"
-    assert dr.salutation(Contact(kind="org", name="Voxa", decision_maker={"name": "S. Rao"}), pb) == "Hi S. Rao,"
+    assert dr.salutation(Contact(kind="org", name="Voxa", decision_maker={"name": "S. Rao", "confidence": 0.9}), pb) == "Hi S. Rao,"
 
 
 def test_a_second_ask_is_caught():

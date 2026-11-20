@@ -234,3 +234,24 @@ def diversify(contacts: List[Contact], limit: int, max_per_org: int, prior: Opti
         if len(out) >= limit:
             break
     return out
+
+
+def prefer_person(contacts: List[Contact]) -> List[Contact]:
+    """When an organisation's shared inbox and a named person at the same organisation are both candidates, keep one:
+    two emails to one organisation, one of them to the front desk, is a worse list. The person wins ties; otherwise the
+    higher score wins (a guessed address for a person does not beat a published inbox)."""
+    def key(c: Contact) -> str:
+        return (c.org_domain or c.org or "").strip().lower()
+
+    best_person: Dict[str, float] = {}
+    best_org: Dict[str, float] = {}
+    for c in contacts:
+        k = key(c)
+        if not k:
+            continue
+        side = best_person if c.kind == "person" else best_org
+        side[k] = max(side.get(k, 0.0), c.score or 0.0)
+    drop_org = {k for k in best_org if k in best_person and best_person[k] >= best_org[k]}
+    drop_person = {k for k in best_org if k in best_person and best_person[k] < best_org[k]}
+    return [c for c in contacts if not ((c.kind == "org" and key(c) in drop_org)
+                                        or (c.kind == "person" and key(c) in drop_person))]

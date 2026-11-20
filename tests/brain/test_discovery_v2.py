@@ -183,7 +183,7 @@ def test_decision_maker_from_search_titles_and_hiring_signal():
 def test_salutation_addresses_the_decision_maker_through_the_inbox():
     from brain.draft import salutation
 
-    org = Contact(kind="org", name="Smile Dental", decision_maker={"name": "Anita Rao", "title": "Owner", "source": "u"})
+    org = Contact(kind="org", name="Smile Dental", decision_maker={"name": "Anita Rao", "title": "Owner", "source": "u", "confidence": 0.9})
     assert salutation(org, get_playbook("b2b_sales")) == "Hi Anita,"
     assert salutation(Contact(kind="org", name="Smile Dental"), get_playbook("b2b_sales")) == "Hello Smile Dental team,"
 

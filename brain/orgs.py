@@ -373,7 +373,7 @@ class OrgEnricher:
             paid = hunter_person(self.fetcher, org, roles)
             if paid is not None:
                 self.stats["hunter_contacts"] = self.stats.get("hunter_contacts", 0) + 1
-                org.decision_maker = {"name": paid.name, "title": paid.title or "", "source": "hunter"}
+                org.decision_maker = {"name": paid.name, "title": paid.title or "", "source": "hunter", "confidence": 1.0}
                 return paid
         with self._lock:
             if self._people_searches >= self.max_people_searches or self.search.remaining <= 4:
@@ -383,12 +383,12 @@ class OrgEnricher:
         top = [r for r in roles[:3] if r]
         query = f'"{org.name}" ' + " OR ".join(f'"{r}"' for r in top)
         hits = self.search.search(query, n=8, raw=True)
-        person = people_from_serp(hits, org.name, top)
+        person = people_from_serp_scored(hits, org.name, top)
         if not person:
             return None
-        name, title, url = person
+        name, title, url, conf = person
         self.stats["decision_makers_found"] += 1
-        org.decision_maker = {"name": name, "title": title, "source": url}
+        org.decision_maker = {"name": name, "title": title, "source": url, "confidence": conf}
         patterns = infer_domain_patterns(site_people, min_support=2)
         hit = next(((d, pn) for d, pn in patterns.items() if registrable_domain(d) == org.org_domain), None)
         c = Contact(kind="person", name=name, title=title, org=org.name, org_domain=org.org_domain,
@@ -693,11 +693,27 @@ def hiring_signal(page: ParsedPage) -> float:
 _SERP_SPLIT = re.compile(r"\s+[-–—|·]\s+|\s+at\s+|,\s+")
 
 
-def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str]]:
-    """A (name, title, url) from search-result titles like "Priya Nair - Head of Partnerships - DevToolCo".
-    Only result titles/snippets are read (no profile pages are fetched), and the organisation must be named."""
+SOCIAL_NOT_PROFILE = ("instagram.com", "facebook.com", "fb.com", "twitter.com", "x.com", "youtube.com", "tiktok.com",
+                      "pinterest.com", "reddit.com", "quora.com", "medium.com")  # posts and reels, not a record of who works where
+
+
+def _is_profile_url(url: str) -> bool:
+    host = host_of(url or "")
+    return not any(host == d or host.endswith("." + d) for d in SOCIAL_NOT_PROFILE)
+
+
+def people_from_serp_scored(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str, float]]:
+    """(name, title, url, confidence) from search-result titles like "Priya Nair - Head of Partnerships - DevToolCo".
+    Only result titles/snippets are read (no profile pages are fetched). Strict on purpose, because the name ends up in
+    the greeting: the organisation must be named, a social-media post or reel is never a source, and a name with a
+    repeated word ("Javier Javier") is rejected. Confidence is 0.9 when the whole organisation name appears together
+    with a role in the title, 0.6 when only some of its (generic) words do, so "Photovoltaic Solar" cannot be vouched
+    for by a stranger who is a "Photovoltaic Engineer"."""
     org_tokens = [t for t in re.findall(r"[a-z0-9]+", org_name.lower()) if len(t) > 2]
+    org_phrase = " ".join(re.findall(r"[a-z0-9]+", org_name.lower()))
     for h in hits:
+        if not _is_profile_url(h.url):
+            continue
         title = (h.title or "").replace("| LinkedIn", "").replace("LinkedIn", "")
         blob = (title + " " + (h.snippet or "")).lower()
         if org_tokens and not any(t in blob for t in org_tokens):
@@ -708,9 +724,20 @@ def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[st
         name = clean_name(parts[0])
         if not looks_like_person_name(name) or any(t in name.lower() for t in org_tokens):
             continue
-        role = next((p for p in parts[1:] if _role_fits(p, roles)), None)
-        if role is None:
-            role = next((r for r in roles if r.lower() in blob), None)
-        if role:
-            return name, squash(role, 80), h.url
+        words = [w.lower().strip(".") for w in name.split()]
+        if len(set(words)) < len(words):
+            continue
+        role_part = next((p for p in parts[1:] if _role_fits(p, roles)), None)
+        role = role_part or next((r for r in roles if r.lower() in blob), None)
+        if not role:
+            continue
+        phrase_in_title = bool(org_phrase) and org_phrase in " ".join(re.findall(r"[a-z0-9]+", title.lower()))
+        conf = 0.9 if (role_part and phrase_in_title) else 0.6
+        return name, squash(role, 80), h.url, conf
     return None
+
+
+def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str]]:
+    """A (name, title, url) from search-result titles (see people_from_serp_scored)."""
+    found = people_from_serp_scored(hits, org_name, roles)
+    return found[:3] if found else None

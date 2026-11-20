@@ -30,3 +30,4 @@ main (*).out
 main (*).toc
 main (*).pdf
 hello.txt
+evals/results/.llm_judge_cache.sqlite

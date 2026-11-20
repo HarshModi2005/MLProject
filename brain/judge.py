@@ -33,12 +33,19 @@ Candidates with "kind": "org" are organisations reached through a shared inbox: 
 ask. Candidates with "kind": "person" must be real individuals: if one is actually a page title, department, event or
 product, score 0. Also score 0 for publishers, directories and media sites that merely write about the topic.
 
+Role in the ask matters. For asks to distribute, resell, partner, sponsor, buy, invest or hire, an organisation that
+makes or sells the SAME thing as the sender (a competitor) is not a fit, and neither is a directory, ranking, marketplace or
+publisher that only lists or covers organisations: set "competitor_or_directory" true and score at most 25.
+Geography matters. If a target geography is given and the candidate is clearly based or active only elsewhere, set
+"region_ok" false (true if it fits, null if the evidence does not say) and score at most 40.
+
 If CRITERIA are listed, also rate each criterion 0-100 for each candidate, strictly from the evidence (0 when the
 evidence says nothing about it), and let the overall score reflect them.
 
 Return JSON: {"results": [{"id": "<id>", "score": <int>, "reasons": ["<short reason>", "<short reason>"],
 "criteria": {"<criterion name>": <int>, ...},
 "hook": "<the single most relevant fact from this person's evidence, quoted or closely paraphrased, or null>",
+"region_ok": <true | false | null>, "competitor_or_directory": <true | false>,
 "hook_ref": <index of the evidence item the hook comes from, or null>,
 "sender_ref": <number of the SENDER FACT most relevant to this candidate, or null>,
 "why_now": "<a timing fact quoted from the evidence that makes now a good moment (hiring now, just raised, a recent
@@ -146,6 +153,14 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
 
     from brain.fit import profile_for, reach_factor
 
+    from brain.textutil import is_aggregator
+
+    for c in contacts:  # directories and rankings are never targets: no model call needed
+        if is_aggregator(c.org or c.name, c.org_domain or ""):
+            c.fit, c.score = 0.0, 0.0
+            c.flags += ["competitor_or_directory", "aggregator"]
+            c.reasons = ["a directory or aggregator, not a target"]
+    contacts = [c for c in contacts if "aggregator" not in c.flags]
     scrub(contacts)  # scraped text may instruct the model: remove it before it reaches the prompt
 
     full = with_context(spec, ctx)
@@ -210,6 +225,12 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
                 if "calibrated" not in c.flags:
                     c.flags.append("calibrated")
             c.reasons = [squash(str(r), 160) for r in (item.get("reasons") or [])[:3]]
+            if item.get("competitor_or_directory") is True:  # the model said so; the cap does not depend on its score
+                c.fit, c.score = min(c.fit, 0.25), min(c.score, 0.25)
+                c.flags.append("competitor_or_directory")
+            if item.get("region_ok") is False and (spec.countries or spec.regions):
+                c.fit, c.score = min(c.fit, 0.4), min(c.score, 0.4)
+                c.flags.append("wrong_region")
             if "injection_suspect" in c.flags:  # its sources tried to instruct the model: half the trust, said out loud
                 c.score = round(c.score * 0.5, 4)
                 c.reasons.insert(0, "source text tried to instruct the model; treated as untrusted")

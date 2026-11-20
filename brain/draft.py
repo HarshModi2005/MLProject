@@ -47,6 +47,8 @@ Rules:
   to THEIR work; (3) exactly ONE ask, in one sentence, easy to answer. If a link or availability is given, use it.
 - Mutual connections: mention one ONLY as the evidence states it ("we are both connected to X", "I know X at your
   company"). Never claim someone introduced, referred or recommended the sender unless the evidence says so.
+- Never mention the recipient's email address, "inbox", "mailbox" or hope that the message "reaches" anyone. The reader
+  must not be able to tell how the address was found or that it is shared.
 - Follow the SITUATION rules.
 - Plain text. No greeting line, no sign-off, no bullet points, no placeholders like [Name], at most one link.
 - No filler openers ("I hope this email finds you well"), no flattery adjectives, no hype, no exclamation marks.
@@ -87,12 +89,28 @@ def team_name(name: str) -> str:
     return n.strip() or name
 
 
+DM_TRUST = 0.7  # below this a found "decision maker" is not greeted by name (search snippets can name a stranger)
+
+
+def trusted_dm(contact: Contact) -> dict:
+    """The decision maker a draft may address by name: found by a paid provider, or by a search that named the
+    organisation and the role together. Records from before the confidence was kept count as unverified."""
+    dm = contact.decision_maker or {}
+    if not dm.get("name"):
+        return {}
+    conf = dm.get("confidence")
+    if conf is None:
+        conf = 1.0 if dm.get("source") == "hunter" else 0.5
+    return dm if float(conf) >= DM_TRUST else {}
+
+
 def salutation(contact: Contact, pack: Pack) -> str:
     from brain.textutil import looks_like_person_name
 
     if contact.kind == "org":
-        dm = contact.decision_maker or {}
-        first = clean_name(dm.get("name") or "").split()
+        dm = trusted_dm(contact)
+        dm_name = clean_name(dm.get("name") or "")
+        first = dm_name.split() if looks_like_person_name(dm_name) else []  # "At SIM" is not someone to greet
         if first:  # found the right person but only the shared inbox: address them through it
             return f"Hi {_greet_name(first)},"
         if looks_like_person_name(contact.name):  # a one-person business listed under its owner's name
@@ -102,7 +120,12 @@ def salutation(contact: Contact, pack: Pack) -> str:
     if not tokens:
         return "Hello,"
     if pack.salutation == "professor":
-        return f"Dear Professor {surname(tokens)},"
+        title = (contact.title or "").lower()
+        if re.search(r"professor|\bprof\b|lecturer|\bfaculty\b|\bchair\b", title):
+            return f"Dear Professor {surname(tokens)},"
+        if re.search(r"\bdr\b|\bphd\b|doctor|researcher|scientist|fellow|investigator", title):
+            return f"Dear Dr. {surname(tokens)},"
+        return f"Dear {' '.join(tokens)},"  # no title in the evidence: do not promote or demote anyone
     return f"Hi {_greet_name(tokens)},"
 
 
@@ -192,6 +215,22 @@ def clean_body(body: str, contact: Contact) -> str:
     return body
 
 
+_ADDRESS = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
+_META = re.compile(r"\b(?:shared|team|general|generic|your|this|the)?\s*(?:e-?mail\s+)?(?:inbox|mailbox)\b|"
+                   r"\b(?:hoping|hope|trust)\s+(?:this|that|my)\s+(?:message|email|note)?\s*(?:finds|reaches|gets to|"
+                   r"makes it to|lands with)\b|\breaches?\s+(?:you|your team|the right (?:person|team))\b", re.I)
+
+
+def leaks(text: str) -> List[str]:
+    """How the email was addressed must not show in it: a raw address, or talk of an inbox or of hoping it arrives."""
+    out: List[str] = []
+    if _ADDRESS.search(text):
+        out.append("shows an email address in the text")
+    if _META.search(text):
+        out.append("talks about the inbox or about the message reaching someone")
+    return out
+
+
 def check(body: str, subject: str, contact: Contact, spec: CampaignSpec) -> List[str]:
     """Deterministic quality and grounding checks. Returns a list of problems (empty = pass)."""
     issues: List[str] = []
@@ -212,6 +251,7 @@ def check(body: str, subject: str, contact: Contact, spec: CampaignSpec) -> List
         issues.append("body must not start with a greeting")
     if not subject.strip():
         issues.append("missing subject")
+    issues += leaks(body + "\n" + subject)
 
     o, a = spec.offer, spec.ask_detail
     raw_facts = " ".join(
@@ -355,7 +395,7 @@ def situation(contact: Contact) -> str:
         shared = bool(best) and (best.method == "inbox" or is_role_address(best.address))
         if not shared:
             return "person_own_address"  # e.g. a small clinic's own Gmail: write as to its owner
-        return "decision_maker_via_inbox" if (contact.decision_maker or {}).get("name") else "org_inbox"
+        return "decision_maker_via_inbox" if trusted_dm(contact) else "org_inbox"
     if best and best.method in GUESSED_METHODS:
         return "person_guessed_address"
     return "person_own_address"
@@ -396,7 +436,7 @@ Tone: {spec.tone}
 LANGUAGE: {spec.language or 'English'}
 {('OFFER: ' + spec.offer.value_prop + ((' | proof: ' + '; '.join(spec.offer.proof_points[:3])) if spec.offer.proof_points else '') + ((' | terms: ' + spec.offer.terms) if spec.offer.terms else '')) if spec.offer.value_prop else ''}
 
-RECIPIENT ({'an organisation, written to through its shared inbox ' + (best.address if (best := contact.best_email) else '') + ' — address the team, not a named person' if contact.kind == 'org' else 'a person'})
+RECIPIENT ({'an organisation, reached through its shared team mailbox; never mention the mailbox or its address' + (' — address the team, not a named person' if not trusted_dm(contact) else '') if contact.kind == 'org' else 'a person'})
 Name: {contact.name}
 Role: {contact.title or ('organisation' if contact.kind == 'org' else 'unknown')} at {contact.org or 'unknown'}
 Works on: {', '.join(contact.topics[:6]) or 'see evidence'}

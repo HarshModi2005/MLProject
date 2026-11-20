@@ -39,7 +39,7 @@ def test_surname_keeps_particles_and_drops_suffixes():
     assert surname("Anna van der Berg".split()) == "van der Berg"
     assert surname(["Rao"]) == "Rao" and surname("Priya Nair".split()) == "Nair"
     assert surname("John Smith Jr.".split()) == "Smith"
-    assert salutation(Contact(name="Anna van der Berg"), get_playbook("academic")) == "Dear Professor van der Berg,"
+    assert salutation(Contact(name="Anna van der Berg", title="Professor"), get_playbook("academic")) == "Dear Professor van der Berg,"
 
 
 def test_bridge_skips_suppressed_recipients(tmp_path, monkeypatch):
