@@ -17,7 +17,7 @@ from urllib.parse import urldefrag, urljoin
 
 from bs4 import BeautifulSoup, Tag
 
-from brain.emailfinder import attach_emails, extract_emails, name_match
+from brain.emailfinder import attach_emails, cloudflare_emails, extract_emails, name_match
 from brain.models import Contact, Evidence
 from brain.textutil import (
     clean_name, country_from_domain, host_of, looks_like_person_name, registrable_domain, squash,
@@ -79,7 +79,7 @@ def parse(html: str, url: str) -> ParsedPage:
     # recorded before navigation is stripped out of the content.
     for a in soup.find_all("a", href=True):
         href = a["href"].strip()
-        if href.lower().startswith(("mailto:", "javascript:", "tel:", "#")):
+        if href.lower().startswith(("mailto:", "javascript:", "tel:", "#")) or "email-protection" in href:
             continue
         absolute = urldefrag(urljoin(url, href))[0]
         if absolute.startswith("http"):
@@ -89,6 +89,7 @@ def parse(html: str, url: str) -> ParsedPage:
         target = re.split("url=", refresh["content"], flags=re.I)[1].strip(" '\"")
         page.nav_links.append((urljoin(url, target), "redirect"))
 
+    hidden = cloudflare_emails(soup)  # decode before the elements that hold them are stripped
     for el in soup.find_all(["script", "style", "noscript", "nav", "footer", "form", "svg", "iframe"]):
         el.decompose()
 
@@ -103,13 +104,16 @@ def parse(html: str, url: str) -> ParsedPage:
                 if addr not in page.mailtos:
                     page.mailtos.append(addr)
             continue
-        if href.startswith(("javascript:", "tel:", "#")):
+        if href.startswith(("javascript:", "tel:", "#")) or "email-protection" in href:
             continue
         absolute = urldefrag(urljoin(url, href))[0]
         if absolute.startswith("http"):
             page.links.append((absolute, squash(a.get_text(" "), 120)))
 
     page.text = re.sub(r"\n\s*\n+", "\n", soup.get_text("\n")).strip()
+    for addr in hidden:
+        if addr not in page.mailtos:
+            page.mailtos.append(addr)
     page.emails = list(dict.fromkeys(page.mailtos + extract_emails(page.text)))
     return page
 

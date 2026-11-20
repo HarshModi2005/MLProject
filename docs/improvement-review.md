@@ -115,7 +115,7 @@ Each item lists what was found, then what to change.
 - JavaScript-rendered team pages are not read by `brain/`.
 
 **Improve**
-- Decode `data-cfemail`, and read schema.org `Person` JSON-LD for contact fields.
+- Decode `data-cfemail`. (schema.org `Person` JSON-LD is already parsed in `pages.py`.)
 - Learn from bounces by downweighting patterns that bounce.
 - Add catch-all detection and optional SMTP probing, or use Hunter, for guessed addresses.
 - Add an opt-in headless fetch for pages that return little content.
@@ -209,8 +209,8 @@ Each item lists what was found, then what to change.
 **Found**
 - `brain` has no send path. `bridge.py` copies drafts into the legacy `professors` and `emails` tables, and the
   Streamlit UI sends through `agents/gmail_sender.py`. Two schemas and two status machines are kept in sync by hand.
-- The rate limiter keeps its counters in memory, and its own docstring says they should be in the database. A restart
-  resets the daily and weekly limits.
+- `email_dispatch/rate_limiter.py` keeps its counters in memory, and its own docstring says they should be in the
+  database. Nothing outside the package instantiates it, so no send limit is enforced at all.
 
 **Improve**
 - Build a native review-and-send step on `ResultRow`, with persisted limits, bounce and reply handling, and the
@@ -222,8 +222,8 @@ Each item lists what was found, then what to change.
 **Found**
 - Good@K is scored by an LLM judge of the same kind that ranks the candidates, so the metric is partly circular.
   Label files exist, but the v3 plan says the labels are still unfilled.
-- Grader noise was measured at about ±1 email per scenario, and live runs cost real money, so a difference of 23
-  versus 31 good@K on one run is hard to interpret.
+- Grader noise was measured at about ±1 email per scenario, so a difference of 23 versus 31 good@K on one run is
+  hard to interpret. Runs are cheap (`final_live`: about $0.15 of LLM calls plus 178 searches), so repeats are affordable.
 
 **Improve**
 - Fill the human labels, even 30 per scenario.
@@ -247,3 +247,21 @@ live source (arXiv, NSF, job-board APIs) changes its response shape.
 3. **Judge calibration and fit-score fixes** (sections 3 and 8). These change ranking quality directly.
 4. **Send path and compliance** (sections 10 and 14). They are required before real deployment.
 5. **LLM parse-retry and region matching** (sections 11 and 5). They are small, concrete bugs.
+
+## Status: changes applied after an audit of this review
+
+Done (tests in `tests/brain/test_review_fixes.py`, 146 pass in a clean venv built from `requirements-brain.txt`):
+- Region match is whole-word (`rank.py`), so `goa` no longer matches "goals".
+- Cloudflare-protected emails are decoded (`emailfinder.decode_cfemail`, used by `pages.parse`).
+- A JSON parse failure is fed back to the model in the retry (`llm.py`).
+- `bridge.export_to_review` re-checks suppression and already-contacted status before export.
+- Surnames keep particles ("van der Berg") and drop suffixes in the professor salutation.
+- Commercial drafts with no sender postal address are flagged for review.
+- The funnel records pre-judge vs judge agreement (`prejudge_agreement`).
+- CI runs `pytest tests/brain`; `requirements-brain.txt` holds the brain-only dependencies.
+- `outreach.db`, the CV, `run_logs/`, LaTeX build files and `hello.txt` are untracked and ignored. They remain in git
+  history until it is rewritten (`git filter-repo` and a force push).
+
+Not done, on purpose: dropping the judge's prescore term (changes what good@K means, needs a re-baseline),
+calibration, a bandit reward from the pre-judge, SMTP probing, bounce learning (needs a send path first), the native
+send path, and the minor items marked low value in the audit.

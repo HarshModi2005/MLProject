@@ -62,6 +62,22 @@ def _greet_name(tokens: List[str]) -> str:
     return tokens[0]
 
 
+_NAME_PARTICLES = {"van", "von", "der", "den", "de", "del", "della", "di", "da", "dos", "das", "du", "la", "le",
+                   "bin", "ibn", "al", "el", "ter", "ten", "st", "mac"}
+_NAME_SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "phd", "md"}
+
+
+def surname(tokens: List[str]) -> str:
+    """'Anna van der Berg' -> 'van der Berg'; 'Rao' -> 'Rao'; 'John Smith Jr.' -> 'Smith'."""
+    toks = [t for t in tokens]
+    while len(toks) > 1 and toks[-1].strip(".,").lower() in _NAME_SUFFIXES:
+        toks.pop()
+    i = len(toks) - 1
+    while i > 1 and toks[i - 1].lower() in _NAME_PARTICLES:  # i > 1: keep a first name in front
+        i -= 1
+    return " ".join(toks[i:])
+
+
 def team_name(name: str) -> str:
     """'The TWIML AI Podcast (formerly This Week in ...)' -> 'TWIML AI Podcast'."""
     n = re.sub(r"\s*[\(\[].*?[\)\]]", "", name or "")
@@ -85,7 +101,7 @@ def salutation(contact: Contact, pack: Pack) -> str:
     if not tokens:
         return "Hello,"
     if pack.salutation == "professor":
-        return f"Dear Professor {tokens[-1]},"
+        return f"Dear Professor {surname(tokens)},"
     return f"Hi {_greet_name(tokens)},"
 
 
@@ -421,6 +437,9 @@ def draft_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, ctx=
         issues = check(body, subject, contact, spec)
         if not issues:
             break
+    if getattr(pack, "commercial", False) and not spec.sender.postal_address.strip():
+        # commercial email law (CAN-SPAM and similar) expects a physical address in the footer
+        issues = issues + ["commercial email without a sender postal address (add one in the sender profile)"]
     return Draft(contact_id=contact.id, to=best.address if best else "", subject=subject,
                  body=assemble(body, contact, spec, pack), issues=issues)
 

@@ -43,6 +43,31 @@ def deobfuscate(text: str) -> str:
     return _OBFUSCATED.sub(fix, text or "")
 
 
+def decode_cfemail(hexstr: str) -> str:
+    """Cloudflare's email protection stores 'user@host' XOR-ed with the first byte as hex; '' if it is not valid."""
+    try:
+        raw = bytes.fromhex((hexstr or "").strip())
+        if len(raw) < 2:
+            return ""
+        key = raw[0]
+        return bytes(b ^ key for b in raw[1:]).decode("utf-8")
+    except (ValueError, UnicodeDecodeError):
+        return ""
+
+
+def cloudflare_emails(soup) -> List[str]:
+    """Addresses hidden by Cloudflare email protection (data-cfemail / '/cdn-cgi/l/email-protection#hex' links)."""
+    out: List[str] = []
+    hexes = [el.get("data-cfemail", "") for el in soup.find_all(attrs={"data-cfemail": True})]
+    hexes += [a["href"].split("#", 1)[1] for a in soup.find_all("a", href=True)
+              if "email-protection#" in a["href"]]
+    for h in hexes:
+        for e in extract_emails(decode_cfemail(h)):
+            if e not in out:
+                out.append(e)
+    return out
+
+
 def extract_emails(text: str) -> List[str]:
     found = EMAIL_RE.findall(deobfuscate(text))
     out: List[str] = []
