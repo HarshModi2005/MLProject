@@ -1,0 +1,483 @@
+{
+  "label": "v3_replay_a",
+  "replay": "strict",
+  "rows": [
+    {
+      "unique": 348,
+      "qualified": 240,
+      "reachable": 14,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 1.1,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "openalex": 300,
+        "web": 50
+      },
+      "replay_misses": 38,
+      "warnings": [
+        "10 candidates could not be judged and were left out.",
+        "2 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "openalex": 298,
+          "web": 50
+        },
+        "qualified": {
+          "openalex": 190,
+          "web": 30
+        },
+        "enriched": {
+          "openalex": 30
+        },
+        "reachable": {
+          "openalex": 14,
+          "web": 2
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.06,
+          "found": 300,
+          "new": 300,
+          "qualified": 250
+        }
+      },
+      "shortlist": [],
+      "name": "academic_gnn",
+      "playbook": "academic",
+      "target": 5
+    },
+    {
+      "unique": 41,
+      "qualified": 41,
+      "reachable": 5,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 3.4,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "places": 38,
+        "orgs": 12
+      },
+      "replay_misses": 27,
+      "warnings": [
+        "5 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 31,
+          "web": 12,
+          "orgs": 12
+        },
+        "qualified": {
+          "places": 31,
+          "web": 12,
+          "orgs": 12
+        },
+        "enriched": {
+          "places": 17,
+          "web": 8,
+          "orgs": 8
+        },
+        "reachable": {
+          "places": 4,
+          "web": 2,
+          "orgs": 2
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.0,
+          "found": 28,
+          "new": 28,
+          "qualified": 28
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.09,
+          "found": 12,
+          "new": 10,
+          "qualified": 10
+        }
+      },
+      "shortlist": [],
+      "name": "b2b_dental_bangalore",
+      "playbook": "b2b_sales",
+      "target": 6
+    },
+    {
+      "unique": 22,
+      "qualified": 17,
+      "reachable": 3,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 4.0,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "portfolio": 14,
+        "orgs": 11,
+        "lookalike": 0
+      },
+      "replay_misses": 39,
+      "warnings": [
+        "3 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 22,
+          "portfolio": 14,
+          "orgs": 11
+        },
+        "qualified": {
+          "web": 17,
+          "portfolio": 12,
+          "orgs": 8
+        },
+        "enriched": {
+          "web": 17,
+          "portfolio": 12,
+          "orgs": 8
+        },
+        "reachable": {
+          "web": 3,
+          "portfolio": 2,
+          "orgs": 1
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "portfolio": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.96,
+          "found": 14,
+          "new": 14,
+          "qualified": 13
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.16,
+          "found": 11,
+          "new": 8,
+          "qualified": 8
+        },
+        "lookalike": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.0,
+          "found": 0,
+          "new": 0,
+          "qualified": 0
+        }
+      },
+      "shortlist": [],
+      "name": "investors_edtech",
+      "playbook": "fundraising",
+      "target": 5
+    },
+    {
+      "unique": 38,
+      "qualified": 38,
+      "reachable": 4,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 7.3,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "orgs": 18,
+        "jobs": 20
+      },
+      "replay_misses": 31,
+      "warnings": [
+        "4 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 18,
+          "orgs": 18,
+          "jobs": 20
+        },
+        "qualified": {
+          "web": 18,
+          "orgs": 18,
+          "jobs": 20
+        },
+        "enriched": {
+          "web": 15,
+          "orgs": 15,
+          "jobs": 15
+        },
+        "reachable": {
+          "web": 3,
+          "orgs": 3,
+          "jobs": 1
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.54,
+          "found": 18,
+          "new": 18,
+          "qualified": 17
+        },
+        "jobs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.13,
+          "found": 20,
+          "new": 20,
+          "qualified": 20
+        }
+      },
+      "shortlist": [],
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5
+    },
+    {
+      "unique": 50,
+      "qualified": 50,
+      "reachable": 27,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 8.3,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "podcasts": 26,
+        "news": 24
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "10 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "podcasts": 26,
+          "news": 24
+        },
+        "qualified": {
+          "news": 24,
+          "podcasts": 26
+        },
+        "enriched": {
+          "news": 24,
+          "podcasts": 26
+        },
+        "reachable": {
+          "podcasts": 26,
+          "news": 1
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "podcasts": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 1.75,
+          "found": 26,
+          "new": 26,
+          "qualified": 19
+        },
+        "news": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.58,
+          "found": 24,
+          "new": 24,
+          "qualified": 24
+        }
+      },
+      "shortlist": [],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    },
+    {
+      "unique": 108,
+      "qualified": 107,
+      "reachable": 12,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 7.6,
+      "usd_per_good": null,
+      "llm_by_purpose": {},
+      "by_source": {
+        "events": 61,
+        "orgs": 47
+      },
+      "replay_misses": 22,
+      "warnings": [
+        "12 candidates could not be judged and were left out.",
+        "1 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "events": 101,
+          "web": 7,
+          "orgs": 47
+        },
+        "qualified": {
+          "events": 100,
+          "orgs": 47,
+          "web": 7
+        },
+        "enriched": {
+          "events": 68,
+          "orgs": 42,
+          "web": 2
+        },
+        "reachable": {
+          "events": 11,
+          "orgs": 8,
+          "web": 2
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "events": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.29,
+          "found": 61,
+          "new": 61,
+          "qualified": 12
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.04,
+          "found": 42,
+          "new": 42,
+          "qualified": 42
+        }
+      },
+      "shortlist": [],
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6
+    }
+  ],
+  "summary": {
+    "scenarios": 6,
+    "failed": 0,
+    "good@K": 0,
+    "precision@K": 0.0,
+    "mean_score": 0.0,
+    "distinct_orgs": 0,
+    "proof_rate": 0.0,
+    "reachable": 65,
+    "search_calls": 0,
+    "llm_paid_calls": 0,
+    "llm_usd": 0.0,
+    "seconds": 31.7,
+    "usd_per_good": null
+  }
+}

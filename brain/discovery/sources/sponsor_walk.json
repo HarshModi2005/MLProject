@@ -1,0 +1,4 @@
+{"name": "sponsor_walk", "title": "Other events the winning sponsors backed, and who else sponsored them.",
+ "adapter": "python", "entry": "brain.discovery.walkers:sponsor_walk", "tier": 2, "cost": "search",
+ "kinds": ["org"], "stage": "expand", "order": 105, "proves": ["past_sponsorship"], "yields_email": false,
+ "policy": {"robots": "respect", "terms": "Event pages read for their sponsor sections."}}

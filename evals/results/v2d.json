@@ -1,0 +1,79 @@
+{
+  "label": "v2d",
+  "replay": "",
+  "rows": [
+    {
+      "unique": 53,
+      "qualified": 67,
+      "reachable": 25,
+      "passed_judge": 2,
+      "shortlisted": 2,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.751,
+      "distinct_orgs": 2,
+      "proof_rate": 1.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 18,
+      "llm_paid_calls": 4,
+      "llm_usd": 0.0052,
+      "pages_fetched": 73,
+      "seconds": 80.7,
+      "usd_per_good": 0.0232,
+      "llm_by_purpose": {
+        "judge": 3,
+        "replan_search": 1
+      },
+      "by_source": {
+        "podcasts": 26,
+        "news": 27
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "Armaan Agarwal",
+          "org": "India Today",
+          "email": "armaan.agarwal@aajtak.com",
+          "score": 0.8707,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Recently wrote about Indian language speech recognition AI"
+          ]
+        },
+        {
+          "name": "Ameya Sathaye",
+          "org": "Sarkaritel.com",
+          "email": "ameya.sathaye@sarkaritel.com",
+          "score": 0.6316,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Covers AI speech recognition in Indian languages"
+          ]
+        }
+      ],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    }
+  ],
+  "summary": {
+    "scenarios": 1,
+    "failed": 0,
+    "good@K": 1,
+    "precision@K": 0.2,
+    "mean_score": 0.751,
+    "distinct_orgs": 2,
+    "proof_rate": 1.0,
+    "reachable": 25,
+    "search_calls": 18,
+    "llm_paid_calls": 4,
+    "llm_usd": 0.0052,
+    "seconds": 80.7,
+    "usd_per_good": 0.0232
+  }
+}

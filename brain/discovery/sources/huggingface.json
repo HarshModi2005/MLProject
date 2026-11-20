@@ -1,0 +1,13 @@
+{
+  "name": "huggingface",
+  "title": "People and organisations publishing popular models on the topic (Hugging Face Hub).",
+  "adapter": "json_api",
+  "tier": 1, "cost": "free", "kinds": ["person"], "stage": "seed", "order": 44,
+  "proves": ["maintains_package", "open_source"], "yields_email": false,
+  "request": {"url": "https://huggingface.co/api/models",
+              "params": {"search": "{term}", "sort": "downloads", "direction": -1, "limit": 30}},
+  "query": {"terms": ["topics"], "max": 3},
+  "dedupe": "modelId",
+  "hooks": "brain.discovery.hooks.huggingface",
+  "policy": {"robots": "api", "rate_per_min": 60, "terms": "Public Hugging Face Hub API."}
+}

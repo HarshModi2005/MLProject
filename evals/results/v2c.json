@@ -1,0 +1,124 @@
+{
+  "label": "v2c",
+  "replay": "",
+  "rows": [
+    {
+      "unique": 25,
+      "qualified": 44,
+      "reachable": 2,
+      "passed_judge": 3,
+      "shortlisted": 3,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.647,
+      "distinct_orgs": 3,
+      "proof_rate": 0.667,
+      "personal_email_rate": 0.0,
+      "search_calls": 17,
+      "llm_paid_calls": 17,
+      "llm_usd": 0.004,
+      "pages_fetched": 54,
+      "seconds": 99.4,
+      "usd_per_good": 0.021,
+      "llm_by_purpose": {
+        "triage": 9,
+        "judge": 2,
+        "extract_orgs": 6
+      },
+      "by_source": {
+        "orgs": 25
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "Iisc",
+          "org": "Iisc",
+          "email": "venky@iisc.ac.in",
+          "score": 0.7159,
+          "sources": [
+            "web"
+          ],
+          "reasons": [
+            "Involved in computer vision projects using deep learning"
+          ]
+        },
+        {
+          "name": "Valiance Solutions",
+          "org": "Valiance Solutions",
+          "email": "info@valiancesolutions.com",
+          "score": 0.6283,
+          "sources": [
+            "list"
+          ],
+          "reasons": [
+            "Company works on AI and machine learning"
+          ]
+        },
+        {
+          "name": "Logic Launch Software Solutions",
+          "org": "Logic Launch Software Solutions",
+          "email": "contact@logiclaunch.in",
+          "score": 0.5978,
+          "sources": [
+            "web"
+          ],
+          "reasons": [
+            "Bengaluru-based company building AI automation and hiring AI engineers"
+          ]
+        }
+      ],
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5
+    },
+    {
+      "unique": 53,
+      "qualified": 65,
+      "reachable": 25,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 16,
+      "llm_paid_calls": 4,
+      "llm_usd": 0.0047,
+      "pages_fetched": 64,
+      "seconds": 81.8,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "judge": 3,
+        "replan_search": 1
+      },
+      "by_source": {
+        "podcasts": 26,
+        "news": 27
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    }
+  ],
+  "summary": {
+    "scenarios": 2,
+    "failed": 0,
+    "good@K": 1,
+    "precision@K": 0.1,
+    "mean_score": 0.324,
+    "distinct_orgs": 3,
+    "proof_rate": 0.334,
+    "reachable": 27,
+    "search_calls": 33,
+    "llm_paid_calls": 21,
+    "llm_usd": 0.0087,
+    "seconds": 181.2,
+    "usd_per_good": 0.0417
+  }
+}

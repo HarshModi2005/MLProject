@@ -1,0 +1,69 @@
+{
+  "name": "b2b_app_devs",
+  "playbook": "b2b_sales",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Pilot customers for a crash-reporting SDK among Indian mobile app studios",
+    "ask": "Would your team try our crash-reporting SDK free for two months on one of your apps?",
+    "persona": {
+      "description": "Mobile app development studios and app-first startups in India",
+      "roles": [
+        "CTO",
+        "Head of Engineering",
+        "Founder",
+        "Mobile Lead"
+      ],
+      "org_types": [
+        "app development studio",
+        "app-first startup"
+      ]
+    },
+    "topics": [
+      "mobile app development",
+      "Android apps",
+      "Flutter apps"
+    ],
+    "expanded_terms": [
+      "React Native",
+      "app studio"
+    ],
+    "locations": [
+      "India"
+    ],
+    "preferred_inboxes": [
+      "hello",
+      "contact",
+      "sales",
+      "partnerships"
+    ],
+    "profile": {
+      "criteria": [
+        {
+          "name": "publishes mobile apps",
+          "signal": "app_publisher",
+          "weight": 1.5,
+          "terms": [
+            "app",
+            "play store",
+            "android"
+          ]
+        }
+      ]
+    }
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of a developer-tools startup",
+    "summary": "Building a lightweight crash-reporting SDK for Android and Flutter, 40 KB on device."
+  },
+  "facts": [
+    "SDK adds 40 KB to the app",
+    "Supports Android and Flutter"
+  ],
+  "prompt": "find mobile app development studios in India that build Android or Flutter apps, to pilot our lightweight crash-reporting SDK free for two months",
+  "playbook_ok": [
+    "integrations",
+    "customer_research"
+  ]
+}

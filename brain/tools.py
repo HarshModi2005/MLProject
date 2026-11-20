@@ -2,7 +2,13 @@
 Discovery tools, registered by name. A playbook lists which ones to use; the pipeline runs them.
 
 Adding a capability means writing one function `(ToolRun) -> (contacts, stats)` and registering it.
-Each tool declares what it costs so the planner and the user can see where budget goes.
+Each tool declares:
+    cost     what it spends (free | search | search+llm | fetch), so budget allocation is visible;
+    proves   which fit signals its results carry proof of (see brain/fit.py) — the explorer adds a tool
+             beyond the playbook's list when the campaign's criteria need that proof;
+    kinds    which target kinds it produces (person / org);
+    stage    "seed" (runs from the campaign description), "expand" (needs known-good prospects: the
+             user's examples or the best finds so far) or "both".
 """
 
 from __future__ import annotations
@@ -28,6 +34,8 @@ class ToolRun:
     ctx: CampaignContext
     deps: "object"  # brain.pipeline.Deps (kept loose to avoid an import cycle)
     planner: "object"  # brain.searchplan.SearchPlanner
+    budget: Optional[int] = None  # search calls this run may spend (None = whatever is left)
+    winners: List[Contact] = field(default_factory=list)  # best prospects so far, for expansion tools
 
 
 @dataclass
@@ -37,54 +45,82 @@ class Tool:
     cost: str  # free | search | search+llm | fetch
     fn: Callable[[ToolRun], Tuple[List[Contact], Dict]]
     needs_search: bool = False
+    proves: Tuple[str, ...] = ()
+    kinds: Tuple[str, ...] = ("person", "org")
+    stage: str = "seed"  # seed | expand | both
+    order: int = 1000  # position when several tools could prove the same signal (lower = preferred)
+    spec: Optional[object] = None  # the manifest (brain.discovery.contracts.SourceSpec) for manifest sources
 
 
 TOOLS: Dict[str, Tool] = {}
 
+# Historical registration order, kept so tool choice stays the same now that some tools are manifests
+# (brain/discovery/sources/*.json carry the matching "order").
+_ORDER = ["openalex", "orgs", "places", "web", "github", "news", "events", "jobs", "portfolio", "podcasts",
+          "lookalike", "coauthors", "memory"]
 
-def register(name: str, description: str, cost: str, needs_search: bool = False):
+
+def register(name: str, description: str, cost: str, needs_search: bool = False, proves: Tuple[str, ...] = (),
+             kinds: Tuple[str, ...] = ("person", "org"), stage: str = "seed"):
     def deco(fn):
-        TOOLS[name] = Tool(name, description, cost, fn, needs_search)
+        order = _ORDER.index(name) * 10 if name in _ORDER else 1000
+        TOOLS[name] = Tool(name, description, cost, fn, needs_search, tuple(proves), tuple(kinds), stage, order)
         return fn
     return deco
+
+
+def _left(run: "ToolRun", reserve: int = 2):
+    """budget_left() for a tool: the global remaining budget, capped by this run's allowance."""
+    search = run.deps.search
+    start = search.calls
+
+    def left() -> int:
+        lim = search.remaining - reserve
+        return min(lim, run.budget - (search.calls - start)) if run.budget is not None else lim
+    return left
 
 
 def _gl(spec: CampaignSpec) -> str:
     return spec.countries[0] if len(spec.countries) == 1 else ""
 
 
-@register("openalex", "Researchers found through recent publications on the topics (OpenAlex).", "free")
+@register("openalex", "Researchers found through recent publications on the topics (OpenAlex).", "free",
+          proves=("publications", "topic"), kinds=("person",))
 def _openalex(run: ToolRun):
     source = run.deps.openalex
     found = source.search(run.spec)
     return found, {"people": len(found), "failed_terms": list(getattr(source, "failed_terms", []))}
 
 
-@register("orgs", "Organisations via web search: their own sites, plus names read off list pages.", "search+llm", True)
+@register("orgs", "Organisations via web search: their own sites, plus names read off list and event pages.",
+          "search+llm", True, proves=("topic", "audience", "funding_focus"), kinds=("org",))
 def _orgs(run: ToolRun):
     from brain.orgs import discover_orgs
 
     return discover_orgs(run.spec, run.playbook, run.deps.search, run.deps.fetcher, run.deps.llm, run.deps.settings,
-                         planner=run.planner)
+                         planner=run.planner, budget=run.budget)
 
 
-@register("places", "Local businesses on Google Maps, with website and address (Serper places).", "search", True)
+@register("places", "Local businesses on Google Maps, with website and address (Serper places).", "search", True,
+          proves=("local_business", "location"), kinds=("org",))
 def _places(run: ToolRun):
     from brain.orgs import discover_places
 
-    return discover_places(run.spec, run.playbook, run.deps.search, run.planner, gl=_gl(run.spec))
+    return discover_places(run.spec, run.playbook, run.deps.search, run.planner, gl=_gl(run.spec), budget=run.budget)
 
 
-@register("web", "People listed on staff, team or faculty pages found by web search.", "search", True)
+@register("web", "People listed on staff, team or faculty pages found by web search.", "search", True,
+          proves=("topic",), kinds=("person",))
 def _web(run: ToolRun):
     from brain.discover import discover_web
 
-    budget = max(0, min(8, run.deps.search.remaining - 4))
+    budget = max(0, min(8, run.deps.search.remaining - 4, run.budget if run.budget is not None else 8))
     return discover_web(run.spec, run.playbook, run.deps.search, run.deps.fetcher, run.deps.llm,
                         run.deps.settings, max_queries=budget)
 
 
-@register("github", "Developers via GitHub user search (skills, location); public profile emails only.", "free")
+@register("github", "Developers via GitHub user search (skills, location); public profile emails only.", "free",
+          proves=("open_source",), kinds=("person",))
 def _github(run: ToolRun):
     from brain.sources.github import GitHubSource
 
@@ -93,40 +129,43 @@ def _github(run: ToolRun):
     return found, {"people": len(found), "requests": src.requests}
 
 
-@register("news", "Journalists via recent articles on the topic (Serper news), read from article bylines.",
-          "search", True)
-def _news(run: ToolRun):
-    search, fetcher = run.deps.search, run.deps.fetcher
-    people: Dict[str, Contact] = {}
-    stats = {"queries": 0, "articles": 0, "bylines": 0}
+@register("events", "Sponsors (or speakers) of similar past events, read from the events' own pages.", "search", True,
+          proves=("past_sponsorship", "spoke_before"))
+def _events(run: ToolRun):
+    from brain.channels import discover_events
 
-    def execute(query: str):
-        stats["queries"] += 1
-        articles = search.news(query, gl=_gl(run.spec))
-        stats["articles"] += len(articles)
-        new = 0
-        for art, page in zip(articles, fetcher.get_many([a.url for a in articles[:10]])):
-            if not page.ok:
-                continue
-            for name, author_url in authors_from_article(page.html, page.url):
-                key = name.lower()
-                dom = registrable_domain(page.url)
-                if key in people:
-                    people[key].evidence.append(Evidence(kind="publication", text=art.title, url=art.url))
-                    continue
-                c = Contact(kind="person", name=name, title="Journalist", org=art.source or None, org_domain=dom,
-                            country=country_from_domain(dom), sources=["news"])
-                c.add_url(author_url)
-                c.evidence.append(Evidence(kind="publication", text=squash(art.title, 200), url=art.url,
-                                           detail=squash(f"{art.source} {art.date}: {art.snippet}", 300)))
-                people[key] = c
-                new += 1
-                stats["bylines"] += 1
-        return len(articles), new
+    return discover_events(run)
 
-    run.planner.run(execute, have=lambda: len(people), budget_left=lambda: search.remaining - 4, kind="news",
-                    first_round_max=5)
-    return list(people.values()), stats
+
+@register("portfolio", "Investors whose own portfolio pages match the topics.", "search+llm", True,
+          proves=("portfolio_fit",), kinds=("org",))
+def _portfolio(run: ToolRun):
+    from brain.channels import discover_portfolio
+
+    return discover_portfolio(run)
+
+
+@register("lookalike", "Organisations similar to the user's examples or to the best finds so far.", "search+llm", True,
+          proves=("topic",), kinds=("org",), stage="expand")
+def _lookalike(run: ToolRun):
+    from brain.channels import discover_lookalike
+
+    return discover_lookalike(run)
+
+
+@register("coauthors", "Researchers who publish with the best finds so far (OpenAlex co-author graph).", "free",
+          proves=("publications",), kinds=("person",), stage="expand")
+def _coauthors(run: ToolRun):
+    from brain.channels import discover_coauthors
+
+    return discover_coauthors(run)
+
+
+@register("memory", "Prospects already found and verified in earlier campaigns.", "free", stage="seed")
+def _memory(run: ToolRun):
+    from brain.channels import discover_memory
+
+    return discover_memory(run)
 
 
 def authors_from_article(html: str, url: str) -> List[Tuple[str, Optional[str]]]:
@@ -169,5 +208,14 @@ def authors_from_article(html: str, url: str) -> List[Tuple[str, Optional[str]]]
     return found[:3]
 
 
+# news, jobs and podcasts are manifest sources now: brain/discovery/sources/*.json
+
 def describe_tools() -> str:
-    return "\n".join(f"- {t.name} [{t.cost}]: {t.description}" for t in TOOLS.values())
+    return "\n".join(f"- {t.name} [{t.cost}; proves {', '.join(t.proves) or '-'}; {t.stage}]: {t.description}"
+                     for t in TOOLS.values())
+
+
+# Manifest sources (built-in and ./sources) join the registry last, then everything is ordered by `order`.
+from brain.discovery import registry as _registry  # noqa: E402
+
+_registry.install(TOOLS)

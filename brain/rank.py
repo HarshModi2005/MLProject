@@ -67,9 +67,16 @@ def filter_contacts(
             if not (named or in_region(c) or vouched):
                 if defer_region and c.kind == "org" and "enriched" not in c.flags:
                     c.flags.append("region_pending")  # its website has not been read yet
+                elif c.kind != "org" and not c.location_text:
+                    # A person whose city nobody states (most researchers, speakers, authors) is not "elsewhere":
+                    # keep them, ranked a little lower, for the pre-judge and the judge to weigh.
+                    if "region_unknown" not in c.flags:
+                        c.flags.append("region_unknown")
                 else:
                     dropped["region"] += 1
                     continue
+            else:
+                c.flags = [f for f in c.flags if f != "region_unknown"]
         if c.org and any(o in c.org.lower() for o in ex_orgs):
             dropped["excluded_org"] += 1
             continue
@@ -138,8 +145,28 @@ def role_match(contact: Contact, roles: List[str]) -> float:
     return 1.0 if any(r.lower() in title for r in roles) else 0.15
 
 
+DEFAULT_WEIGHTS = {
+    # people: what they publish/do matters, and whether they lead (academic signals default to neutral)
+    "person": {"sim": 0.30, "fit": 0.20, "activity": 0.16, "lead": 0.10, "seniority": 0.10, "role": 0.08,
+               "timing": 0.06, "quality": 0.0},
+    # organisations: topical match and proof of fit (sponsored before, hiring, portfolio) dominate
+    "org": {"sim": 0.35, "fit": 0.35, "activity": 0.0, "lead": 0.0, "seniority": 0.0, "role": 0.05,
+            "timing": 0.15, "quality": 0.10},
+}
+
+
+def rank_weights(spec: CampaignSpec, pack: Pack, kind: str) -> Dict[str, float]:
+    w = dict(DEFAULT_WEIGHTS["org" if kind == "org" else "person"])
+    w.update({k: float(v) for k, v in (getattr(pack, "rank_weights", None) or {}).items() if k in w})
+    total = sum(w.values()) or 1.0
+    return {k: v / total for k, v in w.items()}
+
+
 def prescore(contacts: List[Contact], spec: CampaignSpec, pack: Pack, backend: str = "lexical") -> List[Contact]:
-    """Sets Contact.prescore in [0, 1] and returns contacts sorted best-first."""
+    """Sets Contact.prescore in [0, 1] (and per-criterion support in Contact.criteria) and returns contacts
+    sorted best-first. Combines topic similarity with the prospect profile's evidence-based fit."""
+    from brain.fit import fit_scores, profile_for
+
     if not contacts:
         return []
     docs = [c.match_text() for c in contacts]
@@ -153,18 +180,34 @@ def prescore(contacts: List[Contact], spec: CampaignSpec, pack: Pack, backend: s
     if sims is None:
         sims = bm25_scores(query, docs)
 
+    prof = profile_for(spec, pack)
     roles = spec.persona.roles or pack.default_roles
     this_year = date.today().year
+    weights = {k: rank_weights(spec, pack, k) for k in ("person", "org")}
     for c, sim in zip(contacts, sims):
         s = c.signals
+        w = weights["org" if c.kind == "org" else "person"]
         # Activity: several recent matching items beats one.
         activity = min(1.0, math.log1p(s.get("matched_works", 0)) / math.log(6)) if s.get("matched_works") else 0.3
         if s.get("latest_year"):
             activity *= max(0.4, 1.0 - 0.2 * max(0, this_year - s["latest_year"]))
         lead = min(1.0, s.get("senior_positions", 0) / 2) if "senior_positions" in s else 0.5
         seniority = s.get("seniority", 0.5)
-        fit = role_match(c, roles)
-        c.prescore = round(0.50 * sim + 0.18 * activity + 0.12 * lead + 0.10 * seniority + 0.10 * fit, 4)
+        fit_role = role_match(c, roles) if c.kind != "org" else (1.0 if c.decision_maker else 0.5)
+        fit, per, timing = fit_scores(c, prof)
+        c.criteria = per
+        quality = min(1.0, math.log1p(s.get("reviews", 0)) / math.log(500)) if s.get("reviews") else 0.4
+        c.prescore = round(w["sim"] * sim + w["fit"] * fit + w["activity"] * activity + w["lead"] * lead
+                           + w["seniority"] * seniority + w["role"] * fit_role + w["timing"] * timing
+                           + w["quality"] * quality, 4)
+        if c.kind == "org" and not c.org_domain and not c.emails:
+            c.prescore = round(c.prescore * 0.7, 4)  # no website: nothing to read, usually nobody to write to
+        if "region_unknown" in c.flags:
+            c.prescore = round(c.prescore * 0.85, 4)  # location not stated: below people known to be local
+        if s.get("warm_path"):  # the user knows them, or someone there: the best reply odds there are
+            c.prescore = round(min(1.0, c.prescore + 0.15 * s["warm_path"]), 4)
+        if any(f.startswith("off_type:") for f in c.flags):
+            c.prescore = round(c.prescore * 0.3, 4)  # a kind of organisation the campaign does not target
     return sorted(contacts, key=lambda c: c.prescore, reverse=True)
 
 

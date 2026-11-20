@@ -18,6 +18,8 @@ class SenderProfile(BaseModel):
     skills: List[str] = Field(default_factory=list)
     links: List[str] = Field(default_factory=list)
     attachment_path: Optional[str] = None
+    signature: str = ""  # sign-off block below the name (title, company, phone), from the user's profile
+    postal_address: str = ""  # for the opt-out footer of commercial emails, if the user gave one
 
     def facts_text(self) -> str:
         parts = [self.name, self.headline, self.summary] + self.highlights + self.skills + self.links
@@ -29,6 +31,71 @@ class TargetPersona(BaseModel):
     roles: List[str] = Field(default_factory=list)  # job titles that qualify
     org_types: List[str] = Field(default_factory=list)  # university, startup, ...
     min_seniority: str = "any"  # any | established
+
+
+class FitCriterion(BaseModel):
+    """One thing that makes a prospect good, and what would prove it.
+
+    `signal` ties the criterion to the discovery channels that can produce that proof
+    (see brain/tools.py `proves`): topic, past_sponsorship, hiring, portfolio_fit, recent_coverage,
+    publications, audience, spoke_before, location, local_business, funding_focus, open_source.
+    """
+
+    name: str
+    description: str = ""
+    weight: float = 1.0
+    signal: str = "topic"
+    terms: List[str] = Field(default_factory=list)  # words whose presence in the evidence supports it
+    must: bool = False  # a hard requirement: candidates with no support are dropped after judging
+
+
+class ProspectProfile(BaseModel):
+    """What a good prospect looks like for this campaign, confirmed by the user at intake."""
+
+    criteria: List[FitCriterion] = Field(default_factory=list)
+    timing_signals: List[FitCriterion] = Field(default_factory=list)  # reasons why *now* is a good moment
+    anti_patterns: List[str] = Field(default_factory=list)  # phrases that mark a poor target
+    decision_roles: List[str] = Field(default_factory=list)  # who to address inside an organisation, best first
+
+    @property
+    def empty(self) -> bool:
+        return not self.criteria
+
+    def signals(self) -> List[str]:
+        return list(dict.fromkeys(c.signal for c in self.criteria + self.timing_signals if c.signal))
+
+
+class Ask(BaseModel):
+    """What each email asks for, structured so the writer can phrase it right for each situation."""
+
+    type: str = "other"  # call | meeting | reply | apply | intro | review | other
+    text: str = ""  # the ask in one sentence (same as CampaignSpec.ask)
+    link: Optional[str] = None  # a booking / application / deck link the user gave
+    availability: Optional[str] = None  # e.g. "Tue-Thu afternoons IST"
+    deadline: Optional[str] = None
+    inbox_text: str = ""  # the version for a shared inbox: "could you point me to whoever handles X?"
+
+
+class Offer(BaseModel):
+    """What the sender offers (B2B, sponsorship, fundraising...). Only what the user or their documents state."""
+
+    value_prop: str = ""
+    proof_points: List[str] = Field(default_factory=list)  # customers, numbers, results
+    terms: str = ""  # price, equity, sponsorship tiers...
+    audience: str = ""  # who the offer is for / the audience the sender brings
+
+
+class Constraints(BaseModel):
+    """Hard or soft limits on who to contact, beyond topics and geography."""
+
+    size_min: Optional[int] = None  # employees
+    size_max: Optional[int] = None
+    stages: List[str] = Field(default_factory=list)  # pre-seed, seed, series a ... / student, mid-career ...
+    seniority: str = ""  # any | senior | junior ...
+    remote_ok: Optional[bool] = None
+    radius_km: Optional[int] = None
+    must: List[str] = Field(default_factory=list)
+    avoid: List[str] = Field(default_factory=list)
 
 
 class CampaignSpec(BaseModel):
@@ -47,13 +114,21 @@ class CampaignSpec(BaseModel):
     search_queries: List[str] = Field(default_factory=list)
     preferred_inboxes: List[str] = Field(default_factory=list)  # e.g. partnerships, marketing (org campaigns)
     lookalike_queries: List[str] = Field(default_factory=list)  # searches for organisations like the user's examples
+    event_queries: List[str] = Field(default_factory=list)  # searches for similar past events (sponsors / speakers)
     target_kind: str = ""  # person | org; empty = the playbook's default
+    profile: ProspectProfile = Field(default_factory=ProspectProfile)
     confirmed: bool = False  # the user saw and approved this spec
     timeline: Optional[str] = None
     tone: str = "professional"
     target_count: int = 25
     word_target: int = 170
     sender: SenderProfile = Field(default_factory=SenderProfile)
+    ask_detail: Ask = Field(default_factory=Ask)
+    offer: Offer = Field(default_factory=Offer)
+    constraints: Constraints = Field(default_factory=Constraints)
+    language: str = ""  # language of the emails; "" = English
+    playbook_confidence: Optional[float] = None
+    playbook_alternatives: List[str] = Field(default_factory=list)
 
     def query_text(self) -> str:
         """Text the cheap pre-ranker matches candidates against."""
@@ -95,12 +170,20 @@ class Contact(BaseModel):
     evidence: List[Evidence] = Field(default_factory=list)
     signals: Dict[str, float] = Field(default_factory=dict)
     sources: List[str] = Field(default_factory=list)
+    # For an organisation reached through its shared inbox: the person in the right role, if one was found
+    # ({"name", "title", "source"}), so the email can be addressed to them.
+    decision_maker: Optional[Dict[str, str]] = None
+    criteria: Dict[str, float] = Field(default_factory=dict)  # support per fit criterion (cheap, then judged)
 
     # filled by ranking
     prescore: float = 0.0
+    prejudge: Optional[float] = None  # cheap LLM screen before enrichment (brain/discovery/precision/prejudge.py)
+    prejudge_reason: Optional[str] = None
     score: Optional[float] = None
     reasons: List[str] = Field(default_factory=list)
     hook: Optional[str] = None
+    why_now: Optional[str] = None  # a timing fact from the evidence (hiring, just raised, new article), set by the judge
+    sender_ref: Optional[int] = None  # index of the sender fact most relevant to this recipient, chosen by the judge
     flags: List[str] = Field(default_factory=list)
 
     @property

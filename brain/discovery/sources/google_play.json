@@ -1,0 +1,14 @@
+{
+  "name": "google_play",
+  "title": "App developers on Google Play, with the developer email from the app page.",
+  "adapter": "search",
+  "tier": 2, "cost": "search", "kinds": ["org"], "stage": "seed", "order": 25,
+  "enabled_by_default": false,
+  "proves": ["app_publisher"], "yields_email": true,
+  "query": {"terms": ["topics", "expanded_terms:1"], "max": 3},
+  "search": {"templates": ["site:play.google.com/store/apps/details \"{term}\""], "match": "play\\.google\\.com/store/apps/details",
+             "max_queries": 4, "first_round_max": 4, "reserve": 3},
+  "follow": {"max": 8},
+  "hooks": "brain.discovery.hooks.google_play",
+  "policy": {"robots": "respect", "terms": "Public app pages (allowed by robots.txt); only developer contact details are kept."}
+}

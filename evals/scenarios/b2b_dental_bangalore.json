@@ -1,0 +1,52 @@
+{
+  "name": "b2b_dental_bangalore",
+  "playbook": "b2b_sales",
+  "target_count": 6,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Sell an appointment-reminder WhatsApp service to dental clinics",
+    "ask": "A 15-minute call to show the reminder service",
+    "persona": {
+      "description": "Owners of independent dental clinics in Bangalore",
+      "roles": [
+        "Owner",
+        "Founder",
+        "Director",
+        "Clinic Manager"
+      ],
+      "org_types": [
+        "dental clinic"
+      ]
+    },
+    "topics": [
+      "dental clinic"
+    ],
+    "expanded_terms": [
+      "dentist",
+      "orthodontist"
+    ],
+    "locations": [
+      "Bangalore, India"
+    ],
+    "search_queries": [
+      "dental clinic Indiranagar Bangalore",
+      "best dental clinic Koramangala Bangalore"
+    ],
+    "preferred_inboxes": [
+      "info",
+      "contact",
+      "appointments",
+      "hello"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of a two-person SaaS studio",
+    "summary": "We built a WhatsApp appointment reminder service used by 12 clinics in Pune."
+  },
+  "facts": [
+    "The reminder service is used by 12 clinics in Pune",
+    "Clinics using it cut no-shows by about a third"
+  ],
+  "prompt": "we sell appointment booking software for dental clinics \u2014 find independent dental clinics in Bangalore (not big chains) whose owners we can pitch"
+}

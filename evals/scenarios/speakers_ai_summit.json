@@ -1,0 +1,44 @@
+{
+  "name": "speakers_ai_summit",
+  "playbook": "speakers",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Speakers for a student AI summit in Bangalore",
+    "ask": "Would you give a 30-minute talk on applied machine learning at our student AI summit in March?",
+    "persona": {
+      "description": "Practitioners and researchers in applied ML who give talks, based in or near Bangalore",
+      "roles": [
+        "ML Engineer",
+        "Research Scientist",
+        "Founder",
+        "Head of AI"
+      ]
+    },
+    "topics": [
+      "machine learning",
+      "large language models",
+      "computer vision"
+    ],
+    "expanded_terms": [
+      "applied AI",
+      "MLOps"
+    ],
+    "locations": [
+      "Bangalore, India"
+    ]
+  },
+  "sender": {
+    "name": "Test Organiser",
+    "headline": "Lead organiser of a college AI club",
+    "summary": "Runs a 1,500-attendee student AI summit at an engineering college in Bangalore."
+  },
+  "facts": [
+    "1,500 attendees last year",
+    "Summit held in March at an engineering college in Bangalore"
+  ],
+  "prompt": "we need speakers for our student AI summit in Bangalore in March: ML practitioners or researchers who give talks on applied ML or LLMs",
+  "playbook_ok": [
+    "academic"
+  ]
+}

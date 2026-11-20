@@ -1,0 +1,876 @@
+{
+  "scenario": "jobs_ml_startups",
+  "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). good = you would really email them for this scenario's ask.",
+  "good": [],
+  "bad": [],
+  "candidates": [
+    {
+      "label": "",
+      "name": "Topstartups",
+      "kind": "org",
+      "org": "Topstartups",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "List of the world's best startups to work for. All startup companies hiring and recently funded by top investors. Sort by new startups. Filter by funding stage, industry, HQ.",
+        "AI Startup company is hiring Computer Vision Engineer solution architect job in Bengaluru (Bangalore).",
+        "Listed on AI Startup company is hiring Computer Vision Engineer solution architect job in Bengaluru (Bangalore) | Cutshort"
+      ],
+      "url": "https://topstartups.io/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Techasoft",
+      "kind": "org",
+      "org": "Techasoft",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Build AI-powered software with Techasoft. We specialize in AI consulting, Generative AI, machine learning, custom software, web, mobile apps, cloud, and enterprise solutions.",
+        "Apply for AI & Computer Vision Site Engineer Internship at Techasoft. Learn Python, OpenCV, industrial cameras and AI deployment. On-site role with travel."
+      ],
+      "url": "https://www.techasoft.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "p99soft",
+      "kind": "org",
+      "org": "p99soft",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "P99soft is an AI development and software engineering company in Austin, Texas, USA offering CRM development, Salesforce consulting, cloud solutions and SaaS product engineering services",
+        "P99soft is a leading IT Services and IT Consulting company dedicated to making our customers' business operations seamless by providing them with digital services and applications using the latest tec",
+        "Listed on 692+ Machine Learning (ML) Jobs in India | Cutshort"
+      ],
+      "url": "https://p99soft.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Valiance Solutions",
+      "kind": "org",
+      "org": "Valiance Solutions",
+      "email": "info@valiancesolutions.com",
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Valiance Solutions helps enterprises drive digital transformation with cutting-edge AI, machine learning, and analytics services.",
+        "Transform businesses with data analysis & artificial intelligence",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": "https://valiancesolutions.com/",
+      "judge_score": 0.6283,
+      "judge_reason": "Company works on AI and machine learning"
+    },
+    {
+      "label": "",
+      "name": "MaxHome",
+      "kind": "org",
+      "org": "MaxHome",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "AI native operating system for residential real estate",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": "https://maxhome.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Teal India",
+      "kind": "org",
+      "org": "Teal India",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "At Teal, we combine the prowess of big data analytics, machine learning and policy research to help banks, housing finance companies, real estate/infrastructure developers, retail investors, transacti",
+        "Re-engineering property due diligence using big data and machine learning",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": "https://www.tealindia.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "DiligentMinds Consulting",
+      "kind": "org",
+      "org": "DiligentMinds Consulting",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "DiligentMinds Consulting helps businesses build modern data platforms, intelligent analytics, AI solutions, and digital products that turn information into action.",
+        "AI ML Engineer",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound"
+      ],
+      "url": "https://diligentmindsconsulting.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Iisc",
+      "kind": "org",
+      "org": "Iisc",
+      "email": "venky@iisc.ac.in",
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        ". This achievement reflects years of dedicated research and innovation. Thanks to our brilliant students, research collaborators, and team members for their unwavering commitment and contributions.",
+        "Applications are invited for Project Assistant position for various Computer Vision projects involving use of Deep Learning. Candidates are expected to be ..."
+      ],
+      "url": "https://val.cds.iisc.ac.in/",
+      "judge_score": 0.7159,
+      "judge_reason": "Involved in computer vision projects using deep learning"
+    },
+    {
+      "label": "",
+      "name": "Advance Sensing",
+      "kind": "org",
+      "org": "Advance Sensing",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Advance Sensing is a machine vision, industrial automation, industrial sensing and AI inspection company in Bengaluru, Karnataka, India. We provide machine vision inspection systems, automated visual ",
+        "We are looking for engineers who want to work in one of the growing machine vision companies in Bengaluru, Karnataka and contribute to industrial automation, ..."
+      ],
+      "url": "https://advancesensing.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Sarvam AI",
+      "kind": "org",
+      "org": "Sarvam AI",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Sarvam is India's full-stack sovereign AI platform, with speech-to-text, text-to-speech, translation, and conversational agents across 22 Indian languages. Start free.",
+        "49 Open Positions · Deployment Engineering · Agent Engineer · Deployment Strategist · Strategic Deployment Engineer, Chanakya · Technical Partner Enablement Manager."
+      ],
+      "url": "https://www.sarvam.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Javis",
+      "kind": "org",
+      "org": "Javis",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Enterprise Works Platform",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "BDIPlus",
+      "kind": "org",
+      "org": "BDIPlus",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Unified solutions underpinning business outcomes and innovation",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Recro",
+      "kind": "org",
+      "org": "Recro",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Recro is a platform that enables developers to work on real world tech projects",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Catalysk Innovations",
+      "kind": "org",
+      "org": "Catalysk Innovations",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "We're building a Sustainability Score for Individuals (along the lines of the Credit Score)",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Talentskeet Consulting",
+      "kind": "org",
+      "org": "Talentskeet Consulting",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Talent Skeet delivers people-first staffing and recruitment solutions that help organizations build",
+        "Listed on Machine Learning Engineer Jobs in Bangalore Urban, India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Augury",
+      "kind": "org",
+      "org": "Augury",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Machines talk, we listen",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Simplismart",
+      "kind": "org",
+      "org": "Simplismart",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Tailor-made Inference for your usecase",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Entrupy",
+      "kind": "org",
+      "org": "Entrupy",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Instantly authenticate high-value physical goods",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "freehire",
+      "kind": "org",
+      "org": "freehire",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Search 3M+ tech jobs indexed straight from company career boards — deduplicated and tagged by stack, seniority and location. Free, open source, no walls.",
+        "AI Engagement assistant & platform for Physical AI",
+        "Listed on Machine Learning Engineer Jobs in India - 2027 | Wellfound"
+      ],
+      "url": "https://jobseek.fullstackpartner.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "TopGenAIJobs",
+      "kind": "org",
+      "org": "TopGenAIJobs",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Curated Gen AI and Agentic AI job listings. Apply with confidence — every role is reviewed by a human before it goes live.",
+        "A Gen AI & Agentic AI Jobs Platform to discover high-quality Gen AI and Agentic AI opportunities from top companies worldwide. topgenaijobs.com ..."
+      ],
+      "url": "https://www.topgenaijobs.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Rubrik",
+      "kind": "org",
+      "org": "Rubrik",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Leads Rubrik’s global renewals and quoting operations strategy in India, building scalable processes, governance, data-quality programs, and a Quote Desk center of excellence.",
+        "Listed on Best Tech Jobs & Startup Jobs in Bangalore 2026 | Built In"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Hewlett Packard Enterprise",
+      "kind": "org",
+      "org": "Hewlett Packard Enterprise",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Provides remote systems administration and proactive technical support for high-performance computing environments.",
+        "Listed on Best Tech Jobs & Startup Jobs in Bangalore 2026 | Built In"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Ericsson",
+      "kind": "org",
+      "org": "Ericsson",
+      "email": null,
+      "sources": [
+        "list"
+      ],
+      "title": null,
+      "evidence": [
+        "Leads the establishment and growth of Ericsson’s Bangalore FPGA development organization.",
+        "Listed on Best Tech Jobs & Startup Jobs in Bangalore 2026 | Built In"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Level Ai",
+      "kind": "org",
+      "org": "Level Ai",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Voice agents, websites and practical systems built around your business.",
+        "Hiring now: Principal Machine Learning Engineer (Bengaluru, India); Senior Machine Learning Engineer (Bangalore/Noida Location) (India, Remote); Sr. Machine Learning Engineer (Speech) - AI (Bangalore/"
+      ],
+      "url": "https://level-ai.io/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "*** Ema.com ***",
+      "kind": "org",
+      "org": "*** Ema.com ***",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Hiring now: Software Engineer, Machine Learning (Bengaluru office); Principal Machine Learning Engineer (India - Bengaluru)"
+      ],
+      "url": "https://ema.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Angel and Genie",
+      "kind": "org",
+      "org": "Angel and Genie",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Top Executive Search Firm - Leading Recruitment Agencies, Talent Acquisition Partner",
+        "We are looking for a hands-on AI Engineer with 2–3 years of experience to design, build, and deploy Generative AI and machine learning powered applications."
+      ],
+      "url": "https://angelandgenie.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Glean",
+      "kind": "org",
+      "org": "Glean",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Glean is the Enterprise AI platform connected to your enterprise's data. Find, create, and automate anything. Explore what Glean can do for you!",
+        "Hiring now: Software Engineer, Machine Learning (Bangalore, India); Tech Lead Manager, Connectors (Bangalore, India)"
+      ],
+      "url": "https://www.glean.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Networking Solutions",
+      "kind": "org",
+      "org": "Networking Solutions",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "We provide networking solutions to power your business. Our flexible and scalable cloud networking services help optimize your network infrastructure.",
+        "Hiring now: AI-Staff/Principal Software Systems Engineer-Gen AI, Machine Learning, Graph ML, Big Data - 10030 (Bangalore); SR PROGRAMMER 10001 - Oracle CPQ (BigMachines) Developer (Chennai, India)"
+      ],
+      "url": "https://extremenetworks.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "AI Jobs",
+      "kind": "org",
+      "org": "AI Jobs",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "AIJobs.ai is the leading source for AI Jobs and Careers in the fields of Artificial Intelligence, Machine Learning & Data Science. We're one of the web's biggest sources of AI jobs from both AI Startu",
+        "See the top MLOps Jobs (Machine Learning Operations) from leading AI companies. Senior AI/ML Ops Engineer I(Hybrid Bangalore India) Salary: $218,000 - $285,000"
+      ],
+      "url": "https://aijobs.ai/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "phData",
+      "kind": "org",
+      "org": "phData",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "phData is an AI and data services leader that builds intelligent systems for enterprises ready to turn AI ambition into working business advantage.",
+        "Hiring now: Director, Communications, Media & Journalism (US - Remote); Director, Product Management (US - Remote); Machine Learning solutions Architect (LATAM - Remote); Machine Learning Solutions Ar"
+      ],
+      "url": "https://www.phdata.io/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Keelzo",
+      "kind": "org",
+      "org": "Keelzo",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Find Computer Vision Engineer jobs in Bangalore. Browse current openings with salary data, required skills, and top hiring companies. Updated daily."
+      ],
+      "url": "https://www.keelzo.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Velza AI Job Search Tool",
+      "kind": "org",
+      "org": "Velza AI Job Search Tool",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "90 current job listings in India mention Computer vision. The listings are updated weekly. Bengaluru, Karnataka, India"
+      ],
+      "url": "https://www.velza.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "CertifyOS",
+      "kind": "org",
+      "org": "CertifyOS",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Get frictionless, API first credentialing, licensing, enrollment, and network monitoring for payers, providers, health systems and rapidly scaling digital health companies.",
+        "Hiring now: Director FP&A (Bengaluru, India); Director of Product Management, Applications (Remote US); Director of Quality (Remote US); Director of Product Management, Applications (Bengaluru, India)"
+      ],
+      "url": "https://www.certifyos.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "AI/ML Engineer Jobs at Product Companies",
+      "kind": "org",
+      "org": "AI/ML Engineer Jobs at Product Companies",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "100+ AI/ML Engineer jobs in India at product based companies like Flipkart, Razorpay, Swiggy. Bangalore, Hyderabad, Pune & remote. Updated daily, no service ...",
+        "16+ MLOps Engineer jobs. Flipkart, Razorpay, Swiggy. Bangalore, top startups 4 new this week 2 with salary 1 remote. AI ML Ops Software Engineer (Bangalore ..."
+      ],
+      "url": "https://www.productbased.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Search Internships, Jobs, & Courses",
+      "kind": "org",
+      "org": "Search Internships, Jobs, & Courses",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Internshala is India’s No. 1 career platform, offering 120K+ paid internships, jobs, and online courses. Post a job and hire candidates faster - trusted by 400K+ companies.",
+        "53 Machine Learning Jobs in Bangalore · Bioinformatics & Genomic Engineer · AIML Lead/Architect · Data Engineer With Python · Principal Perception Engineer."
+      ],
+      "url": "https://internshala.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Startup",
+      "kind": "org",
+      "org": "Startup",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Discover the latest Machine Learning Engineer jobs at the fastest growing startups in Bengaluru. Updated daily ... AI-Staff/Principal Software Systems Engineer- ...",
+        "Find your next job at a startup in Bengaluru. Discover the latest jobs at the fastest growing startups in Bengaluru. Updated daily. Bengaluru. Workplace.",
+        "1029 Machine Learning jobs available at Startup Jobs. – Apply to jobs at startups like SpaceX, Airbnb, Stripe, and Mozilla. Updated daily!"
+      ],
+      "url": "https://startup.jobs/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Smarsh",
+      "kind": "org",
+      "org": "Smarsh",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Helping companies manage the risk in their electronic communications. Cloud-based capture, archiving and supervision solutions across more than 80 channels.",
+        "Hiring now: Java Application Developer (India - Bengaluru); Manager, ML Engineering (India - Bengaluru)"
+      ],
+      "url": "https://smarsh.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "HackerRank",
+      "kind": "org",
+      "org": "HackerRank",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "HackerRank is the market-leading coding test and interview solution for hiring developers. Start hiring at the pace of innovation!",
+        "Hiring now: Deep Learning Research Engineer (Hybrid in Bangalore, India); Senior Deep Learning Research Engineer (Hybrid in Bangalore, India)"
+      ],
+      "url": "https://hackerrank.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Career Enquiry",
+      "kind": "person",
+      "org": "W2Ssolutions",
+      "email": "careers@w2ssolutions.com",
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "W2S Solutions is a tech consulting firm that helps businesses thrive in the digital age. We deliver change through AI, data, and product engineering services.",
+        "Hire top MLOps engineers to streamline model deployment, automate ML pipelines, and scale your AI workflows. Fast onboarding and flexible hiring options."
+      ],
+      "url": "https://www.w2ssolutions.com/contact",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "JumpCloud",
+      "kind": "org",
+      "org": "JumpCloud",
+      "email": "info@jumpcloud.com",
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "JumpCloud makes it simple to manage Windows, Apple, Linux, and Android devices and to deliver secure access with SSO, MFA, Zero Trust, RADIUS, and more.",
+        "Hiring now: Director of Global Account Management - India (Bangalore, India - Remote); Director, Product Experience & Design - India (Bangalore, India - Remote); Director, Product Marketing Management"
+      ],
+      "url": "https://jumpcloud.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Riveron",
+      "kind": "org",
+      "org": "Riveron",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "From transaction to transformation, Riveron helps finance teams and private equity leaders solve complex challenges, improve performance, and execute with",
+        "Hiring now: Associate Director - Salesforce Revenue Cloud (India); Associate Director - IT Risk Advisory and RAS Practice Leader (India GCC) (Bangalore, IN)"
+      ],
+      "url": "https://riveron.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Paytm",
+      "kind": "org",
+      "org": "Paytm",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Send money with UPI using any bank account. Recharge mobile and pay bills.",
+        "Hiring now: Ad Sales (KAM) -Manager/ Senior Manager - Paytm Ads - Bangalore (Bangalore, Karnataka); Backend - TL/STL (Bangalore, Karnataka); Campaign Management - Campaign Ads I Exp- 7 -11 Years (Bang"
+      ],
+      "url": "https://paytm.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "PortCast.com",
+      "kind": "org",
+      "org": "PortCast.com",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Mobile number port kaise kare 2026 | sim card port kaise kare | jio airtel vi bsnl sim ko port kare",
+        "Hiring now: Marketing Director (Bangalore)"
+      ],
+      "url": "https://portcast.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Applied",
+      "kind": "org",
+      "org": "Applied",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Hiring now: Firmware Engineer (Bangalore); Electrical Integration Engineer (Bangalore); Engineering Technician (Australia Remote); Firmware Validation Engineer (Bangalore)"
+      ],
+      "url": "https://www.appliedmaterials.com/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Logic Launch Software Solutions",
+      "kind": "org",
+      "org": "Logic Launch Software Solutions",
+      "email": "contact@logiclaunch.in",
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Logic Launch is a Bengaluru software company building e-commerce stores, mobile apps, websites, CRM/ERP and AI automation for India and the GCC. Free quotation.",
+        "Hire AI engineers and LLM developers in India for chatbots, document processing, telecalling, and custom AI solutions. Based in Bengaluru."
+      ],
+      "url": "https://logiclaunch.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Michael Page",
+      "kind": "org",
+      "org": "Michael Page",
+      "email": null,
+      "sources": [
+        "web"
+      ],
+      "title": null,
+      "evidence": [
+        "Find your next job or hire talent that makes a difference, from experienced professionals to executive search, scaled recruitment and outsourcing.",
+        "Search the latest Machine Learning jobs in Bangalore. Enquire with recruitment agency Michael Page India for top Machine Learning positions today.",
+        "Find Machine Learning jobs with top recruitment agency Michael Page India with new jobs added everyday. Hiring: AI/ML Engineer (Data Engineering ) VLMs, and ..."
+      ],
+      "url": "https://www.michaelpage.co.in/",
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Netskope",
+      "kind": "org",
+      "org": "Netskope",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Hiring now: Channel Sales Manager (India); Principal Engineer, DLP (Bengaluru, Karnataka, India); Principal Product Manager, AI Security (Bengaluru, Karnataka, India); Software Development Engineer in"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    },
+    {
+      "label": "",
+      "name": "Korza",
+      "kind": "org",
+      "org": "Korza",
+      "email": null,
+      "sources": [
+        "jobs"
+      ],
+      "title": null,
+      "evidence": [
+        "Hiring now: Product Manager (Bangalore); AutoCad Engineer (Bangalore); AI Engineer - L3 (Bangalore); AI Engineer - L4 (Bangalore)"
+      ],
+      "url": null,
+      "judge_score": null,
+      "judge_reason": null
+    }
+  ]
+}

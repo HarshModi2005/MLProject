@@ -1,0 +1,477 @@
+{
+  "label": "v2b",
+  "replay": "",
+  "rows": [
+    {
+      "unique": 298,
+      "qualified": 190,
+      "reachable": 15,
+      "passed_judge": 9,
+      "shortlisted": 5,
+      "good@K": 5,
+      "precision@K": 1.0,
+      "mean_score": 0.775,
+      "distinct_orgs": 5,
+      "proof_rate": 0.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 6,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0031,
+      "pages_fetched": 10,
+      "seconds": 94.7,
+      "usd_per_good": 0.0018,
+      "llm_by_purpose": {
+        "judge": 2
+      },
+      "by_source": {
+        "openalex": 300
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "Subhankar Mishra",
+          "org": "National Institute of Science Education and Research",
+          "email": "smishra@niser.ac.in",
+          "score": 0.8318,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks"
+          ]
+        },
+        {
+          "name": "Swagatam Das",
+          "org": "Indian Statistical Institute",
+          "email": "swagatam.das@isical.ac.in",
+          "score": 0.7818,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks in 2025"
+          ]
+        },
+        {
+          "name": "Partha Basuchowdhuri",
+          "org": "Indian Association for the Cultivation of Science",
+          "email": "partha.basuchowdhuri@iacs.res.in",
+          "score": 0.7684,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks in 2026 and 2024"
+          ]
+        },
+        {
+          "name": "Sandeep Kumar",
+          "org": "Indian Institute of Technology Delhi",
+          "email": "ksandeep@ee.iitd.ac.in",
+          "score": 0.7596,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Multiple recent publications on advanced graph neural networks in 2024 and 2025"
+          ]
+        },
+        {
+          "name": "Garima Chanana",
+          "org": "Vivekananda Institute of Professional Studies",
+          "email": "garimachanana1@gmail.com",
+          "score": 0.7313,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on molecular property prediction using GNNs in 2025 and 2026"
+          ]
+        }
+      ],
+      "name": "academic_gnn",
+      "playbook": "academic",
+      "target": 5
+    },
+    {
+      "unique": 32,
+      "qualified": 32,
+      "reachable": 7,
+      "passed_judge": 7,
+      "shortlisted": 6,
+      "good@K": 6,
+      "precision@K": 1.0,
+      "mean_score": 0.78,
+      "distinct_orgs": 6,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.167,
+      "search_calls": 4,
+      "llm_paid_calls": 1,
+      "llm_usd": 0.0022,
+      "pages_fetched": 4,
+      "seconds": 21.7,
+      "usd_per_good": 0.001,
+      "llm_by_purpose": {
+        "judge": 1
+      },
+      "by_source": {
+        "places": 32
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "Amaya Dental Clinic",
+          "org": "Amaya Dental Clinic",
+          "email": "amayadental.ind@gmail.com",
+          "score": 0.8256,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Best dental clinic in Bangalore with experienced dentists"
+          ]
+        },
+        {
+          "name": "Excel Dental Care | Jayanagar, Bengaluru",
+          "org": "Excel Dental Care | Jayanagar, Bengaluru",
+          "email": "1exceldentalcare@gmail.com",
+          "score": 0.8255,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Bangalore with specialist dentists"
+          ]
+        },
+        {
+          "name": "Dentistree Bangalore",
+          "org": "Dentistree Advanced Dental & Implant Center",
+          "email": "dentistree.bangalore@gmail.com",
+          "score": 0.7777,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Bangalore with specialist dentists"
+          ]
+        },
+        {
+          "name": "House of Dentistry",
+          "org": "House of Dentistry",
+          "email": "info@houseofdentistry.in",
+          "score": 0.7536,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic near Sadashiva Nagar and Malleshwaram Bangalore"
+          ]
+        },
+        {
+          "name": "Chisel Dental Clinic",
+          "org": "Chisel Dental Clinic",
+          "email": "chiseldentalclinics@gmail.com",
+          "score": 0.7519,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Koramangala Bangalore"
+          ]
+        },
+        {
+          "name": "Narayanadental",
+          "org": "Narayanadental",
+          "email": "care@narayanadental.com",
+          "score": 0.7461,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Specialist dental clinic serving Bangalore areas"
+          ]
+        }
+      ],
+      "name": "b2b_dental_bangalore",
+      "playbook": "b2b_sales",
+      "target": 6
+    },
+    {
+      "unique": 46,
+      "qualified": 39,
+      "reachable": 9,
+      "passed_judge": 7,
+      "shortlisted": 5,
+      "good@K": 2,
+      "precision@K": 0.4,
+      "mean_score": 0.684,
+      "distinct_orgs": 5,
+      "proof_rate": 0.4,
+      "personal_email_rate": 0.6,
+      "search_calls": 17,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0029,
+      "pages_fetched": 39,
+      "seconds": 48.5,
+      "usd_per_good": 0.01,
+      "llm_by_purpose": {
+        "judge": 2
+      },
+      "by_source": {
+        "portfolio": 21,
+        "orgs": 26
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "Christopher Nyren",
+          "org": "Educated Ventures",
+          "email": "cnyren@educatedventures.com",
+          "score": 0.7617,
+          "sources": [
+            "list",
+            "portfolio"
+          ],
+          "reasons": [
+            "Advisory and investment in education industry"
+          ]
+        },
+        {
+          "name": "Rema Subramanian",
+          "org": "Ankur Capital",
+          "email": "rema@ankurcapital.com",
+          "score": 0.7176,
+          "sources": [
+            "list"
+          ],
+          "reasons": [
+            "Top VC firm in India"
+          ]
+        },
+        {
+          "name": "Robb Doub",
+          "org": "New Markets Venture Partners",
+          "email": "rdoub@newmarketsvp.com",
+          "score": 0.6932,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "reasons": [
+            "Leading edtech venture capital firm"
+          ]
+        },
+        {
+          "name": "Kalaari Capital",
+          "org": "Kalaari Capital",
+          "email": "info@kalaari.com",
+          "score": 0.6432,
+          "sources": [
+            "list"
+          ],
+          "reasons": [
+            "Listed on EdTech Investors in India"
+          ]
+        },
+        {
+          "name": "Terex Ventures",
+          "org": "Terex Ventures",
+          "email": "info@terexventures.com",
+          "score": 0.6062,
+          "sources": [
+            "list"
+          ],
+          "reasons": [
+            "Provides capital raising and advisory"
+          ]
+        }
+      ],
+      "name": "investors_edtech",
+      "playbook": "fundraising",
+      "target": 5
+    },
+    {
+      "unique": 41,
+      "qualified": 42,
+      "reachable": 1,
+      "passed_judge": 1,
+      "shortlisted": 1,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.529,
+      "distinct_orgs": 1,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 23,
+      "llm_paid_calls": 7,
+      "llm_usd": 0.0018,
+      "pages_fetched": 55,
+      "seconds": 63.4,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "triage": 3,
+        "extract_orgs": 3,
+        "judge": 1
+      },
+      "by_source": {
+        "jobs": 20,
+        "orgs": 21
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [
+        {
+          "name": "JumpCloud",
+          "org": "JumpCloud",
+          "email": "info@jumpcloud.com",
+          "score": 0.5289,
+          "sources": [
+            "jobs"
+          ],
+          "reasons": [
+            "Company focuses on device management and security, not ML or AI"
+          ]
+        }
+      ],
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5
+    },
+    {
+      "unique": 53,
+      "qualified": 65,
+      "reachable": 17,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 21,
+      "llm_paid_calls": 3,
+      "llm_usd": 0.0035,
+      "pages_fetched": 183,
+      "seconds": 153.4,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "judge": 2,
+        "replan_search": 1
+      },
+      "by_source": {
+        "podcasts": 26,
+        "news": 27
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "shortlist": [],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    },
+    {
+      "unique": 103,
+      "qualified": 135,
+      "reachable": 12,
+      "passed_judge": 4,
+      "shortlisted": 4,
+      "good@K": 3,
+      "precision@K": 0.5,
+      "mean_score": 0.72,
+      "distinct_orgs": 4,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.25,
+      "search_calls": 14,
+      "llm_paid_calls": 5,
+      "llm_usd": 0.0049,
+      "pages_fetched": 82,
+      "seconds": 98.5,
+      "usd_per_good": 0.0063,
+      "llm_by_purpose": {
+        "judge": 3,
+        "triage": 1,
+        "extract_orgs": 1
+      },
+      "by_source": {
+        "events": 61,
+        "orgs": 42
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "3 candidates could not be judged and were left out."
+      ],
+      "shortlist": [
+        {
+          "name": "OpenBuild",
+          "org": "OpenBuild",
+          "email": "build@openbuild.xyz",
+          "score": 0.7936,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Dedicated to developers bridging Web2 and Web3"
+          ]
+        },
+        {
+          "name": "JetBrains",
+          "org": "JetBrains",
+          "email": "marketing@jetbrains.com",
+          "score": 0.7205,
+          "sources": [
+            "list"
+          ],
+          "reasons": [
+            "Specializes in developer tools relevant to student developers"
+          ]
+        },
+        {
+          "name": "Red Hat",
+          "org": "Red Hat",
+          "email": "apac@redhat.com",
+          "score": 0.7116,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Works on cloud and developer tools"
+          ]
+        },
+        {
+          "name": "Partner Spotlight",
+          "org": "Databricks",
+          "email": "partners@databricks.com",
+          "score": 0.6544,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Offers data, analytics and AI platform relevant to developers"
+          ]
+        }
+      ],
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6
+    }
+  ],
+  "summary": {
+    "scenarios": 6,
+    "failed": 0,
+    "good@K": 16,
+    "precision@K": 0.483,
+    "mean_score": 0.581,
+    "distinct_orgs": 21,
+    "proof_rate": 0.567,
+    "reachable": 61,
+    "search_calls": 85,
+    "llm_paid_calls": 20,
+    "llm_usd": 0.0184,
+    "seconds": 480.2,
+    "usd_per_good": 0.0065
+  }
+}

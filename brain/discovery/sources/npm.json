@@ -1,0 +1,12 @@
+{
+  "name": "npm",
+  "title": "Maintainers of npm packages on the topic, with the address the registry publishes.",
+  "adapter": "json_api",
+  "tier": 1, "cost": "free", "kinds": ["person"], "stage": "seed", "order": 42,
+  "proves": ["maintains_package", "open_source"], "yields_email": true,
+  "request": {"url": "https://registry.npmjs.org/-/v1/search", "params": {"text": "{term}", "size": 20}},
+  "query": {"terms": ["topics", "expanded_terms:1"], "max": 3},
+  "items": "objects", "dedupe": "package.name",
+  "hooks": "brain.discovery.hooks.npm",
+  "policy": {"robots": "api", "rate_per_min": 60, "terms": "Public npm registry search API."}
+}

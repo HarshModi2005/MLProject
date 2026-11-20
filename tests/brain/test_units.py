@@ -145,8 +145,11 @@ def test_hard_filters():
     blocked = Contact(name="I J", country="IN", location_text="Punjab")
     kept, dropped = filter_contacts([ok, wrong_country, wrong_region, student, blocked, web_unverified, web_vouched],
                                     _spec(), pack, is_blocked=lambda c: "suppressed" if c.name == "I J" else None)
-    assert [c.name for c in kept] == ["A B", "M N"]  # M N is vouched for by A B's confirmed organisation
-    assert dropped == {"country": 1, "region": 2, "seniority": 1, "suppressed": 1}
+    # M N is vouched for by A B's confirmed organisation; K L's city is unknown (not known to be elsewhere), so they
+    # stay, flagged for the pre-judge and the judge, and ranked below people known to be local.
+    assert [c.name for c in kept] == ["A B", "K L", "M N"]
+    assert "region_unknown" in web_unverified.flags and "region_unknown" not in web_vouched.flags
+    assert dropped == {"country": 1, "region": 1, "seniority": 1, "suppressed": 1}
 
 
 def test_prescore_orders_by_relevance():

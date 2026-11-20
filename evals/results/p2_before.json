@@ -1,0 +1,815 @@
+{
+  "label": "p2_before",
+  "replay": "replay",
+  "rows": [
+    {
+      "unique": 298,
+      "qualified": 190,
+      "reachable": 14,
+      "passed_judge": 9,
+      "shortlisted": 5,
+      "good@K": 5,
+      "precision@K": 1.0,
+      "mean_score": 0.802,
+      "distinct_orgs": 5,
+      "proof_rate": 0.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 0,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0031,
+      "pages_fetched": 0,
+      "seconds": 12.3,
+      "usd_per_good": 0.0006,
+      "llm_by_purpose": {
+        "judge": 2
+      },
+      "by_source": {
+        "openalex": 300
+      },
+      "replay_misses": 10,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "openalex": 298
+        },
+        "qualified": {
+          "openalex": 190
+        },
+        "enriched": {
+          "openalex": 30
+        },
+        "reachable": {
+          "openalex": 14
+        },
+        "passed_judge": {
+          "openalex": 9
+        },
+        "shortlisted": {
+          "openalex": 5
+        }
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.06,
+          "found": 300,
+          "new": 300,
+          "qualified": 250
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Garima Chanana",
+          "org": "Vivekananda Institute of Professional Studies",
+          "email": "garimachanana1@gmail.com",
+          "score": 0.8513,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on molecular property prediction using message passing GNNs"
+          ]
+        },
+        {
+          "name": "Subhankar Mishra",
+          "org": "National Institute of Science Education and Research",
+          "email": "smishra@niser.ac.in",
+          "score": 0.8387,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks"
+          ]
+        },
+        {
+          "name": "Bhaskarjyoti Das",
+          "org": "PES University",
+          "email": "bhaskarjyoti01@gmail.com",
+          "score": 0.8097,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graphormers and graph representation learning"
+          ]
+        },
+        {
+          "name": "Partha Basuchowdhuri",
+          "org": "Indian Association for the Cultivation of Science",
+          "email": "partha.basuchowdhuri@iacs.res.in",
+          "score": 0.7684,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on fine-tuning graph neural networks and crystal property prediction"
+          ]
+        },
+        {
+          "name": "Swagatam Das",
+          "org": "Indian Statistical Institute",
+          "email": "swagatam.das@isical.ac.in",
+          "score": 0.7418,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on graph neural networks in 2025"
+          ]
+        }
+      ],
+      "name": "academic_gnn",
+      "playbook": "academic",
+      "target": 5
+    },
+    {
+      "unique": 32,
+      "qualified": 32,
+      "reachable": 7,
+      "passed_judge": 6,
+      "shortlisted": 6,
+      "good@K": 6,
+      "precision@K": 1.0,
+      "mean_score": 0.762,
+      "distinct_orgs": 6,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.167,
+      "search_calls": 0,
+      "llm_paid_calls": 1,
+      "llm_usd": 0.0019,
+      "pages_fetched": 0,
+      "seconds": 10.8,
+      "usd_per_good": 0.0003,
+      "llm_by_purpose": {
+        "judge": 1
+      },
+      "by_source": {
+        "places": 32
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "places": 32
+        },
+        "qualified": {
+          "places": 32
+        },
+        "enriched": {
+          "places": 21
+        },
+        "reachable": {
+          "places": 7
+        },
+        "passed_judge": {
+          "places": 6
+        },
+        "shortlisted": {
+          "places": 6
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.0,
+          "found": 32,
+          "new": 32,
+          "qualified": 32
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Amaya Dental Clinic",
+          "org": "Amaya Dental Clinic",
+          "email": "amayadental.ind@gmail.com",
+          "score": 0.7946,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Best dental clinic in Bangalore"
+          ]
+        },
+        {
+          "name": "Excel Dental Care | Jayanagar, Bengaluru",
+          "org": "Excel Dental Care | Jayanagar, Bengaluru",
+          "email": "1exceldentalcare@gmail.com",
+          "score": 0.7945,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Orthodontist and dental specialists present"
+          ]
+        },
+        {
+          "name": "House of Dentistry",
+          "org": "House of Dentistry",
+          "email": "info@houseofdentistry.in",
+          "score": 0.7618,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic near Sadashiva Nagar and Malleshwaram"
+          ]
+        },
+        {
+          "name": "Narayanadental",
+          "org": "Narayanadental",
+          "email": "care@narayanadental.com",
+          "score": 0.7542,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Specialist dental clinic serving Bangalore areas"
+          ]
+        },
+        {
+          "name": "Dentistree Bangalore",
+          "org": "Dentistree Advanced Dental & Implant Center",
+          "email": "dentistree.bangalore@gmail.com",
+          "score": 0.746,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Bangalore"
+          ]
+        },
+        {
+          "name": "Chisel Dental Clinic",
+          "org": "Chisel Dental Clinic",
+          "email": "chiseldentalclinics@gmail.com",
+          "score": 0.7209,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Dental clinic in Koramangala Bangalore"
+          ]
+        }
+      ],
+      "name": "b2b_dental_bangalore",
+      "playbook": "b2b_sales",
+      "target": 6
+    },
+    {
+      "unique": 44,
+      "qualified": 37,
+      "reachable": 8,
+      "passed_judge": 7,
+      "shortlisted": 5,
+      "good@K": 4,
+      "precision@K": 0.8,
+      "mean_score": 0.733,
+      "distinct_orgs": 5,
+      "proof_rate": 0.4,
+      "personal_email_rate": 0.6,
+      "search_calls": 0,
+      "llm_paid_calls": 1,
+      "llm_usd": 0.0027,
+      "pages_fetched": 0,
+      "seconds": 16.1,
+      "usd_per_good": 0.0007,
+      "llm_by_purpose": {
+        "judge": 1
+      },
+      "by_source": {
+        "portfolio": 21,
+        "orgs": 26
+      },
+      "replay_misses": 5,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "web": 16,
+          "portfolio": 21,
+          "orgs": 26,
+          "list": 28
+        },
+        "qualified": {
+          "web": 11,
+          "portfolio": 17,
+          "list": 26,
+          "orgs": 23
+        },
+        "enriched": {
+          "web": 11,
+          "portfolio": 17,
+          "list": 26,
+          "orgs": 23
+        },
+        "reachable": {
+          "web": 3,
+          "portfolio": 3,
+          "list": 5,
+          "orgs": 5
+        },
+        "passed_judge": {
+          "list": 5,
+          "portfolio": 3,
+          "orgs": 4,
+          "web": 2
+        },
+        "shortlisted": {
+          "list": 4,
+          "portfolio": 2,
+          "orgs": 3,
+          "web": 1
+        }
+      },
+      "ledger": {
+        "portfolio": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 1.37,
+          "found": 21,
+          "new": 21,
+          "qualified": 20
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.23,
+          "found": 26,
+          "new": 23,
+          "qualified": 23
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Christopher Nyren",
+          "org": "Educated Ventures",
+          "email": "cnyren@educatedventures.com",
+          "score": 0.8115,
+          "sources": [
+            "list",
+            "portfolio"
+          ],
+          "reasons": [
+            "Advisory and investment in the education industry"
+          ]
+        },
+        {
+          "name": "Rema Subramanian",
+          "org": "Ankur Capital",
+          "email": "rema@ankurcapital.com",
+          "score": 0.751,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Top venture capital firm in India backing pre-seed to Series A"
+          ]
+        },
+        {
+          "name": "Robb Doub",
+          "org": "New Markets Venture Partners",
+          "email": "rdoub@newmarketsvp.com",
+          "score": 0.7408,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "reasons": [
+            "Leading edtech VC firm investing in education technology startups"
+          ]
+        },
+        {
+          "name": "Kalaari Capital",
+          "org": "Kalaari Capital",
+          "email": "info@kalaari.com",
+          "score": 0.7205,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Listed on EdTech Investors in India"
+          ]
+        },
+        {
+          "name": "Terex Ventures",
+          "org": "Terex Ventures",
+          "email": "info@terexventures.com",
+          "score": 0.639,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Provides capital raising and advisory including education technology"
+          ]
+        }
+      ],
+      "name": "investors_edtech",
+      "playbook": "fundraising",
+      "target": 5
+    },
+    {
+      "unique": 44,
+      "qualified": 44,
+      "reachable": 2,
+      "passed_judge": 4,
+      "shortlisted": 4,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.651,
+      "distinct_orgs": 4,
+      "proof_rate": 0.75,
+      "personal_email_rate": 0.25,
+      "search_calls": 0,
+      "llm_paid_calls": 2,
+      "llm_usd": 0.0017,
+      "pages_fetched": 0,
+      "seconds": 12.5,
+      "usd_per_good": 0.0017,
+      "llm_by_purpose": {
+        "judge": 2
+      },
+      "by_source": {
+        "orgs": 43,
+        "lookalike": 9
+      },
+      "replay_misses": 7,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "list": 29,
+          "orgs": 37,
+          "web": 15,
+          "lookalike": 7
+        },
+        "qualified": {
+          "web": 15,
+          "orgs": 37,
+          "list": 29,
+          "lookalike": 7
+        },
+        "enriched": {
+          "list": 18,
+          "orgs": 23,
+          "web": 5
+        },
+        "reachable": {
+          "list": 1,
+          "orgs": 4,
+          "web": 3
+        },
+        "passed_judge": {
+          "web": 3,
+          "orgs": 4,
+          "list": 1
+        },
+        "shortlisted": {
+          "web": 3,
+          "orgs": 4,
+          "list": 1
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.7,
+          "found": 25,
+          "new": 25,
+          "qualified": 25
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Iisc",
+          "org": "Iisc",
+          "email": "venky@iisc.ac.in",
+          "score": 0.7434,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Involved in computer vision projects using deep learning"
+          ]
+        },
+        {
+          "name": "Valiance Solutions",
+          "org": "Valiance Solutions",
+          "email": "info@valiancesolutions.com",
+          "score": 0.6671,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Company works on AI, machine learning, and analytics services"
+          ]
+        },
+        {
+          "name": "Logic Launch Software Solutions",
+          "org": "Logic Launch Software Solutions",
+          "email": "contact@logiclaunch.in",
+          "score": 0.6552,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Based in Bengaluru and works on AI automation and LLM development"
+          ]
+        },
+        {
+          "name": "Career Enquiry",
+          "org": "W2Ssolutions",
+          "email": "careers@w2ssolutions.com",
+          "score": 0.5368,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Company works with AI and MLOps, relevant to candidate's skills"
+          ]
+        }
+      ],
+      "name": "jobs_ml_startups",
+      "playbook": "job_search",
+      "target": 5
+    },
+    {
+      "unique": 69,
+      "qualified": 67,
+      "reachable": 25,
+      "passed_judge": 2,
+      "shortlisted": 2,
+      "good@K": 1,
+      "precision@K": 0.2,
+      "mean_score": 0.751,
+      "distinct_orgs": 2,
+      "proof_rate": 1.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 0,
+      "llm_paid_calls": 0,
+      "llm_usd": 0.0,
+      "pages_fetched": 0,
+      "seconds": 15.3,
+      "usd_per_good": 0.0,
+      "llm_by_purpose": {},
+      "by_source": {
+        "podcasts": 26,
+        "news": 46
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "podcasts": 26,
+          "news": 43
+        },
+        "qualified": {
+          "news": 41,
+          "podcasts": 26
+        },
+        "enriched": {
+          "news": 26,
+          "podcasts": 24
+        },
+        "reachable": {
+          "podcasts": 24,
+          "news": 7
+        },
+        "passed_judge": {
+          "news": 2
+        },
+        "shortlisted": {
+          "news": 2
+        }
+      },
+      "ledger": {
+        "podcasts": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 2.34,
+          "found": 26,
+          "new": 26,
+          "qualified": 19
+        },
+        "news": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.9,
+          "found": 27,
+          "new": 27,
+          "qualified": 27
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Armaan Agarwal",
+          "org": "India Today",
+          "email": "armaan.agarwal@aajtak.com",
+          "score": 0.8707,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Recently wrote about Indian language speech recognition AI"
+          ]
+        },
+        {
+          "name": "Ameya Sathaye",
+          "org": "Sarkaritel.com",
+          "email": "ameya.sathaye@sarkaritel.com",
+          "score": 0.6316,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Covers AI speech recognition in Indian languages"
+          ]
+        }
+      ],
+      "name": "pr_ai_media",
+      "playbook": "pr_media",
+      "target": 5
+    },
+    {
+      "unique": 136,
+      "qualified": 135,
+      "reachable": 12,
+      "passed_judge": 4,
+      "shortlisted": 4,
+      "good@K": 2,
+      "precision@K": 0.333,
+      "mean_score": 0.699,
+      "distinct_orgs": 4,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.25,
+      "search_calls": 0,
+      "llm_paid_calls": 3,
+      "llm_usd": 0.0041,
+      "pages_fetched": 0,
+      "seconds": 24.3,
+      "usd_per_good": 0.0021,
+      "llm_by_purpose": {
+        "judge": 3
+      },
+      "by_source": {
+        "events": 61,
+        "orgs": 59,
+        "lookalike": 17
+      },
+      "replay_misses": 6,
+      "warnings": [
+        "3 candidates could not be judged and were left out."
+      ],
+      "source_funnel": {
+        "unique": {
+          "events": 101,
+          "web": 9,
+          "orgs": 58,
+          "lookalike": 17,
+          "list": 26
+        },
+        "qualified": {
+          "events": 100,
+          "orgs": 58,
+          "web": 4,
+          "list": 18,
+          "lookalike": 4
+        },
+        "enriched": {
+          "events": 68,
+          "orgs": 42,
+          "web": 2
+        },
+        "reachable": {
+          "events": 11,
+          "orgs": 8,
+          "web": 1,
+          "list": 1
+        },
+        "passed_judge": {
+          "events": 3,
+          "list": 1,
+          "orgs": 1
+        },
+        "shortlisted": {
+          "events": 3,
+          "list": 1,
+          "orgs": 1
+        }
+      },
+      "ledger": {
+        "events": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.48,
+          "found": 61,
+          "new": 61,
+          "qualified": 12
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.06,
+          "found": 42,
+          "new": 42,
+          "qualified": 42
+        }
+      },
+      "shortlist": [
+        {
+          "name": "OpenBuild",
+          "org": "OpenBuild",
+          "email": "build@openbuild.xyz",
+          "score": 0.7888,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Focus on developer content bridging Web2 and Web3"
+          ]
+        },
+        {
+          "name": "JetBrains",
+          "org": "JetBrains",
+          "email": "marketing@jetbrains.com",
+          "score": 0.7205,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Creates developer tools relevant to student developers"
+          ]
+        },
+        {
+          "name": "Partner Spotlight",
+          "org": "Databricks",
+          "email": "partners@databricks.com",
+          "score": 0.6556,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Databricks offers data, analytics, AI platform relevant to developers"
+          ]
+        },
+        {
+          "name": "Red Hat",
+          "org": "Red Hat",
+          "email": "apac@redhat.com",
+          "score": 0.6305,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Works on cloud and developer tools relevant to event topics"
+          ]
+        }
+      ],
+      "name": "sponsors_tech_fest",
+      "playbook": "sponsorship",
+      "target": 6
+    }
+  ],
+  "summary": {
+    "scenarios": 6,
+    "failed": 0,
+    "good@K": 19,
+    "precision@K": 0.589,
+    "mean_score": 0.733,
+    "distinct_orgs": 26,
+    "proof_rate": 0.692,
+    "reachable": 68,
+    "search_calls": 0,
+    "llm_paid_calls": 9,
+    "llm_usd": 0.0135,
+    "seconds": 91.3,
+    "usd_per_good": 0.0007
+  }
+}

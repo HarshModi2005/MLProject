@@ -71,7 +71,7 @@ def router(req: httpx.Request) -> httpx.Response:
 
 
 class FakeSearch(WebSearch):
-    def search(self, query, n=8):
+    def search(self, query, n=8, raw=False):
         self.calls += 1
         return SEARCH.get(query, [])
 

@@ -10,6 +10,7 @@ Every call counts against one budget; cached answers are free.
 from __future__ import annotations
 
 import logging
+import threading
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -66,27 +67,36 @@ class WebSearch:
         self.calls = 0
         self.budget = self.settings.max_search_calls  # the pipeline lowers this per campaign
         self.by_kind = {"search": 0, "places": 0, "news": 0}
+        self.replay_misses = 0
+        self._lock = threading.Lock()
 
     @property
     def remaining(self) -> int:
         return max(0, self.budget - self.calls)
 
     def _spend(self, kind: str, query: str) -> bool:
-        if self.calls >= self.budget:
-            log.warning("search budget (%d) exhausted; skipping %s %r", self.budget, kind, query)
-            return False
-        self.calls += 1
-        self.by_kind[kind] = self.by_kind.get(kind, 0) + 1
-        return True
+        with self._lock:  # tools enrich in threads; the budget must hold under concurrency
+            if self.settings.replay:
+                self.replay_misses += 1
+                log.info("replay: no recorded answer for %s %r; skipped", kind, query)
+                return False
+            if self.calls >= self.budget:
+                log.warning("search budget (%d) exhausted; skipping %s %r", self.budget, kind, query)
+                return False
+            self.calls += 1
+            self.by_kind[kind] = self.by_kind.get(kind, 0) + 1
+            return True
 
     @property
     def available(self) -> bool:
         return bool(self.settings.serper_api_key or self.settings.tavily_api_key)
 
-    def search(self, query: str, n: int = 8) -> List[Hit]:
+    def search(self, query: str, n: int = 8, raw: bool = False) -> List[Hit]:
+        """Web results. Login-walled and reference sites are dropped unless `raw` (used only to read result
+        TITLES, e.g. "Name - Role - Company", never to fetch those pages)."""
         if not self.available:
             return []
-        key = Cache.key(query, n)
+        key = Cache.key("raw", query, n) if raw else Cache.key(query, n)
         cached = self.cache.get("search", key)
         if cached is not None:
             return [Hit(**h) for h in cached]
@@ -97,7 +107,7 @@ class WebSearch:
         except (httpx.HTTPError, ValueError, KeyError) as e:
             log.warning("search failed for %r: %s", query, e)
             return []
-        hits = [h for h in hits if h.url and not any(s in h.url.lower() for s in SKIP_HOSTS)]
+        hits = [h for h in hits if h.url and (raw or not any(s in h.url.lower() for s in SKIP_HOSTS))]
         self.cache.set("search", key, [h.__dict__ for h in hits], ttl=7 * 86400)
         return hits
 

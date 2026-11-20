@@ -1,0 +1,780 @@
+{
+  "run": "v3_live",
+  "rows": [
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 5.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [],
+      "name": "academic_gnn",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 7260,
+        "est_cost_usd": 0.0033,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "swagatam.das@isical.ac.in",
+          "name": "Swagatam Das",
+          "subject": "Interest in your GNN message passing work",
+          "body": "Dear Professor Das,\n\nI am a third-year CS undergraduate who built a GNN-based molecule property predictor using PyTorch Geometric, achieving 0.91 ROC-AUC on the Tox21 dataset.\n\nI recently read your paper \"Asynchronous Message Passing for Addressing Oversquashing in Graph Neural Networks\" and found your approach to mitigating oversquashing insightful. My project involved message passing on molecular graphs, where long-range interactions are also critical, though I did not specifically address oversquashing.\n\nI am seeking a 2-month summer research internship in your group to gain experience working on graph neural networks and message passing algorithms. Would you be open to discussing potential opportunities for this internship?\n\nThank you for considering my request.\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "partha.basuchowdhuri@iacs.res.in",
+          "name": "Partha Basuchowdhuri",
+          "subject": "Interest in MoLE-GNN and GNN Research",
+          "body": "Dear Professor Basuchowdhuri,\n\nI am a third-year CS undergraduate who built a graph neural network-based molecule property predictor achieving 0.91 ROC-AUC on the Tox21 dataset using PyTorch Geometric.\n\nI recently read your paper MoLE-GNN: Parameter-Efficient Fine-Tuning of Graph Neural Networks with Mixture-of-Experts. Your approach to fine-tuning GNNs aligns with my interest in graph representation learning and molecular property prediction. Although I have not worked on fine-tuning methods, my experience developing a GNN model for molecular properties could provide a useful foundation.\n\nI am seeking a two-month summer research internship in your group to gain experience with advanced GNN techniques like those in your work. Would it be possible to discuss potential opportunities for such an internship?\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "smishra@niser.ac.in",
+          "name": "Subhankar Mishra",
+          "subject": "Internship inquiry on interpretable GNNs",
+          "body": "Dear Professor Mishra,\n\nI am a third-year computer science undergraduate who developed a graph neural network (GNN) model for molecule property prediction, achieving 0.91 ROC-AUC on the Tox21 dataset using PyTorch Geometric.\n\nI recently read your paper \"Inherently Interpretable Graph Neural Networks via B-cos Alignment\" and found the approach to interpretability intriguing. While my project focused on molecular data, I am interested in how interpretability techniques like B-cos alignment can be applied to GNNs in other domains.\n\nI am seeking a two-month summer research internship to deepen my understanding of advanced GNN methods. Would you consider hosting me in your group at the National Institute of Science Education and Research for this period? I am eager to contribute and learn under your guidance.\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.67,
+      "avg_relevance": 4.67,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Make it more specific to Krishang's focus on React Native."
+      ],
+      "name": "b2b_app_devs",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 1,
+        "fixed": 1,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 7,
+        "cached_hits": 0,
+        "tokens": 7818,
+        "est_cost_usd": 0.0038,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 2,
+          "draft_fix": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "sales@unicoconnect.com",
+          "name": "Unico Connect",
+          "subject": "Try a lightweight crash-reporting SDK for Android and Flutter",
+          "body": "Hello Unico Connect team,\n\nUnico Connect specializes in native Android and Flutter app development, which matches the platforms my crash-reporting SDK supports.\n\nI have developed a lightweight crash-reporting SDK that adds only 40 KB to apps on Android and Flutter. It is designed to provide essential crash insights without significant app size increase.\n\nWould your team be interested in trying our crash-reporting SDK free for two months on one of your apps? I can provide access and support to get started quickly.\n\nIf this is not the right contact, could you please forward this to the person handling developer tools or app performance at Unico Connect?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "sales@openxcell.com",
+          "name": "OpenXcell",
+          "subject": "Crash-reporting SDK for your Android apps",
+          "body": "Hello OpenXcell team,\n\nOpenXcell\u2019s work as a leading mobile app development company in India caught my attention because your team builds custom Android and cross-platform apps.\n\nI have developed a lightweight crash-reporting SDK that supports Android and Flutter, adding only 40 KB to the app size on device. This SDK is designed to help developers identify and fix crashes efficiently without significant app bloat.\n\nWould your team be interested in trying our crash-reporting SDK free for two months on one of your apps? I\u2019m happy to provide access and support during the trial.\n\nIf this is not the right team for this, could you please point me to the appropriate person to discuss this opportunity?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@krishangtechnolab.com",
+          "name": "Krishangtechnolab",
+          "subject": "Crash-reporting SDK for your Android and Flutter apps",
+          "body": "Hello Krishangtechnolab team,\n\nKrishangtechnolab specializes in mobile apps and custom software development in India.\n\nI am the founder of a developer-tools startup building a crash-reporting SDK that supports Android and Flutter, adding only 40 KB to the app size on device.\n\nWould your team be interested in trying our crash-reporting SDK free for two months on one of your apps? I am looking for pilot customers among Indian mobile app studios.\n\nPlease let me know if this offer should be directed to someone else on your team.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make it more specific to Krishang's focus on React Native."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 4.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "Specify how the service can enhance personalized care.",
+        "Mention specific benefits for multiple locations.",
+        "Highlight how it aligns with their focus on patient care."
+      ],
+      "name": "b2b_dental_bangalore",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5770,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "1exceldentalcare@gmail.com",
+          "name": "Excel Dental Care | Jayanagar, Bengaluru",
+          "subject": "WhatsApp reminders for Excel Dental Care appointments",
+          "body": "Hello Excel Dental Care | Jayanagar, Bengaluru team,\n\nExcel Dental Care emphasizes personalized and compassionate dental practice in Bangalore. I built a WhatsApp appointment reminder service currently used by 12 clinics in Pune, helping them reduce no-shows by about a third.\n\nI believe your clinic could benefit from this service to improve appointment attendance. I would like to offer a 15-minute call to demonstrate how the reminder service works and discuss if it fits your needs.\n\nCould you please direct me to the appropriate team member to arrange this call?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how the service can enhance personalized care."
+          }
+        },
+        {
+          "to": "drbracesandfaces@gmail.com",
+          "name": "Dr Braces",
+          "subject": "WhatsApp reminders for Dr Braces' clinics",
+          "body": "Hi Afsaneh,\n\nWriting to drbracesandfaces@gmail.com hoping this reaches your team.\n\nI built a WhatsApp appointment reminder service currently used by 12 clinics in Pune. These clinics have cut no-shows by about a third using the service.\n\nGiven Dr Braces is Bangalore's largest Diamond Invisalign centre with multiple locations, a simple reminder system could help your patient appointments run more smoothly.\n\nWould you be open to a 15-minute call where I can show how the reminder service works and discuss if it might fit your clinics' needs? I am happy to work around your schedule.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits for multiple locations."
+          }
+        },
+        {
+          "to": "dentistree.bangalore@gmail.com",
+          "name": "Dentistree Bangalore",
+          "subject": "WhatsApp reminders for Dentistree appointments",
+          "body": "Hi Dentistree,\n\nDentistree Bangalore's focus on expert smile design and implants highlights the importance of reliable patient appointments.\n\nI founded a two-person SaaS studio that built a WhatsApp appointment reminder service currently used by 12 clinics in Pune. These clinics have reduced no-shows by about a third using our service.\n\nWould you be open to a 15-minute call where I can demonstrate how this reminder service might support Dentistree's scheduling needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Highlight how it aligns with their focus on patient care."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 4.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "Specify how your inverters complement their offerings.",
+        "Clarify how your inverters differ from Adani's.",
+        "Mention specific benefits of your inverters."
+      ],
+      "name": "distributors_solar",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 6620,
+        "est_cost_usd": 0.0031,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@photovoltaicsolar.in",
+          "name": "Photovoltaic Solar",
+          "subject": "Residential solar inverter distribution in Gujarat",
+          "body": "Hi Delgado,\n\nWriting to info@photovoltaicsolar.in hoping this reaches your team.\n\nI am a channel sales manager at a manufacturer of 3-10 kW residential hybrid solar inverters. Our inverters are BIS certified and come with a 5-year warranty. We are looking for distributors in Gujarat to expand the reach of our residential solar inverter products.\n\nPhotovoltaic Solar distributes Tier 1 solar panel and inverter brands and is a premier solar distributor and EPC specialist in Gujarat. We believe our product could complement your existing portfolio and provide additional options for your customers.\n\nWould you consider distributing our residential solar inverters in your region? I am happy to provide product details and discuss how we can collaborate to benefit both our companies.\n\nBest regards,\nTest Manager\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how your inverters complement their offerings."
+          }
+        },
+        {
+          "to": "info@gracerenew.com",
+          "name": "Gracerenew",
+          "subject": "Residential solar inverters for Gujarat market",
+          "body": "Hi Manish,\n\nWriting to the team address hoping this reaches you. I am a channel sales manager at a manufacturer of 3-10 kW residential hybrid solar inverters. Our inverters are BIS certified and come with a 5-year warranty.\n\nI see that Gracerenew is a solar EPC solution provider active in Ahmedabad and Gujarat, supplying solar inverters and partnering with Adani Solar. Given your presence in the residential solar rooftop market, I wanted to explore if you would consider distributing our residential solar inverters in your region.\n\nWould you be open to a brief call or meeting to discuss how our hybrid inverters might complement your current offerings? Please let me know what works for you or if you prefer to continue this conversation via email.\n\nBest regards,\nTest Manager\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how your inverters differ from Adani's."
+          }
+        },
+        {
+          "to": "info@thevoltah.com",
+          "name": "Voltah",
+          "subject": "Residential solar inverter distribution in Gujarat",
+          "body": "Hi Helen,\n\nI am writing to the team inbox at Voltah, hoping this message reaches you.\n\nVoltah is known for manufacturing high-performance solar inverters and panels in Gujarat. We manufacture 3-10 kW residential hybrid solar inverters that are BIS certified and come with a 5-year warranty.\n\nWe are looking for distributors for our residential solar inverters in Gujarat and would like to explore if Voltah would consider distributing our products in your region. Our inverters could complement your existing solar product line.\n\nWould you be open to a brief call or meeting to discuss a potential distribution partnership? Please let me know a convenient time or if there is a better contact for this inquiry.\n\nBest regards,\nTest Manager\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits of your inverters."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 5.0,
+      "avg_tone": 4.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "Clarify the greeting to personalize the email.",
+        "Remove the second ask about directing to another contact.",
+        "Consider a more engaging opening sentence."
+      ],
+      "name": "grants_csr_india",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5937,
+        "est_cost_usd": 0.0028,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@e-class.in",
+          "name": "E-Class",
+          "subject": "Partnering on coding education for girls",
+          "body": "Hi At,\n\nI am writing to the team address hoping this reaches you. We run after-school coding clubs in 14 villages near Nashik, training 600 students since 2022. Our NGO is registered under 12G and 80G.\n\nWe seek CSR funding to run a 12-month coding course specifically for 300 girls in rural Maharashtra. This program aims to build digital skills and provide STEM education opportunities where access is limited.\n\nGiven E-Class\u2019s role as a trusted CSR partner helping corporates implement scalable and sustainable digital education programs across Maharashtra, I am reaching out to explore if your CSR program would consider funding this initiative.\n\nWould your CSR programme consider funding a 12-month coding course for 300 girls in rural Maharashtra? Please let me know if you need more details or a proposal.\n\nBest regards,\nTest NGO Lead",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 4,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify the greeting to personalize the email."
+          }
+        },
+        {
+          "to": "connect@anylanfoundation.org",
+          "name": "Anylan Foundation",
+          "subject": "Support coding education for girls in Maharashtra",
+          "body": "Hello Anylan Foundation team,\n\nAnylan Foundation supports STEM labs in government schools in Maharashtra through CSR funding. My NGO runs after-school coding clubs in 14 villages near Nashik, where we have trained 600 students since 2022.\n\nWe seek CSR funding to run a 12-month coding course specifically for 300 girls in rural Maharashtra. This program aims to build skills in a region where such opportunities are limited.\n\nWould your CSR program consider funding this coding course? If not the right contact, could you please direct me to the appropriate person on your team?\n\nBest regards,\nTest NGO Lead",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 4,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Remove the second ask about directing to another contact."
+          }
+        },
+        {
+          "to": "info@navdrishtidigital.com",
+          "name": "NavDrishti Digital Trust",
+          "subject": "Seeking CSR partnership for coding education",
+          "body": "Hello NavDrishti Digital Trust team,\n\nNavDrishti Digital Trust supports education and digital literacy for underserved communities in Maharashtra. My NGO runs after-school coding clubs in 14 villages near Nashik, training 600 students since 2022.\n\nWe propose a 12-month coding course specifically for 300 girls in rural Maharashtra. The program aims to build digital skills and opportunities for girls in these areas. Our NGO is registered under 12G and 80G.\n\nWould your CSR programme consider funding this initiative? If not the right contact, kindly direct me to the appropriate person on your team.\n\nBest regards,\nTest NGO Lead",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 4,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Consider a more engaging opening sentence."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "None, it's well-crafted.",
+        "None, it's well-crafted.",
+        "None, it's well-crafted."
+      ],
+      "name": "investors_edtech",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5704,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "team@ajuniorvc.com",
+          "name": "Ajuniorvc",
+          "subject": "Pre-seed investment opportunity in AI tutoring",
+          "body": "Hi Aviral,\n\nI am writing to the team address hoping this reaches the right person at A Junior VC.\n\nI co-founded an AI tutoring startup focused on class 9-12 math, currently serving 3,000 monthly active students with an 18% paid conversion rate. We are raising a $400k pre-seed round to expand our platform and reach.\n\nGiven A Junior VC's focus on pre-seed and seed investments across industries and support for Indian entrepreneurship, I believe a conversation could be mutually beneficial.\n\nWould you be available for a 20-minute call to discuss our pre-seed round and explore potential fit? I am happy to share more details and answer any questions you may have.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None, it's well-crafted."
+          }
+        },
+        {
+          "to": "mgrovic@newmarketsvp.com",
+          "name": "Mark Grovic",
+          "subject": "Discuss AI tutoring pre-seed funding",
+          "body": "Hi Mark,\n\nNew Markets Venture Partners invests in education technology startups transforming learning and economic mobility.\n\nI am the co-founder of an AI tutoring startup focused on math for classes 9-12. We have 3,000 monthly active students and an 18% paid conversion rate. We are currently raising $400k in a pre-seed round.\n\nI would like to schedule a 20-minute call to discuss this round and explore any potential fit with your investment focus. If you are not the right contact, could you please direct me to the appropriate person?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None, it's well-crafted."
+          }
+        },
+        {
+          "to": "cnyren@educatedventures.com",
+          "name": "Christopher Nyren",
+          "subject": "Exploring investment in AI education technology",
+          "body": "Hi Christopher,\n\nI am the co-founder of an AI tutoring startup focused on maths for classes 9-12, currently serving 3,000 monthly active students with an 18% paid conversion rate.\n\nWe are raising a $400k pre-seed round to expand our platform and improve our AI capabilities. Given your advisory and investment work in the education industry and your portfolio including edtech companies, I believe you could offer valuable insights.\n\nCould we schedule a 20-minute call to discuss our pre-seed round and potential fit with Educated Ventures? I am happy to accommodate your availability.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None, it's well-crafted."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.67,
+      "avg_relevance": 4.67,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Make the ask more specific to the Computer Vision role."
+      ],
+      "name": "jobs_ml_startups",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 6141,
+        "est_cost_usd": 0.0029,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "arif@techasoft.com",
+          "name": "Arif Masum Mallick",
+          "subject": "Internship inquiry: AI & Computer Vision Site Engineer",
+          "body": "Hi Arif,\n\nI am a final-year CS student interested in the AI & Computer Vision Site Engineer Internship at Techasoft. I have built a YOLO-based defect detector deployed on a factory line, which involved computer vision and real-world AI deployment.\n\nAdditionally, I fine-tuned a 7B large language model for code review comments, gaining experience with machine learning models. I am eager to learn more about Python, OpenCV, industrial cameras, and AI deployment as described in your internship.\n\nCould we schedule a short call to discuss the internship and how I might contribute? If I should reach out to someone else about this opportunity, please let me know.\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "shiva@advancesensing.com",
+          "name": "Shiva Kumar M",
+          "subject": "Seeking ML internship at Advance Sensing",
+          "body": "Hi Shiva,\n\nI am a final-year computer science student with experience building a YOLO-based defect detector deployed at a factory. I am reaching out because Advance Sensing works on machine vision inspection and AI defect detection in Bengaluru, which aligns with my practical project experience.\n\nIn addition to the defect detector, I have fine-tuned a 7B language model for code review comments, demonstrating my ability to work with AI models. I am interested in applying my skills in machine learning engineering at a startup like Advance Sensing.\n\nWould you be open to a short call to discuss potential internship opportunities in ML engineering at your company? If I should contact someone else, please let me know.\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "kai@topstartups.io",
+          "name": "Kai Brandt",
+          "subject": "Interest in Computer Vision Engineer Internship",
+          "body": "Hi Kai,\n\nI noticed your AI startup listings include a Computer Vision Engineer solution architect role in Bengaluru. I am a final-year CS student who fine-tuned a 7B large language model specifically for code review comments. Additionally, I built a YOLO-based defect detector that was deployed on a factory line.\n\nWhile my experience is primarily in model fine-tuning and defect detection, I am keen to expand my skills in computer vision engineering. I am interested in discussing potential machine learning engineering internships at startups you list or know about.\n\nCould we schedule a short call to talk about internship opportunities or to connect me with the right person for this role?\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more specific to the Computer Vision role."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.67,
+      "avg_relevance": 4.67,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Make the connection to the recipient's article more explicit."
+      ],
+      "name": "pr_ai_media",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5675,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "ridhika.basnet@analyticsindiamag.com",
+          "name": "Ridhika Basnet",
+          "subject": "Open-source speech model launch for 11 Indian languages",
+          "body": "Hi Ridhika,\n\nI saw your recent article on Chariot's speech recognition model for 10 Indian languages. I am launching an open-source speech recognition model covering 11 Indian languages next month.\n\nMy startup focuses on speech AI, and this model aims to expand accessibility for Indian language speakers. Since your coverage includes the real-world impact of AI and speech recognition, I thought you might be interested in early access and an interview for a story on our launch.\n\nWould you like to receive early access and schedule an interview to discuss the model and its potential impact? If this topic is outside your scope, could you kindly point me to the right contact?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "kileuna.haralu@analyticsindiamag.com",
+          "name": "Kileuna Haralu",
+          "subject": "Open-source speech model for 11 Indian languages",
+          "body": "Hi Kileuna,\n\nYou recently covered Gnani AI's Prisma v3.0 speech recognition model for 10 Indian languages in Analytics India Magazine. I am launching an open-source speech recognition model that supports 11 Indian languages, releasing next month.\n\nOur model aims to expand language coverage and provide accessible tools for Indian language speech AI. As the founder of this startup, I can offer early access to the model and share insights on its development and potential impact.\n\nWould you be interested in early access and an interview for a story on this launch? If this is outside your scope, could you please direct me to the appropriate contact at Analytics India Magazine?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "charlotte.lang@computerweekly.com",
+          "name": "Charlotte Lang",
+          "subject": "Open-source Indian speech model launch",
+          "body": "Hi Charlotte,\n\nYour recent article on the India AI Impact Summit highlighted the growing recognition of open-source AI amid governance debates.\n\nI am the founder of a speech AI startup releasing an open-source speech recognition model covering 11 Indian languages. We plan to launch next month and believe this could add a new dimension to the discussion around open-source AI in India.\n\nWould you be interested in early access to the model and an interview for a story on its launch? If this falls outside your scope, could you kindly direct me to the appropriate contact at Computer Weekly?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the connection to the recipient's article more explicit."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 4.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "Specify how OpenBuild's involvement could add value.",
+        "Mention specific alignment with Reliance's objectives.",
+        "Clarify how the event complements Red Hat's outreach."
+      ],
+      "name": "sponsors_tech_fest",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5787,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "build@openbuild.xyz",
+          "name": "OpenBuild",
+          "subject": "Partner with our 5000+ student tech event",
+          "body": "Hello OpenBuild team,\n\nOur annual technical fest draws over 5000 students from 120 colleges, featuring 40 workshops and a 36-hour hackathon last year.\n\nGiven OpenBuild's experience sponsoring OSEN and supporting student hackathons in India, we believe your involvement could add value to our event. We offer sponsorship options including title sponsor, gold sponsor, or workshop partner.\n\nCould you please direct me to the right person on your team to discuss potential sponsorship opportunities for this event?\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how OpenBuild's involvement could add value."
+          }
+        },
+        {
+          "to": "savithri.parekh@ril.com",
+          "name": "Savithri Parekh",
+          "subject": "Partner with our 5000+ attendee technical fest",
+          "body": "Hi Savithri,\n\nOur annual technical fest attracts over 5000 students from 120 colleges, offering a platform to engage with a large, diverse student audience.\n\nWe offer sponsorship options including title sponsor, gold partner, and workshop partner roles. Last year, the fest featured 40 workshops and a 36-hour hackathon, providing multiple engagement points.\n\nGiven Reliance Industries Limited's support of Aaruush '26 and its reach in technology and innovation, your partnership would be a valuable addition to our event.\n\nWould you be available for a brief call next week to discuss sponsorship opportunities and how we can align them with your objectives?\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific alignment with Reliance's objectives."
+          }
+        },
+        {
+          "to": "apac@redhat.com",
+          "name": "Red Hat",
+          "subject": "Partner with our 5000+ student technical fest",
+          "body": "Hello Red Hat team,\n\nOur annual technical fest attracts over 5000 students from 120 colleges, offering a platform to engage future developers and technologists.\n\nWe offer multiple sponsorship options including title sponsor, gold partner, and workshop partner roles. Last year's event included 40 workshops and a 36-hour hackathon, providing diverse engagement opportunities.\n\nGiven Red Hat's sponsorship of DeveloperWeek and focus on developer tools and cloud technologies, this event could complement your outreach to student developers.\n\nCould you please direct me to the appropriate person on your team to discuss potential sponsorship opportunities?\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how the event complements Red Hat's outreach."
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "drafts": 27,
+    "pass_rate": 1.0,
+    "top_issues": [],
+    "avg_specificity": 4.33,
+    "avg_relevance": 4.56,
+    "avg_ask": 5.0,
+    "avg_tone": 4.89,
+    "avg_honesty": 5.0,
+    "would_send_rate": 0.889,
+    "critiques": [
+      "Make it more specific to Krishang's focus on React Native.",
+      "Specify how the service can enhance personalized care.",
+      "Mention specific benefits for multiple locations.",
+      "Highlight how it aligns with their focus on patient care.",
+      "Specify how your inverters complement their offerings."
+    ]
+  },
+  "llm_usd": 0.0267
+}

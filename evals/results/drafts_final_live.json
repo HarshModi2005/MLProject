@@ -1,0 +1,818 @@
+{
+  "run": "final_live",
+  "rows": [
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 5.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [],
+      "name": "academic_gnn",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 6454,
+        "est_cost_usd": 0.003,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "shampa.santra@gmail.com",
+          "name": "Shampa Raghunathan",
+          "subject": "Internship Inquiry: GNN for Molecular Property Prediction",
+          "body": "Dear Professor Raghunathan,\n\nI am a third-year CS undergraduate who built a graph neural network-based molecule property predictor using PyTorch Geometric, achieving 0.91 ROC-AUC on the Tox21 dataset.\n\nI read your recent paper \"Graph Neural Network for 3\u2010Dimensional Structures Including Dihedral Angles for Molecular Property Prediction\" in the Journal of Computational Chemistry. Your approach to incorporating 3D structural information into GNNs for molecular property prediction aligns with my interest in molecular graph learning.\n\nI am seeking a two-month summer research internship in your group to gain experience in machine learning applications in materials science and molecular interactions. Would you be open to discussing potential opportunities for this internship?\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "arul.murugan@iiitd.ac.in",
+          "name": "N. Arul Murugan",
+          "subject": "Interest in your quantum physics-inspired ML model",
+          "body": "Dear Professor Murugan,\n\nI am a third-year CS undergraduate who built a graph neural network molecule property predictor using PyTorch Geometric, achieving 0.91 ROC-AUC on the Tox21 dataset.\n\nI read your recent paper on developing a quantum physics-inspired machine learning model for partition coefficient prediction and its comparison with molecular graph-based models. My project involved molecular graph learning for property prediction, which is related to your study.\n\nI am seeking a two-month summer research internship in your group to gain experience in molecular graph-based machine learning and computational drug discovery methods. Would you be open to discussing potential opportunities for such an internship?\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "chandramohan.d@iiitk.ac.in",
+          "name": "Chandra Mohan Dasari",
+          "subject": "Interest in your graph GANs for molecule generation",
+          "body": "Dear Professor Dasari,\n\nI read your recent paper, \"Novel Molecules Generation Using Graph Generative Adversarial Networks.\" Your approach to de novo molecular generation addresses key challenges in drug discovery.\n\nI developed a graph neural network-based molecule property predictor using PyTorch Geometric. My model achieved a 0.91 ROC-AUC on the Tox21 dataset, focusing on molecular graph learning and property prediction.\n\nI am a third-year computer science undergraduate seeking a 2-month summer research internship. I would like to contribute to your work on graph generative models for molecule generation.\n\nWould you be open to discussing a potential internship opportunity in your group this summer?\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 5.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [],
+      "name": "b2b_app_devs",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5839,
+        "est_cost_usd": 0.0028,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@toobler.com",
+          "name": "Toobler",
+          "subject": "Crash-reporting SDK for Your Android and Flutter Apps",
+          "body": "Hi Bobin,\n\nToobler specializes in Android and Flutter app development, which aligns with the platforms supported by the crash-reporting SDK I am building.\n\nMy startup has developed a lightweight crash-reporting SDK that adds only 40 KB to the app size, designed specifically for Android and Flutter environments.\n\nWould your team be interested in piloting our SDK free for two months on one of your apps, or point me to whoever handles this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@clariontech.com",
+          "name": "Clariontech",
+          "subject": "Crash-reporting SDK for Android and Flutter apps",
+          "body": "Hi Amit,\n\nClarion Technologies provides custom software development services, including mobile app development for Android and Flutter. I am reaching out because I have developed a lightweight crash-reporting SDK designed specifically for Android and Flutter apps that adds only 40 KB to the app size.\n\nThis SDK is built to be minimal and efficient, aiming to help developers identify crashes with minimal impact on app performance. I would like to offer your team a free two-month trial of this crash-reporting SDK on one of your apps to gather feedback and see if it fits your development needs.\n\nWould your team be interested in trying this SDK free for two months on one of your Android or Flutter apps, or could you point me to whoever handles such evaluations?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@tvisha.com",
+          "name": "Tvisha Technologies",
+          "subject": "Pilot our crash-reporting SDK at Tvisha Technologies",
+          "body": "Hello Tvisha Technologies team,\n\nTvisha Technologies has 21 years of experience building Android and iOS apps in India and the USA, which suggests you have teams developing mobile applications that could benefit from efficient crash reporting.\n\nI am the founder of a developer-tools startup and have built a crash-reporting SDK that supports Android and Flutter. Our SDK is lightweight, adding only 40 KB to the app size on device, designed to minimize impact on app performance.\n\nWould your team be interested in trying our crash-reporting SDK free for two months on one of your apps? This pilot would allow you to evaluate its integration and effectiveness with no cost or commitment.\n\nPlease let me know if I should connect with someone specific on your team to facilitate this trial.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 3.67,
+      "avg_relevance": 3.67,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Mention specific benefits for Dr. Jagadeesh's clinic.",
+        "Include specific benefits for Dentis Zone's patient demographics.",
+        "Add a personalized touch related to Dr. Ali's services."
+      ],
+      "name": "b2b_dental_bangalore",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5673,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "drcjagadeeshdentalclinic@gmail.com",
+          "name": "C Jagadeesh",
+          "subject": "Reduce no-shows at your dental clinic",
+          "body": "Hi C Jagadeesh,\n\nDr C Jagadeesh's Dental Clinic in Indiranagar offers advanced dental care with a strong reputation, as shown by your 4.9 rating from 1800 reviews.\n\nI founded a small SaaS studio that built a WhatsApp appointment reminder service currently used by 12 clinics in Pune. These clinics have seen a reduction in no-shows by about a third after using our service.\n\nI would like to offer a 15-minute call to show how this reminder service could support your appointments and patient engagement. Would you be open to a quick demonstration this week?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits for Dr. Jagadeesh's clinic."
+          }
+        },
+        {
+          "to": "dentiszone@gmail.com",
+          "name": "Dentis Zone",
+          "subject": "15-minute call: appointment reminders for Dentis Zone",
+          "body": "Hi Nahid,\n\nDentis Zone offers expert dental care in Koramangala, serving all ages with comprehensive services. I founded a small SaaS studio that built a WhatsApp appointment reminder service currently used by 12 clinics in Pune.\n\nClinics using our service have reduced no-shows by about a third. While our experience is with clinics outside Bangalore, the reminder system could support your appointment management.\n\nWould you be open to a 15-minute call where I can show how the reminder service works and discuss if it might fit Dentis Zone's needs?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Include specific benefits for Dentis Zone's patient demographics."
+          }
+        },
+        {
+          "to": "info@dralisdentacare.com",
+          "name": "Dralisdentacare",
+          "subject": "Cut no-shows at your dental clinic",
+          "body": "Hello Dralisdentacare team,\n\nYour clinic in Shivaji Nagar has a strong reputation with 515 reviews and a 4.9 rating. I founded a two-person SaaS studio that built a WhatsApp appointment reminder service currently used by 12 clinics in Pune.\n\nClinics using our service have cut no-shows by about a third. This simple tool could help your dental clinic reduce missed appointments and improve scheduling efficiency.\n\nWould your team be open to a 15-minute call to see a quick demo of the reminder service? I can share how it works and answer any questions.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Add a personalized touch related to Dr. Ali's services."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 5.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 4.67,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Simplify the ask to one clear question."
+      ],
+      "name": "distributors_solar",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5771,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@lobelpower.com",
+          "name": "Lobelpower",
+          "subject": "Residential hybrid inverters for Lobel Green Energy",
+          "body": "Hello Lobelpower team,\n\nYour team at Lobel Green Energy delivers comprehensive solar solutions in Vadodara, including advanced inverters and monitoring systems. We manufacture 3-10 kW residential hybrid inverters with BIS certification and a 5-year warranty, designed for reliability and performance.\n\nGiven your presence in Gujarat and focus on solar EPC services, our inverters could complement your existing product range. We are seeking distributors for our residential solar inverters in your region and believe this could add value to your offerings.\n\nWould you consider distributing our residential solar inverters in your region? Please forward this to the appropriate person on your team if needed.\n\nBest regards,\nTest Manager\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@zodiacenergy.com",
+          "name": "Zodiac Energy Limited",
+          "subject": "Residential solar inverter distribution in Gujarat",
+          "body": "Hi Mukesh,\n\nZodiac Energy is known for providing reliable and affordable solar products in Ahmedabad, Gujarat. I manage channel sales for a company that manufactures 3-10 kW residential hybrid solar inverters, which are BIS certified and come with a 5-year warranty.\n\nGiven your strong presence in Gujarat and focus on solar solutions, I wanted to explore if you would consider distributing our residential solar inverters in your region. Our inverters are designed for residential use and could complement your existing product offerings.\n\nWould you be open to discussing this potential distribution opportunity, or could you point me to the person who handles partnerships at Zodiac Energy?\n\nBest regards,\nTest Manager\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Simplify the ask to one clear question."
+          }
+        },
+        {
+          "to": "info@dlightsolarenergy.in",
+          "name": "D-Light Solar | Solar Panel Provider",
+          "subject": "Potential partnership for residential solar inverters",
+          "body": "Hello D-Light Solar team,\n\nD-Light Solar is a leading distributor of solar solutions in Gujarat, serving residential, commercial, and corporate sectors.\n\nI manage channel sales for a manufacturer of 3-10 kW residential hybrid solar inverters. Our products are BIS certified and come with a 5-year warranty, designed to support reliable solar power solutions.\n\nWould you consider distributing our residential solar inverters in your region? I believe our hybrid inverters could complement your existing product range and benefit your customers.\n\nPlease let me know if there is a suitable contact on your team to discuss this opportunity further.\n\nBest regards,\nTest Manager\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 3.67,
+      "avg_relevance": 4.67,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "None needed; well-crafted email.",
+        "None needed; well-crafted email.",
+        "Make the connection to AAS Vidyalaya clearer."
+      ],
+      "name": "grants_csr_india",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 5,
+        "cached_hits": 0,
+        "tokens": 5720,
+        "est_cost_usd": 0.0027,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@e-class.in",
+          "name": "E-Class",
+          "subject": "Proposal: coding education for girls in Maharashtra",
+          "body": "Hello E-Class team,\n\nYour work as a trusted CSR partner for digital education in Maharashtra caught my attention. We run after-school coding clubs in 14 villages near Nashik, training 600 students since 2022. Our NGO is 12G and 80G registered, ensuring compliance and transparency.\n\nWe aim to launch a 12-month coding course specifically for 300 girls in rural Maharashtra to increase digital skills and opportunities. This program builds on our existing clubs and focuses on girls, a group often underserved in tech education.\n\nWould your CSR programme consider funding this coding course? I can share detailed plans and budgets to facilitate your evaluation. Please direct this to the appropriate team member if needed.\n\nBest regards,\nTest NGO Lead",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed; well-crafted email."
+          }
+        },
+        {
+          "to": "nidhi.mathur@iitbacr.com",
+          "name": "Nidhi Mathur",
+          "subject": "CSR funding for rural girls' coding course",
+          "body": "Hi Nidhi,\n\nI lead a rural education NGO running after-school coding clubs in 14 villages near Nashik, where we have trained 600 students since 2022. We have identified a need to expand focused coding education for girls in rural Maharashtra to help bridge the digital skills gap.\n\nIIT Bombay\u2019s initiative to collaborate with corporate partners through CSR funding aligns with this goal. We seek CSR support to fund a 12-month coding course for 300 girls in these villages. The funding would cover course delivery, materials, and instructor costs.\n\nWould your CSR programme consider supporting this project? I can provide detailed proposals and impact metrics upon request.\n\nBest regards,\nTest NGO Lead",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed; well-crafted email."
+          }
+        },
+        {
+          "to": "vikas.kakwani@vidyalaya.org.in",
+          "name": "AAS Vidyalaya",
+          "subject": "CSR funding for rural girls' coding course",
+          "body": "Hi AAS,\n\nAAS Vidyalaya supports bridging the digital divide by providing tablets, internet access, and smart class apps through CSR funding.\n\nI run after-school coding clubs in 14 villages near Nashik, training 600 students since 2022. My NGO is registered under 12G and 80G, which may facilitate CSR partnerships.\n\nWe seek funding for a 12-month coding course aimed at 300 girls in rural Maharashtra to expand digital skills access. Would your CSR programme consider supporting this initiative?\n\nBest regards,\nTest NGO Lead",
+          "issues": [],
+          "grade": {
+            "specificity": 3,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the connection to AAS Vidyalaya clearer."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 0.667,
+      "top_issues": [
+        [
+          "unsupported claim",
+          1
+        ]
+      ],
+      "avg_specificity": 3.67,
+      "avg_relevance": 4.33,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Consider adding a brief mention of your traction.",
+        "Make it more specific to Realtime's investment focus.",
+        "None, it's well-tailored."
+      ],
+      "name": "investors_edtech",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 1,
+        "fixed": 0,
+        "still_flagged": 1
+      },
+      "llm": {
+        "paid_calls": 7,
+        "cached_hits": 0,
+        "tokens": 7600,
+        "est_cost_usd": 0.0037,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 2,
+          "draft_fix": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@hyderabadangels.in",
+          "name": "Hyderabad Angels",
+          "subject": "Pre-seed funding opportunity for AI tutoring startup",
+          "body": "Hi Hyderabad,\n\nHyderabad Angels has supported seed and pre-seed startups across India since 2010, making you a key network for early-stage founders.\n\nI am the co-founder of an AI tutoring startup focused on class 9-12 math. We currently have 3,000 monthly active students and an 18% paid conversion rate. We are raising a $400k pre-seed round to expand our platform.\n\nCould we schedule a 20-minute call to discuss this pre-seed round? Please forward this to the appropriate person if needed.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Consider adding a brief mention of your traction."
+          }
+        },
+        {
+          "to": "hello@realtimeaf.com",
+          "name": "Realtime",
+          "subject": "Pre-seed round discussion for AI education startup",
+          "body": "Hello Realtime team,\n\nI am the co-founder of an AI tutoring startup focused on class 9-12 math. We currently have 3,000 monthly active students and an 18% paid conversion rate.\n\nAs a SEBI-registered angel fund based in Jaipur that invests in seed to pre-Series A rounds, I believe you might be interested in our pre-seed round.\n\nCould we schedule a 20-minute call to discuss this opportunity further? Please direct me to the appropriate person if needed.\n\nBest regards,\nTest Founder",
+          "issues": [
+            "unsupported claim: As a SEBI-registered angel fund based in Jaipur that invests in seed to pre-Series A rounds"
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make it more specific to Realtime's investment focus."
+          }
+        },
+        {
+          "to": "rema@ankurcapital.com",
+          "name": "Rema Subramanian",
+          "subject": "AI tutoring startup raising pre-seed capital",
+          "body": "Hi Rema,\n\nI am the co-founder of an AI tutoring startup focused on maths education for classes 9-12. We currently have 3,000 monthly active students and an 18% paid conversion rate.\n\nWe are raising a $400k pre-seed round to expand our platform and improve our offerings. Given Ankur Capital\u2019s focus on backing early-stage startups in India from pre-seed to Series A, I wanted to reach out.\n\nWould you be available for a 20-minute call to discuss this round? I can share more details about our traction and plans.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None, it's well-tailored."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 1,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 5.0,
+      "avg_ask": 4.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "Specify the role you're interested in more clearly."
+      ],
+      "name": "jobs_ml_startups",
+      "fact_check": {
+        "checked": 1,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 3,
+        "cached_hits": 0,
+        "tokens": 2464,
+        "est_cost_usd": 0.0011,
+        "by_purpose": {
+          "draft": 1,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "info@aileadvision.com",
+          "name": "AI Lead Vision Pvt Ltd",
+          "subject": "Interest in AI Lead Vision's ML roles",
+          "body": "Hello AI Lead Vision Pvt Ltd team,\n\nAI Lead Vision builds production-ready AI, computer vision, machine learning, robotics, and automation solutions for real business environments in Bengaluru.\n\nI am a final-year computer science student who fine-tuned a 7B large language model to generate code review comments. Additionally, I built and deployed a YOLO-based defect detector on a factory production line. These projects gave me hands-on experience with machine learning model training and deploying computer vision solutions in real-world settings.\n\nI am seeking a machine learning engineering internship at an AI startup and would appreciate a short call to discuss potential opportunities at AI Lead Vision. Could you please connect me with the appropriate person to talk to about this?\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the role you're interested in more clearly."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 0.667,
+      "top_issues": [
+        [
+          "not personalised",
+          1
+        ]
+      ],
+      "avg_specificity": 4.33,
+      "avg_relevance": 4.33,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.333,
+      "critiques": [
+        "Make it more specific to the podcast's focus on AI impact.",
+        "Emphasize how the model relates to AI concepts discussed in the podcast."
+      ],
+      "name": "pr_ai_media",
+      "fact_check": {
+        "checked": 2,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 6,
+        "cached_hits": 0,
+        "tokens": 7384,
+        "est_cost_usd": 0.0035,
+        "by_purpose": {
+          "draft": 4,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "manishas@cybermedia.co.in",
+          "name": "Manisha Sharma",
+          "subject": "Open-source speech AI for 11 Indian languages",
+          "body": "Hi Manisha,\n\nI saw your recent article on Chariot's context-aware speech AI for 11 Indian languages. I am launching an open-source speech recognition model covering the same number of Indian languages next month.\n\nMy startup's model focuses on speech recognition and will be publicly available for developers and researchers. Since your work covers emerging AI technologies and you recently reported on speech AI in Indian languages, I thought this might interest you.\n\nWould you like early access to the model and an interview to discuss the launch? I can provide detailed technical information and insights about the project.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "team@twimlai.com",
+          "name": "The TWIML AI Podcast (formerly This Week in Machine Learning & Artificial Intelligence)",
+          "subject": "Open-source speech model for Indian languages",
+          "body": "Hello TWIML AI Podcast team,\n\nThe TWIML AI Podcast shares insights from leading AI experts and explores how AI changes lives and business.\n\nI am the founder of a speech AI startup releasing an open-source speech recognition model covering 11 Indian languages next month. This project aims to support developers and researchers working with diverse Indian languages.\n\nWould your team be interested in early access to the model and an interview to discuss its development and potential impact on AI accessibility? Please let me know who I should connect with for this story.\n\nBest regards,\nTest Founder",
+          "issues": [
+            "not personalised: mentions nothing specific from the recipient's evidence"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make it more specific to the podcast's focus on AI impact."
+          }
+        },
+        {
+          "to": "spmallick@bigvision.ai",
+          "name": "Satya Mallick",
+          "subject": "Early access to Indian-language speech AI model",
+          "body": "Hi Satya,\n\nI am launching an open-source speech recognition model covering 11 Indian languages next month. Given your podcast Artificial Intelligence : Papers & Concepts explains AI papers and concepts to engineers and researchers, I thought this launch might interest you.\n\nThe model is designed to support diverse Indian languages, which is a unique addition to the open-source AI community. I would like to offer you early access to the model and the opportunity for an interview to discuss the technology and its development.\n\nWould you be interested in early access and an interview for a story on this launch?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Emphasize how the model relates to AI concepts discussed in the podcast."
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 3,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.67,
+      "avg_relevance": 4.67,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 0.667,
+      "critiques": [
+        "Mention specific relevance of machine learning to their work."
+      ],
+      "name": "speakers_ai_summit",
+      "fact_check": {
+        "checked": 3,
+        "flagged": 2,
+        "fixed": 2,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 8,
+        "cached_hits": 0,
+        "tokens": 9292,
+        "est_cost_usd": 0.0045,
+        "by_purpose": {
+          "draft": 3,
+          "verify": 2,
+          "draft_fix": 2,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "sharmar@cs.stanford.edu",
+          "name": "Rahul Sharma",
+          "subject": "Invitation to speak at Bangalore AI summit",
+          "body": "Hi Rahul,\n\nI am the lead organiser of a student AI summit held every March at an engineering college in Bangalore, which attracted 1,500 attendees last year.\n\nYour recent work on using large language models to find inductive loop invariants caught my attention. While the summit covers AI and machine learning broadly, your research on large language models would offer valuable perspectives to our student audience.\n\nWould you be willing to give a 30-minute talk on applied machine learning at our upcoming summit? The event is designed for students and young researchers interested in AI and runs in March. Please let me know if this is something you might consider.\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "sapnavm@pes.edu",
+          "name": "Sapna V M",
+          "subject": "Invitation to speak at Bangalore AI summit",
+          "body": "Hi Sapna,\n\nI am organising a student AI summit in Bangalore this March with 1,500 attendees from engineering colleges.\n\nI came across your work on Agile Project Management Using Large Language Models at PES University.\n\nWould you be willing to give a 30-minute talk on applied machine learning at our event? Your insights would be valuable for the student audience.\n\nPlease let me know if you are interested or need more details.\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Mention specific relevance of machine learning to their work."
+          }
+        },
+        {
+          "to": "shruthimlj@pes.edu",
+          "name": "M. L. J. Shruthi",
+          "subject": "Invitation to speak on applied ML at AI summit",
+          "body": "Hi M. L. J. Shruthi,\n\nYour work on applied machine learning models, particularly in structural defect classification, caught my attention. I lead a college AI club that organizes a student AI summit in Bangalore every March, with 1,500 attendees from engineering backgrounds.\n\nWe are seeking speakers to give 30-minute talks on applied machine learning at our next summit. Given your research focus, your insights would greatly benefit our student audience.\n\nWould you be willing to present at this event? I can provide more details if you are interested.\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ]
+    },
+    {
+      "drafts": 1,
+      "pass_rate": 1.0,
+      "top_issues": [],
+      "avg_specificity": 4.0,
+      "avg_relevance": 4.0,
+      "avg_ask": 5.0,
+      "avg_tone": 5.0,
+      "avg_honesty": 5.0,
+      "would_send_rate": 1.0,
+      "critiques": [
+        "Mention specific benefits for AI-focused sponsors."
+      ],
+      "name": "sponsors_tech_fest",
+      "fact_check": {
+        "checked": 1,
+        "flagged": 0,
+        "fixed": 0,
+        "still_flagged": 0
+      },
+      "llm": {
+        "paid_calls": 3,
+        "cached_hits": 0,
+        "tokens": 2572,
+        "est_cost_usd": 0.0011,
+        "by_purpose": {
+          "draft": 1,
+          "verify": 1,
+          "draft_grade": 1
+        },
+        "model_switches": []
+      },
+      "emails": [
+        {
+          "to": "gsinghviews@gmail.com",
+          "name": "Gaurav Singh",
+          "subject": "Join as a sponsor for upcoming Tech Fest",
+          "body": "Hi Gaurav,\n\nOur annual technical fest attracts over 5000 students from 120 colleges, making it a significant event for student engagement in the region.\n\nLast year, we hosted 40 workshops and a 36-hour hackathon, creating multiple avenues for sponsors to connect with a diverse and motivated audience. We offer sponsorship options as title, gold, or workshop partners.\n\nGiven your past involvement as a sponsor or partner of Tech Fest events, we believe this could be a valuable opportunity for your organization to reach a large and relevant student community.\n\nWould you be interested in discussing sponsorship options for our upcoming fest?\n\nBest regards,\nTest Organiser",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits for AI-focused sponsors."
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "drafts": 26,
+    "pass_rate": 0.923,
+    "top_issues": [
+      [
+        "unsupported claim",
+        1
+      ],
+      [
+        "not personalised",
+        1
+      ]
+    ],
+    "avg_specificity": 4.35,
+    "avg_relevance": 4.58,
+    "avg_ask": 4.92,
+    "avg_tone": 5.0,
+    "avg_honesty": 5.0,
+    "would_send_rate": 0.731,
+    "critiques": [
+      "Mention specific benefits for Dr. Jagadeesh's clinic.",
+      "Include specific benefits for Dentis Zone's patient demographics.",
+      "Add a personalized touch related to Dr. Ali's services.",
+      "Simplify the ask to one clear question.",
+      "None needed; well-crafted email."
+    ]
+  },
+  "llm_usd": 0.0278
+}

@@ -63,16 +63,47 @@ python main.py brain suppress someone@x.com    # never contact again
 2. **Uploads** (`brain/uploads.py`). CSV, Excel, JSON, text, PDF or Word. Each is classified (and can be
    corrected) as *targets* to contact, people to *exclude*, good *examples* to find more like, *style*
    (emails you sent before) or *about you* (CV, deck).
-3. **Discovery tools** (`brain/tools.py`), chosen by the playbook: `openalex` (researchers by publication),
-   `orgs` (organisations via web search and list pages), `places` (local businesses via Google Maps, with
-   website and address), `news` (journalists via article bylines), `github` (developers), `web` (people on
-   team pages), plus your own lists.
-4. **Search planner** (`brain/searchplan.py`). A Serper budget sized to the campaign; queries run in rounds,
-   stop as soon as there are enough candidates, expand only from queries that produced results, and never
-   repeat. Every query's yield is logged in the campaign context.
-5. **Rank → enrich → judge → draft → fact-check**, as before: hard filters (location, exclusions,
-   do-not-contact), contact details from the organisation's own site or the person's pages, a batched LLM
-   judge with the playbook's rubric, drafts that may only use sourced facts, and deterministic plus LLM checks.
+3. **What a good prospect is** (`brain/fit.py`). Intake also produces a *prospect profile*: weighted fit
+   criteria ("has sponsored college tech fests", "hiring backend engineers", "invests at pre-seed"), timing
+   signals, kinds of target to avoid, and the roles to address inside an organisation. Playbooks supply
+   defaults; you confirm it on the verification card. Every candidate is scored against it from its
+   evidence, without an LLM.
+4. **Adaptive discovery** (`brain/explore.py`). Starts with prospects remembered from earlier campaigns
+   (free), then the playbook's tools plus any tool that can prove a criterion no listed tool covers.
+   Later rounds move the remaining search budget to whichever tool has produced the most *qualified*
+   prospects per search (a bandit), and expand from the best finds: lookalike organisations, co-authors.
+   It stops when there are enough qualified prospects, not just enough results.
+   Tools (`brain/tools.py`, `brain/channels.py`):
+   `openalex` (researchers by publication), `coauthors` (OpenAlex co-author graph from the best finds),
+   `orgs` (organisations via web search, list pages and event pages), `places` (local businesses via Google
+   Maps), `events` (sponsors or speakers of similar past events), `jobs` (companies hiring now, from public
+   Greenhouse/Lever/Ashby boards), `portfolio` (investors whose portfolio pages match), `podcasts` (iTunes
+   directory; host email from the RSS feed), `news` (journalists via bylines), `github` (developers), `web`
+   (people on team pages), `lookalike`, `memory`, plus your own lists.
+5. **Search planner and triage** (`brain/searchplan.py`, `brain/triage.py`). Every search hit is triaged
+   (the organisation's own site / a list / an event / an article) before anything is fetched. Query yield
+   is measured in qualified finds. Templates that worked in earlier campaigns of the same playbook are
+   tried early. Queries are never repeated.
+6. **Rank → enrich → judge → draft → fact-check**. Hard filters, then a homepage-only *light read* of the
+   top organisations before pre-ranking. Enrichment finds contact details and, inside organisations,
+   the decision-maker by role. The batched judge rates each confirmed criterion and accounts for how
+   reachable the address is. If too few candidates pass, **one backfill round** searches again, seeded
+   with the winners and the judge's rejection reasons. Drafts may only use sourced facts and get
+   deterministic plus LLM checks.
+
+### Measuring discovery
+
+```bash
+python main.py brain bench                          # all scenarios in evals/scenarios (stops after judging)
+python main.py brain bench --only sponsors_tech_fest --label after_change --compare evals/results/baseline.json
+python main.py brain bench --replay                 # re-run from recorded answers: no search/fetch spend
+python main.py brain labels <campaign_id> --out labels.json   # your review decisions as eval labels
+```
+
+Each scenario is a ready campaign spec, so intake spends no LLM calls. Each one records its network
+answers in `evals/cache/<name>.sqlite`. Metrics: good@K (judge score ≥ 0.7), precision@K, distinct
+organisations, share of the shortlist with direct proof (sponsored / hiring / portfolio …), reachability,
+search and LLM spend, and USD per good prospect.
 
 ### Grounded context
 
@@ -85,7 +116,11 @@ and observations made during the run. Every judge and writer prompt is built fro
 - **New kind of outreach:** add a playbook — a JSON file in `./playbooks/` with the fields of
   `brain/playbooks.py` (description, target kind, tools, roles, inbox preferences, rubric, writing notes,
   which lists to ask for, which questions to ask). No code changes.
-- **New data source:** write one function and register it with `@register(...)` in `brain/tools.py`.
+- **New data source:** write one function and register it with `@register(...)` in `brain/tools.py`,
+  declaring which fit signals it `proves`. The explorer will use it whenever a campaign needs that proof.
+- **Knobs:** `BRAIN_TRIAGE_LLM=0` (heuristic triage only), `BRAIN_LIGHT_READ_FACTOR`, `BRAIN_MAX_PEOPLE_SEARCHES`,
+  `BRAIN_EXPLORE_ROUNDS`, `BRAIN_BACKFILL=0`, `BRAIN_MEMORY=0` (memory is shared across all campaigns in a
+  database; scope it per account before a multi-user deployment).
 - **Other LLM provider:** `LLM_PROVIDER=groq|openai`, or any OpenAI-compatible `LLM_BASE_URL`.
 
 Tests: `python -m pytest tests/brain` (offline; no keys needed).

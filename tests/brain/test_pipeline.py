@@ -65,6 +65,10 @@ class ScriptedLLM:
             return json.dumps({"results": [
                 {"id": c["id"], "score": 20 if "Soil" in json.dumps(c["evidence"]) else 85,
                  "reasons": ["works on GNNs for molecules"], "hook": "x", "hook_ref": 0} for c in cards]})
+        if system.startswith("You screen"):  # the pre-judge: everyone plausible except the soil chemist
+            cards = json.loads(user.split("Candidates:\n", 1)[1])
+            return json.dumps({"results": [{"id": c["id"], "score": 15 if "Soil" in json.dumps(c) else 80,
+                                            "why": "x"} for c in cards]})
         if system.startswith("You fact-check"):
             ids = [line.split("id: ", 1)[1].strip() for line in user.splitlines() if line.startswith("### id: ")]
             return json.dumps({"results": [{"id": i, "unsupported": list(self.unsupported.pop(i, []))} for i in ids]})
@@ -104,15 +108,17 @@ def test_full_run_and_llm_call_budget(tmp_path):
     result = run_campaign(spec(3), deps)
 
     f = result.funnel
-    assert f["unique_people"] == 8 and f["reachable"] == 7  # the one without an email is not judged or drafted
+    # the one without an email is not judged or drafted; the soil chemist is screened out before enrichment
+    assert f["unique_people"] == 8 and f["reachable"] == 6 and f["prejudge"] == {"screened": 8, "rejected": 1}
     assert len(result.shortlist) == 3 and all(c.score >= 0.5 for c in result.shortlist)
     assert all("Soil" not in c.evidence[0].text for c in result.shortlist)
     assert f["drafted_ok"] == 3 and f["drafts_need_review"] == 0
     d = result.drafts[result.shortlist[0].id]
     assert d.body.startswith("Dear Professor Rani,") and d.body.endswith("Riya Shah") and d.to.endswith("@iitrpr.ac.in")
-    # 2x target (6) judged in ONE batched call, one call per draft, one batched fact-check: 5 calls for 3 emails.
-    assert f["cost"]["llm"]["paid_calls"] == 5
-    assert f["cost"]["llm"]["by_purpose"] == {"judge": 1, "draft": 3, "verify": 1}
+    # one batched pre-judge, 2x target (6) judged in ONE batched call, one call per draft, one batched fact-check:
+    # 6 calls for 3 emails.
+    assert f["cost"]["llm"]["paid_calls"] == 6
+    assert f["cost"]["llm"]["by_purpose"] == {"prejudge": 1, "judge": 1, "draft": 3, "verify": 1}
     assert f["fact_check"] == {"checked": 3, "flagged": 0, "fixed": 0, "still_flagged": 0}
 
 

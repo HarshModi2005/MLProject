@@ -1,0 +1,4 @@
+{"name": "graph_walk", "title": "Neighbours of the best finds in the entity graph (co-sponsors, colleagues, co-authors), from this and earlier campaigns.",
+ "adapter": "python", "entry": "brain.discovery.walkers:graph_walk", "tier": 1, "cost": "free",
+ "kinds": ["person", "org"], "stage": "expand", "order": 104, "proves": ["past_sponsorship"], "yields_email": false,
+ "policy": {"robots": "api", "terms": "Local data only."}}

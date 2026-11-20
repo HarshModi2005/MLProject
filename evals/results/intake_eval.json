@@ -1,0 +1,791 @@
+{
+  "cases": 30,
+  "check_accuracy": 1.0,
+  "cases_fully_right": 30,
+  "by_check": {
+    "playbook": "29/29",
+    "target_kind": "27/27",
+    "countries": "11/11",
+    "topics": "19/19",
+    "ask_type": "2/2",
+    "no_invented_numbers": "30/30",
+    "regions": "14/14",
+    "topics_describe_targets": "3/3",
+    "criteria": "7/7",
+    "avoid": "1/1",
+    "facts_kept": "1/1",
+    "remote_ok": "1/1",
+    "size": "1/1",
+    "language": "1/1",
+    "asks_question": "1/1",
+    "exclusions": "1/1"
+  },
+  "rows": [
+    {
+      "id": "phd_gnn",
+      "playbook": "academic",
+      "confidence": 0.9,
+      "alternatives": [
+        "phd_positions"
+      ],
+      "kind": "person",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "graph neural networks",
+        "machine learning research",
+        "artificial intelligence research"
+      ],
+      "ask_type": "apply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you prefer only in-person internships or are remote internships acceptable?",
+        "Are you targeting any specific IIT campuses or open to all IITs?",
+        "Do you have any prior research experience or projects related to graph neural networks to mention?"
+      ]
+    },
+    {
+      "id": "sponsors_fest",
+      "playbook": "sponsorship",
+      "confidence": 0.95,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "Bangalore",
+        "IN"
+      ],
+      "topics": [
+        "marketing and branding"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "What is the exact date or date range of the tech fest in March?",
+        "Do you have any specific industries or company types you want to target for sponsorship?",
+        "Do you have a sponsorship proposal or deck to share with potential sponsors?"
+      ]
+    },
+    {
+      "id": "dentist_saas",
+      "playbook": "b2b_sales",
+      "confidence": 0.9,
+      "alternatives": [],
+      "kind": "org",
+      "where": [
+        "Indiranagar",
+        "Bangalore",
+        "Koramangala"
+      ],
+      "topics": [
+        "dental clinics",
+        "independent dental practices",
+        "healthcare providers"
+      ],
+      "ask_type": "call",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you want to include only clinics with a certain minimum number of dentists or staff?",
+        "Should the outreach mention any specific features or benefits of the software?"
+      ]
+    },
+    {
+      "id": "seed_investors",
+      "playbook": "fundraising",
+      "confidence": 0.95,
+      "alternatives": [],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "edtech startups",
+        "early-stage investing",
+        "startup funding"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you have a pitch deck or website link to include in the outreach?",
+        "Are you targeting only investors based in India or also those investing in Indian startups from abroad?"
+      ]
+    },
+    {
+      "id": "ml_internship",
+      "playbook": "job_search",
+      "confidence": 0.9,
+      "alternatives": [
+        "recruiting"
+      ],
+      "kind": "org",
+      "where": [
+        "Bangalore",
+        "IN"
+      ],
+      "topics": [
+        "AI startups",
+        "machine learning engineering"
+      ],
+      "ask_type": "meeting",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "What is your availability or preferred time frame for the internship?",
+        "Do you have a resume or portfolio link to include in the outreach?"
+      ]
+    },
+    {
+      "id": "press_launch",
+      "playbook": "pr_media",
+      "confidence": 0.9,
+      "alternatives": [
+        "creators"
+      ],
+      "kind": "person",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "artificial intelligence",
+        "AI technology",
+        "machine learning",
+        "technology journalism"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you want to target only English-language media and podcasts, or also those in Indian languages?",
+        "Do you have a press kit or link to share about the speech model launch?",
+        "Is there a specific launch date or timeframe for the outreach?"
+      ]
+    },
+    {
+      "id": "speakers",
+      "playbook": "speakers",
+      "confidence": 0.95,
+      "alternatives": [],
+      "kind": "person",
+      "where": [
+        "Bangalore",
+        "IN"
+      ],
+      "topics": [
+        "applied machine learning",
+        "large language models",
+        "AI practitioners"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Is there a specific date or timeframe for the summit?",
+        "Are there any compensation or honorarium details to mention in the invitation?"
+      ]
+    },
+    {
+      "id": "csr_grant",
+      "playbook": "grants",
+      "confidence": 0.9,
+      "alternatives": [
+        "sponsorship"
+      ],
+      "kind": "org",
+      "where": [
+        "Maharashtra",
+        "IN"
+      ],
+      "topics": [
+        "corporate social responsibility",
+        "girls education funding",
+        "digital literacy programs",
+        "CSR foundations"
+      ],
+      "ask_type": "intro",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you want to focus only on companies headquartered in Maharashtra or all companies operating in India?",
+        "Are you interested in companies from specific industries or sectors for CSR funding?",
+        "Do you have any existing partnerships or prior contacts with companies that we should prioritize or avoid?"
+      ]
+    },
+    {
+      "id": "solar_distributors",
+      "playbook": "distributors",
+      "confidence": 0.9,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "Gujarat",
+        "IN"
+      ],
+      "topics": [
+        "solar energy distributors",
+        "solar inverter dealers",
+        "renewable energy product distributors",
+        "solar power equipment resellers"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you want to target only companies physically located in Gujarat or also those who distribute there remotely?",
+        "Are there specific types of distributors or dealers you prefer, such as those focused on residential or commercial solar products?",
+        "Do you have any existing partnerships or references to mention in the outreach to increase credibility?"
+      ]
+    },
+    {
+      "id": "app_devs",
+      "playbook": "b2b_sales",
+      "confidence": 0.9,
+      "alternatives": [
+        "customer_research"
+      ],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "mobile app development",
+        "Android app development",
+        "Flutter app development",
+        "software development studios"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you have a preferred company size or minimum number of developers for the studios?",
+        "Would you like to include studios that develop iOS apps as well, or only Android and Flutter?"
+      ]
+    },
+    {
+      "id": "cofounder",
+      "playbook": "cofounder",
+      "confidence": 0.9,
+      "alternatives": [
+        "recruiting"
+      ],
+      "kind": "person",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "speech AI",
+        "voice AI",
+        "large language models",
+        "machine learning"
+      ],
+      "ask_type": "intro",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you have a preferred city or region within India for the cofounder?",
+        "Are you open to cofounders who have experience in related AI fields but not specifically speech or LLM products?",
+        "Do you have any equity or compensation terms prepared to mention in outreach?"
+      ]
+    },
+    {
+      "id": "advisors",
+      "playbook": "advisors",
+      "confidence": 0.95,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "person",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "B2B SaaS",
+        "enterprise sales",
+        "SaaS scaling",
+        "Indian SaaS market"
+      ],
+      "ask_type": "intro",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "What exactly should the recipient do? (\"Would you be interested in advising our company on enterpris\" has no clear action)",
+        "Do you prefer advisors to be located specifically in certain Indian cities or is remote acceptable?"
+      ]
+    },
+    {
+      "id": "accelerator",
+      "playbook": "accelerators",
+      "confidence": 0.95,
+      "alternatives": [
+        "fundraising"
+      ],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "climate tech startups",
+        "clean technology",
+        "sustainability innovation",
+        "early-stage startup support"
+      ],
+      "ask_type": "apply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "What exactly should the recipient do? (\"Could you provide information or recommendations on accelera\" has no clear action)",
+        "Do you have a specific city or region in India you prefer for the accelerator?"
+      ]
+    },
+    {
+      "id": "tenders",
+      "playbook": "government_tenders",
+      "confidence": 0.9,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "Karnataka",
+        "IN"
+      ],
+      "topics": [
+        "government surveying departments",
+        "mapping services procurement",
+        "state government infrastructure planning"
+      ],
+      "ask_type": "intro",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you want to target only departments currently issuing tenders or also those who might buy in the future?",
+        "Are there specific types of surveying or mapping services you specialize in or want to emphasize?",
+        "Do you want to include local government bodies or only state-level departments?"
+      ]
+    },
+    {
+      "id": "integrations",
+      "playbook": "integrations",
+      "confidence": 0.9,
+      "alternatives": [
+        "partnerships"
+      ],
+      "kind": "org",
+      "where": [],
+      "topics": [
+        "ecommerce platforms",
+        "payment gateways",
+        "app marketplaces",
+        "SaaS integrations"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you want to target platforms globally or within specific countries or regions?",
+        "Are there any specific platforms or types of platforms you want to exclude from the search?",
+        "Do you have any preferred communication channels or formats for the outreach (e.g., email, LinkedIn)?"
+      ]
+    },
+    {
+      "id": "guest_posts",
+      "playbook": "seo_guest_posts",
+      "confidence": 0.9,
+      "alternatives": [
+        "creators"
+      ],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "personal finance",
+        "budgeting",
+        "financial planning",
+        "money management"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you want to target only blogs that explicitly accept guest posts?",
+        "Are you open to writing in languages other than English, such as Hindi or regional languages?"
+      ]
+    },
+    {
+      "id": "brand_deals",
+      "playbook": "brand_deals",
+      "confidence": 0.95,
+      "alternatives": [
+        "pr_media"
+      ],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "consumer electronics",
+        "tech gadgets",
+        "mobile phones",
+        "technology brands"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you want to target only brands based in India or also international brands that market in India?",
+        "Are you interested in any specific types of tech brands, such as smartphones, accessories, or general electronics?",
+        "Do you have any existing sponsorship deals or contacts with brands that we should consider or avoid?"
+      ]
+    },
+    {
+      "id": "campus",
+      "playbook": "campus_recruiting",
+      "confidence": 0.95,
+      "alternatives": [
+        "job_search"
+      ],
+      "kind": "org",
+      "where": [
+        "Pune",
+        "IN"
+      ],
+      "topics": [
+        "engineering colleges",
+        "placement cells",
+        "campus recruitment",
+        "technical education"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you have a specific list of engineering colleges in Pune you want to target?",
+        "Do you want to include polytechnic or diploma colleges or only degree engineering colleges?",
+        "Is there a deadline by which you want to complete the hiring?"
+      ]
+    },
+    {
+      "id": "schools",
+      "playbook": "school_outreach",
+      "confidence": 0.9,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "Jaipur",
+        "IN"
+      ],
+      "topics": [
+        "CBSE schools",
+        "middle school education",
+        "school principals"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you have a specific deadline for the pilot sign-up?",
+        "Should the outreach be in English, Hindi, or bilingual?"
+      ]
+    },
+    {
+      "id": "phd_us",
+      "playbook": "phd_positions",
+      "confidence": 0.9,
+      "alternatives": [
+        "academic"
+      ],
+      "kind": "person",
+      "where": [
+        "US"
+      ],
+      "topics": [
+        "natural language processing",
+        "low-resource languages",
+        "NSF-funded research"
+      ],
+      "ask_type": "apply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you have a preference for specific universities or regions within the US?",
+        "Would you like to include professors working on related topics such as computational linguistics or speech processing beyond low-resource languages?"
+      ]
+    },
+    {
+      "id": "awards",
+      "playbook": "awards_cfps",
+      "confidence": 0.95,
+      "alternatives": [
+        "fundraising",
+        "accelerators"
+      ],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "startup awards",
+        "startup competitions",
+        "agritech innovation",
+        "agriculture technology startups"
+      ],
+      "ask_type": "apply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you want only awards and competitions that provide funding or also those that offer mentorship, publicity, or other benefits?",
+        "Are you interested in government-run programs only, or also private and corporate-sponsored competitions?"
+      ]
+    },
+    {
+      "id": "volunteer",
+      "playbook": "volunteering",
+      "confidence": 0.9,
+      "alternatives": [
+        "partnerships"
+      ],
+      "kind": "org",
+      "where": [
+        "Mumbai",
+        "IN"
+      ],
+      "topics": [
+        "mental health NGOs",
+        "mental health advocacy",
+        "mental health support services"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "What exactly should the recipient do? (\"Request an opportunity to volunteer UX design services for m\" has no clear action)",
+        "Do you prefer volunteering remotely or in person?",
+        "Are you looking for short-term or long-term volunteer commitments?"
+      ]
+    },
+    {
+      "id": "alumni",
+      "playbook": "alumni",
+      "confidence": 0.9,
+      "alternatives": [
+        "job_search"
+      ],
+      "kind": "person",
+      "where": [
+        "Bangalore",
+        "IN"
+      ],
+      "topics": [
+        "product management",
+        "fintech companies",
+        "career advice"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "How many alumni contacts does the user want to reach?",
+        "Does the user want to include any specific details about themselves in the outreach?"
+      ]
+    },
+    {
+      "id": "suppliers",
+      "playbook": "suppliers",
+      "confidence": 0.95,
+      "alternatives": [],
+      "kind": "org",
+      "where": [
+        "Delhi NCR"
+      ],
+      "topics": [
+        "biodegradable food packaging",
+        "bagasse plates",
+        "eco-friendly packaging",
+        "food packaging suppliers"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Do you have a preferred minimum order quantity or budget range for the packaging?",
+        "Are you looking for suppliers who can provide custom branding or printing on the packaging?",
+        "Is there a specific timeline or urgency for receiving the packaging supplies?"
+      ]
+    },
+    {
+      "id": "recruit_rust",
+      "playbook": "recruiting",
+      "confidence": 0.95,
+      "alternatives": [],
+      "kind": "person",
+      "where": [],
+      "topics": [
+        "Rust programming",
+        "open source software development",
+        "software engineering"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you have a preferred geographic region or timezone for candidates?",
+        "Do you have a link to a job posting or application page to include in the outreach?"
+      ]
+    },
+    {
+      "id": "customer_interviews",
+      "playbook": "customer_research",
+      "confidence": 0.9,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "Hyderabad",
+        "IN"
+      ],
+      "topics": [
+        "human resources",
+        "employee onboarding",
+        "IT companies",
+        "talent management"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Should the interviews be conducted in person or are remote interviews acceptable?",
+        "Is there a preferred timeframe or deadline to complete these interviews?",
+        "Are there any specific sub-sectors within IT (e.g., software development, IT services) to focus on or exclude?"
+      ]
+    },
+    {
+      "id": "german_market",
+      "playbook": "b2b_sales",
+      "confidence": 0.9,
+      "alternatives": [
+        "customer_research"
+      ],
+      "kind": "org",
+      "where": [
+        "DE"
+      ],
+      "topics": [
+        "logistics companies",
+        "route optimisation",
+        "freight transportation",
+        "supply chain management"
+      ],
+      "ask_type": "reply",
+      "language": "German",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you want to target only large logistics companies or all sizes?",
+        "Should the outreach be in German or is English acceptable?"
+      ]
+    },
+    {
+      "id": "vague",
+      "playbook": "general",
+      "confidence": 0.5,
+      "alternatives": [
+        "b2b_sales",
+        "recruiting"
+      ],
+      "kind": "org",
+      "where": [],
+      "topics": [],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "What kind of people or organisations should receive these emails?",
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "What exactly should the recipient do? (\"Help me find relevant people to email about my startup.\" has no clear action)"
+      ]
+    },
+    {
+      "id": "typos",
+      "playbook": "sponsorship",
+      "confidence": 0.9,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "Hyderabad",
+        "IN"
+      ],
+      "topics": [
+        "developer platforms",
+        "technology companies",
+        "startup ecosystem"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "What is the size or scale of your hackathon event?",
+        "Do you have a sponsorship package or proposal document ready?",
+        "Are you open to sponsors outside Hyderabad who might want to sponsor remotely?"
+      ]
+    },
+    {
+      "id": "exclusions",
+      "playbook": "partnerships",
+      "confidence": 0.9,
+      "alternatives": [
+        "b2b_sales"
+      ],
+      "kind": "org",
+      "where": [
+        "IN"
+      ],
+      "topics": [
+        "edtech companies",
+        "coding education",
+        "technology education"
+      ],
+      "ask_type": "reply",
+      "language": "",
+      "failed": [],
+      "questions": [
+        "Tell me about yourself or your offer in 2-3 sentences (numbers help), or give a path to your CV/deck.",
+        "Do you want to target startups only or also established edtech companies?",
+        "Should the partnership focus only on coding courses or other subjects as well?"
+      ]
+    }
+  ],
+  "llm": {
+    "paid_calls": 0,
+    "cached_hits": 30,
+    "tokens": 0,
+    "est_cost_usd": 0.0,
+    "by_purpose": {},
+    "model_switches": []
+  }
+}

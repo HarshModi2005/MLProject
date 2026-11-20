@@ -70,7 +70,9 @@ def absorb_page(contact: Contact, html: str, url: str) -> bool:
 
 
 class Enricher:
-    def __init__(self, fetcher: Fetcher, search: WebSearch, orcid: Orcid, settings: Optional[Settings] = None):
+    def __init__(self, fetcher: Fetcher, search: WebSearch, orcid: Orcid, settings: Optional[Settings] = None,
+                 store=None, accept_prior: bool = False):
+        self.store, self.accept_prior = store, accept_prior  # cross-campaign email conventions (reach/patterns.py)
         self.fetcher = fetcher
         self.search = search
         self.orcid = orcid
@@ -136,6 +138,9 @@ class Enricher:
         self._crawl_org_sites(targets, hint_terms or [])
         patterns = infer_domain_patterns(pool or targets)
         self.stats["email_guessed"] = apply_patterns(targets, patterns)
+        from brain.discovery.reach.patterns import fill
+
+        self.stats["email_guessed_known_convention"] = fill(targets, self.store, self.accept_prior)
         self.stats["undeliverable_removed"] = verify_deliverable(targets)
 
     def _crawl_org_sites(self, targets: List[Contact], hint_terms: List[str], max_orgs: int = 8) -> None:

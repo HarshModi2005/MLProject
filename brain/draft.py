@@ -18,6 +18,7 @@ from typing import List, Optional
 from brain.llm import LLM, LLMError
 from brain.models import CampaignSpec, Contact, Draft
 from brain.packs import Pack
+from brain.emailfinder import is_role_address
 from brain.textutil import clean_name, squash, strip_accents
 
 log = logging.getLogger("brain.draft")
@@ -41,23 +42,51 @@ Rules:
 - Do not stretch the sender's experience to look relevant. If no sender fact relates to the recipient's work, say so
   plainly and offer the closest real experience as transferable skills — an honest gap reads better than a forced link.
 - Refer to the recipient's work using the HOOK. If you name a paper or project title, copy it exactly.
-- Structure: (1) why this person, tied to the hook; (2) the one or two sender facts most relevant to THEIR work; (3) the ask, in one sentence, easy to answer.
-- Plain text. No greeting line, no sign-off, no bullet points, no placeholders like [Name].
-- No filler openers ("I hope this email finds you well"), no flattery adjectives.
-- Stay within the word range.
+- Structure: (1) why this person, tied to the hook (and WHY NOW if given); (2) the one or two sender facts most relevant
+  to THEIR work; (3) exactly ONE ask, in one sentence, easy to answer. If a link or availability is given, use it.
+- Mutual connections: mention one ONLY as the evidence states it ("we are both connected to X", "I know X at your
+  company"). Never claim someone introduced, referred or recommended the sender unless the evidence says so.
+- Follow the SITUATION rules.
+- Plain text. No greeting line, no sign-off, no bullet points, no placeholders like [Name], at most one link.
+- No filler openers ("I hope this email finds you well"), no flattery adjectives, no hype, no exclamation marks.
+- Short sentences (under 25 words). Stay within the word range. Write in the LANGUAGE given.
 
-Return JSON: {"subject": "<under 9 words, specific, no clickbait>", "body": "<paragraphs separated by blank lines>"}"""
+Return JSON: {"subjects": ["<3 different subject lines, each under 9 words, specific to this recipient, no clickbait>"],
+"body": "<paragraphs separated by blank lines>"}"""
+
+
+def _greet_name(tokens: List[str]) -> str:
+    """'C Jagadeesh' -> 'C Jagadeesh' (an initial is not a first name); 'Priya Nair' -> 'Priya'."""
+    if len(tokens) > 1 and len(tokens[0].strip(".")) <= 1:
+        return " ".join(tokens)
+    return tokens[0]
+
+
+def team_name(name: str) -> str:
+    """'The TWIML AI Podcast (formerly This Week in ...)' -> 'TWIML AI Podcast'."""
+    n = re.sub(r"\s*[\(\[].*?[\)\]]", "", name or "")
+    n = re.split(r"\s+[|–—-]\s+|:\s", n)[0]
+    n = re.sub(r"^the\s+", "", n.strip(), flags=re.I)
+    return n.strip() or name
 
 
 def salutation(contact: Contact, pack: Pack) -> str:
+    from brain.textutil import looks_like_person_name
+
     if contact.kind == "org":
-        return f"Hello {contact.name} team,"
+        dm = contact.decision_maker or {}
+        first = clean_name(dm.get("name") or "").split()
+        if first:  # found the right person but only the shared inbox: address them through it
+            return f"Hi {_greet_name(first)},"
+        if looks_like_person_name(contact.name):  # a one-person business listed under its owner's name
+            return f"Hi {_greet_name(clean_name(contact.name).split())},"
+        return f"Hello {team_name(contact.name)} team,"
     tokens = clean_name(contact.name).split()
     if not tokens:
         return "Hello,"
     if pack.salutation == "professor":
         return f"Dear Professor {tokens[-1]},"
-    return f"Hi {tokens[0]},"
+    return f"Hi {_greet_name(tokens)},"
 
 
 def _norm(text: str) -> str:
@@ -156,7 +185,8 @@ def check(body: str, subject: str, contact: Contact, spec: CampaignSpec) -> List
     if words > hi:
         issues.append(f"too long ({words} words, limit {hi})")
     low = body.lower()
-    for phrase in BANNED:
+    english = not spec.language or spec.language.lower() == "english"
+    for phrase in BANNED if english else []:
         if phrase in low:
             issues.append(f"contains filler phrase '{phrase}'")
     if re.search(r"\[[^\]]{2,40}\]|\{[^}]{2,40}\}|<[^>]{2,30}>", body + subject):
@@ -166,8 +196,10 @@ def check(body: str, subject: str, contact: Contact, spec: CampaignSpec) -> List
     if not subject.strip():
         issues.append("missing subject")
 
+    o, a = spec.offer, spec.ask_detail
     raw_facts = " ".join(
-        [spec.sender.facts_text(), spec.objective, spec.ask, spec.timeline or "", contact.name, contact.org or "",
+        [spec.sender.facts_text(), spec.objective, spec.ask, spec.timeline or "", o.value_prop, " ".join(o.proof_points),
+         o.terms, o.audience, a.link or "", a.availability or "", a.deadline or "", contact.name, contact.org or "",
          contact.title or "", contact.bio or "", " ".join(contact.topics)]
         + [f"{ev.text} {ev.detail or ''} {ev.year or ''}" for ev in contact.evidence]
     )
@@ -177,12 +209,68 @@ def check(body: str, subject: str, contact: Contact, spec: CampaignSpec) -> List
         if _norm(quoted).strip() not in facts:
             issues.append(f"quotes a title not found in the evidence: \"{squash(quoted, 60)}\"")
     issues += conflations(body, spec.sender.highlights, spec.sender.summary, contact.match_text())
+    issues += quality_problems(body, contact, spec)
     # Numbers are claims (GPA, years, counts): each must trace back to the source facts.
     fact_numbers = set(re.findall(r"\d+(?:\.\d+)?", raw_facts))  # raw text: keeps decimals like 0.91 intact
     for num in set(re.findall(r"\d+(?:\.\d+)?", body)):
         if num not in fact_numbers and len(num) > 1:
             issues.append(f"states a number not found in the source facts: {num}")
     return issues
+
+
+# A second request tacked on after the ask ("Also, if you could connect me with ...").
+_SECOND_ASK = re.compile(r"(^|[.?!]\s+)(also|alternatively|additionally|separately|in addition),?\s+"
+                         r"(if you could|could you|would you|can you|please|i would (also )?(appreciate|love)|i'?d (also )?(appreciate|love))",
+                         re.I)
+_SHORTENERS = ("bit.ly", "tinyurl", "t.co/", "goo.gl", "ow.ly", "rb.gy", "cutt.ly", "is.gd")
+_WARM_OVERCLAIM = re.compile(r"\b(introduced me|suggested (that )?I (reach|contact|write)|referred me|recommended (that )?I|"
+                             r"asked me to (reach|contact|write)|told me to (reach|contact))", re.I)
+_STOPWORDS = {"this", "that", "with", "from", "your", "their", "have", "about", "would", "could", "which", "there", "where",
+              "what", "when", "will", "into", "they", "them", "were", "been", "more", "also", "such", "only"}
+
+
+def _recipient_terms(contact: Contact) -> set:
+    """Content words specific to this recipient (from the hook and evidence), not their name or generic words."""
+    own = {w.lower() for w in re.findall(r"[A-Za-z]+", contact.name)}
+    text = " ".join([contact.hook or ""] + [f"{e.text} {e.detail or ''}" for e in contact.evidence[:6]] + contact.topics)
+    return {t for t in _TERM.findall(text.lower()) if len(t) > 3 and t not in _GENERIC and t not in _STOPWORDS
+            and t not in own}
+
+
+def quality_problems(body: str, contact: Contact, spec: CampaignSpec) -> List[str]:
+    """Personalisation, one ask, deliverability and readability — deterministic, free."""
+    out: List[str] = []
+    english = not spec.language or spec.language.lower() == "english"
+    terms = _recipient_terms(contact)
+    if terms and english and not ({t for t in _TERM.findall(body.lower())} & terms):
+        out.append("not personalised: mentions nothing specific from the recipient's evidence")
+    if body.count("?") > 2 or _SECOND_ASK.search(body):
+        out.append("more than one ask")
+    links = re.findall(r"https?://\S+|www\.\S+", body)
+    if len(links) > 1:
+        out.append(f"{len(links)} links (at most one)")
+    if any(s in body.lower() for s in _SHORTENERS):
+        out.append("uses a link shortener (spam filters penalise them)")
+    if body.count("!") > 1:
+        out.append("more than one exclamation mark")
+    if any(w.isupper() and len(w) > 5 and w.isalpha() for w in body.split()):
+        out.append("ALL-CAPS word")
+    if english:
+        low = body.lower()
+        hit = next((w for w in SPAM_WORDS if w in low), None)
+        if hit:
+            out.append(f"spam-trigger phrase '{hit}'")
+        sentences = [x for x in re.split(r"(?<=[.!?])\s+", body.strip()) if x.strip()]
+        if sentences and sum(len(x.split()) for x in sentences) / len(sentences) > 28:
+            out.append("sentences too long on average (over 28 words)")
+        for para in [p for p in body.split("\n\n") if p.strip()]:
+            if len([x for x in re.split(r"(?<=[.!?])\s+", para.strip()) if x]) > 5:
+                out.append("a paragraph has more than 5 sentences")
+                break
+    evidence = " ".join(e.text for e in contact.evidence).lower()
+    if _WARM_OVERCLAIM.search(body) and not re.search(r"introduc|referr|recommend", evidence):
+        out.append("claims an introduction or referral the evidence does not show")
+    return out
 
 
 def with_context(spec: CampaignSpec, ctx=None) -> CampaignSpec:
@@ -200,16 +288,67 @@ def with_context(spec: CampaignSpec, ctx=None) -> CampaignSpec:
 
 
 def relevant_highlights(contact: Contact, spec: CampaignSpec, k: int = 2) -> List[str]:
-    """Sender facts ordered by overlap with this recipient's evidence (BM25, no LLM)."""
+    """Sender facts for this recipient: the one the judge chose (it read both sides) first, then BM25 overlap."""
     from brain.rank import bm25_scores
 
     highlights = [h for h in spec.sender.highlights if h.strip()]
     if not highlights:
         return []
+    chosen = []
+    if contact.sender_ref is not None and 0 <= contact.sender_ref < len(spec.sender.highlights):
+        h = spec.sender.highlights[contact.sender_ref]
+        if h.strip():
+            chosen.append(h)
     recipient = contact.match_text()
     scores = bm25_scores(recipient, highlights)
     ranked = sorted(zip(scores, highlights), key=lambda x: x[0], reverse=True)
-    return [h for score, h in ranked[:k] if score > 0] or [ranked[0][1]]
+    rest = [h for score, h in ranked if score > 0 and h not in chosen]
+    out = (chosen + rest)[:k]
+    return out or [ranked[0][1]]
+
+
+# ── situations: who exactly is reading, and how they were reached ────────────
+
+GUESSED_METHODS = ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior")
+
+SITUATION_RULES = {
+    "person_own_address": "Writing to the person's own address: be direct and personal.",
+    "person_guessed_address": ("The address follows the organisation's usual format and may not reach them: do not imply "
+                               "you know them; if it is not their area, ask them to point you to the right person."),
+    "decision_maker_via_inbox": ("The email goes to the organisation's shared team inbox but is addressed to the named "
+                                 "person: do not comment on the address. Keep ONE ask; you may end it with a short clause "
+                                 "such as 'or point me to whoever handles this' — never a second request."),
+    "org_inbox": ("The email goes to a shared team inbox: write to the team and make it easy to forward. The ONE ask is "
+                  "the SHARED-INBOX ASK if one is given (to be pointed to the right person), otherwise the main ask — "
+                  "never both."),
+    "warm_direct": "The sender is already connected to this person (see evidence): mention it once, plainly, first.",
+    "warm_intro": ("The sender knows someone at this organisation (see evidence): you may mention that connection once, "
+                   "plainly; do not claim they referred or introduced the sender."),
+}
+
+
+def situation(contact: Contact) -> str:
+    warm = contact.signals.get("warm_path", 0)
+    if warm >= 1.0:
+        return "warm_direct"
+    if warm > 0:
+        return "warm_intro"
+    best = contact.best_email
+    if contact.kind == "org":
+        shared = bool(best) and (best.method == "inbox" or is_role_address(best.address))
+        if not shared:
+            return "person_own_address"  # e.g. a small clinic's own Gmail: write as to its owner
+        return "decision_maker_via_inbox" if (contact.decision_maker or {}).get("name") else "org_inbox"
+    if best and best.method in GUESSED_METHODS:
+        return "person_guessed_address"
+    return "person_own_address"
+
+
+def strongest_criterion(contact: Contact) -> Optional[str]:
+    if not contact.criteria:
+        return None
+    name, v = max(contact.criteria.items(), key=lambda kv: kv[1] or 0)
+    return f"{name} (support {v:.2f})" if v and v >= 0.5 else None
 
 
 def _prompt(contact: Contact, spec: CampaignSpec, pack: Pack, style=()) -> str:
@@ -232,19 +371,26 @@ Skills: {', '.join(s.skills[:10])}
 
 GOAL
 Objective: {spec.objective}
-Ask: {spec.ask or spec.objective}
+Ask: {spec.ask or spec.objective}{(' [' + a.type + ']') if (a := spec.ask_detail).type != 'other' else ''}
+{('Link to include: ' + a.link) if a.link else ''}{(chr(10) + 'Sender availability: ' + a.availability) if a.availability else ''}{(chr(10) + 'Deadline: ' + a.deadline) if a.deadline else ''}
+SHARED-INBOX ASK: {(a.inbox_text or 'n/a') if situation(contact) in ('org_inbox', 'decision_maker_via_inbox') else 'n/a (not writing to a team inbox)'}
 Timing: {spec.timeline or 'not specified'}
 Tone: {spec.tone}
+LANGUAGE: {spec.language or 'English'}
+{('OFFER: ' + spec.offer.value_prop + ((' | proof: ' + '; '.join(spec.offer.proof_points[:3])) if spec.offer.proof_points else '') + ((' | terms: ' + spec.offer.terms) if spec.offer.terms else '')) if spec.offer.value_prop else ''}
 
 RECIPIENT ({'an organisation, written to through its shared inbox ' + (best.address if (best := contact.best_email) else '') + ' — address the team, not a named person' if contact.kind == 'org' else 'a person'})
 Name: {contact.name}
 Role: {contact.title or ('organisation' if contact.kind == 'org' else 'unknown')} at {contact.org or 'unknown'}
 Works on: {', '.join(contact.topics[:6]) or 'see evidence'}
 HOOK (most relevant fact): {contact.hook or (contact.evidence[0].text if contact.evidence else 'none — keep the reference to their work general')}
+WHY NOW: {contact.why_now or 'none given — do not invent urgency'}
+STRONGEST FIT: {strongest_criterion(contact) or 'n/a'}
 Evidence:
 {evidence or '- (none)'}
 Why they fit: {'; '.join(contact.reasons) or 'n/a'}
 
+SITUATION: {SITUATION_RULES[situation(contact)]}
 STYLE NOTES: {pack.writing_notes}
 LENGTH: {lo}-{hi} words for the body.""" + (
         "\n\nAN EMAIL THE SENDER WROTE BEFORE (match its tone, directness and length; do not copy its content):\n"
@@ -270,13 +416,74 @@ def draft_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, ctx=
         except LLMError as e:
             log.warning("draft failed for %s: %s", contact.name, e)
             return None
-        subject = squash(str(data.get("subject") or ""), 120)
         body = clean_body(str(data.get("body") or ""), contact)
+        subject = choose_subject(_subjects(data), contact, spec)
         issues = check(body, subject, contact, spec)
         if not issues:
             break
-    full = f"{salutation(contact, pack)}\n\n{body}\n\nBest regards,\n{spec.sender.name}".strip()
-    return Draft(contact_id=contact.id, to=best.address if best else "", subject=subject, body=full, issues=issues)
+    return Draft(contact_id=contact.id, to=best.address if best else "", subject=subject,
+                 body=assemble(body, contact, spec, pack), issues=issues)
+
+
+def _subjects(data) -> List[str]:
+    subs = data.get("subjects") if isinstance(data, dict) else None
+    out = [squash(str(x), 120) for x in subs] if isinstance(subs, list) else []
+    if isinstance(data, dict) and data.get("subject"):
+        out.append(squash(str(data["subject"]), 120))
+    return [x for x in out if x.strip()]
+
+
+SPAM_WORDS = ["act now", "limited time", "100% free", "risk-free", "risk free", "guaranteed", "guarantee", "click here",
+              "buy now", "winner", "urgent", "no obligation", "earn money", "cash bonus", "special promotion",
+              "exclusive deal", "once in a lifetime", "!!!", "$$$", "dear friend", "congratulations"]
+
+
+def subject_problems(subject: str, contact: Contact, spec: CampaignSpec) -> List[str]:
+    out = []
+    words = subject.split()
+    if not words:
+        return ["missing subject"]
+    if len(words) > 9:
+        out.append("subject longer than 9 words")
+    if re.match(r"\s*(re|fwd?)\s*:", subject, re.I):
+        out.append("subject pretends to be a reply or forward")
+    if "!" in subject or any(w.isupper() and len(w) > 4 for w in words):
+        out.append("subject shouts (! or ALL CAPS)")
+    low = subject.lower()
+    if any(w in low for w in SPAM_WORDS):
+        out.append("subject contains a spam-trigger phrase")
+    return out
+
+
+def choose_subject(subjects: List[str], contact: Contact, spec: CampaignSpec) -> str:
+    """The first subject that passes the checks, preferring one that names something specific to the recipient."""
+    if not subjects:
+        return ""
+    specific = _recipient_terms(contact) | {w.lower() for w in re.findall(r"[A-Za-z]{4,}", contact.org or "")}
+    clean = [x for x in subjects if not subject_problems(x, contact, spec)]
+    pool = clean or subjects
+    ranked = sorted(pool, key=lambda x: -len({t for t in _TERM.findall(x.lower())} & specific))
+    return ranked[0]
+
+
+_OPT_OUT = {"": "If this isn't relevant, just reply 'no' and I won't write again.",
+            "German": "Falls das für Sie nicht relevant ist, antworten Sie einfach mit „nein“ und ich schreibe nicht wieder.",
+            "French": "Si ce n'est pas pertinent, répondez simplement « non » et je ne vous écrirai plus.",
+            "Spanish": "Si no le resulta relevante, responda «no» y no volveré a escribirle.",
+            "Portuguese": "Se não for relevante, basta responder «não» e não voltarei a escrever.",
+            "Italian": "Se non è rilevante, risponda semplicemente «no» e non le scriverò più."}
+
+
+def assemble(body: str, contact: Contact, spec: CampaignSpec, pack: Pack) -> str:
+    """Greeting, body, sign-off, signature block and (commercial playbooks) the opt-out line — all in code."""
+    sign = f"Best regards,\n{spec.sender.name}" + (f"\n{spec.sender.signature.strip()}" if spec.sender.signature.strip() else "")
+    full = f"{salutation(contact, pack)}\n\n{body}\n\n{sign}".strip()
+    if getattr(pack, "commercial", False):
+        footer = _OPT_OUT.get(spec.language, _OPT_OUT[""])
+        if spec.sender.postal_address.strip():
+            footer += "\n" + spec.sender.postal_address.strip()
+        full += "\n\n--\n" + footer
+    return full
 
 
 # ── fact-check pass (batched) ────────────────────────────────────────────────
@@ -314,7 +521,7 @@ def find_unsupported(items, spec: CampaignSpec, llm: LLM, batch_size: int = 4) -
         batch = items[start:start + batch_size]
         blocks = []
         for c, d in batch:
-            body = d.body.split("\n", 1)[1] if "\n" in d.body else d.body  # drop the salutation
+            body = body_of(d.body)  # without greeting, sign-off and footer
             blocks.append(f"### id: {c.id}\nEVIDENCE ABOUT RECIPIENT:\n{_recipient_facts(c)}\nDRAFT:\n{body}")
         user = f"SENDER FACTS:\n{sender_facts}\nGoal: {spec.objective}; timing: {spec.timeline or 'n/a'}\n\n" + "\n\n".join(blocks)
         # Careful reading matters more here than anywhere else, so the checker thinks harder.
@@ -372,7 +579,7 @@ def verify_and_fix(contacts, drafts: dict, spec: CampaignSpec, pack: Pack, llm: 
 
 
 def _rewrite(c: Contact, d: Draft, claims, spec: CampaignSpec, pack: Pack, llm: LLM):
-    body = d.body.split("\n\n", 1)[1].rsplit("\n\nBest regards", 1)[0] if "\n\n" in d.body else d.body
+    body = body_of(d.body)
     user = (_prompt(c, spec, pack) + "\n\nA fact-checker found these claims unsupported by the facts above:\n- "
             + "\n- ".join(claims) + f"\n\nRewrite the draft without them (do not replace them with other unsupported claims).\n\nDraft:\n{body}")
     try:
@@ -380,8 +587,49 @@ def _rewrite(c: Contact, d: Draft, claims, spec: CampaignSpec, pack: Pack, llm: 
     except LLMError as e:
         log.warning("rewrite failed for %s: %s", c.name, e)
         return None
-    subject = squash(str(data.get("subject") or d.subject), 120)
+    subject = choose_subject(_subjects(data), c, spec) or d.subject
     new_body = clean_body(str(data.get("body") or ""), c)
     issues = check(new_body, subject, c, spec)
-    full = f"{salutation(c, pack)}\n\n{new_body}\n\nBest regards,\n{spec.sender.name}".strip()
-    return Draft(contact_id=c.id, to=d.to, subject=subject, body=full, issues=issues)
+    return Draft(contact_id=c.id, to=d.to, subject=subject, body=assemble(new_body, c, spec, pack), issues=issues)
+
+
+def body_of(full: str) -> str:
+    """The model-written middle of an assembled email (no greeting, sign-off, signature or footer)."""
+    text = full.split("\n\n--\n", 1)[0]
+    text = text.split("\n\n", 1)[1] if "\n\n" in text else text
+    return text.rsplit("\n\nBest regards", 1)[0].strip()
+
+
+# ── follow-ups ───────────────────────────────────────────────────────────────
+
+FOLLOWUP_SYSTEM = """You write a short follow-up to a cold email that got no reply.
+Rules: 40-80 words; do not repeat the first email; bring ONE new, true reason drawn from the evidence or the sender
+facts that the first email did not use; restate the ask in one easy sentence (or offer to stop writing); no guilt
+("just bumping", "did you see my email"), no greeting line, no sign-off. Use only the facts given.
+Return JSON: {"body": "<text>"}"""
+
+
+def followup_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, first: Draft, n: int = 1,
+                   ctx=None) -> Optional[Draft]:
+    """Follow-up number n (1 or 2) to a sent first email: a new angle from evidence the first email did not use."""
+    spec = with_context(spec, ctx)
+    first_body = body_of(first.body)
+    unused = [e for e in contact.evidence if e.text[:40].lower() not in first_body.lower()][:4]
+    user = (_prompt(contact, spec, pack) + f"\n\nFIRST EMAIL (sent, no reply):\n{first_body}\n\n"
+            "EVIDENCE NOT USED YET:\n" + ("\n".join(f"- {e.text}" for e in unused) or "- (none: use another sender fact)")
+            + f"\n\nThis is follow-up number {n}." + (" Make it the last one: offer to stop writing." if n >= 2 else ""))
+    try:
+        data = llm.json(system=FOLLOWUP_SYSTEM, user=user, purpose="followup", tier="strong", temperature=0.4, max_tokens=300)
+    except LLMError as e:
+        log.warning("follow-up failed for %s: %s", contact.name, e)
+        return None
+    body = clean_body(str((data or {}).get("body") or ""), contact)
+    subject = first.subject if first.subject.lower().startswith("re:") else f"Re: {first.subject}"
+    short = spec.model_copy(update={"word_target": 60})
+    issues = [i for i in check(body, subject, contact, short) if not i.startswith(("too short", "subject"))]
+    first_low = " ".join(first_body.lower().split())
+    reused = [x for x in re.split(r"(?<=[.!?])\s+", body.strip()) if len(x.split()) >= 5
+              and " ".join(x.lower().split()) in first_low]
+    if reused:
+        issues.append("repeats the first email")
+    return Draft(contact_id=contact.id, to=first.to, subject=subject, body=assemble(body, contact, spec, pack), issues=issues)

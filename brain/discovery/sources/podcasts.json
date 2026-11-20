@@ -1,0 +1,22 @@
+{
+  "name": "podcasts",
+  "title": "Podcasts on the topics (public iTunes directory); host email from the show's RSS feed.",
+  "adapter": "json_api",
+  "tier": 1,
+  "cost": "free",
+  "kinds": ["person", "org"],
+  "stage": "seed",
+  "order": 90,
+  "proves": ["recent_coverage", "audience"],
+  "yields_email": true,
+  "request": {
+    "url": "https://itunes.apple.com/search",
+    "params": {"media": "podcast", "term": "{term}", "limit": 25, "country": "{country|lower}"}
+  },
+  "query": {"terms": ["topics", "expanded_terms:2"], "max": 5, "default_country": "US"},
+  "items": "results",
+  "dedupe": "feedUrl",
+  "follow": {"field": "feedUrl", "parse": "rss", "as": "feed", "max": 30},
+  "hooks": "brain.discovery.hooks.podcasts",
+  "policy": {"robots": "api", "terms": "iTunes Search API is public; feeds are published for syndication."}
+}

@@ -62,6 +62,8 @@ def strong_keys(c: Contact) -> List[str]:
     person's name or came from a source that ties it to them (ORCID, the user's own list); otherwise one
     mis-attributed address would chain unrelated people into a single record."""
     keys = list(c.keys)
+    if c.kind == "org" and c.org_domain:
+        keys.append(f"domain:{registrable_domain(c.org_domain)}")  # one website, one organisation
     for e in c.emails:
         if e.method == "pattern" or e.confidence < 0.8:
             continue
@@ -94,7 +96,14 @@ def merge_into(a: Contact, b: Contact) -> Contact:
     for k, v in b.signals.items():
         a.signals[k] = max(a.signals.get(k, 0.0), v)
     a.sources = list(dict.fromkeys(a.sources + b.sources))
+    # The pre-judge screen: keep the best one; the merged record is rejected only if that screen rejected it.
+    best = a
+    if b.prejudge is not None and (a.prejudge is None or b.prejudge > a.prejudge):
+        a.prejudge, a.prejudge_reason, best = b.prejudge, b.prejudge_reason, b
+    best_rejected = "prejudge_reject" in best.flags
     a.flags = list(dict.fromkeys(a.flags + b.flags))
+    if a.prejudge is not None and not best_rejected:
+        a.flags = [f for f in a.flags if f != "prejudge_reject"]
     return a
 
 
@@ -131,7 +140,7 @@ def resolve(contacts: Iterable[Contact]) -> List[Contact]:
             j = by_key.get(k)
             if j is None:
                 by_key[k] = i
-            elif k.startswith(("orcid:", "openalex:")) or names_compatible(contacts[j].name, c.name):
+            elif k.startswith(("orcid:", "openalex:", "domain:")) or names_compatible(contacts[j].name, c.name):
                 union(i, j)  # a shared email alone never merges two different names
 
     # Fuzzy pass, blocked by surname so it stays near-linear.
