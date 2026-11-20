@@ -105,6 +105,13 @@ answers in `evals/cache/<name>.sqlite`. Metrics: good@K (judge score ≥ 0.7), p
 organisations, share of the shortlist with direct proof (sponsored / hiring / portfolio …), reachability,
 search and LLM spend, and USD per good prospect.
 
+### Production hardening
+
+Address trust tiers (`verified` / `attributed` / `inbox` / `guess`), mailbox verification, a Hunter-first route for
+named people in companies, a shortlist that never pads, a calibrated score, prompt-injection defences, outcome logging
+(`brain outcome`, `brain outcomes`) and per-user workspaces (`brain --workspace`). Held-out scenarios, repeat runs and a
+terminal labeller (`brain bench-label`) make the benchmark honest. See [docs/production-hardening.md](docs/production-hardening.md).
+
 ### Grounded context
 
 `brain/context.py` holds the agent's working memory: the confirmed understanding, sourced facts about the

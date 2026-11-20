@@ -72,9 +72,21 @@ class LLM:
     def available(self) -> bool:
         return bool(self.settings.llm_api_key) or self._transport != self._http_transport
 
+    def _endpoint(self, model: str):
+        """(base URL, API key) for a model: the verifier may live at another provider (LLM_VERIFY_BASE_URL)."""
+        st = self.settings
+        if st.llm_verify_base_url and st.llm_model_verify and model == st.llm_model_verify:
+            return st.llm_verify_base_url, (st.llm_verify_api_key or st.llm_api_key)
+        return st.llm_base_url, st.llm_api_key
+
+    def model_for(self, tier: str) -> Optional[str]:
+        """The model the next call of this tier would use."""
+        return self._pick(tier)
+
     # ── transport ────────────────────────────────────────────────────────────
     def _http_transport(self, model: str, system: str, user: str, temperature: float, max_tokens: int) -> str:
-        if not self.settings.llm_api_key:
+        base, key = self._endpoint(model)
+        if not key:
             raise LLMError("No LLM API key configured (set LLM_API_KEY or GROQ_API_KEY).")
         if self._client is None:
             self._client = httpx.Client(timeout=90)
@@ -92,16 +104,16 @@ class LLM:
         cap = self._token_caps.get(model)
         if cap:
             payload["max_tokens"] = min(payload["max_tokens"], cap)
-        if "api.openai.com" in self.settings.llm_base_url:
+        if "api.openai.com" in base:
             payload["max_completion_tokens"] = payload.pop("max_tokens")  # OpenAI's current name for the limit
         for param in self._unsupported.get(model, ()):
             payload.pop(param, None)
-        url = self.settings.llm_base_url.rstrip("/") + "/chat/completions"
+        url = base.rstrip("/") + "/chat/completions"
         last = ""
         for attempt in range(4):
             try:
                 r = self._client.post(
-                    url, json=payload, headers={"Authorization": f"Bearer {self.settings.llm_api_key}"}
+                    url, json=payload, headers={"Authorization": f"Bearer {key}"}
                 )
             except httpx.HTTPError as e:
                 last = repr(e)
@@ -215,6 +227,13 @@ class LLM:
         raise LLMError(f"LLM returned unparseable output for '{purpose}': {last_err}")
 
     def _pick(self, tier: str) -> Optional[str]:
+        if tier == "verify":
+            # An independent checker: its own model if configured, else the fast model (not the writer's). The
+            # writer's model is the last resort only, and a switch to it shows up in the report.
+            first = self.settings.llm_model_verify or self.settings.llm_model_fast
+            order = [first] + [m.strip() for m in self.settings.llm_fallback_models.split(",") if m.strip()]
+            order += [self.settings.llm_model_strong]
+            return next((m for m in dict.fromkeys(order) if m not in self._dead), None)
         order = [self.settings.llm_model_strong]
         if tier == "fast":
             order.insert(0, self.settings.llm_model_fast)

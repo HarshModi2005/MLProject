@@ -1,5 +1,6 @@
 {
   "name": "grants_csr_india",
+  "split": "dev",
   "playbook": "grants",
   "target_count": 5,
   "spec": {

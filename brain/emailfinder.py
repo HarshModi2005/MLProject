@@ -97,6 +97,13 @@ def is_role_address(address: str) -> bool:
     return any(t in ROLE_TOKENS for t in tokens)
 
 
+def _explained(part: str, tokens: List[str], patterns) -> bool:
+    """Is this piece of an address's local part accounted for by the person's name (or a pattern of it)?"""
+    if part in tokens or any(part in pat for pat in patterns):
+        return True
+    return any(len(t) >= 4 and (t in part) for t in tokens)  # 'drrahul', 'sharmacs'
+
+
 def name_match(name: str, address: str) -> float:
     """How strongly an address's local part matches a person's name: 0, 0.5 (initials) or 1.
 
@@ -120,6 +127,14 @@ def name_match(name: str, address: str) -> float:
     others = [p for p in parts if len(p) >= 3 and p not in tokens and not any(p in pat for pat in patterns)]
     if last in parts and first not in joined and others:
         return 0.0
+    # A full-name pattern ('rahulsharma', 'sharmar', 'drtusharshukla') settles it before anything looser is tried.
+    for part in parts + [joined]:
+        if part in patterns or any(len(pat) >= 8 and pat in part for pat in patterns):
+            return 1.0
+    # The first name alone is only a match when nothing contradicts it: 'rahul@' can be Rahul Sharma, but
+    # 'rahul.gupta@' and 'shampa.santra@' carry another surname, so they belong to someone else.
+    if len(first) >= 3 and first in parts:
+        return 0.0 if [p for p in parts if len(p) >= 3 and p != first and not _explained(p, tokens, patterns)] else 1.0
     for part in parts + [joined]:
         if part in patterns or (part == first and len(first) >= 3):
             return 1.0
@@ -137,6 +152,9 @@ def name_match(name: str, address: str) -> float:
     return 0.0
 
 
+DIFFERENT_ORG = 0.45  # penalty: address at another organisation's domain, not from the person's own page
+DIFFERENT_ORG_OWN_PAGE = 0.15  # same, but the person's own page lists it (a second affiliation is plausible)
+
 _METHOD_BASE = {"provided": 0.95, "orcid": 0.9, "mailto": 0.8, "text": 0.7, "directory": 0.75, "llm": 0.65,
                 "pattern": 0.4}
 
@@ -148,12 +166,17 @@ def is_institutional(domain: str) -> bool:
     return domain.endswith(_ACADEMIC_SUFFIX) or ".ac." in domain or ".edu." in domain
 
 
+_GENERIC_ORG_WORDS = {"india", "indian", "research", "institute", "university", "college", "global", "group",
+                      "technology", "technologies", "international", "national", "science", "sciences", "school"}
+
+
 def _org_mentions(org: str, domain: str) -> bool:
     """Does the domain plausibly belong to the organisation name? 'Thapar Institute' ~ thapar.edu"""
     label = domain.split(".")[0]
     words = [w for w in re.findall(r"[a-z]+", org.lower()) if len(w) > 2]
     initials = "".join(w[0] for w in words if w not in {"of", "and", "the", "for"})
-    return any(w in label or label in w for w in words if len(w) > 3) or label in (initials, initials[:len(label)])
+    distinctive = [w for w in words if len(w) > 3 and w not in _GENERIC_ORG_WORDS]  # 'india' names no organisation
+    return any(w in label or label in w for w in distinctive) or label in (initials, initials[:len(label)])
 
 
 def score_email(address: str, contact: Contact, method: str, on_own_page: bool = False) -> float:
@@ -180,9 +203,12 @@ def score_email(address: str, contact: Contact, method: str, on_own_page: bool =
     elif reg in FREE_MAIL:
         score -= 0.05 if nm == 1.0 else 0.2
     elif contact.org_domain:
-        score -= 0.15  # an address at a different organisation is often a previous employer
+        # A different organisation's domain: a previous employer or a namesake. Only the person's own page makes it
+        # plausible; anywhere else it must not clear the send threshold on a name match alone (a "Rahul Sharma" at
+        # Microsoft Research is not the Rahul Sharma at stanford.edu).
+        score -= DIFFERENT_ORG_OWN_PAGE if on_own_page else DIFFERENT_ORG
     elif is_institutional(reg) and contact.org and not _org_mentions(contact.org, reg):
-        score -= 0.15  # organisation known only by name, and this domain does not look like it
+        score -= DIFFERENT_ORG_OWN_PAGE if on_own_page else DIFFERENT_ORG  # organisation known only by name
     return max(0.0, min(1.0, round(score, 2)))
 
 

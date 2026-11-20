@@ -89,7 +89,9 @@ def triage(hits: List[Hit], spec: CampaignSpec, is_aggregator, llm=None, stats: 
         items = [{"i": i, "url": hits[i].url, "title": squash(hits[i].title, 120), "snippet": squash(hits[i].snippet, 200)}
                  for i in unsure]
         try:
-            data = llm.json(system=TRIAGE_SYSTEM, user=f"TARGET: {target}\n\nRESULTS:\n{json.dumps(items)}",
+            from brain.safety import guard
+
+            data = llm.json(system=guard(TRIAGE_SYSTEM), user=f"TARGET: {target}\n\nRESULTS:\n{json.dumps(items)}",
                             purpose="triage", tier="fast", max_tokens=40 * len(items) + 80)
             for r in (data.get("results") or []) if isinstance(data, dict) else []:
                 i, kind = r.get("i"), r.get("kind")

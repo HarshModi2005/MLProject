@@ -1,5 +1,6 @@
 {
   "name": "jobs_ml_startups",
+  "split": "dev",
   "playbook": "job_search",
   "target_count": 5,
   "spec": {

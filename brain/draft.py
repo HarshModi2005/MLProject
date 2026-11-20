@@ -15,6 +15,7 @@ import logging
 import re
 from typing import List, Optional
 
+from brain.safety import guard
 from brain.llm import LLM, LLMError
 from brain.models import CampaignSpec, Contact, Draft
 from brain.packs import Pack
@@ -415,6 +416,9 @@ LENGTH: {lo}-{hi} words for the body.""" + (
 
 def draft_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, ctx=None) -> Optional[Draft]:
     """Returns a Draft (possibly with issues), or None if the LLM could not be reached at all."""
+    from brain.safety import scrub
+
+    scrub([contact])
     best = contact.best_email
     spec = with_context(spec, ctx)
     style = list(getattr(ctx, "style_examples", []) or [])
@@ -427,7 +431,7 @@ def draft_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, ctx=
             + "\n- ".join(issues) + f"\n\nPrevious draft:\n{body}"
         )
         try:
-            data = llm.json(system=SYSTEM, user=user, purpose="draft", tier="strong", temperature=0.5,
+            data = llm.json(system=guard(SYSTEM), user=user, purpose="draft", tier="strong", temperature=0.5,
                             max_tokens=700)
         except LLMError as e:
             log.warning("draft failed for %s: %s", contact.name, e)
@@ -437,6 +441,8 @@ def draft_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, ctx=
         issues = check(body, subject, contact, spec)
         if not issues:
             break
+    if "injection_suspect" in contact.flags:
+        issues = issues + ["the recipient's source pages contained text trying to instruct an AI; read the sources before sending"]
     if getattr(pack, "commercial", False) and not spec.sender.postal_address.strip():
         # commercial email law (CAN-SPAM and similar) expects a physical address in the footer
         issues = issues + ["commercial email without a sender postal address (add one in the sender profile)"]
@@ -544,7 +550,7 @@ def find_unsupported(items, spec: CampaignSpec, llm: LLM, batch_size: int = 4) -
             blocks.append(f"### id: {c.id}\nEVIDENCE ABOUT RECIPIENT:\n{_recipient_facts(c)}\nDRAFT:\n{body}")
         user = f"SENDER FACTS:\n{sender_facts}\nGoal: {spec.objective}; timing: {spec.timeline or 'n/a'}\n\n" + "\n\n".join(blocks)
         # Careful reading matters more here than anywhere else, so the checker thinks harder.
-        data = llm.json(system=VERIFY_SYSTEM, user=user, purpose="verify", tier="strong", reasoning="medium",
+        data = llm.json(system=guard(VERIFY_SYSTEM), user=user, purpose="verify", tier="verify", reasoning="medium",
                         max_tokens=250 * len(batch) + 1200)
         ids = {c.id for c, _ in batch}
         for item in (data.get("results") or []) if isinstance(data, dict) else []:
@@ -560,6 +566,9 @@ def verify_and_fix(contacts, drafts: dict, spec: CampaignSpec, pack: Pack, llm: 
     """Fact-check every passing draft; rewrite flagged ones once; re-check the rewrites.
     Mutates drafts in place. Returns stats."""
     stats = {"checked": 0, "flagged": 0, "fixed": 0, "still_flagged": 0}
+    if hasattr(llm, "model_for"):  # who checked: independent of the writer, or not
+        stats["verifier"] = llm.model_for("verify")
+        stats["independent_of_writer"] = stats["verifier"] != llm.model_for("strong")
     spec = with_context(spec, ctx)
     by_id = {c.id: c for c in contacts}
     items = [(by_id[cid], d) for cid, d in drafts.items() if d.ok and cid in by_id]

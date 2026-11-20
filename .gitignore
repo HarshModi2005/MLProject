@@ -13,14 +13,14 @@ __pycache__/
 .pytest_cache/
 
 # Brain cache (fetched pages, API and LLM responses)
-.brain_cache.sqlite*
+.brain_cache*.sqlite*
 
 # Benchmark recordings and per-run databases (results JSON is kept)
 evals/cache/
 evals/results/run_*/
 
 # Personal data and run artefacts that must not be committed
-outreach.db
+outreach*.db
 *.db-journal
 run_logs/
 HarshModi.pdf

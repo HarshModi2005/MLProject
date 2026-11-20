@@ -132,8 +132,10 @@ def _orgs_from_list_page(html: str, url: str, spec: CampaignSpec, llm: LLM) -> L
             links[href] = dom
     link_lines = "\n".join(f"- {u}" for u in list(links)[:150])
     target = f"{spec.persona.description} | topics: {', '.join(spec.topics[:5])} | where: {', '.join(spec.regions + spec.countries) or 'anywhere'}"
-    user = f"TARGET: {target}\nPAGE: {url}\n\nTEXT:\n{page.text[:6000]}\n\nLINKS:\n{link_lines or '(none)'}"
-    data = llm.json(system=ORG_LIST_SYSTEM, user=user, purpose="extract_orgs", tier="fast", max_tokens=2500)
+    from brain.safety import clean_text, guard
+
+    user = f"TARGET: {target}\nPAGE: {url}\n\nTEXT:\n{clean_text(page.text[:6000])}\n\nLINKS:\n{link_lines or '(none)'}"
+    data = llm.json(system=guard(ORG_LIST_SYSTEM), user=user, purpose="extract_orgs", tier="fast", max_tokens=2500)
     text_low = page.text.lower()
     out: List[Contact] = []
     for o in (data.get("organisations") or [])[:30] if isinstance(data, dict) else []:
@@ -362,6 +364,17 @@ class OrgEnricher:
         """Search for the person in the right role at this organisation. Their name and title are recorded on the
         organisation (so the email can address them) even when only the shared inbox is known; a personal
         contact is returned only when the address follows a convention confirmed on the organisation's site."""
+        # A contact-data provider, when configured, goes first: it names the person in the role AND holds an address
+        # it has checked, for one provider call instead of a web search plus a guessed address.
+        from brain.discovery.reach.providers import hunter_available, hunter_find, hunter_person
+
+        if hunter_available():
+            org.flags.append("hunter_tried")  # the later fallback must not pay for the same lookup again
+            paid = hunter_person(self.fetcher, org, roles)
+            if paid is not None:
+                self.stats["hunter_contacts"] = self.stats.get("hunter_contacts", 0) + 1
+                org.decision_maker = {"name": paid.name, "title": paid.title or "", "source": "hunter"}
+                return paid
         with self._lock:
             if self._people_searches >= self.max_people_searches or self.search.remaining <= 4:
                 return None
@@ -382,6 +395,13 @@ class OrgEnricher:
                     country=org.country, location_text=org.location_text, urls=[url] + org.urls,
                     evidence=list(org.evidence), bio=org.bio, sources=org.sources + ["decision_maker"],
                     flags=org.flags + ["email_from_pattern"], signals=dict(org.signals))
+        found = hunter_find(self.fetcher, name, title, org) if hunter_available() else None
+        if found is not None:  # the provider knows this person's address: no guessing from a convention
+            c.add_email(found)
+            c.flags = [f for f in c.flags if f != "email_from_pattern"]
+            self.stats["hunter_found"] = self.stats.get("hunter_found", 0) + 1
+            self.stats["decision_makers_emailed"] += 1
+            return c
         if hit:
             domain, (pname, support) = hit
             local = _patterns(name).get(pname)
@@ -586,7 +606,7 @@ class OrgEnricher:
         # theirs (a page title such as "Partner Spotlight" can look like a name and half-match partners@).
         if best_person and any(name_match(best_person[0].name, e.address) == 1.0 for e in best_person[1]):
             return self._person_contact(org, best_person)
-        if self.find_people:
+        if self.find_people and "hunter_tried" not in org.flags:
             from brain.discovery.reach.providers import hunter_person
 
             paid = hunter_person(self.fetcher, org, roles or [])

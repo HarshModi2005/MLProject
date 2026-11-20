@@ -1,5 +1,6 @@
 {
   "name": "distributors_solar",
+  "split": "dev",
   "playbook": "partnerships",
   "target_count": 5,
   "spec": {

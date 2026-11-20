@@ -39,7 +39,8 @@ from brain.context import CampaignContext
 from brain.discovery.graph import record as graph_record
 from brain.discovery.reach.patterns import learn as learn_patterns, threshold as reach_threshold
 from brain.discovery.reach.providers import tag_tech
-from brain.discovery.reach.verify import verify_guesses
+from brain.discovery.reach.tiers import contact_tier, counts as tier_counts
+from brain.discovery.reach.verify import verify_addresses
 from brain.discovery.precision.orgtype import gate as org_type_gate
 from brain.discovery.precision.prejudge import prejudge, reorder as reorder_screened
 from brain.explore import explore
@@ -65,6 +66,9 @@ from brain.store import Store
 log = logging.getLogger("brain.pipeline")
 
 STAGES = ["discover", "rank", "enrich", "judge", "draft"]
+
+# Playbook families whose targets are named people inside companies, where free web sources rarely publish an address.
+PERSON_AT_COMPANY_FAMILIES = ("funding", "jobs", "media", "selling", "people")
 
 
 HANDLE_SOURCES = ("npm", "huggingface", "github")  # people known by a username, not a full name
@@ -133,7 +137,7 @@ def build_deps(settings: Optional[Settings] = None) -> Deps:
     return Deps(
         settings=settings, cache=cache, llm=LLM(settings, cache), fetcher=Fetcher(settings, cache),
         search=WebSearch(settings, cache), orcid=Orcid(settings, cache),
-        openalex=OpenAlexSource(settings, cache), store=Store(settings.database_url),
+        openalex=OpenAlexSource(settings, cache), store=Store(settings.database_url, workspace=settings.workspace),
     )
 
 
@@ -299,11 +303,20 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         funnel["enrichment"] = enrich_stats
         return out
 
+    from brain import calibrate
+
+    calibrator = calibrate.load(store)  # fitted on human labels, kept only if it beat the raw score (brain/calibrate.py)
+    if calibrator is not None:
+        funnel["calibrated_on_labels"] = calibrator.n
+    judged_log: List[Dict[str, Any]] = []  # every judged candidate's signals: a human label turns each into training data
+
     def judge_stage(to_judge: List[Contact]) -> List[Contact]:
-        n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack)
+        n = judge(to_judge, spec, deps.llm, batch_size=st.judge_batch_size, ctx=ctx, playbook=pack,
+                  prescore_weight=st.judge_prescore_weight, calibrator=calibrator)
+        judged_log.extend(calibrate.row(c) for c in to_judge if c.score is not None)
         funnel["judged"] = funnel.get("judged", 0) + n
         note_prejudge_agreement(funnel, to_judge)
-        passed = [c for c in to_judge if c.score is not None and c.score >= MIN_JUDGED_SCORE]
+        passed = [c for c in to_judge if c.score is not None and c.score >= st.shortlist_floor]
         for c in to_judge:  # negative feedback for any later search
             if c.score is not None and c.score < MIN_JUDGED_SCORE and c.reasons and len(ctx.rejected_reasons) < 20:
                 ctx.rejected_reasons.append(f"{c.name}: {c.reasons[0]}")
@@ -413,6 +426,15 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     note_sources(funnel, "reachable", reachable)
     funnel["guessed_email_only"] = sum(1 for c in targets if c.emails and c not in reachable)
     progress(f"enrich: {len(reachable)} of {len(targets)} have a confident email")
+    from brain.discovery.reach.providers import hunter_available
+
+    funnel["contact_provider"] = "hunter" if hunter_available() else "none"
+    if len(reachable) < spec.target_count and pack.family in PERSON_AT_COMPANY_FAMILIES and not hunter_available():
+        # Said plainly, because it is structural: a named person's address inside a company is rarely published.
+        result.warnings.append(
+            f"Only {len(reachable)} of {spec.target_count} wanted contacts have a confident address. This kind of campaign "
+            f"({pack.title or pack.name}) needs a contact-data provider to reach named people inside companies: set "
+            f"HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.")
     if reachable:
         try:  # verified, reachable prospects become memory for later campaigns
             store.upsert_contacts(reachable)
@@ -434,9 +456,11 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         shortlist = cp["contacts"]
     else:
         to_judge = reachable[: spec.target_count * 3]  # a wider pool for the judge: it, not the pre-score, decides
-        checked = verify_guesses(to_judge, deps.fetcher)  # a guessed address must at least be deliverable
+        # Every address is checked before it can be shortlisted (MX always; SMTP / Hunter when enabled): undeliverable
+        # ones are dropped, the verdict is kept on the address and decides its tier.
+        checked = verify_addresses(to_judge, deps.fetcher, limit=len(to_judge))
         if checked["checked"]:
-            funnel["guess_verification"] = checked
+            funnel["address_verification"] = checked
             to_judge = [c for c in to_judge if has_usable_email(c, reach_min)]
         if deps.llm.available:
             progress(f"judge: assessing fit for {len(to_judge)} people…")
@@ -466,11 +490,16 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
             unique.append(c)
         shortlist = diversify(unique, spec.target_count, st.max_per_org)
         funnel["shortlisted"] = len(shortlist)
-        note_sources(funnel, "passed_judge", [c for c in scored if c.score is not None and c.score >= MIN_JUDGED_SCORE])
+        funnel["address_tiers"] = tier_counts(shortlist)
+        funnel["coverage"] = coverage(spec.target_count, shortlist, st.shortlist_floor)
+        if funnel["coverage"]["short_by"]:
+            result.warnings.append(funnel["coverage"]["message"])
+        note_sources(funnel, "passed_judge", [c for c in scored if c.score is not None and c.score >= st.shortlist_floor])
         note_sources(funnel, "shortlisted", shortlist)
         store.upsert_contacts(shortlist)
         store.checkpoint(spec.id, "judge", shortlist,
-                         extra={"unjudged": sum(1 for c in to_judge if "unjudged" in c.flags and deps.llm.available)})
+                         extra={"unjudged": sum(1 for c in to_judge if "unjudged" in c.flags and deps.llm.available),
+                                "judged": judged_log})
         store.save_results(spec.id, shortlist, {})
     result.shortlist = shortlist
     progress(f"judge: {len(shortlist)} shortlisted")
@@ -493,9 +522,15 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     funnel["fact_check"] = verify_and_fix(shortlist, drafts, spec, pack, deps.llm, ctx=ctx)
     for c in shortlist:  # a guessed address is never sent without a human looking at it
         best = c.best_email
-        if c.id in drafts and best and best.method in ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior"):
-            drafts[c.id].issues.append(f"recipient address {best.address} is a guess from the organisation's usual "
-                                       f"email format ({best.method}); verify it before sending")
+        d = drafts.get(c.id)
+        if d is None:
+            continue
+        d.address_tier = contact_tier(c)
+        if best and best.method in ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior") and d.address_tier != "verified":
+            d.issues.append(f"recipient address {best.address} is a guess from the organisation's usual "
+                            f"email format ({best.method}); verify it before sending")
+        elif d.address_tier == "unattributed":
+            d.issues.append(f"nothing ties {best.address if best else 'the address'} to {c.name}; check it is theirs before sending")
     store.save_results(spec.id, shortlist, drafts)
     result.drafts = drafts
     funnel.update({"drafted_ok": sum(1 for d in drafts.values() if d.ok),
@@ -504,6 +539,21 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     if failed:
         result.warnings.append(f"{failed} drafts could not be generated (LLM error or budget); re-run to retry them.")
     return finish("done")
+
+
+def coverage(wanted: int, shortlist: List[Contact], floor: float) -> Dict[str, Any]:
+    """What the run actually delivered against what was asked for, stated plainly. A short list is a correct answer
+    when the alternative is padding it with weak fits or addresses nothing ties to the person."""
+    tiers = tier_counts(shortlist)
+    sendable = tiers.get("verified", 0)
+    short_by = max(0, wanted - len(shortlist))
+    msg = ""
+    if short_by:
+        msg = (f"Found {len(shortlist)} confident prospect{'s' if len(shortlist) != 1 else ''} of the {wanted} wanted: "
+               f"the list stops at fit {floor:g} instead of filling it with weaker matches. Broaden the topics or "
+               f"locations, or add a contact-data provider, to find more.")
+    return {"wanted": wanted, "delivered": len(shortlist), "short_by": short_by, "floor": floor,
+            "verified_address": sendable, "needs_address_check": len(shortlist) - sendable, "message": msg}
 
 
 def learn_fit(spec: CampaignSpec, pack, store: Store, contacts: List[Contact]) -> Dict[str, Any]:

@@ -1,0 +1,52 @@
+{
+  "name": "accelerators_agritech",
+  "split": "holdout",
+  "note": "HELD OUT: never used to tune prompts, thresholds or playbooks. Do not edit after its first scored run.",
+  "playbook": "accelerators",
+  "target_count": 5,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Get our agritech startup into an accelerator programme in India",
+    "ask": "Could we apply to your next cohort, and who should we send the application to?",
+    "persona": {
+      "description": "Accelerators and incubators in India that back agritech or climate startups",
+      "roles": [
+        "Programme Manager",
+        "Partner",
+        "Head of Startups"
+      ],
+      "org_types": [
+        "accelerator",
+        "incubator"
+      ]
+    },
+    "topics": [
+      "agritech",
+      "agriculture startups"
+    ],
+    "expanded_terms": [
+      "climate tech",
+      "farm technology",
+      "food supply chain"
+    ],
+    "locations": [
+      "India"
+    ],
+    "preferred_inboxes": [
+      "apply",
+      "startups",
+      "programs"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Co-founder of an agritech startup",
+    "summary": "Building soil-moisture sensors and an advisory app for smallholder farmers in Maharashtra; 400 farmers on pilot."
+  },
+  "facts": [
+    "Soil-moisture sensor and advisory app",
+    "400 farmers on pilot in Maharashtra",
+    "Pre-seed, 8 months old"
+  ],
+  "prompt": "we're an agritech startup with soil sensors piloting with 400 farmers in Maharashtra, find accelerators and incubators in India that back agritech so we can apply"
+}

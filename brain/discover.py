@@ -53,7 +53,10 @@ def llm_extract(html: str, url: str, llm: LLM) -> List[Contact]:
     text = page_excerpt(html, url, limit=6000)
     if len(text) < 300:
         return []
-    data = llm.json(system=EXTRACT_SYSTEM, user=f"URL: {url}\n\nPAGE TEXT:\n{text}", purpose="extract",
+    from brain.safety import clean_text, guard
+
+    text = clean_text(text)
+    data = llm.json(system=guard(EXTRACT_SYSTEM), user=f"URL: {url}\n\nPAGE TEXT:\n{text}", purpose="extract",
                     tier="fast", max_tokens=1400)
     haystack = deobfuscate(text).lower()
     domain = registrable_domain(url)

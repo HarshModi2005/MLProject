@@ -23,6 +23,14 @@ Metrics (per scenario, and summed/averaged):
     cost          search calls, paid LLM calls, est. LLM USD, pages fetched, seconds
     usd_per_good  (LLM USD + search calls x SERPER_USD) / good@K
     label_precision@K  against the scenario's labels, if any (brain/evalkit.py)
+    good_reachable@K   good AND the address is attributed / verified / a shared inbox (not a guess or a namesake's)
+    good_verified@K    good AND a mailbox check confirmed the address (brain/discovery/reach/tiers.py)
+
+Honest reading of the numbers:
+    * "good" is the pipeline's own LLM judge: treat it as a proxy. Human labels are the truth (`brain bench-label`).
+    * every pooled figure carries a 95% Wilson interval; with a few dozen slots, differences inside it are noise.
+    * scenarios have a "split": `dev` (tuned on) or `holdout` (never tuned on). Report both; trust holdout.
+    * `--repeat N` re-runs each scenario with a fresh cache, so web and model noise show up instead of being replayed.
 """
 
 from __future__ import annotations
@@ -54,28 +62,31 @@ def load_labels(name: str, folder: Path = LABEL_DIR) -> Dict[str, List[str]]:
     if not path.exists():
         return {}
     data = json.loads(path.read_text(encoding="utf-8"))
-    good, bad = list(data.get("good") or []), list(data.get("bad") or [])
+    good, bad, wrong = list(data.get("good") or []), list(data.get("bad") or []), list(data.get("wrong_address") or [])
     for c in data.get("candidates") or []:
         verdict = str(c.get("label") or "").strip().lower()
         ident = c.get("email") or c.get("name")
-        if ident and verdict in ("good", "bad"):
-            (good if verdict == "good" else bad).append(ident)
-    return {"good": good, "bad": bad}
+        if ident and verdict in ("good", "bad", "wrong_address"):
+            {"good": good, "bad": bad, "wrong_address": wrong}[verdict].append(ident)
+    return {"good": good, "bad": bad, "wrong_address": wrong}
 
 
 def load_scenarios(only: Optional[List[str]] = None, folder: Path = SCENARIO_DIR,
-                   label_dir: Path = LABEL_DIR) -> List[Dict[str, Any]]:
+                   label_dir: Path = LABEL_DIR, split: str = "") -> List[Dict[str, Any]]:
     out = []
     for path in sorted(folder.glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         data.setdefault("name", path.stem)
+        data.setdefault("split", "dev")
         if only and data["name"] not in only:
             continue
+        if split and data["split"] != split:
+            continue
         extra = load_labels(data["name"], label_dir)
-        if extra.get("good") or extra.get("bad"):
+        if extra.get("good") or extra.get("bad") or extra.get("wrong_address"):
             labels = data.setdefault("labels", {})
-            labels["good"] = list(dict.fromkeys((labels.get("good") or []) + extra["good"]))
-            labels["bad"] = list(dict.fromkeys((labels.get("bad") or []) + extra["bad"]))
+            for key in ("good", "bad", "wrong_address"):
+                labels[key] = list(dict.fromkeys((labels.get(key) or []) + extra.get(key, [])))
         out.append(data)
     return out
 
@@ -94,6 +105,14 @@ def export_label_sheet(run_label: str, name: str, folder: Path = LABEL_DIR, limi
     con.close()
     judged = {c["id"]: c for c in (stages.get("judge") or {}).get("contacts", [])}
     pool = (stages.get("enrich") or stages.get("rank") or {}).get("contacts", [])
+    # every candidate the judge saw, with the signals it used: a label on one of these becomes training data for
+    # brain/calibrate.py (the shortlist alone would hold only the good ones)
+    signals = {r["id"]: r for r in ((stages.get("judge") or {}).get("extra") or {}).get("judged", [])}
+    have = {c["id"] for c in pool}
+    pool = sorted(pool, key=lambda c: c["id"] not in signals)  # stable: judged candidates first
+    pool += [{"id": i, "name": r["name"], "kind": "person", "emails": [{"address": r["email"], "confidence": 1.0}]
+              if r.get("email") else [], "org": None, "sources": [], "evidence": []}
+             for i, r in signals.items() if i not in have]
     path = folder / f"{name}.json"
     old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     known = {(c.get("email") or c.get("name")): c for c in old.get("candidates") or []}
@@ -108,11 +127,14 @@ def export_label_sheet(run_label: str, name: str, folder: Path = LABEL_DIR, limi
                      "sources": c.get("sources"), "title": c.get("title"),
                      "evidence": [e["text"][:200] for e in (c.get("evidence") or [])[:3]],
                      "url": (c.get("urls") or [None])[0], "judge_score": j.get("score"),
-                     "judge_reason": (j.get("reasons") or [None])[0]})
+                     "judge_reason": (j.get("reasons") or [None])[0],
+                     **({"features": signals[c["id"]]["features"]} if c["id"] in signals else {})})
     folder.mkdir(parents=True, exist_ok=True)
-    out = {"scenario": name, "how": "Set each candidate's \"label\" to \"good\" or \"bad\" (leave \"\" if unsure). "
-                                   "good = you would really email them for this scenario's ask.",
-           "good": old.get("good", []), "bad": old.get("bad", []), "candidates": rows}
+    out = {"scenario": name, "how": "Set each candidate's \"label\" to \"good\", \"bad\" or \"wrong_address\" "
+                                   "(leave \"\" if unsure). good = you would really email them for this scenario's "
+                                   "ask; wrong_address = right person, but the address shown is not theirs.",
+           "good": old.get("good", []), "bad": old.get("bad", []),
+           "wrong_address": old.get("wrong_address", []), "candidates": rows}
     path.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
     return path
 
@@ -138,11 +160,18 @@ def metrics(result, spec: CampaignSpec, labels: Optional[Dict[str, List[str]]] =
     short = result.shortlist
     k = spec.target_count
     good = [c for c in short if (c.score or 0) >= GOOD]
+    from brain.discovery.reach.tiers import contact_tier, counts as tier_counts
+
+    tier_of = {c.id: contact_tier(c) for c in short}
+    reachable_tiers = ("verified", "attributed", "inbox")
     usd = float(llm.get("est_cost_usd") or 0) + SERPER_USD * float(cost.get("search_calls") or 0)
     m = {
         "unique": f.get("unique_people", 0), "qualified": f.get("qualified", 0), "reachable": f.get("reachable", 0),
         "passed_judge": f.get("passed_judge", 0), "shortlisted": len(short),
         "good@K": len(good), "precision@K": round(len(good) / k, 3) if k else None,
+        "good_reachable@K": sum(1 for c in good if tier_of[c.id] in reachable_tiers),
+        "good_verified@K": sum(1 for c in good if tier_of[c.id] == "verified"),
+        "address_tiers": tier_counts(short),
         "mean_score": round(sum(c.score or 0 for c in short) / len(short), 3) if short else 0.0,
         "distinct_orgs": len({(c.org_domain or c.org or c.name).lower() for c in short}),
         "proof_rate": round(sum(1 for c in short if any(c.signals.get(s, 0) > 0 for s in SIGNAL_KEYS
@@ -157,23 +186,21 @@ def metrics(result, spec: CampaignSpec, labels: Optional[Dict[str, List[str]]] =
         "shortlist": [{"name": c.name, "org": c.org, "email": c.best_email.address if c.best_email else None,
                        "score": c.score, "sources": c.sources, "reasons": c.reasons[:1]} for c in short],
     }
-    if labels and (labels.get("good") or labels.get("bad")):
-        import tempfile
+    if labels and (labels.get("good") or labels.get("bad") or labels.get("wrong_address")):
+        from brain.evalkit import evaluate_labels
 
-        from brain.evalkit import evaluate
-
-        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
-            json.dump(labels, fh)
         rows = [{"name": c.name, "email": c.best_email.address if c.best_email else "", "score": c.score} for c in short]
-        ev = evaluate(rows, fh.name, ks=(k,))
-        os.unlink(fh.name)
+        ev = evaluate_labels(rows, labels, ks=(k,))
         m["label_precision@K"] = ev.get(f"precision@{k}")
+        m["label_precision@K_ci95"] = ev.get(f"precision@{k}_ci95")
+        m["label_good_k"], m["label_n_k"] = ev.get(f"good@{k}_labeled", 0), ev.get(f"labeled@{k}", 0)
+        m["label_wrong_address"] = ev.get("wrong_address", 0)
         m["labeled"] = ev.get("labeled")
     return m
 
 
 def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, out_dir: Path,
-                 from_prompt: bool = True) -> Dict[str, Any]:
+                 from_prompt: bool = True, cache_tag: str = "") -> Dict[str, Any]:
     from brain.cache import Cache
     from brain.context import CampaignContext
     from brain.fetch import Fetcher
@@ -192,7 +219,7 @@ def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, o
     for k, v in (sc.get("settings") or {}).items():
         setattr(st, k, v)
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    cache = Cache(str(CACHE_DIR / f"{sc['name']}.sqlite"), ignore_ttl=bool(replay))
+    cache = Cache(str(CACHE_DIR / f"{sc['name']}{cache_tag}.sqlite"), ignore_ttl=bool(replay))
     deps = Deps(settings=st, cache=cache, llm=LLM(st, cache), fetcher=Fetcher(st, cache), search=WebSearch(st, cache),
                 orcid=Orcid(st, cache), openalex=OpenAlexSource(st, cache), store=Store(st.database_url))
     intake: Dict[str, Any] = {}
@@ -240,13 +267,37 @@ def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, o
         m["llm_usd"] = deps.llm.report().get("est_cost_usd", m.get("llm_usd"))
         m["llm_paid_calls"] = deps.llm.report().get("paid_calls", m.get("llm_paid_calls"))
     m["name"] = sc["name"]
+    m["split"] = sc.get("split", "dev")
     m["playbook"] = spec.pack
     m["target"] = spec.target_count
     return m
 
 
-SUMMARY_KEYS = ["good@K", "precision@K", "mean_score", "distinct_orgs", "proof_rate", "reachable", "search_calls",
-                "llm_paid_calls", "llm_usd", "seconds"]
+SUMMARY_KEYS = ["good@K", "good_reachable@K", "good_verified@K", "precision@K", "mean_score", "distinct_orgs",
+                "proof_rate", "reachable", "search_calls", "llm_paid_calls", "llm_usd", "seconds"]
+
+
+def _pooled(ok: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Pooled precision with 95% intervals: the judge's good@K over every slot, and human-label precision over the
+    shortlisted candidates a human labelled. Pooling across scenarios is what makes the interval meaningful."""
+    from brain.evalkit import wilson
+
+    out: Dict[str, Any] = {}
+    slots = sum(int(r.get("target") or 0) for r in ok)
+    good = sum(int(r.get("good@K") or 0) for r in ok)
+    if slots:
+        out["judge_precision"] = round(good / slots, 3)
+        out["judge_precision_ci95"] = wilson(good, slots)
+        out["sendable_precision"] = round(sum(int(r.get("good_reachable@K") or 0) for r in ok) / slots, 3)
+        out["verified_precision"] = round(sum(int(r.get("good_verified@K") or 0) for r in ok) / slots, 3)
+    n = sum(int(r.get("label_n_k") or 0) for r in ok)
+    if n:
+        g = sum(int(r.get("label_good_k") or 0) for r in ok)
+        out["label_precision"] = round(g / n, 3)
+        out["label_precision_ci95"] = wilson(g, n)
+        out["labeled_slots"] = f"{n}/{slots}"
+        out["wrong_address_labels"] = sum(int(r.get("label_wrong_address") or 0) for r in ok)
+    return out
 
 
 def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -272,30 +323,108 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     goods = out.get("good@K") or 0
     spend = (out.get("llm_usd") or 0) + SERPER_USD * (out.get("search_calls") or 0)
     out["usd_per_good"] = round(spend / goods, 4) if goods else None
+    out.update(_pooled(ok))
+    splits = sorted({r.get("split", "dev") for r in ok})
+    if len(splits) > 1 or splits == ["holdout"]:  # trust the holdout line: nothing was tuned on it
+        out["by_split"] = {sp: {"scenarios": len(sub), **_pooled(sub)}
+                           for sp in splits for sub in [[r for r in ok if r.get("split", "dev") == sp]]}
+    noisy = [r["repeat"]["spread"] for r in ok if r.get("repeat")]
+    if noisy:
+        out["repeat_noise_good@K"] = round(sum(noisy) / len(noisy), 2)  # average max-min across repeats, per scenario
     return out
 
 
 def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool = False, label: str = "",
-              progress=print, from_prompt: bool = True) -> Dict[str, Any]:
-    scenarios = load_scenarios(only)
+              progress=print, from_prompt: bool = True, split: str = "", repeat: int = 1) -> Dict[str, Any]:
+    """split: only the "dev" or "holdout" scenarios. repeat: run every scenario this many times, each with its own
+    fresh cache (a repeat that reads the first run's cache measures nothing), and report the spread."""
+    if repeat > 1 and replay:
+        raise ValueError("--repeat measures live noise; it cannot be combined with --replay")
+    scenarios = load_scenarios(only, split=split)
     if not scenarios:
-        raise ValueError(f"No scenarios found in {SCENARIO_DIR} (filter: {only})")
+        raise ValueError(f"No scenarios found in {SCENARIO_DIR} (filter: {only}, split: {split or 'any'})")
     stamp = time.strftime("%Y%m%dT%H%M%S")
     out_dir = RESULT_DIR / f"run_{label or stamp}"
     out_dir.mkdir(parents=True, exist_ok=True)
     rows = []
     for sc in scenarios:
-        progress(f"[bench] {sc['name']} ({sc.get('playbook')}) …")
-        row = run_scenario(sc, replay=replay, draft=draft, out_dir=out_dir, from_prompt=from_prompt)
+        runs = []
+        for i in range(max(1, repeat)):
+            progress(f"[bench] {sc['name']} ({sc.get('playbook')}, {sc.get('split', 'dev')})"
+                     + (f" run {i + 1}/{repeat}" if repeat > 1 else "") + " …")
+            sub = out_dir / f"rep{i + 1}" if repeat > 1 else out_dir
+            sub.mkdir(parents=True, exist_ok=True)
+            runs.append(run_scenario(sc, replay=replay, draft=draft, out_dir=sub, from_prompt=from_prompt,
+                                     cache_tag=f".rep{i + 1}" if repeat > 1 else ""))
+        row = runs[0]
+        done = [r for r in runs if "error" not in r]
+        if repeat > 1 and done:
+            goods = [r["good@K"] for r in done]
+            row = dict(done[0])
+            row["repeat"] = {"runs": len(done), "good@K": goods, "mean": round(sum(goods) / len(goods), 2),
+                             "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods)}
         rows.append(row)
         progress(f"[bench] {sc['name']}: " + (row.get("error") or
                  f"good@K {row['good@K']}/{row['target']}, reachable {row['reachable']}, "
-                 f"{row['search_calls']} searches, {row['llm_paid_calls']} LLM calls (${row['llm_usd']})"))
-    report = {"label": label or stamp, "replay": replay, "rows": rows, "summary": summarize(rows)}
+                 f"{row['search_calls']} searches, {row['llm_paid_calls']} LLM calls (${row['llm_usd']})"
+                 + (f", over {repeat} runs {row['repeat']['good@K']}" if row.get("repeat") else "")))
+    report = {"label": label or stamp, "replay": replay, "split": split or "all", "repeat": repeat, "rows": rows,
+              "summary": summarize(rows)}
     path = RESULT_DIR / f"{label or stamp}.json"
     path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
     report["path"] = str(path)
     return report
+
+
+# ── labels: the ground truth ─────────────────────────────────────────────────
+
+def label_status(min_labels: int = 30, folder: Path = LABEL_DIR, scenarios: Optional[List[Dict[str, Any]]] = None
+                 ) -> List[Dict[str, Any]]:
+    """How far each scenario's human labels are from usable: labelled vs wanted, per verdict."""
+    rows = []
+    for sc in scenarios if scenarios is not None else load_scenarios(label_dir=folder):
+        path = folder / f"{sc['name']}.json"
+        data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+        cands = data.get("candidates") or []
+        marks = [str(c.get("label") or "").strip().lower() for c in cands]
+        extra = load_labels(sc["name"], folder)
+        labeled = sum(m in ("good", "bad", "wrong_address") for m in marks) + len(data.get("good") or []) + len(data.get("bad") or []) \
+            + len(data.get("wrong_address") or [])
+        rows.append({"name": sc["name"], "split": sc.get("split", "dev"), "candidates": len(cands), "labeled": labeled,
+                     "good": len(extra.get("good", [])), "bad": len(extra.get("bad", [])),
+                     "wrong_address": len(extra.get("wrong_address", [])), "needed": max(0, min_labels - labeled),
+                     "sheet": path.exists()})
+    return rows
+
+
+def label_interactive(name: str, ask=input, say=print, folder: Path = LABEL_DIR, limit: int = 0) -> int:
+    """Walk through a scenario's unlabelled candidates in the terminal. g good, b bad, w wrong address (right person,
+    address not theirs), s skip, q quit. The sheet is saved after every answer. Returns the number labelled."""
+    path = folder / f"{name}.json"
+    if not path.exists():
+        raise FileNotFoundError(f"No label sheet {path}; run `brain bench-labels --run <label>` first")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    n = 0
+    for c in data.get("candidates") or []:
+        if str(c.get("label") or "").strip():
+            continue
+        say(f"\n{c.get('name')}  ·  {c.get('org') or '-'}  ·  {c.get('title') or '-'}\n  email: {c.get('email') or '(none)'}"
+            f"\n  source: {', '.join(c.get('sources') or [])}  judge: {c.get('judge_score')}")
+        for ev in (c.get("evidence") or [])[:3]:
+            say(f"  - {ev}")
+        while True:
+            a = str(ask("[g]ood  [b]ad  [w]rong address  [s]kip  [q]uit > ")).strip().lower()[:1]
+            if a in ("g", "b", "w", "s", "q"):
+                break
+        if a == "q":
+            break
+        if a in ("g", "b", "w"):
+            c["label"] = {"g": "good", "b": "bad", "w": "wrong_address"}[a]
+            n += 1
+            path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+            if limit and n >= limit:
+                break
+    return n
 
 
 def compare(new: Dict[str, Any], old: Dict[str, Any]) -> List[Dict[str, Any]]:

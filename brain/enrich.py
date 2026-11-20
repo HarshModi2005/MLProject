@@ -34,8 +34,11 @@ _NOT_PERSONAL = ("openalex.org", "orcid.org", "doi.org")
 
 
 def has_usable_email(c: Contact, threshold: float) -> bool:
+    from brain.discovery.reach.tiers import email_tier
+
     best = c.best_email
-    return bool(best and best.confidence >= threshold)
+    # A confident-looking address with nothing tying it to this person (a namesake, a previous employer) is not reachable.
+    return bool(best and best.confidence >= threshold and email_tier(c, best) not in ("unattributed",))
 
 
 def absorb_page(contact: Contact, html: str, url: str) -> bool:
@@ -90,7 +93,7 @@ class Enricher:
         if orcid:
             self.stats["orcid_lookups"] += 1
             emails, urls = self.orcid.person(orcid)
-            if attach_emails(c, emails, "orcid", f"https://orcid.org/{orcid}"):
+            if attach_emails(c, emails, "orcid", f"https://orcid.org/{orcid}", on_own_page=True):  # self-declared
                 self.stats["email_from_orcid"] += 1
             for u in urls[:3]:
                 c.add_url(u)

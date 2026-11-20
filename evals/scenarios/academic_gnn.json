@@ -1,5 +1,6 @@
 {
   "name": "academic_gnn",
+  "split": "dev",
   "playbook": "academic",
   "target_count": 5,
   "spec": {
