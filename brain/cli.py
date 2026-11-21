@@ -512,7 +512,7 @@ def bench(
     if sm.get("degraded_names"):
         console.print(f"[yellow]Some calls failed in {', '.join(sm['degraded_names'])}: treat their numbers as lower bounds.[/yellow]")
     if sm.get("judge_precision") is not None:
-        line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]})"
+        line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]}, {sm.get('judge_precision_ci_method')})"
         line += f"  ·  good AND reachable {sm.get('sendable_precision')}  ·  good AND verified {sm.get('verified_precision')}"
         if sm.get("label_precision") is not None:
             ci = sm["label_precision_ci95"]

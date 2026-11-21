@@ -208,3 +208,33 @@ def test_scenario_files_are_validated_when_loaded(tmp_path):
 
 def test_every_shipped_scenario_passes_validation():
     assert len(bench.load_scenarios()) >= 40
+
+
+def test_cluster_interval_is_wider_than_wilson_when_scenarios_differ():
+    from brain.evalkit import cluster_ci, wilson
+
+    # ten scenarios of 10 slots: five perfect, five empty. Pooled 50 of 100 looks tight to Wilson but is not:
+    # the result depends entirely on which scenarios you happened to pick.
+    parts = [(10, 10)] * 5 + [(0, 10)] * 5
+    c = cluster_ci(parts)
+    w = wilson(50, 100)
+    assert c["method"].startswith("bootstrap over 10") and c["ci"][1] - c["ci"][0] > 2 * (w[1] - w[0])
+    assert cluster_ci(parts) == c  # seeded: the same data gives the same interval
+    steady = cluster_ci([(5, 10)] * 10)
+    assert steady["ci"] == [0.5, 0.5]  # no scenario-to-scenario spread: nothing to widen
+
+
+def test_cluster_interval_falls_back_to_wilson_with_few_scenarios_and_says_so():
+    from brain.evalkit import cluster_ci, wilson
+
+    c = cluster_ci([(4, 5), (1, 5)])
+    assert c["ci"] == wilson(5, 10) and c["method"].startswith("wilson (only 2")
+    assert cluster_ci([]) is None and cluster_ci([(0, 0)]) is None
+
+
+def test_summary_reports_which_interval_it_used():
+    rows = [{"name": str(i), "split": "dev", "target": 10, "good@K": g, "label_n_k": 10, "label_good_k": g}
+            for i, g in enumerate([9, 1, 8, 2, 7, 3])]
+    s = bench.summarize(rows)
+    assert s["judge_precision_ci_method"] == "bootstrap over 6 scenarios" and s["label_precision_ci_method"].startswith("bootstrap")
+    assert s["judge_precision_ci95"][0] < s["judge_precision"] < s["judge_precision_ci95"][1]

@@ -320,21 +320,23 @@ SUMMARY_KEYS = ["good@K", "good_reachable@K", "good_verified@K", "precision@K", 
 def _pooled(ok: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Pooled precision with 95% intervals: the judge's good@K over every slot, and human-label precision over the
     shortlisted candidates a human labelled. Pooling across scenarios is what makes the interval meaningful."""
-    from brain.evalkit import wilson
+    from brain.evalkit import cluster_ci
 
     out: Dict[str, Any] = {}
     slots = sum(int(r.get("target") or 0) for r in ok)
     good = sum(int(r.get("good@K") or 0) for r in ok)
     if slots:
         out["judge_precision"] = round(good / slots, 3)
-        out["judge_precision_ci95"] = wilson(good, slots)
+        c = cluster_ci([(int(r.get("good@K") or 0), int(r.get("target") or 0)) for r in ok])
+        out["judge_precision_ci95"], out["judge_precision_ci_method"] = c["ci"], c["method"]
         out["sendable_precision"] = round(sum(int(r.get("good_reachable@K") or 0) for r in ok) / slots, 3)
         out["verified_precision"] = round(sum(int(r.get("good_verified@K") or 0) for r in ok) / slots, 3)
     n = sum(int(r.get("label_n_k") or 0) for r in ok)
     if n:
         g = sum(int(r.get("label_good_k") or 0) for r in ok)
         out["label_precision"] = round(g / n, 3)
-        out["label_precision_ci95"] = wilson(g, n)
+        c = cluster_ci([(int(r.get("label_good_k") or 0), int(r.get("label_n_k") or 0)) for r in ok])
+        out["label_precision_ci95"], out["label_precision_ci_method"] = c["ci"], c["method"]
         out["labeled_slots"] = f"{n}/{slots}"
         out["wrong_address_labels"] = sum(int(r.get("label_wrong_address") or 0) for r in ok)
     return out
