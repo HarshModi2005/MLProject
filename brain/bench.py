@@ -71,13 +71,45 @@ def load_labels(name: str, folder: Path = LABEL_DIR) -> Dict[str, List[str]]:
     return {"good": good, "bad": bad, "wrong_address": wrong}
 
 
+SPLITS = ("dev", "holdout", "stress")
+
+
+def _scenario_problems(data: Dict[str, Any], stem: str) -> List[str]:
+    """What is wrong with a scenario file. A typo here (a split called "holdout ", a playbook that does not exist and so
+    falls back to "general") would not crash anything: it would quietly change what a benchmark measures."""
+    from brain.playbooks import PLAYBOOKS
+
+    bad = []
+    if data.get("split") not in SPLITS:
+        bad.append(f"split {data.get('split')!r} is not one of {', '.join(SPLITS)}")
+    for pb in [data.get("playbook")] + list(data.get("playbook_ok") or []):
+        if pb not in PLAYBOOKS:
+            bad.append(f"playbook {pb!r} does not exist")
+    if not (data.get("prompt") or data.get("spec")):
+        bad.append("has neither a prompt nor a spec")
+    try:
+        if int(data.get("target_count", 8)) < 1:
+            bad.append("target_count must be at least 1")
+    except (TypeError, ValueError):
+        bad.append(f"target_count {data.get('target_count')!r} is not a number")
+    return [f"{stem}: {b}" for b in bad]
+
+
 def load_scenarios(only: Optional[List[str]] = None, folder: Path = SCENARIO_DIR,
                    label_dir: Path = LABEL_DIR, split: str = "") -> List[Dict[str, Any]]:
-    out = []
+    """Scenario files, validated as a set (every file is checked, not only the ones selected, so a bad file is caught
+    the day it is added). Raises ValueError listing every problem."""
+    if split and split not in SPLITS:
+        raise ValueError(f"Unknown split {split!r}: use one of {', '.join(SPLITS)}")
+    out, problems, seen = [], [], {}
     for path in sorted(folder.glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         data.setdefault("name", path.stem)
         data.setdefault("split", "dev")
+        problems += _scenario_problems(data, path.stem)
+        if data["name"] in seen:
+            problems.append(f"{path.stem}: name {data['name']!r} is already used by {seen[data['name']]}")
+        seen[data["name"]] = path.stem
         if only and data["name"] not in only:
             continue
         if split and data["split"] != split:
@@ -88,6 +120,8 @@ def load_scenarios(only: Optional[List[str]] = None, folder: Path = SCENARIO_DIR
             for key in ("good", "bad", "wrong_address"):
                 labels[key] = list(dict.fromkeys((labels.get(key) or []) + extra.get(key, [])))
         out.append(data)
+    if problems:
+        raise ValueError("Scenario files need fixing:\n  - " + "\n  - ".join(problems))
     return out
 
 
@@ -186,6 +220,11 @@ def metrics(result, spec: CampaignSpec, labels: Optional[Dict[str, List[str]]] =
         "shortlist": [{"name": c.name, "org": c.org, "email": c.best_email.address if c.best_email else None,
                        "score": c.score, "sources": c.sources, "reasons": c.reasons[:1]} for c in short],
     }
+    problem = f.get("provider_problem") or ""
+    if problem:  # a failing search/GitHub account makes the numbers a measure of the account, not the pipeline
+        m["provider_problem"] = problem
+        if not short or not f.get("unique_people"):
+            m["invalid"] = "provider_failure"  # discovery came back empty because calls failed: not a real zero
     if labels and (labels.get("good") or labels.get("bad") or labels.get("wrong_address")):
         from brain.evalkit import evaluate_labels
 
@@ -253,7 +292,8 @@ def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, o
         result = run_campaign(spec, deps, upto="draft" if draft else "judge", resume=False, ctx=ctx)
     except Exception as e:  # one broken scenario must not stop the benchmark
         log.exception("scenario %s failed", sc["name"])
-        return {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - started, 1)}
+        return {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - started, 1),
+                "split": sc.get("split", "dev"), "target": int(sc.get("target_count", 8))}
     m = metrics(result, spec, sc.get("labels"))
     m.update(intake)
     if draft and result.drafts:
@@ -301,8 +341,16 @@ def _pooled(ok: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
-    ok = [r for r in rows if "error" not in r]
-    out: Dict[str, Any] = {"scenarios": len(rows), "failed": len(rows) - len(ok)}
+    ok = [r for r in rows if "error" not in r and not r.get("invalid")]
+    errored = [r for r in rows if "error" in r]
+    invalid = [r for r in rows if "error" not in r and r.get("invalid")]
+    out: Dict[str, Any] = {"scenarios": len(rows), "failed": len(errored)}
+    if invalid:  # discovery came back empty because the search/GitHub account failed: not a result about the pipeline
+        out["invalid"] = len(invalid)
+        out["invalid_names"] = [r["name"] for r in invalid]
+    degraded = [r["name"] for r in ok if r.get("provider_problem")]
+    if degraded:  # ran, but a real share of calls failed, so these numbers are lower bounds
+        out["degraded_names"] = degraded
     for k in SUMMARY_KEYS:
         vals = [r.get(k) for r in ok if isinstance(r.get(k), (int, float))]
         if not vals:
@@ -324,6 +372,10 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     spend = (out.get("llm_usd") or 0) + SERPER_USD * (out.get("search_calls") or 0)
     out["usd_per_good"] = round(spend / goods, 4) if goods else None
     out.update(_pooled(ok))
+    lost = [r for r in errored + invalid if r.get("target")]
+    if lost and out.get("judge_precision") is not None:  # the number if every scenario that did not count had scored zero
+        slots = sum(int(r.get("target") or 0) for r in ok) + sum(int(r["target"]) for r in lost)
+        out["judge_precision_worst_case"] = round(sum(int(r.get("good@K") or 0) for r in ok) / slots, 3)
     splits = sorted({r.get("split", "dev") for r in ok})
     if len(splits) > 1 or splits == ["holdout"]:  # trust the holdout line: nothing was tuned on it
         out["by_split"] = {sp: {"scenarios": len(sub), **_pooled(sub)}
@@ -345,13 +397,35 @@ def _scenario_row(sc: Dict[str, Any], *, replay: str, draft: bool, out_dir: Path
         sub.mkdir(parents=True, exist_ok=True)
         runs.append(run_scenario(sc, replay=replay, draft=draft, out_dir=sub, from_prompt=from_prompt,
                                  cache_tag=f".rep{i + 1}" if repeat > 1 else ""))
-    row = runs[0]
+    return _combine_runs(runs)
+
+
+def _mean(vals: List[float]) -> float:
+    m = sum(vals) / len(vals)
+    return int(m) if m == int(m) else round(m, 2)
+
+
+def _combine_runs(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """One row from several runs of the same scenario: every numeric metric is the MEAN over the runs that counted, so
+    the headline uses all the data instead of the first run. Runs that errored or were invalid (a failing provider)
+    are left out when any run was fine. The per-run values and the spread are kept; per-candidate detail (shortlist,
+    emails, warnings) is from the first counted run."""
+    if len(runs) == 1:
+        return runs[0]
     done = [r for r in runs if "error" not in r]
-    if repeat > 1 and done:
-        goods = [r["good@K"] for r in done]
-        row = dict(done[0])
-        row["repeat"] = {"runs": len(done), "good@K": goods, "mean": round(sum(goods) / len(goods), 2),
-                         "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods)}
+    if not done:
+        return runs[0]
+    counted = [r for r in done if not r.get("invalid")] or done
+    row = dict(counted[0])
+    for k, v in counted[0].items():
+        if isinstance(v, (int, float)) and not isinstance(v, bool):
+            vals = [r[k] for r in counted if isinstance(r.get(k), (int, float)) and not isinstance(r.get(k), bool)]
+            row[k] = _mean(vals)
+    goods = [r["good@K"] for r in counted]
+    row["repeat"] = {"runs": len(counted), "of": len(runs), "good@K": goods, "mean": _mean(goods),
+                     "good_reachable@K": [r.get("good_reachable@K") for r in counted],
+                     "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods),
+                     "left_out": [r.get("error") or r.get("invalid") for r in runs if not any(r is c for c in counted)]}
     return row
 
 
@@ -404,7 +478,8 @@ def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool
                 try:
                     row = fut.result()
                 except Exception as e:  # a crashed worker must not lose the others
-                    row = {"name": sc["name"], "error": f"{type(e).__name__}: {e}"}
+                    row = {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "split": sc.get("split", "dev"),
+                           "target": int(sc.get("target_count", 8))}
                 rows.append(row)
                 progress(_row_line(row, sc["name"], repeat))
                 checkpoint()
@@ -483,11 +558,18 @@ def compare(new: Dict[str, Any], old: Dict[str, Any]) -> List[Dict[str, Any]]:
         if not o or "error" in r or "error" in o:
             out.append({"name": r["name"], "note": "missing or failed on one side"})
             continue
+        if r.get("invalid") or o.get("invalid"):
+            out.append({"name": r["name"], "note": "invalid on one side (the provider failed): not comparable"})
+            continue
         row = {"name": r["name"]}
         for k in SUMMARY_KEYS + ["usd_per_good"]:
             a, b = r.get(k), o.get(k)
             if isinstance(a, (int, float)) and isinstance(b, (int, float)):
                 row[k] = (b, a)
+        spreads = [x["repeat"]["spread"] for x in (r, o) if x.get("repeat")]
+        if spreads and "good@K" in row:  # a change no bigger than the run-to-run spread is not evidence of anything
+            row["noise"] = max(spreads)
+            row["within_noise"] = abs(row["good@K"][1] - row["good@K"][0]) <= max(spreads)
         out.append(row)
     return out
 

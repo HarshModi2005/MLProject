@@ -485,6 +485,9 @@ def bench(
         if "error" in r:
             t.add_row(r["name"], f"[red]{r['error'][:60]}[/red]", *[""] * 10)
             continue
+        if r.get("invalid"):
+            t.add_row(r["name"], f"[red]INVALID: {r['invalid']}[/red]", *[""] * 10)
+            continue
         lp = r.get("label_precision@K")
         t.add_row(r["name"], "-" if lp is None else f"{lp} ({r.get('labeled', 0)} lab.)", f"{r['good@K']}/{r['target']}",
                   str(r["precision@K"]), str(r["mean_score"]), str(r["distinct_orgs"]), str(r["proof_rate"]),
@@ -503,6 +506,11 @@ def bench(
         console.print(srcs)
     console.print_json(json.dumps(report["summary"]))
     sm = report["summary"]
+    if sm.get("invalid"):
+        console.print(f"[red]{sm['invalid']} scenario(s) invalid because the search/GitHub account failed ({', '.join(sm['invalid_names'])}); "
+                      f"left out of the precision below. If they had all scored zero: {sm.get('judge_precision_worst_case')}.[/red]")
+    if sm.get("degraded_names"):
+        console.print(f"[yellow]Some calls failed in {', '.join(sm['degraded_names'])}: treat their numbers as lower bounds.[/yellow]")
     if sm.get("judge_precision") is not None:
         line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]})"
         line += f"  ·  good AND reachable {sm.get('sendable_precision')}  ·  good AND verified {sm.get('verified_precision')}"
@@ -522,7 +530,10 @@ def bench(
         for k in keys:
             d.add_column(k)
         for row in compare(report, old):
-            d.add_row(row["name"], *[f"{row[k][0]} → {row[k][1]}" if k in row else row.get("note", "") for k in keys])
+            cells = [f"{row[k][0]} → {row[k][1]}" if k in row else row.get("note", "") for k in keys]
+            if row.get("within_noise") and "good@K" in row:
+                cells[0] += f" [dim](within noise ±{row['noise']})[/dim]"
+            d.add_row(row["name"], *cells)
         console.print(d)
 
 

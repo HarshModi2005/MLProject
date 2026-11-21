@@ -397,6 +397,7 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     problem = deps.search.provider_problem() if hasattr(deps.search, "provider_problem") else ""
     if problem:
         result.warnings.insert(0, problem)
+        funnel["provider_problem"] = problem  # structured, so the benchmark can tell a failed run from a real zero
     if not contacts:
         result.warnings.append("Discovery found nobody." + ("" if problem else " Broaden the topics or locations."))
         return finish("empty")
