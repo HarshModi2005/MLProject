@@ -173,6 +173,11 @@ def _run(deps, description, cv, about, name, n, location, uploads, playbook, top
                          max_searches_ceiling=deps.settings.max_search_calls, sender_source=source, store=deps.store)
         spec, ctx, seeds, only = res.spec, res.ctx, res.seed_contacts, res.only_seeds
         console.print(f"[dim]Intake used {res.llm_calls} LLM call(s).[/dim]")
+        if res.needs:  # --yes cannot guess these: starting would search for, and write about, the wrong thing
+            console.print("[red]Not started: this request is missing something essential, and --yes cannot ask.[/red]")
+            for q in res.needs:
+                console.print(f"  • {q}")
+            raise typer.Exit(2)
 
     from brain.touch import MODES, RECYCLE
 
@@ -188,7 +193,8 @@ def _run(deps, description, cv, about, name, n, location, uploads, playbook, top
         f"[bold]{spec.objective}[/bold]\nPlaybook: {spec.pack} · Looking for: {', '.join(spec.topics)}\n"
         f"Where: {where} · Target: {spec.target_count} · Campaign id: [cyan]{spec.id}[/cyan]", title="Campaign"))
     result = run_campaign(spec, deps, upto=upto, csv_path=people_csv, ctx=ctx, seed_contacts=seeds, only_seeds=only,
-                          progress=lambda m: console.print(f"[dim]{m}[/dim]"), confirm_recycle=_confirm_recycle)
+                          progress=lambda m: console.print(f"[dim]{m}[/dim]"), confirm_recycle=_confirm_recycle,
+                          require_confirmed=True)
     _print_shortlist(result.shortlist, result.drafts)
     _print_funnel(result.funnel)
     for w in result.warnings:
@@ -225,7 +231,8 @@ def resume(campaign_id: str, upto: str = "draft"):
     saved = deps.store.load_campaign(campaign_id)
     if not saved:
         raise typer.BadParameter(f"No campaign {campaign_id}")
-    result = run_campaign(saved["spec"], deps, upto=upto, progress=lambda m: console.print(f"[dim]{m}[/dim]"))
+    result = run_campaign(saved["spec"], deps, upto=upto, progress=lambda m: console.print(f"[dim]{m}[/dim]"),
+                          require_confirmed=True)
     _print_shortlist(result.shortlist, result.drafts)
     _print_funnel(result.funnel)
     for w in result.warnings:

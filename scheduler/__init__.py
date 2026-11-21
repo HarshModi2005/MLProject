@@ -1,16 +1,9 @@
 """
-scheduler/__init__.py
+scheduler/
 
-Autonomous execution scheduler, duplicate detection, and automated follow-ups.
+Autonomous execution scheduler, reply monitor and automated follow-ups. Import the submodules directly
+(scheduler.autonomous_scheduler, scheduler.reply_monitor, scheduler.followup_engine). This package used to import
+`start_scheduler`, `stop_scheduler`, `check_replies_job` and `send_followups_job` from modules that do not define them
+(the first two are methods of AutonomousScheduler, the last two live in autonomous_scheduler), so no part of it could be
+imported at all.
 """
-
-from scheduler.autonomous_scheduler import start_scheduler, stop_scheduler
-from scheduler.reply_monitor import check_replies_job
-from scheduler.followup_engine import send_followups_job
-
-__all__ = [
-    "start_scheduler",
-    "stop_scheduler",
-    "check_replies_job",
-    "send_followups_job",
-]

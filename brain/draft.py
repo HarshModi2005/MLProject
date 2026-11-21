@@ -547,14 +547,15 @@ _OPT_OUT = {"": "If this isn't relevant, just reply 'no' and I won't write again
 
 
 def assemble(body: str, contact: Contact, spec: CampaignSpec, pack: Pack) -> str:
-    """Greeting, body, sign-off, signature block and (commercial playbooks) the opt-out line — all in code."""
+    """Greeting, body, sign-off, signature block and the opt-out line — all in code."""
     sign = f"Best regards,\n{spec.sender.name}" + (f"\n{spec.sender.signature.strip()}" if spec.sender.signature.strip() else "")
     full = f"{salutation(contact, pack)}\n\n{body}\n\n{sign}".strip()
-    if getattr(pack, "commercial", False):
-        footer = _OPT_OUT.get(spec.language, _OPT_OUT[""])
-        if spec.sender.postal_address.strip():
-            footer += "\n" + spec.sender.postal_address.strip()
-        full += "\n\n--\n" + footer
+    # Every cold email says how to stop it, and the line is honoured: a reply of "no" suppresses the address
+    # (brain/replies.py, scheduler/reply_monitor.py). Commercial playbooks also carry the sender's postal address.
+    footer = _OPT_OUT.get(spec.language, _OPT_OUT[""])
+    if getattr(pack, "commercial", False) and spec.sender.postal_address.strip():
+        footer += "\n" + spec.sender.postal_address.strip()
+    full += "\n\n--\n" + footer
     return full
 
 
@@ -699,7 +700,9 @@ def followup_email(contact: Contact, spec: CampaignSpec, pack: Pack, llm: LLM, f
         log.warning("follow-up failed for %s: %s", contact.name, e)
         return None
     body = clean_body(str((data or {}).get("body") or ""), contact)
-    subject = first.subject if first.subject.lower().startswith("re:") else f"Re: {first.subject}"
+    # Never "Re:" on a message that is not a reply: it fakes an existing conversation, and it is the first thing the
+    # first-email check rejects. The mail client threads on its own headers; the subject stays the one the reader saw.
+    subject = re.sub(r"^\s*(?:(?:re|fwd?)\s*:\s*)+", "", first.subject, flags=re.I).strip() or first.subject
     short = spec.model_copy(update={"word_target": 60})
     issues = [i for i in check(body, subject, contact, short) if not i.startswith(("too short", "subject"))]
     first_low = " ".join(first_body.lower().split())

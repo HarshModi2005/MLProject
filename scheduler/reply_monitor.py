@@ -6,13 +6,16 @@ Gmail inbox monitor for detecting professor replies.
 Strategy:
   1. Pull recent unread messages from Gmail
   2. Match sender email against our sent emails table
-  3. Mark matched emails as "replied" in the DB
+  3. Read what the reply says (brain/replies.py): a request to stop ("no", "unsubscribe", "remove me", "not interested")
+     suppresses the address for every campaign; an out-of-office or delivery notice is not a reply at all; a polite
+     decline is recorded as a decline, never as a good prospect; anything else is marked "replied" in the DB
 """
 
 from __future__ import annotations
 
 from rich.console import Console
 from db import database as db
+from brain.replies import classify_reply, header, message_text
 
 console = Console()
 
@@ -54,6 +57,7 @@ class ReplyMonitor:
             return 0
 
         reply_count = 0
+        stopped = 0
 
         for msg_stub in messages:
             msg_id = msg_stub.get("id")
@@ -75,16 +79,32 @@ class ReplyMonitor:
                     session.query(Email)
                     .filter(
                         Email.recipient_email == sender,
-                        Email.status == "sent",
+                        Email.status.in_(["sent", "followed_up"]),  # a reply to a follow-up counts too
                     )
                     .first()
                 )
-                if sent_email:
-                    db.mark_email_replied(sent_email.id)
-                    console.print(
-                        f"  [green]✓ Reply detected from {sender}[/green]"
-                    )
-                    reply_count += 1
+                sent_id = sent_email.id if sent_email else None
+            kind = classify_reply(message_text(details), header(details, "Subject"), sender)
+            if kind == "unsubscribed":
+                # Honoured even when no sent email matches: someone who asked to stop is never written to again.
+                from brain import bridge
 
-        console.print(f"  [dim]Reply scan complete. {reply_count} new replies detected.[/dim]")
+                bridge.record_reply(sender, "unsubscribed", detail="asked to stop")
+                stopped += 1
+            if not sent_id:
+                continue
+            if kind == "auto_reply":
+                console.print(f"  [dim]Ignored an automatic reply from {sender}.[/dim]")
+                continue
+            db.mark_email_replied(sent_id)
+            if kind == "negative":
+                from brain import bridge
+
+                bridge.record_reply(sender, "negative", detail="declined")
+            console.print(f"  [green]✓ Reply detected from {sender}[/green]"
+                          + (" [yellow](asked to stop: suppressed)[/yellow]" if kind == "unsubscribed" else ""))
+            reply_count += 1
+
+        console.print(f"  [dim]Reply scan complete. {reply_count} new replies detected"
+                      f"{f', {stopped} asked to stop' if stopped else ''}.[/dim]")
         return reply_count

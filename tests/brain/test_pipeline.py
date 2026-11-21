@@ -114,7 +114,7 @@ def test_full_run_and_llm_call_budget(tmp_path):
     assert all("Soil" not in c.evidence[0].text for c in result.shortlist)
     assert f["drafted_ok"] == 3 and f["drafts_need_review"] == 0
     d = result.drafts[result.shortlist[0].id]
-    assert d.body.startswith("Dear Professor Rani,") and d.body.endswith("Riya Shah") and d.to.endswith("@iitrpr.ac.in")
+    assert d.body.startswith("Dear Professor Rani,") and "Best regards,\nRiya Shah" in d.body and d.body.endswith("won't write again.") and d.to.endswith("@iitrpr.ac.in")
     # one batched pre-judge, 2x target (6) judged in ONE batched call, one call per draft, one batched fact-check:
     # 6 calls for 3 emails.
     assert f["cost"]["llm"]["paid_calls"] == 6

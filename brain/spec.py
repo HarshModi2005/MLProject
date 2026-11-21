@@ -133,6 +133,7 @@ def spec_from_fields(*, topics: List[str], objective: str, sender: SenderProfile
         persona=TargetPersona(description=objective, roles=roles or []),
         topics=topics, countries=countries, regions=regions, target_count=target_count,
         timeline=timeline, sender=sender,
+        confirmed=True, confirmed_by="fields",  # the user supplied every field: there is no model reading to check
     )
     spec.search_queries = fallback_queries(spec)
     return spec

@@ -80,3 +80,31 @@ The backfill now triggers on the floor, not on 0.5.
 - Postgres schemas are implemented through SQLAlchemy's `schema_translate_map` and have not been exercised against a real Postgres.
 - Hunter and the SMTP probe were tested against fakes only; check Hunter's response shape against your plan once.
 - Sending, per-user rate limits, bounce parsing from the mailbox and consent/legal rules are outside this change.
+
+## Round 2 (21 Nov): intent, judge, follow-ups, opt-outs
+
+From the readiness review. All offline-tested (`tests/brain/test_production_fixes.py`); none measured on a live run.
+
+- **Approval is enforced.** `CampaignSpec.confirmed_by` is `user` (read the card), `fields` (hand-typed flags) or `auto`
+  (`--yes`). `--yes` no longer skips what it cannot ask: with no targets, no ask or nothing about the sender it stops and lists
+  the questions (`IntakeResult.needs`, exit code 2). `run_campaign(..., require_confirmed=True)` (the CLI always sets it)
+  refuses an unapproved spec. The correction limit no longer applies an unseen last edit: it is shown and approved or dropped.
+- **The model may not invent facts about the sender.** `intake.ground_data` removes `sender_facts` and offer claims whose numbers
+  and most content words are not in the user's own words (request, typed answers, corrections, CV, uploads). They were labelled
+  "you said" and then accepted as true by the draft checks. Dropped claims are listed on the card as assumptions. A heuristic:
+  it stops "5 years at Google", not a reworded true fact.
+- **Corrections keep the guards.** `intake.finalise` (spoken negations, size limits, standing exclusions, unprovable-criteria notes,
+  dropped claims) runs after the first reading and after every correction. Before, a correction rebuilt the spec and lost them.
+- **A required criterion the judge did not rate no longer passes.** The score is halved and flagged `required_unrated:`; the run
+  warns with a count. Criterion names match ignoring case and punctuation.
+- **No fake "Re:".** Follow-ups (`draft.followup_email` and the scheduler's follow-up engine) keep the original subject.
+  The follow-up engine now checks the do-not-contact list first (it did not before).
+- **"No" means no.** Every email carries the opt-out line (commercial ones also the postal address) and a `List-Unsubscribe`
+  mailto header. `brain/replies.py` reads replies: stop / remove me / "no" / "not interested" suppresses the address for every
+  campaign, a polite decline is recorded but never labelled good, out-of-office and delivery notices are ignored. The reply monitor
+  uses it, and now also sees replies to follow-ups.
+- `scheduler/__init__.py` imported four names that do not exist, so nothing in `scheduler/` could be imported; fixed.
+
+Still open from the review: human labels and calibration, a live holdout run (`--repeat 3`, different-vendor judge), Hunter and SMTP
+verification against the real services, bounce parsing from the mailbox (a delivery notice is now ignored, not yet turned into a
+bounce), and the review/send UI's workspace isolation.
