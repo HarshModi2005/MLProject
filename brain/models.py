@@ -117,7 +117,8 @@ class CampaignSpec(BaseModel):
     event_queries: List[str] = Field(default_factory=list)  # searches for similar past events (sponsors / speakers)
     target_kind: str = ""  # person | org; empty = the playbook's default
     profile: ProspectProfile = Field(default_factory=ProspectProfile)
-    confirmed: bool = False  # the user saw and approved this spec
+    confirmed: bool = False  # the user saw and approved this spec (or gave every field themselves)
+    confirmed_by: str = ""  # user (read the card) | auto (--yes: nothing blocking, nobody read it) | fields (typed by the user)
     timeline: Optional[str] = None
     tone: str = "professional"
     target_count: int = 25

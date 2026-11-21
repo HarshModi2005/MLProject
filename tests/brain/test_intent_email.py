@@ -180,7 +180,9 @@ def test_assembly_adds_signature_and_an_opt_out_for_commercial_mail():
     full = dr.assemble("Body text here.", _contact(), spec, get_playbook("b2b_sales"))
     assert full.startswith("Hi Asha,") and "Riya Shah\nFounder, Voxa" in full
     assert full.endswith("reply 'no' and I won't write again.\n12 MG Road, Bengaluru")
-    assert "--" not in dr.assemble("Body.", _contact(), spec, get_playbook("academic"))
+    academic = dr.assemble("Body.", _contact(), spec, get_playbook("academic"))
+    assert academic.endswith("reply 'no' and I won't write again.")  # every campaign says how to stop...
+    assert "12 MG Road" not in academic  # ...but only commercial ones carry the postal address
     assert dr.body_of(full) == "Body text here."
 
 
@@ -226,8 +228,10 @@ def test_follow_up_brings_a_new_angle_and_never_repeats():
                   body="Hi Asha,\n\nQuickClinic caught my eye. Would you try our SDK?\n\nBest regards,\nRiya Shah")
     llm = FakeLLM({"followup": {"body": "Saw you are hiring a Flutter developer in Pune; crash reports help new hires ramp up on QuickClinic. Worth a try?"}})
     d = dr.followup_email(c, _spec(), get_playbook("b2b_sales"), llm, first, n=1)
-    assert d.subject == "Re: Crash reports for QuickClinic" and "Hiring now: Flutter developer (Pune)" in llm.seen[0][1]
+    assert d.subject == "Crash reports for QuickClinic" and "Hiring now: Flutter developer (Pune)" in llm.seen[0][1]
     assert d.ok, d.issues
+    first_re = first.model_copy(update={"subject": "Re: RE: Crash reports for QuickClinic"})  # never stack fake replies
+    assert dr.followup_email(c, _spec(), get_playbook("b2b_sales"), llm, first_re, n=1).subject == "Crash reports for QuickClinic"
     llm2 = FakeLLM({"followup": {"body": "QuickClinic caught my eye. Would you try our SDK? It is small and fast for QuickClinic."}})
     assert "repeats the first email" in dr.followup_email(c, _spec(), get_playbook("b2b_sales"), llm2, first, n=2).issues
 

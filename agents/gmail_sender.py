@@ -86,6 +86,10 @@ class GmailSender:
             message["To"] = to_email
             message['from'] = config.SENDER_EMAIL
             message['subject'] = subject
+            from brain.replies import unsubscribe_headers
+
+            for hname, hvalue in unsubscribe_headers(config.SENDER_EMAIL).items():
+                message[hname] = hvalue  # mail clients show an unsubscribe action; the reply monitor honours it
 
             # Ensure body has newlines correctly formatted for MIMEText
             body_text = message_body

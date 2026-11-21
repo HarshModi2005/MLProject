@@ -122,6 +122,9 @@ def sync_outcomes(store: Store) -> dict:
             if kind != "sent" and not store.has_outcome(campaign_id, contact_id, "sent"):
                 store.record_outcome(campaign_id, contact_id, "sent")  # a reply or bounce implies it was sent
                 stats["sent"] += 1
+            if kind == "replied" and (store.has_outcome(campaign_id, contact_id, "unsubscribed")
+                                      or store.has_outcome(campaign_id, contact_id, "negative")):
+                continue  # the reply monitor already read it: a "no" must not become a good-prospect label
             if not store.has_outcome(campaign_id, contact_id, kind):
                 store.record_outcome(campaign_id, contact_id, kind)
                 stats[kind] += 1
@@ -175,6 +178,37 @@ def send_gate(address: str, campaign_id: str = "") -> Optional[str]:
         log.warning("send gate failed: %s", e)
         return f"Could not check the do-not-contact list ({e}); not sending."
     return None
+
+
+def followup_gate(address: str) -> Optional[str]:
+    """None when a follow-up may go to this address. Only the hard stops apply (an unsubscribe, a bounce, the
+    do-not-contact list): the person has of course been emailed already. Fails closed."""
+    try:
+        if _store().is_suppressed(address):
+            return explain("suppressed")
+    except Exception as e:
+        log.warning("follow-up gate failed: %s", e)
+        return f"Could not check the do-not-contact list ({e}); not sending."
+    return None
+
+
+def record_reply(address: str, kind: str, detail: str = "") -> dict:
+    """A reply that asks to stop (kind 'unsubscribed') suppresses the address for every campaign; a polite decline
+    ('negative') is recorded so the prospect is never labelled good. Never raises: the reply monitor must keep going."""
+    out = {"matched": 0}
+    try:
+        store = _store()
+        if kind == "unsubscribed":
+            store.suppress(address, "unsubscribed")
+        for campaign_id, contact_id in store.results_by_email(address.lower()):
+            if not store.has_outcome(campaign_id, contact_id, "sent"):
+                store.record_outcome(campaign_id, contact_id, "sent")
+            store.record_outcome(campaign_id, contact_id, kind, detail=detail)
+            out["matched"] += 1
+    except Exception as e:
+        log.warning("could not record reply from %s: %s", address, e)
+        out["error"] = str(e)
+    return out
 
 
 def explain(reason: str) -> str:

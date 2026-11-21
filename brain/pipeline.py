@@ -163,10 +163,13 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                  csv_path: Optional[str] = None, progress: Callable[[str], None] = lambda m: None,
                  ctx: Optional[CampaignContext] = None, seed_contacts: Optional[List[Contact]] = None,
                  only_seeds: bool = False,
-                 confirm_recycle: Optional[Callable[[Dict[str, Any]], bool]] = None) -> RunResult:
+                 confirm_recycle: Optional[Callable[[Dict[str, Any]], bool]] = None,
+                 require_confirmed: bool = False) -> RunResult:
     """ctx: the campaign context from the intake (loaded from the store when resuming).
     seed_contacts: people/organisations from the user's uploaded lists, always considered.
     only_seeds: skip discovery tools and work only on the user's list.
+    require_confirmed: refuse to search unless the spec was approved (by the user at the intake card, from fields the
+    user typed, or by an unattended run that had nothing essential missing). The CLI always sets it.
     confirm_recycle: asked when new matches are very few but earlier, undecided people could fill the batch
     (spec.recycle == "ask"); it gets {"fresh", "wanted", "undecided", "standby", "offer"} and returns yes/no."""
     if upto not in STAGES:
@@ -227,6 +230,11 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         store.save_campaign(spec, status, funnel)
         store.save_context(spec.id, ctx)
         return result
+
+    if require_confirmed and not spec.confirmed:
+        result.warnings.append("This campaign was never approved, so nothing was searched. Run `brain run` again and "
+                               "approve the card (or answer the questions that stopped an unattended run).")
+        return finish("needs_input")
 
     if is_too_vague(spec):
         # Intake could not tell who to contact. Searching anyway makes the planner invent a target group (the vague
@@ -352,6 +360,11 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         for c in to_judge:  # negative feedback for any later search
             if c.score is not None and c.score < MIN_JUDGED_SCORE and c.reasons and len(ctx.rejected_reasons) < 20:
                 ctx.rejected_reasons.append(f"{c.name}: {c.reasons[0]}")
+        unrated = sum(1 for c in to_judge if any(f.startswith("required_unrated") for f in c.flags))
+        if unrated:
+            funnel["required_unrated"] = funnel.get("required_unrated", 0) + unrated
+            result.warnings.append(f"{unrated} candidate{'s' if unrated != 1 else ''} had a required criterion the judge did "
+                                   "not rate; their scores were halved rather than assumed to pass.")
         unjudged = [c for c in to_judge if c.score is None]
         if unjudged:
             result.warnings.append(f"{len(unjudged)} candidates could not be judged and were left out.")

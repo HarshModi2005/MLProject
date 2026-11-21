@@ -61,7 +61,8 @@ def test_full_interactive_verification(tmp_path):
         "only fintech brands please",        # verification: correction
         "yes",                                # verification: confirm
     ])
-    res = run_intake("Find sponsors for our college fest", llm_with(model), ui, SenderProfile(name="Harsh"))
+    res = run_intake("Find sponsors for our college fest. Advitiya is IIT Ropar's technical fest.", llm_with(model), ui,
+                     SenderProfile(name="Harsh"))
 
     assert res.spec.confirmed and res.spec.pack == "sponsorship" and res.spec.topics == ["fintech companies"]
     assert res.spec.countries == ["IN"] and res.spec.target_count == 15

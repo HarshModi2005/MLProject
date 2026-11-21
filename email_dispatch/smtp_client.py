@@ -54,6 +54,10 @@ class SMTPClient:
         
         # Add a unique Message-ID (useful for reply tracking later)
         msg['Message-ID'] = make_msgid()
+        from brain.replies import unsubscribe_headers
+
+        for hname, hvalue in unsubscribe_headers(self.sender).items():
+            msg[hname] = hvalue  # mail clients show an unsubscribe action; the reply monitor honours it
 
         # Assuming the body might be HTML.
         # Fallback to plain text if no HTML tags are found.

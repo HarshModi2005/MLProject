@@ -176,6 +176,65 @@ class IntakeResult:
     seed_contacts: List[Contact] = field(default_factory=list)
     only_seeds: bool = False
     llm_calls: int = 0
+    needs: List[str] = field(default_factory=list)  # questions that stopped an unattended (--yes) run from starting
+
+
+
+# ── grounding: the model may not invent facts about the sender ────────────────
+
+_NUM = re.compile(r"\d[\d,]*(?:\.\d+)?")
+_WORD = re.compile(r"[a-z][a-z0-9+-]{3,}")
+
+
+def _numbers(text: str) -> set:
+    return {n.replace(",", "").rstrip(".") for n in _NUM.findall(text or "")}
+
+
+def _stems(text: str) -> set:
+    return {w[:5] for w in _WORD.findall((text or "").lower()) if w not in _STOP}
+
+
+def is_grounded(fact: str, source_text: str) -> bool:
+    """Is this claim about the sender something the user (or their CV, uploads, answers, corrections) actually said?
+    Every number in it must appear in the sources, and most of its content words must too. A heuristic: it stops a
+    model from inventing "5 years at Google", not from rewording the user's own words."""
+    if not (fact or "").strip():
+        return False
+    if not _numbers(fact) <= _numbers(source_text):
+        return False
+    words = _stems(fact)
+    if not words:
+        return True
+    have = _stems(source_text)
+    need = len(words) if len(words) <= 2 else 0.6 * len(words)
+    return len(words & have) >= need
+
+
+def ground_data(data: Dict[str, Any], source_text: str) -> List[str]:
+    """Remove from the model's answer every claim about the sender that the user's own words do not support
+    (sender_facts, offer proof points / terms / value proposition). Returns the dropped claims, to show on the card.
+    Without this a made-up "fact" is labelled "you said", accepted by the draft checks as true, and written into emails."""
+    dropped: List[str] = []
+    facts = [str(f) for f in data.get("sender_facts") or [] if str(f).strip()]
+    data["sender_facts"] = [f for f in facts if is_grounded(f, source_text)]
+    dropped += [f for f in facts if f not in data["sender_facts"]]
+    offer = data.get("offer") if isinstance(data.get("offer"), dict) else None
+    if offer:
+        proofs = [str(p) for p in offer.get("proof_points") or [] if str(p).strip()]
+        offer["proof_points"] = [p for p in proofs if is_grounded(p, source_text)]
+        dropped += [p for p in proofs if p not in offer["proof_points"]]
+        for key in ("value_prop", "terms", "audience"):
+            val = str(offer.get(key) or "").strip()
+            if val and not is_grounded(val, source_text):
+                dropped.append(val)
+                offer[key] = ""
+    return dropped
+
+
+def source_text(prompt: str, sender: SenderProfile, *, answers: List[str] = (), edits: List[str] = (),
+                uploads_text: str = "") -> str:
+    """Everything the user actually provided. Answers that were only the model's own default are not included."""
+    return "\n".join([prompt, sender.facts_text(), uploads_text, *answers, *edits])
 
 
 # ── steps ────────────────────────────────────────────────────────────────────
@@ -464,6 +523,10 @@ def negations_from_text(text: str) -> List[str]:
                 break
             words.append(w)
         phrase = " ".join(words)
+        if words and words[0] in ("exclude", "excluding", "avoid", "include", "including"):
+            continue  # "not exclude agencies"
+        if re.search(r"(don'?t|do not|dont|never|no need to|not to)\s*$", text[max(0, m.start() - 14):m.start()].lower()):
+            continue  # "don't exclude agencies": a correction that undoes a rule, not a kind of target to avoid
         if len(phrase) > 3 and phrase not in out and phrase not in {"sure", "only", "problem"}:
             out.append(phrase)
     return out[:6]
@@ -612,6 +675,32 @@ def unprovable_notes(spec: CampaignSpec) -> List[str]:
     return out
 
 
+def finalise(spec: CampaignSpec, data: Dict[str, Any], ctx: CampaignContext, sender: SenderProfile, sender_source: str,
+             prompt: str, edits: List[str], max_searches_ceiling: int, dropped: List[str] = ()) -> int:
+    """Everything done to a freshly built spec that does not come from the model: spoken negations, size limits, standing
+    exclusions, claims the user did not make (dropped), criteria nothing can prove. It runs after the first reading AND after
+    every correction, so a correction cannot quietly undo what the first pass enforced. Returns the web-search budget."""
+    said = "\n".join([prompt, *edits])
+    spec.profile.anti_patterns = list(dict.fromkeys(spec.profile.anti_patterns + negations_from_text(said)))[:10]
+    assumptions = [str(a) for a in data.get("assumptions") or []]
+    note = set_aside_size_note(said)
+    if note and note not in assumptions:
+        assumptions.append(note)
+    if spec.constraints.size_min is None and spec.constraints.size_max is None:
+        spec.constraints.size_min, spec.constraints.size_max = size_from_text(said)
+    ctx.understanding = squash(str(data.get("understanding") or ""), 600)
+    ctx.target_brief = spec.persona.description
+    ctx.assumptions = assumptions[:10]
+    for claim in dropped:
+        ctx.assumptions.append(f"Left out a claim about you that your own words don't support: \"{squash(claim, 120)}\". "
+                               "Say it yourself if it is true, and it will be used.")
+    _record_facts(ctx, data, sender, sender_source)
+    for org in spec.exclude_organizations:
+        ctx.exclude(org)
+    ctx.assumptions += unprovable_notes(spec)
+    return search_budget(spec.target_count, max_searches_ceiling)
+
+
 def _record_facts(ctx: CampaignContext, data: Dict[str, Any], sender: SenderProfile, sender_source: str) -> None:
     for f in data.get("sender_facts") or []:
         ctx.add_fact(str(f), "you said")
@@ -642,6 +731,7 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
 
     # ── questions ────────────────────────────────────────────────────────────
     answers: List[str] = []
+    user_said: List[str] = []  # only what the user typed: the model's own defaults are not evidence of anything
     questions = _merge_questions(data, validate(data, sender))
     if interactive and questions:
         ui.show(f"\n[bold]{squash(str(data.get('understanding') or ''), 500)}[/bold]")
@@ -650,6 +740,7 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
             ans = ui.ask(f"  {q['question']}", default=q["default"])
             if ans and ans != q["default"]:
                 answers.append(f"{q['question']} → {ans}")
+                user_said.append(ans)
             elif q["default"]:
                 answers.append(f"{q['question']} → (default) {q['default']}")
             if ans and "cv" in q["question"].lower() and ans.lower().endswith((".pdf", ".docx", ".txt")):
@@ -702,26 +793,23 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
         data["tone"] = profile["tone"]
     if profile.get("language") and not data.get("language"):
         data["language"] = profile["language"]
+    edits: List[str] = []
+    evidence = source_text(prompt, sender, answers=user_said, uploads_text=about)
+    dropped = ground_data(data, evidence)
     spec = build(data, sender, campaign_id=cid, target_count=target_count, locations=locations, playbook=playbook)
-    spec.profile.anti_patterns = list(dict.fromkeys(spec.profile.anti_patterns + negations_from_text(prompt)))[:10]
-    note = set_aside_size_note(prompt)
-    if note:
-        data.setdefault("assumptions", [])
-        data["assumptions"] = list(data["assumptions"]) + [note]
-    if spec.constraints.size_min is None and spec.constraints.size_max is None:
-        spec.constraints.size_min, spec.constraints.size_max = size_from_text(prompt)
-    ctx.understanding = squash(str(data.get("understanding") or ""), 600)
-    ctx.target_brief = spec.persona.description
-    ctx.assumptions = [str(a) for a in data.get("assumptions") or []][:10]
-    _record_facts(ctx, data, sender, sender_source)
-    for org in spec.exclude_organizations:
-        ctx.exclude(org)
-    ctx.assumptions += unprovable_notes(spec)
-    max_searches = search_budget(spec.target_count, max_searches_ceiling)
+    max_searches = finalise(spec, data, ctx, sender, sender_source, prompt, edits, max_searches_ceiling, dropped)
 
     # ── verify ───────────────────────────────────────────────────────────────
     if not interactive:
-        spec.confirmed = True
+        # Nobody reads a card in this mode, so the run only starts when nothing essential is missing. The card is still
+        # shown, so a log of the run says what was understood and assumed.
+        blocking = [q for q in validate(data, sender) if not q.get("default")]
+        ui.show("\n" + card(spec, ctx, max_searches))
+        if blocking:
+            spec.confirmed, spec.confirmed_by = False, ""
+            return IntakeResult(spec, ctx, seeds_contacts, only_seeds=False, llm_calls=llm.calls - calls_before,
+                                needs=[q["question"] for q in blocking])
+        spec.confirmed, spec.confirmed_by = True, "auto"
         return IntakeResult(spec, ctx, seeds_contacts, only_seeds=False, llm_calls=llm.calls - calls_before)
     for _ in range(max_edits):
         ui.show("\n" + card(spec, ctx, max_searches))
@@ -729,18 +817,21 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
                        default="yes")
         low = reply.strip().lower()
         if low in ("y", "yes", "ok", "okay", "go", "start", "looks good", "correct"):
-            spec.confirmed = True
+            spec.confirmed, spec.confirmed_by = True, "user"
             break
         if low in ("q", "quit", "exit", "cancel"):
             raise KeyboardInterrupt("cancelled by user")
+        edits.append(reply)
         data = refine(data, prompt, sender, llm, edits=[reply], uploads_summary=uploads_summary, seeds=ctx.seed_names)
+        dropped = ground_data(data, source_text(prompt, sender, answers=user_said, edits=edits, uploads_text=about))
         spec = build(data, sender, campaign_id=cid, target_count=target_count, locations=None if "where" in low or
                      "location" in low else locations, playbook=None if "playbook" in low else playbook)
-        ctx.understanding = squash(str(data.get("understanding") or ""), 600)
-        ctx.target_brief = spec.persona.description
-        ctx.assumptions = [str(a) for a in data.get("assumptions") or []][:10]
-        _record_facts(ctx, data, sender, sender_source)
-        max_searches = search_budget(spec.target_count, max_searches_ceiling)
+        max_searches = finalise(spec, data, ctx, sender, sender_source, prompt, edits, max_searches_ceiling, dropped)
+    if not spec.confirmed:  # the last correction was applied but not yet seen: it must be approved, not assumed
+        ui.show("\n" + card(spec, ctx, max_searches))
+        if ui.ask("\n[bold]That is the limit on corrections. Start with this? yes / quit[/bold]",
+                  default="quit").strip().lower() in ("y", "yes", "ok", "okay", "go", "start"):
+            spec.confirmed, spec.confirmed_by = True, "user"
     if not spec.confirmed:
         raise KeyboardInterrupt("not confirmed")
     if store is not None and hasattr(store, "save_user_profile"):

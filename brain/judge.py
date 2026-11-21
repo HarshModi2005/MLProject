@@ -138,6 +138,26 @@ def _constraints_line(spec: CampaignSpec) -> str:
     return ("Limits set by the user (a candidate clearly outside them is a poor fit): " + " · ".join(parts)) if parts else ""
 
 
+def _key(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(text).lower()).strip()
+
+
+def _rating(name: str, ratings: Dict) -> "float | None":
+    """The model's 0-1 rating for a criterion, or None when it gave none. Names match ignoring case and punctuation, or
+    when one contains the other, so a lightly reworded key is not read as "not rated"."""
+    want = _key(name)
+    value = None
+    for k, v in ratings.items():
+        have = _key(k)
+        if have == want or (len(have) >= 6 and (have in want or want in have)):
+            value = v
+            break
+    try:
+        return max(0.0, min(100.0, float(value))) / 100.0 if value is not None else None
+    except (TypeError, ValueError):
+        return None
+
+
 def _in_evidence(text: str, c: Contact) -> bool:
     low = (text or "").strip().lower()
     if len(low) < 8:
@@ -207,14 +227,8 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
                 c.flags.append("unjudged")
                 continue
             crit = item.get("criteria") if isinstance(item.get("criteria"), dict) else {}
-            if prof is not None and prof.criteria and crit:
-                per = {}
-                for cr in prof.criteria:
-                    v = next((val for k, val in crit.items() if str(k).strip().lower() == cr.name.lower()), None)
-                    try:
-                        per[cr.name] = max(0.0, min(100.0, float(v))) / 100.0 if v is not None else None
-                    except (TypeError, ValueError):
-                        per[cr.name] = None
+            if prof is not None and prof.criteria:
+                per = {cr.name: _rating(cr.name, crit) for cr in prof.criteria}
                 rated = [(cr, per[cr.name]) for cr in prof.criteria if per.get(cr.name) is not None]
                 if rated:
                     crit_score = sum(cr.weight * v for cr, v in rated) / (sum(cr.weight for cr, _ in rated) or 1.0)
@@ -224,6 +238,12 @@ def judge(contacts: List[Contact], spec: CampaignSpec, llm: LLM, batch_size: int
                     if missing:
                         score *= 0.5
                         c.flags.append("missing_required:" + ", ".join(missing))
+                # A requirement the user made a must, which the model did not rate at all, is not met: "no answer" must
+                # not read as "passed". Fail closed (the score is halved and the flag says why).
+                unrated = [cr.name for cr in prof.criteria if cr.must and per.get(cr.name) is None]
+                if unrated:
+                    score *= 0.5
+                    c.flags.append("required_unrated:" + ", ".join(unrated))
             reach = reach_factor(c) if c.emails else 1.0
             c.fit = round(score, 4)
             c.score = round(((1 - prescore_weight) * score + prescore_weight * c.prescore) * (0.85 + 0.15 * reach), 4)

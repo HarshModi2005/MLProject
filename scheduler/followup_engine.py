@@ -9,6 +9,7 @@ and sends a brief, polite follow-up.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from typing import Optional
 
@@ -71,13 +72,21 @@ class FollowupEngine:
                 f"({days_elapsed} days since original)"
             )
 
+            from brain import bridge
+
+            stop = bridge.followup_gate(email_row.recipient_email)
+            if stop:  # asked to stop, bounced or do-not-contact since the first email: no follow-up
+                console.print(f"  [yellow]Skipped: {stop}[/yellow]")
+                continue
+
             # Generate follow-up body
             followup_body = self._generate_followup_body(
                 email_row.recipient_name,
                 email_row.subject,
                 days_elapsed,
             )
-            followup_subject = f"Re: {email_row.subject}"
+            followup_subject = re.sub(r"^\s*(?:(?:re|fwd?)\s*:\s*)+", "", email_row.subject or "", flags=re.I).strip() \
+                or (email_row.subject or "")  # never "Re:" on a message that is not a reply
 
             # Send via Gmail
             try:

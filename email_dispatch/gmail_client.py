@@ -93,6 +93,10 @@ class GmailClient:
             msg["from"] = config.SENDER_EMAIL
             msg["subject"] = subject
 
+        from brain.replies import unsubscribe_headers
+
+        for name, value in unsubscribe_headers(config.SENDER_EMAIL).items():
+            msg[name] = value  # mail clients show an unsubscribe action; the reply monitor honours it
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
         return {"raw": raw}
 

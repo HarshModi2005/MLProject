@@ -818,6 +818,16 @@ class Store:
                 return why
         return None
 
+    def is_suppressed(self, address: str) -> bool:
+        """Only the hard stop: this address or its domain asked not to be written to, bounced, or was imported as
+        do-not-contact. Unlike `address_blocked` it ignores "already emailed", so it is the check for a follow-up."""
+        addr = (address or "").strip().lower()
+        if "@" not in addr:
+            return False
+        domain = addr.split("@", 1)[1]
+        with self._Session() as s:
+            return s.query(SuppressionRow).filter(SuppressionRow.value.in_({addr, domain, registrable_domain(domain)})).first() is not None
+
     def address_blocked(self, address: str, campaign_id: str = "") -> Optional[str]:
         """The send gate: may an email go to this address right now? (suppressed, already emailed, dead address, imported
         do-not-contact, or the series that holds this draft is paused because its bounce rate is too high)."""
