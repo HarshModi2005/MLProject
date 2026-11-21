@@ -756,11 +756,20 @@ def calibrate(save: bool = typer.Option(False, "--save", help="Store the model i
 
 @app.command("bench-label")
 def bench_label(scenario: str = typer.Argument(..., help="Scenario name."),
-                limit: int = typer.Option(0, help="Stop after this many labels (0 = all).")):
-    """Label a scenario's candidates in the terminal: g good, b bad, w wrong address, s skip, q quit."""
+                limit: int = typer.Option(0, help="Stop after this many labels (0 = all)."),
+                again: bool = typer.Option(False, "--again", help="Ask about the candidates you skipped before too.")):
+    """Label a scenario's candidates in the terminal: g good, b bad, w wrong address, s skip, u undo, q quit."""
+    import click
+
     from brain.bench import label_interactive
 
-    n = label_interactive(scenario, ask=lambda m: typer.prompt(m, prompt_suffix=""), say=console.print, limit=limit)
+    def ask(m: str) -> str:
+        try:
+            return typer.prompt(m, prompt_suffix="")
+        except click.exceptions.Abort:  # Ctrl-C / Ctrl-D: stop cleanly, everything answered so far is saved
+            raise EOFError
+
+    n = label_interactive(scenario, ask=ask, say=console.print, limit=limit, revisit_skipped=again)
     console.print(f"Labelled {n} candidates.")
 
 

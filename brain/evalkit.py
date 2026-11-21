@@ -8,14 +8,33 @@ Label a campaign's results once; every later change to discovery or ranking can 
 from __future__ import annotations
 
 import json
+import logging
 import math
+import re
 from typing import Any, Dict, List, Optional
 
 from brain.textutil import name_tokens
 
 
 def _key(value: str) -> str:
-    return value.strip().lower() if "@" in value else " ".join(name_tokens(value))
+    """Identity used to match labels to results: an address as written, a name as its tokens, and "Name | Org" (a
+    person with no address, see bench.label_ident) as both, so the same name at another organisation does not match."""
+    if "@" in value:
+        return value.strip().lower()
+    if "|" in value:
+        who, org = value.split("|", 1)
+        return " ".join(name_tokens(who)) + " | " + " ".join(re.findall(r"[a-z0-9]+", org.lower()))
+    return " ".join(name_tokens(value))
+
+
+def label_conflicts(labels: Dict[str, Any]) -> List[str]:
+    """Identities labelled with more than one verdict (good and also bad, ...): the evaluation would silently pick
+    one by precedence, so they are reported."""
+    seen: Dict[str, set] = {}
+    for verdict in ("good", "bad", "wrong_address"):
+        for v in labels.get(verdict, []) or []:
+            seen.setdefault(_key(v), set()).add(verdict)
+    return sorted(k for k, v in seen.items() if len(v) > 1)
 
 
 def wilson(k: int, n: int, z: float = 1.96) -> Optional[List[float]]:
@@ -65,13 +84,20 @@ def evaluate_labels(results: List[Dict[str, Any]], labels: Dict[str, Any], ks=(5
     bad = {_key(v) for v in labels.get("bad", [])}
     wrong = {_key(v) for v in labels.get("wrong_address", [])}
     ranked = sorted(results, key=lambda r: r.get("score") or 0, reverse=True)
+    conflicts = label_conflicts(labels)
+    if conflicts:
+        logging.getLogger("brain.evalkit").warning("labels with two different verdicts (wrong_address, then good, then "
+                                                   "bad wins): %s", ", ".join(conflicts))
 
     def verdict(r: Dict[str, Any]) -> str:
-        keys = {_key(r.get("name") or ""), _key(r.get("email") or "")}
+        name = _key(r.get("name") or "")
+        keys = {name, _key(r.get("email") or "")}
+        if r.get("org") and r.get("kind", "person") == "person":
+            keys.add(_key(f"{r['name']} | {r['org']}"))
         return ("wrong_address" if keys & wrong else "good" if keys & good else "bad" if keys & bad else "unlabeled")
 
     verdicts = [verdict(r) for r in ranked]
-    out: Dict[str, Any] = {"results": len(ranked), "labeled": sum(v != "unlabeled" for v in verdicts),
+    out: Dict[str, Any] = {"conflicts": conflicts, "results": len(ranked), "labeled": sum(v != "unlabeled" for v in verdicts),
                            "wrong_address": verdicts.count("wrong_address")}
     for k in ks:
         top = [v for v in verdicts[:k] if v != "unlabeled"]
