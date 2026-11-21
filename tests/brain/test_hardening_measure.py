@@ -104,7 +104,8 @@ def test_repeat_runs_use_fresh_caches_and_report_spread(tmp_path, monkeypatch):
 def test_label_status_and_interactive_labelling(tmp_path):
     sc = [{"name": "demo", "split": "dev"}]
     assert bench.label_status(30, tmp_path, sc)[0] == {"name": "demo", "split": "dev", "candidates": 0, "labeled": 0,
-                                                       "good": 0, "bad": 0, "wrong_address": 0, "needed": 30, "sheet": False}
+                                                       "good": 0, "bad": 0, "wrong_address": 0, "needed": 30, "skipped": 0,
+                                                       "conflicts": [], "sheet": False}
     sheet = {"candidates": [{"label": "", "name": "A One", "email": "a@x.com", "evidence": ["e1"]},
                             {"label": "", "name": "B Two", "email": "b@x.com"},
                             {"label": "", "name": "C Three", "email": "c@x.com"},
@@ -238,3 +239,79 @@ def test_summary_reports_which_interval_it_used():
     s = bench.summarize(rows)
     assert s["judge_precision_ci_method"] == "bootstrap over 6 scenarios" and s["label_precision_ci_method"].startswith("bootstrap")
     assert s["judge_precision_ci95"][0] < s["judge_precision"] < s["judge_precision_ci95"][1]
+
+
+# ── labels: same name at another organisation, conflicts, counting, and the interactive session ──────────────
+
+def test_a_label_on_one_person_is_not_applied_to_a_namesake_elsewhere():
+    rows = [{"name": "Priya Nair", "email": "", "org": "The Paper", "kind": "person", "score": 0.9},
+            {"name": "Priya Nair", "email": "", "org": "Acme Bank", "kind": "person", "score": 0.8},
+            {"name": "Some Show", "email": "", "org": "", "kind": "org", "score": 0.7}]
+    ev = evaluate_labels(rows, {"good": ["Priya Nair | The Paper"], "bad": ["Some Show"]}, ks=(3,))
+    assert ev["labeled@3"] == 2 and ev["good@3_labeled"] == 1  # the Acme Priya stays unlabelled, not "good"
+    plain = evaluate_labels(rows, {"good": ["Priya Nair"]}, ks=(3,))
+    assert plain["good@3_labeled"] == 2  # a hand-written plain name still matches by name, as before
+
+
+def test_load_labels_qualifies_people_without_an_address_and_lists_each_once(tmp_path):
+    sheet = {"good": ["a@x.com"], "candidates": [
+        {"label": "good", "name": "A One", "email": "a@x.com"},                      # also in the top-level list
+        {"label": "bad", "name": "Priya Nair", "kind": "person", "org": "The Paper"},  # no address
+        {"label": "bad", "name": "Some Show", "kind": "org", "org": "Some Show"},    # an organisation: name alone
+        {"label": "", "name": "Unsure", "email": "u@x.com"}]}
+    (tmp_path / "sc.json").write_text(json.dumps(sheet))
+    got = bench.load_labels("sc", tmp_path)
+    assert got["good"] == ["a@x.com"] and got["bad"] == ["Priya Nair | The Paper", "Some Show"]
+    st = bench.label_status(30, tmp_path, [{"name": "sc"}])[0]
+    assert st["labeled"] == 3 and st["needed"] == 27  # not 4: a@x.com was written twice
+
+
+def test_contradictory_labels_are_reported_not_silently_resolved(caplog):
+    from brain.evalkit import label_conflicts
+
+    labels = {"good": ["a@x.com", "Priya Nair"], "bad": ["A@X.com", "Other Person"]}
+    assert label_conflicts(labels) == ["a@x.com"]
+    rows = [{"name": "A One", "email": "a@x.com", "score": 0.9}]
+    with caplog.at_level("WARNING", logger="brain.evalkit"):
+        ev = evaluate_labels(rows, labels, ks=(1,))
+    assert ev["conflicts"] == ["a@x.com"] and "two different verdicts" in caplog.text
+
+
+def test_interactive_labelling_skips_are_remembered_undo_works_and_interrupts_are_clean(tmp_path):
+    sheet = {"candidates": [{"label": "", "name": n, "email": f"{n[0].lower()}@x.com"} for n in ("A One", "B Two", "C Three", "D Four")]}
+    path = tmp_path / "demo.json"
+    path.write_text(json.dumps(sheet))
+
+    def run(answers, **kw):
+        it = iter(answers)
+
+        def ask(prompt):
+            a = next(it)
+            if a == "^C":
+                raise KeyboardInterrupt
+            return a
+
+        return bench.label_interactive("demo", ask=ask, say=lambda m: None, folder=tmp_path, **kw)
+
+    # A good, B skipped, C bad, then undo C and mark it good, then Ctrl-C: three answers on the sheet, session ends cleanly
+    assert run(["g", "s", "b", "u", "g", "^C"]) == 2
+    saved = json.loads(path.read_text())["candidates"]
+    assert [c["label"] for c in saved] == ["good", "", "good", ""] and saved[1]["skipped"] is True
+    assert not list(tmp_path.glob("*.tmp"))  # atomic write leaves no temp file behind
+    # next session: B (skipped) is not asked again; D is the only one left
+    assert run(["w"]) == 1
+    assert [c["label"] for c in json.loads(path.read_text())["candidates"]] == ["good", "", "good", "wrong_address"]
+    # --again brings the skipped one back, and undo of a skip restores it to unlabelled-and-skipped
+    assert run(["b"], revisit_skipped=True) == 1
+    final = json.loads(path.read_text())["candidates"]
+    assert final[1]["label"] == "bad" and "skipped" not in final[1]
+    assert run(["u"], revisit_skipped=True) == 0  # nothing left to ask; undo with no history is harmless
+
+
+def test_undo_with_nothing_to_undo_and_a_final_candidate_do_not_crash(tmp_path):
+    path = tmp_path / "d.json"
+    path.write_text(json.dumps({"candidates": [{"label": "", "name": "Only One", "email": "o@x.com"}]}))
+    said = []
+    answers = iter(["u", "g"])
+    n = bench.label_interactive("d", ask=lambda p: next(answers), say=said.append, folder=tmp_path)
+    assert n == 1 and any("Nothing to undo" in m for m in said)

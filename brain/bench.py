@@ -55,9 +55,21 @@ SERPER_USD = 0.001  # approximate price of one search call
 GOOD = 0.7
 
 
+def label_ident(c: Dict[str, Any]) -> Optional[str]:
+    """How a label sheet row is identified: its address when it has one. A person with no address is "Name | Org",
+    so that a label on one Priya Nair is not applied to a different Priya Nair at another organisation."""
+    if c.get("email"):
+        return c["email"]
+    name = c.get("name")
+    if name and c.get("kind", "person") == "person" and c.get("org"):
+        return f"{name} | {c['org']}"
+    return name
+
+
 def load_labels(name: str, folder: Path = LABEL_DIR) -> Dict[str, List[str]]:
     """Human labels for a scenario from evals/labels/<name>.json: {"good": [...], "bad": [...]} and/or a label
-    sheet's "candidates" with "label": "good" | "bad" (see export_label_sheet)."""
+    sheet's "candidates" with "label": "good" | "bad" | "wrong_address" (see export_label_sheet). Each identity is
+    listed once per verdict, however many places it was written."""
     path = folder / f"{name}.json"
     if not path.exists():
         return {}
@@ -65,10 +77,17 @@ def load_labels(name: str, folder: Path = LABEL_DIR) -> Dict[str, List[str]]:
     good, bad, wrong = list(data.get("good") or []), list(data.get("bad") or []), list(data.get("wrong_address") or [])
     for c in data.get("candidates") or []:
         verdict = str(c.get("label") or "").strip().lower()
-        ident = c.get("email") or c.get("name")
+        ident = label_ident(c)
         if ident and verdict in ("good", "bad", "wrong_address"):
             {"good": good, "bad": bad, "wrong_address": wrong}[verdict].append(ident)
-    return {"good": good, "bad": bad, "wrong_address": wrong}
+    return {"good": list(dict.fromkeys(good)), "bad": list(dict.fromkeys(bad)), "wrong_address": list(dict.fromkeys(wrong))}
+
+
+def _write_json_atomic(path: Path, data: Any) -> None:
+    """Write then rename, so a crash or Ctrl-C mid-write cannot leave a half-written (unreadable) label sheet."""
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    os.replace(tmp, path)
 
 
 SPLITS = ("dev", "holdout", "stress")
@@ -149,11 +168,11 @@ def export_label_sheet(run_label: str, name: str, folder: Path = LABEL_DIR, limi
              for i, r in signals.items() if i not in have]
     path = folder / f"{name}.json"
     old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-    known = {(c.get("email") or c.get("name")): c for c in old.get("candidates") or []}
+    known = {label_ident(c): c for c in old.get("candidates") or []}
     rows = list(old.get("candidates") or [])
     for c in pool[:limit]:
         best = max(c.get("emails") or [{}], key=lambda e: e.get("confidence", 0))
-        ident = best.get("address") or c["name"]
+        ident = label_ident({"email": best.get("address"), "name": c["name"], "kind": c["kind"], "org": c.get("org")})
         if ident in known:
             continue
         j = judged.get(c["id"], {})
@@ -169,7 +188,7 @@ def export_label_sheet(run_label: str, name: str, folder: Path = LABEL_DIR, limi
                                    "ask; wrong_address = right person, but the address shown is not theirs.",
            "good": old.get("good", []), "bad": old.get("bad", []),
            "wrong_address": old.get("wrong_address", []), "candidates": rows}
-    path.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    _write_json_atomic(path, out)
     return path
 
 
@@ -228,12 +247,15 @@ def metrics(result, spec: CampaignSpec, labels: Optional[Dict[str, List[str]]] =
     if labels and (labels.get("good") or labels.get("bad") or labels.get("wrong_address")):
         from brain.evalkit import evaluate_labels
 
-        rows = [{"name": c.name, "email": c.best_email.address if c.best_email else "", "score": c.score} for c in short]
+        rows = [{"name": c.name, "email": c.best_email.address if c.best_email else "", "score": c.score,
+                 "kind": c.kind, "org": c.org or ""} for c in short]
         ev = evaluate_labels(rows, labels, ks=(k,))
         m["label_precision@K"] = ev.get(f"precision@{k}")
         m["label_precision@K_ci95"] = ev.get(f"precision@{k}_ci95")
         m["label_good_k"], m["label_n_k"] = ev.get(f"good@{k}_labeled", 0), ev.get(f"labeled@{k}", 0)
         m["label_wrong_address"] = ev.get("wrong_address", 0)
+        if ev.get("conflicts"):
+            m["label_conflicts"] = ev["conflicts"]
         m["labeled"] = ev.get("labeled")
     return m
 
@@ -504,50 +526,81 @@ def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool
 
 def label_status(min_labels: int = 30, folder: Path = LABEL_DIR, scenarios: Optional[List[Dict[str, Any]]] = None
                  ) -> List[Dict[str, Any]]:
-    """How far each scenario's human labels are from usable: labelled vs wanted, per verdict."""
+    """How far each scenario's human labels are from usable: labelled vs wanted, per verdict. A person written in both
+    the sheet and the top-level lists counts once; one given two different verdicts is reported as a conflict."""
+    from brain.evalkit import label_conflicts
+
     rows = []
     for sc in scenarios if scenarios is not None else load_scenarios(label_dir=folder):
         path = folder / f"{sc['name']}.json"
         data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
         cands = data.get("candidates") or []
-        marks = [str(c.get("label") or "").strip().lower() for c in cands]
         extra = load_labels(sc["name"], folder)
-        labeled = sum(m in ("good", "bad", "wrong_address") for m in marks) + len(data.get("good") or []) + len(data.get("bad") or []) \
-            + len(data.get("wrong_address") or [])
+        from brain.evalkit import _key
+
+        labeled = len({_key(i) for v in extra.values() for i in v})
         rows.append({"name": sc["name"], "split": sc.get("split", "dev"), "candidates": len(cands), "labeled": labeled,
                      "good": len(extra.get("good", [])), "bad": len(extra.get("bad", [])),
                      "wrong_address": len(extra.get("wrong_address", [])), "needed": max(0, min_labels - labeled),
-                     "sheet": path.exists()})
+                     "skipped": sum(1 for c in cands if c.get("skipped") and not str(c.get("label") or "").strip()),
+                     "conflicts": label_conflicts(extra), "sheet": path.exists()})
     return rows
 
 
-def label_interactive(name: str, ask=input, say=print, folder: Path = LABEL_DIR, limit: int = 0) -> int:
+def label_interactive(name: str, ask=input, say=print, folder: Path = LABEL_DIR, limit: int = 0,
+                      revisit_skipped: bool = False) -> int:
     """Walk through a scenario's unlabelled candidates in the terminal. g good, b bad, w wrong address (right person,
-    address not theirs), s skip, q quit. The sheet is saved after every answer. Returns the number labelled."""
+    address not theirs), s skip, u undo the last answer, q quit. The sheet is saved (atomically) after every answer,
+    a skipped candidate is not asked again next time unless revisit_skipped, and Ctrl-C / Ctrl-D end the session
+    cleanly. Returns the number labelled."""
     path = folder / f"{name}.json"
     if not path.exists():
         raise FileNotFoundError(f"No label sheet {path}; run `brain bench-labels --run <label>` first")
     data = json.loads(path.read_text(encoding="utf-8"))
-    n = 0
-    for c in data.get("candidates") or []:
-        if str(c.get("label") or "").strip():
+    cands = data.get("candidates") or []
+    n, i, history = 0, 0, []  # history: (index, labelled?, was it skipped before)
+    while i < len(cands):
+        c = cands[i]
+        if str(c.get("label") or "").strip() or (c.get("skipped") and not revisit_skipped):
+            i += 1
             continue
         say(f"\n{c.get('name')}  ·  {c.get('org') or '-'}  ·  {c.get('title') or '-'}\n  email: {c.get('email') or '(none)'}"
             f"\n  source: {', '.join(c.get('sources') or [])}  judge: {c.get('judge_score')}")
         for ev in (c.get("evidence") or [])[:3]:
             say(f"  - {ev}")
-        while True:
-            a = str(ask("[g]ood  [b]ad  [w]rong address  [s]kip  [q]uit > ")).strip().lower()[:1]
-            if a in ("g", "b", "w", "s", "q"):
-                break
+        try:
+            a = str(ask("[g]ood  [b]ad  [w]rong address  [s]kip  [u]ndo  [q]uit > ")).strip().lower()[:1]
+        except (EOFError, KeyboardInterrupt):
+            break
         if a == "q":
             break
-        if a in ("g", "b", "w"):
+        if a == "u":
+            if not history:
+                say("Nothing to undo.")
+                continue
+            j, was_label, was_skipped = history.pop()
+            cands[j]["label"] = ""
+            cands[j].pop("skipped", None)
+            if was_skipped:
+                cands[j]["skipped"] = True
+            n -= was_label
+            i = j
+            _write_json_atomic(path, data)
+            continue
+        if a == "s":
+            history.append((i, 0, bool(c.get("skipped"))))
+            c["skipped"] = True
+        elif a in ("g", "b", "w"):
+            history.append((i, 1, bool(c.get("skipped"))))
             c["label"] = {"g": "good", "b": "bad", "w": "wrong_address"}[a]
+            c.pop("skipped", None)
             n += 1
-            path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-            if limit and n >= limit:
-                break
+        else:
+            continue  # not an option: ask again about the same candidate
+        _write_json_atomic(path, data)
+        i += 1
+        if limit and n >= limit:
+            break
     return n
 
 
