@@ -1,0 +1,43 @@
+{
+  "name": "stress_senior_data_hire",
+  "split": "stress",
+  "playbook": "job_search",
+  "target_count": 15,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Land a Head of Data role at a fintech in Singapore",
+    "ask": "A short call about the Head of Data role",
+    "persona": {
+      "description": "Hiring managers, CTOs and chief data officers at fintech companies in Singapore with 50-500 employees",
+      "roles": [
+        "CTO",
+        "Chief Data Officer",
+        "VP Engineering",
+        "Head of Data"
+      ]
+    },
+    "topics": [
+      "fintech",
+      "data platform",
+      "machine learning"
+    ],
+    "locations": [
+      "Singapore"
+    ]
+  },
+  "sender": {
+    "name": "Test Candidate",
+    "headline": "Data leader, 9 years in payments",
+    "summary": "Led a 25-person data team at a payments company; built fraud models that cut losses 31%."
+  },
+  "facts": [
+    "9 years in payments",
+    "Led a 25-person data team",
+    "Fraud models cut losses by 31%"
+  ],
+  "prompt": "I'm a data leader with 9 years in payments; find CTOs, CDOs and VPs of engineering at Singapore fintechs with 50 to 500 employees who might be hiring a Head of Data",
+  "playbook_ok": [
+    "job_search",
+    "recruiting"
+  ]
+}

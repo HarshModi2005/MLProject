@@ -11,10 +11,12 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
+import threading
 import time
 from collections import defaultdict
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import httpx
 
@@ -22,6 +24,47 @@ from brain.cache import Cache
 from brain.settings import PRICES, Settings
 
 log = logging.getLogger("brain.llm")
+
+
+class _TokenWindow:
+    """Spend tokens per minute under a provider's limit by waiting instead of failing. Groq's on-demand tier allows
+    8,000 tokens a minute; without this, parallel stages hit HTTP 429 and candidates were silently left unjudged."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._events: Dict[str, List[Tuple[float, int]]] = {}
+
+    def acquire(self, host: str, tokens: int, per_minute: int, now: Callable[[], float] = time.time,
+                sleep: Callable[[float], None] = time.sleep) -> float:
+        """Block until `tokens` fit in the last 60 seconds. Returns the seconds waited."""
+        if per_minute <= 0:
+            return 0.0
+        tokens = min(tokens, per_minute)  # one request can never need more than the whole window
+        waited = 0.0
+        while True:
+            with self._lock:
+                t = now()
+                ev = [(ts, n) for ts, n in self._events.get(host, []) if t - ts < 60]
+                used = sum(n for _, n in ev)
+                if used + tokens <= per_minute:
+                    ev.append((t, tokens))
+                    self._events[host] = ev
+                    return waited
+                delay = max(0.5, 60 - (t - ev[0][0]) + 0.1)
+                self._events[host] = ev
+            sleep(delay)
+            waited += delay
+
+
+_WINDOW = _TokenWindow()
+
+
+def _tpm_limit(base: str) -> int:
+    """Tokens per minute to stay under: LLM_TPM if set, else a safe default for Groq's on-demand tier, else no limit."""
+    env = os.getenv("LLM_TPM")
+    if env and env.isdigit():
+        return int(env)
+    return 6500 if "groq.com" in base else 0
 
 
 class LLMError(RuntimeError):
@@ -110,6 +153,10 @@ class LLM:
             payload.pop(param, None)
         url = base.rstrip("/") + "/chat/completions"
         last = ""
+        est = int(len(json.dumps(payload.get("messages", ""))) / 3.5) + int(payload.get("max_tokens") or payload.get("max_completion_tokens") or 0)
+        waited = _WINDOW.acquire(base, est, _tpm_limit(base))
+        if waited:
+            self.waited_s = getattr(self, "waited_s", 0.0) + waited
         for attempt in range(4):
             try:
                 r = self._client.post(

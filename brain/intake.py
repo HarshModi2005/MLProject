@@ -98,6 +98,13 @@ Rules:
 - criteria are qualities of a GOOD target beyond the topic, each with the SIGNAL that would prove it. Never make a
   criterion of a location (that is "locations") or a job title / role (that is "persona.roles"). Never use warm_path
   (it comes only from the user's imported contacts) and use uses_tech only when the user named a technology.
+- A request that does not say WHO should be contacted or WHAT is wanted from them ("people to talk to about my startup")
+  is too vague to search on. Do not invent a target group (investors, mentors, customers). Use playbook "general", set
+  playbook_confidence at most 0.3, keep topics to what the user actually said, say in "assumptions" that the request was
+  too vague, and put the two questions that would resolve it first in "questions".
+- When two constraints in the request conflict ("not distributors" and "also large EPC firms"; "only Germany" and
+  "also Italy"), keep both visible: apply the one stated first, list the other under "assumptions" as set aside, and
+  ask which the user means in "questions". Never drop either silently.
 - Topics are WHAT THE TARGET ORGANISATIONS OR PEOPLE ARE OR DO — never the sender's event, product or the role sought.
   Sponsors of a tech fest: the industries that sponsor such events ("developer tools", "edtech", "cloud platforms"),
   not "tech fests" or "hackathon sponsorship". A job search at AI startups: "AI startups", "machine learning
@@ -284,11 +291,28 @@ def _merge_questions(data: Dict[str, Any], extra: List[Dict[str, str]], limit: i
     return out[:limit]
 
 
+_PUBLIC_BUYER = re.compile(r"\b(municipal(ity|ities)?|municipal corporations?|nagar ?palika|mahapalika|panchayats?|water boards?|"
+                           r"public (works|utilit\w+|sector)|government (departments?|agenc\w+|bod\w+|offices?)|"
+                           r"ministr(y|ies)|state (electricity|transport|water) \w+|civic bod\w+|city councils?)\b", re.I)
+
+
+def public_buyer_playbook(name: str, data: Dict[str, Any]) -> str:
+    """A request to sell to municipal corporations or water boards was routed to generic B2B sales, which searches
+    Google Maps and returns private water-treatment firms (stress_municipal_iot: 0 of 12). When the TARGETS are public
+    bodies, the government playbook is the one that knows tenders, procurement officers and public-body inboxes."""
+    if name != "b2b_sales":
+        return name
+    persona = data.get("persona") if isinstance(data.get("persona"), dict) else {}
+    text = f"{persona.get('description') or ''} {data.get('target_brief') or ''}"
+    return "government_tenders" if _PUBLIC_BUYER.search(text) else name
+
+
 def build(data: Dict[str, Any], sender: SenderProfile, *, campaign_id: str, target_count: Optional[int],
           locations: Optional[List[str]], playbook: Optional[str]) -> CampaignSpec:
     name = playbook or (data.get("playbook") or data.get("pack"))
     if name == "general" and data.get("pack") in PLAYBOOKS and data.get("pack") != "general":
         name = data.get("pack")
+    name = public_buyer_playbook(name, data)
     pb = get_playbook(name if name in PLAYBOOKS else "general")
     locs, remote = normalise_locations(locations if locations else [str(x) for x in data.get("locations") or []])
     countries, regions = split_locations(locs)
@@ -390,6 +414,69 @@ def _offer(data: Dict[str, Any]) -> Offer:
     d = data.get("offer") if isinstance(data.get("offer"), dict) else {}
     return Offer(value_prop=_str(d.get("value_prop")), terms=_str(d.get("terms")), audience=_str(d.get("audience")),
                  proof_points=[squash(str(p), 200) for p in d.get("proof_points") or [] if str(p).strip()][:6])
+
+
+_SIZE_RANGE = re.compile(r"\b(\d[\d,]*)\s*(?:to|-|–|and)\s*(\d[\d,]*)\s*(?:\+\s*)?(?:employees|people|staff|headcount)\b", re.I)
+_SIZE_OVER = re.compile(r"\b(?:over|more than|above|at least|>)\s*(\d[\d,]*)\s*(?:\+\s*)?(?:employees|people|staff)\b", re.I)
+_SIZE_UNDER = re.compile(r"\b(?:under|fewer than|less than|below|at most|<)\s*(\d[\d,]*)\s*(?:employees|people|staff)\b", re.I)
+
+
+def size_from_text(text: str) -> tuple:
+    """(size_min, size_max) in employees when the request states them in words. The model leaves these out often
+    enough (a stage-judge run dropped "50 to 500 employees") that a plain pattern backs it up. A limit that sits in
+    an "also ..." clause belongs to another kind of target ("small installers ... and also large EPC firms with over
+    500 employees"), so it is not applied to the whole campaign."""
+    def num(x: str) -> int:
+        return int(x.replace(",", ""))
+
+    text = text or ""
+
+    def clause_ok(m: "re.Match[str]") -> bool:
+        return not re.search(r"\b(also|plus|as well as|but|except)\b", text[max(0, m.start() - 60):m.start()], re.I)
+
+    m = _SIZE_RANGE.search(text)
+    if m and clause_ok(m):
+        lo, hi = sorted((num(m.group(1)), num(m.group(2))))
+        return lo, hi
+    over, under = _SIZE_OVER.search(text), _SIZE_UNDER.search(text)
+    over = over if over and clause_ok(over) else None
+    under = under if under and clause_ok(under) else None
+    return (num(over.group(1)) if over else None, num(under.group(1)) if under else None)
+
+
+_NEGATION = re.compile(r"\b(?:not|no|never|excluding|exclude|except|without|avoid)\s+(?:any\s+|the\s+)?([a-z][a-z\-]*(?:\s+[a-z][a-z\-]*){0,2})", re.I)
+_NEG_STOP = {"and", "or", "but", "who", "that", "which", "in", "at", "with", "for", "of", "to", "also", "from", "by", "the", "a"}
+
+
+def negations_from_text(text: str) -> List[str]:
+    """Kinds of target the request rules out in words ("not distributors, not manufacturers", "excluding agencies").
+    The model often keeps the positive half of such a request and loses these; as anti-patterns they lower the fit of
+    look-alikes and are shown to the judge. Named organisations ("excluding Max Planck institutes") go the other way,
+    through exclude_organizations, so capitalised phrases are left alone."""
+    out: List[str] = []
+    for m in _NEGATION.finditer(text or ""):
+        raw = m.group(1)
+        if raw[:1].isupper() and not text[m.start(1):].startswith(raw.lower()):
+            continue  # a proper name: handled as an excluded organisation
+        words = []
+        for w in raw.lower().split():
+            if w in _NEG_STOP:
+                break
+            words.append(w)
+        phrase = " ".join(words)
+        if len(phrase) > 3 and phrase not in out and phrase not in {"sure", "only", "problem"}:
+            out.append(phrase)
+    return out[:6]
+
+
+def set_aside_size_note(text: str) -> str:
+    """The assumption to show when a size limit was left out because it belongs to an "also ..." clause."""
+    for rx in (_SIZE_RANGE, _SIZE_OVER, _SIZE_UNDER):
+        m = rx.search(text or "")
+        if m and re.search(r"\b(also|plus|as well as|but|except)\b", text[max(0, m.start() - 60):m.start()], re.I):
+            return (f"The request gives a size limit ('{m.group(0)}') for only part of the targets, so it was not applied to "
+                    "everyone. Say if it should be, or run it as a separate campaign.")
+    return ""
 
 
 def _constraints(data: Dict[str, Any], remote: Optional[bool]) -> Constraints:
@@ -616,6 +703,13 @@ def run_intake(prompt: str, llm: LLM, ui: UI, sender: SenderProfile, *, upload_p
     if profile.get("language") and not data.get("language"):
         data["language"] = profile["language"]
     spec = build(data, sender, campaign_id=cid, target_count=target_count, locations=locations, playbook=playbook)
+    spec.profile.anti_patterns = list(dict.fromkeys(spec.profile.anti_patterns + negations_from_text(prompt)))[:10]
+    note = set_aside_size_note(prompt)
+    if note:
+        data.setdefault("assumptions", [])
+        data["assumptions"] = list(data["assumptions"]) + [note]
+    if spec.constraints.size_min is None and spec.constraints.size_max is None:
+        spec.constraints.size_min, spec.constraints.size_max = size_from_text(prompt)
     ctx.understanding = squash(str(data.get("understanding") or ""), 600)
     ctx.target_brief = spec.persona.description
     ctx.assumptions = [str(a) for a in data.get("assumptions") or []][:10]

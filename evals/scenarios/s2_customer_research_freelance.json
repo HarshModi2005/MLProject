@@ -1,0 +1,36 @@
+{
+  "name": "s2_customer_research_freelance",
+  "split": "stress",
+  "playbook": "customer_research",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Interview freelance designers about invoicing",
+    "ask": "A 20-minute interview",
+    "persona": {
+      "description": "Freelance UI/UX designers in India who invoice international clients",
+      "roles": [
+        "Freelance designer"
+      ]
+    },
+    "topics": [
+      "freelance ui ux designer",
+      "invoicing international clients"
+    ],
+    "locations": [
+      "India"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Product founder",
+    "summary": "Building an invoicing tool for freelancers; no product yet"
+  },
+  "facts": [
+    "building an invoicing tool for freelancers"
+  ],
+  "prompt": "I'm building an invoicing tool for freelancers and want to interview freelance UI/UX designers in India who bill international clients",
+  "playbook_ok": [
+    "customer_research"
+  ]
+}

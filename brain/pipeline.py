@@ -56,7 +56,8 @@ from brain.judge import judge
 from brain.llm import LLM
 from brain.models import CampaignSpec, Contact, Draft
 from brain.packs import get_pack
-from brain.rank import diversify, filter_contacts, prescore
+from brain.rank import (diversify, filter_contacts, location_gaps, location_targets, prefer_person, prescore,
+                        reserve_locations)
 from brain.resolve import resolve
 from brain.settings import Settings
 from brain.sources.csvlist import load_csv
@@ -152,6 +153,12 @@ class RunResult:
     warnings: List[str] = field(default_factory=list)
 
 
+def is_too_vague(spec: CampaignSpec) -> bool:
+    """Intake found no topics and little confidence in any playbook: there is nothing to search for."""
+    return not spec.topics and (spec.playbook_confidence is not None and spec.playbook_confidence <= 0.35) \
+        and not spec.persona.org_types and not spec.persona.roles and not spec.organizations
+
+
 def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume: bool = True,
                  csv_path: Optional[str] = None, progress: Callable[[str], None] = lambda m: None,
                  ctx: Optional[CampaignContext] = None, seed_contacts: Optional[List[Contact]] = None,
@@ -220,6 +227,13 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         store.save_campaign(spec, status, funnel)
         store.save_context(spec.id, ctx)
         return result
+
+    if is_too_vague(spec):
+        # Intake could not tell who to contact. Searching anyway makes the planner invent a target group (the vague
+        # stress request came back as eight accelerators), which reads as a result and is a guess.
+        result.warnings.append("The request does not say who to contact or what you want from them, so nothing was searched. "
+                               "Say who the targets are (for example 'dental clinics in Pune' or 'professors working on X') and run again.")
+        return finish("needs_input")
 
     planner = SearchPlanner(spec, pack, ctx, deps.llm,
                             learned_templates=store.learned_templates(pack.name) if st.use_memory else None)
@@ -380,8 +394,12 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
         store.checkpoint(spec.id, "discover", contacts)
         store.save_context(spec.id, ctx)
         progress(f"discover: {funnel['found_raw']} records → {len(contacts)} unique candidates")
+    problem = deps.search.provider_problem() if hasattr(deps.search, "provider_problem") else ""
+    if problem:
+        result.warnings.insert(0, problem)
+        funnel["provider_problem"] = problem  # structured, so the benchmark can tell a failed run from a real zero
     if not contacts:
-        result.warnings.append("Discovery found nobody. Broaden the topics or locations.")
+        result.warnings.append("Discovery found nobody." + ("" if problem else " Broaden the topics or locations."))
         return finish("empty")
     if last == 0:
         return finish("partial")
@@ -448,6 +466,19 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
     note_sources(funnel, "reachable", reachable)
     funnel["guessed_email_only"] = sum(1 for c in targets if c.emails and c not in reachable)
     progress(f"enrich: {len(reachable)} of {len(targets)} have a confident email")
+    # Candidates the pre-judge liked but that have no address we trust. In the stress runs these were 84% of everything
+    # lost after enrichment; they are listed for a person to resolve instead of vanishing from the funnel.
+    unreached = [c for c in targets if c not in reachable and (c.prejudge or 0) >= 0.7]
+    funnel["good_no_address_n"] = len(unreached)
+    funnel["good_no_address"] = [{"name": c.name, "org": c.org, "domain": c.org_domain, "kind": c.kind,
+                                  "why": c.prejudge_reason, "url": (c.urls or [None])[0],
+                                  "unconfirmed_address": c.best_email.address if c.best_email else None}
+                                 for c in unreached[:25]]
+    if unreached:
+        result.warnings.append(
+            f"{len(unreached)} well-matched candidate{'s' if len(unreached) != 1 else ''} had no address we trust and "
+            "were left off the shortlist (the first 25 are in the run's funnel under good_no_address). Add an address by hand "
+            "or a contact-data provider to include them.")
     from brain.discovery.reach.providers import hunter_available
 
     funnel["contact_provider"] = "hunter" if hunter_available() else "none"
@@ -512,7 +543,19 @@ def run_campaign(spec: CampaignSpec, deps: Deps, *, upto: str = "draft", resume:
                 continue
             seen_addr.add(addr)
             unique.append(c)
+        before_pref = len(unique)
+        unique = prefer_person(unique)
+        if len(unique) < before_pref:
+            funnel["dropped_inbox_for_person"] = before_pref - len(unique)
+        places = location_targets(spec)
+        if places:
+            unique = reserve_locations(unique, places, spec.target_count, st.shortlist_floor)
         capped = diversify(unique, spec.target_count, st.max_per_org, prior=prior_org, prior_cap=1 if org_campaign else None)
+        gaps = location_gaps(capped, places)
+        if gaps:
+            funnel["location_gaps"] = gaps
+            result.warnings.append(f"Nobody on the list is in {', '.join(gaps)} (you asked for {', '.join(places)}). "
+                                   "Candidates there were missing, unreachable or below the fit floor; search those places on their own.")
         if prior_org:
             funnel["dedup_org_cap"] = sum(1 for c in unique if c not in capped and prior_org.get(touch.org_key(c), 0)
                                           >= (1 if org_campaign else st.max_per_org))

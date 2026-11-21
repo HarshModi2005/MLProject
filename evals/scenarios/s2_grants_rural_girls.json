@@ -1,0 +1,40 @@
+{
+  "name": "s2_grants_rural_girls",
+  "split": "stress",
+  "playbook": "grants",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Fund a coding programme for rural girls",
+    "ask": "A call about CSR funding",
+    "persona": {
+      "description": "Corporate CSR teams and foundations funding girls' education in Rajasthan and Madhya Pradesh",
+      "roles": [
+        "CSR head",
+        "Programme officer"
+      ]
+    },
+    "topics": [
+      "girls education",
+      "STEM education",
+      "digital literacy"
+    ],
+    "locations": [
+      "Rajasthan",
+      "Madhya Pradesh"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Nonprofit founder",
+    "summary": "Run a registered trust teaching coding to 300 girls in 12 villages"
+  },
+  "facts": [
+    "300 girls in 12 villages",
+    "registered trust since 2019"
+  ],
+  "prompt": "we run a coding programme for rural girls in 12 villages and need CSR funding; find foundations and company CSR teams that fund girls' education in Rajasthan and Madhya Pradesh",
+  "playbook_ok": [
+    "grants"
+  ]
+}

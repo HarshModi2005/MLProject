@@ -1,0 +1,39 @@
+{
+  "name": "stress_rust_maintainers",
+  "split": "stress",
+  "playbook": "general",
+  "target_count": 15,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Get feedback on a new Rust crate",
+    "ask": "A review of our crate's API",
+    "persona": {
+      "description": "Maintainers of popular Rust async and networking crates",
+      "roles": [
+        "Maintainer",
+        "Author"
+      ]
+    },
+    "topics": [
+      "rust async",
+      "networking",
+      "tokio"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Dev",
+    "headline": "Rust developer",
+    "summary": "Author of an async rate-limiting crate with 4,000 downloads."
+  },
+  "facts": [
+    "4,000 downloads",
+    "Async rate limiting crate"
+  ],
+  "prompt": "we released a small Rust crate for async rate limiting; find maintainers of popular Rust async or networking crates who might review the API",
+  "playbook_ok": [
+    "general",
+    "integrations",
+    "speakers"
+  ]
+}

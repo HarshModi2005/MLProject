@@ -1,0 +1,1025 @@
+{
+  "run": "stress_scale",
+  "judge_model": "gpt-4.1",
+  "scenarios": {
+    "stress_scale_vc_50": {
+      "playbook": "fundraising",
+      "objective": "To identify and reach out to seed and pre-seed venture funds and angel networks in India that invest in B2B SaaS startups for raising pre-seed funding.",
+      "ask": "Request an introduction or information on how to apply for pre-seed or seed funding from Indian investors who back B2B SaaS startups.",
+      "prospects": [
+        {
+          "id": "fd4a7b1c088e68b5",
+          "name": "Eximius VC",
+          "kind": "org",
+          "title": null,
+          "org": "Eximius VC",
+          "email": "pitches@eximiusvc.com",
+          "tier": "inbox",
+          "score": 0.8949,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "pipeline_reason": [
+            "India's only sector-differentiated pre-seed fund"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic fund pipeline address",
+          "why": "Pre-seed VC in India, invests in SaaS, inbox is appropriate."
+        },
+        {
+          "id": "0d94a5dcbf6fa77d",
+          "name": "3One4Capital",
+          "kind": "org",
+          "title": null,
+          "org": "3One4Capital",
+          "email": "hello@3one4capital.com",
+          "tier": "inbox",
+          "score": 0.8933,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Pre-seed to Series A focus including SaaS"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "General fund contact, fits org ask",
+          "why": "Early-stage VC, invests in SaaS, inbox is suitable for org."
+        },
+        {
+          "id": "53f5dc337bb0c058",
+          "name": "StartupXseed",
+          "kind": "org",
+          "title": null,
+          "org": "StartupXseed",
+          "email": "ideas@startupxseed.in",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs",
+            "list"
+          ],
+          "pipeline_reason": [
+            "B2B early stage investor with sector agnostic but includes SaaS"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Fund's idea submission inbox",
+          "why": "Early-stage B2B investor, includes SaaS, inbox is correct."
+        },
+        {
+          "id": "145476c45748e24f",
+          "name": "BdsVC",
+          "kind": "org",
+          "title": null,
+          "org": "BdsVC",
+          "email": "info@bdsvc.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "BdsVC invests from pre-seed to Series A"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Fund's info inbox, standard for org",
+          "why": "Pre-seed/seed VC, SaaS focus, inbox is appropriate."
+        },
+        {
+          "id": "3781f58e5a0d68e0",
+          "name": "Kalaari Capital",
+          "kind": "org",
+          "title": null,
+          "org": "Kalaari Capital",
+          "email": "info@kalaari.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Kalaari Capital is an early-stage, technology-focused VC in Bengaluru"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "General info inbox for fund",
+          "why": "Early-stage tech VC, India, inbox is suitable."
+        },
+        {
+          "id": "03faeba571d5df06",
+          "name": "Endiya",
+          "kind": "org",
+          "title": null,
+          "org": "Endiya",
+          "email": "contact@endiya.com",
+          "tier": "inbox",
+          "score": 0.8865,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Early-stage VC fund focused on enterprise and SaaS"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Fund's contact inbox, fits org ask",
+          "why": "Early-stage VC, SaaS/enterprise focus, inbox is correct."
+        },
+        {
+          "id": "e6461128b6183e4c",
+          "name": "PedalStart",
+          "kind": "org",
+          "title": null,
+          "org": "PedalStart",
+          "email": "connect@pedalstart.com",
+          "tier": "inbox",
+          "score": 0.8798,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Indian startup accelerator backing pre-seed founders"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Accelerator's main contact inbox",
+          "why": "Pre-seed accelerator, India, inbox is appropriate."
+        },
+        {
+          "id": "b94f27222972f57c",
+          "name": "Venture Catalysts++",
+          "kind": "org",
+          "title": null,
+          "org": "Venture Catalysts++",
+          "email": "info@venturecatalysts.in",
+          "tier": "inbox",
+          "score": 0.8559,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "India's largest early-stage investment platform"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Investment platform's info inbox",
+          "why": "Large early-stage platform, pre-seed/seed, inbox is suitable."
+        },
+        {
+          "id": "c642dd96231e4ff5",
+          "name": "Unicorn India Ventures (UIV)",
+          "kind": "org",
+          "title": null,
+          "org": "Unicorn India Ventures (UIV)",
+          "email": "info@unicornivc.com",
+          "tier": "inbox",
+          "score": 0.8474,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "pipeline_reason": [
+            "Early-stage VC focusing on SaaS and seed stage"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, appropriate for VC.",
+          "why": "Early-stage VC in India, SaaS/seed focus, inbox is standard."
+        },
+        {
+          "id": "55193b6b7efd3047",
+          "name": "PrimeVP",
+          "kind": "org",
+          "title": null,
+          "org": "PrimeVP",
+          "email": "info@primevp.in",
+          "tier": "inbox",
+          "score": 0.8389,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "pipeline_reason": [
+            "Early-stage VC backing SaaS startups"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, fits VC outreach.",
+          "why": "PrimeVP is a top Indian seed VC with SaaS focus."
+        },
+        {
+          "id": "bc6775d7cabe446f",
+          "name": "Hyderabad Angels",
+          "kind": "org",
+          "title": null,
+          "org": "Hyderabad Angels",
+          "email": "info@hyderabadangels.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Hyderabad Angels backs seed and pre-seed startups across India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Angel network shared inbox, appropriate.",
+          "why": "Hyderabad Angels is a major Indian angel network, invests at seed/pre-seed."
+        },
+        {
+          "id": "e77020bbec64a206",
+          "name": "100 Unicorns",
+          "kind": "org",
+          "title": null,
+          "org": "100 Unicorns",
+          "email": "info@100unicorns.in",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "100Unicorns provides seed funding and mentorship to early-stage startups in India"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Org inbox, fits accelerator/VC.",
+          "why": "100 Unicorns is an Indian accelerator VC, does seed/pre-seed, sector-agnostic."
+        },
+        {
+          "id": "d080ef9c7ab91133",
+          "name": "Startup Grants India",
+          "kind": "org",
+          "title": null,
+          "org": "Startup Grants India",
+          "email": "team@startupgrantsindia.com",
+          "tier": "inbox",
+          "score": 0.8372,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Lists 59 angel networks in India, many seed and pre-seed"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "aggregator_or_directory",
+            "not_a_real_target"
+          ],
+          "address": "inbox",
+          "address_note": "Directory, not an investor.",
+          "why": "Startup Grants India is a directory, not a fund or network itself."
+        },
+        {
+          "id": "fcee4e4fbb988ff4",
+          "name": "Sasha Mirchandani",
+          "kind": "person",
+          "title": "Founder and Managing Partner",
+          "org": "Kae Capital",
+          "email": "sasha@kae-capital.com",
+          "tier": "attributed",
+          "score": 0.8224,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Pre-seed/seed focus including SaaS"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Direct email for Kae Capital founder.",
+          "why": "Sasha Mirchandani is a relevant decision-maker at a top Indian seed VC."
+        },
+        {
+          "id": "31442e286b4b51f7",
+          "name": "Scalable",
+          "kind": "org",
+          "title": null,
+          "org": "Scalable",
+          "email": "hello@scalable.ventures",
+          "tier": "inbox",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "pipeline_reason": [
+            "Venture studio building early-stage B2B SaaS startups"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "weak_evidence",
+            "wrong_geography"
+          ],
+          "address": "inbox",
+          "address_note": "Org inbox, but unclear if India-based.",
+          "why": "Venture studio model, unclear if they invest in Indian startups or just build them."
+        },
+        {
+          "id": "180da7b366b64b36",
+          "name": "Beta Boom",
+          "kind": "org",
+          "title": null,
+          "org": "Beta Boom",
+          "email": "hello@betaboom.com",
+          "tier": "inbox",
+          "score": 0.788,
+          "sources": [
+            "web",
+            "portfolio"
+          ],
+          "pipeline_reason": [
+            "Pre-seed and seed VC fund"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "wrong_geography"
+          ],
+          "address": "inbox",
+          "address_note": "Org inbox, but not India-focused.",
+          "why": "Beta Boom invests outside Silicon Valley, but no evidence of India focus."
+        },
+        {
+          "id": "996b9a571251daad",
+          "name": "The Chennai Angels",
+          "kind": "org",
+          "title": null,
+          "org": "The Chennai Angels",
+          "email": "connect@thechennaiangels.com",
+          "tier": "inbox",
+          "score": 0.782,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "The Chennai Angels is a leading angel investment network in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, appropriate for angel network.",
+          "why": "Leading Indian angel network, invests in diverse startups including B2B SaaS."
+        },
+        {
+          "id": "4022f88a3d771a8f",
+          "name": "Good Capital Investment Group",
+          "kind": "org",
+          "title": null,
+          "org": "Good Capital Investment Group",
+          "email": "info@goodcapitalinvestmentgroup.com",
+          "tier": "inbox",
+          "score": 0.7642,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Pre-seed to seed focus on early-stage tech VC"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "weak_evidence",
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Generic org inbox, plausible for org.",
+          "why": "Bio focuses on financial advisory, not clearly a VC/angel fund; SaaS VC mention is weak."
+        },
+        {
+          "id": "46310d5759b920a5",
+          "name": "Bharat Angels Networks",
+          "kind": "person",
+          "title": "Founder",
+          "org": "Bharatangelsnetworks",
+          "email": "bharatangelsnetworks@gmail.com",
+          "tier": "guess",
+          "score": 0.75,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Bharat Angels bridges Indian startups with global investors"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Likely founder's direct email.",
+          "why": "Founder of an Indian angel network with B2B SaaS relevance."
+        },
+        {
+          "id": "ab8f338c5ec896b3",
+          "name": "Anand Lunia",
+          "kind": "person",
+          "title": null,
+          "org": "IndiaQuotient",
+          "email": "anand@indiaquotient.in",
+          "tier": "attributed",
+          "score": 0.75,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Early-stage investor backing SaaS and tech-led businesses"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "plausible",
+          "address_note": "Direct email, matches name and org.",
+          "why": "Early-stage investor, listed as pre-seed/seed, invests in SaaS/tech in India."
+        },
+        {
+          "id": "2f53be9b1c6c9fb3",
+          "name": "Ajuniorvc",
+          "kind": "org",
+          "title": null,
+          "org": "Ajuniorvc",
+          "email": "team@ajuniorvc.com",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Pre-seed VC fund investing in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Team inbox, appropriate for fund.",
+          "why": "Pre-seed VC fund in India, invests in B2B SaaS."
+        },
+        {
+          "id": "54a4d2321822a497",
+          "name": "TGC Capital Partners",
+          "kind": "org",
+          "title": null,
+          "org": "TGC Capital Partners",
+          "email": "hello@tgccapitalpartners.com",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Invests in B2B SaaS startups in India"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Generic org inbox, plausible.",
+          "why": "Invests in B2B SaaS but targets higher ARR than typical pre-seed/seed."
+        },
+        {
+          "id": "2fdf54d759b219ca",
+          "name": "PitchDecks.in",
+          "kind": "org",
+          "title": null,
+          "org": "PitchDecks.in",
+          "email": "hello@pitchdecks.in",
+          "tier": "inbox",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Connects Indian startups with investors"
+          ],
+          "verdict": "bad",
+          "fit": 2,
+          "problems": [
+            "aggregator_or_directory",
+            "not_a_real_target"
+          ],
+          "address": "inbox",
+          "address_note": "Generic org inbox, but not an investor.",
+          "why": "Platform/aggregator, not a fund or angel network itself."
+        },
+        {
+          "id": "debb70cf23708a0a",
+          "name": "Gayathry S",
+          "kind": "person",
+          "title": null,
+          "org": "Venture Center",
+          "email": "gayathry.s@venturecenter.co.in",
+          "tier": "attributed",
+          "score": 0.7,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Associated with Startup India Seed Fund Scheme"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "plausible",
+          "address_note": "Direct email, matches org.",
+          "why": "Incubator/seed scheme contact, not a VC/angel network; may help but not core target."
+        },
+        {
+          "id": "47c7c5d83c06b67b",
+          "name": "seedfund",
+          "kind": "org",
+          "title": null,
+          "org": "seedfund",
+          "email": "info@seedfund.in",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Seedfund pioneers early stage investment ecosystem in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Generic org inbox, fits VC fund.",
+          "why": "Established early-stage VC in India, fits B2B SaaS pre-seed ask."
+        },
+        {
+          "id": "f29366fbe3087683",
+          "name": "Indian Investment Network",
+          "kind": "org",
+          "title": null,
+          "org": "Indian Investment Network",
+          "email": "admin@investmentnetwork.in",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Connects entrepreneurs with angel investors in India"
+          ],
+          "verdict": "good",
+          "fit": 5,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Org admin inbox, fits angel network.",
+          "why": "Large Indian angel network, matches B2B SaaS/early-stage focus."
+        },
+        {
+          "id": "c42c2f63ad8c6c47",
+          "name": "startupfunds.in",
+          "kind": "org",
+          "title": null,
+          "org": "startupfunds.in",
+          "email": "team@startupfunds.in",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "lookalike",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Lists seed and pre-seed funding options for Indian startups"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "aggregator_or_directory",
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Team@, fits org/aggregator.",
+          "why": "Appears to be a funding aggregator, not a direct investor."
+        },
+        {
+          "id": "20297d406d27a613",
+          "name": "IIMCIP",
+          "kind": "org",
+          "title": null,
+          "org": "IIMCIP",
+          "email": "contact@iimcip.org",
+          "tier": "inbox",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Indian accelerator promoting entrepreneurship and innovation"
+          ],
+          "verdict": "borderline",
+          "fit": 3,
+          "problems": [
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Contact@, fits accelerator.",
+          "why": "Accelerator, not a fund/angel network; may not invest directly."
+        },
+        {
+          "id": "3f692008985ba06e",
+          "name": "Z47",
+          "kind": "org",
+          "title": null,
+          "org": "Z47",
+          "email": "namaste@z47.com",
+          "tier": "inbox",
+          "score": 0.6843,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "pipeline_reason": [
+            "Backs early-stage technology startups in India"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Namaste@, fits org.",
+          "why": "Early-stage tech VC, plausible for B2B SaaS pre-seed ask."
+        },
+        {
+          "id": "31267b8949d793fd",
+          "name": "Marwari Catalysts",
+          "kind": "org",
+          "title": null,
+          "org": "Marwari Catalysts",
+          "email": "office@marwaricatalysts.com",
+          "tier": "inbox",
+          "score": 0.6402,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Startup accelerator and venture studio in India"
+          ],
+          "verdict": "good",
+          "fit": 4,
+          "problems": [],
+          "address": "inbox",
+          "address_note": "Office@, fits accelerator/fund.",
+          "why": "Accelerator/fund supporting early-stage Indian startups."
+        },
+        {
+          "id": "6f5087f5ccea2c18",
+          "name": "InvestHind",
+          "kind": "org",
+          "title": null,
+          "org": "InvestHind",
+          "email": "contact@investhind.com",
+          "tier": "inbox",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "pipeline_reason": [
+            "Gateway to India's top investors and startups"
+          ],
+          "verdict": "borderline",
+          "fit": 2,
+          "problems": [
+            "weak_evidence",
+            "off_topic"
+          ],
+          "address": "inbox",
+          "address_note": "Contact@, fits org.",
+          "why": "No clear evidence of B2B SaaS or seed/pre-seed focus."
+        }
+      ],
+      "list": {
+        "coverage": 4.2,
+        "diversity": 4.2,
+        "missing": "No clear angel networks; all are funds or accelerators. | Some regional/sector-specific Indian angel networks and micro-VCs; more direct partner contacts. | More mainstream seed VCs, sector-specific SaaS funds, and larger angel syndicates. | Direct contacts at top-tier B2B SaaS-focused VCs, more named partners, some pure-play SaaS funds.",
+        "systemic_issues": [
+          "No direct angel network contacts",
+          "All generic inboxes, no named decision makers",
+          "Some non-India or unclear geography targets",
+          "Inclusion of directories/aggregators",
+          "Few direct partner/decision-maker contacts",
+          "Some off-topic or aggregator entries"
+        ]
+      },
+      "emails": [
+        {
+          "id": "fd4a7b1c088e68b5",
+          "to": "pitches@eximiusvc.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hi Eximius,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, with 40 paying customers and Rs 25 lakh ARR. We are preparing to raise pre-seed funding to scale further.\n\nEximius VC invests in SaaS startups at the pre-seed and seed stages, which aligns with our current funding needs. Could you please share how I might apply for pre-seed or seed funding through Eximius Ventures or if an introduction to the relevant team member is possible? A brief call to discuss this would be appreciated.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "0d94a5dcbf6fa77d",
+          "to": "hello@3one4capital.com",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS",
+          "body": "Hello 3One4Capital team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an ARR of Rs 25 lakh.\n\nI see that 3One4Capital invests in early-stage SaaS companies from pre-seed to Series A in India. I am exploring pre-seed or seed funding options to grow our business.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at 3One4Capital? I would appreciate any guidance on how to apply or engage with your fund.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "53f5dc337bb0c058",
+          "to": "ideas@startupxseed.in",
+          "subject": "Introduction request for B2B SaaS seed funding",
+          "body": "Hello StartupXseed team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nI see that StartupXseed invests in early-stage B2B ventures across sectors including SaaS, which aligns with my current stage and product focus. I am exploring pre-seed or seed funding options to scale further.\n\nCould you please guide me on how to apply for funding or connect me with the appropriate contacts at StartupXseed who handle B2B SaaS startups? A brief introduction or information on your process would be greatly appreciated.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "145476c45748e24f",
+          "to": "info@bdsvc.com",
+          "subject": "Seeking pre-seed funding contacts at BdsVC",
+          "body": "Hello BdsVC team,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently looking to raise pre-seed funding to scale further. BdsVC\u2019s focus on early-stage SaaS startups in India aligns with our stage and sector.\n\nCould you please connect me with the person or team handling pre-seed or seed investments for B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "3781f58e5a0d68e0",
+          "to": "info@kalaari.com",
+          "subject": "Request for pre-seed investment contact at Kalaari",
+          "body": "Hello Kalaari Capital team,\n\nKalaari Capital's focus on early-stage tech startups aligns with my current stage as founder of a B2B SaaS startup.\n\nMy company provides invoice-reconciliation software, currently serving 40 paying customers and generating Rs 25 lakh in ARR.\n\nI am exploring pre-seed or seed funding options to support growth and would appreciate if you could connect me with the person or team managing investments in B2B SaaS startups at Kalaari Capital.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "03faeba571d5df06",
+          "to": "contact@endiya.com",
+          "subject": "Introduction request for seed funding at Endiya",
+          "body": "Hello Endiya team,\n\nI am founder of a B2B SaaS startup offering invoice-reconciliation services. We have 40 paying customers and generate Rs 25 lakh ARR.\n\nI understand Endiya focuses on early-stage investments in enterprise and SaaS startups, including seed rounds for Indian product companies. While my startup operates in B2B SaaS, I am currently exploring pre-seed or seed funding options.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at Endiya? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and consideration.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "e6461128b6183e4c",
+          "to": "connect@pedalstart.com",
+          "subject": "Pre-seed funding inquiry for B2B SaaS startup",
+          "body": "Hello PedalStart team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation. We currently serve 40 paying customers and generate Rs 25 lakh in annual recurring revenue.\n\nI am interested in raising pre-seed funding and understand PedalStart leads rounds with $150K cheques for idea-stage and pre-seed founders. Given your focus on supporting startups from idea to next raise, I would appreciate any information or introductions to Indian investors who back B2B SaaS startups at the pre-seed or seed stage.\n\nCould you please advise on how to apply for funding through PedalStart or connect me with the relevant contacts?\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "b94f27222972f57c",
+          "to": "info@venturecatalysts.in",
+          "subject": "Seeking pre-seed funding info for B2B SaaS startup",
+          "body": "Hello Venture Catalysts++ team,\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nI am exploring pre-seed or seed funding opportunities with Indian investors who support B2B SaaS startups. Given Venture Catalysts++ is India's largest early-stage investment platform providing capital and development support, I wanted to reach out.\n\nCould you connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "c642dd96231e4ff5",
+          "to": "info@unicornivc.com",
+          "subject": "Seeking pre-seed funding for B2B SaaS startup",
+          "body": "Hello Unicorn India Ventures team,\n\nI am the founder of an invoice-reconciliation SaaS startup with 40 paying customers and Rs 25 lakh ARR.\n\nWe are currently exploring pre-seed or seed funding opportunities to grow our B2B SaaS business.\n\nSince Unicorn India Ventures focuses on early-stage technology-driven startups including SaaS at seed and early growth, could you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups?\n\nI would appreciate any guidance on how to apply or whom to contact for such funding at your firm.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "55193b6b7efd3047",
+          "to": "info@primevp.in",
+          "subject": "Seeking pre-seed funding guidance for B2B SaaS",
+          "body": "Hello PrimeVP team,\n\nPrimeVP backs early-stage SaaS startups, with over 50 investments and a focus on seed rounds in fintech, SaaS, and edtech.\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation software, currently serving 40 paying customers and generating Rs 25 lakh ARR.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups? I am interested in exploring funding opportunities and would appreciate guidance on how to apply.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "bc6775d7cabe446f",
+          "to": "info@hyderabadangels.in",
+          "subject": "Seeking pre-seed funding contacts for B2B SaaS startup",
+          "body": "Hi Hyderabad,\n\nHyderabad Angels' long-standing role in backing seed and pre-seed startups across India caught my attention.\n\nI am the founder of a B2B SaaS startup focused on invoice reconciliation, currently serving 40 paying customers with an annual recurring revenue of Rs 25 lakh.\n\nCould you please connect me with the person or team handling pre-seed or seed investments in B2B SaaS startups at Hyderabad Angels? I am exploring options to raise pre-seed funding and would appreciate guidance on how to apply or proceed.\n\nThank you for your time and assistance.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "person_greeting_on_role_inbox:Hyderabad",
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        },
+        {
+          "id": "e77020bbec64a206",
+          "to": "info@100unicorns.in",
+          "subject": "Intro request for seed funding at 100 Unicorns",
+          "body": "Hello 100 Unicorns team,\n\nI am the founder of a B2B SaaS startup offering invoice-reconciliation software. We currently serve 40 paying customers and have reached Rs 25 lakh in ARR.\n\nI understand 100 Unicorns supports early-stage startups in India with seed funding and mentorship. I am looking to raise pre-seed or seed funding to grow further.\n\nCould you connect me with the person or team handling investments in B2B SaaS startups? I would appreciate any guidance on how to apply or proceed with 100 Unicorns.\n\nThank you for your time.\n\nBest regards,\nTest Founder",
+          "pipeline_grade": null,
+          "lint": [
+            "placeholder_sender"
+          ],
+          "grounded": 5,
+          "unsupported": [],
+          "personal": 4,
+          "ask": 5,
+          "tone": 5,
+          "salutation_ok": true,
+          "reply_odds": "high",
+          "would_send": true,
+          "problems": [],
+          "fix": "No change needed."
+        }
+      ]
+    }
+  },
+  "cost": {
+    "paid_calls": 5,
+    "est_usd": 0.0621
+  }
+}

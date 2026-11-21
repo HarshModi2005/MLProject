@@ -1,0 +1,39 @@
+{
+  "name": "s2_phd_marine_aus",
+  "split": "stress",
+  "playbook": "phd_positions",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Find PhD supervisors in marine ecology",
+    "ask": "A conversation about PhD supervision",
+    "persona": {
+      "description": "Professors in marine ecology and coral reef research at universities in Australia and New Zealand",
+      "roles": [
+        "Professor",
+        "Associate Professor"
+      ]
+    },
+    "topics": [
+      "coral reef ecology",
+      "marine ecology"
+    ],
+    "locations": [
+      "Australia",
+      "New Zealand"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "MSc student",
+    "summary": "MSc in marine biology; thesis on coral bleaching recovery"
+  },
+  "facts": [
+    "thesis on coral bleaching recovery"
+  ],
+  "prompt": "I finished an MSc on coral bleaching recovery; find marine ecology professors in Australia or New Zealand who could supervise a PhD",
+  "playbook_ok": [
+    "phd_positions",
+    "academic"
+  ]
+}

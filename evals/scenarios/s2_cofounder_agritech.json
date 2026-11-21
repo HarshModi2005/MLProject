@@ -1,0 +1,37 @@
+{
+  "name": "s2_cofounder_agritech",
+  "split": "stress",
+  "playbook": "cofounder",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Find a technical co-founder",
+    "ask": "A coffee chat about building together",
+    "persona": {
+      "description": "Machine learning engineers who have built crop or soil analytics projects",
+      "roles": [
+        "Engineer",
+        "Founder"
+      ]
+    },
+    "topics": [
+      "crop disease detection",
+      "precision agriculture ML"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Agronomist founder",
+    "summary": "Agronomist with 8 years in farm advisory; 200 farmers on a WhatsApp service"
+  },
+  "facts": [
+    "8 years in farm advisory",
+    "200 farmers on WhatsApp"
+  ],
+  "prompt": "I'm an agronomist starting a crop-advisory company and need a technical co-founder; find ML engineers who built crop disease detection or precision agriculture projects",
+  "playbook_ok": [
+    "cofounder",
+    "recruiting"
+  ]
+}

@@ -30,6 +30,34 @@ def wilson(k: int, n: int, z: float = 1.96) -> Optional[List[float]]:
     return [round(max(0.0, centre - half), 3), round(min(1.0, centre + half), 3)]
 
 
+MIN_CLUSTERS = 5
+
+
+def cluster_ci(parts: List[tuple], draws: int = 4000, seed: int = 7, z: float = 1.96) -> Optional[Dict[str, Any]]:
+    """95% interval for a pooled precision when the slots come in clusters (one cluster per scenario: its slots share a
+    query, its sources and its playbook, so they are not independent). parts = [(good, slots), ...]. Resamples whole
+    scenarios with replacement. With fewer than MIN_CLUSTERS scenarios a bootstrap is not trustworthy, so it falls back
+    to the Wilson interval, which is too narrow for clustered data, and says so in "method"."""
+    import random
+
+    parts = [(int(g), int(n)) for g, n in parts if n]
+    slots = sum(n for _, n in parts)
+    if not slots:
+        return None
+    good = sum(g for g, _ in parts)
+    if len(parts) < MIN_CLUSTERS:
+        return {"ci": wilson(good, slots, z), "method": f"wilson (only {len(parts)} scenario(s); too narrow if they differ)"}
+    rng = random.Random(seed)
+    stats = []
+    for _ in range(draws):
+        pick = [parts[rng.randrange(len(parts))] for _ in parts]
+        n = sum(x for _, x in pick)
+        stats.append(sum(g for g, _ in pick) / n)
+    stats.sort()
+    lo, hi = stats[int(draws * 0.025)], stats[min(draws - 1, int(draws * 0.975))]
+    return {"ci": [round(lo, 3), round(hi, 3)], "method": f"bootstrap over {len(parts)} scenarios"}
+
+
 def evaluate_labels(results: List[Dict[str, Any]], labels: Dict[str, Any], ks=(5, 10, 25)) -> Dict[str, Any]:
     """Precision of a ranked list against labels {"good": [...], "bad": [...], "wrong_address": [...]}.
     `wrong_address` = the right person but an address that is not theirs: not good (the email would go astray)."""

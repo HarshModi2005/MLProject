@@ -1,0 +1,46 @@
+{
+  "name": "stress_municipal_iot",
+  "split": "stress",
+  "playbook": "government_tenders",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Pilot smart water meters with municipal corporations",
+    "ask": "A meeting about a 3-month pilot",
+    "persona": {
+      "description": "Municipal corporations and water boards in Maharashtra and Gujarat that run water supply",
+      "roles": [
+        "Commissioner",
+        "Executive Engineer"
+      ],
+      "org_types": [
+        "municipal corporation",
+        "water board"
+      ]
+    },
+    "topics": [
+      "smart water meter",
+      "water supply",
+      "non-revenue water"
+    ],
+    "locations": [
+      "Maharashtra",
+      "Gujarat"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of an IoT startup",
+    "summary": "Smart water meters cutting non-revenue water 18% in a 5,000-home pilot."
+  },
+  "facts": [
+    "Cut non-revenue water 18%",
+    "5,000-home pilot"
+  ],
+  "prompt": "we make IoT smart water meters and want a 3-month pilot with municipal corporations or water boards in Maharashtra and Gujarat",
+  "playbook_ok": [
+    "government_tenders",
+    "partnerships",
+    "b2b_sales"
+  ]
+}

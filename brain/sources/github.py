@@ -42,6 +42,8 @@ class GitHubSource:
             headers["Authorization"] = f"Bearer {token}"
         self.client = client or httpx.Client(timeout=20, headers=headers)
         self.requests = 0
+        self.failures = 0
+        self.last_failure = ""
 
     def _get(self, path: str, params: Optional[dict] = None) -> Optional[dict]:
         key = Cache.key(path, params)
@@ -53,9 +55,14 @@ class GitHubSource:
             r = self.client.get(API + path, params=params)
         except httpx.HTTPError as e:
             log.warning("GitHub request failed: %s", e)
+            self.failures += 1
+            self.last_failure = type(e).__name__
             return None
         if r.status_code != 200:
             log.warning("GitHub %s -> HTTP %s (rate limit? set GITHUB_TOKEN)", path, r.status_code)
+            self.failures += 1
+            self.last_failure = (f"HTTP {r.status_code}, rate limited: set GITHUB_TOKEN" if r.status_code in (403, 429)
+                                 else f"HTTP {r.status_code}")
             return None
         data = r.json()
         self.cache.set("github", key, data, ttl=7 * 86400)

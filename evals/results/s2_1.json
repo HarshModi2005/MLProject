@@ -1,0 +1,1306 @@
+{
+  "label": "s2_1",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 69,
+      "qualified": 66,
+      "reachable": 8,
+      "passed_judge": 8,
+      "shortlisted": 8,
+      "good@K": 7,
+      "precision@K": 0.7,
+      "good_reachable@K": 7,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 8
+      },
+      "mean_score": 0.75,
+      "distinct_orgs": 8,
+      "proof_rate": 0.5,
+      "personal_email_rate": 0.0,
+      "search_calls": 38,
+      "llm_paid_calls": 53,
+      "llm_usd": 0.0231,
+      "pages_fetched": 198,
+      "seconds": 293.8,
+      "usd_per_good": 0.0086,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 20,
+        "extract_orgs": 9,
+        "prejudge": 7,
+        "judge": 1,
+        "draft": 8,
+        "verify": 3,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "orgs": 56,
+        "lookalike": 26
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 8 of 10 wanted contacts have a confident address. This kind of campaign (Grants and CSR funding) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 8 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 53,
+          "orgs": 49,
+          "lookalike": 23,
+          "list": 16
+        },
+        "qualified": {
+          "web": 50,
+          "orgs": 48,
+          "lookalike": 21,
+          "list": 16
+        },
+        "enriched": {
+          "web": 12,
+          "orgs": 18,
+          "lookalike": 4,
+          "list": 8
+        },
+        "reachable": {
+          "web": 6,
+          "orgs": 8,
+          "list": 2
+        },
+        "passed_judge": {
+          "web": 6,
+          "orgs": 8,
+          "list": 2
+        },
+        "shortlisted": {
+          "web": 6,
+          "orgs": 8,
+          "list": 2
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 2,
+          "search_calls": 16,
+          "fetches": 4,
+          "llm_calls": 18,
+          "seconds": 61.4,
+          "found": 54,
+          "new": 48,
+          "qualified": 48
+        },
+        "lookalike": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 3,
+          "llm_calls": 4,
+          "seconds": 41.45,
+          "found": 16,
+          "new": 13,
+          "qualified": 12
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Bal Raksha Bharat",
+          "org": "Bal Raksha Bharat",
+          "email": "info@balrakshabharat.org",
+          "score": 0.8443,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading NGO in Madhya Pradesh working on children's education and protection"
+          ]
+        },
+        {
+          "name": "Koitafoundation",
+          "org": "Koitafoundation",
+          "email": "info@koitafoundation.org",
+          "score": 0.8021,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Sponsors residential program teaching software programming to girls in Rajasthan"
+          ]
+        },
+        {
+          "name": "Light of Life Trust",
+          "org": "Light of Life Trust",
+          "email": "connect@lightoflifetrust.org",
+          "score": 0.796,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Empowers rural India through education and women's upliftment"
+          ]
+        },
+        {
+          "name": "Sambhali Trust",
+          "org": "Sambhali Trust",
+          "email": "info@sambhali.org",
+          "score": 0.7599,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Supports women, girls, children through education and empowerment"
+          ]
+        },
+        {
+          "name": "IDRF",
+          "org": "IDRF",
+          "email": "info@idrf.org",
+          "score": 0.7599,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Supports women empowerment and education in Madhya Pradesh"
+          ]
+        },
+        {
+          "name": "Prayatn Sanstha",
+          "org": "Prayatn Sanstha",
+          "email": "prayatnraj@yahoo.com",
+          "score": 0.7122,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Focus on education and community action to combat inequality"
+          ]
+        },
+        {
+          "name": "Sky Social",
+          "org": "Sky Social",
+          "email": "skysocialorg@gmail.com",
+          "score": 0.7122,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Youth-led feminist group advancing gender equality"
+          ]
+        },
+        {
+          "name": "Vaagdhara",
+          "org": "Vaagdhara",
+          "email": "vaagdhara@gmail.com",
+          "score": 0.6144,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Works for holistic development of tribal communities"
+          ]
+        }
+      ],
+      "intake_playbook": "grants",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Rajasthan",
+        "Madhya Pradesh",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "girls' education funding",
+        "CSR funding for education",
+        "foundations supporting education",
+        "corporate social responsibility teams"
+      ],
+      "intake_ask_type": "intro",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 8,
+        "pass_rate": 0.875,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ]
+        ],
+        "avg_specificity": 4.38,
+        "avg_relevance": 5.0,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": [
+          "None needed.",
+          "None needed.",
+          "None needed.",
+          "None needed.",
+          "None needed."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@balrakshabharat.org",
+          "subject": "Supporting girls' education in Rajasthan and MP",
+          "body": "Hello Bal Raksha Bharat team,\n\nBal Raksha Bharat's work improving children's lives through education and protection in Madhya Pradesh is well known. We run a registered trust teaching coding to 300 girls across 12 villages in Rajasthan and Madhya Pradesh, empowering rural girls through education.\n\nOur trust has been active since 2019, focusing on building skills that can open new opportunities for these girls. To expand our impact, we seek CSR funding from foundations and companies that support girls' education in these states.\n\nCould you provide information or connect us with your CSR team or foundation contacts that fund girls' education in Rajasthan and Madhya Pradesh? This would help us explore potential collaboration to benefit more girls in these regions.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed."
+          }
+        },
+        {
+          "to": "info@koitafoundation.org",
+          "subject": "Support for Girls' Coding Education in Rajasthan",
+          "body": "Hello Koitafoundation team,\n\nWe run a registered trust teaching coding to 300 girls across 12 villages in Rajasthan and Madhya Pradesh. Our work focuses on empowering rural girls by providing them with technical skills that can improve their future opportunities.\n\nI understand Koita Foundation supports Abhilasha, a residential program teaching software programming to underprivileged girls in Rajasthan, and partners with NGOs for technical assistance.\n\nCould you provide information or connect us with your CSR team or foundation contacts that fund girls' education in Rajasthan and Madhya Pradesh? This would help us explore potential support to scale our impact in these underserved villages.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed."
+          }
+        },
+        {
+          "to": "connect@lightoflifetrust.org",
+          "subject": "Partnering on rural girls' education programs",
+          "body": "Hello Light of Life Trust team,\n\nLight of Life Trust empowers rural India through education and women's upliftment, including in Madhya Pradesh and Rajasthan.\n\nSince 2019, I have run a registered trust teaching coding to 300 girls across 12 villages. Our program aims to empower rural girls through digital skills, addressing educational gaps in these regions.\n\nWe are seeking CSR funding from foundations or companies that support girls' education in Rajasthan and Madhya Pradesh. Could you provide information or connect us with your CSR team or foundation contacts involved in funding such initiatives?\n\nThis connection would help us expand our impact and align with your mission to transform lives through education and hope.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed."
+          }
+        },
+        {
+          "to": "info@sambhali.org",
+          "subject": "Request for CSR contacts on girls' education",
+          "body": "Hello Sambhali Trust team,\n\nWe run a registered trust teaching coding to 300 girls across 12 villages in Rajasthan and Madhya Pradesh, focusing on empowering rural girls through education.\n\nCould you provide information or connect us with your CSR team or foundation contacts that fund girls' education in Rajasthan and Madhya Pradesh? This would help us explore potential support for continuing and expanding our work.\n\nPlease let me know who handles CSR funding for girls' education at Sambhali Trust or if there is a relevant contact we can reach out to.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Please let me know who handles CSR funding for girls' education at Sambhali Trust or if there is a relevant contact we can reach out to."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed."
+          }
+        },
+        {
+          "to": "info@idrf.org",
+          "subject": "Supporting girls' education in Madhya Pradesh",
+          "body": "Hello IDRF team,\n\nOur registered trust teaches coding to 300 girls across 12 villages, focusing on empowering rural girls through education. We operate in regions including Rajasthan and Madhya Pradesh.\n\nIDRF\u2019s work supporting women\u2019s empowerment and education in Madhya Pradesh, particularly projects like the Sagar Girls Hostel & Midli Project addressing tribal female literacy, aligns with the communities we serve.\n\nCould you provide information or connect us with your CSR team or foundation contacts that fund girls' education in Rajasthan and Madhya Pradesh? This would help us explore potential support and collaboration opportunities.\n\nPlease point me to whoever handles CSR funding for girls' education in these states if possible.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "None needed."
+          }
+        },
+        {
+          "to": "prayatnraj@yahoo.com",
+          "subject": "Supporting girls' education in Rajasthan and MP",
+          "body": "Hi Prayatn,\n\nPrayatn Sanstha's focus on education and community action to combat inequality aligns with the work we do through our registered trust. Since 2019, we have been teaching coding to 300 girls across 12 villages, empowering them with skills for the future.\n\nWe are seeking CSR funding from foundations or companies that support girls' education in Rajasthan and Madhya Pradesh to expand this initiative. Could you provide information or connect us with your CSR team or foundation contacts that fund girls' education in these regions?\n\nYour support could help us reach more girls and foster positive social change through education and skill development. I look forward to any guidance or connections you can share.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "skysocialorg@gmail.com",
+          "subject": "Collaboration opportunity on girls' education",
+          "body": "Hi Sky,\n\nSky Social's work promoting menstrual health among girls in Madhya Pradesh shows your commitment to improving girls' lives in the region.\n\nI run a registered trust that teaches coding to 300 girls across 12 villages in Rajasthan and Madhya Pradesh. Our programs empower rural girls with digital skills, broadening their future opportunities.\n\nWe seek CSR funding from foundations and companies supporting girls' education in these states. Could you provide information or connect us with your CSR team or foundation contacts that fund girls' education in Rajasthan and Madhya Pradesh?\n\nThank you for considering this request to support education and empowerment for rural girls.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "vaagdhara@gmail.com",
+          "subject": "Collaboration on education support for tribal girls",
+          "body": "Hello Vaagdhara team,\n\nVaagdhara supports tribal students with financial aid and information for higher education. We run a registered trust teaching coding to 300 girls in 12 villages, empowering rural girls through education.\n\nWe seek CSR funding from foundations and companies that support girls' education in Rajasthan and Madhya Pradesh. Our program focuses on building skills that can create new opportunities for these girls.\n\nCould you provide information or connect us with your CSR team or foundation contacts that fund girls' education in Rajasthan and Madhya Pradesh? This would help us explore potential collaboration to expand educational support for tribal communities.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ],
+      "name": "s2_grants_rural_girls",
+      "split": "stress",
+      "playbook": "grants",
+      "target": 10
+    },
+    {
+      "unique": 83,
+      "qualified": 83,
+      "reachable": 2,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 11,
+      "llm_paid_calls": 12,
+      "llm_usd": 0.0086,
+      "pages_fetched": 49,
+      "seconds": 110.4,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "extract": 5,
+        "prejudge": 5,
+        "judge": 1
+      },
+      "by_source": {
+        "github": 25,
+        "npm": 35,
+        "web": 69
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 2 of 12 wanted contacts have a confident address. This kind of campaign (Open-source maintainers and developers) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 0 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "github": 25,
+          "npm": 35,
+          "web": 23
+        },
+        "qualified": {
+          "github": 25,
+          "web": 23,
+          "npm": 35
+        },
+        "enriched": {
+          "github": 3,
+          "web": 2
+        },
+        "reachable": {
+          "github": 2
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "github": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 9.28,
+          "found": 25,
+          "new": 25,
+          "qualified": 2
+        },
+        "npm": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 3,
+          "llm_calls": 0,
+          "seconds": 2.87,
+          "found": 35,
+          "new": 35,
+          "qualified": 35
+        },
+        "web": {
+          "runs": 2,
+          "search_calls": 8,
+          "fetches": 23,
+          "llm_calls": 5,
+          "seconds": 32.97,
+          "found": 46,
+          "new": 23,
+          "qualified": 17
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "oss_maintainers",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "Python validation libraries",
+        "Python CLI libraries",
+        "Python open-source maintainers"
+      ],
+      "intake_ask_type": "review",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "name": "s2_oss_python_feedback",
+      "split": "stress",
+      "playbook": "oss_maintainers",
+      "target": 12
+    },
+    {
+      "unique": 82,
+      "qualified": 81,
+      "reachable": 8,
+      "passed_judge": 10,
+      "shortlisted": 10,
+      "good@K": 8,
+      "precision@K": 0.667,
+      "good_reachable@K": 8,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 10
+      },
+      "mean_score": 0.855,
+      "distinct_orgs": 10,
+      "proof_rate": 0.7,
+      "personal_email_rate": 0.0,
+      "search_calls": 39,
+      "llm_paid_calls": 44,
+      "llm_usd": 0.027,
+      "pages_fetched": 153,
+      "seconds": 320.3,
+      "usd_per_good": 0.0081,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 6,
+        "prejudge": 7,
+        "judge": 2,
+        "extract_orgs": 3,
+        "draft": 11,
+        "verify": 5,
+        "draft_fix": 7
+      },
+      "by_source": {
+        "places": 54,
+        "orgs": 40
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 10 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 46,
+          "web": 24,
+          "orgs": 38,
+          "list": 14
+        },
+        "qualified": {
+          "web": 23,
+          "orgs": 37,
+          "places": 46,
+          "list": 14
+        },
+        "enriched": {
+          "web": 6,
+          "orgs": 6,
+          "places": 20
+        },
+        "reachable": {
+          "places": 5,
+          "web": 6,
+          "orgs": 7,
+          "list": 1
+        },
+        "passed_judge": {
+          "places": 5,
+          "web": 4,
+          "orgs": 5,
+          "list": 1
+        },
+        "shortlisted": {
+          "places": 5,
+          "web": 4,
+          "orgs": 5,
+          "list": 1
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 3,
+          "search_calls": 18,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 39.75,
+          "found": 54,
+          "new": 45,
+          "qualified": 45
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 3,
+          "llm_calls": 4,
+          "seconds": 14.3,
+          "found": 19,
+          "new": 18,
+          "qualified": 13
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Niraj Public School",
+          "org": "Niraj Public School",
+          "email": "info@nirajpublicschool.com",
+          "score": 0.9357,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "ICSE school in Hyderabad"
+          ]
+        },
+        {
+          "name": "Hpsbegumpet",
+          "org": "Hpsbegumpet",
+          "email": "contactus@hpsbegumpet.org.in",
+          "score": 0.9357,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "ICSE school in Hyderabad"
+          ]
+        },
+        {
+          "name": "Vikas The Concept School -",
+          "org": "Vikas The Concept School -",
+          "email": "info@vikasconcept.com",
+          "score": 0.9357,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "CBSE school in Hyderabad"
+          ]
+        },
+        {
+          "name": "EuroSchool",
+          "org": "EuroSchool",
+          "email": "connect@euroschoolindia.com",
+          "score": 0.9286,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Top CBSE & ICSE school in India"
+          ]
+        },
+        {
+          "name": "Pearsonschoolkompally",
+          "org": "Pearsonschoolkompally",
+          "email": "admissions1@pearsonschoolkompally.edu.in",
+          "score": 0.9286,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "CBSE school located in Hyderabad"
+          ]
+        },
+        {
+          "name": "Academic Heights Public School",
+          "org": "Academic Heights Public School",
+          "email": "franchisee@academicheights.in",
+          "score": 0.9286,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "CBSE K-12 school with branches in Hyderabad"
+          ]
+        },
+        {
+          "name": "CHIREC International School",
+          "org": "CHIREC International School",
+          "email": "office.gb@chirec.ac.in",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Offers CBSE curriculum in Hyderabad"
+          ]
+        },
+        {
+          "name": "The Clement Grammar School",
+          "org": "The Clement Grammar School",
+          "email": "info@theclementgrammarschool.com",
+          "score": 0.7388,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "School in Hyderabad"
+          ]
+        },
+        {
+          "name": "Creya Learning",
+          "org": "Creya Learning",
+          "email": "info@creyalearning.com",
+          "score": 0.6895,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "STEM and robotics focus"
+          ]
+        },
+        {
+          "name": "United Way of Hyderabad",
+          "org": "United Way of Hyderabad",
+          "email": "contact@unitedwayhyderabad.org",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "NGO, not a school"
+          ]
+        }
+      ],
+      "intake_playbook": "school_outreach",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Hyderabad",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "CBSE schools",
+        "ICSE schools",
+        "K-12 education",
+        "STEM education",
+        "extracurricular activities"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 10,
+        "pass_rate": 0.8,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ],
+          [
+            "ALL-CAPS word",
+            1
+          ]
+        ],
+        "avg_specificity": 4.0,
+        "avg_relevance": 4.4,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.6,
+        "critiques": [
+          "Specify the school's name in the email.",
+          "Include a more personalized greeting.",
+          "Add a specific mention of the school's location.",
+          "Mention the school's name directly in the email.",
+          "Remove the extra ask about connecting to the right person."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@nirajpublicschool.com",
+          "subject": "Free Robotics Workshop for Niraj Public School",
+          "body": "Hello Niraj Public School team,\n\nI am reaching out to offer Niraj Public School a free one-hour robotics workshop for your ICSE students in Hyderabad. The workshop requires minimal time from teachers and includes a robotics kit that costs the school nothing during the pilot.\n\nI have taught over 1,500 students in similar workshops focused on hands-on learning and practical experience.\n\nWould you be interested in hosting this free one-hour robotics workshop for your students? Please let me know if you can connect me with the person responsible for extracurricular or STEM activities to discuss this further.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contactus@hpsbegumpet.org.in",
+          "subject": "Free Robotics Workshop for Your ICSE Students",
+          "body": "Hello Hpsbegumpet team,\n\nI am a robotics educator who has taught over 1,500 students using a hands-on approach. I offer a free one-hour robotics workshop pilot that requires no cost for the robotics kit during the trial.\n\nThe pilot is designed to be easy to host and to provide a practical robotics experience for students.\n\nWould you be interested in hosting a free one-hour robotics workshop for your students? Please let me know if I can provide more details or if you could connect me with the person responsible for extracurricular or STEM activities.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the school's name in the email."
+          }
+        },
+        {
+          "to": "info@vikasconcept.com",
+          "subject": "Offer: No-Cost Robotics Pilot for CBSE Schools",
+          "body": "Hello Vikas The Concept School - team,\n\nVikas The Concept School is a CBSE school in Bachupally, Hyderabad, with admissions open for 2027\u201328.\n\nI am a robotics educator who has taught 1,500 students using a kit that costs schools nothing during the pilot phase. I offer a free one-hour robotics workshop designed to engage students in STEM without requiring extra time from teachers or resources from the school.\n\nWould you be interested in hosting a free one-hour robotics workshop for your students? Please let me know if this is something your school would consider or kindly point me to whoever manages extracurricular or STEM activities.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Vikas The Concept School is the best CBSE School in Bachupally, Hyderabad"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a more personalized greeting."
+          }
+        },
+        {
+          "to": "connect@euroschoolindia.com",
+          "subject": "Free one-hour robotics workshop for EuroSchool",
+          "body": "Hello EuroSchool team,\n\nWith admissions open, I am reaching out to offer a free one-hour robotics workshop for EuroSchool students.\n\nI am a robotics educator who has taught over 1,500 students. The pilot workshop uses a robotics kit that costs schools nothing during the trial and requires minimal time from teachers.\n\nWould EuroSchool be interested in hosting this free workshop for your students? Please reply if you would like to explore this opportunity.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Add a specific mention of the school's location."
+          }
+        },
+        {
+          "to": "admissions1@pearsonschoolkompally.edu.in",
+          "subject": "Robotics Workshop Opportunity for CBSE Schools",
+          "body": "Hello Pearsonschoolkompally team,\n\nI am offering your school a free one-hour robotics workshop as a pilot. The robotics kit costs the school nothing during this pilot phase.\n\nI have taught robotics to over 1,500 students and designed this pilot to fit easily into school schedules without burdening teachers.\n\nWould you be interested in hosting this free one-hour robotics workshop for your students? Please let me know if you would like to explore this opportunity.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention the school's name directly in the email."
+          }
+        },
+        {
+          "to": "franchisee@academicheights.in",
+          "subject": "Invite Academic Heights to a free robotics session",
+          "body": "Hello Academic Heights Public School team,\n\nAcademic Heights Public School\u2019s commitment to NEP-aligned learning and STEAM labs stands out in Hyderabad\u2019s CBSE schools.\n\nI am a robotics educator who has taught 1,500 students through workshops where the robotics kit costs schools nothing during the pilot. I offer a free one-hour robotics workshop designed to engage students with minimal time required from teachers.\n\nWould you be interested in hosting this free pilot workshop for your students? It could complement your existing STEAM initiatives without any cost to your school.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "office.gb@chirec.ac.in",
+          "subject": "Robotics workshop opportunity for your school",
+          "body": "Hello CHIREC International School team,\n\nCHIREC International School provides education from preschool to high school in Hyderabad, including the CBSE curriculum.\n\nI am a robotics educator who has taught 1,500 students using a robotics kit that costs schools nothing during the pilot phase. I offer a free one-hour robotics workshop that requires minimal time from teachers.\n\nWould you be interested in hosting this free one-hour robotics workshop for your students? Please let me know or kindly connect me with the person responsible for extracurricular or STEM activities at CHIREC International School.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "ALL-CAPS word"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Remove the extra ask about connecting to the right person."
+          }
+        },
+        {
+          "to": "info@theclementgrammarschool.com",
+          "subject": "Robotics Workshop Opportunity for Clement Grammar",
+          "body": "Hello Clement Grammar School team,\n\nThe Clement Grammar School offers quality education and modern learning in Hyderabad. I am reaching out to propose a free one-hour robotics workshop for your students as a pilot program.\n\nI have taught robotics to over 1,500 students and provide the robotics kit at no cost to schools during the pilot phase. The workshop requires minimal time from your teachers and aims to introduce students to robotics in an engaging way.\n\nWould you be interested in hosting this free workshop for your students? Please let me know if you would like to discuss this further or if you could connect me with the person responsible for extracurricular or STEM activities at your school.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Remove the extra ask about connecting to the right person."
+          }
+        },
+        {
+          "to": "info@creyalearning.com",
+          "subject": "Host a Free Robotics Workshop at Creya Learning",
+          "body": "Hello Creya Learning team,\n\nI have taught robotics to 1,500 students using a kit that costs schools nothing during the pilot phase. The workshop lasts one hour and requires minimal time from teachers, providing students with hands-on learning.\n\nWould you be interested in hosting a free one-hour robotics workshop for your students? Please let me know if you handle extracurricular or STEM activities or can direct me to the right person.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make it more specific to Creya Learning's existing programs."
+          }
+        },
+        {
+          "to": "contact@unitedwayhyderabad.org",
+          "subject": "Robotics Workshop Opportunity for Hyderabad Students",
+          "body": "Hello United Way of Hyderabad team,\n\nI am a robotics educator who has taught over 1,500 students using kits that cost schools nothing during a pilot.\n\nI am offering a free one-hour robotics workshop for your students. This pilot requires minimal time from teachers and provides hands-on STEM experience to help engage students in robotics.\n\nWould you be interested in hosting this workshop? Please let me know if you are interested or could connect me with the person responsible for extracurricular or STEM activities.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Tailor the email to align with United Way's mission."
+          }
+        }
+      ],
+      "name": "s2_school_stem_hyd",
+      "split": "stress",
+      "playbook": "school_outreach",
+      "target": 12
+    },
+    {
+      "unique": 58,
+      "qualified": 58,
+      "reachable": 9,
+      "passed_judge": 7,
+      "shortlisted": 7,
+      "good@K": 6,
+      "precision@K": 0.6,
+      "good_reachable@K": 6,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 7
+      },
+      "mean_score": 0.816,
+      "distinct_orgs": 7,
+      "proof_rate": 0.429,
+      "personal_email_rate": 0.0,
+      "search_calls": 38,
+      "llm_paid_calls": 41,
+      "llm_usd": 0.0214,
+      "pages_fetched": 169,
+      "seconds": 289.7,
+      "usd_per_good": 0.0098,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 11,
+        "extract_orgs": 6,
+        "prejudge": 5,
+        "judge": 3,
+        "draft": 7,
+        "verify": 3,
+        "draft_fix": 3
+      },
+      "by_source": {
+        "orgs": 121,
+        "places": 6
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 7 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 35,
+          "orgs": 57,
+          "places": 5,
+          "list": 28
+        },
+        "qualified": {
+          "list": 28,
+          "orgs": 57,
+          "places": 5,
+          "web": 35
+        },
+        "enriched": {
+          "list": 18,
+          "orgs": 27,
+          "places": 5,
+          "web": 12
+        },
+        "reachable": {
+          "web": 8,
+          "orgs": 10,
+          "list": 4,
+          "places": 1
+        },
+        "passed_judge": {
+          "web": 7,
+          "orgs": 7,
+          "list": 2,
+          "places": 1
+        },
+        "shortlisted": {
+          "web": 7,
+          "orgs": 7,
+          "list": 2,
+          "places": 1
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 3,
+          "search_calls": 16,
+          "fetches": 5,
+          "llm_calls": 13,
+          "seconds": 74.92,
+          "found": 109,
+          "new": 60,
+          "qualified": 58
+        },
+        "places": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 10.85,
+          "found": 6,
+          "new": 3,
+          "qualified": 0
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Animal Rescue Trust, Pune",
+          "org": "Animal Rescue Trust, Pune",
+          "email": "info@animalrescuetrust.org",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "places"
+          ],
+          "reasons": [
+            "Animal Rescue Trust is a registered animal rescue NGO in Pune"
+          ]
+        },
+        {
+          "name": "SAW",
+          "org": "SAW",
+          "email": "info@sawct.org",
+          "score": 0.8668,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "SAW is dedicated to animal welfare in Pune"
+          ]
+        },
+        {
+          "name": "Animalfarmrescue",
+          "org": "Animalfarmrescue",
+          "email": "animalfarm.pune@gmail.com",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Animalfarmrescue rescues and nurtures stray animals"
+          ]
+        },
+        {
+          "name": "Welcome To Karma Foundation",
+          "org": "Welcome To Karma Foundation",
+          "email": "report@karmafoundation.ngo",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs",
+            "list"
+          ],
+          "reasons": [
+            "Karma Foundation focuses on animal welfare and rescue in Pune"
+          ]
+        },
+        {
+          "name": "VOSD",
+          "org": "VOSD",
+          "email": "info@vosd.in",
+          "score": 0.8266,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Largest canine welfare institution in India, active in rescue and rehab"
+          ]
+        },
+        {
+          "name": "Make New Life, NGO in Pune",
+          "org": "Make New Life, NGO in Pune",
+          "email": "mayurpasare@gmail.com",
+          "score": 0.782,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Make New Life is an animal rescue NGO in Pune"
+          ]
+        },
+        {
+          "name": "Connecting Volunteers to NGOs",
+          "org": "Connecting Volunteers to NGOs",
+          "email": "contact@connectfor.org",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Connectfor.org connects volunteers to NGOs"
+          ]
+        }
+      ],
+      "intake_playbook": "volunteering",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Pune",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "animal shelters",
+        "animal rescue NGOs",
+        "animal welfare organizations"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 7,
+        "pass_rate": 0.714,
+        "top_issues": [
+          [
+            "not personalised",
+            1
+          ],
+          [
+            "unsupported claim",
+            1
+          ]
+        ],
+        "avg_specificity": 4.86,
+        "avg_relevance": 5.0,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.857,
+        "critiques": [
+          "Clarify how your skills directly benefit their specific needs."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@animalrescuetrust.org",
+          "subject": "Volunteer help for rescued animals in Pune",
+          "body": "Hello Animal Rescue Trust, Pune team,\n\nI am a software engineer based in Pune offering volunteer support two weekends a month. I noticed Animal Rescue Trust provides shelter and care for rescued animals, which is a cause I want to support.\n\nAlong with my technical skills, I have experience in web design and creating fundraising posters. I would like to contribute these skills or assist in other ways during my available weekends.\n\nWould you be interested in volunteer help for two weekends a month? Please let me know if this could be useful or if I should connect with someone else on your team.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@sawct.org",
+          "subject": "Volunteer support for SAW on weekends",
+          "body": "Hello SAW team,\n\nI am a software engineer based in Pune offering volunteer help two weekends each month. I have experience in web design and creating fundraising posters.\n\nI see that Sinhgad Animal Welfare Charitable Trust has been rescuing, treating, and finding homes for animals in Pune since 2015. I would like to support your efforts by volunteering my time on weekends.\n\nWould you be interested in volunteer help for two weekends a month? Please let me know if this could be useful or point me to whoever handles volunteer coordination.\n\nThank you for your work with animal welfare in Pune.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "animalfarm.pune@gmail.com",
+          "subject": "Offering weekend volunteer support in Pune",
+          "body": "Hello Animalfarmrescue team,\n\nI am a software engineer based in Pune with experience in web design and creating fundraising posters. I want to volunteer my time to support Animalfarmrescue\u2019s mission to rescue and nurture stray animals.\n\nI can offer help for two weekends each month. While my skills are mainly technical, I can assist with web design or promotional materials if needed. I am also willing to help with general volunteer tasks at your rescue center.\n\nWould you be interested in volunteer help from me for two weekends a month? I am flexible and eager to contribute where I can.\n\nPlease let me know if this could be useful for your team and the animals you care for.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "report@karmafoundation.ngo",
+          "subject": "Volunteer support for Karma Foundation",
+          "body": "Hello Welcome To Karma Foundation team,\n\nI am a software engineer based in Pune offering volunteer support two weekends a month. I have experience in web design and creating fundraising posters, skills I can use to assist your animal welfare and rescue efforts.\n\nKarma Foundation focuses on animal welfare and rescue efforts in Pune. While I do not have direct animal care experience, I can contribute through digital support and outreach materials.\n\nWould you be interested in volunteer help for two weekends a month? I am happy to discuss how I can assist your team effectively.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@vosd.in",
+          "subject": "Weekend volunteer support for VOSD",
+          "body": "Hello VOSD team,\n\nI am a software engineer based in Pune offering volunteer help two weekends a month. I have experience in web design and creating fundraising posters, skills I hope could support your work.\n\nI don\u2019t have direct experience in animal care but am eager to contribute where my skills and time can be useful.\n\nWould you be interested in volunteer help for two weekends a month? Please let me know if this could assist your team or point me to whoever handles volunteer coordination.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "not personalised: mentions nothing specific from the recipient's evidence"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "mayurpasare@gmail.com",
+          "subject": "Volunteer help for injured animals in Pune",
+          "body": "Hello Make New Life, NGO in Pune team,\n\nI am a software engineer based in Pune offering volunteer help two weekends a month. I have skills in web design and creating fundraising posters.\n\nI understand Make New Life is a sanctuary for injured and handicapped dogs and animals in Pune. While I do not have direct experience in animal care, I can contribute by supporting your outreach efforts through design and technical help.\n\nWould you be interested in volunteer assistance for two weekends a month? I can adapt my support to your current needs, whether that involves web or poster design or other tasks.\n\nPlease let me know if this could be helpful to your team.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@connectfor.org",
+          "subject": "Volunteer support for rescued dogs and cats",
+          "body": "Hello Connecting Volunteers to NGOs team,\n\nI am a software engineer based in Pune with experience in web design and creating fundraising posters. I can volunteer two weekends a month and am interested in supporting your work with rescued dogs and cats.\n\nWhile I do not have direct experience in animal care, I can contribute my skills in web design and poster creation to support your outreach or fundraising efforts.\n\nWould you be interested in volunteer help for two weekends a month? Please let me know if this could be useful for your centre or point me to whoever handles volunteer coordination.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: I can volunteer two weekends a month and am interested in supporting your work with rescued dogs and cats."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Clarify how your skills directly benefit their specific needs."
+          }
+        }
+      ],
+      "name": "s2_volunteer_animal_pune",
+      "split": "stress",
+      "playbook": "volunteering",
+      "target": 10
+    }
+  ],
+  "summary": {
+    "scenarios": 4,
+    "failed": 0,
+    "good@K": 21,
+    "good_reachable@K": 21,
+    "good_verified@K": 0,
+    "precision@K": 0.492,
+    "mean_score": 0.605,
+    "distinct_orgs": 25,
+    "proof_rate": 0.407,
+    "reachable": 27,
+    "search_calls": 126,
+    "llm_paid_calls": 150,
+    "llm_usd": 0.0801,
+    "seconds": 1014.2,
+    "intake_playbook_ok": "4/4",
+    "intake_where_ok": "4/4",
+    "drafts": 25,
+    "draft_pass_rate": 0.8,
+    "would_send_rate": 0.8,
+    "usd_per_good": 0.0098,
+    "judge_precision": 0.477,
+    "judge_precision_ci95": [
+      0.338,
+      0.621
+    ],
+    "sendable_precision": 0.477,
+    "verified_precision": 0.0
+  }
+}

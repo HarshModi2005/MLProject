@@ -344,6 +344,12 @@ def _role_fits(title: Optional[str], roles: List[str]) -> bool:
     return any(r.lower() in t or t in r.lower() for r in roles)
 
 
+# Pages that are about an organisation but are not its own website (a result for "<name> official website" can be one).
+NOT_OWN_SITE = {"google.com", "facebook.com", "instagram.com", "linkedin.com", "youtube.com", "twitter.com", "x.com",
+                "wikipedia.org", "justdial.com", "indiamart.com", "tripadvisor.com", "yelp.com", "pinterest.com",
+                "crunchbase.com", "zaubacorp.com", "tofler.in"}
+
+
 class OrgEnricher:
     def __init__(self, fetcher: Fetcher, search: WebSearch, settings: Settings, find_people: bool = False,
                  max_people_searches: int = 6, store=None, accept_prior: bool = False):
@@ -353,7 +359,8 @@ class OrgEnricher:
         self.max_people_searches = max_people_searches
         self._people_searches = 0
         self._resolves = 0
-        self.max_resolves = 8
+        self._snippet_searches = 0
+        self.max_resolves = 8  # raised to follow the campaign size in enrich_all
         self._lock = threading.Lock()
         self._pending: Dict[int, tuple] = {}  # organisations waiting for a decision-maker search (enrich_all)
         self.stats = {"orgs_read": 0, "sites_resolved": 0, "person_contacts": 0, "inbox_contacts": 0,
@@ -373,7 +380,7 @@ class OrgEnricher:
             paid = hunter_person(self.fetcher, org, roles)
             if paid is not None:
                 self.stats["hunter_contacts"] = self.stats.get("hunter_contacts", 0) + 1
-                org.decision_maker = {"name": paid.name, "title": paid.title or "", "source": "hunter"}
+                org.decision_maker = {"name": paid.name, "title": paid.title or "", "source": "hunter", "confidence": 1.0}
                 return paid
         with self._lock:
             if self._people_searches >= self.max_people_searches or self.search.remaining <= 4:
@@ -383,12 +390,12 @@ class OrgEnricher:
         top = [r for r in roles[:3] if r]
         query = f'"{org.name}" ' + " OR ".join(f'"{r}"' for r in top)
         hits = self.search.search(query, n=8, raw=True)
-        person = people_from_serp(hits, org.name, top)
+        person = people_from_serp_scored(hits, org.name, top)
         if not person:
             return None
-        name, title, url = person
+        name, title, url, conf = person
         self.stats["decision_makers_found"] += 1
-        org.decision_maker = {"name": name, "title": title, "source": url}
+        org.decision_maker = {"name": name, "title": title, "source": url, "confidence": conf}
         patterns = infer_domain_patterns(site_people, min_support=2)
         hit = next(((d, pn) for d, pn in patterns.items() if registrable_domain(d) == org.org_domain), None)
         c = Contact(kind="person", name=name, title=title, org=org.name, org_domain=org.org_domain,
@@ -424,7 +431,9 @@ class OrgEnricher:
         return c
 
     def _resolve_site(self, org: Contact, spec: CampaignSpec) -> None:
-        """Find the official website of an organisation known only by name (one search, capped per campaign)."""
+        """Find the official website of an organisation known only by name (one search, capped per campaign).
+        A hit is accepted when the domain carries a word of the name, or, for acronym domains (unal.edu.co for
+        "Universidad Nacional de Colombia"), when the result's title or snippet names the organisation in full."""
         with self._lock:
             if self._resolves >= self.max_resolves or not _plausible_org_name(org.name):
                 return
@@ -432,12 +441,14 @@ class OrgEnricher:
         place = (spec.regions or [""])[0]
         hits = self.search.search(f'"{org.name}" {place} official website', n=5)
         tokens = [t for t in re.findall(r"[a-z0-9]+", org.name.lower()) if len(t) > 2]
-        for h in hits:
+        full = " ".join(re.findall(r"[a-z0-9]+", org.name.lower()))
+        for rank, h in enumerate(hits):
             dom = registrable_domain(h.url)
             label = dom.split(".")[0]
-            if is_aggregator(dom):
+            if is_aggregator(domain=dom) or dom in NOT_OWN_SITE:
                 continue
-            if any(t in label for t in tokens) or label in "".join(tokens):
+            said = " ".join(re.findall(r"[a-z0-9]+", f"{h.title} {h.snippet}".lower()))
+            if any(t in label for t in tokens) or label in "".join(tokens) or (rank < 2 and len(full) > 8 and full in said):
                 org.org_domain = dom
                 org.country = org.country or country_from_domain(dom)
                 org.add_url(f"https://{host_of(h.url)}/")
@@ -507,6 +518,9 @@ class OrgEnricher:
         go to the best-ranked organisations in order rather than to whichever thread gets there first."""
         if "channel_verified" in org.flags and org.emails:
             return org  # the channel already gave a published address (e.g. a podcast feed): nothing to look up
+        if org.org_domain in NOT_OWN_SITE:  # a map or social page is not the organisation's own site
+            org.add_url(f"https://{org.org_domain}/")
+            org.org_domain = None
         if not org.org_domain:
             self._resolve_site(org, spec)
         if not org.org_domain:
@@ -515,6 +529,7 @@ class OrgEnricher:
         got = self.read_home(org)
         if not got:
             org.flags.append("site_unreachable")
+            self._from_snippets(org, spec)  # the site will not load; a search result may still quote its address
             return org
         self.stats["orgs_read"] += 1
         parsed, page_url = got
@@ -638,11 +653,48 @@ class OrgEnricher:
             org.add_email(EmailCandidate(address=personal[0], confidence=0.65, method="site", source_url=emails[personal[0]]))
             self.stats["site_contacts"] += 1
             return org
+        if self._from_snippets(org, spec):
+            self.stats["inbox_contacts"] += 1
+            return org
         self.stats["no_contact"] += 1
         return org
 
+    def _from_snippets(self, org: Contact, spec: CampaignSpec) -> bool:
+        """One search for the organisation's own address, read from result titles and snippets only (no page fetch).
+        Used when the site would not load or published nothing: 84% of the valid candidates lost in the stress runs had
+        no address at all. Only addresses on the organisation's own domain are taken, as an inbox (not a person)."""
+        from brain.emailfinder import extract_emails
+
+        if not org.org_domain:
+            return False
+        with self._lock:
+            if self._snippet_searches >= self.max_resolves:
+                return False
+            self._snippet_searches += 1
+        hits = self.search.search(f'"{org.name}" {org.org_domain} email contact', n=6)
+        found: Dict[str, str] = {}
+        for h in hits:
+            for addr in extract_emails(f"{h.title} {h.snippet}"):
+                if registrable_domain(addr.split("@")[1]) == org.org_domain:
+                    found.setdefault(addr.lower(), h.url)
+        if not found:
+            return False
+        preferred = [p.lower() for p in spec.preferred_inboxes]
+        ranked = sorted(found, key=lambda a: (_inbox_rank(a, preferred, spec.countries) is None,
+                                              _inbox_rank(a, preferred, spec.countries) or 0))
+        before = len(org.emails)
+        org.add_email(EmailCandidate(address=ranked[0], confidence=0.6, method="inbox", source_url=found[ranked[0]]))
+        if len(org.emails) > before:
+            org.flags.append("email_from_snippet")
+            self.stats["snippet_contacts"] = self.stats.get("snippet_contacts", 0) + 1
+            return True
+        return False
+
     def enrich_all(self, orgs: List[Contact], spec: CampaignSpec, pack: Pack) -> List[Contact]:
         roles = spec.profile.decision_roles or spec.persona.roles or pack.default_roles
+        # One search per organisation known only by name. A fixed 8 left 106 of ~300 valid, named candidates in the
+        # stress runs with no website and so no address; the cap now follows the size of the campaign.
+        self.max_resolves = max(self.max_resolves, min(80, 4 * spec.target_count))
 
         def one(o: Contact) -> Contact:
             try:
@@ -693,11 +745,27 @@ def hiring_signal(page: ParsedPage) -> float:
 _SERP_SPLIT = re.compile(r"\s+[-–—|·]\s+|\s+at\s+|,\s+")
 
 
-def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str]]:
-    """A (name, title, url) from search-result titles like "Priya Nair - Head of Partnerships - DevToolCo".
-    Only result titles/snippets are read (no profile pages are fetched), and the organisation must be named."""
+SOCIAL_NOT_PROFILE = ("instagram.com", "facebook.com", "fb.com", "twitter.com", "x.com", "youtube.com", "tiktok.com",
+                      "pinterest.com", "reddit.com", "quora.com", "medium.com")  # posts and reels, not a record of who works where
+
+
+def _is_profile_url(url: str) -> bool:
+    host = host_of(url or "")
+    return not any(host == d or host.endswith("." + d) for d in SOCIAL_NOT_PROFILE)
+
+
+def people_from_serp_scored(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str, float]]:
+    """(name, title, url, confidence) from search-result titles like "Priya Nair - Head of Partnerships - DevToolCo".
+    Only result titles/snippets are read (no profile pages are fetched). Strict on purpose, because the name ends up in
+    the greeting: the organisation must be named, a social-media post or reel is never a source, and a name with a
+    repeated word ("Javier Javier") is rejected. Confidence is 0.9 when the whole organisation name appears together
+    with a role in the title, 0.6 when only some of its (generic) words do, so "Photovoltaic Solar" cannot be vouched
+    for by a stranger who is a "Photovoltaic Engineer"."""
     org_tokens = [t for t in re.findall(r"[a-z0-9]+", org_name.lower()) if len(t) > 2]
+    org_phrase = " ".join(re.findall(r"[a-z0-9]+", org_name.lower()))
     for h in hits:
+        if not _is_profile_url(h.url):
+            continue
         title = (h.title or "").replace("| LinkedIn", "").replace("LinkedIn", "")
         blob = (title + " " + (h.snippet or "")).lower()
         if org_tokens and not any(t in blob for t in org_tokens):
@@ -708,9 +776,20 @@ def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[st
         name = clean_name(parts[0])
         if not looks_like_person_name(name) or any(t in name.lower() for t in org_tokens):
             continue
-        role = next((p for p in parts[1:] if _role_fits(p, roles)), None)
-        if role is None:
-            role = next((r for r in roles if r.lower() in blob), None)
-        if role:
-            return name, squash(role, 80), h.url
+        words = [w.lower().strip(".") for w in name.split()]
+        if len(set(words)) < len(words):
+            continue
+        role_part = next((p for p in parts[1:] if _role_fits(p, roles)), None)
+        role = role_part or next((r for r in roles if r.lower() in blob), None)
+        if not role:
+            continue
+        phrase_in_title = bool(org_phrase) and org_phrase in " ".join(re.findall(r"[a-z0-9]+", title.lower()))
+        conf = 0.9 if (role_part and phrase_in_title) else 0.6
+        return name, squash(role, 80), h.url, conf
     return None
+
+
+def people_from_serp(hits, org_name: str, roles: List[str]) -> Optional[Tuple[str, str, str]]:
+    """A (name, title, url) from search-result titles (see people_from_serp_scored)."""
+    found = people_from_serp_scored(hits, org_name, roles)
+    return found[:3] if found else None

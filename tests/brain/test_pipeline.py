@@ -31,7 +31,7 @@ BODY_OK = ("Your paper on scalable message passing for molecular graphs is close
 
 
 def person(i, org="IIT Ropar", domain="iitrpr.ac.in", email=True, text="Scalable message passing for molecular graphs"):
-    c = Contact(name=f"Asha{chr(65 + i)} Rani", org=org, org_domain=domain, country="IN",
+    c = Contact(name=f"Asha{chr(65 + i)} Rani", title="Professor", org=org, org_domain=domain, country="IN",
                 location_text="Rupnagar, Punjab, India", keys=[f"openalex:A{i}"], sources=["openalex"],
                 evidence=[Evidence(kind="publication", text=text, year=2026)],
                 signals={"matched_works": 2, "senior_positions": 1, "seniority": 0.8, "latest_year": 2026})

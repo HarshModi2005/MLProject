@@ -1,0 +1,1185 @@
+{
+  "label": "s2_4",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 64,
+      "qualified": 64,
+      "reachable": 17,
+      "passed_judge": 8,
+      "shortlisted": 8,
+      "good@K": 5,
+      "precision@K": 0.5,
+      "good_reachable@K": 4,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "guess": 1,
+        "inbox": 7
+      },
+      "mean_score": 0.775,
+      "distinct_orgs": 8,
+      "proof_rate": 0.625,
+      "personal_email_rate": 0.125,
+      "search_calls": 33,
+      "llm_paid_calls": 44,
+      "llm_usd": 0.0271,
+      "pages_fetched": 211,
+      "seconds": 316.2,
+      "usd_per_good": 0.0119,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 13,
+        "extract_orgs": 1,
+        "prejudge": 6,
+        "judge": 4,
+        "draft": 8,
+        "verify": 4,
+        "draft_fix": 5
+      },
+      "by_source": {
+        "orgs": 64,
+        "places": 26,
+        "events": 2
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 8 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 44,
+          "orgs": 45,
+          "places": 23,
+          "list": 1,
+          "events": 2
+        },
+        "qualified": {
+          "web": 44,
+          "orgs": 45,
+          "places": 23,
+          "list": 1,
+          "events": 2
+        },
+        "enriched": {
+          "web": 29,
+          "orgs": 30,
+          "decision_maker": 1,
+          "places": 13,
+          "list": 1
+        },
+        "reachable": {
+          "web": 14,
+          "orgs": 14,
+          "decision_maker": 1,
+          "places": 9
+        },
+        "passed_judge": {
+          "web": 7,
+          "orgs": 7,
+          "decision_maker": 1,
+          "places": 3
+        },
+        "shortlisted": {
+          "web": 7,
+          "orgs": 7,
+          "decision_maker": 1,
+          "places": 3
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 3,
+          "search_calls": 14,
+          "fetches": 5,
+          "llm_calls": 14,
+          "seconds": 40.65,
+          "found": 64,
+          "new": 44,
+          "qualified": 43
+        },
+        "places": {
+          "runs": 1,
+          "search_calls": 3,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 5.92,
+          "found": 16,
+          "new": 11,
+          "qualified": 11
+        },
+        "events": {
+          "runs": 1,
+          "search_calls": 3,
+          "fetches": 6,
+          "llm_calls": 0,
+          "seconds": 11.64,
+          "found": 2,
+          "new": 2,
+          "qualified": 0
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Rahul Mishra",
+          "org": "MIT Institute of Design",
+          "email": "rahulmishra@mitid.edu.in",
+          "score": 0.893,
+          "sources": [
+            "web",
+            "orgs",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Placement Officer at MIT Institute of Design in Pune"
+          ]
+        },
+        {
+          "name": "Symbiosis Institute of Design, Pune",
+          "org": "Symbiosis Institute of Design, Pune",
+          "email": "info@sid.edu.in",
+          "score": 0.8865,
+          "sources": [
+            "web",
+            "orgs",
+            "places"
+          ],
+          "reasons": [
+            "Symbiosis Institute of Design Pune offers B.Des and M.Des in Product Design"
+          ]
+        },
+        {
+          "name": "International School of Design",
+          "org": "International School of Design",
+          "email": "info@insdpunepcmc.com",
+          "score": 0.8372,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Located in PCMC near Pune, offers design courses"
+          ]
+        },
+        {
+          "name": "Vupune",
+          "org": "Vupune",
+          "email": "est.section@vupune.ac.in",
+          "score": 0.8309,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Vishwakarma University Pune offers B.Des, M.Des, Ph.D. in Product Design"
+          ]
+        },
+        {
+          "name": "DPU School of Design",
+          "org": "DPU School of Design",
+          "email": "info.sod@dpu.edu.in",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "orgs",
+            "places"
+          ],
+          "reasons": [
+            "Design college in Pune with placement support mentioned"
+          ]
+        },
+        {
+          "name": "Oasisedu",
+          "org": "Oasisedu",
+          "email": "info@oasisedu.in",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Oasis College of Design and Technology in Pune"
+          ]
+        },
+        {
+          "name": "Jspmuni",
+          "org": "Jspmuni",
+          "email": "info@jspmuni.ac.in",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Private university in Pune with campus recruitment"
+          ]
+        },
+        {
+          "name": "INSD Andheri / Ghatkopar",
+          "org": "INSD Andheri / Ghatkopar",
+          "email": "pannache@insdandheri.com",
+          "score": 0.6354,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Design institute in Mumbai with positive student feedback"
+          ]
+        }
+      ],
+      "intake_playbook": "campus_recruiting",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Pune",
+        "Mumbai",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "design colleges",
+        "design departments",
+        "placement cells",
+        "internship recruitment"
+      ],
+      "intake_ask_type": "intro",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 8,
+        "pass_rate": 0.75,
+        "top_issues": [
+          [
+            "unsupported claim",
+            2
+          ],
+          [
+            "recipient address rahulmishra@mitid.edu.in is a guess from t",
+            1
+          ]
+        ],
+        "avg_specificity": 4.75,
+        "avg_relevance": 4.88,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.875,
+        "critiques": [
+          "Clarify relevance to interior design students."
+        ]
+      },
+      "emails": [
+        {
+          "to": "rahulmishra@mitid.edu.in",
+          "subject": "Seeking contacts for product design internships",
+          "body": "Hi Rahul,\n\nI am reaching out to connect with the placement cell at MIT Institute of Design regarding internship opportunities.\n\nWe are a product design studio currently hiring four paid interns for a six-month period. Our internship offers practical experience in product design, open to students from any educational background.\n\nSince MITID offers a Masters in Product Design and supports internships and placements, could you please connect me with the placement cell or relevant contacts who manage internships at MITID?\n\nI am also available to provide a pre-placement talk to introduce our studio and the internship roles. Please let me know the best way to proceed or if there is someone else I should contact.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: open to students from any educational background",
+            "recipient address rahulmishra@mitid.edu.in is a guess from the organisation's usual email format (pattern_confirmed); verify it before sending"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@sid.edu.in",
+          "subject": "Internship opportunities for SID Product Design students",
+          "body": "Hello Symbiosis Institute of Design, Pune team,\n\nWe are a product design studio hiring four paid interns for six months. The internship involves work in product design, including research, prototyping, and manufacturing.\n\nWe see that Symbiosis Institute of Design Pune offers a B.Des in Product Design covering user research, form, materials, prototyping, and manufacturing.\n\nCould you connect us with the placement cells or relevant contacts at your design department who handle internship placements or recruitment? We can offer a pre-placement talk to introduce the opportunity to interested students.\n\nPlease let us know the best contact or next steps to proceed with this collaboration.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@insdpunepcmc.com",
+          "subject": "Seeking Internship Placement Contacts at INSD",
+          "body": "Hello International School of Design team,\n\nI represent a product design studio looking to hire four paid interns for a six-month period. We are reaching out to connect with placement cells at design colleges in Pune and Mumbai to recruit suitable candidates for these internships.\n\nWe understand that INSD provides placement assistance based on student eligibility and employer requirements. Our internship program offers practical experience in product design, and we would be happy to arrange a pre-placement talk to introduce our studio and the internship roles to your students.\n\nCould you connect us with the placement cells or relevant contacts at INSD who handle internship placements or recruitment? If not, could you please point me to whoever manages this process within your design department?\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "est.section@vupune.ac.in",
+          "subject": "Paid Product Design Internships for Your Students",
+          "body": "Hello Vupune team,\n\nI am reaching out from a product design studio currently hiring four paid interns for a six-month period. We are interested in connecting with the placement cells or relevant contacts at Vishwakarma University Pune to share this internship opportunity with your B.Des., M.Des., and Ph.D. students in Product Design.\n\nThe internships offer hands-on experience in product design projects and a chance to work closely with our design team. We can also provide a pre-placement talk to introduce the studio and the internship roles to interested students.\n\nCould you please connect us with the appropriate placement contacts or advise on the best way to share this opportunity with your students? We look forward to potentially collaborating to support your students' career development.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info.sod@dpu.edu.in",
+          "subject": "Internship opportunity for design students",
+          "body": "Hello DPU School of Design team,\n\nI am reaching out from a product design studio hiring four paid interns for six months. We provide hands-on experience and mentorship in product design.\n\nI understand DY Patil School of Design in Pune offers comprehensive training and placement support. We would like to connect with your placement cells or relevant contacts who handle internship placements or recruitment.\n\nCould you connect us with the appropriate contacts at your design department? We can offer a pre-placement talk to introduce the internship and answer questions.\n\nPlease let me know the best contact or point me to whoever manages internship recruitment at your school.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@oasisedu.in",
+          "subject": "Internship opportunities for your design students",
+          "body": "Hello Oasisedu team,\n\nI am reaching out from a product design studio currently hiring four paid interns for a six-month period. We are looking to connect with placement cells or relevant contacts at design colleges in Pune and Mumbai to recruit product design interns.\n\nYour Oasis College of Design and Technology offers placement support and internship opportunities, which aligns with our goal to provide practical industry experience to students. We can also offer a pre-placement talk to introduce our studio and internship roles.\n\nCould you connect us with the team or person who handles internship placements or recruitment at your design department? This will help us share details directly and streamline the process for your students interested in product design internships.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@jspmuni.ac.in",
+          "subject": "Paid product design internships for your students",
+          "body": "Hello Jspmuni team,\n\nWe are a product design studio hiring four paid interns for six months. The internship provides hands-on experience in product design.\n\nWe note that JSPM Private University places students through campus recruitment initiatives. We would like to connect with the placement cells or relevant contacts at your design department to discuss recruiting interns.\n\nCould you connect us with the appropriate contacts for internship placements or recruitment at your design department? We are open to conducting a pre-placement talk to share details about our studio and the internship.\n\nBest regards,\nTest Sender",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "pannache@insdandheri.com",
+          "subject": "Paid Product Design Internships for Your Students",
+          "body": "Hello INSD Andheri / Ghatkopar team,\n\nWe are a product design studio looking to hire four paid interns for a six-month period. Our internship offers practical experience in product design, ideal for students wanting to apply their skills in a professional setting.\n\nWe know your institute offers interior design courses, and we are interested in connecting with your placement cell or relevant contacts to recruit students interested in product design internships.\n\nCould you please connect us with the placement cell or the appropriate person at INSD who manages internship opportunities? We would also be happy to offer a pre-placement talk to introduce our studio and internship roles to interested students.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: We know your institute offers interior design courses."
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Clarify relevance to interior design students."
+          }
+        }
+      ],
+      "name": "s2_campus_design_pune",
+      "split": "stress",
+      "playbook": "campus_recruiting",
+      "target": 10
+    },
+    {
+      "unique": 129,
+      "qualified": 128,
+      "reachable": 1,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 38,
+      "llm_paid_calls": 14,
+      "llm_usd": 0.0105,
+      "pages_fetched": 99,
+      "seconds": 219.9,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "prejudge": 9,
+        "judge": 2,
+        "extract": 2
+      },
+      "by_source": {
+        "github": 17,
+        "npm": 38,
+        "huggingface": 30,
+        "events": 45
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 1 of 10 wanted contacts have a confident address. This kind of campaign (Co-founder or technical partner) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 0 confident prospects of the 10 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "github": 17,
+          "npm": 38,
+          "huggingface": 30,
+          "events": 44
+        },
+        "qualified": {
+          "huggingface": 30,
+          "npm": 37,
+          "github": 17,
+          "events": 44
+        },
+        "enriched": {
+          "huggingface": 28,
+          "npm": 3,
+          "github": 1
+        },
+        "reachable": {
+          "npm": 1,
+          "events": 4
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "github": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 5.95,
+          "found": 17,
+          "new": 17,
+          "qualified": 0
+        },
+        "npm": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 3,
+          "llm_calls": 0,
+          "seconds": 2.44,
+          "found": 38,
+          "new": 38,
+          "qualified": 22
+        },
+        "huggingface": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 3,
+          "llm_calls": 0,
+          "seconds": 2.32,
+          "found": 30,
+          "new": 30,
+          "qualified": 30
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "cofounder",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "crop disease detection",
+        "precision agriculture",
+        "machine learning in agriculture",
+        "agritech projects"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "name": "s2_cofounder_agritech",
+      "split": "stress",
+      "playbook": "cofounder",
+      "target": 10
+    },
+    {
+      "unique": 76,
+      "qualified": 75,
+      "reachable": 15,
+      "passed_judge": 11,
+      "shortlisted": 10,
+      "good@K": 6,
+      "precision@K": 0.6,
+      "good_reachable@K": 6,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 10
+      },
+      "mean_score": 0.709,
+      "distinct_orgs": 10,
+      "proof_rate": 0.8,
+      "personal_email_rate": 0.0,
+      "search_calls": 38,
+      "llm_paid_calls": 44,
+      "llm_usd": 0.0252,
+      "pages_fetched": 205,
+      "seconds": 334.5,
+      "usd_per_good": 0.0104,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 8,
+        "extract_orgs": 14,
+        "prejudge": 6,
+        "judge": 3,
+        "draft": 10
+      },
+      "by_source": {
+        "places": 22,
+        "orgs": 43,
+        "lookalike": 22
+      },
+      "replay_misses": 0,
+      "warnings": [],
+      "source_funnel": {
+        "unique": {
+          "places": 22,
+          "web": 35,
+          "orgs": 39,
+          "list": 23,
+          "lookalike": 19
+        },
+        "qualified": {
+          "places": 22,
+          "web": 35,
+          "orgs": 38,
+          "list": 22,
+          "lookalike": 19
+        },
+        "enriched": {
+          "places": 16,
+          "web": 13,
+          "orgs": 13,
+          "list": 2,
+          "lookalike": 2
+        },
+        "reachable": {
+          "places": 11,
+          "web": 11,
+          "orgs": 10,
+          "list": 1,
+          "lookalike": 2
+        },
+        "passed_judge": {
+          "places": 6,
+          "web": 8,
+          "orgs": 8,
+          "list": 1,
+          "lookalike": 1
+        },
+        "shortlisted": {
+          "places": 5,
+          "web": 7,
+          "orgs": 7,
+          "list": 1,
+          "lookalike": 1
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 9,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 20.93,
+          "found": 22,
+          "new": 22,
+          "qualified": 22
+        },
+        "orgs": {
+          "runs": 2,
+          "search_calls": 7,
+          "fetches": 6,
+          "llm_calls": 8,
+          "seconds": 32.7,
+          "found": 33,
+          "new": 27,
+          "qualified": 24
+        },
+        "lookalike": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 7,
+          "llm_calls": 5,
+          "seconds": 27.28,
+          "found": 13,
+          "new": 13,
+          "qualified": 6
+        }
+      },
+      "shortlist": [
+        {
+          "name": "SEDNA Energy Systems",
+          "org": "SEDNA Energy Systems",
+          "email": "info@sednaenergy.in",
+          "score": 0.7388,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Solar company in Kerala with 2500+ rooftop solar installations"
+          ]
+        },
+        {
+          "name": "SolarRun",
+          "org": "SolarRun",
+          "email": "info@solarrun.in",
+          "score": 0.7388,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Trusted solar company in Chennai offering solar panel installation"
+          ]
+        },
+        {
+          "name": "EKK Infrastructure Limited",
+          "org": "EKK Infrastructure Limited",
+          "email": "info@ekk.co.in",
+          "score": 0.7359,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading EPC company based in Kerala"
+          ]
+        },
+        {
+          "name": "BandB Green Energy Solutions",
+          "org": "BandB Green Energy Solutions",
+          "email": "md@bandbgreenenergy.com",
+          "score": 0.7331,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Solar company in Kerala offering residential and commercial solar installation"
+          ]
+        },
+        {
+          "name": "Renvolt",
+          "org": "Renvolt",
+          "email": "care@renvolt.in",
+          "score": 0.7331,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Solar EPC & development company delivering renewable energy solutions"
+          ]
+        },
+        {
+          "name": "INKEL Limited",
+          "org": "INKEL Limited",
+          "email": "info@inkel.in",
+          "score": 0.7061,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading company in solar project installation in Kerala"
+          ]
+        },
+        {
+          "name": "GSL Energy",
+          "org": "GSL Energy",
+          "email": "info@gslenergy.in",
+          "score": 0.6895,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Solar company offering residential and commercial installations across Kerala"
+          ]
+        },
+        {
+          "name": "Alcheme Green Energy",
+          "org": "Alcheme Green Energy",
+          "email": "info@alchemegreenenergy.com",
+          "score": 0.6895,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Top solar installer in Tamil Nadu cities including Madurai and Trichy"
+          ]
+        },
+        {
+          "name": "Illumine",
+          "org": "Illumine",
+          "email": "info@illumineenergy.com",
+          "score": 0.6895,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading solar company in Kerala"
+          ]
+        },
+        {
+          "name": "Epcsolarsolution",
+          "org": "Epcsolarsolution",
+          "email": "info@epcsolarsolution.com",
+          "score": 0.6402,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "EPC company in Trivandrum specializing in residential and commercial solar projects"
+          ]
+        }
+      ],
+      "intake_playbook": "b2b_sales",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Kerala",
+        "Tamil Nadu",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "solar installers",
+        "EPC firms",
+        "solar energy companies",
+        "renewable energy contractors"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 10,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            10
+          ]
+        ],
+        "avg_specificity": 4.5,
+        "avg_relevance": 4.5,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": [
+          "Specify how your inverters can benefit their projects.",
+          "Clarify how your inverters complement their offerings.",
+          "Mention specific projects where your inverters fit.",
+          "Include a brief benefit of your inverters for their projects.",
+          "Highlight a unique feature of your inverters."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@sednaenergy.in",
+          "subject": "Solar inverter options for Kerala installations",
+          "body": "Hello SEDNA Energy Systems team,\n\nYour team\u2019s experience with 2,500+ rooftop solar installations in Alappuzha caught my attention. Since 2009, SEDNA Energy Systems has built a strong presence in Kerala with on-grid, off-grid, and hybrid solar solutions.\n\nWe manufacture 3 to 10 kW string inverters backed by a 5-year warranty. Our products might complement your ongoing projects or future plans in Kerala and Tamil Nadu.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu? Please point me to whoever handles this if more appropriate.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@solarrun.in",
+          "subject": "Solar inverters for SolarRun installations",
+          "body": "Hello SolarRun team,\n\nSolarRun\u2019s rapid solar panel installation and strong local presence in Chennai are impressive.\n\nWe manufacture 3-10 kW string inverters with a 5-year warranty, designed for reliable performance in residential and commercial solar setups.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu interested in these inverters? I am keen to explore potential sales or partnership opportunities.\n\nPlease let me know if there is someone on your team I should contact directly.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@ekk.co.in",
+          "subject": "Inverter solutions for EKK Infrastructure projects",
+          "body": "Hello EKK Infrastructure Limited team,\n\nEKK Infrastructure Limited has delivered over 150 projects as a leading EPC company based in Ernakulam, Kerala. This local presence and scale suggest potential synergies for solar power solutions.\n\nOur company manufactures 3 to 10 kW string solar inverters, which come with a 5 year warranty. These inverters could support your solar installations and EPC activities in Kerala and Tamil Nadu.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu interested in exploring these inverter options? Please point me to whoever handles this if needed.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "md@bandbgreenenergy.com",
+          "subject": "String inverters for BandB Green Energy",
+          "body": "Hello BandB Green Energy Solutions team,\n\nBandB Green Energy Solutions has built trust in Kerala and Kottayam since 2012 through residential and commercial solar installations and EPC services.\n\nTest Sender manufactures 3 to 10 kW string inverters with a 5-year warranty, designed to support solar projects like those you install.\n\nWould you be open to a brief discussion to explore if our inverters could fit your current or upcoming projects? I am happy to provide specifications or answer any questions you may have.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "care@renvolt.in",
+          "subject": "Inverter solutions for Renvolt's solar projects",
+          "body": "Hello Renvolt team,\n\nRenvolt\u2019s end-to-end solar EPC and development work aligns with our focus on reliable solar components.\n\nWe manufacture 3 to 10 kW string inverters, designed for solar installations, and offer a 5 year warranty. Our products could support your engineering and construction phases with dependable inverter solutions.\n\nWould you be open to a brief discussion to explore how our inverters might fit into your projects in Kerala and Tamil Nadu?\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@inkel.in",
+          "subject": "Solar inverters for Kerala and Tamil Nadu projects",
+          "body": "Hello INKEL Limited team,\n\nINKEL Limited is known as the leading company in solar project installation and EPC management in Kerala. Your experience with large-scale building projects on EPC mode is notable.\n\nTest Sender manufactures 3 to 10 kW string solar inverters and offers a 5 year warranty on these products. We aim to connect with small solar installers and large EPC firms in Kerala and Tamil Nadu to promote and sell these inverters.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu who might be interested in our solar inverters? Please let me know if there is someone on your team I should contact.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how your inverters can benefit their projects."
+          }
+        },
+        {
+          "to": "info@gslenergy.in",
+          "subject": "Solar inverters for Kerala installations",
+          "body": "Hello GSL Energy team,\n\nGSL Energy Solutions' role as a leading solar installer in Kerala caught my attention. Your work with residential and commercial solar installations aligns with our inverter range.\n\nWe manufacture 3 to 10 kW string inverters and provide a 5 year warranty on all products. Our inverters could complement your solar solutions portfolio.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu interested in reliable inverters? I look forward to exploring potential sales or partnership opportunities with your team.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how your inverters complement their offerings."
+          }
+        },
+        {
+          "to": "info@alchemegreenenergy.com",
+          "subject": "Inverter supply for Alcheme Green Energy projects",
+          "body": "Hello Alcheme Green Energy team,\n\nAlcheme Green Energy provides comprehensive EPC services including supply of solar modules and inverters, serving major Tamil Nadu cities like Madurai and Trichy.\n\nTest Sender manufactures 3 to 10 kW string solar inverters with a 5 year warranty. Our product range could complement your inverter supply needs for on-grid and off-grid solar installations.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu interested in exploring inverter options? Please point me to the right contact if needed.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific projects where your inverters fit."
+          }
+        },
+        {
+          "to": "info@illumineenergy.com",
+          "subject": "Connecting on solar inverter supply in Kerala",
+          "body": "Hello Illumine team,\n\nIllumine Energy\u2019s position as a leading solar company in Kerala offering complete solar product supply and installation caught my attention.\n\nWe manufacture 3 to 10 kW string inverters with a 5 year warranty, designed to support solar installations like those you provide.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu who might be interested in these inverters? Please point me to whoever handles this if needed.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a brief benefit of your inverters for their projects."
+          }
+        },
+        {
+          "to": "info@epcsolarsolution.com",
+          "subject": "Inverter options for your solar projects",
+          "body": "Hello Epcsolarsolution team,\n\nYour team at Epcsolarsolution specializes in residential and commercial solar projects in Trivandrum, which aligns with our focus on string inverters suitable for such applications.\n\nWe manufacture 3 to 10 kW string inverters and provide a 5 year warranty, designed to support reliable solar installations. Our products could complement your current offerings to clients.\n\nCould you help identify or connect me with small solar installers and large EPC firms in Kerala and Tamil Nadu interested in exploring these inverter options? Please let me know if I should reach out to someone specific on your team.\n\nBest regards,\nTest Sender\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Highlight a unique feature of your inverters."
+          }
+        }
+      ],
+      "name": "s2_contradictory",
+      "split": "stress",
+      "playbook": "b2b_sales",
+      "target": 10
+    },
+    {
+      "unique": 69,
+      "qualified": 69,
+      "reachable": 5,
+      "passed_judge": 2,
+      "shortlisted": 2,
+      "good@K": 1,
+      "precision@K": 0.125,
+      "good_reachable@K": 1,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 2
+      },
+      "mean_score": 0.76,
+      "distinct_orgs": 2,
+      "proof_rate": 1.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 28,
+      "llm_paid_calls": 14,
+      "llm_usd": 0.0103,
+      "pages_fetched": 114,
+      "seconds": 204.8,
+      "usd_per_good": 0.0381,
+      "llm_by_purpose": {
+        "intake": 1,
+        "prejudge": 5,
+        "judge": 1,
+        "draft": 2,
+        "verify": 2,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "events": 69
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 2 confident prospects of the 8 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "events": 69
+        },
+        "qualified": {
+          "events": 69
+        },
+        "enriched": {
+          "events": 12
+        },
+        "reachable": {
+          "events": 5
+        },
+        "passed_judge": {
+          "events": 2
+        },
+        "shortlisted": {
+          "events": 2
+        }
+      },
+      "ledger": {
+        "events": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 13,
+          "llm_calls": 0,
+          "seconds": 18.13,
+          "found": 69,
+          "new": 69,
+          "qualified": 69
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Pebblebed",
+          "org": "Pebblebed",
+          "email": "pitch@pebblebed.com",
+          "score": 0.8309,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "Seed-stage venture firm backing technical founders"
+          ]
+        },
+        {
+          "name": "AgentPark",
+          "org": "AgentPark",
+          "email": "info@agentpark.am",
+          "score": 0.6895,
+          "sources": [
+            "events"
+          ],
+          "reasons": [
+            "AI innovation hub and accelerator"
+          ]
+        }
+      ],
+      "intake_playbook": "general",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "startup mentorship",
+        "venture capital",
+        "startup advising",
+        "early-stage investing"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.7,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 2,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "unsupported claim",
+            2
+          ]
+        ],
+        "avg_specificity": 3.5,
+        "avg_relevance": 3.5,
+        "avg_ask": 4.5,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.5,
+        "critiques": [
+          "Specify the challenges you want to discuss.",
+          "Make the ask more direct and specific."
+        ]
+      },
+      "emails": [
+        {
+          "to": "pitch@pebblebed.com",
+          "subject": "Discussion on supporting seed-stage startups",
+          "body": "Hello Pebblebed team,\n\nPebblebed supports technical founders at the seed stage. I am the founder of an early-stage startup and am reaching out to connect.\n\nI would like to have a conversation about the challenges and opportunities I am encountering in this phase. Your experience advising early-stage startups could provide valuable perspective.\n\nCould we arrange a time to discuss this further? I am interested in learning from your insights and exploring a meaningful conversation.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: Your experience advising early-stage startups could provide valuable perspective."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the challenges you want to discuss."
+          }
+        },
+        {
+          "to": "info@agentpark.am",
+          "subject": "Startup support inquiry",
+          "body": "Hello AgentPark team,\n\nI am the founder of an early-stage startup and am reaching out to organizations that support startups in their initial phases.\n\nAgentPark sponsors AI Hackathon Sponsorship & Partnerships - Hack-Nation and has experience supporting early-stage startups.\n\nCould we arrange a conversation or meeting to discuss my startup and explore potential advice or support you might offer? Please let me know if you can connect me with the appropriate person to talk about startup guidance or support.\n\nBest regards,\nTest Sender",
+          "issues": [
+            "unsupported claim: AgentPark sponsors AI Hackathon Sponsorship & Partnerships - Hack-Nation and has experience supporting early-stage startups."
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask more direct and specific."
+          }
+        }
+      ],
+      "name": "s2_vague_prompt",
+      "split": "stress",
+      "playbook": "general",
+      "target": 8
+    }
+  ],
+  "summary": {
+    "scenarios": 4,
+    "failed": 0,
+    "good@K": 12,
+    "good_reachable@K": 11,
+    "good_verified@K": 0,
+    "precision@K": 0.306,
+    "mean_score": 0.561,
+    "distinct_orgs": 20,
+    "proof_rate": 0.606,
+    "reachable": 38,
+    "search_calls": 137,
+    "llm_paid_calls": 116,
+    "llm_usd": 0.0731,
+    "seconds": 1075.4,
+    "intake_playbook_ok": "4/4",
+    "intake_where_ok": "4/4",
+    "drafts": 20,
+    "draft_pass_rate": 0.3,
+    "would_send_rate": 0.9,
+    "usd_per_good": 0.0175,
+    "judge_precision": 0.316,
+    "judge_precision_ci95": [
+      0.191,
+      0.475
+    ],
+    "sendable_precision": 0.289,
+    "verified_precision": 0.0
+  }
+}

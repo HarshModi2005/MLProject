@@ -1,0 +1,37 @@
+{
+  "name": "s2_vague_prompt",
+  "split": "stress",
+  "playbook": "general",
+  "target_count": 8,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Talk to people about my startup",
+    "ask": "A conversation",
+    "persona": {
+      "description": "People who could help my startup",
+      "roles": [
+        "Founder"
+      ]
+    },
+    "topics": [
+      "startup"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Founder",
+    "summary": "Early-stage startup"
+  },
+  "facts": [
+    "early stage"
+  ],
+  "prompt": "i need people to talk to about my startup",
+  "playbook_ok": [
+    "general",
+    "partnerships",
+    "customer_research",
+    "fundraising",
+    "b2b_sales"
+  ]
+}

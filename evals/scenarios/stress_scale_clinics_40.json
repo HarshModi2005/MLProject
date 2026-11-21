@@ -1,0 +1,47 @@
+{
+  "name": "stress_scale_clinics_40",
+  "split": "stress",
+  "playbook": "b2b_sales",
+  "target_count": 40,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Sell appointment software to clinics",
+    "ask": "A 15-minute call",
+    "persona": {
+      "description": "Independent dental and skin clinics in Mumbai, Pune and Hyderabad",
+      "roles": [
+        "Owner",
+        "Practice manager"
+      ],
+      "org_types": [
+        "clinic"
+      ]
+    },
+    "topics": [
+      "appointment reminders",
+      "clinic software"
+    ],
+    "locations": [
+      "Mumbai",
+      "Pune",
+      "Hyderabad"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of a clinic software startup",
+    "summary": "WhatsApp reminders cut no-shows by a third for 12 clinics."
+  },
+  "facts": [
+    "Cut no-shows by a third",
+    "12 clinics"
+  ],
+  "prompt": "we sell a WhatsApp appointment-reminder tool; find independent dental and skin clinics in Mumbai, Pune and Hyderabad",
+  "playbook_ok": [
+    "b2b_sales"
+  ],
+  "settings": {
+    "max_search_calls": 200,
+    "llm_max_calls": 500
+  }
+}

@@ -1,0 +1,3542 @@
+{
+  "label": "stress_c",
+  "replay": "",
+  "split": "all",
+  "repeat": 1,
+  "rows": [
+    {
+      "unique": 118,
+      "qualified": 113,
+      "reachable": 13,
+      "passed_judge": 7,
+      "shortlisted": 7,
+      "good@K": 4,
+      "precision@K": 0.333,
+      "good_reachable@K": 4,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 7
+      },
+      "mean_score": 0.71,
+      "distinct_orgs": 7,
+      "proof_rate": 0.286,
+      "personal_email_rate": 0.0,
+      "search_calls": 31,
+      "llm_paid_calls": 51,
+      "llm_usd": 0.0302,
+      "pages_fetched": 99,
+      "seconds": 389.5,
+      "usd_per_good": 0.0151,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 12,
+        "extract_orgs": 15,
+        "prejudge": 9,
+        "judge": 3,
+        "draft": 9
+      },
+      "by_source": {
+        "places": 29,
+        "orgs": 96,
+        "lookalike": 15
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 7 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 29,
+          "web": 29,
+          "orgs": 78,
+          "list": 61,
+          "lookalike": 12
+        },
+        "qualified": {
+          "list": 59,
+          "orgs": 74,
+          "web": 26,
+          "places": 29,
+          "lookalike": 11
+        },
+        "enriched": {
+          "list": 20,
+          "orgs": 26,
+          "web": 6,
+          "places": 5
+        },
+        "reachable": {
+          "list": 8,
+          "orgs": 11,
+          "web": 4,
+          "places": 2,
+          "lookalike": 1
+        },
+        "passed_judge": {
+          "list": 5,
+          "orgs": 7,
+          "web": 2
+        },
+        "shortlisted": {
+          "list": 5,
+          "orgs": 7,
+          "web": 2
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 8,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 18.54,
+          "found": 29,
+          "new": 29,
+          "qualified": 29
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 2,
+          "llm_calls": 8,
+          "seconds": 56.13,
+          "found": 60,
+          "new": 59,
+          "qualified": 55
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Luna Polska Sp. z o.o.",
+          "org": "Luna Polska Sp. z o.o.",
+          "email": "info@lunapolska.pl",
+          "score": 0.8259,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading supplier of hand tools and measuring equipment in Poland"
+          ]
+        },
+        {
+          "name": "Finzoo",
+          "org": "Finzoo",
+          "email": "fin@finzoo.pl",
+          "score": 0.8196,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Distributor of high-quality cutting tools in Poland"
+          ]
+        },
+        {
+          "name": "POLTRA",
+          "org": "POLTRA",
+          "email": "poltra@poltra.pl",
+          "score": 0.7358,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Listed as top 25 metal cutting tool distributor in Poland"
+          ]
+        },
+        {
+          "name": "utensilline.it",
+          "org": "utensilline.it",
+          "email": "info@utensilline.it",
+          "score": 0.7168,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Distributes tools and industrial equipment in Italy"
+          ]
+        },
+        {
+          "name": "Sorma Spa",
+          "org": "Sorma Spa",
+          "email": "info@sorma.net",
+          "score": 0.6323,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Listed as top 25 industrial cutting tool supplier in Italy"
+          ]
+        },
+        {
+          "name": "Baritools s.r.l.",
+          "org": "Baritools s.r.l.",
+          "email": "commerciale@baritools.it",
+          "score": 0.6274,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Listed as top 25 industrial cutting tool supplier in Italy"
+          ]
+        },
+        {
+          "name": "UOP S.p.A.",
+          "org": "UOP S.p.A.",
+          "email": "info@uop.it",
+          "score": 0.6123,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Listed as top 25 industrial cutting tool supplier in Italy"
+          ]
+        }
+      ],
+      "intake_playbook": "distributors",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "DE",
+        "IT",
+        "PL"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "industrial cutting tools distribution",
+        "carbide cutting tools",
+        "industrial tool suppliers"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 7,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            7
+          ],
+          [
+            "ALL-CAPS word",
+            2
+          ]
+        ],
+        "avg_specificity": 4.0,
+        "avg_relevance": 4.14,
+        "avg_ask": 4.14,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.857,
+        "critiques": [
+          "Clarify the ask to focus on one specific distributor.",
+          "Specify how your tools complement their existing offerings.",
+          "Make the ask more direct and concise.",
+          "Focus the ask on one specific distributor type.",
+          "Simplify the ask for clarity."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@lunapolska.pl",
+          "subject": "Rajkot carbide inserts for Luna Polska",
+          "body": "Hello Luna Polska Sp. z o.o. team,\n\nYour listing among the Top 25 metal cutting tool distributors in Poland caught my attention. We are a Rajkot-based manufacturer of carbide inserts, ISO 9001 certified, exporting to 14 countries.\n\nOur products include high-quality carbide CNC cutting tools that might complement your current offering of hand tools, measuring equipment, and metal devices. While we do not manufacture power tools or woodworking machinery, our carbide cutting tools could add value to your metal tool distribution catalogue.\n\nCould you connect me with distributors at Luna Polska who sell industrial cutting tools but are not manufacturers? I would appreciate an introduction to the right person to discuss potential collaboration.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify the ask to focus on one specific distributor."
+          }
+        },
+        {
+          "to": "fin@finzoo.pl",
+          "subject": "Carbide cutting tools for your distribution",
+          "body": "Hello Finzoo team,\n\nFinzoo distributes high-quality cutting tools from global manufacturers like ACHTECK and KARCAN and holds ISO 9001 certification.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We are ISO 9001 certified and export to 14 countries. Our carbide CNC cutting tools may complement your current product range in Poland, Germany, and Italy.\n\nWould you be interested in distributing our products? I can provide samples or arrange a call to discuss details.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "ALL-CAPS word",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Specify how your tools complement their existing offerings."
+          }
+        },
+        {
+          "to": "poltra@poltra.pl",
+          "subject": "Opportunity to expand your cutting tool range",
+          "body": "Hi Zbigniew,\n\nPOLTRA is listed among the Top 25 metal cutting tool distributors in Poland, which suggests your catalogue includes cutting tools for CNC machining.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We are ISO 9001 certified and currently export to 14 countries. Our focus is on carbide CNC cutting tools produced under strict quality standards.\n\nWould you be interested in distributing our carbide CNC cutting tools in Germany, Italy, or Poland? I can provide samples or discuss terms that support your margin and product range.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "ALL-CAPS word",
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Make the ask more direct and concise."
+          }
+        },
+        {
+          "to": "info@utensilline.it",
+          "subject": "Distributing carbide CNC tools in Italy and Europe",
+          "body": "Hello utensilline.it team,\n\nYour team distributes tools, instrumentation, and equipment for machine tools in Italy, including Rivoli. We are a Rajkot-based manufacturer of carbide inserts, ISO 9001 certified, exporting to 14 countries.\n\nWe produce high-quality carbide CNC cutting tools suitable for industrial applications. Our experience exporting to multiple countries shows our capability to meet international standards and demand.\n\nCould you connect me with distributors in Germany, Italy, or Poland who sell industrial cutting tools but are not manufacturers themselves? I would appreciate an introduction to the right contacts in your network.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Focus the ask on one specific distributor type."
+          }
+        },
+        {
+          "to": "info@sorma.net",
+          "subject": "Potential partnership for cutting tools in Italy",
+          "body": "Hi Sorma,\n\nYour company is listed among the Top 25 industrial cutting tool suppliers in Italy, which suggests a strong presence in the market.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We hold ISO 9001 certification and currently export to 14 countries. Our products include high-quality carbide CNC cutting tools.\n\nWould you be able to connect me with distributors who sell industrial cutting tools but are not manufacturers? I am particularly interested in contacts in Germany, Italy, and Poland who might consider distributing our products.\n\nThank you for forwarding this to the appropriate person on your team if needed.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Simplify the ask for clarity."
+          }
+        },
+        {
+          "to": "commerciale@baritools.it",
+          "subject": "Carbide cutting tools for Baritools s.r.l.",
+          "body": "Hello Baritools s.r.l. team,\n\nBaritools s.r.l. is recognized among Italy's top 25 industrial cutting tool suppliers, specializing in high-precision mechanical tools.\n\nI manage exports at a Rajkot-based manufacturer of carbide inserts, ISO 9001 certified, with experience exporting to 14 countries. We produce carbide CNC cutting tools that may complement your existing product range.\n\nWould you be interested in distributing our high-quality carbide CNC cutting tools from India? I can provide samples or arrange a call to discuss details.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Consider adding a brief mention of Baritools' product range."
+          }
+        },
+        {
+          "to": "info@uop.it",
+          "subject": "Carbide CNC tools distribution in Germany, Italy, Poland",
+          "body": "Hello UOP S.p.A. team,\n\nYour work designing and producing standard and tailor-made tools in solid carbide and high-speed steel aligns with the market for carbide CNC cutting tools.\n\nI manage exports for a Rajkot-based manufacturer of carbide inserts. We are ISO 9001 certified and currently export to 14 countries. Our products include high-quality carbide CNC cutting tools suited for industrial machining.\n\nCould you connect me with distributors in Germany, Italy, or Poland who sell industrial cutting tools but do not manufacture them? I would like to explore the possibility of supplying them with our carbide tools.\n\nThank you for forwarding this to the appropriate contact within your team.\n\nBest regards,\nTest Exporter\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify the ask to make it more direct."
+          }
+        }
+      ],
+      "name": "stress_germany_machinery",
+      "split": "stress",
+      "playbook": "distributors",
+      "target": 12
+    },
+    {
+      "unique": 113,
+      "qualified": 88,
+      "reachable": 11,
+      "passed_judge": 7,
+      "shortlisted": 7,
+      "good@K": 6,
+      "precision@K": 0.4,
+      "good_reachable@K": 6,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 7
+      },
+      "mean_score": 0.759,
+      "distinct_orgs": 7,
+      "proof_rate": 0.429,
+      "personal_email_rate": 0.0,
+      "search_calls": 44,
+      "llm_paid_calls": 64,
+      "llm_usd": 0.031,
+      "pages_fetched": 189,
+      "seconds": 1026.7,
+      "usd_per_good": 0.0124,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 19,
+        "extract_orgs": 22,
+        "prejudge": 6,
+        "judge": 2,
+        "draft": 7,
+        "verify": 3,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "portfolio": 34,
+        "orgs": 42,
+        "lookalike": 67
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 11 of 15 wanted contacts have a confident address. This kind of campaign (Investors) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 7 confident prospects of the 15 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 39,
+          "portfolio": 34,
+          "list": 75,
+          "orgs": 42,
+          "lookalike": 52
+        },
+        "qualified": {
+          "list": 54,
+          "portfolio": 24,
+          "orgs": 32,
+          "lookalike": 40,
+          "web": 34
+        },
+        "enriched": {
+          "list": 27,
+          "portfolio": 14,
+          "orgs": 5,
+          "lookalike": 17,
+          "web": 2
+        },
+        "reachable": {
+          "list": 10,
+          "portfolio": 4,
+          "orgs": 4,
+          "lookalike": 7,
+          "web": 1
+        },
+        "passed_judge": {
+          "list": 6,
+          "portfolio": 4,
+          "orgs": 3,
+          "lookalike": 4,
+          "web": 1
+        },
+        "shortlisted": {
+          "list": 6,
+          "portfolio": 4,
+          "orgs": 3,
+          "lookalike": 4,
+          "web": 1
+        }
+      },
+      "ledger": {
+        "portfolio": {
+          "runs": 2,
+          "search_calls": 5,
+          "fetches": 23,
+          "llm_calls": 8,
+          "seconds": 615.83,
+          "found": 34,
+          "new": 34,
+          "qualified": 34
+        },
+        "orgs": {
+          "runs": 1,
+          "search_calls": 6,
+          "fetches": 5,
+          "llm_calls": 11,
+          "seconds": 50.63,
+          "found": 42,
+          "new": 37,
+          "qualified": 35
+        },
+        "lookalike": {
+          "runs": 1,
+          "search_calls": 6,
+          "fetches": 6,
+          "llm_calls": 11,
+          "seconds": 48.57,
+          "found": 34,
+          "new": 25,
+          "qualified": 25
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Quona Capital",
+          "org": "Quona Capital",
+          "email": "info@quona.com",
+          "score": 0.8372,
+          "sources": [
+            "list",
+            "portfolio",
+            "orgs"
+          ],
+          "reasons": [
+            "Invests in fintech innovators advancing financial inclusion"
+          ]
+        },
+        {
+          "name": "Init-6",
+          "org": "Init-6",
+          "email": "info@init-6.fund",
+          "score": 0.788,
+          "sources": [
+            "list",
+            "portfolio",
+            "lookalike"
+          ],
+          "reasons": [
+            "Focus on fintech and financial services"
+          ]
+        },
+        {
+          "name": "Skystar Capital",
+          "org": "Skystar Capital",
+          "email": "contact@skystarcapital.com",
+          "score": 0.788,
+          "sources": [
+            "list",
+            "portfolio"
+          ],
+          "reasons": [
+            "Focus on FinTech and Financial Services in Indonesia"
+          ]
+        },
+        {
+          "name": "Venturra",
+          "org": "Venturra",
+          "email": "all@venturra.com",
+          "score": 0.782,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Indonesia-focused early-stage VC"
+          ]
+        },
+        {
+          "name": "Kejorahq",
+          "org": "Kejorahq",
+          "email": "contact@kejorahq.com",
+          "score": 0.7388,
+          "sources": [
+            "list",
+            "orgs",
+            "lookalike"
+          ],
+          "reasons": [
+            "Invests from seed to late-stage in Southeast Asia"
+          ]
+        },
+        {
+          "name": "NEXEA",
+          "org": "NEXEA",
+          "email": "hello@nexea.co",
+          "score": 0.7388,
+          "sources": [
+            "web",
+            "portfolio",
+            "orgs"
+          ],
+          "reasons": [
+            "Early stage VC program for tech startups in Indonesia"
+          ]
+        },
+        {
+          "name": "InvestIdea",
+          "org": "InvestIdea",
+          "email": "info@investidea.ventures",
+          "score": 0.6402,
+          "sources": [
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Multi-stage investment firm in Indonesia"
+          ]
+        }
+      ],
+      "intake_playbook": "fundraising",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Indonesia",
+        "IN",
+        "SG"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "climate tech investment",
+        "fintech investment",
+        "seed stage investing",
+        "venture capital",
+        "angel investing"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 7,
+        "pass_rate": 0.857,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ]
+        ],
+        "avg_specificity": 5.0,
+        "avg_relevance": 5.0,
+        "avg_ask": 4.71,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.857,
+        "critiques": [
+          "Add a clear, easy-to-answer ask."
+        ]
+      },
+      "emails": [
+        {
+          "to": "info@quona.com",
+          "subject": "Seeking seed investors for Indian green loans platform",
+          "body": "Hi David,\n\nQuona Capital's focus on fintech innovators advancing financial inclusion aligns with my work as co-founder of a climate-fintech platform. We match Indian MSMEs with green loans and have onboarded 1,200 MSMEs, disbursing Rs 9 crore.\n\nCurrently, we are raising a $1.5M seed round to scale further. I am looking for seed investors interested in investing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia.\n\nCould you point me to seed investors at Quona Capital who might be interested or to whoever handles this?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@init-6.fund",
+          "subject": "Seeking seed investors in climate fintech",
+          "body": "Hello Init-6 team,\n\nI co-founded a climate-fintech startup that matches Indian MSMEs with green loans. We have onboarded 1,200 MSMEs and disbursed Rs 9 crore so far.\n\nWe are currently raising a $1.5M seed round and are looking for investors interested in contributing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia. \n\nCould you please point me to seed investors in your network who focus on these sectors and investment sizes, excluding corporate venture arms and accelerators? Your guidance would be very helpful.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@skystarcapital.com",
+          "subject": "Seeking seed investors in fintech and climate",
+          "body": "Hello Skystar Capital team,\n\nI co-founded a climate-fintech platform that connects Indian MSMEs with green loans. We have onboarded 1,200 MSMEs and disbursed Rs 9 crore so far. We are currently raising a $1.5M seed round.\n\nGiven your focus on FinTech and Financial Services in Southeast Asia and Indonesia, I wanted to ask if you could point me to seed investors in your network who invest $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia. We are excluding corporate venture arms and accelerators.\n\nWould you be able to connect me to the right person or share relevant contacts? A brief reply would be much appreciated.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "all@venturra.com",
+          "subject": "Early-stage investment in green loans",
+          "body": "Hello Venturra team,\n\nVenturra focuses on early-stage, high-growth technology companies in Southeast Asia. Our climate-fintech startup has onboarded 1,200 Indian MSMEs and disbursed Rs 9 crore in green loans.\n\nWe are raising a $1.5M seed round to grow our platform and impact. I would like to share more details or arrange a short call to discuss potential interest in this round.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 3,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Add a clear, easy-to-answer ask."
+          }
+        },
+        {
+          "to": "contact@kejorahq.com",
+          "subject": "Seeking seed investors for climate-fintech startup",
+          "body": "Hello Kejorahq team,\n\nKejora Capital's focus on seed to late-stage investments in transformative Southeast Asian companies aligns with our climate-fintech platform's goals.\n\nWe have onboarded 1,200 Indian MSMEs and disbursed Rs 9 crore in green loans. We are currently raising a $1.5M seed round to expand our impact.\n\nCould you please direct me to seed investors within your network who invest $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia, excluding corporate venture arms and accelerators?\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hello@nexea.co",
+          "subject": "Connecting with seed investors in India and Indonesia",
+          "body": "Hello NEXEA team,\n\nOur platform matches Indian MSMEs with green loans, onboarding 1,200 MSMEs and disbursing Rs 9 crore.\n\nWe are raising a $1.5M seed round to expand. Given NEXEA\u2019s focus on early-stage tech startups ready to grow, could you point me to seed investors investing $100k-$500k in climate or fintech sectors in India, Singapore, or Indonesia?\n\nPlease direct me to the appropriate person or team for this inquiry. Thank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [
+            "unsupported claim: Given NEXEA\u2019s focus on early-stage tech startups ready to grow"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@investidea.ventures",
+          "subject": "Seed investment opportunity in climate-fintech",
+          "body": "Hello InvestIdea team,\n\nInvestIdea\u2019s focus on generating social impact aligns with our work at a climate-fintech startup. We have developed a platform that matches Indian MSMEs with green loans, onboarding 1,200 MSMEs and disbursing Rs 9 crore.\n\nWe are currently raising a $1.5M seed round and are seeking seed investors interested in investing $100k-$500k. Could you point me to seed investors in India, Singapore, or Indonesia who focus on climate or fintech sectors, excluding corporate venture arms and accelerators?\n\nI would appreciate an introduction to the right person or team for this. Thank you for your time.\n\nBest regards,\nTest Founder",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ],
+      "name": "stress_investors_multi",
+      "split": "stress",
+      "playbook": "fundraising",
+      "target": 15
+    },
+    {
+      "unique": 168,
+      "qualified": 168,
+      "reachable": 20,
+      "passed_judge": 18,
+      "shortlisted": 18,
+      "good@K": 18,
+      "precision@K": 0.6,
+      "good_reachable@K": 16,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 16,
+        "guess": 2
+      },
+      "mean_score": 0.809,
+      "distinct_orgs": 18,
+      "proof_rate": 0.5,
+      "personal_email_rate": 0.111,
+      "search_calls": 68,
+      "llm_paid_calls": 89,
+      "llm_usd": 0.047,
+      "pages_fetched": 219,
+      "seconds": 586.4,
+      "usd_per_good": 0.0063,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 29,
+        "extract_orgs": 24,
+        "prejudge": 9,
+        "judge": 4,
+        "draft": 18
+      },
+      "by_source": {
+        "places": 24,
+        "orgs": 166,
+        "lookalike": 74
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 20 of 30 wanted contacts have a confident address. This kind of campaign (B2B sales leads) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 18 confident prospects of the 30 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 24,
+          "web": 53,
+          "orgs": 95,
+          "lookalike": 59,
+          "list": 101
+        },
+        "qualified": {
+          "web": 53,
+          "orgs": 95,
+          "places": 24,
+          "list": 101,
+          "lookalike": 59
+        },
+        "enriched": {
+          "web": 19,
+          "orgs": 69,
+          "places": 14,
+          "list": 67,
+          "lookalike": 16
+        },
+        "reachable": {
+          "places": 9,
+          "list": 3,
+          "orgs": 18,
+          "web": 17,
+          "lookalike": 2
+        },
+        "passed_judge": {
+          "places": 9,
+          "web": 14,
+          "orgs": 14,
+          "lookalike": 2,
+          "list": 2
+        },
+        "shortlisted": {
+          "places": 9,
+          "web": 14,
+          "orgs": 14,
+          "lookalike": 2,
+          "list": 2
+        }
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 19,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 65.15,
+          "found": 24,
+          "new": 24,
+          "qualified": 24
+        },
+        "orgs": {
+          "runs": 2,
+          "search_calls": 14,
+          "fetches": 17,
+          "llm_calls": 24,
+          "seconds": 157.24,
+          "found": 113,
+          "new": 80,
+          "qualified": 80
+        },
+        "lookalike": {
+          "runs": 2,
+          "search_calls": 9,
+          "fetches": 10,
+          "llm_calls": 17,
+          "seconds": 62.24,
+          "found": 43,
+          "new": 39,
+          "qualified": 38
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Shree Chunniya Studios",
+          "org": "Shree Chunniya Studios",
+          "email": "shreechunniyastudios@gmail.com",
+          "score": 0.902,
+          "sources": [
+            "places",
+            "web",
+            "orgs",
+            "lookalike"
+          ],
+          "reasons": [
+            "Specializes in wedding photography in Jaipur"
+          ]
+        },
+        {
+          "name": "Pre-Wedding Shoot Jaipur",
+          "org": "Candid Life Photography",
+          "email": "candidlifejaipur@gmail.com",
+          "score": 0.8692,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Award-winning wedding photographers in Jaipur since 2007"
+          ]
+        },
+        {
+          "name": "Sony Fashion Photography",
+          "org": "Sony Fashion Photography",
+          "email": "contact@weddingphotographybysf.com",
+          "score": 0.8561,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Independent wedding photography studio in Jaipur"
+          ]
+        },
+        {
+          "name": "CN Films Photography",
+          "org": "CN Films Photography",
+          "email": "cnfilmsphotography@gmail.com",
+          "score": 0.8496,
+          "sources": [
+            "list",
+            "orgs",
+            "web"
+          ],
+          "reasons": [
+            "Listed among top wedding photographers in Jaipur and Rajasthan"
+          ]
+        },
+        {
+          "name": "The Candid House",
+          "org": "The Candid House",
+          "email": "thecandidhouse@gmail.com",
+          "score": 0.8496,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Leading wedding photography company in Jaipur"
+          ]
+        },
+        {
+          "name": "Viresh Studio",
+          "org": "Viresh Studio",
+          "email": "vireshstudiojaipur@gmail.com",
+          "score": 0.8496,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Expert wedding and pre-wedding shoots in Jaipur"
+          ]
+        },
+        {
+          "name": "Hitesh Malpani",
+          "org": "Hitesh Malpani",
+          "email": "info@hiteshmalpani.com",
+          "score": 0.8484,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Wedding photographer and cinematographer based in Jaipur and Delhi"
+          ]
+        },
+        {
+          "name": "Himanshi Photo Studio -",
+          "org": "Himanshi Photo Studio -",
+          "email": "himanshistudio7@gmail.com",
+          "score": 0.8287,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Offers wedding photography and related shoots"
+          ]
+        },
+        {
+          "name": "Photography Studio in Jaipur",
+          "org": "Photography Studio in Jaipur",
+          "email": "hello@jaipurphotostudio.com",
+          "score": 0.8178,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Professional wedding photography studio in Jaipur"
+          ]
+        },
+        {
+          "name": "Dk Wedding Studio",
+          "org": "Dk Wedding Studio",
+          "email": "dkweddingstudio@gmail.com",
+          "score": 0.8116,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Reputed wedding photography studio in Jaipur"
+          ]
+        },
+        {
+          "name": "Kumkumphotosjaipur",
+          "org": "Kumkumphotosjaipur",
+          "email": "kumkumphotosjaipur@gmail.com",
+          "score": 0.8116,
+          "sources": [
+            "places",
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Offers candid and pre wedding photography in Jaipur"
+          ]
+        },
+        {
+          "name": "Vogueshaire",
+          "org": "Vogueshaire",
+          "email": "info@vogueshaire.com",
+          "score": 0.8043,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Specializes in wedding photography in Jaipur"
+          ]
+        },
+        {
+          "name": "Weddingdiariesbyomp",
+          "org": "Weddingdiariesbyomp",
+          "email": "weddingdiariesbyomp@gmail.com",
+          "score": 0.8042,
+          "sources": [
+            "places"
+          ],
+          "reasons": [
+            "Wedding photographer in Jaipur with strong local presence"
+          ]
+        },
+        {
+          "name": "Matrix Studio",
+          "org": "Matrix Studio",
+          "email": "ms@matrixstudio.in",
+          "score": 0.7664,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Known candid wedding photography studio in Jaipur"
+          ]
+        },
+        {
+          "name": "Clikers Motion Picture",
+          "org": "Clikers Motion Picture",
+          "email": "clikersmotionpicture@gmail.com",
+          "score": 0.7664,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Luxury wedding photography and cinematic films in Jaipur"
+          ]
+        },
+        {
+          "name": "GauRi Brothers",
+          "org": "Gauri Design",
+          "email": "gauridesignnagaur@gmail.com",
+          "score": 0.7136,
+          "sources": [
+            "places",
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Provides album design and photo editing services"
+          ]
+        },
+        {
+          "name": "Voila",
+          "org": "Voila",
+          "email": "contact@voilaindia.com",
+          "score": 0.7119,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Specializes in wedding picture albums and photography"
+          ]
+        },
+        {
+          "name": "PlaymatriX Studio",
+          "org": "PlaymatriX Studio",
+          "email": "playmatrixstudioofficial@gmail.com",
+          "score": 0.7065,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Photographs and films weddings in Jaipur"
+          ]
+        }
+      ],
+      "intake_playbook": "b2b_sales",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Jaipur",
+        "Rajasthan",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "wedding photography studios",
+        "independent photography businesses",
+        "wedding album design"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 18,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            18
+          ]
+        ],
+        "avg_specificity": 4.33,
+        "avg_relevance": 4.39,
+        "avg_ask": 4.94,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.778,
+        "critiques": [
+          "Remove the extra ask about pointing to the right person.",
+          "Make the introduction more personalized to CN Films.",
+          "Add a specific benefit for Viresh Studio.",
+          "Mention how it can enhance Hitesh's workflow.",
+          "Include a specific example of success with similar studios."
+        ]
+      },
+      "emails": [
+        {
+          "to": "shreechunniyastudios@gmail.com",
+          "subject": "Album design tool for wedding studios",
+          "body": "Hello Shree Chunniya Studios team,\n\nShree Chunniya Studios specializes in wedding photography in Mansarovar, Jaipur, which aligns with the focus of my album-design software.\n\nI founded a tool that lays out a 40-page wedding album in 10 minutes, currently used by 600 studios. This software could help your team save time on album creation without compromising quality.\n\nWould you be open to scheduling a demo or starting a conversation about how this tool might fit your workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "candidlifejaipur@gmail.com",
+          "subject": "Album design software for Jaipur studios",
+          "body": "Hi Pre-Wedding,\n\nCandid Life Photography\u2019s award-winning reputation and extensive wedding portfolio in Jaipur caught my attention.\n\nI founded a software tool that lays out a 40-page wedding album in just 10 minutes. It is currently used by 600 studios and could help streamline your album creation process.\n\nWould you be open to a brief demo or conversation to see if this tool fits your workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@weddingphotographybysf.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hi Chander,\n\nSony Fashion Photography offers wedding photography services in Jaipur and across India, including a limited-time deal for a free pre-wedding shoot.\n\nI am the founder of an album-design tool that lays out a 40-page wedding album in just 10 minutes. Currently, 600 studios use it to speed up their album creation process.\n\nWould you be open to scheduling a demo or starting a conversation about how this software might fit your studio\u2019s needs? If you\u2019re not the right person, could you please point me to whoever handles software or tool purchases at your studio?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Remove the extra ask about pointing to the right person."
+          }
+        },
+        {
+          "to": "cnfilmsphotography@gmail.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hi CN,\n\nCN Films Photography is recognized among the top wedding photographers in Jaipur and Rajasthan, known for your photo and video services with strong client ratings.\n\nI founded an album-design software that lays out a 40-page wedding album in just 10 minutes. Currently, 600 studios use this tool to speed up their album creation process.\n\nWould you be open to a short demo or conversation about how this software might support your album production? I can adapt to your schedule for a quick call or online presentation.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the introduction more personalized to CN Films."
+          }
+        },
+        {
+          "to": "thecandidhouse@gmail.com",
+          "subject": "Album design software for Jaipur studios",
+          "body": "Hello Candid House team,\n\nThe Candid House is a leading wedding photography company in Jaipur specializing in candid and pre-wedding shoots. I founded a software tool that lays out a 40-page wedding album in just 10 minutes, currently used by 600 studios.\n\nThis tool could help your team save time on album design while maintaining quality. I\u2019d like to offer a demo or start a conversation about how this software might fit your studio\u2019s workflow.\n\nWould you be open to scheduling a short demo to explore this further?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "vireshstudiojaipur@gmail.com",
+          "subject": "Streamline Wedding Albums for Viresh Studio",
+          "body": "Hello Viresh Studio team,\n\nViresh Studio\u2019s focus on expert wedding and pre-wedding shoots in Jaipur caught my attention.\n\nI founded an album-design tool used by 600 studios that lays out a 40-page wedding album in just 10 minutes. This software could help your team reduce the time spent on album creation while maintaining quality.\n\nWould you be open to a brief demo or a conversation about how this tool might fit your workflow? I can share how other studios have integrated it easily.\n\nLooking forward to your thoughts.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Add a specific benefit for Viresh Studio."
+          }
+        },
+        {
+          "to": "info@hiteshmalpani.com",
+          "subject": "Album design tool for your wedding projects",
+          "body": "Hi Hitesh,\n\nYour work in wedding photography and filmmaking in Jaipur and Delhi caught my attention.\n\nI founded an album-design tool that lays out a 40-page wedding album in 10 minutes. Currently, 600 studios use this software to streamline their album creation process.\n\nCould you connect me with the person responsible for software or tool purchases at your studio? I would like to schedule a demo or start a conversation about how this tool might support your album production workflow.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention how it can enhance Hitesh's workflow."
+          }
+        },
+        {
+          "to": "himanshistudio7@gmail.com",
+          "subject": "Streamline Wedding Album Design for Himanshi Studio",
+          "body": "Hello Himanshi Photo Studio - team,\n\nHimanshi Photo Studio focuses on capturing special moments through wedding and related photography. I founded a software tool that automates the layout of 40-page wedding albums in just 10 minutes. Currently, 600 studios use this tool to speed up their album design process.\n\nIf your team is interested, I can schedule a demo to show how this software works and discuss how it might fit your workflow. Would you be open to a brief conversation about this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a specific example of success with similar studios."
+          }
+        },
+        {
+          "to": "hello@jaipurphotostudio.com",
+          "subject": "Album design software for Jaipur studios",
+          "body": "Hello Photography Studio in Jaipur team,\n\nYour studio offers professional wedding and pre-wedding photography in Jaipur, including cinematic coverage. I founded a software tool that automatically lays out a 40-page wedding album in 10 minutes, currently used by 600 studios.\n\nThis software could simplify your album design process and save time. Could you connect me with the person responsible for software or tool purchases at your studio? I would like to schedule a demo or start a conversation about how this tool might fit your needs.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make it more personalized to the studio's unique offerings."
+          }
+        },
+        {
+          "to": "dkweddingstudio@gmail.com",
+          "subject": "Quick album design for Dk Wedding Studio",
+          "body": "Hello Dk Wedding Studio team,\n\nDk Wedding Studio's reputation in wedding photography and celebrity clientele stands out in Jaipur.\n\nI founded a software tool that designs 40-page wedding albums in just 10 minutes. Currently, 600 studios use it to save time and streamline album creation.\n\nWould you be open to a brief demo or conversation about how this software might fit your studio's workflow? I can share how it works and answer any questions.\n\nPlease let me know a convenient time to connect.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Highlight how it can benefit celebrity photography specifically."
+          }
+        },
+        {
+          "to": "kumkumphotosjaipur@gmail.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hello Kumkumphotosjaipur team,\n\nKumkum Photos offers candid and pre-wedding photography in Jaipur and is recognized as an award-winning studio since 2022. I founded a software tool used by 600 studios that lays out a 40-page wedding album in just 10 minutes.\n\nThis tool could help your team save time designing albums while maintaining quality. Would you be open to scheduling a brief demo or starting a conversation about how this software might fit your studio\u2019s workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "info@vogueshaire.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hello Vogueshaire team,\n\nVogueshaire\u2019s work in candid, traditional, and cinematic wedding photography in Jaipur caught my attention.\n\nI founded a tool that automates the layout of 40-page wedding albums in just 10 minutes. Currently, 600 studios use this software to speed up their album design process.\n\nCould you connect me with the person responsible for software or tool purchases at your studio? I\u2019d like to schedule a demo or start a conversation about how this tool might support your workflow.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify the recipient's role for better clarity."
+          }
+        },
+        {
+          "to": "weddingdiariesbyomp@gmail.com",
+          "subject": "Streamline album design for Jaipur weddings",
+          "body": "Hello Weddingdiariesbyomp team,\n\nYour work creating royal pre-wedding shoots at Jaipur landmarks caught my attention.\n\nI founded an album-design tool that arranges a 40-page wedding album in just 10 minutes. Currently, 600 studios use it to speed up their album creation process.\n\nI\u2019d like to offer a demo or start a conversation about how this software might fit your workflow at Weddingdiariesbyomp. Would you be open to a brief call or demo session to explore this?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "ms@matrixstudio.in",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hello Matrix Studio team,\n\nMatrix Studio has a long history as a candid wedding photography studio in Jaipur, serving clients for the past 40 years.\n\nI founded an album-design tool that creates a 40-page wedding album layout in 10 minutes. Currently, 600 studios use this software to speed up their album production.\n\nWould you be open to scheduling a demo or starting a conversation about how this software might fit your studio\u2019s workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific benefits for a 40-year studio."
+          }
+        },
+        {
+          "to": "clikersmotionpicture@gmail.com",
+          "subject": "Streamline album creation at Clikers Motion Picture",
+          "body": "Hi Clikers,\n\nClikers Motion Picture\u2019s focus on luxury wedding photography and cinematic films at Jaipur\u2019s palaces caught my attention.\n\nI founded a software tool that lays out a 40-page wedding album in just 10 minutes. Currently, 600 studios use this tool to speed up their album design process.\n\nWould you be open to a quick demo or conversation to see if this software could fit your studio\u2019s workflow?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "gauridesignnagaur@gmail.com",
+          "subject": "Album design software for Gauri Design",
+          "body": "Hi GauRi,\n\nGauri Design offers album design and photo editing services to photographers in Nagaur, Rajasthan. Your team\u2019s experience in premium album design and retouching caught my attention.\n\nI founded a software tool that automates the layout of 40-page wedding albums in 10 minutes. Currently, 600 studios use this tool to speed up their album design process.\n\nWould you be open to scheduling a quick demo to see if this software could support your album design services? I\u2019m happy to share more details and answer any questions you have.\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "contact@voilaindia.com",
+          "subject": "Album design tool for Voila's wedding albums",
+          "body": "Hello Voila team,\n\nVoila specializes in stunning wedding picture albums in Jaipur. I founded a software tool that lays out a 40-page wedding album in 10 minutes, currently used by 600 studios.\n\nThis tool could help your team speed up album design while maintaining quality. I would like to schedule a demo or start a conversation about how this software might fit your workflow.\n\nCould you please connect me with the person responsible for software or tool purchases at your studio?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Remove the request to connect with another person."
+          }
+        },
+        {
+          "to": "playmatrixstudioofficial@gmail.com",
+          "subject": "Album design tool for Jaipur wedding studios",
+          "body": "Hello PlaymatriX Studio team,\n\nPlaymatriX Studio photographs and films weddings in Jaipur, creating images that clients value for their look. My album-design software lays out a 40-page wedding album in 10 minutes and is currently used by 600 studios.\n\nThis tool could help your team save time on album creation while maintaining quality. I\u2019d like to offer a demo or start a conversation about how it might fit your workflow.\n\nWould you be open to scheduling a brief demo to see the software in action?\n\nBest regards,\nTest Founder\n\n--\nIf this isn't relevant, just reply 'no' and I won't write again.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ],
+      "name": "stress_jaipur_photographers",
+      "split": "stress",
+      "playbook": "b2b_sales",
+      "target": 30
+    },
+    {
+      "unique": 111,
+      "qualified": 105,
+      "reachable": 7,
+      "passed_judge": 3,
+      "shortlisted": 3,
+      "good@K": 2,
+      "precision@K": 0.1,
+      "good_reachable@K": 2,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 3
+      },
+      "mean_score": 0.717,
+      "distinct_orgs": 3,
+      "proof_rate": 1.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 66,
+      "llm_paid_calls": 20,
+      "llm_usd": 0.0147,
+      "pages_fetched": 385,
+      "seconds": 479.7,
+      "usd_per_good": 0.0403,
+      "llm_by_purpose": {
+        "intake": 1,
+        "replan_search": 2,
+        "prejudge": 8,
+        "judge": 1,
+        "draft": 3,
+        "verify": 2,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "gdelt": 0,
+        "podcasts": 25,
+        "news": 82,
+        "beat_walk": 2,
+        "graph_walk": 16
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 7 of 20 wanted contacts have a confident address. This kind of campaign (Journalists and media) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 3 confident prospects of the 20 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "podcasts": 25,
+          "news": 72,
+          "beat_walk": 2,
+          "graph_walk": 12
+        },
+        "qualified": {
+          "news": 66,
+          "podcasts": 25,
+          "graph_walk": 12,
+          "beat_walk": 2
+        },
+        "enriched": {
+          "news": 42,
+          "graph_walk": 2,
+          "podcasts": 3
+        },
+        "reachable": {
+          "news": 5,
+          "podcasts": 2
+        },
+        "passed_judge": {
+          "news": 3
+        },
+        "shortlisted": {
+          "news": 3
+        }
+      },
+      "ledger": {
+        "gdelt": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 2,
+          "llm_calls": 0,
+          "seconds": 23.51,
+          "found": 0,
+          "new": 0,
+          "qualified": 0
+        },
+        "podcasts": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 34,
+          "llm_calls": 0,
+          "seconds": 27.96,
+          "found": 25,
+          "new": 25,
+          "qualified": 25
+        },
+        "news": {
+          "runs": 3,
+          "search_calls": 26,
+          "fetches": 200,
+          "llm_calls": 1,
+          "seconds": 161.29,
+          "found": 82,
+          "new": 72,
+          "qualified": 62
+        },
+        "beat_walk": {
+          "runs": 2,
+          "search_calls": 8,
+          "fetches": 9,
+          "llm_calls": 0,
+          "seconds": 64.81,
+          "found": 1,
+          "new": 1,
+          "qualified": 1
+        },
+        "graph_walk": {
+          "runs": 2,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.01,
+          "found": 10,
+          "new": 6,
+          "qualified": 0
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Biplab Lenin",
+          "org": "Cyril Amarchand Mangaldas",
+          "email": "biplab.lenin@cyrilshroff.com",
+          "score": 0.85,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Recent article on Indian health data protection"
+          ]
+        },
+        {
+          "name": "Amoha Basrur",
+          "org": "orfonline.org",
+          "email": "amoha.basrur@orfonline.org",
+          "score": 0.7,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Wrote about Digital Personal Data Protection Act recently"
+          ]
+        },
+        {
+          "name": "Deepali Jain",
+          "org": "DQ",
+          "email": "deepalij@cybermedia.co.in",
+          "score": 0.6,
+          "sources": [
+            "news"
+          ],
+          "reasons": [
+            "Covers AI and enterprise tech, no clear focus on data privacy or health tech"
+          ]
+        }
+      ],
+      "intake_playbook": "pr_media",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "data privacy",
+        "health technology",
+        "Indian health apps",
+        "cybersecurity in healthcare"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.95,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 3,
+        "pass_rate": 0.667,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ]
+        ],
+        "avg_specificity": 5.0,
+        "avg_relevance": 5.0,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": []
+      },
+      "emails": [
+        {
+          "to": "biplab.lenin@cyrilshroff.com",
+          "subject": "Insights on Indian health data protection",
+          "body": "Hi Biplab,\n\nYour recent article, \"Mind Your Meds and Metrics: Navigating the Indian Health Data Protection Labyrinth,\" highlights critical issues in Indian health data protection.\n\nI recently audited 10 popular Indian health apps and found that 8 of them share user identifiers with third-party trackers. This report reveals significant privacy concerns that may interest your readership.\n\nWould you be open to an interview to discuss these findings and their implications for digital health privacy in India? I can provide exclusive insights and data from the audit to support your coverage.\n\nPlease let me know if you are interested in scheduling a conversation.\n\nBest regards,\nTest Researcher",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "amoha.basrur@orfonline.org",
+          "subject": "Insights on Indian Health Apps Privacy",
+          "body": "Hi Amoha,\n\nYour recent article on The Digital Personal Data Protection Act, 2023 caught my attention due to its focus on data privacy legislation in India.\n\nI audited 10 popular Indian health apps and found 8 sharing user identifiers with third-party trackers. These findings may be relevant to your coverage of data protection policies.\n\nWould you be open to an interview to discuss these findings and their implications for India\u2019s digital privacy landscape? I can provide exclusive insights from the audit to support your reporting.\n\nPlease let me know if you are interested.\n\nBest regards,\nTest Researcher",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "deepalij@cybermedia.co.in",
+          "subject": "Interview on Indian health app privacy leaks",
+          "body": "Hi Deepali,\n\nYour recent article on Hitachi's AI-led cybersecurity centre in Bengaluru highlights growing tech security efforts in India.\n\nI audited 10 popular Indian health apps and found that 8 share user identifiers with third-party trackers, raising privacy concerns.\n\nGiven your focus on enterprise tech and policy trends, would you be open to a brief interview to discuss these findings and their implications for privacy in Indian health technology?\n\nBest regards,\nTest Researcher",
+          "issues": [
+            "unsupported claim: Your recent article on Hitachi's AI-led cybersecurity centre in Bengaluru highlights growing tech security efforts in India."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ],
+      "name": "stress_journalists_exclusions",
+      "split": "stress",
+      "playbook": "pr_media",
+      "target": 20
+    },
+    {
+      "unique": 50,
+      "qualified": 50,
+      "reachable": 2,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 44,
+      "llm_paid_calls": 24,
+      "llm_usd": 0.0114,
+      "pages_fetched": 144,
+      "seconds": 423.4,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 13,
+        "extract_orgs": 3,
+        "prejudge": 4,
+        "judge": 2,
+        "replan_search": 1
+      },
+      "by_source": {
+        "places": 42,
+        "orgs": 17,
+        "lookalike": 5
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 2 of 12 wanted contacts have a confident address. This kind of campaign (B2B sales leads) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 0 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "places": 34,
+          "web": 19,
+          "orgs": 15,
+          "lookalike": 5
+        },
+        "qualified": {
+          "web": 19,
+          "orgs": 15,
+          "places": 34,
+          "lookalike": 5
+        },
+        "enriched": {
+          "web": 9,
+          "orgs": 9,
+          "places": 12,
+          "lookalike": 1
+        },
+        "reachable": {
+          "places": 10
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "places": {
+          "runs": 1,
+          "search_calls": 10,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 23.65,
+          "found": 13,
+          "new": 13,
+          "qualified": 13
+        },
+        "orgs": {
+          "runs": 2,
+          "search_calls": 8,
+          "fetches": 4,
+          "llm_calls": 8,
+          "seconds": 22.39,
+          "found": 17,
+          "new": 12,
+          "qualified": 12
+        },
+        "lookalike": {
+          "runs": 1,
+          "search_calls": 5,
+          "fetches": 7,
+          "llm_calls": 8,
+          "seconds": 28.99,
+          "found": 5,
+          "new": 4,
+          "qualified": 1
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "b2b_sales",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Maharashtra",
+        "Gujarat",
+        "IN"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "municipal water management",
+        "water distribution authorities",
+        "public water utilities",
+        "water boards"
+      ],
+      "intake_ask_type": "other",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "name": "stress_municipal_iot",
+      "split": "stress",
+      "playbook": "b2b_sales",
+      "target": 12
+    },
+    {
+      "unique": 306,
+      "qualified": 304,
+      "reachable": 32,
+      "passed_judge": 19,
+      "shortlisted": 15,
+      "good@K": 14,
+      "precision@K": 0.933,
+      "good_reachable@K": 13,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 14,
+        "guess": 1
+      },
+      "mean_score": 0.815,
+      "distinct_orgs": 14,
+      "proof_rate": 0.0,
+      "personal_email_rate": 1.0,
+      "search_calls": 46,
+      "llm_paid_calls": 55,
+      "llm_usd": 0.0517,
+      "pages_fetched": 220,
+      "seconds": 653.1,
+      "usd_per_good": 0.0069,
+      "llm_by_purpose": {
+        "intake": 1,
+        "prejudge": 9,
+        "judge": 4,
+        "draft": 15,
+        "verify": 8,
+        "draft_fix": 15
+      },
+      "by_source": {
+        "openalex": 300,
+        "arxiv": 7
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Source nsf_awards: does not serve the campaign's countries; skipped."
+      ],
+      "source_funnel": {
+        "unique": {
+          "openalex": 299,
+          "arxiv": 7
+        },
+        "qualified": {
+          "openalex": 299,
+          "arxiv": 5
+        },
+        "enriched": {
+          "openalex": 103
+        },
+        "reachable": {
+          "openalex": 32
+        },
+        "passed_judge": {
+          "openalex": 19
+        },
+        "shortlisted": {
+          "openalex": 15
+        }
+      },
+      "ledger": {
+        "openalex": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 27.83,
+          "found": 300,
+          "new": 300,
+          "qualified": 269
+        },
+        "arxiv": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 6,
+          "llm_calls": 0,
+          "seconds": 69.69,
+          "found": 7,
+          "new": 7,
+          "qualified": 2
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Jochen Triesch",
+          "org": "Frankfurt Institute for Advanced Studies",
+          "email": "triesch@fias.uni-frankfurt.de",
+          "score": 0.9294,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on spiking neural networks and predictive coding"
+          ]
+        },
+        {
+          "name": "Hans Armin Kestler",
+          "org": "Universit\u00e4t Ulm",
+          "email": "hans.kestler@uni-ulm.de",
+          "score": 0.9206,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent work on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Said Hamdioui",
+          "org": "Delft University of Technology",
+          "email": "s.hamdioui@tudelft.nl",
+          "score": 0.8809,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Thorsten Jungeblut",
+          "org": "Hochschule Bielefeld",
+          "email": "thorsten.jungeblut@hsbi.de",
+          "score": 0.8809,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Multiple recent publications on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Katrin Franke",
+          "org": "University of T\u00fcbingen",
+          "email": "kafranke@stanford.edu",
+          "score": 0.8721,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Research on neural code in visual neurons"
+          ]
+        },
+        {
+          "name": "Shamini Koravuna",
+          "org": "Bielefeld University",
+          "email": "shaminik9646@gmail.com",
+          "score": 0.8412,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent work on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Mahyar Shahsavari",
+          "org": "Radboud University Nijmegen",
+          "email": "mahyar.shahsavari@ru.nl",
+          "score": 0.8074,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Tobias Gemmeke",
+          "org": "RWTH Aachen University",
+          "email": "gemmeke@ids.rwth-aachen.de",
+          "score": 0.8059,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Works on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Luisa Ramirez",
+          "org": "Johannes Gutenberg University Mainz",
+          "email": "luramire@uni-mainz.de",
+          "score": 0.7985,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Works on neural coding"
+          ]
+        },
+        {
+          "name": "Charlotte Frenkel",
+          "org": "Delft University of Technology",
+          "email": "c.frenkel@tudelft.nl",
+          "score": 0.7824,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Works on spiking neural networks and neural computing"
+          ]
+        },
+        {
+          "name": "Jorge F. Mej\u00edas",
+          "org": "University of Amsterdam",
+          "email": "j.f.mejias@uva.nl",
+          "score": 0.7735,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Works on neural dynamics and cortical column models relevant to neural coding"
+          ]
+        },
+        {
+          "name": "Marc Timme",
+          "org": "Center for Advancing Electronics Dresden",
+          "email": "marc.timme@tu-dresden.de",
+          "score": 0.7544,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Works on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Johannes Schemmel",
+          "org": "Heidelberg University",
+          "email": "schemmel@ziti.uni-heidelberg.de",
+          "score": 0.7544,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Recent publications on spiking neural networks"
+          ]
+        },
+        {
+          "name": "Stefano Panzeri",
+          "org": "University Medical Center Hamburg-Eppendorf",
+          "email": "s.panzeri@uke.de",
+          "score": 0.7294,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Research on neural coding and spike timing"
+          ]
+        },
+        {
+          "name": "Henk Corporaal",
+          "org": "Eindhoven University of Technology",
+          "email": "h.corporaal@tue.nl",
+          "score": 0.6868,
+          "sources": [
+            "openalex"
+          ],
+          "reasons": [
+            "Works on spiking neural networks"
+          ]
+        }
+      ],
+      "intake_playbook": "phd_positions",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "DE",
+        "NL"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "computational neuroscience",
+        "neural coding",
+        "spiking neural networks"
+      ],
+      "intake_ask_type": "apply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 15,
+        "pass_rate": 0.133,
+        "top_issues": [
+          [
+            "unsupported claim",
+            14
+          ]
+        ],
+        "avg_specificity": 4.47,
+        "avg_relevance": 4.6,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.933,
+        "critiques": [
+          "Mention specific relevance to Kestler's work.",
+          "Clarify how your skills relate to hardware.",
+          "Mention specific aspects of the recipient's research.",
+          "Add a specific detail about how you can contribute.",
+          "Include a specific connection to the recipient's work."
+        ]
+      },
+      "emails": [
+        {
+          "to": "triesch@fias.uni-frankfurt.de",
+          "subject": "PhD inquiry: spiking networks at Frankfurt IAS",
+          "body": "Dear Jochen Triesch,\n\nI am completing an MSc in Physics with a thesis on spiking network models of cortex. My work involved developing and analyzing these models using Python and Brian2.\n\nI noticed your publications on spiking neural networks, including work on predictive coding and simulation tools. Although my thesis is not directly linked to your papers, my computational modeling skills might be relevant to your research.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities at the Frankfurt Institute for Advanced Studies and would appreciate any guidance on application procedures or openings.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: my computational modeling skills might be relevant to your research"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "hans.kestler@uni-ulm.de",
+          "subject": "PhD positions in spiking neural networks",
+          "body": "Dear Hans Armin Kestler,\n\nI am an MSc Physics student working on a thesis about spiking network models of cortex. My research involves simulations using Python and Brian2, and I have presented two workshop posters on related topics.\n\nI noticed your publication on stochasticity in spiking-neural-network based Boolean networks at Universit\u00e4t Ulm. Although my thesis is focused on cortex models, I am interested in neural coding and spiking networks and would like to explore doctoral research in this area.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks?\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: I noticed your publication on stochasticity in spiking-neural-network based Boolean networks at Universit\u00e4t Ulm"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific relevance to Kestler's work."
+          }
+        },
+        {
+          "to": "s.hamdioui@tudelft.nl",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Professor Hamdioui,\n\nI am a MSc Physics student completing a thesis on spiking network models of the cortex. My work involves simulation models using Python and Brian2, focusing on neural dynamics relevant to spiking neural networks.\n\nI read your paper \"On the Trustworthiness of Spiking Neural Networks and Neuromorphic Systems\" and found your research on neuromorphic computing and SNNs relevant to my interests.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities starting in the next academic cycle and would appreciate any guidance on applying.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: focusing on neural dynamics relevant to spiking neural networks"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "thorsten.jungeblut@hsbi.de",
+          "subject": "Interest in PhD positions at Hochschule Bielefeld",
+          "body": "Dear Thorsten Jungeblut,\n\nI am completing my MSc in Physics with a thesis on spiking network models of cortex. I have presented two workshop posters on related topics, using Python and Brian2 for simulations.\n\nYour publications on spiking neural networks and their applications, including work on model selection and FPGA analysis, are relevant to my interests. While my experience focuses on computational modeling rather than hardware, I am keen to expand my expertise in spiking networks.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities at Hochschule Bielefeld and can start as soon as the position is available.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: Your publications on spiking neural networks and their applications, including work on model selection and FPGA analysis, are relevant to my interests"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify how your skills relate to hardware."
+          }
+        },
+        {
+          "to": "kafranke@stanford.edu",
+          "subject": "Seeking PhD opportunities in computational neuroscience",
+          "body": "Dear Katrin Franke,\n\nI am a MSc Physics student currently writing a thesis on spiking network models of cortex, using Python and Brian2 for computational modeling.\n\nYour paper, \"Letting the neural code speak: Automated characterization of monkey visual neurons through human language,\" drew my attention due to its focus on neural coding in visual neurons.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in opportunities in Germany or the Netherlands, excluding Max Planck institutes, and would appreciate any guidance on applying or discussing potential openings.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: Your paper, 'Letting the neural code speak: Automated characterization of monkey visual neurons through human language,' drew my attention due to its focus on n"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "shaminik9646@gmail.com",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Shamini Koravuna,\n\nI am a MSc Physics student working on spiking network models of the cortex for my thesis. I have experience using Python and Brian2 to simulate these models.\n\nYour recent paper on Spiking Neural Network Models Analysis on Field Programmable Gate Arrays drew my attention due to its focus on SNN implementation challenges and applications. I am interested in neural coding and spiking networks and would like to pursue a PhD in this area.\n\nCould you please consider me for any available PhD positions in your lab at Bielefeld University related to neural coding or spiking networks? I would be happy to provide my CV or discuss my background further if you are interested.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: Your recent paper on Spiking Neural Network Models Analysis on Field Programmable Gate Arrays drew my attention due to its focus on SNN implementation challenge"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "mahyar.shahsavari@ru.nl",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Professor Shahsavari,\n\nI am a MSc Physics student completing a thesis on spiking network models of cortex. Your recent paper on exploring the limitations of layer synchronization in spiking neural networks caught my attention.\n\nMy thesis work involves computational modeling of spiking networks using Python and Brian2. I am seeking a PhD position focused on neural coding or spiking networks and am interested in opportunities in your lab at Radboud University.\n\nCould you please consider me for any available PhD positions in these areas? I would appreciate any information on how to apply.\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "gemmeke@ids.rwth-aachen.de",
+          "subject": "PhD interest in spiking neural networks",
+          "body": "Dear Tobias Gemmeke,\n\nI am a MSc Physics student working on spiking network models of cortex for my thesis, with experience in Python and Brian2. I recently read your paper on Balanced and Efficient Spiking Neural Networks from IJCNN 2025 and found your approach to efficient spiking models relevant to my research focus.\n\nMy work focuses on computational modeling of cortical spiking networks. I have not worked on hardware implementations like VLSI designs but am interested in neural coding and spiking networks and their efficiency.\n\nCould you please consider me for any available PhD positions in your lab at RWTH Aachen University related to neural coding or spiking networks? I am eager to start a PhD soon and would appreciate the opportunity to contribute.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: I recently read your paper on Balanced and Efficient Spiking Neural Networks from IJCNN 2025 and found your approach to efficient spiking models relevant to my"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "luramire@uni-mainz.de",
+          "subject": "PhD inquiry on neural coding research",
+          "body": "Dear Luisa Ramirez,\n\nI am a MSc Physics student completing a thesis on spiking network models of cortex, using Python and Brian2 for simulations.\n\nYour recent paper \"Probabilistic Models, Compressible Interactions, and Neural Coding\" is directly related to neural coding, a field I want to pursue in my PhD studies.\n\nI am seeking PhD positions in Germany or the Netherlands focused on neural coding or spiking networks, excluding Max Planck institutes.\n\nCould you please consider me for any available PhD positions in your lab related to these topics?\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: Your recent paper 'Probabilistic Models, Compressible Interactions, and Neural Coding' is directly related to neural coding, a field I want to pursue in my PhD"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "c.frenkel@tudelft.nl",
+          "subject": "PhD opportunity in spiking neural networks",
+          "body": "Dear Professor Frenkel,\n\nI am completing an MSc in Physics with a thesis on spiking network models of the cortex. Your paper on TESS, a scalable temporally and spatially local learning rule for spiking neural networks, caught my attention.\n\nMy thesis involved computational modeling of cortical spiking networks using Python and Brian2. I also presented two workshop posters on related topics. Although I have not worked on hardware or VLSI design, I have experience with spiking neural models that might be useful for your research on advanced neural computing.\n\nCould you please consider me for any available PhD positions in your lab related to spiking neural networks? I am interested in opportunities at Delft University of Technology and can start soon.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: Your paper on TESS, a scalable temporally and spatially local learning rule for spiking neural networks, caught my attention.",
+            "unsupported claim: I have experience with spiking neural models that might be useful for your research on advanced neural computing."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "j.f.mejias@uva.nl",
+          "subject": "PhD inquiry: spiking networks at UvA",
+          "body": "Dear Jorge F. Mej\u00edas,\n\nI am a MSc Physics student writing a thesis on spiking network models of cortex. I am interested in PhD positions focused on neural coding or spiking networks.\n\nI have developed spiking network models of cortex using Python and Brian2, which I presented in two workshop posters.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am particularly interested in opportunities at the University of Amsterdam.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: I have developed spiking network models of cortex using Python and Brian2, which I presented in two workshop posters."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific aspects of the recipient's research."
+          }
+        },
+        {
+          "to": "marc.timme@tu-dresden.de",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Marc Timme,\n\nI am a MSc Physics student researching spiking network models of cortex for my thesis. I recently read your paper on the equivalence of additive and multiplicative coupling in spiking neural networks and found the approach to modeling emergent dynamics insightful.\n\nMy thesis involves computational modeling of cortical spiking networks using Python and Brian2. I am seeking PhD positions focused on neural coding or spiking networks in Germany or the Netherlands.\n\nCould you please consider me for any available PhD positions in your lab related to these topics? I would be glad to provide my CV and discuss how my background might contribute to your research.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: I recently read your paper on the equivalence of additive and multiplicative coupling in spiking neural networks and found the approach to modeling emergent dyn"
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Add a specific detail about how you can contribute."
+          }
+        },
+        {
+          "to": "schemmel@ziti.uni-heidelberg.de",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Johannes Schemmel,\n\nI am a MSc Physics student working on a thesis about spiking network models of cortex, with experience using Python and Brian2 for neural simulations.\n\nI read your paper on spiking neural network nonlinear demapping on neuromorphic hardware for optical communication. I am looking for PhD positions in computational neuroscience focused on neural coding or spiking networks in Germany or the Netherlands.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I would appreciate any information on openings or application procedures.\n\nBest regards,\nTest Student",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Include a specific connection to the recipient's work."
+          }
+        },
+        {
+          "to": "s.panzeri@uke.de",
+          "subject": "Interest in PhD positions on spike timing research",
+          "body": "Dear Stefano Panzeri,\n\nI am a MSc Physics student working on a thesis about spiking network models of cortex. My research involves the use of Python and Brian2 to simulate and analyze spike timing dynamics.\n\nI am contacting you because of your publication Contribution of spike timing to the neural code: from fast to slow timescales, which I found relevant to my research interests.\n\nCould you please consider me for any available PhD positions in your lab related to neural coding or spiking networks? I am interested in pursuing this research in Germany or the Netherlands and would appreciate any opportunity to contribute to your projects.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: which I found relevant to my research interests."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention how your skills align with their research."
+          }
+        },
+        {
+          "to": "h.corporaal@tue.nl",
+          "subject": "PhD inquiry on spiking neural networks",
+          "body": "Dear Professor Corporaal,\n\nI am a MSc Physics student with a thesis on spiking network models of cortex, using Python and Brian2 for simulations.\n\nI read your paper on STEMS: Spatial-Temporal Mapping for Spiking Neural Networks. My thesis work involved modeling spiking networks, which gave me practical experience in computational neuroscience.\n\nCould you please consider me for any available PhD positions in your lab related to spiking neural networks or neural coding? I am interested in positions based in the Netherlands and would appreciate the opportunity to contribute to your research at Eindhoven University of Technology.\n\nBest regards,\nTest Student",
+          "issues": [
+            "unsupported claim: which gave me practical experience in computational neuroscience."
+          ],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Focus more on neural coding relevance to the recipient."
+          }
+        }
+      ],
+      "name": "stress_phd_neuro",
+      "split": "stress",
+      "playbook": "phd_positions",
+      "target": 15
+    },
+    {
+      "unique": 215,
+      "qualified": 213,
+      "reachable": 13,
+      "passed_judge": 11,
+      "shortlisted": 11,
+      "good@K": 10,
+      "precision@K": 0.667,
+      "good_reachable@K": 10,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "attributed": 11
+      },
+      "mean_score": 0.839,
+      "distinct_orgs": 11,
+      "proof_rate": 0.909,
+      "personal_email_rate": 0.273,
+      "search_calls": 46,
+      "llm_paid_calls": 48,
+      "llm_usd": 0.0344,
+      "pages_fetched": 219,
+      "seconds": 417.8,
+      "usd_per_good": 0.0079,
+      "llm_by_purpose": {
+        "intake": 1,
+        "extract": 7,
+        "prejudge": 9,
+        "judge": 2,
+        "draft": 11,
+        "verify": 6,
+        "draft_fix": 9
+      },
+      "by_source": {
+        "podcasts": 20,
+        "web": 464
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 13 of 15 wanted contacts have a confident address. This kind of campaign (Creators, influencers and podcasts) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 11 confident prospects of the 15 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "podcasts": 19,
+          "web": 196
+        },
+        "qualified": {
+          "podcasts": 17,
+          "web": 181
+        },
+        "enriched": {
+          "podcasts": 16,
+          "web": 56
+        },
+        "reachable": {
+          "podcasts": 12,
+          "web": 1
+        },
+        "passed_judge": {
+          "podcasts": 10,
+          "web": 1
+        },
+        "shortlisted": {
+          "podcasts": 10,
+          "web": 1
+        }
+      },
+      "ledger": {
+        "podcasts": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 35,
+          "llm_calls": 0,
+          "seconds": 12.3,
+          "found": 20,
+          "new": 20,
+          "qualified": 19
+        },
+        "web": {
+          "runs": 1,
+          "search_calls": 8,
+          "fetches": 40,
+          "llm_calls": 5,
+          "seconds": 51.42,
+          "found": 262,
+          "new": 262,
+          "qualified": 192
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Lisa Cohn",
+          "org": "Clean Energy Today",
+          "email": "lisa@cleanenergywriters.com",
+          "score": 0.95,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast focuses on clean energy transition"
+          ]
+        },
+        {
+          "name": "Bite-Size Climate Tech",
+          "org": "Bite-Size Climate Tech",
+          "email": "lydia@lydiaclinzi.com",
+          "score": 0.9,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast focuses on climate solutions and clean energy"
+          ]
+        },
+        {
+          "name": "Climate Solutions News | Insights on Sustainability & Climate Solutions",
+          "org": "Climate Solutions News | Insights on Sustainability & Climate Solutions",
+          "email": "contact@reset-media.com",
+          "score": 0.9,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast covers sustainability and climate solutions"
+          ]
+        },
+        {
+          "name": "The Climate Cycle",
+          "org": "The Climate Cycle",
+          "email": "hello@climatetechcanada.ca",
+          "score": 0.9,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast covers Canadian climate tech and energy"
+          ]
+        },
+        {
+          "name": "So Watt?",
+          "org": "So Watt?",
+          "email": "media@originenergy.com.au",
+          "score": 0.8962,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast focuses on energy topics including batteries"
+          ]
+        },
+        {
+          "name": "Energy vs Climate: How climate is changing our energy systems",
+          "org": "Energy vs Climate: How climate is changing our energy systems",
+          "email": "info@energyvsclimate.com",
+          "score": 0.85,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast focuses on energy and climate systems"
+          ]
+        },
+        {
+          "name": "The Adapt Interviews",
+          "org": "The Adapt Interviews",
+          "email": "louie@climateproof.news",
+          "score": 0.8435,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Focuses on adaptation technology, a climate-tech niche"
+          ]
+        },
+        {
+          "name": "Climate Confidential",
+          "org": "Climate Confidential",
+          "email": "podcast@fultonring.com",
+          "score": 0.8,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast covers climate tech critically"
+          ]
+        },
+        {
+          "name": "The Climate and Sustainability Series by 4WARD.earth",
+          "org": "The Climate and Sustainability Series by 4WARD.earth",
+          "email": "matt@4ward.vc",
+          "score": 0.7962,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast covers climate and sustainability experts"
+          ]
+        },
+        {
+          "name": "Mia Funk",
+          "org": "Future Cities \u00b7 Sustainability, Energy, Innovation, Climate Change, Transport, Housing, Work, Circular Economy, Education & Environmental Solutions",
+          "email": "mia@creativeprocess.info",
+          "score": 0.7,
+          "sources": [
+            "podcasts"
+          ],
+          "reasons": [
+            "Podcast covers sustainability and energy topics"
+          ]
+        },
+        {
+          "name": "Tim Montague",
+          "org": "Clean Power Hour",
+          "email": "tim@cleanpowerhour.com",
+          "score": 0.6938,
+          "sources": [
+            "web"
+          ],
+          "reasons": [
+            "Focus on battery storage projects relevant to sender"
+          ]
+        }
+      ],
+      "intake_playbook": "creators",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "climate technology",
+        "clean energy",
+        "renewable energy",
+        "energy storage",
+        "battery technology"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 11,
+        "pass_rate": 0.455,
+        "top_issues": [
+          [
+            "unsupported claim",
+            6
+          ]
+        ],
+        "avg_specificity": 4.64,
+        "avg_relevance": 4.64,
+        "avg_ask": 4.45,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.727,
+        "critiques": [
+          "Mention specific episodes for stronger relevance.",
+          "Make the ask clearer and more direct.",
+          "Clarify the ask to directly request a guest spot.",
+          "Request a guest appearance instead of a connection.",
+          "No changes needed; it's well-crafted."
+        ]
+      },
+      "emails": [
+        {
+          "to": "lisa@cleanenergywriters.com",
+          "subject": "Guest opportunity on Clean Energy Today podcast",
+          "body": "Hi Lisa,\n\nYour podcast Clean Energy Today covers innovations shaping the clean energy transition. I represent a battery scientist founder who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nGiven your recent episodes on grid services and cost reductions in storage, the founder could share experiences from building grid batteries and leading a startup focused on storage cost reduction.\n\nWould you be open to having the founder as a guest on Clean Energy Today to discuss these topics? A brief reply is appreciated to explore this further.\n\nBest regards,\nTest Publicist",
+          "issues": [
+            "unsupported claim: the founder could share experiences from building grid batteries and leading a startup focused on storage cost reduction."
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "lydia@lydiaclinzi.com",
+          "subject": "Guest appearance opportunity on Bite-Size Climate Tech",
+          "body": "Hello Bite-Size Climate Tech team,\n\nYour podcast Bite-Size Climate Tech explores clean energy and circular batteries, topics that relate to our founder's work.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%. This background could provide your audience with insights into battery technology and cost reduction.\n\nWould you be open to featuring our founder as a guest on your show to discuss these topics? Please let me know if you need any additional information or a brief bio.\n\nBest regards,\nTest Publicist",
+          "issues": [
+            "unsupported claim: explores clean energy and circular batteries, topics that relate to our founder's work."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Mention specific episodes for stronger relevance."
+          }
+        },
+        {
+          "to": "contact@reset-media.com",
+          "subject": "Guest opportunity for Climate Solutions News podcast",
+          "body": "Hello Climate Solutions News team,\n\nYour podcast Climate Solutions News covers innovative climate-tech and clean energy solutions.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nCould you connect me with the person who manages guest bookings for your podcast? I look forward to exploring a guest appearance opportunity.\n\nBest regards,\nTest Publicist",
+          "issues": [
+            "unsupported claim: covers innovative climate-tech and clean energy solutions."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 3,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Make the ask clearer and more direct."
+          }
+        },
+        {
+          "to": "hello@climatetechcanada.ca",
+          "subject": "Podcast guest inquiry for The Climate Cycle",
+          "body": "Hello Climate Cycle team,\n\nThe Climate Cycle explores the future of Canadian climate tech, including energy innovations. Your focus on founders building industries of tomorrow fits the context for our founder's background.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%. This experience may provide your listeners with insights into energy storage advancements.\n\nCould you please connect me with the person who manages guest bookings for The Climate Cycle? I would appreciate the opportunity to discuss a guest appearance.\n\nBest regards,\nTest Publicist",
+          "issues": [
+            "unsupported claim: Your focus on founders building industries of tomorrow fits the context for our founder's background."
+          ],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 3,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Clarify the ask to directly request a guest spot."
+          }
+        },
+        {
+          "to": "media@originenergy.com.au",
+          "subject": "Podcast guest request for So Watt?",
+          "body": "Hello So Watt? team,\n\nSo Watt? explores energy topics like electrification and batteries, which relates to our founder\u2019s work as a battery scientist. He has built grid batteries and leads a startup that cut storage costs by 22%.\n\nCould you connect me with the person who manages guest bookings for your podcast? We think your audience would benefit from hearing about battery technology and cost reduction from his perspective.\n\nBest regards,\nTest Publicist",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 3,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Request a guest appearance instead of a connection."
+          }
+        },
+        {
+          "to": "info@energyvsclimate.com",
+          "subject": "Guest opportunity for Energy vs Climate podcast",
+          "body": "Hello Energy vs Climate team,\n\nYour podcast Energy vs Climate explores how climate is changing energy systems, a timely topic given the evolving clean energy landscape.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nCould you connect me with the person who manages guest bookings for your podcast? We would appreciate the opportunity to contribute to your conversations on climate and energy.\n\nBest regards,\nTest Publicist",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "louie@climateproof.news",
+          "subject": "Guest opportunity: battery scientist on The Adapt Interviews",
+          "body": "Hello Adapt Interviews team,\n\nThe Adapt Interviews highlights early-stage adaptation technology founders. My founder has built grid batteries and led a startup that cut storage costs by 22%.\n\nTheir background includes hands-on experience in battery science and energy storage solutions.\n\nWould you be open to having my founder as a guest on your podcast to discuss their work and its relevance to adaptation technology?\n\nBest regards,\nTest Publicist",
+          "issues": [
+            "unsupported claim: highlights early-stage adaptation technology founders"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "podcast@fultonring.com",
+          "subject": "Guest opportunity for Climate Confidential podcast",
+          "body": "Hi Climate,\n\nClimate Confidential hosts critical conversations on climate tech, including your recent series on climate risk.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that has cut storage costs by 22%.\n\nWould you be open to having our founder as a guest on Climate Confidential to discuss these developments and their implications for clean energy technology?\n\nBest regards,\nTest Publicist",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "matt@4ward.vc",
+          "subject": "Founder expertise for your climate podcast",
+          "body": "Hello Climate and Sustainability Series by 4WARD.earth team,\n\nI\u2019m reaching out because your podcast, The Climate and Sustainability Series by 4WARD.earth, hosts deep dives with climate and cleantech experts that align with our founder\u2019s background.\n\nOur founder is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%. This experience offers practical insights into energy storage technology and cost reduction.\n\nWould you be open to having our founder as a guest on your podcast to discuss these topics? Please let me know if this could fit your upcoming episodes.\n\nBest regards,\nTest Publicist",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "mia@creativeprocess.info",
+          "subject": "Guest opportunity on Future Cities podcast",
+          "body": "Hi Mia,\n\nYou host Future Cities, exploring sustainability, energy, and innovation in urban environments.\n\nOur founder is a battery scientist who previously built grid batteries and led a startup that cut storage costs by 22%. This experience offers insights into clean energy solutions relevant to your audience.\n\nWould you be open to having our founder as a guest on your podcast to share expertise on energy storage and innovation in sustainable cities?\n\nBest regards,\nTest Publicist",
+          "issues": [],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "tim@cleanpowerhour.com",
+          "subject": "Discussing battery storage costs on Clean Power Hour",
+          "body": "Hi Tim,\n\nYour work on making battery storage projects financially viable by explaining demand charge reduction and ancillary services is relevant to our founder's background.\n\nHe is a battery scientist who previously built grid batteries and now leads a startup that cut storage costs by 22%.\n\nWould you be open to having him as a guest on Clean Power Hour to discuss cost reduction and project economics? Please let me know if this sounds interesting.\n\nBest regards,\nTest Publicist",
+          "issues": [
+            "unsupported claim: Your work on making battery storage projects financially viable by explaining demand charge reduction and ancillary services is relevant to our founder's backgr"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "No changes needed; it's well-crafted."
+          }
+        }
+      ],
+      "name": "stress_podcast_climate",
+      "split": "stress",
+      "playbook": "creators",
+      "target": 15
+    },
+    {
+      "unique": 34,
+      "qualified": 34,
+      "reachable": 3,
+      "passed_judge": 0,
+      "shortlisted": 0,
+      "good@K": 0,
+      "precision@K": 0.0,
+      "good_reachable@K": 0,
+      "good_verified@K": 0,
+      "address_tiers": {},
+      "mean_score": 0.0,
+      "distinct_orgs": 0,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.0,
+      "search_calls": 44,
+      "llm_paid_calls": 39,
+      "llm_usd": 0.0111,
+      "pages_fetched": 65,
+      "seconds": 207.6,
+      "usd_per_good": null,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 25,
+        "extract_orgs": 6,
+        "replan_search": 2,
+        "prejudge": 3,
+        "judge": 2
+      },
+      "by_source": {
+        "orgs": 53
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Found 0 confident prospects of the 15 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 15,
+          "orgs": 34,
+          "list": 21
+        },
+        "qualified": {
+          "list": 21,
+          "orgs": 34,
+          "web": 15
+        },
+        "enriched": {
+          "list": 12,
+          "orgs": 17,
+          "web": 6
+        },
+        "reachable": {
+          "web": 4,
+          "orgs": 5,
+          "list": 1
+        },
+        "passed_judge": {},
+        "shortlisted": {}
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 3,
+          "search_calls": 25,
+          "fetches": 8,
+          "llm_calls": 27,
+          "seconds": 105.95,
+          "found": 45,
+          "new": 28,
+          "qualified": 28
+        }
+      },
+      "shortlist": [],
+      "intake_playbook": "general",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": false,
+      "intake_where": [],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "Rust async crates",
+        "Rust networking crates",
+        "open source Rust projects"
+      ],
+      "intake_ask_type": "review",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "name": "stress_rust_maintainers",
+      "split": "stress",
+      "playbook": "general",
+      "target": 15
+    },
+    {
+      "unique": 177,
+      "qualified": 176,
+      "reachable": 10,
+      "passed_judge": 5,
+      "shortlisted": 4,
+      "good@K": 3,
+      "precision@K": 0.2,
+      "good_reachable@K": 2,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 3,
+        "guess": 1
+      },
+      "mean_score": 0.797,
+      "distinct_orgs": 4,
+      "proof_rate": 0.75,
+      "personal_email_rate": 0.25,
+      "search_calls": 52,
+      "llm_paid_calls": 73,
+      "llm_usd": 0.0346,
+      "pages_fetched": 339,
+      "seconds": 564.2,
+      "usd_per_good": 0.0287,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 26,
+        "extract_orgs": 22,
+        "prejudge": 11,
+        "judge": 3,
+        "draft": 5,
+        "verify": 2,
+        "draft_fix": 2
+      },
+      "by_source": {
+        "hn_hiring": 5,
+        "orgs": 178,
+        "jobs": 12,
+        "lookalike": 43
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 10 of 15 wanted contacts have a confident address. This kind of campaign (Job and internship search) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 4 confident prospects of the 15 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "hn_hiring": 4,
+          "web": 46,
+          "orgs": 126,
+          "list": 116,
+          "events": 1,
+          "jobs": 12,
+          "lookalike": 43
+        },
+        "qualified": {
+          "list": 115,
+          "orgs": 125,
+          "web": 46,
+          "lookalike": 43,
+          "jobs": 12,
+          "hn_hiring": 4,
+          "events": 1
+        },
+        "enriched": {
+          "list": 49,
+          "orgs": 54,
+          "decision_maker": 1,
+          "web": 6,
+          "jobs": 3,
+          "lookalike": 1
+        },
+        "reachable": {
+          "list": 12,
+          "orgs": 12,
+          "decision_maker": 1,
+          "jobs": 2,
+          "lookalike": 1
+        },
+        "passed_judge": {
+          "jobs": 2,
+          "list": 3,
+          "orgs": 3,
+          "decision_maker": 1,
+          "lookalike": 1
+        },
+        "shortlisted": {
+          "jobs": 2,
+          "list": 2,
+          "orgs": 2,
+          "decision_maker": 1
+        }
+      },
+      "ledger": {
+        "hn_hiring": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 5,
+          "llm_calls": 0,
+          "seconds": 2.86,
+          "found": 5,
+          "new": 5,
+          "qualified": 5
+        },
+        "orgs": {
+          "runs": 2,
+          "search_calls": 16,
+          "fetches": 20,
+          "llm_calls": 25,
+          "seconds": 124.6,
+          "found": 113,
+          "new": 83,
+          "qualified": 77
+        },
+        "jobs": {
+          "runs": 1,
+          "search_calls": 4,
+          "fetches": 30,
+          "llm_calls": 0,
+          "seconds": 53.5,
+          "found": 12,
+          "new": 12,
+          "qualified": 12
+        },
+        "lookalike": {
+          "runs": 1,
+          "search_calls": 6,
+          "fetches": 9,
+          "llm_calls": 11,
+          "seconds": 43.95,
+          "found": 33,
+          "new": 32,
+          "qualified": 24
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Flywire",
+          "org": "Flywire",
+          "email": "solutions@flywire.com",
+          "score": 0.8798,
+          "sources": [
+            "jobs"
+          ],
+          "reasons": [
+            "Flywire is a Singapore fintech with payment platform"
+          ]
+        },
+        {
+          "name": "Checkout.com",
+          "org": "Checkout.com",
+          "email": "team@checkout.com",
+          "score": 0.8372,
+          "sources": [
+            "jobs"
+          ],
+          "reasons": [
+            "Checkout.com fights fraud and improves payments"
+          ]
+        },
+        {
+          "name": "Alex DeNeui",
+          "org": "Coda",
+          "email": "alex@codapayments.com",
+          "score": 0.7862,
+          "sources": [
+            "list",
+            "orgs",
+            "decision_maker"
+          ],
+          "reasons": [
+            "CTO at Singapore fintech listed in top fintech startups"
+          ]
+        },
+        {
+          "name": "Atome - Time to own it.",
+          "org": "Atome - Time to own it.",
+          "email": "merchant@atome.sg",
+          "score": 0.6843,
+          "sources": [
+            "list",
+            "orgs"
+          ],
+          "reasons": [
+            "Fintech payments company based in Singapore"
+          ]
+        }
+      ],
+      "intake_playbook": "job_search",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": false,
+      "intake_where": [
+        "SG"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "fintech companies",
+        "payments technology"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 4,
+        "pass_rate": 0.75,
+        "top_issues": [
+          [
+            "unsupported claim",
+            1
+          ],
+          [
+            "recipient address alex@codapayments.com is a guess from the ",
+            1
+          ]
+        ],
+        "avg_specificity": 4.0,
+        "avg_relevance": 4.0,
+        "avg_ask": 4.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 0.75,
+        "critiques": [
+          "Specify how your experience directly benefits Flywire.",
+          "Mention specific ways your skills align with Checkout.com's goals.",
+          "Clarify the specific role you are interested in at Coda.",
+          "Highlight how your experience can enhance Atome's BNPL offerings."
+        ]
+      },
+      "emails": [
+        {
+          "to": "solutions@flywire.com",
+          "subject": "Head of Data role at Flywire",
+          "body": "Hello Flywire team,\n\nI am reaching out because Flywire is currently hiring for senior roles in payments, and I am interested in exploring Head of Data opportunities.\n\nWith 9 years of experience in payments, I led a 25-person data team and developed fraud models that cut losses by 31%. My background includes managing data initiatives that support payment platforms, which aligns with Flywire's focus on complex payment challenges.\n\nCould we schedule a brief call to discuss potential fit or any upcoming Head of Data roles at Flywire? I would appreciate any referral or guidance you can provide.\n\nThank you for considering this request.\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Specify how your experience directly benefits Flywire."
+          }
+        },
+        {
+          "to": "team@checkout.com",
+          "subject": "Head of Data role inquiry at Checkout.com",
+          "body": "Hello Checkout.com team,\n\nI have 9 years of experience in payments, including leading a 25-person data team and building fraud models that cut losses by 31%.\n\nI am interested in Head of Data roles and would appreciate if you could connect me with the person responsible for hiring this position at Checkout.com.\n\nCould you please direct me to the appropriate contact or arrange a brief call to discuss this opportunity?\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 3,
+            "relevance": 3,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": false,
+            "critique": "Mention specific ways your skills align with Checkout.com's goals."
+          }
+        },
+        {
+          "to": "alex@codapayments.com",
+          "subject": "Data leadership for Coda's payment platform",
+          "body": "Hi Alex,\n\nWith nine years in payments, I led a 25-person data team and built fraud models that reduced losses by 31%. My experience includes managing data initiatives that support complex payment ecosystems, which relates to Coda's work unlocking 400+ local payment methods and cross-border monetization.\n\nI am interested in exploring Head of Data opportunities at Coda or any referrals you could provide. Would you be open to a brief call to discuss potential fits or direct me to the right contact?\n\nBest regards,\nTest Candidate",
+          "issues": [
+            "unsupported claim: managing data initiatives that support complex payment ecosystems, which relates to Coda's work unlocking 400+ local payment methods and cross-border monetizati",
+            "recipient address alex@codapayments.com is a guess from the organisation's usual email format (pattern_prior); verify it before sending"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Clarify the specific role you are interested in at Coda."
+          }
+        },
+        {
+          "to": "merchant@atome.sg",
+          "subject": "Head of Data role inquiry at Atome",
+          "body": "Hello Atome team,\n\nAtome\u2019s role in enabling interest-free payment options at various Singapore brands aligns with my experience in payments data.\n\nI have 9 years in payments, led a 25-person data team, and built fraud models that cut losses by 31%. These skills may be relevant to your data challenges.\n\nI am seeking a Head of Data position and would value a brief call to discuss any openings or referrals at Atome.\n\nWould you be available for a short conversation this week?\n\nBest regards,\nTest Candidate",
+          "issues": [],
+          "grade": {
+            "specificity": 4,
+            "relevance": 4,
+            "ask": 4,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": "Highlight how your experience can enhance Atome's BNPL offerings."
+          }
+        }
+      ],
+      "name": "stress_senior_data_hire",
+      "split": "stress",
+      "playbook": "job_search",
+      "target": 15
+    },
+    {
+      "unique": 102,
+      "qualified": 82,
+      "reachable": 4,
+      "passed_judge": 4,
+      "shortlisted": 4,
+      "good@K": 4,
+      "precision@K": 0.333,
+      "good_reachable@K": 3,
+      "good_verified@K": 0,
+      "address_tiers": {
+        "inbox": 2,
+        "guess": 1,
+        "attributed": 1
+      },
+      "mean_score": 0.773,
+      "distinct_orgs": 4,
+      "proof_rate": 0.0,
+      "personal_email_rate": 0.5,
+      "search_calls": 40,
+      "llm_paid_calls": 58,
+      "llm_usd": 0.0212,
+      "pages_fetched": 161,
+      "seconds": 560.1,
+      "usd_per_good": 0.0152,
+      "llm_by_purpose": {
+        "intake": 1,
+        "triage": 29,
+        "extract_orgs": 13,
+        "replan_search": 1,
+        "prejudge": 7,
+        "judge": 2,
+        "draft": 4
+      },
+      "by_source": {
+        "orgs": 75,
+        "lookalike": 80,
+        "graph_walk": 0
+      },
+      "replay_misses": 0,
+      "warnings": [
+        "Only 4 of 12 wanted contacts have a confident address. This kind of campaign (Partnerships and collaborations) needs a contact-data provider to reach named people inside companies: set HUNTER_API_KEY. Without one, expect mostly shared inboxes and a short list.",
+        "Found 4 confident prospects of the 12 wanted: the list stops at fit 0.6 instead of filling it with weaker matches. Broaden the topics or locations, or add a contact-data provider, to find more."
+      ],
+      "source_funnel": {
+        "unique": {
+          "web": 57,
+          "orgs": 64,
+          "list": 50,
+          "lookalike": 42
+        },
+        "qualified": {
+          "list": 40,
+          "lookalike": 40,
+          "web": 47,
+          "orgs": 46
+        },
+        "enriched": {
+          "list": 14,
+          "lookalike": 15,
+          "web": 13,
+          "orgs": 11,
+          "decision_maker": 1
+        },
+        "reachable": {
+          "web": 4,
+          "orgs": 4,
+          "list": 3,
+          "lookalike": 3,
+          "decision_maker": 1
+        },
+        "passed_judge": {
+          "web": 4,
+          "orgs": 4,
+          "list": 2,
+          "lookalike": 2,
+          "decision_maker": 1
+        },
+        "shortlisted": {
+          "web": 4,
+          "orgs": 4,
+          "list": 2,
+          "lookalike": 2,
+          "decision_maker": 1
+        }
+      },
+      "ledger": {
+        "orgs": {
+          "runs": 2,
+          "search_calls": 16,
+          "fetches": 6,
+          "llm_calls": 17,
+          "seconds": 92.92,
+          "found": 39,
+          "new": 38,
+          "qualified": 14
+        },
+        "lookalike": {
+          "runs": 2,
+          "search_calls": 7,
+          "fetches": 6,
+          "llm_calls": 12,
+          "seconds": 47.91,
+          "found": 45,
+          "new": 24,
+          "qualified": 20
+        },
+        "graph_walk": {
+          "runs": 1,
+          "search_calls": 0,
+          "fetches": 0,
+          "llm_calls": 0,
+          "seconds": 0.0,
+          "found": 0,
+          "new": 0,
+          "qualified": 0
+        }
+      },
+      "shortlist": [
+        {
+          "name": "Universidad del Rosario",
+          "org": "Universidad del Rosario",
+          "email": "tienda.rosarista@urosario.edu.co",
+          "score": 0.8099,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike"
+          ],
+          "reasons": [
+            "Universidad del Rosario offers academic mobility programs"
+          ]
+        },
+        {
+          "name": "CAIE MEXICO",
+          "org": "Universidad de la Sabana",
+          "email": "mexico@unisabana.edu.co",
+          "score": 0.7822,
+          "sources": [
+            "web",
+            "orgs",
+            "list",
+            "lookalike",
+            "decision_maker"
+          ],
+          "reasons": [
+            "Director of International Relations at Universidad de la Sabana"
+          ]
+        },
+        {
+          "name": "Universidad Piloto de Colombia",
+          "org": "Universidad Piloto de Colombia",
+          "email": "notificacionesjudiciales@unipiloto.edu.co",
+          "score": 0.7506,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "Universidad Piloto de Colombia has student mobility programs"
+          ]
+        },
+        {
+          "name": "CRAI UNAM",
+          "org": "UNAM",
+          "email": "crai@unam.mx",
+          "score": 0.75,
+          "sources": [
+            "web",
+            "orgs"
+          ],
+          "reasons": [
+            "International relations office at UNAM promotes academic cooperation and student mobility"
+          ]
+        }
+      ],
+      "intake_playbook": "partnerships",
+      "intake_playbook_ok": true,
+      "intake_kind_ok": true,
+      "intake_where": [
+        "Colombia",
+        "Chile",
+        "MX"
+      ],
+      "intake_where_ok": true,
+      "intake_topics": [
+        "higher education",
+        "university international relations",
+        "student exchange programs"
+      ],
+      "intake_ask_type": "reply",
+      "intake_confidence": 0.9,
+      "intake_llm_calls": 1,
+      "drafts": {
+        "drafts": 4,
+        "pass_rate": 0.0,
+        "top_issues": [
+          [
+            "commercial email without a sender postal address",
+            4
+          ],
+          [
+            "recipient address mexico@unisabana.edu.co is a guess from th",
+            1
+          ]
+        ],
+        "avg_specificity": 5.0,
+        "avg_relevance": 5.0,
+        "avg_ask": 5.0,
+        "avg_tone": 5.0,
+        "avg_honesty": 5.0,
+        "would_send_rate": 1.0,
+        "critiques": []
+      },
+      "emails": [
+        {
+          "to": "tienda.rosarista@urosario.edu.co",
+          "subject": "Oportunidad de movilidad acad\u00e9mica conjunta",
+          "body": "Hello Universidad del Rosario team,\n\nDirijo un bootcamp de codificaci\u00f3n en Bangalore que forma a 400 graduados anualmente mediante programas intensivos de tres meses.\n\nS\u00e9 que Universidad del Rosario tiene un programa de movilidad acad\u00e9mica para cursar asignaturas o semestres completos en universidades nacionales e internacionales. Me gustar\u00eda explorar c\u00f3mo podr\u00edamos establecer un acuerdo de intercambio o colaboraci\u00f3n para que sus estudiantes puedan acceder a nuestros programas de inmersi\u00f3n en tecnolog\u00eda.\n\nCreo que esta alianza podr\u00eda complementar sus ofertas actuales y ampliar las opciones de movilidad para sus estudiantes.\n\n\u00bfPodr\u00edamos iniciar una conversaci\u00f3n con la oficina de relaciones internacionales para evaluar esta posibilidad? Estoy disponible para una llamada o reuni\u00f3n virtual en la fecha que les convenga.\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "mexico@unisabana.edu.co",
+          "subject": "Propuesta de alianza para internacionalizaci\u00f3n educativa",
+          "body": "Hi CAIE,\n\nDirige usted la gesti\u00f3n del marco estrat\u00e9gico para la internacionalizaci\u00f3n de la docencia en la Universidad de la Sabana. Por ello, me gustar\u00eda proponer una colaboraci\u00f3n que podr\u00eda enriquecer su oferta educativa.\n\nDirijo un bootcamp de programaci\u00f3n en Bangalore que grad\u00faa a 400 estudiantes anualmente mediante programas intensivos de tres meses. Nuestra experiencia en formaci\u00f3n pr\u00e1ctica podr\u00eda complementar la internacionalizaci\u00f3n de sus programas acad\u00e9micos.\n\n\u00bfPodr\u00eda indicarme la persona adecuada en su oficina de relaciones internacionales para iniciar una conversaci\u00f3n sobre posibles intercambios o alianzas? Estoy a disposici\u00f3n para discutir c\u00f3mo podemos aportar valor mutuo.\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)",
+            "recipient address mexico@unisabana.edu.co is a guess from the organisation's usual email format (pattern_confirmed); verify it before sending"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "notificacionesjudiciales@unipiloto.edu.co",
+          "subject": "Propuesta de colaboraci\u00f3n para movilidad estudiantil",
+          "body": "Hi Universidad,\n\nDirijo un bootcamp de codificaci\u00f3n en Bangalore que grad\u00faa a 400 estudiantes al a\u00f1o mediante programas intensivos de 3 meses.\n\nConociendo el programa de movilidad estudiantil de la Universidad Piloto de Colombia, veo una oportunidad para establecer un intercambio que beneficie a sus estudiantes con experiencia pr\u00e1ctica y formaci\u00f3n acelerada en tecnolog\u00eda.\n\nMe gustar\u00eda iniciar una conversaci\u00f3n con la oficina de relaciones internacionales para explorar c\u00f3mo podr\u00edamos dise\u00f1ar un programa conjunto que complemente sus actuales opciones de movilidad.\n\n\u00bfPodr\u00edan indicarme el contacto adecuado para comenzar esta discusi\u00f3n?\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        },
+        {
+          "to": "crai@unam.mx",
+          "subject": "Explorar alianza acad\u00e9mica con UNAM",
+          "body": "Hi CRAI,\n\nLa Coordinaci\u00f3n de Relaciones y Asuntos Internacionales de la UNAM promueve la cooperaci\u00f3n acad\u00e9mica y la movilidad estudiantil, lo que me lleva a contactarlos para explorar una posible colaboraci\u00f3n.\n\nDirijo un bootcamp de programaci\u00f3n en Bangalore que forma a 400 graduados anualmente mediante programas intensivos de tres meses. Considero que una alianza entre nuestra instituci\u00f3n y la UNAM podr\u00eda beneficiar a sus estudiantes y docentes mediante intercambios o programas conjuntos.\n\n\u00bfPodr\u00edamos iniciar una conversaci\u00f3n para evaluar c\u00f3mo establecer esta cooperaci\u00f3n? Me gustar\u00eda contactar a la oficina de relaciones internacionales para discutir detalles y posibles pasos a seguir.\n\nQuedo atento a su respuesta para coordinar una llamada o reuni\u00f3n virtual.\n\nBest regards,\nTest Director\n\n--\nSi no le resulta relevante, responda \u00abno\u00bb y no volver\u00e9 a escribirle.",
+          "issues": [
+            "commercial email without a sender postal address (add one in the sender profile)"
+          ],
+          "grade": {
+            "specificity": 5,
+            "relevance": 5,
+            "ask": 5,
+            "tone": 5,
+            "honesty": 5,
+            "would_send": true,
+            "critique": ""
+          }
+        }
+      ],
+      "name": "stress_spanish_universities",
+      "split": "stress",
+      "playbook": "partnerships",
+      "target": 12
+    }
+  ],
+  "summary": {
+    "scenarios": 10,
+    "failed": 0,
+    "good@K": 61,
+    "good_reachable@K": 56,
+    "good_verified@K": 0,
+    "precision@K": 0.357,
+    "mean_score": 0.622,
+    "distinct_orgs": 68,
+    "proof_rate": 0.387,
+    "reachable": 115,
+    "search_calls": 481,
+    "llm_paid_calls": 521,
+    "llm_usd": 0.2873,
+    "seconds": 5308.5,
+    "intake_playbook_ok": "10/10",
+    "intake_where_ok": "10/10",
+    "drafts": 69,
+    "draft_pass_rate": 0.261,
+    "would_send_rate": 0.84,
+    "usd_per_good": 0.0126,
+    "judge_precision": 0.379,
+    "judge_precision_ci95": [
+      0.308,
+      0.456
+    ],
+    "sendable_precision": 0.348,
+    "verified_precision": 0.0
+  }
+}

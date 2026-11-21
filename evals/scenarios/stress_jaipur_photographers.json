@@ -1,0 +1,41 @@
+{
+  "name": "stress_jaipur_photographers",
+  "split": "stress",
+  "playbook": "b2b_sales",
+  "target_count": 30,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Sell album-design software to wedding photographers",
+    "ask": "A 10-minute demo call",
+    "persona": {
+      "description": "Independent wedding photography studios in Jaipur and nearby cities",
+      "roles": [
+        "Owner"
+      ],
+      "org_types": [
+        "photography studio"
+      ]
+    },
+    "topics": [
+      "wedding photography",
+      "album design"
+    ],
+    "locations": [
+      "Jaipur",
+      "Rajasthan"
+    ]
+  },
+  "sender": {
+    "name": "Test Founder",
+    "headline": "Founder of an album-design tool",
+    "summary": "Software that lays out a 40-page wedding album in 10 minutes; 600 studios use it."
+  },
+  "facts": [
+    "Lays out a 40-page album in 10 minutes",
+    "600 studios use it"
+  ],
+  "prompt": "we sell album-design software for wedding photographers; find independent wedding photography studios in Jaipur and nearby cities in Rajasthan",
+  "playbook_ok": [
+    "b2b_sales"
+  ]
+}

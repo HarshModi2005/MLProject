@@ -12,7 +12,7 @@ from __future__ import annotations
 import logging
 import threading
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 import httpx
 
@@ -68,6 +68,9 @@ class WebSearch:
         self.budget = self.settings.max_search_calls  # the pipeline lowers this per campaign
         self.by_kind = {"search": 0, "places": 0, "news": 0}
         self.replay_misses = 0
+        self.failures = 0  # calls the provider rejected or that errored (out of credits, bad key, rate limit)
+        self.last_failure = ""
+        self.other_failures: Dict[str, tuple] = {}  # provider -> (failed, of, last message), reported by other sources
         self._lock = threading.Lock()
 
     @property
@@ -87,6 +90,39 @@ class WebSearch:
             self.by_kind[kind] = self.by_kind.get(kind, 0) + 1
             return True
 
+    def _note_failure(self, kind: str, query: str, e: Exception) -> None:
+        """Count a failed call and keep the provider's own words ("Not enough credits"), so the run can tell the user
+        why results are thin instead of advising them to broaden a search that never ran."""
+        detail = ""
+        resp = getattr(e, "response", None)
+        if resp is not None:
+            try:
+                detail = str(resp.json().get("message") or resp.text)[:120]
+            except (ValueError, AttributeError):
+                detail = (getattr(resp, "text", "") or "")[:120]
+            detail = f"HTTP {resp.status_code}: {detail}"
+        with self._lock:
+            self.failures += 1
+            self.last_failure = detail or type(e).__name__
+        log.warning("%s search failed for %r: %s", kind, query, detail or e)
+
+    def note_provider_failure(self, provider: str, message: str, failed: int, of: int) -> None:
+        with self._lock:
+            old = self.other_failures.get(provider, (0, 0, ""))
+            self.other_failures[provider] = (old[0] + failed, old[1] + of, message or old[2])
+
+    def provider_problem(self, min_failures: int = 3) -> str:
+        """A sentence for the user when a real share of a provider's calls failed; empty when everything behaved."""
+        parts = []
+        if self.failures >= min_failures and self.failures >= 0.2 * max(1, self.calls):
+            parts.append(f"The search provider failed {self.failures} of {self.calls} searches ({self.last_failure}).")
+        for name, (failed, of, msg) in self.other_failures.items():
+            if failed >= 2 and failed >= 0.2 * max(1, of):
+                parts.append(f"{name} failed {failed} of {of} requests ({msg}).")
+        if not parts:
+            return ""
+        return " ".join(parts) + " Results are incomplete because of that, not because nobody matches: fix the account or key and run again."
+
     @property
     def available(self) -> bool:
         return bool(self.settings.serper_api_key or self.settings.tavily_api_key)
@@ -105,7 +141,7 @@ class WebSearch:
         try:
             hits = self._serper(query, n) if self.settings.serper_api_key else self._tavily(query, n)
         except (httpx.HTTPError, ValueError, KeyError) as e:
-            log.warning("search failed for %r: %s", query, e)
+            self._note_failure("web", query, e)
             return []
         hits = [h for h in hits if h.url and (raw or not any(s in h.url.lower() for s in SKIP_HOSTS))]
         self.cache.set("search", key, [h.__dict__ for h in hits], ttl=7 * 86400)
@@ -130,7 +166,7 @@ class WebSearch:
             r.raise_for_status()
             raw = r.json().get("places", [])
         except (httpx.HTTPError, ValueError) as e:
-            log.warning("places search failed for %r: %s", query, e)
+            self._note_failure("places", query, e)
             return []
         out = [Place(name=p.get("title", ""), website=p.get("website", "") or "", address=p.get("address", "") or "",
                      phone=p.get("phoneNumber", "") or "", category=p.get("category", "") or "",
@@ -158,7 +194,7 @@ class WebSearch:
             r.raise_for_status()
             raw = r.json().get("news", [])
         except (httpx.HTTPError, ValueError) as e:
-            log.warning("news search failed for %r: %s", query, e)
+            self._note_failure("news", query, e)
             return []
         out = [NewsHit(url=h.get("link", ""), title=h.get("title", ""), snippet=h.get("snippet", ""),
                        source=h.get("source", ""), date=h.get("date", "")) for h in raw if h.get("link")]

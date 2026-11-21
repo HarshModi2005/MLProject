@@ -1,0 +1,38 @@
+{
+  "name": "s2_advisors_medtech",
+  "split": "stress",
+  "playbook": "advisors",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Find advisors for a medical device startup",
+    "ask": "A 30-minute advisory conversation",
+    "persona": {
+      "description": "Senior regulatory and clinical experts who have taken Class II medical devices through CDSCO or FDA approval",
+      "roles": [
+        "Regulatory affairs",
+        "VP",
+        "Advisor"
+      ]
+    },
+    "topics": [
+      "medical device regulatory",
+      "CDSCO approval",
+      "FDA 510(k)"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Medtech founder",
+    "summary": "Building a low-cost portable ECG device; 3 hospital pilots"
+  },
+  "facts": [
+    "portable ECG device",
+    "3 hospital pilots"
+  ],
+  "prompt": "I'm building a low-cost portable ECG device and need advisors who have taken Class II medical devices through CDSCO or FDA approval",
+  "playbook_ok": [
+    "advisors"
+  ]
+}

@@ -18,6 +18,7 @@ from typing import Dict, Iterable, Optional
 
 from brain.emailfinder import name_match
 from brain.models import Contact, EmailCandidate
+from brain.textutil import FREE_MAIL
 
 GUESSED = ("pattern", "pattern_confirmed", "pattern_global", "pattern_prior")
 INBOX_METHODS = ("inbox", "site")
@@ -44,7 +45,11 @@ def email_tier(c: Contact, e: Optional[EmailCandidate]) -> str:
         return "verified" if e.deliverability == "deliverable" and name_match(c.name, e.address) >= 1.0 else "guess"
     if not identity_ok(c, e):
         return "unattributed"
-    return "verified" if e.deliverability == "deliverable" else "attributed"
+    if e.deliverability == "deliverable":
+        return "verified"
+    if c.kind == "person" and e.method != "orcid" and e.address.rsplit("@", 1)[-1].lower() in FREE_MAIL:
+        return "guess"  # a personal gmail/yahoo for a professional ask: it may be theirs, nothing says it is read for this
+    return "attributed"
 
 
 def contact_tier(c: Contact) -> str:

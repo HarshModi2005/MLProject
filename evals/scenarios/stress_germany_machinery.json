@@ -1,0 +1,47 @@
+{
+  "name": "stress_germany_machinery",
+  "split": "stress",
+  "playbook": "distributors",
+  "target_count": 12,
+  "spec": {
+    "target_kind": "org",
+    "objective": "Find European distributors for Indian CNC tooling",
+    "ask": "A call about distributing our carbide cutting tools",
+    "persona": {
+      "description": "Industrial tooling distributors in Germany, Italy and Poland that sell CNC cutting tools",
+      "roles": [
+        "Head of Purchasing",
+        "Managing Director"
+      ],
+      "org_types": [
+        "distributor",
+        "industrial supplier"
+      ]
+    },
+    "topics": [
+      "CNC cutting tools",
+      "carbide inserts",
+      "industrial distribution"
+    ],
+    "locations": [
+      "Germany",
+      "Italy",
+      "Poland"
+    ]
+  },
+  "sender": {
+    "name": "Test Exporter",
+    "headline": "Export manager at a tooling manufacturer",
+    "summary": "Rajkot manufacturer of carbide inserts, ISO 9001, exporting to 14 countries."
+  },
+  "facts": [
+    "ISO 9001 certified",
+    "Exports to 14 countries"
+  ],
+  "prompt": "we make carbide CNC cutting tools in Rajkot, India and want distributors in Germany, Italy and Poland that already sell industrial cutting tools; not manufacturers",
+  "playbook_ok": [
+    "distributors",
+    "partnerships",
+    "b2b_sales"
+  ]
+}

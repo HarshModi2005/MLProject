@@ -71,13 +71,45 @@ def load_labels(name: str, folder: Path = LABEL_DIR) -> Dict[str, List[str]]:
     return {"good": good, "bad": bad, "wrong_address": wrong}
 
 
+SPLITS = ("dev", "holdout", "stress")
+
+
+def _scenario_problems(data: Dict[str, Any], stem: str) -> List[str]:
+    """What is wrong with a scenario file. A typo here (a split called "holdout ", a playbook that does not exist and so
+    falls back to "general") would not crash anything: it would quietly change what a benchmark measures."""
+    from brain.playbooks import PLAYBOOKS
+
+    bad = []
+    if data.get("split") not in SPLITS:
+        bad.append(f"split {data.get('split')!r} is not one of {', '.join(SPLITS)}")
+    for pb in [data.get("playbook")] + list(data.get("playbook_ok") or []):
+        if pb not in PLAYBOOKS:
+            bad.append(f"playbook {pb!r} does not exist")
+    if not (data.get("prompt") or data.get("spec")):
+        bad.append("has neither a prompt nor a spec")
+    try:
+        if int(data.get("target_count", 8)) < 1:
+            bad.append("target_count must be at least 1")
+    except (TypeError, ValueError):
+        bad.append(f"target_count {data.get('target_count')!r} is not a number")
+    return [f"{stem}: {b}" for b in bad]
+
+
 def load_scenarios(only: Optional[List[str]] = None, folder: Path = SCENARIO_DIR,
                    label_dir: Path = LABEL_DIR, split: str = "") -> List[Dict[str, Any]]:
-    out = []
+    """Scenario files, validated as a set (every file is checked, not only the ones selected, so a bad file is caught
+    the day it is added). Raises ValueError listing every problem."""
+    if split and split not in SPLITS:
+        raise ValueError(f"Unknown split {split!r}: use one of {', '.join(SPLITS)}")
+    out, problems, seen = [], [], {}
     for path in sorted(folder.glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         data.setdefault("name", path.stem)
         data.setdefault("split", "dev")
+        problems += _scenario_problems(data, path.stem)
+        if data["name"] in seen:
+            problems.append(f"{path.stem}: name {data['name']!r} is already used by {seen[data['name']]}")
+        seen[data["name"]] = path.stem
         if only and data["name"] not in only:
             continue
         if split and data["split"] != split:
@@ -88,6 +120,8 @@ def load_scenarios(only: Optional[List[str]] = None, folder: Path = SCENARIO_DIR
             for key in ("good", "bad", "wrong_address"):
                 labels[key] = list(dict.fromkeys((labels.get(key) or []) + extra.get(key, [])))
         out.append(data)
+    if problems:
+        raise ValueError("Scenario files need fixing:\n  - " + "\n  - ".join(problems))
     return out
 
 
@@ -186,6 +220,11 @@ def metrics(result, spec: CampaignSpec, labels: Optional[Dict[str, List[str]]] =
         "shortlist": [{"name": c.name, "org": c.org, "email": c.best_email.address if c.best_email else None,
                        "score": c.score, "sources": c.sources, "reasons": c.reasons[:1]} for c in short],
     }
+    problem = f.get("provider_problem") or ""
+    if problem:  # a failing search/GitHub account makes the numbers a measure of the account, not the pipeline
+        m["provider_problem"] = problem
+        if not short or not f.get("unique_people"):
+            m["invalid"] = "provider_failure"  # discovery came back empty because calls failed: not a real zero
     if labels and (labels.get("good") or labels.get("bad") or labels.get("wrong_address")):
         from brain.evalkit import evaluate_labels
 
@@ -253,7 +292,8 @@ def run_scenario(sc: Dict[str, Any], *, replay: str = "", draft: bool = False, o
         result = run_campaign(spec, deps, upto="draft" if draft else "judge", resume=False, ctx=ctx)
     except Exception as e:  # one broken scenario must not stop the benchmark
         log.exception("scenario %s failed", sc["name"])
-        return {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - started, 1)}
+        return {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - started, 1),
+                "split": sc.get("split", "dev"), "target": int(sc.get("target_count", 8))}
     m = metrics(result, spec, sc.get("labels"))
     m.update(intake)
     if draft and result.drafts:
@@ -280,29 +320,39 @@ SUMMARY_KEYS = ["good@K", "good_reachable@K", "good_verified@K", "precision@K", 
 def _pooled(ok: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Pooled precision with 95% intervals: the judge's good@K over every slot, and human-label precision over the
     shortlisted candidates a human labelled. Pooling across scenarios is what makes the interval meaningful."""
-    from brain.evalkit import wilson
+    from brain.evalkit import cluster_ci
 
     out: Dict[str, Any] = {}
     slots = sum(int(r.get("target") or 0) for r in ok)
     good = sum(int(r.get("good@K") or 0) for r in ok)
     if slots:
         out["judge_precision"] = round(good / slots, 3)
-        out["judge_precision_ci95"] = wilson(good, slots)
+        c = cluster_ci([(int(r.get("good@K") or 0), int(r.get("target") or 0)) for r in ok])
+        out["judge_precision_ci95"], out["judge_precision_ci_method"] = c["ci"], c["method"]
         out["sendable_precision"] = round(sum(int(r.get("good_reachable@K") or 0) for r in ok) / slots, 3)
         out["verified_precision"] = round(sum(int(r.get("good_verified@K") or 0) for r in ok) / slots, 3)
     n = sum(int(r.get("label_n_k") or 0) for r in ok)
     if n:
         g = sum(int(r.get("label_good_k") or 0) for r in ok)
         out["label_precision"] = round(g / n, 3)
-        out["label_precision_ci95"] = wilson(g, n)
+        c = cluster_ci([(int(r.get("label_good_k") or 0), int(r.get("label_n_k") or 0)) for r in ok])
+        out["label_precision_ci95"], out["label_precision_ci_method"] = c["ci"], c["method"]
         out["labeled_slots"] = f"{n}/{slots}"
         out["wrong_address_labels"] = sum(int(r.get("label_wrong_address") or 0) for r in ok)
     return out
 
 
 def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
-    ok = [r for r in rows if "error" not in r]
-    out: Dict[str, Any] = {"scenarios": len(rows), "failed": len(rows) - len(ok)}
+    ok = [r for r in rows if "error" not in r and not r.get("invalid")]
+    errored = [r for r in rows if "error" in r]
+    invalid = [r for r in rows if "error" not in r and r.get("invalid")]
+    out: Dict[str, Any] = {"scenarios": len(rows), "failed": len(errored)}
+    if invalid:  # discovery came back empty because the search/GitHub account failed: not a result about the pipeline
+        out["invalid"] = len(invalid)
+        out["invalid_names"] = [r["name"] for r in invalid]
+    degraded = [r["name"] for r in ok if r.get("provider_problem")]
+    if degraded:  # ran, but a real share of calls failed, so these numbers are lower bounds
+        out["degraded_names"] = degraded
     for k in SUMMARY_KEYS:
         vals = [r.get(k) for r in ok if isinstance(r.get(k), (int, float))]
         if not vals:
@@ -324,6 +374,10 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     spend = (out.get("llm_usd") or 0) + SERPER_USD * (out.get("search_calls") or 0)
     out["usd_per_good"] = round(spend / goods, 4) if goods else None
     out.update(_pooled(ok))
+    lost = [r for r in errored + invalid if r.get("target")]
+    if lost and out.get("judge_precision") is not None:  # the number if every scenario that did not count had scored zero
+        slots = sum(int(r.get("target") or 0) for r in ok) + sum(int(r["target"]) for r in lost)
+        out["judge_precision_worst_case"] = round(sum(int(r.get("good@K") or 0) for r in ok) / slots, 3)
     splits = sorted({r.get("split", "dev") for r in ok})
     if len(splits) > 1 or splits == ["holdout"]:  # trust the holdout line: nothing was tuned on it
         out["by_split"] = {sp: {"scenarios": len(sub), **_pooled(sub)}
@@ -334,10 +388,68 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     return out
 
 
+def _scenario_row(sc: Dict[str, Any], *, replay: str, draft: bool, out_dir: Path, from_prompt: bool, repeat: int,
+                  progress=print) -> Dict[str, Any]:
+    """Run one scenario (repeat times with fresh caches) and return its report row."""
+    runs = []
+    for i in range(max(1, repeat)):
+        progress(f"[bench] {sc['name']} ({sc.get('playbook')}, {sc.get('split', 'dev')})"
+                 + (f" run {i + 1}/{repeat}" if repeat > 1 else "") + " …")
+        sub = out_dir / f"rep{i + 1}" if repeat > 1 else out_dir
+        sub.mkdir(parents=True, exist_ok=True)
+        runs.append(run_scenario(sc, replay=replay, draft=draft, out_dir=sub, from_prompt=from_prompt,
+                                 cache_tag=f".rep{i + 1}" if repeat > 1 else ""))
+    return _combine_runs(runs)
+
+
+def _mean(vals: List[float]) -> float:
+    m = sum(vals) / len(vals)
+    return int(m) if m == int(m) else round(m, 2)
+
+
+def _combine_runs(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """One row from several runs of the same scenario: every numeric metric is the MEAN over the runs that counted, so
+    the headline uses all the data instead of the first run. Runs that errored or were invalid (a failing provider)
+    are left out when any run was fine. The per-run values and the spread are kept; per-candidate detail (shortlist,
+    emails, warnings) is from the first counted run."""
+    if len(runs) == 1:
+        return runs[0]
+    done = [r for r in runs if "error" not in r]
+    if not done:
+        return runs[0]
+    counted = [r for r in done if not r.get("invalid")] or done
+    row = dict(counted[0])
+    for k, v in counted[0].items():
+        if isinstance(v, (int, float)) and not isinstance(v, bool):
+            vals = [r[k] for r in counted if isinstance(r.get(k), (int, float)) and not isinstance(r.get(k), bool)]
+            row[k] = _mean(vals)
+    goods = [r["good@K"] for r in counted]
+    row["repeat"] = {"runs": len(counted), "of": len(runs), "good@K": goods, "mean": _mean(goods),
+                     "good_reachable@K": [r.get("good_reachable@K") for r in counted],
+                     "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods),
+                     "left_out": [r.get("error") or r.get("invalid") for r in runs if not any(r is c for c in counted)]}
+    return row
+
+
+def _bench_worker(args: tuple) -> Dict[str, Any]:  # top level so a process pool can import it
+    sc, kw = args
+    return _scenario_row(sc, **kw, progress=lambda m: None)
+
+
+def _row_line(row: Dict[str, Any], name: str, repeat: int) -> str:
+    return f"[bench] {name}: " + (row.get("error") or
+            f"good@K {row['good@K']}/{row['target']}, reachable {row['reachable']}, "
+            f"{row['search_calls']} searches, {row['llm_paid_calls']} LLM calls (${row['llm_usd']})"
+            + (f", over {repeat} runs {row['repeat']['good@K']}" if row.get("repeat") else ""))
+
+
 def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool = False, label: str = "",
-              progress=print, from_prompt: bool = True, split: str = "", repeat: int = 1) -> Dict[str, Any]:
+              progress=print, from_prompt: bool = True, split: str = "", repeat: int = 1, parallel: int = 1) -> Dict[str, Any]:
     """split: only the "dev" or "holdout" scenarios. repeat: run every scenario this many times, each with its own
-    fresh cache (a repeat that reads the first run's cache measures nothing), and report the spread."""
+    fresh cache (a repeat that reads the first run's cache measures nothing), and report the spread.
+    parallel: scenarios run side by side in separate processes (they share the search and LLM accounts, so the
+    provider's rate limits bind sooner). The report is rewritten after every scenario, so an interrupted run keeps
+    what finished (<label>.partial.json)."""
     if repeat > 1 and replay:
         raise ValueError("--repeat measures live noise; it cannot be combined with --replay")
     scenarios = load_scenarios(only, split=split)
@@ -346,32 +458,44 @@ def run_bench(only: Optional[List[str]] = None, *, replay: str = "", draft: bool
     stamp = time.strftime("%Y%m%dT%H%M%S")
     out_dir = RESULT_DIR / f"run_{label or stamp}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    rows = []
-    for sc in scenarios:
-        runs = []
-        for i in range(max(1, repeat)):
-            progress(f"[bench] {sc['name']} ({sc.get('playbook')}, {sc.get('split', 'dev')})"
-                     + (f" run {i + 1}/{repeat}" if repeat > 1 else "") + " …")
-            sub = out_dir / f"rep{i + 1}" if repeat > 1 else out_dir
-            sub.mkdir(parents=True, exist_ok=True)
-            runs.append(run_scenario(sc, replay=replay, draft=draft, out_dir=sub, from_prompt=from_prompt,
-                                     cache_tag=f".rep{i + 1}" if repeat > 1 else ""))
-        row = runs[0]
-        done = [r for r in runs if "error" not in r]
-        if repeat > 1 and done:
-            goods = [r["good@K"] for r in done]
-            row = dict(done[0])
-            row["repeat"] = {"runs": len(done), "good@K": goods, "mean": round(sum(goods) / len(goods), 2),
-                             "min": min(goods), "max": max(goods), "spread": max(goods) - min(goods)}
-        rows.append(row)
-        progress(f"[bench] {sc['name']}: " + (row.get("error") or
-                 f"good@K {row['good@K']}/{row['target']}, reachable {row['reachable']}, "
-                 f"{row['search_calls']} searches, {row['llm_paid_calls']} LLM calls (${row['llm_usd']})"
-                 + (f", over {repeat} runs {row['repeat']['good@K']}" if row.get("repeat") else "")))
-    report = {"label": label or stamp, "replay": replay, "split": split or "all", "repeat": repeat, "rows": rows,
-              "summary": summarize(rows)}
+    rows: List[Dict[str, Any]] = []
+    partial = RESULT_DIR / f"{label or stamp}.partial.json"
+
+    def checkpoint(done: bool = False) -> Dict[str, Any]:
+        rep = {"label": label or stamp, "replay": replay, "split": split or "all", "repeat": repeat, "rows": rows,
+               "summary": summarize(rows) if rows else {}, "complete": done}
+        (RESULT_DIR / f"{label or stamp}.json" if done else partial).write_text(json.dumps(rep, indent=2, default=str), encoding="utf-8")
+        return rep
+
+    kw = dict(replay=replay, draft=draft, out_dir=out_dir, from_prompt=from_prompt, repeat=repeat)
+    if parallel > 1 and len(scenarios) > 1:
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+
+        with ProcessPoolExecutor(max_workers=min(parallel, len(scenarios))) as ex:
+            futures = {ex.submit(_bench_worker, (sc, kw)): sc for sc in scenarios}
+            for sc in scenarios:
+                progress(f"[bench] {sc['name']} queued")
+            for fut in as_completed(futures):
+                sc = futures[fut]
+                try:
+                    row = fut.result()
+                except Exception as e:  # a crashed worker must not lose the others
+                    row = {"name": sc["name"], "error": f"{type(e).__name__}: {e}", "split": sc.get("split", "dev"),
+                           "target": int(sc.get("target_count", 8))}
+                rows.append(row)
+                progress(_row_line(row, sc["name"], repeat))
+                checkpoint()
+        order = {sc["name"]: i for i, sc in enumerate(scenarios)}
+        rows.sort(key=lambda r: order.get(r.get("name"), 0))
+    else:
+        for sc in scenarios:
+            row = _scenario_row(sc, **kw, progress=progress)
+            rows.append(row)
+            progress(_row_line(row, sc["name"], repeat))
+            checkpoint()
+    report = checkpoint(done=True)
     path = RESULT_DIR / f"{label or stamp}.json"
-    path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
+    partial.unlink(missing_ok=True)
     report["path"] = str(path)
     return report
 
@@ -436,11 +560,18 @@ def compare(new: Dict[str, Any], old: Dict[str, Any]) -> List[Dict[str, Any]]:
         if not o or "error" in r or "error" in o:
             out.append({"name": r["name"], "note": "missing or failed on one side"})
             continue
+        if r.get("invalid") or o.get("invalid"):
+            out.append({"name": r["name"], "note": "invalid on one side (the provider failed): not comparable"})
+            continue
         row = {"name": r["name"]}
         for k in SUMMARY_KEYS + ["usd_per_good"]:
             a, b = r.get(k), o.get(k)
             if isinstance(a, (int, float)) and isinstance(b, (int, float)):
                 row[k] = (b, a)
+        spreads = [x["repeat"]["spread"] for x in (r, o) if x.get("repeat")]
+        if spreads and "good@K" in row:  # a change no bigger than the run-to-run spread is not evidence of anything
+            row["noise"] = max(spreads)
+            row["within_noise"] = abs(row["good@K"][1] - row["good@K"][0]) <= max(spreads)
         out.append(row)
     return out
 

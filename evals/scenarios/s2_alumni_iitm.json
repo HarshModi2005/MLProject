@@ -1,0 +1,41 @@
+{
+  "name": "s2_alumni_iitm",
+  "split": "stress",
+  "playbook": "alumni",
+  "target_count": 10,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Talk to alumni working in payments",
+    "ask": "A 15-minute call",
+    "persona": {
+      "description": "IIT Madras alumni working in product or engineering at payments companies in India",
+      "roles": [
+        "Engineer",
+        "Product manager",
+        "Director"
+      ]
+    },
+    "topics": [
+      "payments",
+      "fintech",
+      "UPI"
+    ],
+    "locations": [
+      "India"
+    ]
+  },
+  "sender": {
+    "name": "Test Sender",
+    "headline": "Final-year student",
+    "summary": "IIT Madras final year, interned at a bank on payments reconciliation"
+  },
+  "facts": [
+    "IIT Madras final year",
+    "payments reconciliation internship"
+  ],
+  "prompt": "I'm a final year at IIT Madras interested in payments; find IIT Madras alumni in product or engineering at Indian payments companies",
+  "playbook_ok": [
+    "alumni",
+    "general"
+  ]
+}

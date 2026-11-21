@@ -1,0 +1,41 @@
+{
+  "name": "stress_phd_neuro",
+  "split": "stress",
+  "playbook": "phd_positions",
+  "target_count": 15,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Find PhD positions in computational neuroscience",
+    "ask": "A conversation about a PhD position in your group",
+    "persona": {
+      "description": "Principal investigators in computational neuroscience at universities in Germany and the Netherlands, not Max Planck institutes",
+      "roles": [
+        "Professor",
+        "Principal Investigator"
+      ]
+    },
+    "topics": [
+      "computational neuroscience",
+      "neural coding",
+      "spiking neural networks"
+    ],
+    "locations": [
+      "Germany",
+      "Netherlands"
+    ]
+  },
+  "sender": {
+    "name": "Test Student",
+    "headline": "MSc Physics student",
+    "summary": "Thesis on spiking network models of cortex; 2 workshop posters; Python and Brian2."
+  },
+  "facts": [
+    "Thesis on spiking network models of cortex",
+    "Brian2 and Python"
+  ],
+  "prompt": "I'm finishing a master's in physics and want a PhD in computational neuroscience; find professors in Germany or the Netherlands working on neural coding or spiking networks, excluding Max Planck institutes",
+  "playbook_ok": [
+    "phd_positions",
+    "academic"
+  ]
+}

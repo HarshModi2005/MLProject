@@ -468,6 +468,7 @@ def bench(
     from_spec: bool = typer.Option(False, help="Use the scenarios' ready-made specs instead of running the intake on their prompts."),
     split: str = typer.Option("", help="Only the 'dev' (tuned on) or 'holdout' (never tuned on) scenarios."),
     repeat: int = typer.Option(1, help="Run each scenario N times with fresh caches to measure noise (costs N times as much)."),
+    parallel: int = typer.Option(1, help="Run N scenarios side by side (separate processes; they share the API accounts)."),
 ):
     """Benchmark discovery on the scenarios in evals/scenarios (stops after judging unless --draft)."""
     from brain.bench import compare, run_bench
@@ -476,13 +477,16 @@ def bench(
     logging.getLogger("httpx").setLevel(logging.WARNING)
     report = run_bench(list(only) if only else None, replay=("strict" if strict else "replay") if replay else "",
                        draft=draft, label=label, progress=lambda m: console.print(f"[dim]{m}[/dim]"),
-                       from_prompt=not from_spec, split=split, repeat=repeat)
+                       from_prompt=not from_spec, split=split, repeat=repeat, parallel=parallel)
     t = Table(title=f"Benchmark {report['label']}")
     for col in ("Scenario", "label prec", "good@K", "prec@K", "mean", "orgs", "proof", "reach", "search", "LLM", "$", "s"):
         t.add_column(col)
     for r in report["rows"]:
         if "error" in r:
             t.add_row(r["name"], f"[red]{r['error'][:60]}[/red]", *[""] * 10)
+            continue
+        if r.get("invalid"):
+            t.add_row(r["name"], f"[red]INVALID: {r['invalid']}[/red]", *[""] * 10)
             continue
         lp = r.get("label_precision@K")
         t.add_row(r["name"], "-" if lp is None else f"{lp} ({r.get('labeled', 0)} lab.)", f"{r['good@K']}/{r['target']}",
@@ -502,8 +506,13 @@ def bench(
         console.print(srcs)
     console.print_json(json.dumps(report["summary"]))
     sm = report["summary"]
+    if sm.get("invalid"):
+        console.print(f"[red]{sm['invalid']} scenario(s) invalid because the search/GitHub account failed ({', '.join(sm['invalid_names'])}); "
+                      f"left out of the precision below. If they had all scored zero: {sm.get('judge_precision_worst_case')}.[/red]")
+    if sm.get("degraded_names"):
+        console.print(f"[yellow]Some calls failed in {', '.join(sm['degraded_names'])}: treat their numbers as lower bounds.[/yellow]")
     if sm.get("judge_precision") is not None:
-        line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]})"
+        line = f"judge precision {sm['judge_precision']} (95% CI {sm['judge_precision_ci95'][0]}–{sm['judge_precision_ci95'][1]}, {sm.get('judge_precision_ci_method')})"
         line += f"  ·  good AND reachable {sm.get('sendable_precision')}  ·  good AND verified {sm.get('verified_precision')}"
         if sm.get("label_precision") is not None:
             ci = sm["label_precision_ci95"]
@@ -521,7 +530,10 @@ def bench(
         for k in keys:
             d.add_column(k)
         for row in compare(report, old):
-            d.add_row(row["name"], *[f"{row[k][0]} → {row[k][1]}" if k in row else row.get("note", "") for k in keys])
+            cells = [f"{row[k][0]} → {row[k][1]}" if k in row else row.get("note", "") for k in keys]
+            if row.get("within_noise") and "good@K" in row:
+                cells[0] += f" [dim](within noise ±{row['noise']})[/dim]"
+            d.add_row(row["name"], *cells)
         console.print(d)
 
 

@@ -1,0 +1,39 @@
+{
+  "name": "stress_podcast_climate",
+  "split": "stress",
+  "playbook": "creators",
+  "target_count": 15,
+  "spec": {
+    "target_kind": "person",
+    "objective": "Get our founder on climate-tech podcasts as a guest",
+    "ask": "A guest slot on your show",
+    "persona": {
+      "description": "Hosts of climate-tech and sustainability podcasts, English, active in the last 6 months",
+      "roles": [
+        "Host",
+        "Producer"
+      ]
+    },
+    "topics": [
+      "climate tech",
+      "sustainability",
+      "clean energy"
+    ],
+    "locations": []
+  },
+  "sender": {
+    "name": "Test Publicist",
+    "headline": "Publicist for a battery startup",
+    "summary": "Founder previously built grid batteries; startup cut storage cost 22%."
+  },
+  "facts": [
+    "Founder built grid batteries",
+    "Cut storage cost 22%"
+  ],
+  "prompt": "our founder is a battery scientist and wants to be a guest on active climate-tech or clean-energy podcasts; find hosts who release episodes regularly",
+  "playbook_ok": [
+    "creators",
+    "speakers",
+    "pr_media"
+  ]
+}

@@ -13,6 +13,7 @@ No LLM calls.
 from __future__ import annotations
 
 import logging
+import re
 from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Optional
 
@@ -31,6 +32,11 @@ from brain.textutil import country_from_domain, name_tokens, registrable_domain,
 
 log = logging.getLogger("brain.enrich")
 _NOT_PERSONAL = ("openalex.org", "orcid.org", "doi.org")
+# Platforms that host many people's profiles: a page there is not "their own site" for the trusted reading above.
+_PLATFORMS = ("github.com", "gitlab.com", "linkedin.com", "twitter.com", "x.com", "facebook.com", "instagram.com",
+              "medium.com", "npmjs.com", "pypi.org", "huggingface.co", "youtube.com", "researchgate.net",
+              "scholar.google", "semanticscholar.org", "wikipedia.org", "dev.to", "substack.com")
+_CONTACT_LINK = re.compile(r"/(contact|about|me|hire|work-with-me)(/|\.html?)?$|\b(contact|about me|about|hire me|get in touch)\b", re.I)
 
 
 def has_usable_email(c: Contact, threshold: float) -> bool:
@@ -41,11 +47,19 @@ def has_usable_email(c: Contact, threshold: float) -> bool:
     return bool(best and best.confidence >= threshold and email_tier(c, best) not in ("unattributed",))
 
 
-def absorb_page(contact: Contact, html: str, url: str) -> bool:
-    """Merge what a fetched page says into the contact. Returns True if the page is about them."""
+def absorb_page(contact: Contact, html: str, url: str, trusted: bool = False) -> bool:
+    """Merge what a fetched page says into the contact. Returns True if the page is about them.
+    `trusted`: the page is the person's own site, reached from a link their own profile gives (a GitHub blog field, a
+    package homepage). A personal site rarely looks like a "profile page" to the classifier (a blog home, a one-page
+    portfolio), so its addresses are taken unless it lists many people."""
     page = parse(html, url)
     name = page_person_name(page)
     own = bool(name and names_compatible(name, contact.name)) and classify(page) == "profile"
+    if trusted and not own and 0 < len(page.emails) <= 6 and not (classify(page) == "directory"):
+        attach_emails(contact, page.mailtos, "mailto", url, on_own_page=True)
+        attach_emails(contact, [e for e in page.emails if e not in page.mailtos], "text", url, on_own_page=True)
+        contact.add_url(url)
+        return True
     if own and len(page.emails) > 6:
         own = False  # a page listing many addresses is not one person's page, whatever its title says
     if own:
@@ -100,10 +114,13 @@ class Enricher:
         # 2. Known pages
         if not has_usable_email(c, threshold):
             for url in [u for u in c.urls if not any(h in u for h in _NOT_PERSONAL)][:3]:
+                own_site = not any(h in url.lower() for h in _PLATFORMS)
                 page = self.fetcher.get(url)
                 if page.ok:
                     self.stats["pages"] += 1
-                    absorb_page(c, page.html, page.url)
+                    absorb_page(c, page.html, page.url, trusted=own_site)
+                    if own_site and not has_usable_email(c, threshold):
+                        self._follow_contact_pages(c, page, threshold)
                 if has_usable_email(c, threshold):
                     self.stats["email_from_page"] += 1
                     break
@@ -113,6 +130,9 @@ class Enricher:
             query = f'"{c.name}" {c.org or ""} email'.strip()
             surname = (name_tokens(c.name) or [""])[-1]
             hits = self.search.search(query, n=6)
+            if self._emails_from_snippets(c, hits) and has_usable_email(c, threshold):
+                self.stats["email_from_snippet"] = self.stats.get("email_from_snippet", 0) + 1
+                return
 
             def priority(h) -> int:
                 same_org = bool(c.org_domain) and registrable_domain(h.url) == registrable_domain(c.org_domain)
@@ -129,6 +149,39 @@ class Enricher:
                 if has_usable_email(c, threshold):
                     self.stats["email_from_search"] += 1
                     break
+
+    def _follow_contact_pages(self, c: Contact, page, threshold: float, limit: int = 2) -> None:
+        """A personal site often keeps its address on /contact or /about, one link from the home page."""
+        parsed = parse(page.html, page.url)
+        host = registrable_domain(page.url)
+        seen = {page.url.rstrip("/")}
+        for href, text in parsed.nav_links:
+            if len(seen) > limit:
+                break
+            if registrable_domain(href) != host or href.rstrip("/") in seen:
+                continue
+            if not _CONTACT_LINK.search(href) and not _CONTACT_LINK.search(text or ""):
+                continue
+            seen.add(href.rstrip("/"))
+            sub = self.fetcher.get(href)
+            if sub.ok:
+                self.stats["pages"] += 1
+                absorb_page(c, sub.html, sub.url, trusted=True)
+            if has_usable_email(c, threshold):
+                return
+
+    def _emails_from_snippets(self, c: Contact, hits) -> int:
+        """Search-result snippets often quote an address ("... email: jane@lab.org"), which saves fetching a page that
+        will not load. Taken only when the address carries the person's name or is on their organisation's domain."""
+        from brain.emailfinder import extract_emails
+
+        added = 0
+        for h in hits[:6]:
+            for addr in extract_emails(f"{h.title} {h.snippet}"):
+                same_org = bool(c.org_domain) and registrable_domain(addr.split("@")[1]) == registrable_domain(c.org_domain)
+                if name_match(c.name, addr) >= 1.0 or (same_org and name_match(c.name, addr) > 0):
+                    added += attach_emails(c, [addr], "text", h.url, on_own_page=False)
+        return added
 
     def enrich(self, targets: List[Contact], pool: Optional[List[Contact]] = None,
                hint_terms: Optional[List[str]] = None) -> None:
